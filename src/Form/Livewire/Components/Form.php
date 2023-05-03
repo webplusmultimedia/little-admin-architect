@@ -73,7 +73,9 @@ final class Form
     {
         $rules = [];
         foreach ($this->fields as $field) {
-            $rules['data.' . $field->name] = $field->rules;
+            if (!$field->isDisabled()) {
+                $rules['data.' . $field->name] = $field->rules;
+            }
         }
         return $rules;
     }

@@ -3,6 +3,7 @@
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields;
 
 use Illuminate\Database\Eloquent\Model;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeDisabled;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeWireModifier;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasHelperText;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasLabel;
@@ -21,6 +22,7 @@ abstract class Field
     use CanBeWireModifier;
     use HasRequired;
     use HasLabel;
+    use CanBeDisabled;
 
     private string $prefixName = 'data';
     protected string $view = 'form::input';
