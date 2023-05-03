@@ -8,14 +8,22 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 
 abstract class AbstractComponent extends Component
 {
     protected string $viewPath;
+    protected Field $field;
+
 
     public function __construct()
     {
         $this->viewPath = $this->setViewPath();
+    }
+
+    public function getConfig(): ?Field
+    {
+        return $this->field;
     }
 
     abstract protected function setViewPath(): string;

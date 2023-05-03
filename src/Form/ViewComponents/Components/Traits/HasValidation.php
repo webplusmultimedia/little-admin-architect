@@ -52,7 +52,9 @@ trait HasValidation
         if (! $this->shouldDisplayValidationFailure()) {
             return null;
         }
+
         $errorBag = $this->getErrorBag($errors);
+
         if ($locale) {
             $errorKey = $this->name . '.' . $locale;
             $rawMessage = $errorBag->first($errorKey);
@@ -64,7 +66,6 @@ trait HasValidation
             ) : null;
         }
 
-
-        return $errorBag->first($this->getNameWithArrayNotationConvertedInto());
+        return $errorBag->first($this->getConfig()->getWireName());
     }
 }

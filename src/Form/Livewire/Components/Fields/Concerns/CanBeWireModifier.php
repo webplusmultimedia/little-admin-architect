@@ -17,4 +17,9 @@ trait CanBeWireModifier
 
         return $this;
     }
+
+    public function getWireModifier(): ?string
+    {
+        return $this->wireModifier;
+    }
 }

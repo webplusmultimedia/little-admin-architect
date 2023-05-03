@@ -3,6 +3,7 @@
 namespace Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\Components;
 
 use Closure;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\Components\Abstracts\AbstractComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\Components\Traits\CanBeWired;
 use Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\Components\Traits\HasAddon;
@@ -29,6 +30,7 @@ class Textarea extends AbstractComponent
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
         public string $name,
+        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Textarea $field ,
         protected string|null $id = null,
         protected object|array|null $bind = null,
         protected string|false|null $label = null,
@@ -42,9 +44,11 @@ class Textarea extends AbstractComponent
         protected bool|null $displayValidationFailure = null,
         protected string|null $errorBag = null,
         public array $locales = [null],
-        public bool $marginBottom = true
+        public bool $marginBottom = true,
+
     ) {
         parent::__construct();
+        $this->field = $field;
     }
 
     protected function setViewPath(): string

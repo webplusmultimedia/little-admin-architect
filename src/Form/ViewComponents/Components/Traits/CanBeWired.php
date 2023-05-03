@@ -28,17 +28,10 @@ trait CanBeWired
         return $this->attributes->has('wire');
     }
 
-    public function getComponentLivewireModifier(): string
+    public function getComponentLivewireModifier(): ?string
     {
-        $hasComponentLivewireModelModifier = $this->attributes->has('wire');
-        $componentLivewireModelModifierAttribute = $this->attributes->get('wire') === true
-            ? ''
-            : $this->attributes->get('wire');
-        $componentLivewireModelModifier = $componentLivewireModelModifierAttribute
-            ? '.' . $componentLivewireModelModifierAttribute
-            : '';
-
-        return $hasComponentLivewireModelModifier ? $componentLivewireModelModifier : $this->getFormLivewireModifier();
+        $modifier = $this->getConfig()->getWireModifier()?'.'.$this->getConfig()->getWireModifier():null;
+        return $modifier;
     }
 
     protected function getFormLivewireModifier(): string

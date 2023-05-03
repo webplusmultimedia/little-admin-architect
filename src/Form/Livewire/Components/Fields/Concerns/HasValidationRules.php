@@ -5,7 +5,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields
 use Closure;
 use Illuminate\Validation\Rule;
 
-trait HasRules
+trait HasValidationRules
 {
     /**
      * @var array<string|Rule|Closure>

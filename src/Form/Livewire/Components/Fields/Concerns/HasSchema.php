@@ -18,6 +18,7 @@ trait HasSchema
      */
     public function schema(array $fields): static
     {
+
         $this->fields = $fields;
         return $this;
     }

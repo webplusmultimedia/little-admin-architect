@@ -12,11 +12,11 @@ trait HasName
 
     protected function getNameWithoutArrayNotation(): string
     {
-        return strstr($this->name, '[', true) ?: 'data.' . $this->name;
+        return strstr($this->name, '[', true) ?: 'data-' . $this->name;
     }
 
     protected function getNameWithArrayNotationConvertedInto(string $notation = '.'): string
     {
-        return str_replace(['[', ']'], [$notation, ''], 'data.' . $this->name);
+        return str_replace(['[', ']'], [$notation, ''], 'data-' . $this->name);
     }
 }
