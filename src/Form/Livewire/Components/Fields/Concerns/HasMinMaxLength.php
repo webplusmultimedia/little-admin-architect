@@ -4,7 +4,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Input;
 
-trait HasMinMax
+trait HasMinMaxLength
 {
     protected null|int $minLength = NULL;
     protected null|int $maxLength = NULL;

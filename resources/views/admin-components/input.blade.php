@@ -37,8 +37,10 @@
                 'data-locale' => $locale,
                 'value' => $isWired ? NULL : ($value ?? ''),
                 'aria-describedby' => $caption ? $id . '-caption' : NULL,
+
             ]) }}
                     @if($config->isRequired()) required @endif
+                    @if($config->isDisabled()) disabled @endif
                 />
                 @if(! $prepend && ! $append && $displayFloatingLabel)
                     <x:form::partials.label :id="$id" class="form-label" :label="$label"/>

@@ -2,11 +2,11 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasMinMax;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasMinMaxLength;
 
 final class Input extends Field
 {
-    use HasMinMax;
+    use HasMinMaxLength;
 
 
     protected ?string $type = 'text';
