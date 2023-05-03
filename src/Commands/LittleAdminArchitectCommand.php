@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Webplusmultimedia\LittleAdminArchitect\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LittleAdminArchitectCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'little-admin-architect';
 
     public $description = 'My command';
 

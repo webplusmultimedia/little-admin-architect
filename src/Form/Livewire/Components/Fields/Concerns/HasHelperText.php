@@ -1,0 +1,21 @@
+<?php
+
+namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
+
+trait HasHelperText
+{
+    protected ?string $helperText = null;
+
+    /**
+     * @return string|null
+     */
+    public function getHelperText(): ?string
+    {
+        return $this->helperText;
+    }
+    public function helperText(?string $helperText): static
+    {
+        $this->helperText = $helperText;
+        return $this;
+    }
+}

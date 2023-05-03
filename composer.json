@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "webplusmultimedia/little-admin-architect",
+    "description": "A little admin with TALL Sack - Laravel, Livewire, ApineJs, TailwindCss",
     "keywords": [
-        ":vendor_name",
+        "webplusmultimedia",
         "laravel",
-        ":package_slug"
+        "little-admin-architect"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/webplusmultimedia/little-admin-architect",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "daniel RMC",
+            "email": "contact@webplusm.net",
             "role": "Developer"
         }
     ],
@@ -30,18 +30,17 @@
         "pestphp/pest-plugin-laravel": "^2.0",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.0",
-        "spatie/laravel-ray": "^1.26"
+        "phpstan/phpstan-phpunit": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Webplusmultimedia\\LittleAdminArchitect\\": "src/",
+            "Webplusmultimedia\\LittleAdminArchitect\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "Webplusmultimedia\\LittleAdminArchitect\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -61,10 +60,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Webplusmultimedia\\LittleAdminArchitect\\LittleAdminArchitectServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LittleAdminArchitect": "Webplusmultimedia\\LittleAdminArchitect\\Facades\\LittleAdminArchitect"
             }
         }
     },
