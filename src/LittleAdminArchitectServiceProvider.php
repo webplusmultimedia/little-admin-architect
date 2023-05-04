@@ -32,6 +32,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
         Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\View\\Components', config('little-admin-architect.blade-prefix'));
         $this->declareBladeDirectives();
     }
+
     public function registeringPackage()
     {
         $this->app->singleton(FormBinder::class, fn (Application $app) => new FormBinder());
@@ -40,20 +41,20 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     protected function declareBladeDirectives(): void
     {
         Blade::directive('bind', function ($dataBatch) {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->bindNewDataBatch(' . $dataBatch . ') ?>';
+            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->bindNewDataBatch('.$dataBatch.') ?>';
         });
         Blade::directive('endbind', function () {
             return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->unbindLastDataBatch() ?>';
         });
         Blade::directive('errorbag', function ($errorBagKey) {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->bindErrorBag(' . $errorBagKey . ') ?>';
+            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->bindErrorBag('.$errorBagKey.') ?>';
         });
         Blade::directive('enderrorbag', function () {
             return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->unbindErrorBag() ?>';
         });
         Blade::directive('wire', function ($livewireModifier) {
             return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->bindNewLivewireModifier('
-                . $livewireModifier . ') ?>';
+                .$livewireModifier.') ?>';
         });
         Blade::directive('endwire', function () {
             return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->unbindLastLivewireModifier() ?>';

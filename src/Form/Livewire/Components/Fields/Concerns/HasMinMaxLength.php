@@ -4,24 +4,31 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields
 
 trait HasMinMaxLength
 {
-    protected null|int $minLength = NULL;
-    protected null|int $maxLength = NULL;
+    protected null|int $minLength = null;
+
+    protected null|int $maxLength = null;
+
     public function minLength(int $length): static
     {
         $this->minLength = $length;
         $this->addRules('min:'.$length);
+
         return $this;
     }
+
     public function getMinLength(): ?int
     {
         return $this->minLength;
     }
+
     public function maxLength(int $length): static
     {
         $this->maxLength = $length;
         $this->addRules('max:'.$length);
+
         return $this;
     }
+
     public function getMaxLength(): ?int
     {
         return $this->maxLength;

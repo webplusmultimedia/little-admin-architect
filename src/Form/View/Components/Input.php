@@ -3,7 +3,6 @@
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Closure;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\CanBeWired;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasAddon;
@@ -27,34 +26,46 @@ class Input extends AbstractComponent
     use HasValidation;
     use CanBeWired;
 
-    protected string|null $id = NULL;
+    protected string|null $id = null;
+
     public ?string $type = 'text';
-    protected array|object|null $bind = NULL;
-    protected string|false|null $label = NULL;
-    protected bool|null $floatingLabel = NULL;
-    protected string|false|null $placeholder = NULL;
-    protected string|Closure|null $prepend = NULL;
-    protected string|Closure|null $append = NULL;
-    protected string|int|array|Closure|null $value = NULL;
-    public string|null $caption = NULL;
-    protected bool|null $displayValidationSuccess = NULL;
+
+    protected array|object|null $bind = null;
+
+    protected string|false|null $label = null;
+
+    protected bool|null $floatingLabel = null;
+
+    protected string|false|null $placeholder = null;
+
+    protected string|Closure|null $prepend = null;
+
+    protected string|Closure|null $append = null;
+
+    protected string|int|array|Closure|null $value = null;
+
+    public string|null $caption = null;
+
+    protected bool|null $displayValidationSuccess = null;
+
     protected bool|null $displayValidationFailure = true;
-    protected string|null $errorBag = NULL;
-    public array $locales = [NULL];
+
+    protected string|null $errorBag = null;
+
+    public array $locales = [null];
+
     public bool $marginBottom = true;
-
-
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
         public string $name,
-        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Input $field ,
-    )
-    {
+        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Input $field,
+    ) {
         parent::__construct();
         $this->field = $field;
         $this->type = $this->field->getType();
     }
+
     protected function setViewPath(): string
     {
         return 'input';

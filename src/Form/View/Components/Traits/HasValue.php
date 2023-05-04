@@ -23,10 +23,10 @@ trait HasValue
             // Prevent packages like spatie/laravel-translatable to automatically get the current locale
             // value from a model, even if `data_get` is being used.
             if ($dataBatch instanceof Model) {
-                return $this->value ?? data_get($dataBatch->toArray(), $this->name . '.' . $locale);
+                return $this->value ?? data_get($dataBatch->toArray(), $this->name.'.'.$locale);
             }
 
-            return $this->value ?? data_get($dataBatch, $this->name . '.' . $locale);
+            return $this->value ?? data_get($dataBatch, $this->name.'.'.$locale);
         }
 
         return $this->value ?? data_get($dataBatch, $this->name);
@@ -34,7 +34,7 @@ trait HasValue
 
     protected function getOldValue(string|null $locale): mixed
     {
-        $oldValue = data_get(old(), $this->name . ($locale ? '.' . $locale : ''));
+        $oldValue = data_get(old(), $this->name.($locale ? '.'.$locale : ''));
         if ($oldValue) {
             return $oldValue;
         }

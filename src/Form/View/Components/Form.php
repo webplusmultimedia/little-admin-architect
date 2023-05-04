@@ -8,7 +8,6 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 final class Form extends Component
 {
-
     public function __construct(
         protected \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form,
         public string $method = 'GET',
@@ -33,6 +32,7 @@ final class Form extends Component
     {
         return $this->form;
     }
+
     public function render(): View
     {
         return view('little-views::admin-components.form');

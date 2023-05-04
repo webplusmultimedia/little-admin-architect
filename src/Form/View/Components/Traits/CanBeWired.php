@@ -31,6 +31,7 @@ trait CanBeWired
     public function getComponentLivewireModifier(): string
     {
         $modifier = $this->getConfig()->getWireModifier();
+
         return $modifier;
     }
 
@@ -38,6 +39,6 @@ trait CanBeWired
     {
         $formLivewireModifier = app(FormBinder::class)->getBoundLivewireModifer();
 
-        return $formLivewireModifier ? '.' . $formLivewireModifier : '';
+        return $formLivewireModifier ? '.'.$formLivewireModifier : '';
     }
 }

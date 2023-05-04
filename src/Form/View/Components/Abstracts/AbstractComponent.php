@@ -13,8 +13,8 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field
 abstract class AbstractComponent extends Component
 {
     protected string $viewPath;
-    protected Field $field;
 
+    protected Field $field;
 
     public function __construct()
     {
@@ -30,6 +30,6 @@ abstract class AbstractComponent extends Component
 
     public function render(): View|Factory|Htmlable|Closure|string|Application
     {
-        return view('little-views::admin-components.' . $this->viewPath);
+        return view('little-views::admin-components.'.$this->viewPath);
     }
 }

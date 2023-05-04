@@ -2,9 +2,9 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
-Trait HasPlaceHolder
+trait HasPlaceHolder
 {
-    protected ?string $placeHolder = NULL;
+    protected ?string $placeHolder = null;
 
     public function getPlaceHolder(): ?string
     {
@@ -17,5 +17,4 @@ Trait HasPlaceHolder
 
         return $this;
     }
-
 }

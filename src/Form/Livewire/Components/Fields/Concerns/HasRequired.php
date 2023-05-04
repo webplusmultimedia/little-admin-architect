@@ -2,7 +2,7 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
-Trait HasRequired
+trait HasRequired
 {
     protected bool $required = false;
 
@@ -15,6 +15,7 @@ Trait HasRequired
     {
         $this->required = $required;
         $this->addRules('required');
+
         return $this;
     }
 }

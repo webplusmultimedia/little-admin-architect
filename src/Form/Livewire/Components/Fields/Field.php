@@ -9,9 +9,8 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasPlaceHolder;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasRequired;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasValidationRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
-
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasValidationRules;
 
 abstract class Field
 {
@@ -25,28 +24,28 @@ abstract class Field
     use CanBeDisabled;
 
     private string $prefixName = 'data';
+
     protected string $view = 'input';
 
-    protected ?Model $record = NULL;
+    protected ?Model $record = null;
 
     final public function __construct(
-        public string     $name,
-        protected ?string $label = NULL,
-    )
-    {
+        public string $name,
+        protected ?string $label = null,
+    ) {
     }
 
     public function getWireName(): string
     {
-        return $this->prefixName . '.' . $this->name;
+        return $this->prefixName.'.'.$this->name;
     }
 
     public function getFieldView(): string
     {
-        return config('little-admin-architect.blade-prefix') . '::' . $this->view;
+        return config('little-admin-architect.blade-prefix').'::'.$this->view;
     }
 
-    public static function make(string $name, null|string $label = NULL): static
+    public static function make(string $name, null|string $label = null): static
     {
         return new static(name: $name, label: $label);
     }
@@ -70,7 +69,6 @@ abstract class Field
 
     protected function getViewComponent(string $view): string
     {
-        return config('little-admin-architect.blade-prefix') . '::' . $view;
+        return config('little-admin-architect.blade-prefix').'::'.$view;
     }
-
 }

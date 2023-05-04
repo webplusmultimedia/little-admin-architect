@@ -5,6 +5,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields
 trait CanBeDisabled
 {
     protected bool $disabled = false;
+
     public function disabled(bool $canDisabled = true): static
     {
         $this->disabled = $canDisabled;

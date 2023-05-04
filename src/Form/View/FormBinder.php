@@ -7,12 +7,11 @@ use Illuminate\Support\Arr;
 class FormBinder
 {
     public function __construct(
-        protected array       $boundDataBatches = [],
-        protected string|null $errorBagKey = NULL,
-        protected array       $livewireModifiers = [],
-        protected null|int    $test = NULL
-    )
-    {
+        protected array $boundDataBatches = [],
+        protected string|null $errorBagKey = null,
+        protected array $livewireModifiers = [],
+        protected null|int $test = null
+    ) {
 
     }
 
@@ -45,12 +44,12 @@ class FormBinder
 
     public function unbindErrorBag(): void
     {
-        $this->errorBagKey = NULL;
+        $this->errorBagKey = null;
     }
 
     public function bindNewLivewireModifier(string|null $livewireModifier): void
     {
-        $this->livewireModifiers[] = $livewireModifier ? : '';
+        $this->livewireModifiers[] = $livewireModifier ?: '';
     }
 
     public function getBoundLivewireModifer(): string|null

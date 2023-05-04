@@ -5,7 +5,6 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields
 use Closure;
 use Illuminate\Validation\Rule;
 
-
 trait HasValidationRules
 {
     /**
@@ -27,6 +26,6 @@ trait HasValidationRules
 
     public function getViewComponentForErrorMessage()
     {
-        return $this->getViewComponent('partials.error-message') ;
+        return $this->getViewComponent('partials.error-message');
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\FieldException;
-
 trait CanBeWireModifier
 {
     protected string $wireModifier = '.defer';
@@ -14,6 +12,7 @@ trait CanBeWireModifier
 
         return $this;
     }
+
     public function defer(): static
     {
         $this->wireModifier = '.defer';

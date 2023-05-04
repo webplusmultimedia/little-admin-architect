@@ -3,23 +3,22 @@
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
 
 trait HasSchema
 {
     /**
-     * @var array<int,Field> $fields
+     * @var array<int,Field>
      */
     protected array $fields = [];
+
     /**
-     * @param array<int,Field> $fields
-     *
-     * @return static
+     * @param  array<int,Field>  $fields
      */
     public function schema(array $fields): static
     {
 
         $this->fields = $fields;
+
         return $this;
     }
 }

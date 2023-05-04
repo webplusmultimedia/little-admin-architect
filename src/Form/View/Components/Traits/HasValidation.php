@@ -14,7 +14,7 @@ trait HasValidation
         if ($errorBag->isEmpty()) {
             return null;
         }
-        if ($locale && $errorBag->has($this->name . '.' . $locale)) {
+        if ($locale && $errorBag->has($this->name.'.'.$locale)) {
             return $this->shouldDisplayValidationFailure() ? ' ring-error-400 !border-error-400' : null;
         }
         if ($errorBag->has($this->getNameWithArrayNotationConvertedInto())) {
@@ -56,12 +56,12 @@ trait HasValidation
         $errorBag = $this->getErrorBag($errors);
 
         if ($locale) {
-            $errorKey = $this->name . '.' . $locale;
+            $errorKey = $this->name.'.'.$locale;
             $rawMessage = $errorBag->first($errorKey);
 
             return $rawMessage ? str_replace(
-                str_replace('_', ' ', $this->name) . '.' . $locale,
-                __('validation.attributes.' . $this->name) . ' (' . strtoupper($locale) . ')',
+                str_replace('_', ' ', $this->name).'.'.$locale,
+                __('validation.attributes.'.$this->name).' ('.strtoupper($locale).')',
                 $rawMessage
             ) : null;
         }

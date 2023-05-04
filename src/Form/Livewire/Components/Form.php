@@ -2,10 +2,9 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components;
 
+use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasButton;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
-use Illuminate\Database\Eloquent\Model;
 
 final class Form
 {
@@ -13,28 +12,29 @@ final class Form
     use HasSchema;
 
     protected string $view = 'form';
+
     protected Model $model;
+
     protected string $mode;
+
     protected string $action;
 
     public function __construct(
-        public string               $title,
-        protected array|object|null $bind = NULL,
-    )
-    {
+        public string $title,
+        protected array|object|null $bind = null,
+    ) {
 
     }
 
-    static public function make(string $title = ''): static
+    public static function make(string $title = ''): static
     {
-        return new static(title: $title);
+        return new self(title: $title);
     }
 
     public function getView()
     {
-        return config('little-admin-architect.blade-prefix') . '::' . $this->view;
+        return config('little-admin-architect.blade-prefix').'::'.$this->view;
     }
-
 
     public function getAction(): ?string
     {
@@ -81,7 +81,7 @@ final class Form
     {
         $rules = [];
         foreach ($this->fields as $field) {
-            $rules['data.' . $field->name] = $field->rules;
+            $rules['data.'.$field->name] = $field->rules;
         }
 
         return $rules;
@@ -104,7 +104,9 @@ final class Form
     protected function isDisabledField(string $name): bool
     {
         foreach ($this->fields as $field) {
-            if ($field->name === $name) return $field->isDisabled();
+            if ($field->name === $name) {
+                return $field->isDisabled();
+            }
         }
 
         return false;
@@ -112,9 +114,9 @@ final class Form
 
     public function init(): void
     {
-        if ($this->bind && $this->bind->exists()){
+        if ($this->bind && $this->bind->exists()) {
             $this->mode = 'UPDATED';
-        }else {
+        } else {
             $this->mode = 'CREATED';
         }
     }
@@ -123,5 +125,4 @@ final class Form
     {
         return $this->mode;
     }
-
 }
