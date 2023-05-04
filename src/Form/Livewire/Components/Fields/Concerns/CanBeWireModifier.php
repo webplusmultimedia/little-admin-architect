@@ -8,12 +8,15 @@ trait CanBeWireModifier
 {
     protected null|string $wireModifier = NULL;
 
-    public function wireModifier(string $modifier): static
+    public function lazy(): static
     {
-        if (! in_array($modifier, ['lazy', 'prevent', 'defer'])) {
-            throw new FieldException('this wire modifier not exist for form');
-        }
-        $this->wireModifier = $modifier;
+        $this->wireModifier = 'lazy';
+
+        return $this;
+    }
+    public function defer(): static
+    {
+        $this->wireModifier = 'defer';
 
         return $this;
     }

@@ -4,7 +4,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields
 
 final class Textarea extends Field
 {
-    protected string $view = 'form::textarea';
+    protected string $view = 'textarea';
     protected int $rows = 6;
     public function rows(int $rows): Textarea
     {

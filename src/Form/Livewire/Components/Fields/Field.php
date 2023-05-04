@@ -25,9 +25,9 @@ abstract class Field
     use CanBeDisabled;
 
     private string $prefixName = 'data';
-    protected string $view = 'form::input';
+    protected string $view = 'input';
 
-    protected ?Model $record = null;
+    protected ?Model $record = NULL;
 
     final public function __construct(
         public string     $name,
@@ -43,7 +43,7 @@ abstract class Field
 
     public function getFieldView(): string
     {
-        return $this->view;
+        return config('little-admin-architect.blade-prefix') . '::' . $this->view;
     }
 
     public static function make(string $name, null|string $label = NULL): static
@@ -58,15 +58,19 @@ abstract class Field
         return $this;
     }
 
-    public function record(Model $model): static
+    protected function record(Model $model): void
     {
         $this->record = $model;
-        return $this;
     }
 
     public function getRecord(): ?Model
     {
         return $this->record;
+    }
+
+    protected function getViewComponent(string $view): string
+    {
+        return config('little-admin-architect.blade-prefix') . '::' . $view;
     }
 
 }

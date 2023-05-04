@@ -6,9 +6,10 @@ use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder;
 
-class Form extends Component
+final class Form extends Component
 {
     public function __construct(
+        protected \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form,
         public string $method = 'GET',
         public array|object|null $bind = null,
         public string|null $errorBag = null,
@@ -27,6 +28,10 @@ class Form extends Component
         $this->method = strtoupper($method);
     }
 
+    public function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form
+    {
+        return $this->form;
+    }
     public function render(): View
     {
         return view('little-views::admin-components.form');

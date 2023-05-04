@@ -1,5 +1,7 @@
+@php use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Textarea; @endphp
 @foreach($locales as $locale)
     @php
+        /** @var Textarea $config */
         $config = $getConfig();
         $id = $getId($locale) ?: $getDefaultId('textarea', $locale);
         $label = $getLabel($locale);
@@ -14,15 +16,15 @@
     @endphp
     <div @class(['col-span-full mb-3' => $marginBottom])>
         @if(($prepend || $append) && ! $displayFloatingLabel)
-            <x:form::partials.label :id="$id" class="form-label" :label="$label"/>
+            <x-dynamic-component :component="$config->getViewComponentForLabel()" :id="$id" class="form-label" :label="$label"/>
             <div class="input-group">
                 @endif
                 @if(! $prepend && ! $append && ! $displayFloatingLabel)
-                    <x:form::partials.label :id="$id" class="form-label" :label="$label"/>
+                    <x-dynamic-component :component="$config->getViewComponentForLabel()" :id="$id" class="form-label" :label="$label"/>
                 @endif
-                @if($prepend && ! $displayFloatingLabel)
-                    <x:form::partials.addon :addon="$prepend"/>
-                @endif
+                {{-- @if($prepend && ! $displayFloatingLabel)
+                     <x:form::partials.addon :addon="$prepend"/>
+                 @endif--}}
                 <textarea {{ $attributes->merge([
                 'wire:model' . $getComponentLivewireModifier() => $isWired && ! $hasComponentNativeLivewireModelBinding() ? ($locale ? $config->getWireName() . '.' . $locale : $config->getWireName()) : NULL,
                 'id' => $id,
@@ -33,14 +35,14 @@
                 'data-locale' => $locale,
                 'aria-describedby' => $caption ? $id . '-caption' : NULL,
             ])}}>{{ $isWired ? NULL : $value }}</textarea>
-                @if(! $prepend && ! $append && $displayFloatingLabel)
-                    <x:form::partials.label :id="$id" class="form-label" :label="$label"/>
-                @endif
-                @if($append && ! $displayFloatingLabel)
-                    <x:form::partials.addon :addon="$append"/>
-                @endif
-                <x:form::partials.caption :inputId="$id" :caption="$caption"/>
-                <x:form::partials.error-message :message="$errorMessage"/>
+                {{--  @if(! $prepend && ! $append && $displayFloatingLabel)
+                      <x:form::partials.label :id="$id" class="form-label" :label="$label"/>
+                  @endif
+                  @if($append && ! $displayFloatingLabel)
+                      <x:form::partials.addon :addon="$append"/>
+                  @endif--}}
+                <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()"/>
+                <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage"/>
                 @if(($prepend || $append) && ! $displayFloatingLabel)
             </div>
         @endif

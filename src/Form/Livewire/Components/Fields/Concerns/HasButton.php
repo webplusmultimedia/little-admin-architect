@@ -5,11 +5,14 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields
 trait HasButton
 {
     protected ?string $captionBtn = null;
+    protected ?string $labelBtn = null;
+    protected ?string $actionBtn = null;
     protected ?string $iconClassBtn = null;
     protected array $configBtn =[
-        'class_post' =>'btn btn-success',
+        'class_success' =>'btn btn-success',
         'class_delete' =>'btn btn-error',
-        'class_update' =>'btn btn-info',
+        'class_info' =>'btn btn-info',
+        'class_warning' =>'btn btn-warning',
     ];
     public function caption(string $caption): static
     {

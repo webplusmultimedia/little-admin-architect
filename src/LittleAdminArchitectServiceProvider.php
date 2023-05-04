@@ -29,7 +29,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
 
     public function bootingPackage()
     {
-        Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\ViewComponents\\Components', 'form');
+        Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\ViewComponents\\Components', config('little-admin-architect.blade-prefix'));
         $this->declareBladeDirectives();
     }
     public function registeringPackage()
