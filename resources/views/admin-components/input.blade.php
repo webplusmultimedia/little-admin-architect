@@ -15,7 +15,7 @@
             $isWired = $componentIsWired();
     @endphp
     <div
-        @class(['hidden' => $type === 'hidden', 'form-floating' => $displayFloatingLabel, 'mb-3' => $marginBottom])
+        @class([ 'mb-3 col-span-1','hidden' => $config->getType() === 'hidden'])
         x-data="{ errors : $wire.__instance.errors}"
     >
 
@@ -43,6 +43,8 @@
                 'maxlength' => $config->getMaxLength() ,
                 'step' => $config->getStep() ,
                 'inputmode' => $config->getInputMode() ,
+                'min' => $config->getMinValue() ,
+                'max' => $config->getMaxValue() ,
             ]) }}
                        @if($config->isRequired()) required @endif
                        @if($config->isDisabled()) disabled @endif
