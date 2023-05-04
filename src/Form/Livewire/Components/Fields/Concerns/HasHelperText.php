@@ -18,7 +18,7 @@ trait HasHelperText
         return $this;
     }
 
-    public function getViewComponentForHelperText()
+    public function getViewComponentForHelperText(): string
     {
         return $this->getViewComponent('partials.caption');
     }

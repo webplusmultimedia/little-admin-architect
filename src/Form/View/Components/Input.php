@@ -3,6 +3,7 @@
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Closure;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\CanBeWired;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasAddon;
@@ -19,42 +20,17 @@ class Input extends AbstractComponent
     use HasId;
     use HasName;
     use HasLabel;
-    use HasFloatingLabel;
     use HasValue;
     use HasPlaceholder;
     use HasAddon;
     use HasValidation;
     use CanBeWired;
 
-    protected string|null $id = null;
 
     public ?string $type = 'text';
 
-    protected array|object|null $bind = null;
-
-    protected string|false|null $label = null;
-
-    protected bool|null $floatingLabel = null;
-
-    protected string|false|null $placeholder = null;
-
-    protected string|Closure|null $prepend = null;
-
-    protected string|Closure|null $append = null;
-
-    protected string|int|array|Closure|null $value = null;
-
     public string|null $caption = null;
-
-    protected bool|null $displayValidationSuccess = null;
-
-    protected bool|null $displayValidationFailure = true;
-
-    protected string|null $errorBag = null;
-
     public array $locales = [null];
-
-    public bool $marginBottom = true;
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
@@ -62,12 +38,17 @@ class Input extends AbstractComponent
         \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Input $field,
     ) {
         parent::__construct();
-        $this->field = $field;
-        $this->type = $this->field->getType();
+        $this->setUp($field);
     }
-
     protected function setViewPath(): string
     {
         return 'input';
+    }
+    protected function setUp(Field $field): void
+    {
+        $this->field = $field;
+        $this->type = $field->getType();
+        $this->placeholder = $field->getPlaceHolder();
+        $this->isRequiredField = $field->isRequired();
     }
 }

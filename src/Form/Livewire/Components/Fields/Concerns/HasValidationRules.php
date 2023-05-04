@@ -8,9 +8,10 @@ use Illuminate\Validation\Rule;
 trait HasValidationRules
 {
     /**
-     * @var array<int,\Illuminate\Contracts\Validation\Rule|array|string|Closure>
+     * @var array<int,string|Rule|Closure>
      */
     public array $rules = [];
+
 
     protected function addRules(string|Rule|Closure $rules): void
     {
@@ -24,7 +25,7 @@ trait HasValidationRules
         return $this;
     }
 
-    public function getViewComponentForErrorMessage()
+    public function getViewComponentForErrorMessage(): string
     {
         return $this->getViewComponent('partials.error-message');
     }

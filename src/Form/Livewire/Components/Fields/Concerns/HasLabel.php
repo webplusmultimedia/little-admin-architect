@@ -17,7 +17,7 @@ trait HasLabel
 
     public function getLabel(): ?string
     {
-        return $this->label;
+        return $this->label ?? str($this->name)->headline()->lower()->ucfirst();
     }
 
     public function getViewComponentForLabel(): string

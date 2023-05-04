@@ -3,6 +3,7 @@
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Closure;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\CanBeWired;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasAddon;
@@ -30,28 +31,23 @@ class Textarea extends AbstractComponent
     public function __construct(
         public string $name,
         \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Textarea $field,
-        protected string|null $id = null,
-        protected object|array|null $bind = null,
-        protected string|false|null $label = null,
-        protected bool|null $floatingLabel = null,
-        protected string|false|null $placeholder = null,
-        protected string|Closure|null $prepend = null,
-        protected string|Closure|null $append = null,
-        protected string|int|array|Closure|null $value = null,
         public string|null $caption = null,
-        protected bool|null $displayValidationSuccess = null,
-        protected bool|null $displayValidationFailure = null,
-        protected string|null $errorBag = null,
         public array $locales = [null],
-        public bool $marginBottom = true,
 
     ) {
         parent::__construct();
-        $this->field = $field;
+       $this->setUp($field);
     }
 
     protected function setViewPath(): string
     {
         return 'textarea';
+    }
+
+    protected function setUp(Field $field): void
+    {
+        $this->field = $field;
+        $this->isRequiredField = $field->isRequired();
+        $this->placeholder = $field->getPlaceHolder();
     }
 }

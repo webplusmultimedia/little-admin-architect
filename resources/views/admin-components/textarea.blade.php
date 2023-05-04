@@ -5,7 +5,6 @@
         $config = $getConfig();
         $id = $getId($locale) ?: $getDefaultId('textarea', $locale);
         $label = $getLabel($locale);
-        $displayFloatingLabel = $shouldDisplayFloatingLabel();
         $placeholder = $getPlaceholder($label, $locale);
         $value = $getValue($locale);
         $prepend = $getPrepend($locale);
@@ -13,38 +12,41 @@
         $errorMessage = $getErrorMessage($errors, $locale);
         $validationClass = $getValidationClass($errors, $locale);
         $isWired = $componentIsWired();
+
     @endphp
-    <div @class(['col-span-full mb-3' => $marginBottom])>
-        @if(($prepend || $append) && ! $displayFloatingLabel)
-            <x-dynamic-component :component="$config->getViewComponentForLabel()" :id="$id" class="form-label" :label="$label"/>
+    <div @class([$config->getColSpan(),'mb-3'])>
+        <x-dynamic-component
+            :component="$config->getViewComponentForLabel()"
+            :id="$id" class="form-label"
+            :label="$config->getLabel()"
+            :showRequired="$isShowSignRequiredOnLabel()"
+        />
+        @if(($prepend || $append))
             <div class="input-group">
                 @endif
-                @if(! $prepend && ! $append && ! $displayFloatingLabel)
-                    <x-dynamic-component :component="$config->getViewComponentForLabel()" :id="$id" class="form-label" :label="$label"/>
-                @endif
-                {{-- @if($prepend && ! $displayFloatingLabel)
+
+                {{-- @if($prepend)
                      <x:form::partials.addon :addon="$prepend"/>
                  @endif--}}
                 <textarea {{ $attributes->merge([
-                'wire:model' . $getComponentLivewireModifier() => $isWired && ! $hasComponentNativeLivewireModelBinding() ? ($locale ? $config->getWireName() . '.' . $locale : $config->getWireName()) : NULL,
+                'wire:model' . $getComponentLivewireModifier() => ($locale ? $config->getWireName() . '.' . $locale : $config->getWireName()),
                 'id' => $id,
                 'class' => 'form-control' . ($validationClass ? ' ' . $validationClass : NULL),
-                'name' => $locale ? $name . '[' . $locale . ']' : $name,
 				'rows' => $config->getRows(),
                 'placeholder' => $placeholder,
                 'data-locale' => $locale,
                 'aria-describedby' => $caption ? $id . '-caption' : NULL,
-            ])}}>{{ $isWired ? NULL : $value }}</textarea>
-                {{--  @if(! $prepend && ! $append && $displayFloatingLabel)
-                      <x:form::partials.label :id="$id" class="form-label" :label="$label"/>
-                  @endif
-                  @if($append && ! $displayFloatingLabel)
+            ])}}></textarea>
+                {{--
+                  @if($append)
                       <x:form::partials.addon :addon="$append"/>
                   @endif--}}
                 <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()"/>
                 <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage"/>
-                @if(($prepend || $append) && ! $displayFloatingLabel)
+                @if(($prepend || $append))
             </div>
         @endif
+
+
     </div>
 @endforeach

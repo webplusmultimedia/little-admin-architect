@@ -21,12 +21,13 @@ abstract class AbstractComponent extends Component
         $this->viewPath = $this->setViewPath();
     }
 
-    public function getConfig(): ?Field
+    public function getConfig(): Field
     {
         return $this->field;
     }
 
     abstract protected function setViewPath(): string;
+    abstract protected function setUp(Field $field): void;
 
     public function render(): View|Factory|Htmlable|Closure|string|Application
     {

@@ -3,25 +3,29 @@
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components;
 
 use Illuminate\Database\Eloquent\Model;
+use NunoMaduro\Larastan\Concerns\HasContainer;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasButton;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
 
 final class Form
 {
     use HasButton;
     use HasSchema;
+    use HasColumns;
 
     protected string $view = 'form';
 
-    protected Model $model;
+    protected ?Model $model = null;
 
-    protected string $mode;
+    protected ?string $mode = null;
 
-    protected string $action;
+    protected ?string $action = null;
+
 
     public function __construct(
         public string $title,
-        protected array|object|null $bind = null,
+        protected Model|null $bind = null,
     ) {
 
     }
@@ -31,7 +35,7 @@ final class Form
         return new self(title: $title);
     }
 
-    public function getView()
+    public function getView(): string
     {
         return config('little-admin-architect.blade-prefix').'::'.$this->view;
     }
@@ -48,12 +52,12 @@ final class Form
         return $this;
     }
 
-    public function getBind(): object|array|null
+    public function getBind(): Model
     {
         return $this->bind;
     }
 
-    public function bind(object|array|null $bind): Form
+    public function bind(Model $bind): Form
     {
         $this->bind = $bind;
 
@@ -87,16 +91,29 @@ final class Form
         return $rules;
     }
 
+    public function getAttributesRules(): array
+    {
+        $rules = [];
+        foreach ($this->fields as $field) {
+            $rules['data.'.$field->name] = str($field->getLabel())->lower();
+        }
+
+        return $rules;
+    }
+
     public function values(array $datas): array
     {
         $values = [];
-        foreach ($datas['data'] as $fieldName => $data) {
-            if (! $this->isDisabledField($fieldName)) {
-                $values[$fieldName] = $data;
-            } else {
-                $this->bind->{$fieldName} = $this->bind->getOriginal($fieldName);
+        if ($this->bind instanceof Model){
+            foreach ($datas['data'] as $fieldName => $data) {
+                if (! $this->isDisabledField($fieldName)) {
+                    $values[$fieldName] = $data;
+                } else {
+                    $this->bind->{$fieldName} = $this->bind->getOriginal($fieldName);
+                }
             }
         }
+
 
         return $values;
     }
@@ -121,7 +138,7 @@ final class Form
         }
     }
 
-    public function mode(): string
+    public function mode(): ?string
     {
         return $this->mode;
     }

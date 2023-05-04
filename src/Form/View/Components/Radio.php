@@ -2,7 +2,8 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent as AbstractComponentAlias;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\CanBeWired;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasId;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasLabel;
@@ -10,7 +11,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasName;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasValidation;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
-class Radio extends AbstractComponent
+class Radio extends AbstractComponentAlias
 {
     use HasId;
     use HasName;
@@ -54,5 +55,10 @@ class Radio extends AbstractComponent
     protected function setViewPath(): string
     {
         return 'radio';
+    }
+
+    protected function setUp(Field $field): void
+    {
+        // TODO: Implement setUp() method.
     }
 }

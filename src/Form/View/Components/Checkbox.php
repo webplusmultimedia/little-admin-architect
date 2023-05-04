@@ -2,6 +2,7 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\CanBeChecked;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\CanBeWired;
@@ -44,5 +45,10 @@ class Checkbox extends AbstractComponent
     protected function setViewPath(): string
     {
         return 'checkbox';
+    }
+
+    protected function setUp(Field $field): void
+    {
+        // TODO: Implement setUp() method.
     }
 }

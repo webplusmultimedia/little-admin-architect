@@ -8,16 +8,19 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 trait HasValidation
 {
+    protected bool|null $displayValidationSuccess = null;
+    protected bool|null $displayValidationFailure = true;
+    protected string|null $errorBag = null;
     public function getValidationClass(ViewErrorBag $errors, string|null $locale = null): string|null
     {
         $errorBag = $this->getErrorBag($errors);
         if ($errorBag->isEmpty()) {
             return null;
         }
-        if ($locale && $errorBag->has($this->name.'.'.$locale)) {
+        if ($locale && $errorBag->has($this->field->getWireName().'.'.$locale)) {
             return $this->shouldDisplayValidationFailure() ? ' ring-error-400 !border-error-400' : null;
         }
-        if ($errorBag->has($this->getNameWithArrayNotationConvertedInto())) {
+        if ($errorBag->has($this->field->getWireName())) {
             return $this->shouldDisplayValidationFailure() ? ' ring-error-400 !border-error-400' : null;
         }
 
@@ -39,19 +42,19 @@ trait HasValidation
 
     public function shouldDisplayValidationFailure(): bool
     {
-        return $this->displayValidationFailure ?? config('little-admin-architect.display_validation_failure', true);
+        return config('little-admin-architect.display_validation_failure', true);
     }
 
     public function shouldDisplayValidationSuccess(): bool
     {
-        return $this->displayValidationSuccess ?? config('little-admin-architect.display_validation_success', true);
+        return config('little-admin-architect.display_validation_success', true);
     }
 
     public function getErrorMessage(ViewErrorBag $errors, string|null $locale = null): string|null
     {
-        if (! $this->shouldDisplayValidationFailure()) {
+        /*if (! $this->shouldDisplayValidationFailure()) {
             return null;
-        }
+        }*/
 
         $errorBag = $this->getErrorBag($errors);
 
@@ -65,7 +68,7 @@ trait HasValidation
                 $rawMessage
             ) : null;
         }
-
+        $_name = str($this->name)->headline()->lower().($locale ? ' ('.strtoupper($locale).')' : '');
         return $errorBag->first($this->getConfig()->getWireName());
     }
 }

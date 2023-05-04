@@ -8,6 +8,8 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 trait HasValue
 {
+    protected string|int|array|Closure|null $value = null;
+    protected array|object|null $bind = null;
     public function getValue(string|null $locale = null): mixed
     {
         $oldValue = $this->getOldValue($locale);
