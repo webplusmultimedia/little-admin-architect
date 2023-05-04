@@ -7,7 +7,7 @@ trait HasMinMaxValues
 {
     private null|int $minValue = NULL;
     private null|int $maxValue = NULL;
-    public function min(int $min): static
+    public function minValue(int $min): static
     {
         $this->minValue = $min;
         $this->addRules('min:'.$min);
@@ -17,7 +17,7 @@ trait HasMinMaxValues
     {
         return $this->minValue;
     }
-    public function max(int $max): static
+    public function maxValue(int $max): static
     {
         $this->maxValue = $max;
         $this->addRules('max:'.$max);

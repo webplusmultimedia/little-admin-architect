@@ -1,10 +1,11 @@
 @php
-    use Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder;
+    use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;use Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder;
 	$requiredCsrfToken = in_array($method, ['POST', 'PUT', 'PATCH', 'DELETE']);
     $requiredMethodSpoofing = in_array($method, ['PUT', 'PATCH', 'DELETE']);
+	/**@var Form $form */
 	$form = $getForm()
 @endphp
-<div class="">
+<div class="py-3 px-2">
     <h1 class="text-2xl mb-5">{{ __($form->title) }}</h1>
     <form wire:submit.prevent="save" >
         @if($requiredCsrfToken)

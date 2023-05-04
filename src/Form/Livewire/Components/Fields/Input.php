@@ -43,6 +43,7 @@ final class Input extends Field
         $this->type = 'number';
         $this->step = 'any';
         $this->inputMode = 'decimal';
+        $this->addRules('numeric');
         return $this;
     }
 

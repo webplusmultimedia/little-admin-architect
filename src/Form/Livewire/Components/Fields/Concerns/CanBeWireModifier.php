@@ -6,22 +6,22 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field
 
 trait CanBeWireModifier
 {
-    protected null|string $wireModifier = NULL;
+    protected string $wireModifier = '.defer';
 
     public function lazy(): static
     {
-        $this->wireModifier = 'lazy';
+        $this->wireModifier = '.lazy';
 
         return $this;
     }
     public function defer(): static
     {
-        $this->wireModifier = 'defer';
+        $this->wireModifier = '.defer';
 
         return $this;
     }
 
-    public function getWireModifier(): ?string
+    public function getWireModifier(): string
     {
         return $this->wireModifier;
     }

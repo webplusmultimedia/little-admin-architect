@@ -28,9 +28,9 @@ trait CanBeWired
         return $this->attributes->has('wire');
     }
 
-    public function getComponentLivewireModifier(): ?string
+    public function getComponentLivewireModifier(): string
     {
-        $modifier = $this->getConfig()->getWireModifier()?'.'.$this->getConfig()->getWireModifier():null;
+        $modifier = $this->getConfig()->getWireModifier();
         return $modifier;
     }
 
