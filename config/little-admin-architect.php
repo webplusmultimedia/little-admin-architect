@@ -25,5 +25,5 @@ return [
      * Fail status will be display when errors are sent to the view with a match with the component name.
      */
     'display_validation_failure' => true,
-    'blade-prefix' => 'my-form',
+    'blade-prefix' => 'little-form',
 ];

@@ -1,5 +1,5 @@
 @php
-    use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;use Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder;
+    use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 	$requiredCsrfToken = in_array($method, ['POST', 'PUT', 'PATCH', 'DELETE']);
     $requiredMethodSpoofing = in_array($method, ['PUT', 'PATCH', 'DELETE']);
 	/**@var Form $form */
@@ -8,14 +8,14 @@
 <div class="py-3 px-2">
     <h1 class="text-2xl mb-5">{{ __($form->title) }}</h1>
     <div class="bg-gray-50 px-5 py-8">
-        <form wire:submit.prevent="save" >
+        <form wire:submit.prevent="save">
             @if($requiredCsrfToken)
                 @csrf
             @endif
             @if($requiredMethodSpoofing)
                 @method($method)
             @endif
-            {{ $slot ?? null }}
+            {{ $slot ?? NULL }}
         </form>
     </div>
 

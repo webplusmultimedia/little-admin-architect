@@ -2,7 +2,7 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\Components\Partials\Label;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Partials\Label;
 
 trait HasLabel
 {

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
-use Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 class LittleAdminArchitectServiceProvider extends PackageServiceProvider
 {
@@ -29,7 +29,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
 
     public function bootingPackage()
     {
-        Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\ViewComponents\\Components', config('little-admin-architect.blade-prefix'));
+        Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\View\\Components', config('little-admin-architect.blade-prefix'));
         $this->declareBladeDirectives();
     }
     public function registeringPackage()
@@ -40,23 +40,23 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     protected function declareBladeDirectives(): void
     {
         Blade::directive('bind', function ($dataBatch) {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder::class)->bindNewDataBatch(' . $dataBatch . ') ?>';
+            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->bindNewDataBatch(' . $dataBatch . ') ?>';
         });
         Blade::directive('endbind', function () {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder::class)->unbindLastDataBatch() ?>';
+            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->unbindLastDataBatch() ?>';
         });
         Blade::directive('errorbag', function ($errorBagKey) {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder::class)->bindErrorBag(' . $errorBagKey . ') ?>';
+            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->bindErrorBag(' . $errorBagKey . ') ?>';
         });
         Blade::directive('enderrorbag', function () {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder::class)->unbindErrorBag() ?>';
+            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->unbindErrorBag() ?>';
         });
         Blade::directive('wire', function ($livewireModifier) {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder::class)->bindNewLivewireModifier('
+            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->bindNewLivewireModifier('
                 . $livewireModifier . ') ?>';
         });
         Blade::directive('endwire', function () {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder::class)->unbindLastLivewireModifier() ?>';
+            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->unbindLastLivewireModifier() ?>';
         });
     }
 }
