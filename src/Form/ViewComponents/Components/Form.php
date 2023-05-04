@@ -8,6 +8,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\ViewComponents\FormBinder;
 
 final class Form extends Component
 {
+
     public function __construct(
         protected \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form,
         public string $method = 'GET',

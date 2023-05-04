@@ -7,15 +7,19 @@
 @endphp
 <div class="py-3 px-2">
     <h1 class="text-2xl mb-5">{{ __($form->title) }}</h1>
-    <form wire:submit.prevent="save" >
-        @if($requiredCsrfToken)
-            @csrf
-        @endif
-        @if($requiredMethodSpoofing)
-            @method($method)
-        @endif
-        {{ $slot ?? null }}
-    </form>
+    <div class="bg-gray-50 px-5 py-8">
+        <form wire:submit.prevent="save" >
+            @if($requiredCsrfToken)
+                @csrf
+            @endif
+            @if($requiredMethodSpoofing)
+                @method($method)
+            @endif
+            {{ $slot ?? null }}
+        </form>
+    </div>
+
+
 </div>
 
 @php

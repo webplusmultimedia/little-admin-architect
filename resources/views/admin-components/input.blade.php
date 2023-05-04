@@ -32,7 +32,7 @@
                 <input {{ $attributes->except(['wire','field'])->merge([
                 'wire:model' . $config->getWireModifier() => $isWired && ! $hasComponentNativeLivewireModelBinding() ? ($locale ? $config->getWireName() . '.' . $locale : $config->getWireName()) : NULL,
                 'id' => $id,
-                'class' => 'form-control' . ($validationClass ? ' ' . $validationClass : NULL),
+                'class' => 'rounded-none py-3 px-2 text-lg' . ($validationClass ? ' ' . $validationClass : NULL),
                 'type' => $type,
                 'name' => $locale ? $name . '[' . $locale . ']' : $name,
                 'placeholder' => $placeholder,

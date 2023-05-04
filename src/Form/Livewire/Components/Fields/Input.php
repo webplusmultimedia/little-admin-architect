@@ -36,6 +36,7 @@ final class Input extends Field
         $this->type = 'number';
         $this->step(1);
         $this->inputMode = 'numeric';
+        $this->addRules('numeric');
         return $this;
     }
     public function decimal(): Input
