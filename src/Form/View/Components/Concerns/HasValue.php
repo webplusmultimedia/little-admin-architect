@@ -1,6 +1,6 @@
 <?php
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits;
+namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns;
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;

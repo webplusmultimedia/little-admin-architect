@@ -4,15 +4,15 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Closure;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\CanBeWired;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasAddon;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasFloatingLabel;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasId;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasLabel;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasName;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasOptions;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasPlaceholder;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasValidation;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeWired;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasAddon;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasFloatingLabel;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasId;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasLabel;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasName;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasOptions;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasPlaceholder;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValidation;
 
 class Select extends AbstractComponent
 {

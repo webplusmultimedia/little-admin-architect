@@ -3,6 +3,8 @@
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields;
 
 use Illuminate\Database\Eloquent\Model;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\ValidateValuesForRules;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\CanValidateValuesForRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeDisabled;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeWireModifier;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColSpan;
@@ -13,7 +15,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasValidationRules;
 
-abstract class Field
+abstract class Field implements CanValidateValuesForRules
 {
     use HasValidationRules;
     //use HasSchema;
@@ -24,6 +26,7 @@ abstract class Field
     use HasLabel;
     use CanBeDisabled;
     use HasColSpan;
+    use ValidateValuesForRules;
 
     private string $prefixName = 'data';
 

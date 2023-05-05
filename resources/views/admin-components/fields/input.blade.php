@@ -13,7 +13,7 @@
             $validationClass = $getValidationClass($errors, $locale);
     @endphp
     <div
-        :wire:key="{{'.' . $id}}"
+        wire:key="{{ $id }}"
         {{ $attributes->class('mb-3')->merge(['class'=> $config->getColSpan()]) }}
         @class([  'hidden' => $config->getType() === 'hidden'])
         x-data="{ errors : $wire.__instance.errors}"

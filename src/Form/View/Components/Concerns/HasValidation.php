@@ -1,6 +1,6 @@
 <?php
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits;
+namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns;
 
 use Illuminate\Contracts\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;

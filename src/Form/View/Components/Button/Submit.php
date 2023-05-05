@@ -10,7 +10,7 @@ class Submit extends AbstractComponent
 {
     protected function setViewPath(): string
     {
-        return 'button.submit';
+        return 'fields.button.submit';
     }
 
     protected function setUp(Field|AbstractLayout $field): void

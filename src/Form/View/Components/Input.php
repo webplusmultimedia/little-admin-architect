@@ -6,15 +6,15 @@ use Closure;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\CanBeWired;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasAddon;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasFloatingLabel;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasId;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasLabel;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasName;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasPlaceholder;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasValidation;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\HasValue;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeWired;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasAddon;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasFloatingLabel;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasId;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasLabel;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasName;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasPlaceholder;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValidation;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValue;
 
 class Input extends AbstractComponent
 {
@@ -43,7 +43,7 @@ class Input extends AbstractComponent
     }
     protected function setViewPath(): string
     {
-        return 'input';
+        return 'fields.input';
     }
     protected function setUp(Field|AbstractLayout $field): void
     {

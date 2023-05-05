@@ -17,6 +17,9 @@ trait CanGetRules
                 $rules['data.' . $field->name] = $field->rules;
             }
             if($field instanceof AbstractLayout){
+                if (!$field->getBind()) {
+                    $field->bind(bind: $this->bind);
+                }
                 $rules = array_merge($rules,$field->getRules());
             }
         }

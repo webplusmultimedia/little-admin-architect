@@ -5,6 +5,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components;
 use Illuminate\Database\Eloquent\Model;
 use NunoMaduro\Larastan\Concerns\HasContainer;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanGetRules;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanValidatedValues;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasButton;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
@@ -15,6 +16,7 @@ final class Form
     use HasSchema;
     use HasColumns;
     use CanGetRules;
+    use CanValidatedValues;
 
     protected string $view = 'form';
 
@@ -79,36 +81,6 @@ final class Form
     }
 
 
-
-
-
-    public function values(array $datas): array
-    {
-        $values = [];
-        if ($this->bind instanceof Model){
-            foreach ($datas['data'] as $fieldName => $data) {
-                if (! $this->isDisabledField($fieldName)) {
-                    $values[$fieldName] = $data;
-                } else {
-                    $this->bind->{$fieldName} = $this->bind->getOriginal($fieldName);
-                }
-            }
-        }
-
-
-        return $values;
-    }
-
-    protected function isDisabledField(string $name): bool
-    {
-        foreach ($this->fields as $field) {
-            if ($field->name === $name) {
-                return $field->isDisabled();
-            }
-        }
-
-        return false;
-    }
 
     public function init(): void
     {
