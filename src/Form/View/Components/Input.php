@@ -35,8 +35,8 @@ class Input extends AbstractComponent
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
-        public string $name,
         \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Input $field,
+        public null|string $name = null,
     ) {
         parent::__construct();
         $this->setUp($field);
@@ -51,5 +51,6 @@ class Input extends AbstractComponent
         $this->type = $field->getType();
         $this->placeholder = $field->getPlaceHolder();
         $this->isRequiredField = $field->isRequired();
+        $this->name = $field->name;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns;
 
-use Illuminate\Support\Arr;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 
@@ -13,15 +12,7 @@ trait CanGetRules
     {
         $rules = [];
         foreach ($this->fields as $field) {
-            if($field instanceof Field) {
-                $rules['data.' . $field->name] = $field->rules;
-            }
-            if($field instanceof AbstractLayout){
-                if (!$field->getBind()) {
-                    $field->bind(bind: $this->bind);
-                }
-                $rules = array_merge($rules,$field->getRules());
-            }
+            $rules = $field->interactWithRules(rules: $rules,model: $this->getBind());
         }
 
         return $rules;
@@ -31,7 +22,7 @@ trait CanGetRules
     {
         $rules = [];
         foreach ($this->fields as $field) {
-            $rules['data.'.$field->name] = str($field->getLabel())->lower();
+            $rules = $field->applyAttributesRules($rules);
         }
 
         return $rules;

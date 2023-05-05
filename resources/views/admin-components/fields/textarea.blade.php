@@ -6,7 +6,6 @@
         $id = $getId($locale) ?: $getDefaultId('textarea', $locale);
         $label = $getLabel($locale);
         $placeholder = $getPlaceholder($label, $locale);
-        $value = $getValue($locale);
         $prepend = $getPrepend($locale);
         $append = $getAppend($locale);
         $errorMessage = $getErrorMessage($errors, $locale);
@@ -14,8 +13,8 @@
         $isWired = $componentIsWired();
 
     @endphp
-    <div :wire:key="{{'.' . $id}}"
-        {{ $attributes->class('mb-3')->merge(['class'=> $config->getColSpan()]) }}
+    <div  wire:key="{{str($config->name)->pipe('md5')->append('-',$id)}}"
+        {{ $attributes->class('mb-3 px-3')->merge(['class'=> $config->getColSpan()]) }}
     >
         <x-dynamic-component
             :component="$config->getViewComponentForLabel()"

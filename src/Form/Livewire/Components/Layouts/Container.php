@@ -16,4 +16,18 @@ class Container extends AbstractLayout
         $values = array_merge($values,$this->values($datas));
         return $values;
     }
+
+    public function applyAttributesRules(array $rules): array
+    {
+        return array_merge($rules,$this->getAttributesRules());
+    }
+
+    public function interactWithRules(array $rules, ?Model $model = NULL): array
+    {
+        /** bind model for container **/
+        if (!$this->getBind()) {
+            $this->bind(bind: $model);
+        }
+        return array_merge($rules,$this->getRules());
+    }
 }

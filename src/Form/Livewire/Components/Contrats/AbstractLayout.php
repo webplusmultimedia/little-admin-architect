@@ -11,7 +11,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
 
-abstract class AbstractLayout implements CanValidateValuesForRules
+abstract class AbstractLayout implements CanValidateValuesForRules,CanGetAttributesRules,CanInteractWithRules
 {
     use HasColumns;
     use HasColSpan;

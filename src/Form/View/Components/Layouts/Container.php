@@ -11,8 +11,8 @@ class Container extends AbstractComponent
 {
 
     public function __construct(
-        public string                                                                      $name,
         \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Layouts\Container $field,
+        public null|string                                                                      $name = null,
     )
     {
         parent::__construct();
@@ -27,5 +27,6 @@ class Container extends AbstractComponent
     protected function setUp(Field|AbstractLayout $field): void
     {
         $this->field = $field;
+        $this->name = $field->name;
     }
 }

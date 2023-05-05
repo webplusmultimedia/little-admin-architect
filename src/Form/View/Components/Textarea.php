@@ -30,8 +30,8 @@ class Textarea extends AbstractComponent
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
-        public string $name,
         \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Textarea $field,
+        public string $name = '',
         public string|null $caption = null,
         public array $locales = [null],
 
@@ -50,5 +50,6 @@ class Textarea extends AbstractComponent
         $this->field = $field;
         $this->isRequiredField = $field->isRequired();
         $this->placeholder = $field->getPlaceHolder();
+        $this->name = $field->name;
     }
 }

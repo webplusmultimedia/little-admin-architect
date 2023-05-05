@@ -3,10 +3,18 @@
     /** @var Container $config */
     $config = $getConfig()
     @endphp
-<div class="bg-cyan-50 py-3 col-span-full" {{ $attributes->class("grid gap-4")->merge(['class'=>$config->getColumns()]) }}>
-    <h1 class="text-2xl mb-5">{{ $config->title }}</h1>
-    @foreach($config->getFields() as $field)
-        <x-dynamic-component :component="$field->getFieldView()" :name="$field->name"  :label="$field->getLabel()"  :field="$field" />
-    @endforeach
+
+
+<div {{ $attributes->class("py-3 grid gap-2 col-span-full border-b border-gray-300 bg-white") }}
+     x-data="{}"
+     wire:key="{{str($config->title)->pipe('md5')->append('-',str($config->title)->kebab())}}"
+>
+    <h1 class="text-2xl mb-5 pl-3">{{ $config->title }}</h1>
+    <div {{ $attributes->class(" py-3 grid gap-2 ")->merge(['class'=>$config->getColumns()]) }}>
+        @foreach($config->getFields() as $field)
+            <x-dynamic-component :component="$field->getFieldView()" :name="$field->name"   :field="$field" />
+        @endforeach
+    </div>
+
 
 </div>
