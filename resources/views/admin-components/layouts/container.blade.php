@@ -4,7 +4,6 @@
     $config = $getConfig()
     @endphp
 
-
 <div {{ $attributes->class("py-3 grid gap-2 col-span-full border border-gray-200 rounded-md bg-white") }}
      x-data="{}"
      wire:key="{{str($config->title)->pipe('md5')->append('-',str($config->title)->kebab())}}"

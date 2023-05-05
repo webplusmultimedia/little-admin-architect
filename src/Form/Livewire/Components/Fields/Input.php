@@ -15,9 +15,9 @@ final class Input extends Field
      */
     protected ?string $type = 'text';
 
-    private null|int|float|string $step = null;
+    private null|int|float|string $step = NULL;
 
-    private null|string $inputMode = null;
+    private null|string $inputMode = NULL;
 
     public function type(string $type): static
     {
@@ -59,10 +59,29 @@ final class Input extends Field
         return $this;
     }
 
-    public function url()
+    public function url(): Input
     {
         $this->type = 'url';
         $this->addRules('url');
+
+        return $this;
+    }
+
+    public function nullable(): Input
+    {
+        $this->addRules('nullable');
+
+        return $this;
+    }
+    public function confirmed(): Input
+    {
+        $this->addRules('confirmed');
+
+        return $this;
+    }
+    public function password(): Input
+    {
+        $this->type = 'password';
 
         return $this;
     }
