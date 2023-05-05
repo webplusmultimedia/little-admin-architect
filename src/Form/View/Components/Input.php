@@ -3,6 +3,7 @@
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Closure;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Traits\CanBeWired;
@@ -44,7 +45,7 @@ class Input extends AbstractComponent
     {
         return 'input';
     }
-    protected function setUp(Field $field): void
+    protected function setUp(Field|AbstractLayout $field): void
     {
         $this->field = $field;
         $this->type = $field->getType();

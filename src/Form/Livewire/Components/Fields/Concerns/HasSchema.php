@@ -23,4 +23,9 @@ trait HasSchema
 
         return $this;
     }
+
+    public function getFields(): array
+    {
+        return $this->fields;
+    }
 }

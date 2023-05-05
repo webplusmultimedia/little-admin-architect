@@ -4,7 +4,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Layout
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
 
-class Form extends AbstractLayout
+class Container extends AbstractLayout
 {
 
 

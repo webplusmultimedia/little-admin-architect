@@ -78,10 +78,7 @@ final class Form
         return $this;
     }
 
-    public function getFields(): array
-    {
-        return $this->fields;
-    }
+
 
 
 

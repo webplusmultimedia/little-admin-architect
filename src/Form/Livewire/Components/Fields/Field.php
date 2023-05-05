@@ -16,7 +16,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 abstract class Field
 {
     use HasValidationRules;
-    use HasSchema;
+    //use HasSchema;
     use HasHelperText;
     use HasPlaceholder;
     use CanBeWireModifier;
@@ -44,7 +44,7 @@ abstract class Field
 
     public function getFieldView(): string
     {
-        return config('little-admin-architect.blade-prefix').'::fields.'.$this->view;
+        return config('little-admin-architect.blade-prefix').'::'.$this->view;
     }
 
     public static function make(string $name, null|string $label = null): static
@@ -61,6 +61,6 @@ abstract class Field
     }
     protected function getViewComponent(string $view): string
     {
-        return config('little-admin-architect.blade-prefix').'::fields.'.$view;
+        return config('little-admin-architect.blade-prefix').'::'.$view;
     }
 }

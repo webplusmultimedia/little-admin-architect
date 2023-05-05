@@ -17,6 +17,17 @@ abstract class AbstractLayout
     use CanGetRules;
     use HasSchema;
     protected string $view = 'layout.grid';
+    final public function __construct(
+        public string $title,
+        int $columns,
+    ) {
+        $this->columns($columns);
+    }
+
+    public static function make(string $title, int $columns = 2): static
+    {
+        return  new static(title: $title,columns: $columns);
+    }
 
     /**
      * @return array<int,Field>
