@@ -10,6 +10,9 @@ final class Input extends Field
     use HasMinMaxLength;
     use HasMinMaxValues;
 
+    /**
+     * @var string|null
+     */
     protected ?string $type = 'text';
 
     private null|int|float|string $step = null;
@@ -52,6 +55,14 @@ final class Input extends Field
         $this->step = 'any';
         $this->inputMode = 'decimal';
         $this->addRules('numeric');
+
+        return $this;
+    }
+
+    public function url()
+    {
+        $this->type = 'url';
+        $this->addRules('url');
 
         return $this;
     }
