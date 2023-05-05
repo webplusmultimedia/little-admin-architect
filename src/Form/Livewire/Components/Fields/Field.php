@@ -44,7 +44,7 @@ abstract class Field
 
     public function getFieldView(): string
     {
-        return config('little-admin-architect.blade-prefix').'::'.$this->view;
+        return config('little-admin-architect.blade-prefix').'::fields.'.$this->view;
     }
 
     public static function make(string $name, null|string $label = null): static
@@ -61,6 +61,6 @@ abstract class Field
     }
     protected function getViewComponent(string $view): string
     {
-        return config('little-admin-architect.blade-prefix').'::'.$view;
+        return config('little-admin-architect.blade-prefix').'::fields.'.$view;
     }
 }

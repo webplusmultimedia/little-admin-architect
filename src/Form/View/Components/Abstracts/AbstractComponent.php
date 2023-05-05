@@ -31,6 +31,6 @@ abstract class AbstractComponent extends Component
 
     public function render(): View|Factory|Htmlable|Closure|string|Application
     {
-        return view('little-views::admin-components.'.$this->viewPath);
+        return view('little-views::admin-components.fields.'.$this->viewPath);
     }
 }
