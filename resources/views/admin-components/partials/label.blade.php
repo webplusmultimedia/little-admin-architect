@@ -1,6 +1,6 @@
 @if($label)
     <div class="mb-2">
-        <label {{ $attributes->merge(['for' => $id,'class' => 'inline-flex gap-x-1 text-lg font-medium text-slate-700 ']) }}>
+        <label {{ $attributes->merge(['for' => $id,'class' => 'inline-flex space-x-3 text-lg font-medium text-slate-700 ']) }}>
             {{ $label }}
             @if($showRequired)
                 <span class="whitespace-nowrap">

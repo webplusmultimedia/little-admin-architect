@@ -28,8 +28,6 @@ class Radio extends AbstractComponentAlias
         protected string|false|null $label = null,
         protected int|string|null $checked = null,
         public string|null $caption = null,
-        protected bool|null $displayValidationSuccess = null,
-        protected bool|null $displayValidationFailure = null,
         protected string|null $errorBag = null,
         public bool $marginBottom = true,
         public bool $inline = false

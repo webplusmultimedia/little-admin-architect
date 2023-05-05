@@ -13,7 +13,9 @@
             $validationClass = $getValidationClass($errors, $locale);
     @endphp
     <div
-        @class([ 'mb-3 col-span-1','hidden' => $config->getType() === 'hidden'])
+        :wire:key="{{'.' . $id}}"
+        {{ $attributes->class('mb-3')->merge(['class'=> $config->getColSpan()]) }}
+        @class([  'hidden' => $config->getType() === 'hidden'])
         x-data="{ errors : $wire.__instance.errors}"
     >
         <x-dynamic-component :component="$config->getViewComponentForLabel()" :id="$id" class="form-label" :label="$config->getLabel()" :showRequired="$isShowSignRequiredOnLabel()"/>

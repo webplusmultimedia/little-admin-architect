@@ -4,6 +4,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components;
 
 use Illuminate\Database\Eloquent\Model;
 use NunoMaduro\Larastan\Concerns\HasContainer;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanGetRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasButton;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
@@ -13,6 +14,7 @@ final class Form
     use HasButton;
     use HasSchema;
     use HasColumns;
+    use CanGetRules;
 
     protected string $view = 'form';
 
@@ -81,25 +83,7 @@ final class Form
         return $this->fields;
     }
 
-    public function getRules(): array
-    {
-        $rules = [];
-        foreach ($this->fields as $field) {
-            $rules['data.'.$field->name] = $field->rules;
-        }
 
-        return $rules;
-    }
-
-    public function getAttributesRules(): array
-    {
-        $rules = [];
-        foreach ($this->fields as $field) {
-            $rules['data.'.$field->name] = str($field->getLabel())->lower();
-        }
-
-        return $rules;
-    }
 
     public function values(array $datas): array
     {

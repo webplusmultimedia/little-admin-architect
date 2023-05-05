@@ -4,14 +4,15 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields
 
 Trait HasColumns
 {
-    protected int $columns = 1;
+    protected string $columns = 'grid-cols-1';
 
-    public function columns(int $columns)
+    public function columns(int $columns): static
     {
-        $this->columns = $columns;
+        $this->columns = 'grid-cols-' . $columns;
+        return $this;
     }
 
-    public function getColumns(): int
+    public function getColumns(): string
     {
         return $this->columns;
     }

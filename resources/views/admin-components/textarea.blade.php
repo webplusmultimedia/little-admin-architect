@@ -14,7 +14,9 @@
         $isWired = $componentIsWired();
 
     @endphp
-    <div @class([$config->getColSpan(),'mb-3'])>
+    <div :wire:key="{{'.' . $id}}"
+        {{ $attributes->class('mb-3')->merge(['class'=> $config->getColSpan()]) }}
+    >
         <x-dynamic-component
             :component="$config->getViewComponentForLabel()"
             :id="$id" class="form-label"

@@ -51,24 +51,14 @@ abstract class Field
     {
         return new static(name: $name, label: $label);
     }
-
-    public function label(string $label): static
-    {
-        $this->label = $label;
-
-        return $this;
-    }
-
-    protected function record(Model $model): void
+      protected function record(Model $model): void
     {
         $this->record = $model;
     }
-
     public function getRecord(): ?Model
     {
         return $this->record;
     }
-
     protected function getViewComponent(string $view): string
     {
         return config('little-admin-architect.blade-prefix').'::'.$view;
