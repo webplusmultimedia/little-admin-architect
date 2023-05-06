@@ -8,7 +8,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 trait HasValidation
 {
-    protected bool|null $displayValidationSuccess = null;
+    protected bool|null $displayValidationSuccess = true;
     protected bool|null $displayValidationFailure = true;
     protected string|null $errorBag = null;
     public function getValidationClass(ViewErrorBag $errors, string|null $locale = null): string|null

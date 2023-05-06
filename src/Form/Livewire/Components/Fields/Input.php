@@ -67,12 +67,7 @@ final class Input extends Field
         return $this;
     }
 
-    public function nullable(): Input
-    {
-        $this->addRules('nullable');
 
-        return $this;
-    }
     public function confirmed(): Input
     {
         $this->addRules('confirmed');

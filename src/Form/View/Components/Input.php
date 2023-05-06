@@ -6,26 +6,23 @@ use Closure;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeWired;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasAddon;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasFloatingLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasId;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasName;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasPlaceholder;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValidation;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValue;
 
 class Input extends AbstractComponent
 {
     use HasId;
     use HasName;
     use HasLabel;
-    use HasValue;
+    //use HasValue;
     use HasPlaceholder;
     use HasAddon;
     use HasValidation;
-    use CanBeWired;
+   // use CanBeWired;
 
 
     public ?string $type = 'text';

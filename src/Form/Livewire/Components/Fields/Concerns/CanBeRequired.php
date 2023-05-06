@@ -2,7 +2,7 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
-trait HasRequired
+trait CanBeRequired
 {
     protected bool $required = false;
 

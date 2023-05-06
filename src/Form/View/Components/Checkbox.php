@@ -2,6 +2,7 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeChecked;
@@ -20,35 +21,31 @@ class Checkbox extends AbstractComponent
     use CanBeChecked;
     use CanBeWired;
 
+    public array $group = [null];
+
+        protected array|object|null $bind = null;
+
+        protected bool|array|null $checked = null;
+        public string|null $caption = null;
+        public bool $inline = false;
+        public bool $toggleSwitch = false;
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
-        public string $name,
-        public array $group = [null],
-        protected string|null $id = null,
-        protected array|object|null $bind = null,
-        protected string|false|null $label = null,
-        protected bool|array|null $checked = null,
-        public string|null $caption = null,
-        protected bool|null $displayValidationSuccess = null,
-        protected bool|null $displayValidationFailure = null,
-        protected string|null $errorBag = null,
-        public bool $marginBottom = true,
-        public bool $inline = false,
-        public bool $toggleSwitch = false,
-
+        Field $field,
+        public null|string $name = null,
     ) {
-        $this->displayValidationSuccess = $this->shouldDisplayValidationSuccess();
-        $this->displayValidationFailure = $this->shouldDisplayValidationFailure();
         parent::__construct();
+        $this->setUp($field);
     }
 
     protected function setViewPath(): string
     {
-        return 'checkbox';
+        return 'fields.checkbox';
     }
 
-    protected function setUp(Field $field): void
+    protected function setUp(Field|AbstractLayout $field): void
     {
-        // TODO: Implement setUp() method.
+        $this->field = $field;
+        $this->name = $field->name;
     }
 }
