@@ -1,6 +1,7 @@
 @if($label)
     <div @class(["mb-2" => $wrappedWithMargin])>
         <label {{ $attributes->merge(['for' => $id,'class' => 'inline-flex space-x-3 font-medium text-slate-700 ']) }}>
+            {{ $slot }}
             {{ $label }}
             @if($showRequired)
                 <span class="whitespace-nowrap">

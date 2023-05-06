@@ -11,8 +11,8 @@
             $errorMessage =  $getErrorMessage($errors, $locale);
             $validationClass = $getValidationClass($errors, $locale);
     @endphp
-    <div
-        wire:key="{{str($config->name)->pipe('md5')->append('-',$id)}}"
+    <x-dynamic-component :component="$config->getWrapperView()"
+        :id="str($config->name)->pipe('md5')->append('-',$id)"
         {{ $attributes->class('mb-3 px-3')->merge(['class'=> $config->getColSpan()]) }}
         @class([  'hidden' => $config->getType() === 'hidden'])
         x-data="{ errors : $wire.__instance.errors}"
@@ -28,7 +28,7 @@
                 <input {{ $attributes->except(['field'])->merge([
                 'wire:model' . $config->getWireModifier() => ($locale ? $config->getWireName() . '.' . $locale : $config->getWireName()),
                 'id' => $id,
-                'class' => 'rounded-none py-2 px-2' . ($validationClass ? ' ' . $validationClass : NULL),
+                'class' => 'py-2 px-2' . ($validationClass ? ' ' . $validationClass : NULL),
                 'type' => $type,
                 'placeholder' => $config->getPlaceHolder(),
                 'data-locale' => $locale,
@@ -53,5 +53,5 @@
                 @if(($prepend || $append))
             </div>
         @endif
-    </div>
+    </x-dynamic-component>
 @endforeach

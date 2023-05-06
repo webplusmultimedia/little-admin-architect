@@ -17,8 +17,8 @@
         $label = $groupMode ? $groupLabel : $getLabel();
         $checked = $groupMode ? $getGroupModeCheckedStatus($groupValue) : $getSingleModeCheckedStatus();
     @endphp
-    <div class="mb-3 pl-3">
-        <div @class(['inline-flex space-x-2   items-center'])>
+    <x-dynamic-component :component="$config->getWrapperView()" class="mb-3 pl-3" :id="$config->getWrapperId()">
+        <label @class(['inline-flex space-x-2   items-center'])>
             {{--<div class="flex bg-gray-100 rounded-full w-16 h-5 duration-200"
                  x-data="{ open : false }" x-on:click="open = !open"
                  x-bind:class="{ 'justify-start': !open,'justify-end': open , 'bg-gray-300': !open,'bg-success-400': open}"
@@ -32,26 +32,16 @@
             'wire:model' . $config->getWireModifier() => ($config->getWireName()),
             'id' => $id,
             'class' => 'form-check-input' . ($validationClass ? ' ' . $validationClass : NULL),
-            'name' => $name . ($groupMode ? '[]' : NULL),
-            'value' => $groupMode ? $groupValue : NULL,
-            'checked' => $isWired ? NULL : $checked,
-            'aria-describedby' => $caption ? ($groupMode && $caption ? $captionId : $id) . '-caption' : NULL,
+            'aria-describedby' => $id,
         ]) }} type="checkbox">
-
-            <x-dynamic-component :component="$config->getViewComponentForLabel()" :id="$id" class="form-label" :label="$config->getLabel()"
-                                 :showRequired="$isShowSignRequiredOnLabel()"
-                                 :wrappedWithMargin="false"
-            />
-            @if(! $groupMode)
-                {{-- <x:form::partials.caption :inputId="$id" :caption="$caption"/>--}}
-
-
-            @endif
-        </div>
+            <span class="">
+                {{ $config->getLabel() }}
+            </span>
+        </label>
         <div class="wf-full">
             <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage"/>
         </div>
-    </div>
+    </x-dynamic-component>
 
 @endforeach
 

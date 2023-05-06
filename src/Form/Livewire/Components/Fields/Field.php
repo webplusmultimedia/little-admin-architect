@@ -18,6 +18,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasValidationRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\InteractWithAttributeRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\InteractWithRules;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\InteractWithWrapper;
 
 abstract class Field implements CanValidateValuesForRules,CanGetAttributesRules,CanInteractWithRules
 {
@@ -33,6 +34,7 @@ abstract class Field implements CanValidateValuesForRules,CanGetAttributesRules,
     use ValidateValuesForRules;
     use InteractWithAttributeRules;
     use InteractWithRules;
+    use InteractWithWrapper;
 
     private string $prefixName = 'data';
 
