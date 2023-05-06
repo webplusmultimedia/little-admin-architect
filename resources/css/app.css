@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    /**/ body{
+    @apply text-gray-600
+}
+    h1{
+        @apply text-6xl lg:text-8xl font-bold uppercase mt-4 mb-2 relative text-primary-900
+        /*after:absolute after:-bottom-0 after:left-0 after:content-[''] after:h-2 after:w-10 after:bg-primary-600*/
+    }
+    h2{
+        @apply text-3xl lg:text-5xl font-medium mt-4 mb-2 text-primary-500
+    }
+    .container{
+        @apply px-2 lg:px-0
+    }
+    p{
+        @apply mb-4 leading-relaxed text-lg md:text-xl
+    }
+    li{
+        @apply text-lg md:text-xl
+    }
+    ul,ol{
+        @apply list-disc ml-10 mb-4
+    }
+    [type="text"],
+    [type="email"],
+    [type="url"],
+    [type="password"],
+    [type="number"],
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="search"],
+    [type="tel"],
+    [type="time"],
+    [type="week"],
+    [multiple],
+    textarea,
+    select {
+        @apply text-black text-[1rem]  py-3 px-2 w-full border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500   dark:border-blue-300 shadow-sm disabled:opacity-50 duration-100 rounded;
+    }
+
+    [type="checkbox"]{
+        @apply text-primary-500 py-2 px-2 border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500 shadow-sm disabled:opacity-50 duration-75 indeterminate:bg-gray-300 rounded
+    }
+
+    label{
+        @apply text-[1rem]
+    }
+}
+
+
+@layer components {
+    .btn{
+        @apply py-3 px-2 bg-primary-500 hover:bg-primary-600 text-white disabled:bg-primary-200
+    }
+    .group-btn{
+        @apply flex gap-2
+    }
+}
+
+@layer components {
+    .btn{
+        @apply py-2 px-6 bg-gray-300 hover:bg-gray-500 hover:text-white hover:disabled:bg-opacity-30 disabled:bg-opacity-50 text-gray-700 duration-300 font-medium
+    }
+    .btn-primary{
+        @apply bg-primary-500 hover:bg-primary-600 text-white
+    }
+    .btn-secondary{
+        @apply bg-secondary-500 hover:bg-secondary-600 text-white
+    }
+    .btn-info{
+        @apply bg-info-500 hover:bg-info-600 text-white
+    }
+    .btn-success{
+        @apply bg-success-500 hover:bg-success-600 text-white
+    }
+    .btn-error{
+        @apply bg-error-500 hover:bg-error-600 text-white
+    }
+    .btn-warning{
+        @apply bg-warning-300 hover:bg-warning-500 text-warning-700
+    }
+}

@@ -36,6 +36,9 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     public function registeringPackage()
     {
         $this->app->singleton(FormBinder::class, fn (Application $app) => new FormBinder());
+        $this->app->scoped('little-admin',function ():LittleAdminArchitect{
+            return new LittleAdminArchitect();
+        });
     }
 
     protected function declareBladeDirectives(): void

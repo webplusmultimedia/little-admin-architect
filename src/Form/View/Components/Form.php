@@ -36,6 +36,6 @@ final class Form extends Component
 
     public function render(): View
     {
-        return view('little-views::admin-components.form');
+        return view('little-views::form-components.form');
     }
 }
