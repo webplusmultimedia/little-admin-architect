@@ -33,7 +33,6 @@ final class Form extends Component
         return $this->form;
     }
 
-
     public function render(): View
     {
         return view('little-views::form-components.form');

@@ -28,6 +28,7 @@ abstract class AbstractComponent extends Component
     }
 
     abstract protected function setViewPath(): string;
+
     abstract protected function setUp(Field|AbstractLayout $field): void;
 
     public function render(): View|Factory|Htmlable|Closure|string|Application

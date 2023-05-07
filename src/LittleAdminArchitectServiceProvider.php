@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Webplusmultimedia\LittleAdminArchitect\Admin\LittleAminManager;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
@@ -33,11 +34,12 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
         $this->declareBladeDirectives();
     }
 
-    public function registeringPackage()
+    public function registeringPackage(): void
     {
         $this->app->singleton(FormBinder::class, fn (Application $app) => new FormBinder());
-        $this->app->scoped('little-admin',function ():LittleAdminArchitect{
-            return new LittleAdminArchitect();
+        $this->app->bind('little-admin-architect', fn (): LittleAdminArchitect => new LittleAdminArchitect());
+        $this->app->scoped('little-admin', function (): LittleAminManager {
+            return new LittleAminManager();
         });
     }
 
@@ -62,5 +64,10 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
         Blade::directive('endwire', function () {
             return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->unbindLastLivewireModifier() ?>';
         });
+    }
+
+    public function packageBooted()
+    {
+        app('little-admin')->registerResources();
     }
 }

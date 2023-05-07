@@ -23,12 +23,16 @@ class Checkbox extends AbstractComponent
 
     public array $group = [null];
 
-        protected array|object|null $bind = null;
+    protected array|object|null $bind = null;
 
-        protected bool|array|null $checked = null;
-        public string|null $caption = null;
-        public bool $inline = false;
-        public bool $toggleSwitch = false;
+    protected bool|array|null $checked = null;
+
+    public string|null $caption = null;
+
+    public bool $inline = false;
+
+    public bool $toggleSwitch = false;
+
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
         Field $field,

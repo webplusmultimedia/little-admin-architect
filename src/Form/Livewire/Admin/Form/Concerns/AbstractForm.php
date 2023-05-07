@@ -10,6 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
 abstract class AbstractForm
 {
     use HasSetUpForm;
+
     abstract protected function form(null|Model $model): Form;
 
     /**
@@ -17,5 +18,5 @@ abstract class AbstractForm
      */
     abstract protected function schema(): array;
 
-   abstract public function setUp(null|Model $model): Form;
+    abstract public function setUp(null|Model $model): Form;
 }

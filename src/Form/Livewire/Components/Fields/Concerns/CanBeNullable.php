@@ -2,9 +2,7 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Input;
-
-Trait CanBeNullable
+trait CanBeNullable
 {
     public function nullable(): static
     {

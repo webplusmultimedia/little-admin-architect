@@ -7,6 +7,6 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 class CheckBox extends Field
 {
     use CanBeBoolean;
-    protected string $view = 'checkbox';
 
+    protected string $view = 'checkbox';
 }

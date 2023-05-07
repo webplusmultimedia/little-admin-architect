@@ -6,5 +6,5 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field
 
 interface HasInitialSetUp
 {
-    function setUp(Field $field): void;
+    public function setUp(Field $field): void;
 }

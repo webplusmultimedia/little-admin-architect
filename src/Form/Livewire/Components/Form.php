@@ -18,10 +18,15 @@ final class Form
     use CanValidatedValues;
 
     protected string $view = 'form';
+
     protected ?Model $model = null;
+
     protected ?string $mode = null;
+
     protected ?string $action = null;
+
     protected ?string $livewireId = null;
+
     public function getLivewireId(): ?string
     {
         return $this->livewireId;
@@ -48,36 +53,43 @@ final class Form
     {
         return config('little-admin-architect.blade-prefix').'::'.$this->view;
     }
+
     public function getAction(): ?string
     {
         return $this->action;
     }
+
     public function setAction(?string $action): Form
     {
         $this->action = $action;
 
         return $this;
     }
+
     public function getBind(): Model
     {
         return $this->bind;
     }
+
     public function bind(Model $bind): Form
     {
         $this->bind = $bind;
 
         return $this;
     }
+
     public function getTitle(): string
     {
         return $this->title;
     }
+
     public function title(string $title): Form
     {
         $this->title = $title;
 
         return $this;
     }
+
     public function init(): void
     {
         if ($this->bind && $this->bind->exists()) {
@@ -86,6 +98,7 @@ final class Form
             $this->mode = 'CREATED';
         }
     }
+
     public function mode(): ?string
     {
         return $this->mode;

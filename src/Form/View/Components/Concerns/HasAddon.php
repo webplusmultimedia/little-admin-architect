@@ -7,7 +7,9 @@ use Closure;
 trait HasAddon
 {
     protected string|Closure|null $prepend = null;
+
     protected string|Closure|null $append = null;
+
     public function getPrepend(string $locale = null): string|null
     {
         if ($this->prepend instanceof Closure) {

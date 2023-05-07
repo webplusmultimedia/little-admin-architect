@@ -19,5 +19,4 @@ trait HasName
     {
         return str_replace(['[', ']'], [$notation, ''], 'data-'.$this->name);
     }
-
 }

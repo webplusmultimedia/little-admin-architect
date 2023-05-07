@@ -9,8 +9,11 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 trait HasValidation
 {
     protected bool|null $displayValidationSuccess = true;
+
     protected bool|null $displayValidationFailure = true;
+
     protected string|null $errorBag = null;
+
     public function getValidationClass(ViewErrorBag $errors, string|null $locale = null): string|null
     {
         $errorBag = $this->getErrorBag($errors);
@@ -69,6 +72,7 @@ trait HasValidation
             ) : null;
         }
         $_name = str($this->name)->headline()->lower().($locale ? ' ('.strtoupper($locale).')' : '');
+
         return $errorBag->first($this->getConfig()->getWireName());
     }
 }

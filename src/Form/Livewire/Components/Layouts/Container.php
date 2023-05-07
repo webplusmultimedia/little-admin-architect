@@ -9,25 +9,28 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 class Container extends AbstractLayout
 {
     use HasLabel;
+
     public ?string $name = 'Mon plein';
 
-    public function getValidatedValues(array $values, ?array $datas = NULL, ?Model $model = NULL): array
+    public function getValidatedValues(array $values, ?array $datas = null, ?Model $model = null): array
     {
-        $values = array_merge($values,$this->values($datas));
+        $values = array_merge($values, $this->values($datas));
+
         return $values;
     }
 
     public function applyAttributesRules(array $rules): array
     {
-        return array_merge($rules,$this->getAttributesRules());
+        return array_merge($rules, $this->getAttributesRules());
     }
 
-    public function interactWithRules(array $rules, ?Model $model = NULL): array
+    public function interactWithRules(array $rules, ?Model $model = null): array
     {
         /** bind model for container **/
-        if (!$this->getBind()) {
+        if (! $this->getBind()) {
             $this->bind(bind: $model);
         }
-        return array_merge($rules,$this->getRules());
+
+        return array_merge($rules, $this->getRules());
     }
 }

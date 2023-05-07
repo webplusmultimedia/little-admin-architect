@@ -11,6 +11,6 @@ class LittleAdminArchitect extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Webplusmultimedia\LittleAdminArchitect\LittleAdminArchitect::class;
+
     }
 }

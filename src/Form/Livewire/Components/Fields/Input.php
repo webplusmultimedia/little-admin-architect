@@ -10,14 +10,11 @@ final class Input extends Field
     use HasMinMaxLength;
     use HasMinMaxValues;
 
-    /**
-     * @var string|null
-     */
     protected ?string $type = 'text';
 
-    private null|int|float|string $step = NULL;
+    private null|int|float|string $step = null;
 
-    private null|string $inputMode = NULL;
+    private null|string $inputMode = null;
 
     public function type(string $type): static
     {
@@ -67,13 +64,13 @@ final class Input extends Field
         return $this;
     }
 
-
     public function confirmed(): Input
     {
         $this->addRules('confirmed');
 
         return $this;
     }
+
     public function password(): Input
     {
         $this->type = 'password';

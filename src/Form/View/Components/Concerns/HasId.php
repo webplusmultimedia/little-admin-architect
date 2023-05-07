@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 trait HasId
 {
     protected string|null $id = null;
+
     public function getId(string|null $locale = null, string $suffix = null): string|null
     {
         return $this->id ? $this->id

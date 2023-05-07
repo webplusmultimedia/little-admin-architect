@@ -12,6 +12,7 @@ class Wrapper extends AbstractComponent
     {
         return 'fields.partials.wrapper';
     }
+
     public function __construct(
         public string $id,
     ) {

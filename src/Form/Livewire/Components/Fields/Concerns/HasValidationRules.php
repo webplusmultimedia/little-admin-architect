@@ -12,7 +12,6 @@ trait HasValidationRules
      */
     public array $rules = [];
 
-
     protected function addRules(string|Rule|Closure $rules): void
     {
         $this->rules[] = $rules;

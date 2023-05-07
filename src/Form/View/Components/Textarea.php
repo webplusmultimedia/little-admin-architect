@@ -2,7 +2,6 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
-use Closure;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
@@ -37,7 +36,7 @@ class Textarea extends AbstractComponent
 
     ) {
         parent::__construct();
-       $this->setUp($field);
+        $this->setUp($field);
     }
 
     protected function setViewPath(): string

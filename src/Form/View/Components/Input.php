@@ -2,7 +2,6 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
-use Closure;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
@@ -18,16 +17,17 @@ class Input extends AbstractComponent
     use HasId;
     use HasName;
     use HasLabel;
+
     //use HasValue;
     use HasPlaceholder;
     use HasAddon;
     use HasValidation;
-   // use CanBeWired;
-
+    // use CanBeWired;
 
     public ?string $type = 'text';
 
     public string|null $caption = null;
+
     public array $locales = [null];
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
@@ -38,10 +38,12 @@ class Input extends AbstractComponent
         parent::__construct();
         $this->setUp($field);
     }
+
     protected function setViewPath(): string
     {
         return 'fields.input';
     }
+
     protected function setUp(Field|AbstractLayout $field): void
     {
         $this->field = $field;
