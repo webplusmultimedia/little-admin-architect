@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats;
 
 use Illuminate\Database\Eloquent\Model;
@@ -11,11 +13,11 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 
 abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
 {
-    use HasColumns;
-    use HasColSpan;
     use CanGetRules;
-    use HasSchema;
     use CanValidatedValues;
+    use HasColSpan;
+    use HasColumns;
+    use HasSchema;
 
     protected string $view = 'layouts.container';
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Layouts;
 
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +12,7 @@ class Container extends AbstractLayout
 {
     use HasLabel;
 
-    public ?string $name = 'Mon plein';
+    protected string $name = 'Mon plein';
 
     public function getValidatedValues(array $values, ?array $datas = null, ?Model $model = null): array
     {
@@ -27,7 +29,7 @@ class Container extends AbstractLayout
     public function interactWithRules(array $rules, ?Model $model = null): array
     {
         /** bind model for container **/
-        if (! $this->getBind()) {
+        if ( ! $this->getBind()) {
             $this->bind(bind: $model);
         }
 

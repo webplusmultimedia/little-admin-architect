@@ -13,7 +13,7 @@
         $isWired = $componentIsWired();
 
     @endphp
-    <x-dynamic-component :component="$config->getWrapperView()" :id="str($config->name)->pipe('md5')->append('-',$id)"
+    <x-dynamic-component :component="$config->getWrapperView()" :id="str($config->getName())->pipe('md5')->append('-',$id)"
         {{ $attributes->class('mb-3 px-3')->merge(['class'=> $config->getColSpan()]) }}
     >
         <x-dynamic-component

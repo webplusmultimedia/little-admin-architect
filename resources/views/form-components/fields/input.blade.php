@@ -12,7 +12,7 @@
             $validationClass = $getValidationClass($errors, $locale);
     @endphp
     <x-dynamic-component :component="$config->getWrapperView()"
-        :id="str($config->name)->pipe('md5')->append('-',$id)"
+        :id="str($config->getName())->pipe('md5')->append('-',$id)"
         {{ $attributes->class('mb-3 px-3')->merge(['class'=> $config->getColSpan()]) }}
         @class([  'hidden' => $config->getType() === 'hidden'])
         x-data="{ errors : $wire.__instance.errors}"

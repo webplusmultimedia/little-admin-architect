@@ -1,33 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
 trait HasButton
 {
-    protected ?string $captionBtn = null;
+    protected string $action;
 
-    protected ?string $labelBtn = null;
-
-    protected ?string $actionBtn = null;
-
-    protected ?string $iconClassBtn = null;
-
-    protected array $configBtn = [
-        'class_success' => 'btn btn-success',
-        'class_delete' => 'btn btn-error',
-        'class_info' => 'btn btn-info',
-        'class_warning' => 'btn btn-warning',
-    ];
-
-    public function caption(string $caption): static
+    /**
+     * @return string
+     */
+    public function getAction(): string
     {
-        $this->captionBtn = $caption;
-
-        return $this;
+        return $this->action;
     }
 
-    public function getCaptionBtn(): ?string
+    /**
+     * @return string
+     */
+    public function getType(): string
     {
-        return $this->captionBtn;
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCaption(): string
+    {
+        return $this->caption;
+    }
+    protected string $type;
+    protected string $caption;
+
+
+
+    public function hasButton(): bool
+    {
+        return isset($this->action) && isset($this->type, $this->caption)  ;
     }
 }

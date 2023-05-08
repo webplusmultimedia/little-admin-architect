@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
@@ -14,13 +16,13 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasVali
 
 class Input extends AbstractComponent
 {
+    use HasAddon;
     use HasId;
-    use HasName;
     use HasLabel;
 
+    use HasName;
     //use HasValue;
     use HasPlaceholder;
-    use HasAddon;
     use HasValidation;
     // use CanBeWired;
 
@@ -50,6 +52,6 @@ class Input extends AbstractComponent
         $this->type = $field->getType();
         $this->placeholder = $field->getPlaceHolder();
         $this->isRequiredField = $field->isRequired();
-        $this->name = $field->name;
+        $this->name = $field->getName();
     }
 }

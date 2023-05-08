@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Facades;
 
 use Illuminate\Support\Facades\Facade;
@@ -9,7 +11,7 @@ use Illuminate\Support\Facades\Facade;
  */
 class LittleAdminArchitect extends Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): void
     {
 
     }

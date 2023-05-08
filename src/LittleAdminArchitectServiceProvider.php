@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect;
 
 use Illuminate\Foundation\Application;
@@ -14,11 +16,6 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
             ->name('little-admin-architect')
             ->hasConfigFile()
@@ -28,10 +25,11 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
             ->hasCommand(LittleAdminArchitectCommand::class);
     }
 
-    public function bootingPackage()
+    public function bootingPackage(): void
     {
         Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\View\\Components', config('little-admin-architect.blade-prefix'));
-        $this->declareBladeDirectives();
+        Blade::anonymousComponentPath(__DIR__.'/../resources/views','little-anonyme');
+        //$this->declareBladeDirectives();
     }
 
     public function registeringPackage(): void
@@ -66,7 +64,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
         });
     }
 
-    public function packageBooted()
+    public function packageBooted(): void
     {
         app('little-admin')->registerResources();
     }

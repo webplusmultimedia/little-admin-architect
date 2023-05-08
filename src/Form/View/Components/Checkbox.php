@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
@@ -14,12 +16,12 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasVali
 
 class Checkbox extends AbstractComponent
 {
-    use HasId;
-    use HasName;
-    use HasLabel;
-    use HasValidation;
     use CanBeChecked;
     use CanBeWired;
+    use HasId;
+    use HasLabel;
+    use HasName;
+    use HasValidation;
 
     public array $group = [null];
 
@@ -50,6 +52,6 @@ class Checkbox extends AbstractComponent
     protected function setUp(Field|AbstractLayout $field): void
     {
         $this->field = $field;
-        $this->name = $field->name;
+        $this->name = $field->getName();
     }
 }

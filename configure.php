@@ -5,7 +5,7 @@ function ask(string $question, string $default = ''): string
 {
     $answer = readline($question.($default ? " ({$default})" : null).': ');
 
-    if (! $answer) {
+    if ( ! $answer) {
         return $default;
     }
 
@@ -16,11 +16,11 @@ function confirm(string $question, bool $default = false): bool
 {
     $answer = ask($question.' ('.($default ? 'Y/n' : 'y/N').')');
 
-    if (! $answer) {
+    if ( ! $answer) {
         return $default;
     }
 
-    return strtolower($answer) === 'y';
+    return 'y' === mb_strtolower($answer);
 }
 
 function writeln(string $line): void
@@ -35,18 +35,18 @@ function run(string $command): string
 
 function str_after(string $subject, string $search): string
 {
-    $pos = strrpos($subject, $search);
+    $pos = mb_strrpos($subject, $search);
 
-    if ($pos === false) {
+    if (false === $pos) {
         return $subject;
     }
 
-    return substr($subject, $pos + strlen($search));
+    return mb_substr($subject, $pos + mb_strlen($search));
 }
 
 function slugify(string $subject): string
 {
-    return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $subject), '-'));
+    return mb_strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $subject), '-'));
 }
 
 function title_case(string $subject): string
@@ -76,13 +76,13 @@ function replace_in_file(string $file, array $replacements): void
 function remove_prefix(string $prefix, string $content): string
 {
     if (str_starts_with($content, $prefix)) {
-        return substr($content, strlen($prefix));
+        return mb_substr($content, mb_strlen($prefix));
     }
 
     return $content;
 }
 
-function remove_composer_deps(array $names)
+function remove_composer_deps(array $names): void
 {
     $data = json_decode(file_get_contents(__DIR__.'/composer.json'), true);
 
@@ -95,7 +95,7 @@ function remove_composer_deps(array $names)
     file_put_contents(__DIR__.'/composer.json', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
 }
 
-function remove_composer_script($scriptName)
+function remove_composer_script($scriptName): void
 {
     $data = json_decode(file_get_contents(__DIR__.'/composer.json'), true);
 
@@ -119,7 +119,7 @@ function remove_readme_paragraphs(string $file): void
     );
 }
 
-function safeUnlink(string $filename)
+function safeUnlink(string $filename): void
 {
     if (file_exists($filename) && is_file($filename)) {
         unlink($filename);
@@ -192,11 +192,11 @@ writeln('------');
 
 writeln('This script will replace the above values in all relevant files in the project directory.');
 
-if (! confirm('Modify files?', true)) {
+if ( ! confirm('Modify files?', true)) {
     exit(1);
 }
 
-$files = (str_starts_with(strtoupper(PHP_OS), 'WIN') ? replaceForWindows() : replaceForAllOtherOSes());
+$files = (str_starts_with(mb_strtoupper(PHP_OS), 'WIN') ? replaceForWindows() : replaceForAllOtherOSes());
 
 foreach ($files as $file) {
     replace_in_file($file, [
@@ -228,12 +228,12 @@ foreach ($files as $file) {
     };
 }
 
-if (! $useLaravelPint) {
+if ( ! $useLaravelPint) {
     safeUnlink(__DIR__.'/.github/workflows/fix-php-code-style-issues.yml');
     safeUnlink(__DIR__.'/pint.json');
 }
 
-if (! $usePhpStan) {
+if ( ! $usePhpStan) {
     safeUnlink(__DIR__.'/phpstan.neon.dist');
     safeUnlink(__DIR__.'/phpstan-baseline.neon');
     safeUnlink(__DIR__.'/.github/workflows/phpstan.yml');
@@ -248,16 +248,16 @@ if (! $usePhpStan) {
     remove_composer_script('phpstan');
 }
 
-if (! $useDependabot) {
+if ( ! $useDependabot) {
     safeUnlink(__DIR__.'/.github/dependabot.yml');
     safeUnlink(__DIR__.'/.github/workflows/dependabot-auto-merge.yml');
 }
 
-if (! $useLaravelRay) {
+if ( ! $useLaravelRay) {
     remove_composer_deps(['spatie/laravel-ray']);
 }
 
-if (! $useUpdateChangelogWorkflow) {
+if ( ! $useUpdateChangelogWorkflow) {
     safeUnlink(__DIR__.'/.github/workflows/update-changelog.yml');
 }
 

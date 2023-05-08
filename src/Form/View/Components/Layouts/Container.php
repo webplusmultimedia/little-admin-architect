@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Layouts;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
@@ -24,6 +26,6 @@ class Container extends AbstractComponent
     protected function setUp(Field|AbstractLayout $field): void
     {
         $this->field = $field;
-        $this->name = $field->name;
+        //$this->name = $field->getName();
     }
 }

@@ -1,10 +1,10 @@
 @php
     use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
     use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
-	$requiredCsrfToken = in_array($method, ['POST', 'PUT', 'PATCH', 'DELETE']);
-    $requiredMethodSpoofing = in_array($method, ['PUT', 'PATCH', 'DELETE']);
+
 	/**@var Form $form */
-	$form = $getForm()
+	$form = $getForm();
+    $button = $form->getButton();
 @endphp
 <div class="py-3 px-2">
     <h1 class="text-2xl mb-5">{{ __($form->title) }}</h1>
@@ -17,22 +17,13 @@
                 @endforeach
             </div>
             <div class="flex justify-end group-btn px-3" aria-autocomplete="none">
-                <x-little-form::button.submit class="btn-primary">Enregistrer</x-little-form::button.submit>
+                <x-little-form::button.submit class="btn-primary" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}" wire:loading.class.delay="opacity-70 cursor-wait">
+                    @if($button->hasIcon())
+                        <x-heroicon-m-check-circle/>
+                    @endif
+                   <span>{{ $button->getCaption() }}</span><x-little-form::icon name="loader"  wire:loading.delay="wire:loading.delay" wire:target="{{ $button->getAction() }}" class="!opacity-100"/>
+                </x-little-form::button.submit>
             </div>
         </form>
     </div>
 </div>
-
-@php
-
-    if($bind) {
-        app(FormBinder::class)->unbindLastDataBatch();
-    }
-    if($errorBag) {
-        app(FormBinder::class)->unbindErrorBag();
-    }
-    if($wire) {
-        app(FormBinder::class)->unbindLastLivewireModifier();
-    }
-
-@endphp

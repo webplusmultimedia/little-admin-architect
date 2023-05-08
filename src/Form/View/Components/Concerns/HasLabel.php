@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns;
 
 trait HasLabel
@@ -13,17 +15,17 @@ trait HasLabel
     public function getLabel(string|false|null $locale = null): string|null
     {
         $label = $this->getConfig()?->getLabel();
-        if ($label === false) {
+        if (false === $label) {
             return null;
         }
         if ($label) {
-            return $label.($locale ? ' ('.strtoupper($locale).')' : '');
+            return $label.($locale ? ' ('.mb_strtoupper($locale).')' : '');
         }
-        if (! $locale) {
+        if ( ! $locale) {
             return str($this->name)->headline()->lower()->ucfirst();
         }
 
-        return str($this->name)->headline()->lower()->ucfirst().($locale ? ' ('.strtoupper($locale).')' : '');
+        return str($this->name)->headline()->lower()->ucfirst().($locale ? ' ('.mb_strtoupper($locale).')' : '');
 
         //return $this->getNameTranslationFromValidation($locale);
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;

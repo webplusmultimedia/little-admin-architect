@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
@@ -13,11 +15,11 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 class Radio extends AbstractComponentAlias
 {
-    use HasId;
-    use HasName;
-    use HasLabel;
-    use HasValidation;
     use CanBeWired;
+    use HasId;
+    use HasLabel;
+    use HasName;
+    use HasValidation;
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(

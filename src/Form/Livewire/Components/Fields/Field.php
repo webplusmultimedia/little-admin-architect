@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields;
 
 use Illuminate\Database\Eloquent\Model;
@@ -14,38 +16,40 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColSpan;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasHelperText;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasLabel;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasName;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasPlaceHolder;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasValidationRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\InteractWithAttributeRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\InteractWithRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\InteractWithWrapper;
 
-abstract class Field implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
+abstract class Field extends AbstractField implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
 {
-    use HasValidationRules;
-    use HasHelperText;
-    use HasPlaceholder;
-    use CanBeWireModifier;
-    use CanBeRequired;
-    use CanBeNullable;
-    use HasLabel;
     use CanBeDisabled;
+    use CanBeNullable;
+    use CanBeRequired;
+    use CanBeWireModifier;
     use HasColSpan;
-    use ValidateValuesForRules;
+    use HasHelperText;
+    use HasLabel;
+    use HasName;
+    use HasPlaceholder;
+    use HasValidationRules;
     use InteractWithAttributeRules;
     use InteractWithRules;
     use InteractWithWrapper;
+    use ValidateValuesForRules;
 
-    private string $prefixName = 'data';
 
-    protected string $view = 'input';
 
     protected ?Model $record = null;
 
     final public function __construct(
-        public string $name,
-        protected ?string $label = null,
+        string $name,
+        ?string $label = null,
     ) {
+        $this->label = $label;
+        $this->name = $name;
     }
 
     public function getWireName(): string
@@ -53,10 +57,10 @@ abstract class Field implements CanValidateValuesForRules, CanGetAttributesRules
         return $this->prefixName.'.'.$this->name;
     }
 
-    public function getFieldView(): string
-    {
-        return config('little-admin-architect.blade-prefix').'::'.$this->view;
-    }
+
+
+
+
 
     public static function make(string $name, null|string $label = null): static
     {
@@ -73,8 +77,8 @@ abstract class Field implements CanValidateValuesForRules, CanGetAttributesRules
         return $this->record;
     }
 
-    protected function getViewComponent(string $view): string
-    {
-        return config('little-admin-architect.blade-prefix').'::'.$view;
-    }
+
+
+
+
 }

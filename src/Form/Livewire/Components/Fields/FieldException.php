@@ -1,7 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields;
 
-class FieldException extends \Exception
+use Exception;
+
+class FieldException extends Exception
 {
 }

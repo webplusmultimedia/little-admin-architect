@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Resources;
 
 use Illuminate\Filesystem\Filesystem;
@@ -16,7 +18,7 @@ class RegisterResources
 
     public static function getResourcesFromApplication(string $path): array
     {
-        return (new static)->getResourcesFromDir($path);
+        return (new static())->getResourcesFromDir($path);
     }
 
     protected function getResourcesFromDir(string $path): array

@@ -17,8 +17,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "spatie/laravel-package-tools": "^1.14.0",
-        "illuminate/contracts": "^10.0"
+        "blade-ui-kit/blade-heroicons": "^2.1",
+        "illuminate/contracts": "^10.0",
+        "livewire/livewire": "^2.12",
+        "spatie/laravel-package-tools": "^1.14.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",

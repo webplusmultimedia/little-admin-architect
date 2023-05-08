@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns;
 
 use Illuminate\Contracts\Support\MessageBag;
@@ -67,11 +69,11 @@ trait HasValidation
 
             return $rawMessage ? str_replace(
                 str_replace('_', ' ', $this->name).'.'.$locale,
-                __('validation.attributes.'.$this->name).' ('.strtoupper($locale).')',
+                __('validation.attributes.'.$this->name).' ('.mb_strtoupper($locale).')',
                 $rawMessage
             ) : null;
         }
-        $_name = str($this->name)->headline()->lower().($locale ? ' ('.strtoupper($locale).')' : '');
+        $_name = str($this->name)->headline()->lower().($locale ? ' ('.mb_strtoupper($locale).')' : '');
 
         return $errorBag->first($this->getConfig()->getWireName());
     }

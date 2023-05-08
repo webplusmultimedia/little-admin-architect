@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Closure;
@@ -16,15 +18,15 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasVali
 
 class Select extends AbstractComponent
 {
-    use HasId;
-    use HasName;
-    use HasLabel;
-    use HasFloatingLabel;
-    use HasPlaceholder;
-    use HasAddon;
-    use HasOptions;
-    use HasValidation;
     use CanBeWired;
+    use HasAddon;
+    use HasFloatingLabel;
+    use HasId;
+    use HasLabel;
+    use HasName;
+    use HasOptions;
+    use HasPlaceholder;
+    use HasValidation;
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(

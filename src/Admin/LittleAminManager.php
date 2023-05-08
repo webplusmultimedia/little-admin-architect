@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Admin;
 
 use Closure;
@@ -9,37 +11,37 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\RegisterResources;
 
 final class LittleAminManager
 {
-    protected bool $isNavigationMounted = false;
+    private bool $isNavigationMounted = false;
 
-    protected array $navigationGroups = [];
+    private array $navigationGroups = [];
 
-    protected array $navigationItems = [];
+    private array $navigationItems = [];
 
-    protected array $pages = [];
+    private array $pages = [];
 
-    protected array $resources = [];
+    private array $resources = [];
 
-    protected array $beforeCoreScripts = [];
+    private array $beforeCoreScripts = [];
 
-    protected array $scripts = [];
+    private array $scripts = [];
 
-    protected array $scriptData = [];
+    private array $scriptData = [];
 
-    protected array $styles = [];
+    private array $styles = [];
 
-    protected array $meta = [];
+    private array $meta = [];
 
-    protected string|Htmlable|null $theme = null;
+    private string|Htmlable|null $theme = null;
 
-    protected array $userMenuItems = [];
+    private array $userMenuItems = [];
 
-    protected array $widgets = [];
+    private array $widgets = [];
 
-    protected ?Closure $navigationBuilder = null;
+    private ?Closure $navigationBuilder = null;
 
-    protected array $renderHooks = [];
+    private array $renderHooks = [];
 
-    protected bool $isServing = false;
+    private bool $isServing = false;
 
     public function auth(): Guard
     {
@@ -66,14 +68,14 @@ final class LittleAminManager
         $this->applyResources();
     }
 
-    public function resolveResourceBy(null|string $name = null, null|string $route = null)
+    public function resolveResourceBy(null|string $name = null, null|string $route = null): void
     {
 
     }
 
     private function applyResources(): void
     {
-        if (! $this->resources) {
+        if ( ! $this->resources) {
             $this->resources = RegisterResources::getResourcesFromApplication(config('little-admin-architect.resources.path'));
         }
     }

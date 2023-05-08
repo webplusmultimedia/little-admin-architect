@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Illuminate\Contracts\View\View;
@@ -16,16 +18,16 @@ final class Form extends Component
         public string|null $wire = null
     ) {
 
-        if ($bind) {
-            app(FormBinder::class)->bindNewDataBatch($bind);
-        }
-        if ($errorBag) {
-            app(FormBinder::class)->bindErrorBag($errorBag);
-        }
-        if ($wire) {
-            app(FormBinder::class)->bindNewLivewireModifier($wire === '1' ? null : $wire);
-        }
-        $this->method = strtoupper($method);
+        /* if ($bind) {
+             app(FormBinder::class)->bindNewDataBatch($bind);
+         }
+         if ($errorBag) {
+             app(FormBinder::class)->bindErrorBag($errorBag);
+         }
+         if ($wire) {
+             app(FormBinder::class)->bindNewLivewireModifier('1' === $wire ? null : $wire);
+         }
+         $this->method = mb_strtoupper($method);*/
     }
 
     public function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form

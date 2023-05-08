@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
@@ -22,7 +24,7 @@ trait HasOptions
 
     protected function getOldValue(): mixed
     {
-        if (! old()) {
+        if ( ! old()) {
             return null;
         }
         $oldValue = data_get(old(), $this->name);

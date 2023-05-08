@@ -1,22 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 // config for Webplusmultimedia/LittleAdminArchitect
 return [
 
-    'prefix' => null,
-    'resources' => [
+    'prefix'                     => null,
+    'resources'                  => [
         'namespace' => 'App\\LittleAdmin\\Resources',
-        'path' => app_path('LittleAdmin/Resources'),
-        'register' => [],
+        'path'      => app_path('LittleAdmin/Resources'),
+        'register'  => [],
     ],
-    'pages' => [
+    'pages'                      => [
         'namespace' => 'App\\LittleAdmin\\Pages',
-        'path' => app_path('appLittleAdmin/Pages'),
-        'register' => [
+        'path'      => app_path('appLittleAdmin/Pages'),
+        'register'  => [
             // Pages\Dashboard::class,
         ],
     ],
-    'auth' => [
+    'auth'                       => [
         'guard' => env('LITTLE_ADMIN_AUTH_GUARD', 'web'),
         'pages' => [
             'login' => \LittleAdmin\Http\Livewire\Auth\Login::class,
@@ -33,5 +35,5 @@ return [
      * Fail status will be display when errors are sent to the view with a match with the component name.
      */
     'display_validation_failure' => true,
-    'blade-prefix' => 'little-form',
+    'blade-prefix'               => 'little-form',
 ];

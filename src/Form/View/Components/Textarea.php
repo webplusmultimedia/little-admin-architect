@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
@@ -17,15 +19,15 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValu
 
 class Textarea extends AbstractComponent
 {
-    use HasId;
-    use HasName;
-    use HasLabel;
-    use HasFloatingLabel;
-    use HasValue;
-    use HasPlaceholder;
-    use HasAddon;
-    use HasValidation;
     use CanBeWired;
+    use HasAddon;
+    use HasFloatingLabel;
+    use HasId;
+    use HasLabel;
+    use HasName;
+    use HasPlaceholder;
+    use HasValidation;
+    use HasValue;
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
@@ -33,7 +35,6 @@ class Textarea extends AbstractComponent
         public string $name = '',
         public string|null $caption = null,
         public array $locales = [null],
-
     ) {
         parent::__construct();
         $this->setUp($field);
@@ -49,6 +50,6 @@ class Textarea extends AbstractComponent
         $this->field = $field;
         $this->isRequiredField = $field->isRequired();
         $this->placeholder = $field->getPlaceHolder();
-        $this->name = $field->name;
+        $this->name = $field->getName();
     }
 }
