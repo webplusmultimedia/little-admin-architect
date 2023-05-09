@@ -53,11 +53,11 @@ final class Form
     {
         return $this->action;
     }
-    public function getBind(): Model
+    public function getBind(): null|Model
     {
         return $this->bind;
     }
-    public function bind(Model $bind): Form
+    public function bind(?Model $bind = null): Form
     {
         $this->bind = $bind;
 
@@ -88,6 +88,6 @@ final class Form
 
     public function getButton(): Button
     {
-        return Button::make($this->caption, $this->type, $this->action)->icon('loader');
+        return Button::make($this->caption, $this->type, $this->action)->icon('s-check');
     }
 }

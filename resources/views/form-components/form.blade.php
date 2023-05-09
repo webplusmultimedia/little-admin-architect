@@ -19,7 +19,7 @@
             <div class="flex justify-end group-btn px-3" aria-autocomplete="none">
                 <x-little-form::button.submit class="btn-primary" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}" wire:loading.class.delay="opacity-70 cursor-wait">
                     @if($button->hasIcon())
-                        <x-heroicon-m-check-circle/>
+                        <x-little-anonyme::form-components.fields.icons.hero-icon :name="$button->getViewIcon()"/>
                     @endif
                    <span>{{ $button->getCaption() }}</span><x-little-form::icon name="loader"  wire:loading.delay="wire:loading.delay" wire:target="{{ $button->getAction() }}" class="!opacity-100"/>
                 </x-little-form::button.submit>

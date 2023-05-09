@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Webplusmultimedia\LittleAdminArchitect\Admin;
+namespace Webplusmultimedia\LittleAdminArchitect;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Arr;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\RegisterResources;
 
 final class LittleAminManager
@@ -78,5 +79,13 @@ final class LittleAminManager
         if ( ! $this->resources) {
             $this->resources = RegisterResources::getResourcesFromApplication(config('little-admin-architect.resources.path'));
         }
+    }
+    public static function getComponentNameFromBaseName(string $componentBaseName): array
+    {
+        $resources = app('little-admin-manager')->getResources();
+        dump($resources);
+        $component = collect($resources)->pluck('resources.*.pages.*.component')
+            ->flatten();
+        return $component->all();
     }
 }

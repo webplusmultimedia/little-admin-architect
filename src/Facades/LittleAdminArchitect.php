@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Facade;
  */
 class LittleAdminArchitect extends Facade
 {
-    protected static function getFacadeAccessor(): void
+    protected static function getFacadeAccessor(): string
     {
-
+        return 'little-admin-architect';
     }
 }

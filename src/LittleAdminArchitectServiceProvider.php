@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect;
 
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Webplusmultimedia\LittleAdminArchitect\Admin\LittleAminManager;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Form;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
@@ -28,44 +30,33 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     public function bootingPackage(): void
     {
         Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\View\\Components', config('little-admin-architect.blade-prefix'));
-        Blade::anonymousComponentPath(__DIR__.'/../resources/views','little-anonyme');
-        //$this->declareBladeDirectives();
+        Blade::anonymousComponentPath(__DIR__ . '/../resources/views', 'little-anonyme');
+
     }
 
     public function registeringPackage(): void
     {
-        $this->app->singleton(FormBinder::class, fn (Application $app) => new FormBinder());
-        $this->app->bind('little-admin-architect', fn (): LittleAdminArchitect => new LittleAdminArchitect());
-        $this->app->scoped('little-admin', function (): LittleAminManager {
+        $this->app->singleton(FormBinder::class, fn(Application $app) => new FormBinder());
+        $this->app->bind('little-admin-architect', fn(): LittleAdminArchitect => new LittleAdminArchitect());
+        $this->app->scoped('little-admin-manager', function (): LittleAminManager {
             return new LittleAminManager();
-        });
-    }
-
-    protected function declareBladeDirectives(): void
-    {
-        Blade::directive('bind', function ($dataBatch) {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->bindNewDataBatch('.$dataBatch.') ?>';
-        });
-        Blade::directive('endbind', function () {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->unbindLastDataBatch() ?>';
-        });
-        Blade::directive('errorbag', function ($errorBagKey) {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->bindErrorBag('.$errorBagKey.') ?>';
-        });
-        Blade::directive('enderrorbag', function () {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->unbindErrorBag() ?>';
-        });
-        Blade::directive('wire', function ($livewireModifier) {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->bindNewLivewireModifier('
-                .$livewireModifier.') ?>';
-        });
-        Blade::directive('endwire', function () {
-            return '<?php app(Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder::class)->unbindLastLivewireModifier() ?>';
         });
     }
 
     public function packageBooted(): void
     {
-        app('little-admin')->registerResources();
+        app('little-admin-manager')->registerResources();
+        $this->registerLivewireComponents(app('little-admin-manager'));
+    }
+
+    private function registerLivewireComponents(LittleAminManager $manager): void
+    {
+        $groups = $manager->getResources();
+        $componentName = collect(Arr::pluck($groups, 'resources.*.pages.*.component'))->flatten();
+
+        foreach ($componentName as $page => $component) {
+            Livewire::component($component, Form::class);
+        }
+        dump(LittleAminManager::getComponentNameFromBaseName('ddd'));
     }
 }

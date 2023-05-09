@@ -10,4 +10,9 @@ class LittleAdminArchitect
     {
         return 'me';
     }
+
+    public function getResourceManager():LittleAminManager
+    {
+        return app('little-admin-manager');
+    }
 }

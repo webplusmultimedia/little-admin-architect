@@ -14,21 +14,7 @@ final class Form extends Component
         protected \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form,
         public string $method = 'GET',
         public array|object|null $bind = null,
-        public string|null $errorBag = null,
-        public string|null $wire = null
-    ) {
-
-        /* if ($bind) {
-             app(FormBinder::class)->bindNewDataBatch($bind);
-         }
-         if ($errorBag) {
-             app(FormBinder::class)->bindErrorBag($errorBag);
-         }
-         if ($wire) {
-             app(FormBinder::class)->bindNewLivewireModifier('1' === $wire ? null : $wire);
-         }
-         $this->method = mb_strtoupper($method);*/
-    }
+    ) { }
 
     public function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form
     {

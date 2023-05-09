@@ -32,6 +32,6 @@ trait HasIcon
 
     public function getViewIcon()
     {
-        return 'little-anonyme::form-components.fields.icons.'.$this->icon;
+        return 'heroicon-'.$this->icon;
     }
 }
