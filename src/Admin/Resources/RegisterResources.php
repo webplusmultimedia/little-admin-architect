@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Resources;
 
 use Illuminate\Filesystem\Filesystem;
 use SplFileInfo;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 
 class RegisterResources
 {
@@ -51,8 +52,15 @@ class RegisterResources
                                 return [
                                     'name'          => (string) str($resourceClassBasePath)->afterLast('/'),
                                     'slug'          => $slug,
-                                    'pages'         => array_map(function (SplFileInfo $page) {
+                                    'pages'         => array_map(function (SplFileInfo $page) use ($slug) {
                                         $pageClassBasePath = (string) str($page->getRealPath())->between('app/', '.php')->prepend("App/");
+                                        $namePage = (string) str($pageClassBasePath)->afterLast('/')->kebab()->explode('-')->first();
+
+                                        $slugPage = match ($namePage){
+                                            'edit' => $slug . '/{id}/edit',
+                                            'create' => $slug . '/create',
+                                            'list' => $slug ,
+                                        };
 
                                         return [
                                             'component'     => str($pageClassBasePath)
@@ -62,6 +70,8 @@ class RegisterResources
                                                 ->implode('.'),
                                             'pageName' => (string) str($pageClassBasePath)->afterLast('/'),
                                             'classBaseName' => (string) str($pageClassBasePath)->replace('/', '\\'),
+                                            'slug' => $slugPage,
+                                            'routeClass' => Page::class
                                         ];
                                     }, $pages),
                                     'namespace'     => config('little-admin-architect.resources.namespace'),

@@ -35,16 +35,16 @@ class Form extends Component
         try {
             $id = (int) str(request()->path())->beforeLast('/')->afterLast('/')->value();
 
-            if($path = str(request()->segment(3))){
-                /** @var EditRecord $basename */
-                $basename= str($path)->explode('.')->map(fn($val)=>str($val)->studly())->implode('\\');
-                /** @var Resources $resource */
-                $resource = $basename::getResource();
-                $this->_form = $resource::getForm();
-                $this->_form->bind($this->data);
-
-                //dump($resource::getEloquentQuery()->first());
-            }
+//            if($path = str(request()->segment(3))){
+//                /** @var EditRecord $basename */
+//                $basename= str($path)->explode('.')->map(fn($val)=>str($val)->studly())->implode('\\');
+//                /** @var Resources $resource */
+//                $resource = $basename::getResource();
+//                $this->_form = $resource::getForm();
+//                $this->_form->bind($this->data);
+//
+//                //dump($resource::getEloquentQuery()->first());
+//            }
             $this->formVal = $this->buildConfig();
         }catch (Exception){
             abort(404);

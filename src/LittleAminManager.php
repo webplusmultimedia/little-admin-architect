@@ -83,9 +83,16 @@ final class LittleAminManager
     public static function getComponentNameFromBaseName(string $componentBaseName): array
     {
         $resources = app('little-admin-manager')->getResources();
-        dump($resources);
+       // dump($resources);
         $component = collect($resources)->pluck('resources.*.pages.*.component')
             ->flatten();
         return $component->all();
+    }
+
+    public function getPages(): array
+    {
+        $resources = app('little-admin-manager')->getResources();
+        return collect($resources)->pluck('resources.*.pages.*')
+            ->collapse()->all();
     }
 }

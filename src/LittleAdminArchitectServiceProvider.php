@@ -22,6 +22,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
             ->name('little-admin-architect')
             ->hasConfigFile()
             ->hasViews('little-views')
+            ->hasRoute('admin')
 
             //->hasMigration('create_little-admin-architect_table')
             ->hasCommand(LittleAdminArchitectCommand::class);
@@ -31,7 +32,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     {
         Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\View\\Components', config('little-admin-architect.blade-prefix'));
         Blade::anonymousComponentPath(__DIR__ . '/../resources/views', 'little-anonyme');
-
+        app('little-admin-manager')->registerResources();
     }
 
     public function registeringPackage(): void
@@ -41,11 +42,12 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
         $this->app->scoped('little-admin-manager', function (): LittleAminManager {
             return new LittleAminManager();
         });
+
+
     }
 
     public function packageBooted(): void
     {
-        app('little-admin-manager')->registerResources();
         $this->registerLivewireComponents(app('little-admin-manager'));
     }
 
@@ -57,6 +59,5 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
         foreach ($componentName as $page => $component) {
             Livewire::component($component, Form::class);
         }
-        dump(LittleAminManager::getComponentNameFromBaseName('ddd'));
     }
 }

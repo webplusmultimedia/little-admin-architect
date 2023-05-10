@@ -5,7 +5,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\AbstractPage;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 
-class CreateRecord extends Page
+class ListRecord extends Page
 {
 
 }
