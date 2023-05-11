@@ -40,45 +40,35 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use InteractWithWrapper;
     use ValidateValuesForRules;
 
-
-
-    protected ?Model $record = null;
+    protected ?Model $record = NULL;
 
     final public function __construct(
-        string $name,
-        ?string $label = null,
-    ) {
+        string  $name,
+        ?string $label = NULL,
+    )
+    {
         $this->label = $label;
         $this->name = $name;
     }
 
     public function getWireName(): string
     {
-        return $this->prefixName.'.'.$this->name;
+        return $this->prefixName . '.' . $this->name;
     }
 
-
-
-
-
-
-    public static function make(string $name, null|string $label = null): static
+    public static function make(string $name, null|string $label = NULL): static
     {
         return new static(name: $name, label: $label);
     }
 
-      protected function record(Model $model): void
-      {
-          $this->record = $model;
-      }
+    protected function record(Model $model): void
+    {
+        $this->record = $model;
+    }
 
     public function getRecord(): ?Model
     {
         return $this->record;
     }
-
-
-
-
 
 }

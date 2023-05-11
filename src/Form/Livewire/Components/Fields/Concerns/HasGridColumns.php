@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
-trait HasColumns
+trait HasGridColumns
 {
-    protected string $columns = 'grid-cols-1';
+    protected string $columns = 'lg:grid-cols-1';
 
     public function columns(int $columns): static
     {
-        $this->columns = 'grid-cols-'.$columns;
+        $this->columns = 'lg:grid-cols-'.$columns;
 
         return $this;
     }

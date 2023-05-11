@@ -5,18 +5,21 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components;
 
 use Illuminate\Database\Eloquent\Model;
+use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanGetRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanValidatedValues;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColumns;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\InteractWithLivewire;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
 
 final class Form
 {
     use CanGetRules;
     use CanValidatedValues;
-    use HasColumns;
+    use HasGridColumns;
     use HasSchema;
+    use InteractWithLivewire;
 
     protected string $view = 'form';
     protected ?Model $model = null;
@@ -90,4 +93,6 @@ final class Form
     {
         return Button::make($this->caption, $this->type, $this->action)->icon('s-check');
     }
+
+
 }

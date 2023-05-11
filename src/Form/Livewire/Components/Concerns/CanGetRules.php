@@ -16,6 +16,10 @@ trait CanGetRules
         return $rules;
     }
 
+    public function hasRules(): bool
+    {
+        return count($this->getRules()) > 0;
+    }
     public function getAttributesRules(): array
     {
         $rules = [];

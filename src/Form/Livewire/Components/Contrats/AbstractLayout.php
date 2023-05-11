@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanGetRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanValidatedValues;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColSpan;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColumns;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
 
 abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
@@ -16,7 +16,7 @@ abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttrib
     use CanGetRules;
     use CanValidatedValues;
     use HasColSpan;
-    use HasColumns;
+    use HasGridColumns;
     use HasSchema;
 
     protected string $view = 'layouts.container';
@@ -24,13 +24,13 @@ abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttrib
     protected Model|null $bind = null;
 
     final public function __construct(
-        public string $title,
-        int $columns,
+        public ?string $title = null,
+        int $columns = 2,
     ) {
         $this->columns($columns);
     }
 
-    public static function make(string $title, int $columns = 2): static
+    public static function make(?string $title = null, int $columns = 2): static
     {
         return new static(title: $title,columns: $columns);
     }

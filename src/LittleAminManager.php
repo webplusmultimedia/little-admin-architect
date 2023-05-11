@@ -32,13 +32,13 @@ final class LittleAminManager
 
     private array $meta = [];
 
-    private string|Htmlable|null $theme = null;
+    private string|Htmlable|null $theme = NULL;
 
     private array $userMenuItems = [];
 
     private array $widgets = [];
 
-    private ?Closure $navigationBuilder = null;
+    private ?Closure $navigationBuilder = NULL;
 
     private array $renderHooks = [];
 
@@ -69,23 +69,21 @@ final class LittleAminManager
         $this->applyResources();
     }
 
-    public function resolveResourceBy(null|string $name = null, null|string $route = null): void
-    {
-
-    }
+    public function resolveResourceBy(null|string $name = NULL, null|string $route = NULL): void {}
 
     private function applyResources(): void
     {
-        if ( ! $this->resources) {
-            $this->resources = RegisterResources::getResourcesFromApplication(config('little-admin-architect.resources.path'));
-        }
+        $this->resources = cache()->remember('little-admin-resource', 60, function () {
+            return RegisterResources::getResourcesFromApplication(config('little-admin-architect.resources.path'));
+        });
     }
+
     public static function getComponentNameFromBaseName(string $componentBaseName): array
     {
         $resources = app('little-admin-manager')->getResources();
-       // dump($resources);
         $component = collect($resources)->pluck('resources.*.pages.*.component')
             ->flatten();
+
         return $component->all();
     }
 

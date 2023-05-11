@@ -6,9 +6,10 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Layout
 
 use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasLabel;
 
-final class Container extends AbstractLayout
+final class Grid extends AbstractLayout
 {
     use HasLabel;
 

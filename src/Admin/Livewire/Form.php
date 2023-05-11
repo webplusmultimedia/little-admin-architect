@@ -2,27 +2,30 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
-use Exception;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages\EditRecord;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form as LittleFormAlias;
 
-class Form extends Component
+class Form extends Component implements Htmlable
 {
+
     public ?Model $data = NULL;
     public null|string $config = NULL;
+    public bool $initialized = true;
     public bool $init = true;
     protected LittleFormAlias|null $_form = NULL;
     protected array $datasRules;
     protected array $attributesRules;
     protected array $configParams = [];
-    protected array $formVal = [];
 
+
+    public function mount($data)
+    {
+         $this->data = $data;
+    }
     protected function rules(): array
     {
         return $this->datasRules;
@@ -30,45 +33,42 @@ class Form extends Component
 
     public function booted()
     {
-
-        /** @todo get resource by url : put url in manager */
-        try {
-            $id = (int) str(request()->path())->beforeLast('/')->afterLast('/')->value();
-
-//            if($path = str(request()->segment(3))){
-//                /** @var EditRecord $basename */
-//                $basename= str($path)->explode('.')->map(fn($val)=>str($val)->studly())->implode('\\');
-//                /** @var Resources $resource */
-//                $resource = $basename::getResource();
-//                $this->_form = $resource::getForm();
-//                $this->_form->bind($this->data);
-//
-//                //dump($resource::getEloquentQuery()->first());
-//            }
-            $this->formVal = $this->buildConfig();
-        }catch (Exception){
-            abort(404);
-        }
-
+       $this->formDatas = $this->buildConfig();
     }
+
     protected function buildConfig(): array
     {
-        $this->_form ??= app($this->config)->setUp($this->data);
+
+
+        //dump($this->config);
+        /** @var Page $page */
+        $page = app($this->config);
+
+        /** @var Resources $resource */
+        $resource = $page::getResource();
+        $this->_form = $resource::getForm();
+
         $this->_form->livewireId($this->id);
+        $this->_form->bind($this->data);
+        $this->_form->title($resource::getModelLabel());
+
 
         $this->datasRules = $this->_form->getRules();
         $this->attributesRules = $this->_form->getAttributesRules();
-        if (!$this->data){
-            $this->data = $this->_form->getBind();
-        }
         return [
             'form' => $this->_form,
+            'title' => $resource::getModelLabel()
         ];
     }
 
-    public function render(): View|\Illuminate\Foundation\Application|Factory|Application
+    public function init()
     {
-        return view('little-views::livewire.form', $this->formVal);
+        $this->initialized = true;
+    }
+    public function render():View
+    {
+
+        return view('little-views::livewire.form', $this->formDatas);
     }
     public function updated($name, $value)
     {
@@ -77,13 +77,13 @@ class Form extends Component
 
     public function save()
     {
-        $datas = $this->_form->values($this->validate(rules: $this->rules(), attributes: $this->attributesRules));
-        // dd($datas);
-        if (! $this->data?->exists) {
-            $this->data?->fill($datas)->save();
-        } else {
-            $this->data->update($datas);
-        }
+         $this->_form->saveDatasForm($this);
+        //@todo Emit message Save
+
     }
 
+    public function toHtml()
+    {
+        $this->render()->render();
+    }
 }

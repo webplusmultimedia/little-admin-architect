@@ -1,1 +1,4 @@
-@livewire($component,['config'=>'App\\Admin\\Article\\ArticleForm'])
+<div class="" wire:key="$id">
+    @livewire($component,['config' => $config, 'data'=>$data])
+</div>
+

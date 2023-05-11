@@ -4,14 +4,20 @@
     $config = $getConfig()
     @endphp
 
-<div {{ $attributes->class("py-3 grid gap-2 col-span-full border border-gray-200 rounded-md bg-white") }}
+<div {{ $attributes->class("pb-3 grid gap-2 col-span-full border border-gray-300 rounded-md bg-white overflow-hidden") }}
      x-data="{}"
      wire:key="{{str($config->title)->pipe('md5')->append('-',str($config->title)->kebab())}}"
 >
-    <h1 class="text-2xl mb-5 pl-3">{{ $config->title }}</h1>
-    <div {{ $attributes->class(" py-3 grid gap-2 ")->merge(['class'=>$config->getColumns()]) }}>
+    @if($config->title )
+        <div class="bg-gray-100">
+            <h2 class="text-2xl my-3 pl-5 text-gray-600">{{ $config->title }}</h2>
+        </div>
+    @endif
+
+
+    <div {{ $attributes->class(" py-3 grid grid-cols-1 gap-5 px-5")->merge(['class'=>$config->getColumns()]) }}>
         @foreach($config->getFields() as $field)
-            <x-dynamic-component :component="$field->getFieldView()"    :field="$field" />
+            <x-dynamic-component :component="$field->getFieldView()"    :field="$field" data-content="dd"/>
         @endforeach
     </div>
 

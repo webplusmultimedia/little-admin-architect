@@ -36,4 +36,12 @@ return [
      */
     'display_validation_failure' => true,
     'blade-prefix'               => 'little-form',
+
+    'grid' => [
+        'col1' => 'lg:grid-cols-1',
+        'col2' => 'lg:grid-cols-2',
+        'col3' => 'lg:grid-cols-3',
+        'col4' => 'lg:grid-cols-4',
+        'col5' => 'lg:grid-cols-5',
+    ]
 ];

@@ -29,10 +29,7 @@ class RegisterResources
             $resourcesGroupe = $this->filesystem->directories($path);
 
             return array_map(function ($resourceGroupe) {
-
                 $resourcesFiles = $this->filesystem->files($resourceGroupe);
-
-                //dump($resourceGroupe, $resourcesFiles);
 
                 return ['group'     => (string) str($resourceGroupe)->afterLast('/'),
                         'resources' =>
@@ -49,17 +46,24 @@ class RegisterResources
                                 $slug = $resourceClassBaseName::getSlug();
                                 $pages = $this->filesystem->files($pagesDirectory);
 
+
                                 return [
                                     'name'          => (string) str($resourceClassBasePath)->afterLast('/'),
+                                    'title'         => str($resourceClassBaseName::getPluralModelLabel())->ucfirst(),
                                     'slug'          => $slug,
                                     'pages'         => array_map(function (SplFileInfo $page) use ($slug) {
                                         $pageClassBasePath = (string) str($page->getRealPath())->between('app/', '.php')->prepend("App/");
                                         $namePage = (string) str($pageClassBasePath)->afterLast('/')->kebab()->explode('-')->first();
 
-                                        $slugPage = match ($namePage){
-                                            'edit' => $slug . '/{id}/edit',
+                                        $slugPage = match ($namePage) {
+                                            'edit' => $slug . '/{record}/edit',
                                             'create' => $slug . '/create',
-                                            'list' => $slug ,
+                                            'list' => $slug,
+                                        };
+                                        $typePage = match ($namePage) {
+                                            'edit' => 'edit',
+                                            'create' => 'create',
+                                            'list' => 'list',
                                         };
 
                                         return [
@@ -68,10 +72,12 @@ class RegisterResources
                                                 ->explode('.')
                                                 ->map(fn($segment) => str($segment)->kebab())
                                                 ->implode('.'),
-                                            'pageName' => (string) str($pageClassBasePath)->afterLast('/'),
+                                            'pageName'      => (string) str($pageClassBasePath)->afterLast('/'),
                                             'classBaseName' => (string) str($pageClassBasePath)->replace('/', '\\'),
-                                            'slug' => $slugPage,
-                                            'routeClass' => Page::class
+                                            'slug'          => $slugPage,
+                                            'routeClass'    => Page::class,
+                                            'type'          => $typePage,
+                                            'name'          => str($slugPage)->replace(['/'], '.')->replace(['{', '}'], '')->kebab()->value()
                                         ];
                                     }, $pages),
                                     'namespace'     => config('little-admin-architect.resources.namespace'),
@@ -87,37 +93,4 @@ class RegisterResources
 
         return [];
     }
-
-    /**
-     * return array_map(function (string $dir) use ($directory, $direResources): array {
-     * $key = str($dir)
-     * ->after('app')
-     * ->prepend('app')
-     * ->before('.php')
-     * ->explode('/')
-     * ->map(fn($val) => str($val)->kebab())->implode('.');
-     * dump($direResources);
-     *
-     * // $files = $this->filesystem->files($direResources);
-     *
-     * return
-     * [
-     * 'resource'      => (string) str($direResources)->afterLast('/'),
-     * 'route'         => $key,
-     * 'namespace'     => (string) str($dir)
-     * ->after('Resources')
-     * ->replace('/', '\\')
-     * ->before('.php')
-     * ->prepend(config('little-admin-architect.resources.namespace')),
-     * 'className'     => (string) str($dir)
-     * ->after('Resources')
-     * ->replace('/', '\\')
-     * ->prepend(config('little-admin-architect.resources.namespace'))
-     * ->before('.php')
-     * ->append('::class'),
-     * 'classBaseName' => (string) str($dir)->after('Resources/')->before('.php')
-     * ];
-     * }, $direResources);
-     *
-     */
 }
