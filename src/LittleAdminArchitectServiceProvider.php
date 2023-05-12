@@ -31,14 +31,14 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     public function bootingPackage(): void
     {
         Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\View\\Components', config('little-admin-architect.blade-prefix'));
-        Blade::anonymousComponentPath(__DIR__ . '/../resources/views', 'little-anonyme');
+        Blade::anonymousComponentPath(__DIR__.'/../resources/views', 'little-anonyme');
         app('little-admin-manager')->registerResources();
     }
 
     public function registeringPackage(): void
     {
-        $this->app->singleton(FormBinder::class, fn(Application $app) => new FormBinder());
-        $this->app->bind('little-admin-architect', fn(): LittleAdminArchitect => new LittleAdminArchitect());
+        $this->app->singleton(FormBinder::class, fn (Application $app) => new FormBinder());
+        $this->app->bind('little-admin-architect', fn (): LittleAdminArchitect => new LittleAdminArchitect());
         $this->app->scoped('little-admin-manager', function (): LittleAminManager {
             return new LittleAminManager();
         });

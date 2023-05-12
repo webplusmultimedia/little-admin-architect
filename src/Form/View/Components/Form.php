@@ -6,7 +6,6 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 final class Form extends Component
 {
@@ -14,7 +13,8 @@ final class Form extends Component
         protected \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form,
         public string $method = 'GET',
         public array|object|null $bind = null,
-    ) { }
+    ) {
+    }
 
     public function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form
     {

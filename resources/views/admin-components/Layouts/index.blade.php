@@ -16,8 +16,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100">
-<header>
-    <nav class="bg-white border-gray-200 dark:bg-gray-900 ml-0 lg:ml-[20rem]">
+<header class="bg-white sticky top-0 z-10 lg:ml-[20rem] border-b ">
+    <nav class="bg-white border-gray-200 dark:bg-gray-900 ml-0">
         <div class="container flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="https://flowbite.com/" class="flex items-center">
                 <x-little-anonyme::form-components.fields.icons.logo class="h-8"/>
@@ -49,8 +49,8 @@
         </div>
     </nav>
 </header>
-<aside class="w-[20rem]  border-r border-gray-100 bg-white fixed top-0 -left-[20rem] bottom-0 lg:left-0 px-5 shadow-lg">
-    <a href="#" class="flex items-center py-5">
+<aside class="w-[20rem]  border-r border-gray-100 bg-white fixed top-0 -left-[20rem] bottom-0 lg:left-0 shadow-lg overflow-x-hidden overflow-y-auto pb-5  z-10">
+    <a href="#" class="flex items-center bg-white py-5  border-b sticky top-0">
         <x-little-anonyme::form-components.fields.icons.logo class="text-primary-500 h-8"/>
         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Little Admin</span>
     </a>
@@ -62,8 +62,12 @@
                         {{ $group }}
                     </div>
                 @foreach($navigations as $navigation)
-                    <div class="flex pl-10">
-                        <a href="{{ route('little-admin.page.' . $navigation['route_name']) }}">{{ $navigation['title'] }}</a>
+                    <div class="flex">
+                        <a href="{{ route($navigation['route_name']) }}"
+                            class="hover:bg-gray-50 pl-10 py-1 rounded-md grow duration-200"
+                        >
+                            {{ $navigation['title'] }}
+                        </a>
                     </div>
                 @endforeach
                 </div>

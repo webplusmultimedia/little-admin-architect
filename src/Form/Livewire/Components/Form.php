@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components;
 
 use Illuminate\Database\Eloquent\Model;
-use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanGetRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanValidatedValues;

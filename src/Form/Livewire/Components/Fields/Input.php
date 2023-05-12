@@ -20,6 +20,11 @@ final class Input extends Field
 
     public function type(string $type): static
     {
+        if ($type === 'slug'){
+            $this->disabled();
+            $this->helperText('Merci de ne pas remplir');
+            $type = 'text';
+        }
         $this->type = $type;
 
         return $this;

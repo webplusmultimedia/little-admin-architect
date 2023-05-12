@@ -15,6 +15,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeWireModifier;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColSpan;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasHelperText;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasId;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasName;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasPlaceHolder;
@@ -39,24 +40,24 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use InteractWithRules;
     use InteractWithWrapper;
     use ValidateValuesForRules;
+    use HasId;
 
-    protected ?Model $record = NULL;
+    protected ?Model $record = null;
 
     final public function __construct(
         string  $name,
-        ?string $label = NULL,
-    )
-    {
+        ?string $label = null,
+    ) {
         $this->label = $label;
         $this->name = $name;
     }
 
     public function getWireName(): string
     {
-        return $this->prefixName . '.' . $this->name;
+        return $this->prefixName.'.'.$this->name;
     }
 
-    public static function make(string $name, null|string $label = NULL): static
+    public static function make(string $name, null|string $label = null): static
     {
         return new static(name: $name, label: $label);
     }

@@ -11,7 +11,7 @@ class LittleAdminArchitect
         return 'me';
     }
 
-    public static function getResourceManager():LittleAminManager
+    public static function getResourceManager(): LittleAminManager
     {
         return app('little-admin-manager');
     }
@@ -25,12 +25,14 @@ class LittleAdminArchitect
             $pages = [];
             foreach ($group['resources'] as $resource) {
                 foreach ($resource[ 'pages' ] as $page) {
-                    if ($page['type']!=='list') continue;
+                    if ('list'!==$page['type']) {
+                        continue;
+                    }
                     $pages[] = [
-                        'route_name' => $page['name'],
+                        'route_name' => 'little-admin.page.'. $page['routeName'],
                         'title' => $resource['title']
                     ];
-                 }
+                }
             }
             $navigation[$group['group']] = $pages;
         }

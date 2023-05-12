@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Illuminate\Contracts\Support\Htmlable;
@@ -11,36 +13,38 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form as Litt
 
 class Form extends Component implements Htmlable
 {
-
-    public ?Model $data = NULL;
-    public null|string $config = NULL;
+    public ?Model $data = null;
+    public null|string $config = null;
     public bool $initialized = true;
     public bool $init = true;
-    protected LittleFormAlias|null $_form = NULL;
+
+    public ?string $routeName = null;
+    protected LittleFormAlias|null $_form = null;
     protected array $datasRules;
     protected array $attributesRules;
     protected array $configParams = [];
+    protected array $formDatas = [];
 
 
-    public function mount($data)
+    public function mount(?Model $data): void
     {
-         $this->data = $data;
+        $this->data = $data;
+        $this->routeName = request()->route()->getName();
     }
     protected function rules(): array
     {
         return $this->datasRules;
     }
 
-    public function booted()
+    public function booted(): void
     {
-       $this->formDatas = $this->buildConfig();
+        $this->formDatas = $this->buildConfig();
     }
 
     protected function buildConfig(): array
     {
-
-
-        //dump($this->config);
+        $route_name = $this->routeName ?? request()->route()->getName();
+        //dump($route_name);
         /** @var Page $page */
         $page = app($this->config);
 
@@ -61,23 +65,23 @@ class Form extends Component implements Htmlable
         ];
     }
 
-    public function init()
+    public function init(): void
     {
         $this->initialized = true;
     }
-    public function render():View
+    public function render(): View
     {
 
         return view('little-views::livewire.form', $this->formDatas);
     }
-    public function updated($name, $value)
+    public function updated($name, $value): void
     {
         $this->validateOnly(field: $name, attributes: $this->attributesRules);
     }
 
-    public function save()
+    public function save(): void
     {
-         $this->_form->saveDatasForm($this);
+        $this->_form->saveDatasForm($this);
         //@todo Emit message Save
 
     }

@@ -4,7 +4,7 @@
     $config = $getConfig()
     @endphp
 
-<div {{ $attributes->class("pb-3 grid gap-2 col-span-full border border-gray-300 rounded-md bg-white overflow-hidden") }}
+<div {{ $attributes->class("pb-3 grid gap-2 border border-gray-300 rounded-md bg-white overflow-hidden")->merge(['class'=>$config->getColSpan()]) }}
      x-data="{}"
      wire:key="{{str($config->title)->pipe('md5')->append('-',str($config->title)->kebab())}}"
 >
@@ -17,7 +17,7 @@
 
     <div {{ $attributes->class(" py-3 grid grid-cols-1 gap-5 px-5")->merge(['class'=>$config->getColumns()]) }}>
         @foreach($config->getFields() as $field)
-            <x-dynamic-component :component="$field->getFieldView()"    :field="$field" data-content="dd"/>
+            <x-dynamic-component :component="$field->getFieldView()"    :field="$field" />
         @endforeach
     </div>
 

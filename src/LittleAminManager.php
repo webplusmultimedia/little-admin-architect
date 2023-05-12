@@ -7,8 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Support\Arr;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\RegisterResources;
+use Webplusmultimedia\LittleAdminArchitect\Support\RegisterResources;
 
 final class LittleAminManager
 {
@@ -32,13 +31,13 @@ final class LittleAminManager
 
     private array $meta = [];
 
-    private string|Htmlable|null $theme = NULL;
+    private string|Htmlable|null $theme = null;
 
     private array $userMenuItems = [];
 
     private array $widgets = [];
 
-    private ?Closure $navigationBuilder = NULL;
+    private ?Closure $navigationBuilder = null;
 
     private array $renderHooks = [];
 
@@ -69,11 +68,13 @@ final class LittleAminManager
         $this->applyResources();
     }
 
-    public function resolveResourceBy(null|string $name = NULL, null|string $route = NULL): void {}
+    public function resolveResourceBy(null|string $name = null, null|string $route = null): void
+    {
+    }
 
     private function applyResources(): void
     {
-        $this->resources = cache()->remember('little-admin-resource', 60, function () {
+        $this->resources = cache()->remember('little-admin-resource', 10, function () {
             return RegisterResources::getResourcesFromApplication(config('little-admin-architect.resources.path'));
         });
     }

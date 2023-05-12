@@ -5,7 +5,7 @@ declare(strict_types=1);
 // config for Webplusmultimedia/LittleAdminArchitect
 return [
 
-    'prefix'                     => null,
+    'prefix'                     => 'admin',
     'resources'                  => [
         'namespace' => 'App\\LittleAdmin\\Resources',
         'path'      => app_path('LittleAdmin/Resources'),
@@ -13,7 +13,7 @@ return [
     ],
     'pages'                      => [
         'namespace' => 'App\\LittleAdmin\\Pages',
-        'path'      => app_path('appLittleAdmin/Pages'),
+        'path'      => app_path('LittleAdmin/Pages'),
         'register'  => [
             // Pages\Dashboard::class,
         ],

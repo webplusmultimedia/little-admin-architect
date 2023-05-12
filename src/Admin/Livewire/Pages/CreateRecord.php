@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages;
 
 use Illuminate\Support\Str;

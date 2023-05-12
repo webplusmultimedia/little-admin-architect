@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 
@@ -13,7 +14,7 @@ class Page extends Component
     protected static ?Model $record = null;
     protected static \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form;
     protected static ?string $route = null;
-    protected static ?string $routeName = NULL;
+    protected static ?string $routeName = null;
 
     public static function getResource(): null|string|Resources
     {
@@ -39,9 +40,9 @@ class Page extends Component
     public static function getComponent()
     {
         return  str(static::class)
-            ->replace('\\','.')
+            ->replace('\\', '.')
             ->explode('.')
-            ->map(fn($segment) => (string) str($segment)->kebab())
+            ->map(fn ($segment) => (string) str($segment)->kebab())
             ->implode('.');
     }
 
@@ -54,7 +55,7 @@ class Page extends Component
 
     public function render()
     {
-        return view('little-views::livewire.page',static::setUpForm())
+        return view('little-views::livewire.page', static::setUpForm())
             ->layout('little-views::admin-components.Layouts.index');
     }
 }

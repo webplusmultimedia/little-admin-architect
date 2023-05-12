@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns;
 
 class AbstractPage
@@ -14,12 +16,12 @@ class AbstractPage
     public static function getComponentBaseName(): string
     {
         return  str(static::class)
-            ->replace('\\','.')
+            ->replace('\\', '.')
             ->explode('.')
-            ->map(fn($segment) => (string) str($segment)->kebab())
+            ->map(fn ($segment) => (string) str($segment)->kebab())
             ->implode('.');
     }
-    public static function getComponent()
+    public static function getComponent(): void
     {
 
     }

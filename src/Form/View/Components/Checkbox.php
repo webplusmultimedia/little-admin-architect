@@ -12,6 +12,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeWi
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasId;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasName;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasType;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValidation;
 
 class Checkbox extends AbstractComponent
@@ -22,6 +23,7 @@ class Checkbox extends AbstractComponent
     use HasLabel;
     use HasName;
     use HasValidation;
+    use HasType;
 
     public array $group = [null];
 
@@ -32,9 +34,12 @@ class Checkbox extends AbstractComponent
     public string|null $caption = null;
 
     public bool $inline = false;
-
     public bool $toggleSwitch = false;
 
+    public function getBind()
+    {
+        return $this->bind;
+    }
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
         Field $field,

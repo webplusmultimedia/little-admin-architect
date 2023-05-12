@@ -28,6 +28,7 @@ abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttrib
         int $columns = 2,
     ) {
         $this->columns($columns);
+        $this->afterMake();
     }
 
     public static function make(?string $title = null, int $columns = 2): static
@@ -35,6 +36,10 @@ abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttrib
         return new static(title: $title,columns: $columns);
     }
 
+    protected function afterMake(): void
+    {
+
+    }
     public function getBind(): ?Model
     {
         return $this->bind;

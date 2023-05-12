@@ -6,9 +6,9 @@
 	$form = $getForm();
     $button = $form->getButton();
 @endphp
-<div class="py-3 px-2">
-    <div class="flex flex-col bg-white px-5 py-5 mb-8">
-        <h1 class="text-2xl mb-5">{{ __($form->title) }}</h1>
+<div class="py-5 px-2">
+    <div class="flex flex-col bg-white px-5 py-2 mb-8">
+        <h1 class="text-2xl mb-0">{{ __($form->title) }}</h1>
         <p>
             title / xxxx / edit
         </p>

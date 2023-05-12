@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Resources;
 
 use Closure;
@@ -74,14 +76,14 @@ class Resources
             return (string) $label;
         }
 
-      /*  if (locale_has_pluralization()) {
-            return Str::plural(static::getModelLabel());
-        }*/
+        /*  if (locale_has_pluralization()) {
+              return Str::plural(static::getModelLabel());
+          }*/
 
         return static::getModelLabel();
     }
 
-    public static function getForm():\Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form
+    public static function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form
     {
         return \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form::make();
     }
@@ -113,13 +115,13 @@ class Resources
 
     public static function getRoutes(): Closure
     {
-        return function () {
+        return function (): void {
             $slug = static::getSlug();
 
             Route::name("{$slug}.")
                 ->prefix($slug)
                 ->middleware(static::getMiddlewares())
-                ->group(function () {
+                ->group(function (): void {
                     foreach (static::getPages() as $name => $page) {
                         Route::get($page['route'], $page['class'])->name($name);
                     }
