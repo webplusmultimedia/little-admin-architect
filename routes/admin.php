@@ -13,6 +13,6 @@ Route::prefix(config('little-admin-architect.prefix'))
     ->name('little-admin.page.')
     ->group(function () use ($manager): void {
         foreach ($manager->getPages() as $page) {
-            Route::get($page[ 'slug' ], $page[ 'classBaseName' ])->name($page['routeName']);
+            Route::get($page['slug'], $page['classBaseName'])->name($page['routeName']);
         }
     });

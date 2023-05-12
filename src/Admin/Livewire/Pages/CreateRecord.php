@@ -11,12 +11,13 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 class CreateRecord extends Page
 {
     protected static ?string $routeName = 'create';
+
     public function mount(): void
     {
 
         /** @var Resources $resource */
         $resource = static::getResource();
-        static::$form  =  $resource::getForm();
+        static::$form = $resource::getForm();
 
         static::$record = new ($resource::getModel());
         //static::$form->bind(static::$record);
@@ -27,13 +28,14 @@ class CreateRecord extends Page
 
         $this->previousUrl = url()->previous();*/
     }
+
     protected static function setUpForm(): array
     {
-        return[
+        return [
             'component' => static::getComponent(),
             'data' => static::$record,
             'config' => static::class,
-            'id' => Str::random(10)
+            'id' => Str::random(10),
         ];
     }
 }

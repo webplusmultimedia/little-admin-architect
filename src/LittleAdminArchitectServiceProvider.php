@@ -31,7 +31,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     public function bootingPackage(): void
     {
         Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\View\\Components', config('little-admin-architect.blade-prefix'));
-        Blade::anonymousComponentPath(__DIR__.'/../resources/views', 'little-anonyme');
+        Blade::anonymousComponentPath(__DIR__ . '/../resources/views', 'little-anonyme');
         app('little-admin-manager')->registerResources();
     }
 
@@ -42,7 +42,6 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
         $this->app->scoped('little-admin-manager', function (): LittleAminManager {
             return new LittleAminManager();
         });
-
 
     }
 

@@ -11,11 +11,12 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 class EditRecord extends Page
 {
     protected static ?string $routeName = 'edit';
+
     public function mount($record): void
     {
         /** @var Resources $resource */
         $resource = static::getResource();
-        static::$form  =  $resource::getForm();
+        static::$form = $resource::getForm();
         static::$record = $resource::getEloquentQuery()->whereId($record)->firstOrFail();
         /*$this->authorizeAccess();
 
@@ -26,11 +27,11 @@ class EditRecord extends Page
 
     protected static function setUpForm(): array
     {
-        return[
+        return [
             'component' => static::getComponent(),
             'data' => static::$record,
             'config' => static::class,
-            'id' => Str::random(10)
+            'id' => Str::random(10),
         ];
     }
 }

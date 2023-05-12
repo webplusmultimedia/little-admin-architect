@@ -14,6 +14,7 @@ class Resources
     protected static ?string $breadcrumb = null;
 
     protected static bool $isGloballySearchable = true;
+
     protected static ?string $modelLabel = null;
 
     protected static ?string $model = null;
@@ -31,13 +32,14 @@ class Resources
     protected static ?string $recordRouteKeyName = null;
 
     protected static bool $shouldRegisterNavigation = true;
+
     protected static ?string $pluralModelLabel = null;
 
     protected static ?string $recordTitleAttribute = null;
 
     protected static ?string $slug = null;
 
-    protected static string | array $middlewares = [];
+    protected static string|array $middlewares = [];
 
     protected static int $globalSearchResultsLimit = 50;
 
@@ -49,9 +51,10 @@ class Resources
     {
         return static::$breadcrumb ?? Str::headline(static::getPluralModelLabel());
     }
+
     public static function getModelLabel(): string
     {
-        return static::$modelLabel ??  (string) str(class_basename(static::getModel()))
+        return static::$modelLabel ?? (string) str(class_basename(static::getModel()))
             ->kebab()
             ->replace('-', ' ');
     }
@@ -60,16 +63,19 @@ class Resources
     {
         return static::getModel()::query();
     }
+
     public static function getModel(): string
     {
         return static::$model ?? (string) str(class_basename(static::class))
             ->beforeLast('Resource')
             ->prepend('App\\Models\\');
     }
+
     public static function getPages(): array
     {
         return [];
     }
+
     public static function getPluralModelLabel(): string
     {
         if (filled($label = static::$pluralModelLabel)) {
@@ -87,6 +93,7 @@ class Resources
     {
         return \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form::make();
     }
+
     public static function getSlug(): string
     {
         if (filled(static::$slug)) {
@@ -129,9 +136,8 @@ class Resources
         };
     }
 
-    public static function getMiddlewares(): string | array
+    public static function getMiddlewares(): string|array
     {
         return static::$middlewares;
     }
-
 }

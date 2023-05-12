@@ -41,6 +41,6 @@ trait CanBeWired
     {
         $formLivewireModifier = app(FormBinder::class)->getBoundLivewireModifer();
 
-        return $formLivewireModifier ? '.'.$formLivewireModifier : '';
+        return $formLivewireModifier ? '.' . $formLivewireModifier : '';
     }
 }

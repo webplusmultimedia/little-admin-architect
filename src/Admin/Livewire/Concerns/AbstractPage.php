@@ -15,12 +15,13 @@ class AbstractPage
 
     public static function getComponentBaseName(): string
     {
-        return  str(static::class)
+        return str(static::class)
             ->replace('\\', '.')
             ->explode('.')
             ->map(fn ($segment) => (string) str($segment)->kebab())
             ->implode('.');
     }
+
     public static function getComponent(): void
     {
 

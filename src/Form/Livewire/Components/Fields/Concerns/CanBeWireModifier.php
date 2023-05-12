@@ -11,7 +11,6 @@ trait CanBeWireModifier
     /**
      * @return bool
      */
-
     protected bool $isWireLazy = false;
 
     public function lazy(): static
@@ -28,10 +27,12 @@ trait CanBeWireModifier
 
         return $this;
     }
+
     public function isWireLazy(): bool
     {
         return $this->isWireLazy;
     }
+
     public function getWireModifier(): string
     {
         return $this->wireModifier;

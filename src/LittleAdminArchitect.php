@@ -20,22 +20,23 @@ class LittleAdminArchitect
     {
         $navigation = [];
         $manager = static::getResourceManager();
-        foreach ($manager->getResources() as  $key => $group) {
+        foreach ($manager->getResources() as $key => $group) {
             //dd($group['resources']);
             $pages = [];
             foreach ($group['resources'] as $resource) {
-                foreach ($resource[ 'pages' ] as $page) {
-                    if ('list'!==$page['type']) {
+                foreach ($resource['pages'] as $page) {
+                    if ('list' !== $page['type']) {
                         continue;
                     }
                     $pages[] = [
-                        'route_name' => 'little-admin.page.'. $page['routeName'],
-                        'title' => $resource['title']
+                        'route_name' => 'little-admin.page.' . $page['routeName'],
+                        'title' => $resource['title'],
                     ];
                 }
             }
             $navigation[$group['group']] = $pages;
         }
+
         return $navigation;
     }
 }

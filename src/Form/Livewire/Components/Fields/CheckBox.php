@@ -11,6 +11,7 @@ class CheckBox extends Field
     use CanBeBoolean;
 
     protected string $view = 'checkbox';
+
     protected string $type = 'checkbox';
 
     public function getType(): string
@@ -21,6 +22,7 @@ class CheckBox extends Field
     public function switch(): static
     {
         $this->type = 'switch';
+
         return $this;
     }
 }

@@ -12,11 +12,12 @@ class Button extends AbstractField
     use HasIcon;
 
     protected string $view = 'button';
+
     protected array $acceptedTypes = ['link', 'submit'];
 
     final public function __construct(
-        protected string      $caption,
-        protected string      $type = 'link',
+        protected string $caption,
+        protected string $type = 'link',
         protected null|string $action = null,
     ) {
         $this->view .= $this->type;
@@ -41,5 +42,4 @@ class Button extends AbstractField
     {
         return $this->caption;
     }
-
 }

@@ -13,6 +13,7 @@ final class Container extends AbstractLayout
     use HasLabel;
 
     protected string $name = '...';
+
     protected int|string $colSpan = 'col-span-full';
 
     public function getValidatedValues(array $values, ?array $datas = null, ?Model $model = null): array

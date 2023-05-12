@@ -8,20 +8,15 @@ trait HasIcon
 {
     protected null|string $icon = null;
 
-    /**
-     * @return string|null
-     */
     public function getIcon(): ?string
     {
         return $this->icon;
     }
 
-    /**
-     * @param string|null $icon
-     */
     public function icon(?string $icon): static
     {
         $this->icon = $icon;
+
         return $this;
     }
 
@@ -32,6 +27,6 @@ trait HasIcon
 
     public function getViewIcon()
     {
-        return 'heroicon-'.$this->icon;
+        return 'heroicon-' . $this->icon;
     }
 }

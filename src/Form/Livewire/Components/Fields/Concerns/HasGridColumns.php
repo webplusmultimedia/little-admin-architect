@@ -10,7 +10,7 @@ trait HasGridColumns
 
     public function columns(int $columns): static
     {
-        $this->columns = 'lg:grid-cols-'.$columns;
+        $this->columns = 'lg:grid-cols-' . $columns;
 
         return $this;
     }

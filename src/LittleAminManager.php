@@ -91,6 +91,7 @@ final class LittleAminManager
     public function getPages(): array
     {
         $resources = app('little-admin-manager')->getResources();
+
         return collect($resources)->pluck('resources.*.pages.*')
             ->collapse()->all();
     }

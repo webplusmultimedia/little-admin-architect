@@ -40,6 +40,7 @@ abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttrib
     {
 
     }
+
     public function getBind(): ?Model
     {
         return $this->bind;
@@ -54,11 +55,11 @@ abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttrib
 
     public function getFieldView(): string
     {
-        return config('little-admin-architect.blade-prefix').'::'.$this->view;
+        return config('little-admin-architect.blade-prefix') . '::' . $this->view;
     }
 
     protected function getViewComponent(string $view): string
     {
-        return config('little-admin-architect.blade-prefix').'::'.$view;
+        return config('little-admin-architect.blade-prefix') . '::' . $view;
     }
 }

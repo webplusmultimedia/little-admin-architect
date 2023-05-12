@@ -1,5 +1,5 @@
 {
-    "preset": "psr12",
+    "preset": "laravel",
     "rules": {
         "align_multiline_comment": true,
         "array_indentation": true,
@@ -8,7 +8,9 @@
         "blank_line_after_opening_tag": true,
         "combine_consecutive_issets": true,
         "combine_consecutive_unsets": true,
-        "concat_space": true,
+        "concat_space": {
+            "spacing": "one"
+        },
         "declare_parentheses": true,
         "declare_strict_types": true,
         "explicit_string_variable": true,

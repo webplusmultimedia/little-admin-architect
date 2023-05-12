@@ -11,6 +11,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Partials\Label;
 trait HasLabel
 {
     protected ?Label $fieldLabel = null;
+
     protected ?string $label = null;
 
     public function label(null|string $label): static

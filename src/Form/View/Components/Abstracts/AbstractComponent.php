@@ -35,6 +35,6 @@ abstract class AbstractComponent extends Component
 
     public function render(): View|Factory|Htmlable|Closure|string|Application
     {
-        return view('little-views::form-components.'.$this->viewPath);
+        return view('little-views::form-components.' . $this->viewPath);
     }
 }

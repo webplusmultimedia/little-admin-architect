@@ -8,17 +8,17 @@ trait HasName
 {
     protected function getNameTranslationFromValidation(string|null $locale = null): string
     {
-        return __('validation.attributes.'.$this->getNameWithoutArrayNotation())
-            .($locale ? ' ('.mb_strtoupper($locale).')' : '');
+        return __('validation.attributes.' . $this->getNameWithoutArrayNotation())
+            . ($locale ? ' (' . mb_strtoupper($locale) . ')' : '');
     }
 
     protected function getNameWithoutArrayNotation(): string
     {
-        return mb_strstr($this->name, '[', true) ?: 'data-'.$this->name;
+        return mb_strstr($this->name, '[', true) ?: 'data-' . $this->name;
     }
 
     protected function getNameWithArrayNotationConvertedInto(string $notation = '.'): string
     {
-        return str_replace(['[', ']'], [$notation, ''], 'data-'.$this->name);
+        return str_replace(['[', ']'], [$notation, ''], 'data-' . $this->name);
     }
 }

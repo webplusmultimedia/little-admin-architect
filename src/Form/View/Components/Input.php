@@ -19,8 +19,8 @@ class Input extends AbstractComponent
     use HasAddon;
     use HasId;
     use HasLabel;
-
     use HasName;
+
     //use HasValue;
     use HasPlaceholder;
     use HasValidation;

@@ -10,7 +10,7 @@ trait HasColSpan
 
     public function colSpan(int $span): static
     {
-        $this->colSpan = 'col-span-'.$span;
+        $this->colSpan = 'col-span-' . $span;
 
         return $this;
     }

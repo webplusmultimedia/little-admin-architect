@@ -32,6 +32,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use CanBeWireModifier;
     use HasColSpan;
     use HasHelperText;
+    use HasId;
     use HasLabel;
     use HasName;
     use HasPlaceholder;
@@ -40,12 +41,11 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use InteractWithRules;
     use InteractWithWrapper;
     use ValidateValuesForRules;
-    use HasId;
 
     protected ?Model $record = null;
 
     final public function __construct(
-        string  $name,
+        string $name,
         ?string $label = null,
     ) {
         $this->label = $label;
@@ -54,7 +54,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
 
     public function getWireName(): string
     {
-        return $this->prefixName.'.'.$this->name;
+        return $this->prefixName . '.' . $this->name;
     }
 
     public static function make(string $name, null|string $label = null): static
@@ -71,5 +71,4 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     {
         return $this->record;
     }
-
 }

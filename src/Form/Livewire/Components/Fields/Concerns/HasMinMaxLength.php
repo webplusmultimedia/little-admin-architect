@@ -13,7 +13,7 @@ trait HasMinMaxLength
     public function minLength(int $length): static
     {
         $this->minLength = $length;
-        $this->addRules('min:'.$length);
+        $this->addRules('min:' . $length);
 
         return $this;
     }
@@ -26,7 +26,7 @@ trait HasMinMaxLength
     public function maxLength(int $length): static
     {
         $this->maxLength = $length;
-        $this->addRules('max:'.$length);
+        $this->addRules('max:' . $length);
 
         return $this;
     }

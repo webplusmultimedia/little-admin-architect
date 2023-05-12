@@ -22,8 +22,8 @@ class Checkbox extends AbstractComponent
     use HasId;
     use HasLabel;
     use HasName;
-    use HasValidation;
     use HasType;
+    use HasValidation;
 
     public array $group = [null];
 
@@ -34,12 +34,14 @@ class Checkbox extends AbstractComponent
     public string|null $caption = null;
 
     public bool $inline = false;
+
     public bool $toggleSwitch = false;
 
     public function getBind()
     {
         return $this->bind;
     }
+
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
         Field $field,

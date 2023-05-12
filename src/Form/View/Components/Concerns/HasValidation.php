@@ -22,7 +22,7 @@ trait HasValidation
         if ($errorBag->isEmpty()) {
             return null;
         }
-        if ($locale && $errorBag->has($this->field->getWireName().'.'.$locale)) {
+        if ($locale && $errorBag->has($this->field->getWireName() . '.' . $locale)) {
             return $this->shouldDisplayValidationFailure() ? ' ring-error-400 !border-error-400' : null;
         }
         if ($errorBag->has($this->field->getWireName())) {
@@ -64,16 +64,16 @@ trait HasValidation
         $errorBag = $this->getErrorBag($errors);
 
         if ($locale) {
-            $errorKey = $this->name.'.'.$locale;
+            $errorKey = $this->name . '.' . $locale;
             $rawMessage = $errorBag->first($errorKey);
 
             return $rawMessage ? str_replace(
-                str_replace('_', ' ', $this->name).'.'.$locale,
-                __('validation.attributes.'.$this->name).' ('.mb_strtoupper($locale).')',
+                str_replace('_', ' ', $this->name) . '.' . $locale,
+                __('validation.attributes.' . $this->name) . ' (' . mb_strtoupper($locale) . ')',
                 $rawMessage
             ) : null;
         }
-        $_name = str($this->name)->headline()->lower().($locale ? ' ('.mb_strtoupper($locale).')' : '');
+        $_name = str($this->name)->headline()->lower() . ($locale ? ' (' . mb_strtoupper($locale) . ')' : '');
 
         return $errorBag->first($this->getConfig()->getWireName());
     }

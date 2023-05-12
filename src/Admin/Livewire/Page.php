@@ -11,9 +11,13 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 class Page extends Component
 {
     protected static ?string $resource = null;
+
     protected static ?Model $record = null;
+
     protected static \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form;
+
     protected static ?string $route = null;
+
     protected static ?string $routeName = null;
 
     public static function getResource(): null|string|Resources
@@ -30,6 +34,7 @@ class Page extends Component
     {
         return static::$form;
     }
+
     public static function route(string $path): array
     {
         return [
@@ -37,9 +42,10 @@ class Page extends Component
             'route' => $path,
         ];
     }
+
     public static function getComponent()
     {
-        return  str(static::class)
+        return str(static::class)
             ->replace('\\', '.')
             ->explode('.')
             ->map(fn ($segment) => (string) str($segment)->kebab())
@@ -48,7 +54,7 @@ class Page extends Component
 
     protected static function setUpForm(): array
     {
-        return[
+        return [
 
         ];
     }

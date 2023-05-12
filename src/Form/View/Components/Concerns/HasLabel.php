@@ -19,13 +19,13 @@ trait HasLabel
             return null;
         }
         if ($label) {
-            return $label.($locale ? ' ('.mb_strtoupper($locale).')' : '');
+            return $label . ($locale ? ' (' . mb_strtoupper($locale) . ')' : '');
         }
         if ( ! $locale) {
             return str($this->name)->headline()->lower()->ucfirst();
         }
 
-        return str($this->name)->headline()->lower()->ucfirst().($locale ? ' ('.mb_strtoupper($locale).')' : '');
+        return str($this->name)->headline()->lower()->ucfirst() . ($locale ? ' (' . mb_strtoupper($locale) . ')' : '');
 
         //return $this->getNameTranslationFromValidation($locale);
     }

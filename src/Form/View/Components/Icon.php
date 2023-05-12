@@ -11,6 +11,7 @@ class Icon extends \Illuminate\View\Component
     ) {
 
     }
+
     public function render()
     {
         return view("little-views::form-components.fields.icons.{$this->name}");

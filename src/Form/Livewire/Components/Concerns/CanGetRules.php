@@ -20,6 +20,7 @@ trait CanGetRules
     {
         return count($this->getRules()) > 0;
     }
+
     public function getAttributesRules(): array
     {
         $rules = [];
