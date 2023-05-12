@@ -12,7 +12,7 @@ trait HasValidationRules
     /**
      * @var array<int,string|Rule|Closure>
      */
-    public array $rules = [];
+    protected array $rules = [];
 
     protected function addRules(string|Rule|Closure $rules): void
     {
