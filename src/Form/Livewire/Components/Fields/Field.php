@@ -13,7 +13,9 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeNullable;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeRequired;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeWireModifier;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanInitValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColSpan;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasHelperText;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasId;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasLabel;
@@ -41,6 +43,8 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use InteractWithRules;
     use InteractWithWrapper;
     use ValidateValuesForRules;
+    use CanInitValue;
+    use HasDefaultValue;
 
     protected ?Model $record = null;
 

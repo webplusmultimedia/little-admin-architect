@@ -7,7 +7,9 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components;
 use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanGetRules;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanInitDatasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanValidatedValues;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
@@ -19,6 +21,8 @@ final class Form
     use HasGridColumns;
     use HasSchema;
     use InteractWithLivewire;
+    use CanInitDatasForm;
+    use HasDefaultValue;
 
     protected string $view = 'form';
 

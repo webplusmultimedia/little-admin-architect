@@ -1,18 +1,22 @@
 <?php
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
+declare(strict_types=1);
 
-use Illuminate\Support\Arr;
-use Illuminate\Validation\Rule;
+namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 
-trait HasOptions
+class Radio extends Field
 {
+
+    use HasGridColumns;
+
+    protected string $view = 'radio';
+
     protected array $options =[];
 
     public function options(array $options): static
     {
         $this->options = $options;
-        $this->addRules('array');
         $this->addRules('in:'. implode(',',array_keys($options)));
         return $this;
     }
@@ -21,6 +25,5 @@ trait HasOptions
     {
         return $this->options;
     }
-
 
 }

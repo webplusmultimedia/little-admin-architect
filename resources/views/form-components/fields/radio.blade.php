@@ -1,31 +1,41 @@
 @php
-    $validationClass = $getValidationClass($errors);
-    $errorMessage = $getErrorMessage($errors);
-    $captionId = $getId() ?: $getDefaultId('radio');
-    $isWired = $componentIsWired();
+
+    use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Radio;$config = $getConfig();
+/** @var Radio $config */
+    $id = $config->getId();
+
+    $errorMessage =  $getErrorMessage($errors);
+
 @endphp
-<div @class(['mb-3' => $marginBottom, $validationClass => $validationClass])>
-    <div>
-        <x:form::partials.label class="form-label" :label="$getLabel()"/>
+<x-dynamic-component :component="$config->getWrapperView()"
+                     :id="str($config->getName())->pipe('md5')->append('-',$id)"
+    {{ $attributes->class('grid col-span-full')->merge(['class'=> $config->getColumns()]) }}
+>
+    <div class="col-span-full py-3 text-sm font-bold uppercase text-slate-600">
+        {{ $config->getLabel() }}
+        @if($config->isRequired())
+            <span class="whitespace-nowrap">
+                    <sup class="font-medium text-error-700 dark:text-error-400">*</sup>
+            </span>
+        @endif
     </div>
-    @foreach($group as $groupValue => $groupLabel)
-        @php
-            $radioId = $getId(suffix: $groupValue) ?: $getDefaultId(prefix: 'radio', suffix: $groupValue);
-            $checked = $getGroupModeCheckedStatus($groupValue);
-        @endphp
-        <div @class(['form-check', 'form-check-inline' => $inline])>
-            <input {{ $attributes->merge([
-                'wire:model' . $getComponentLivewireModifier() => $isWired && ! $hasComponentNativeLivewireModelBinding() ? $name : null,
-                'id' => $radioId,
-                'class' => 'form-check-input',
-                'name' => $name,
-                'value' => $groupValue,
-                'checked' => $isWired ? null : $checked,
-                'aria-describedby' => $caption ? $captionId . '-caption' : null,
-            ]) }} type="radio">
-            <x:form::partials.label :id="$radioId" class="form-check-label" :label="$groupLabel"/>
-        </div>
+    @foreach($config->getOptions() as $key => $option)
+        @php($idGroup = str($key)->slug()->append($id))
+        <x-dynamic-component :component="$config->getViewComponentForLabel()"
+                             :id="$idGroup"
+                             class=" items-center gap-2" :label="$option"
+                             :showRequired="false"
+        >
+            <input id="{{$idGroup}}"
+                   aria-describedby="{{$idGroup}}"
+                   value="{{$key}}"
+                   type="radio"
+                   wire:model{{ $config->getWireModifier() }}="{{ $config->getWireName() }}"
+            >
+        </x-dynamic-component>
     @endforeach
-    <x:form::partials.caption :inputId="$captionId" :caption="$caption"/>
-    <x:form::partials.error-message class="d-block" :message="$errorMessage"/>
-</div>
+    <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()"/>
+    <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage"/>
+</x-dynamic-component>
+
+

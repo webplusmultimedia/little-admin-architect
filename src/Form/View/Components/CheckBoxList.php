@@ -16,11 +16,10 @@ class CheckBoxList extends AbstractComponent
     use HasId;
     use HasLabel;
     use HasName;
-    use HasPlaceholder;
     use HasValidation;
 
     public function __construct(
-        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Input $field,
+        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\CheckBoxList $field,
         public null|string $name = null,
     ) {
         parent::__construct();
@@ -28,13 +27,12 @@ class CheckBoxList extends AbstractComponent
     }
     protected function setViewPath(): string
     {
-        return 'fields.checkboxlist';
+        return 'fields.check-box-list';
     }
 
     protected function setUp(AbstractLayout|Field $field): void
     {
         $this->field = $field;
-        $this->placeholder = $field->getPlaceHolder();
         $this->isRequiredField = $field->isRequired();
         $this->name = $field->getName();
     }

@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concer
 
 use Livewire\Component;
 
+
 trait InteractWithLivewire
 {
     public function saveDatasForm(Component $livewire): void
@@ -31,4 +32,6 @@ trait InteractWithLivewire
 
         return null;
     }
+
+
 }

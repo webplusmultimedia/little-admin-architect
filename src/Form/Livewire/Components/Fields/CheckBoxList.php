@@ -10,39 +10,17 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 
 class CheckBoxList extends Field
 {
-     use HasOptions;
-     use HasGridColumns;
+    use HasOptions;
+    use HasGridColumns;
 
-    protected string $view = 'checkboxlist';
+    protected string $view = 'check-box-list';
 
-    public function getWireName(): string
+    public function initDatasFormOnMount(?Model $model): void
     {
-        return $this->prefixName . '.' . $this->name . '*';
+        if ($model) {
+            if ($model->{$this->name} === NULL) {
+                $model->{$this->name} = [];
+            }
+        }
     }
-
-    /*  public function interactWithRules(array $rules, ?Model $model = null): array
-      {
-          $rules['data.' . $this->name . '*'] = $this->rules;
-
-          return $rules;
-      }
-
-      public function applyAttributesRules(array $rules): array
-      {
-          $rules['data.' . $this->name . '*'] = str($this->getLabel())->lower();
-
-          rern $rules;
-      }
-
-    /*  public function getValidatedValues(array $values, null|array $datas = null, Model|null $model = null): array
-      {
-          if ($this->isDisabled()) {
-              $model->{$this->name} = $model->getOriginal($this->name);
-          } else {
-              $values[$this->name] = $model->{$this->name};
-          }
-
-          return $values;
-      }*/
-
 }

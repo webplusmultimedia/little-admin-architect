@@ -8,16 +8,17 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\CanInitForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form as LittleFormAlias;
 
 class Form extends Component implements Htmlable
 {
+    use CanInitForm;
     public ?Model $data = null;
 
     public null|string $config = null;
 
-    public bool $initialized = true;
+    public bool $initialized = false;
 
     public bool $init = true;
 
@@ -35,8 +36,12 @@ class Form extends Component implements Htmlable
 
     public function mount(?Model $data): void
     {
-        $this->data = $data;
         $this->routeName = request()->route()->getName();
+        $this->formDatas = $this->buildConfig();
+        $this->_form->initDatasFormOnMount($data);
+        $this->_form->applyDefaultValue($data);
+        $this->data = $data;
+        $this->initialized = true;
     }
 
     protected function rules(): array
@@ -46,32 +51,17 @@ class Form extends Component implements Htmlable
 
     public function booted(): void
     {
-        $this->formDatas = $this->buildConfig();
+        if ($this->initialized) {
+            $this->formDatas = $this->buildConfig();
+        }
     }
 
-    protected function buildConfig(): array
+    public function hydrate()
     {
-        $route_name = $this->routeName ?? request()->route()->getName();
-        //dump($route_name);
-        /** @var Page $page */
-        $page = app($this->config);
 
-        /** @var Resources $resource */
-        $resource = $page::getResource();
-        $this->_form = $resource::getForm();
-
-        $this->_form->livewireId($this->id);
-        $this->_form->bind($this->data);
-        $this->_form->title($resource::getModelLabel());
-
-        $this->datasRules = $this->_form->getRules();
-        $this->attributesRules = $this->_form->getAttributesRules();
-
-        return [
-            'form' => $this->_form,
-            'title' => $resource::getModelLabel(),
-        ];
     }
+
+
 
     public function init(): void
     {
@@ -86,6 +76,7 @@ class Form extends Component implements Htmlable
 
     public function updated($name, $value): void
     {
+        //dd($name,$value,$this->getRules());
         $this->validateOnly(field: $name, attributes: $this->attributesRules);
     }
 

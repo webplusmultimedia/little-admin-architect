@@ -6,7 +6,9 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contra
 
 use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanGetRules;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanInitDatasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanValidatedValues;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColSpan;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
@@ -15,6 +17,8 @@ abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttrib
 {
     use CanGetRules;
     use CanValidatedValues;
+    use CanInitDatasForm;
+    use HasDefaultValue;
     use HasColSpan;
     use HasGridColumns;
     use HasSchema;
@@ -62,4 +66,6 @@ abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttrib
     {
         return config('little-admin-architect.blade-prefix') . '::' . $view;
     }
+
+
 }
