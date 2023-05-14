@@ -26,10 +26,11 @@ class CheckBox extends Field
 
         return $this;
     }
+
     public function initDatasFormOnMount(?Model $model): void
     {
         if ($model) {
-            if ($model->{$this->name} === NULL) {
+            if (null === $model->{$this->name}) {
                 $model->{$this->name} = false;
             }
         }

@@ -14,7 +14,11 @@
 
     <div class="" x-data="{}">
         @foreach($table->getRecords() as $record)
-            @dump($record)
+        <div class="py-2">
+          Id :   {{$record->id}} -
+          Titre :   {{$record->titre}} -
+           Tarif : {{$record->tarif_du_jeu}}
+        </div>
         @endforeach
     </div>
 </div>

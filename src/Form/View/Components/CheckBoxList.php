@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
@@ -8,7 +10,6 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\Abstra
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasId;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasName;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasPlaceholder;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValidation;
 
 class CheckBoxList extends AbstractComponent
@@ -25,6 +26,7 @@ class CheckBoxList extends AbstractComponent
         parent::__construct();
         $this->setUp($field);
     }
+
     protected function setViewPath(): string
     {
         return 'fields.check-box-list';

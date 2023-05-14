@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Views;
 
 use Illuminate\View\Component;
 
 class Table extends Component
 {
-
     public function __construct(
         protected \Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $table
     ) {

@@ -20,8 +20,6 @@ class Radio extends AbstractComponentAlias
     use HasValidation;
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
-
-
     public function __construct(
         \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Radio $field,
         public null|string $name = null,
@@ -29,10 +27,11 @@ class Radio extends AbstractComponentAlias
         parent::__construct();
         $this->setUp($field);
     }
+
    protected function setViewPath(): string
-    {
-        return 'fields.radio';
-    }
+   {
+       return 'fields.radio';
+   }
 
     protected function setUp(AbstractLayout|Field $field): void
     {

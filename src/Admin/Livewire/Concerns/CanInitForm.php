@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
@@ -10,12 +12,12 @@ trait CanInitForm
 {
     protected function buildConfig(): array
     {
-         $this->pageRoute =  $this->pageRoute ?? request()->collect('fingerprint')->get('name');
+        $this->pageRoute = $this->pageRoute ?? request()->collect('fingerprint')->get('name');
 
-         $pageClass = str($this->pageRoute)
-             ->explode('.')
-             ->map(fn(string $segment) => str($segment)->studly())
-             ->implode('\\') ;
+        $pageClass = str($this->pageRoute)
+            ->explode('.')
+            ->map(fn (string $segment) => str($segment)->studly())
+            ->implode('\\');
         /** @var Page $page */
         $page = app($pageClass);
 

@@ -11,11 +11,12 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 class ListRecord extends Page
 {
     protected static ?string $routeName = 'list';
+
     public function mount(): void
     {
         /** @var Resources $resource */
-//        $resource = static::getResource();
-//        static::$records = $resource::getEloquentQuery()->paginate(static::$rowsPerPage);
+        //        $resource = static::getResource();
+        //        static::$records = $resource::getEloquentQuery()->paginate(static::$rowsPerPage);
         /*$this->authorizeAccess();
 
         $this->fillForm();
@@ -31,16 +32,17 @@ class ListRecord extends Page
             'id' => Str::random(10),
         ];
     }
+
     protected static function setUpLayout(): array
     {
         return [
             'title' => static::getResource()::getPluralModelLabel(),
         ];
     }
+
     public function render()
     {
         return view('little-views::livewire.list', static::setUpPage())
-            ->layout('little-views::admin-components.Layouts.index',static::setUpLayout());
+            ->layout('little-views::admin-components.Layouts.index', static::setUpLayout());
     }
-
 }

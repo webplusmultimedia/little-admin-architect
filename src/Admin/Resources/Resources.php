@@ -100,6 +100,7 @@ class Resources
     {
         return $table;
     }
+
     public static function getSlug(): string
     {
         if (filled(static::$slug)) {
@@ -146,7 +147,4 @@ class Resources
     {
         return static::$middlewares;
     }
-
-
-
 }

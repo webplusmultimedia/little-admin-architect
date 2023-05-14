@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
@@ -10,11 +12,10 @@ trait HasDefaultValue
 
     public function applyDefaultValue(?Model $model): void
     {
-        if ($model and !$model->exists) {
+        if ($model and ! $model->exists) {
             foreach ($this->fields as $field) {
                 $field->applyDefaultValue($model);
             }
         }
     }
-
 }

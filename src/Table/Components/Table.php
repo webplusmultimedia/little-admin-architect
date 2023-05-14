@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 final class Table
 {
-    protected string $view = 'table';
-    protected ?LengthAwarePaginator $records = NULL;
-    protected ?string $livewireId = null;
+    private string $view = 'table';
+
+    private ?LengthAwarePaginator $records = null;
+
+    private ?string $livewireId = null;
 
     public function getLivewireId(): ?string
     {
@@ -28,11 +31,13 @@ final class Table
 
     public function hasRecords(): bool
     {
-        if (!$this->records){
+        if ( ! $this->records) {
             return false;
         }
+
         return $this->records->count() > 0;
     }
+
     public function __construct(
         public string $title,
     ) {
@@ -48,6 +53,4 @@ final class Table
     {
         return config('little-admin-architect.blade-table-prefix') . '::' . $this->view;
     }
-
-
 }

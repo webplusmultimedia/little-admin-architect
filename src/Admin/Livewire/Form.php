@@ -15,15 +15,24 @@ class Form extends Component implements Htmlable
 {
     use CanInitForm;
 
-    public ?Model $data = NULL;
-    protected null|string $pageRoute = NULL;
+    public ?Model $data = null;
+
+    protected null|string $pageRoute = null;
+
     public bool $initialized = false;
-    public ?string $routeName = NULL;
+
+    protected ?string $routeName = null;
+
     protected bool $initBoot = true;
-    protected LittleFormAlias|null $_form = NULL;
+
+    protected LittleFormAlias|null $_form = null;
+
     protected array $datasRules;
+
     protected array $attributesRules;
+
     protected array $configParams = [];
+
     protected array $formDatas = [];
 
     public function mount(?Model $data, ?string $pageRoute): void

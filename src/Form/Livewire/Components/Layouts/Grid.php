@@ -13,6 +13,7 @@ final class Grid extends AbstractLayout
     use HasLabel;
 
     protected string $name = '...';
+
     protected string $colSpan = 'lg:col-span-full';
 
     public function getValidatedValues(array $values, ?array $datas = null, ?Model $model = null): array

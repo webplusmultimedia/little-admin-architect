@@ -10,15 +10,15 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 
 class CheckBoxList extends Field
 {
-    use HasOptions;
     use HasGridColumns;
+    use HasOptions;
 
     protected string $view = 'check-box-list';
 
     public function initDatasFormOnMount(?Model $model): void
     {
         if ($model) {
-            if ($model->{$this->name} === NULL) {
+            if (null === $model->{$this->name}) {
                 $model->{$this->name} = [];
             }
         }

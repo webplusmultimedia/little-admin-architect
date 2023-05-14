@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
@@ -14,15 +15,17 @@ class Table extends Component implements Htmlable
     use WithPagination;
 
     public bool $initialized = true;
-    public ?string $routeName = NULL;
-    protected null|string $pageRoute = NULL;
-    protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = NULL;
 
-    public function mount(string $pageRoute)
+    public ?string $routeName = null;
+
+    protected null|string $pageRoute = null;
+
+    protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = null;
+
+    public function mount(string $pageRoute): void
     {
         $this->pageRoute = $pageRoute;
     }
-
 
     protected function setUp()
     {
@@ -30,7 +33,7 @@ class Table extends Component implements Htmlable
 
         $pageClass = str($this->pageRoute)
             ->explode('.')
-            ->map(fn(string $segment) => str($segment)->studly())
+            ->map(fn (string $segment) => str($segment)->studly())
             ->implode('\\');
         /** @var Page $page */
         $page = app($pageClass);
@@ -43,7 +46,7 @@ class Table extends Component implements Htmlable
 
         return [
             'title' => $resource::getPluralModelLabel(),
-            'table'   => $this->_table,
+            'table' => $this->_table,
         ];
     }
 

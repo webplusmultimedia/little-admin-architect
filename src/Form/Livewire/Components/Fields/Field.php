@@ -32,7 +32,9 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use CanBeNullable;
     use CanBeRequired;
     use CanBeWireModifier;
+    use CanInitValue;
     use HasColSpan;
+    use HasDefaultValue;
     use HasHelperText;
     use HasId;
     use HasLabel;
@@ -43,8 +45,6 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use InteractWithRules;
     use InteractWithWrapper;
     use ValidateValuesForRules;
-    use CanInitValue;
-    use HasDefaultValue;
 
     protected ?Model $record = null;
 

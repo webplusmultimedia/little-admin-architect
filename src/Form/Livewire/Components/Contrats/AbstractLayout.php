@@ -16,10 +16,10 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
 {
     use CanGetRules;
-    use CanValidatedValues;
     use CanInitDatasForm;
-    use HasDefaultValue;
+    use CanValidatedValues;
     use HasColSpan;
+    use HasDefaultValue;
     use HasGridColumns;
     use HasSchema;
 
@@ -66,6 +66,4 @@ abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttrib
     {
         return config('little-admin-architect.blade-prefix') . '::' . $view;
     }
-
-
 }

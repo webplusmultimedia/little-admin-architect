@@ -14,7 +14,9 @@ class Page extends Component
     protected static ?string $resource = null;
 
     protected static ?Model $record = null;
+
     protected static LengthAwarePaginator $records;
+
     protected static int $rowsPerPage = 20;
 
     protected static \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form;
@@ -30,13 +32,14 @@ class Page extends Component
 
     public static function getPageRoute(): string
     {
-        return (string) str(static::class)->replace('\\','.');
+        return (string) str(static::class)->replace('\\', '.');
     }
 
     public static function getRowsPerPage(): int
     {
         return static::$rowsPerPage;
     }
+
     protected static function title(): string
     {
         return (static::getResource())::getModelLabel();
@@ -70,6 +73,7 @@ class Page extends Component
             'title' => static::title(),
         ];
     }
+
     protected static function setUpPage(): array
     {
         return [
@@ -79,6 +83,6 @@ class Page extends Component
     public function render()
     {
         return view('little-views::livewire.page', static::setUpPage())
-            ->layout('little-views::admin-components.Layouts.index',static::setUpLayout());
+            ->layout('little-views::admin-components.Layouts.index', static::setUpLayout());
     }
 }

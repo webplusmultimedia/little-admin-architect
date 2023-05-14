@@ -17,12 +17,12 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 final class Form
 {
     use CanGetRules;
+    use CanInitDatasForm;
     use CanValidatedValues;
+    use HasDefaultValue;
     use HasGridColumns;
     use HasSchema;
     use InteractWithLivewire;
-    use CanInitDatasForm;
-    use HasDefaultValue;
 
     protected string $view = 'form';
 
