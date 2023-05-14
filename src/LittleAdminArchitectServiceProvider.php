@@ -11,6 +11,7 @@ use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Form;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Table;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
@@ -31,6 +32,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     public function bootingPackage(): void
     {
         Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\View\\Components', config('little-admin-architect.blade-prefix'));
+        Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Table\\Components\\Views', config('little-admin-architect.blade-table-prefix'));
         Blade::anonymousComponentPath(__DIR__ . '/../resources/views', 'little-anonyme');
         app('little-admin-manager')->registerResources();
     }
@@ -53,10 +55,14 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     private function registerLivewireComponents(LittleAminManager $manager): void
     {
         $groups = $manager->getResources();
-        $componentName = collect(Arr::pluck($groups, 'resources.*.pages.*.component'))->flatten();
+        $componentNames = collect(Arr::pluck($groups, 'resources.*.pages.*.component'))->flatten();
 
-        foreach ($componentName as $page => $component) {
-            Livewire::component($component, Form::class);
+        foreach ($componentNames as $page => $component) {
+            $class = Form::class;
+            if (str($component)->afterLast('.')->startsWith('list-')) {
+                $class = Table::class;
+            }
+            Livewire::component($component, $class);
         }
     }
 }

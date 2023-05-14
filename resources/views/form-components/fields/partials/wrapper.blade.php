@@ -1,4 +1,4 @@
-<div {{ $attributes  }}
+<div {{ $attributes->class('col-span-full')  }}
      wire:key="{{$id}}"
 >
     {{ $slot }}

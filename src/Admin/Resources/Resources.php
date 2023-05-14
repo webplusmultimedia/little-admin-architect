@@ -8,6 +8,8 @@ use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
 
 class Resources
 {
@@ -89,11 +91,15 @@ class Resources
         return static::getModelLabel();
     }
 
-    public static function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form
+    public static function getFormSchema(Form $form): Form
     {
-        return \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form::make();
+        return $form;
     }
 
+    public static function getTable(Table $table): Table
+    {
+        return $table;
+    }
     public static function getSlug(): string
     {
         if (filled(static::$slug)) {
@@ -140,4 +146,7 @@ class Resources
     {
         return static::$middlewares;
     }
+
+
+
 }

@@ -14,7 +14,7 @@ final class Container extends AbstractLayout
 
     protected string $name = '...';
 
-    protected int|string $colSpan = 'col-span-full';
+    protected string $colSpan = 'lg:col-span-full';
 
     public function getValidatedValues(array $values, ?array $datas = NULL, ?Model $model = NULL): array
     {

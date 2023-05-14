@@ -1,4 +1,4 @@
 <div class="" wire:key="{{$id}}">
-    @livewire($component,['config' => $config, 'data'=>$data])
+    @livewire($component,['pageRoute' => $pageRoute, 'data'=>$data])
 </div>
 

@@ -6,23 +6,23 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields
 
 trait HasColSpan
 {
-    protected int|string $colSpan = 'col-span-1';
+    protected string $colSpan = 'lg:col-span-1';
 
     public function colSpan(int $span): static
     {
-        $this->colSpan = 'col-span-' . $span;
+        $this->colSpan = 'lg:col-span-' . $span;
 
         return $this;
     }
 
     public function colSpanFull(): static
     {
-        $this->colSpan = 'col-span-full';
+        $this->colSpan = 'lg:col-span-full';
 
         return $this;
     }
 
-    public function getColSpan()
+    public function getColSpan(): string
     {
         return $this->colSpan;
     }

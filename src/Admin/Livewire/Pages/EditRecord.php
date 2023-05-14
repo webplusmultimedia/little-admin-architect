@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages;
 use Illuminate\Support\Str;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
 
 class EditRecord extends Page
 {
@@ -16,7 +17,7 @@ class EditRecord extends Page
     {
         /** @var Resources $resource */
         $resource = static::getResource();
-        static::$form = $resource::getForm();
+        static::$form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
         static::$record = $resource::getEloquentQuery()->whereId($record)->firstOrFail();
         /*$this->authorizeAccess();
 
@@ -25,12 +26,12 @@ class EditRecord extends Page
         $this->previousUrl = url()->previous();*/
     }
 
-    protected static function setUpForm(): array
+    protected static function setUpPage(): array
     {
         return [
             'component' => static::getComponent(),
             'data' => static::$record,
-            'config' => static::class,
+            'pageRoute' => static::getComponent(),
             'id' => Str::random(10),
         ];
     }

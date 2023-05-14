@@ -6,7 +6,8 @@
     $validationClass = $getValidationClass($errors);
 @endphp
 <x-dynamic-component :component="$config->getWrapperView()"
-                     class="{{ $config->getColSpan() }} flex items-center"
+
+                     {{ $attributes->class('flex items-center')->merge(['class'=> $config->getColSpan()]) }}
                      :id="$config->getWrapperId()"
 >
     <div>
@@ -15,22 +16,20 @@
                              class=" items-center gap-2" :label="$config->getLabel()"
                              :showRequired="$isShowSignRequiredOnLabel()"
         >
-            @if($config->getType() === 'checkbox')
-                <input {{ $attributes->merge([
-                            'wire:model' . $config->getWireModifier() => ($config->getWireName()),
-                            'id' => $id,
-                            'aria-describedby' => $id
-                        ])
-                       }}
-                       type="checkbox"
-                >
-
-            @else
+            @if($config->getType() === 'switch')
                 <x-little-anonyme::form-components.fields.partials.toggle-switch
                     {{ $attributes->merge(['wire:model' . $config->getWireModifier() => ($config->getWireName())]) }}
                     :id="$id"
 
                 />
+            @else
+                <input {{ $attributes->merge([
+                            'wire:model' . $config->getWireModifier() => ($config->getWireName()),
+                            'id' => $id,
+                            'aria-describedby' => $id
+                        ]) }}
+                       type="checkbox"
+                >
             @endif
         </x-dynamic-component>
         @if($errorMessage)
@@ -38,7 +37,6 @@
                 <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage"/>
             </div>
         @endif
-
     </div>
 </x-dynamic-component>
 

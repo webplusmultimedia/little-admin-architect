@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 
@@ -13,6 +14,8 @@ class Page extends Component
     protected static ?string $resource = null;
 
     protected static ?Model $record = null;
+    protected static LengthAwarePaginator $records;
+    protected static int $rowsPerPage = 20;
 
     protected static \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form;
 
@@ -25,6 +28,15 @@ class Page extends Component
         return static::$resource;
     }
 
+    public static function getPageRoute(): string
+    {
+        return (string) str(static::class)->replace('\\','.');
+    }
+
+    public static function getRowsPerPage(): int
+    {
+        return static::$rowsPerPage;
+    }
     protected static function title(): string
     {
         return (static::getResource())::getModelLabel();
@@ -43,7 +55,7 @@ class Page extends Component
         ];
     }
 
-    public static function getComponent()
+    public static function getComponent(): string
     {
         return str(static::class)
             ->replace('\\', '.')
@@ -52,16 +64,21 @@ class Page extends Component
             ->implode('.');
     }
 
-    protected static function setUpForm(): array
+    protected static function setUpLayout(): array
     {
         return [
-
+            'title' => static::title(),
+        ];
+    }
+    protected static function setUpPage(): array
+    {
+        return [
         ];
     }
 
     public function render()
     {
-        return view('little-views::livewire.page', static::setUpForm())
-            ->layout('little-views::admin-components.Layouts.index');
+        return view('little-views::livewire.page', static::setUpPage())
+            ->layout('little-views::admin-components.Layouts.index',static::setUpLayout());
     }
 }

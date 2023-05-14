@@ -7,18 +7,19 @@
     $errorMessage =  $getErrorMessage($errors);
 
 @endphp
-    <x-dynamic-component :component="$config->getWrapperView()"
-                         :id="str($config->getName())->pipe('md5')->append('-',$id)"
-                         {{ $attributes->class('grid auto-rows-min')->merge(['class'=> $config->getColumns()]) }}
-    >
-    <div class="col-span-full  py-3 text-sm font-bold uppercase text-slate-600">
-        {{ $config->getLabel() }}
-        @if($config->isRequired())
-            <span class="whitespace-nowrap">
+<x-dynamic-component :component="$config->getWrapperView()"
+                     :id="str($config->getName())->pipe('md5')->append('-',$id)"
+    {{ $attributes->merge(['class'=> $config->getColSpan()]) }}
+>
+    <div {{ $attributes->class('grid auto-rows-min')->merge(['class'=> $config->getColumns()]) }}>
+        <div class="col-span-full  py-3 text-sm font-bold uppercase text-slate-600">
+            {{ $config->getLabel() }}
+            @if($config->isRequired())
+                <span class="whitespace-nowrap">
                     <sup class="font-medium text-error-700 dark:text-error-400">*</sup>
             </span>
-        @endif
-    </div>
+            @endif
+        </div>
         @foreach($config->getOptions() as $key => $option)
             @php($idGroup = str($key)->slug()->append($id))
             <x-dynamic-component :component="$config->getViewComponentForLabel()"
@@ -36,6 +37,7 @@
         @endforeach
         <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()"/>
         <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage"/>
-    </x-dynamic-component>
+    </div>
+</x-dynamic-component>
 
 

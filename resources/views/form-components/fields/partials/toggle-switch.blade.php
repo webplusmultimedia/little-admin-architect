@@ -3,7 +3,7 @@
       role="switch"
       class="w-12 h-7 rounded-full p-1 bg-gray-200 flex transition cursor-pointer"
       wire:ignore
-      x-on:click="is_check = !is_check ?? false; console.log(is_check)"
+      x-on:click="is_check = !is_check ?? false"
       x-bind:class="{ 'bg-primary-500' : is_check}"
       x-bind:aria-checked="is_check?.toString()"
         type="button"

@@ -14,36 +14,31 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form as Litt
 class Form extends Component implements Htmlable
 {
     use CanInitForm;
-    public ?Model $data = null;
 
-    public null|string $config = null;
-
+    public ?Model $data = NULL;
+    protected null|string $pageRoute = NULL;
     public bool $initialized = false;
-
-    public bool $init = true;
-
-    public ?string $routeName = null;
-
-    protected LittleFormAlias|null $_form = null;
-
+    public ?string $routeName = NULL;
+    protected bool $initBoot = true;
+    protected LittleFormAlias|null $_form = NULL;
     protected array $datasRules;
-
     protected array $attributesRules;
-
     protected array $configParams = [];
-
     protected array $formDatas = [];
 
-    public function mount(?Model $data): void
+    public function mount(?Model $data, ?string $pageRoute): void
     {
+
         $this->routeName = request()->route()->getName();
+        $this->pageRoute = $pageRoute;
         $this->formDatas = $this->buildConfig();
         $this->_form->initDatasFormOnMount($data);
-        if($data and !$data->exists) {
+        if ($data and ! $data->exists) {
             $this->_form->applyDefaultValue($data);
         }
         $this->data = $data;
         $this->initialized = true;
+        $this->initBoot = false;
     }
 
     protected function rules(): array
@@ -53,27 +48,14 @@ class Form extends Component implements Htmlable
 
     public function booted(): void
     {
-        if ($this->initialized) {
+        if ($this->initBoot) {
             $this->formDatas = $this->buildConfig();
         }
     }
 
-    public function hydrate()
-    {
-
-    }
-
-
-
     public function init(): void
     {
         $this->initialized = true;
-    }
-
-    public function render(): View
-    {
-
-        return view('little-views::livewire.form', $this->formDatas);
     }
 
     public function updated($name, $value): void
@@ -89,8 +71,13 @@ class Form extends Component implements Htmlable
 
     }
 
-    public function toHtml(): void
+    public function render(): View
     {
-        $this->render()->render();
+        return view('little-views::livewire.form', $this->formDatas);
+    }
+
+    public function toHtml(): string
+    {
+        return $this->render()->render();
     }
 }

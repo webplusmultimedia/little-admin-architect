@@ -8,7 +8,7 @@ final class Textarea extends Field
 {
     protected string $view = 'textarea';
 
-    protected int|string $colSpan = 'col-span-full';
+    protected string $colSpan = 'lg:col-span-full';
 
     protected int $rows = 6;
 

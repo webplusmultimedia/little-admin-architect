@@ -1,6 +1,5 @@
 @php
     use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
-    use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 	/**@var Form $form */
 	$form = $getForm();
