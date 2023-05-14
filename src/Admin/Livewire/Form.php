@@ -39,7 +39,9 @@ class Form extends Component implements Htmlable
         $this->routeName = request()->route()->getName();
         $this->formDatas = $this->buildConfig();
         $this->_form->initDatasFormOnMount($data);
-        $this->_form->applyDefaultValue($data);
+        if($data and !$data->exists) {
+            $this->_form->applyDefaultValue($data);
+        }
         $this->data = $data;
         $this->initialized = true;
     }

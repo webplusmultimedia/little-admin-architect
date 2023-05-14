@@ -9,13 +9,13 @@
 @endphp
 <x-dynamic-component :component="$config->getWrapperView()"
                      :id="str($config->getName())->pipe('md5')->append('-',$id)"
-    {{ $attributes->class('grid col-span-full')->merge(['class'=> $config->getColumns()]) }}
+    {{ $attributes->class('relative grid px-4 little-admin-fildset')->merge(['class'=> $config->getColumns()]) }}
 >
-    <div class="col-span-full py-3 text-sm font-bold uppercase text-slate-600">
-        {{ $config->getLabel() }}
+    <div class="col-span-full inline-flex item-center  py-3 text-sm font-bold uppercase text-slate-600">
+        <span class="bg-white z-[1] px-2">{{ $config->getLabel() }}</span>
         @if($config->isRequired())
-            <span class="whitespace-nowrap">
-                    <sup class="font-medium text-error-700 dark:text-error-400">*</sup>
+            <span class="whitespace-nowrap bg-white z-[1] pr-2">
+                <sup class="font-medium text-error-700 dark:text-error-400">*</sup>
             </span>
         @endif
     </div>
@@ -30,12 +30,13 @@
                    aria-describedby="{{$idGroup}}"
                    value="{{$key}}"
                    type="radio"
+                   name="{{ $id }}"
                    wire:model{{ $config->getWireModifier() }}="{{ $config->getWireName() }}"
             >
         </x-dynamic-component>
     @endforeach
-    <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()"/>
-    <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage"/>
+    <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()" class="mb-1"/>
+    <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage" class="mb-1"/>
 </x-dynamic-component>
 
 

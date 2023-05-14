@@ -9,9 +9,9 @@
 @endphp
     <x-dynamic-component :component="$config->getWrapperView()"
                          :id="str($config->getName())->pipe('md5')->append('-',$id)"
-                         {{ $attributes->class('grid col-span-full')->merge(['class'=> $config->getColumns()]) }}
+                         {{ $attributes->class('grid auto-rows-min')->merge(['class'=> $config->getColumns()]) }}
     >
-    <div class="col-span-full py-3 text-sm font-bold uppercase text-slate-600">
+    <div class="col-span-full  py-3 text-sm font-bold uppercase text-slate-600">
         {{ $config->getLabel() }}
         @if($config->isRequired())
             <span class="whitespace-nowrap">
@@ -23,7 +23,7 @@
             @php($idGroup = str($key)->slug()->append($id))
             <x-dynamic-component :component="$config->getViewComponentForLabel()"
                                  :id="$idGroup"
-                                 class=" items-center gap-2" :label="$option"
+                                 class="gap-2" :label="$option"
                                  :showRequired="false"
             >
                 <input id="{{$idGroup}}"

@@ -23,7 +23,7 @@ class Radio extends AbstractComponentAlias
 
 
     public function __construct(
-        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\CheckBoxList $field,
+        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Radio $field,
         public null|string $name = null,
     ) {
         parent::__construct();
@@ -31,7 +31,7 @@ class Radio extends AbstractComponentAlias
     }
    protected function setViewPath(): string
     {
-        return 'radio';
+        return 'fields.radio';
     }
 
     protected function setUp(AbstractLayout|Field $field): void
