@@ -55,7 +55,7 @@ final class Form
 
     }
 
-    public static function make(string $title = ''): static
+    public static function make(string $title = ''): Form
     {
         return new self(title: $title);
     }

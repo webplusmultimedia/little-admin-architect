@@ -13,37 +13,44 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
 
 class Resources
 {
-    protected static ?string $breadcrumb = null;
+    protected static ?string $breadcrumb = NULL;
 
     protected static bool $isGloballySearchable = true;
 
-    protected static ?string $modelLabel = null;
+    protected static ?string $modelLabel = NULL;
 
-    protected static ?string $model = null;
+    protected static ?string $model = NULL;
 
-    protected static ?string $navigationGroup = null;
+    protected static ?string $navigationGroup = NULL;
 
-    protected static ?string $navigationIcon = null;
+    protected static ?string $navigationIcon = NULL;
 
-    protected static ?string $activeNavigationIcon = null;
+    protected static ?string $activeNavigationIcon = NULL;
 
-    protected static ?string $navigationLabel = null;
+    protected static ?string $navigationLabel = NULL;
 
-    protected static ?int $navigationSort = null;
+    protected static ?int $navigationSort = NULL;
 
-    protected static ?string $recordRouteKeyName = null;
+    protected static ?string $recordRouteKeyName = NULL;
 
     protected static bool $shouldRegisterNavigation = true;
 
-    protected static ?string $pluralModelLabel = null;
+    protected static ?string $pluralModelLabel = NULL;
 
-    protected static ?string $recordTitleAttribute = null;
+    protected static ?string $recordTitleAttribute = NULL;
 
-    protected static ?string $slug = null;
+    protected static ?string $slug = NULL;
 
     protected static string|array $middlewares = [];
 
     protected static int $globalSearchResultsLimit = 50;
+
+    protected static int $rowsPerPage = 20;
+
+    public static function getRowsPerPage(): int
+    {
+        return static::$rowsPerPage;
+    }
 
     protected static bool $shouldAuthorizeWithGate = false;
 
@@ -111,7 +118,7 @@ class Resources
             ->afterLast('\\Models\\')
             ->plural()
             ->explode('\\')
-            ->map(fn (string $string) => Str::of($string)->kebab()->slug())
+            ->map(fn(string $string) => Str::of($string)->kebab()->slug())
             ->implode('/');
     }
 
@@ -137,7 +144,7 @@ class Resources
                 ->middleware(static::getMiddlewares())
                 ->group(function (): void {
                     foreach (static::getPages() as $name => $page) {
-                        Route::get($page['route'], $page['class'])->name($name);
+                        Route::get($page[ 'route' ], $page[ 'class' ])->name($name);
                     }
                 });
         };

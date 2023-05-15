@@ -17,7 +17,7 @@ class Page extends Component
 
     protected static LengthAwarePaginator $records;
 
-    protected static int $rowsPerPage = 20;
+
 
     protected static \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form;
 
@@ -35,10 +35,6 @@ class Page extends Component
         return (string) str(static::class)->replace('\\', '.');
     }
 
-    public static function getRowsPerPage(): int
-    {
-        return static::$rowsPerPage;
-    }
 
     protected static function title(): string
     {

@@ -13,6 +13,16 @@
     </div>
 
     <div class="" x-data="{}">
+        <table>
+            <thead>
+             <tr>
+                 @foreach($table->getHeaders() as $header)
+                     @livewire($header->getComponentView(),['header' => $header])
+                 @endforeach
+
+             </tr>
+            </thead>
+        </table>
         @foreach($table->getRecords() as $record)
         <div class="py-2">
           Id :   {{$record->id}} -
@@ -20,5 +30,6 @@
            Tarif : {{$record->tarif_du_jeu}}
         </div>
         @endforeach
+            {{ $table->getRecords()->links() }}
     </div>
 </div>

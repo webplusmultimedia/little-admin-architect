@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Views;
+namespace Webplusmultimedia\LittleAdminArchitect\Table\Views;
 
 use Illuminate\View\Component;
 

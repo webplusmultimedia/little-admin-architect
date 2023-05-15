@@ -40,7 +40,7 @@ class Table extends Component implements Htmlable
 
         /** @var Resources $resource */
         $resource = $page::getResource();
-        $records = $resource::getEloquentQuery()->paginate($page::getRowsPerPage());
+        $records = $resource::getEloquentQuery()->paginate($resource::getRowsPerPage());
         $this->_table = $resource::getTable(\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table::make($resource::getPluralModelLabel()));
         $this->_table->records($records);
 
