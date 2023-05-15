@@ -51,10 +51,10 @@ final class Table
 
     }
 
-    protected function applyHeaders(): void
+    public function applyHeaders(): void
     {
         foreach ($this->columns as $column) {
-            $this->headers(Header::make(name: $column->getName(),sortable: $column->isSortable()));
+            $this->headers(Header::make($column));
         }
     }
 

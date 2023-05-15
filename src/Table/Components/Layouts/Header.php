@@ -3,19 +3,20 @@
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts;
 
 use Illuminate\Database\Eloquent\Model;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts\AbstractColumn;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Concerns\HasLabel;
 
 final class Header
 {
-    use HasLabel;
 
-    protected string $view = 'layout.header';
-    protected Model $record;
-    public function __construct(protected string $name, protected bool $sortable = false, protected string $direction = 'asc') {}
 
-    public static function make(string $name, bool $sortable = false, string $direction = 'asc'): Header
+    protected string $view = 'layouts.header';
+
+    public function __construct(protected AbstractColumn $column) {}
+
+    public static function make(AbstractColumn $column): Header
     {
-        return new static($name, $sortable, $direction);
+        return new static($column);
     }
     public function getComponentView(): string
     {
@@ -23,18 +24,20 @@ final class Header
     }
     public function getName(): string
     {
-        return $this->name;
+        return $this->column->getName();
     }
 
     public function isSortable(): bool
     {
-        return $this->sortable;
+        return $this->column->isSortable();
     }
 
-    public function getDirection(): string
+    public function getLabel()
     {
-        return $this->direction;
+        return $this->column->getLabel();
     }
+
+
 
     public function getRecord(): Model
     {

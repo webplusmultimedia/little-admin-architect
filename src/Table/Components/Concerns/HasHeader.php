@@ -12,6 +12,9 @@ trait HasHeader
     protected array $headers = [];
 
 
+    /**
+     * @return array<int,Header>
+     */
     public function getHeaders(): array
     {
         return $this->headers;

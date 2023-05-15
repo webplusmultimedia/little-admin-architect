@@ -43,6 +43,7 @@ class Table extends Component implements Htmlable
         $records = $resource::getEloquentQuery()->paginate($resource::getRowsPerPage());
         $this->_table = $resource::getTable(\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table::make($resource::getPluralModelLabel()));
         $this->_table->records($records);
+        $this->_table->applyHeaders();
 
         return [
             'title' => $resource::getPluralModelLabel(),

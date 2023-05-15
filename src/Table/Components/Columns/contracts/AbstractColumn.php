@@ -1,12 +1,16 @@
 <?php
 
-namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Fields\contracts;
+namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts;
 
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Fields\Concerns\HasSortable;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasLabel;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasRecord;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasSortable;
 
 abstract class AbstractColumn
 {
     use HasSortable;
+    use HasLabel;
+    use HasRecord;
 
     protected string $view = 'text';
     public function __construct(
@@ -26,7 +30,7 @@ abstract class AbstractColumn
     {
         return config('little-admin-architect.blade-table-prefix').'::columns.'. $this->view;
     }
-    protected function getViewComponent(string $view): string
+    public function getComponentView(string $view): string
     {
         return config('little-admin-architect.blade-table-prefix') . '::' . $view;
     }

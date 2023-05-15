@@ -1,12 +1,18 @@
 <?php
 
-namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Fields\Concerns;
+namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns;
 
 use Closure;
 
 trait HasSortable
 {
     protected bool $sortable = false;
+    protected string $direction = 'asc';
+
+    public function getDirection(): string
+    {
+        return $this->direction;
+    }
 /** @todo : define sort on closure and array */
     public function sortable(null|array|Closure $sort = null): static
     {

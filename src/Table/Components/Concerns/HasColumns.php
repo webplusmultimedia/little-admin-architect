@@ -2,7 +2,7 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Fields\contracts\AbstractColumn;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts\AbstractColumn;
 
 trait HasColumns
 {
@@ -11,12 +11,20 @@ trait HasColumns
      */
     protected array $columns = [];
 
-    public function columns(AbstractColumn $column): static
+    /**
+     * @param array<int,AbstractColumn> $columns
+     *
+     * @return static
+     */
+    public function columns(array $columns): static
     {
-        $this->columns[] = $column;
+        $this->columns = $columns;
         return $this;
     }
 
+    /**
+     * @return array<int,AbstractColumn>
+     */
     public function getColumns(): array
     {
         return $this->columns;

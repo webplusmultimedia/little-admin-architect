@@ -13,6 +13,6 @@ abstract class AbstractComponent extends Component
 
     public function render(): View|Htmlable
     {
-        return view('little-views::table-components::' . $this->viewPath);
+        return view('little-views::table-components.' . $this->viewPath);
     }
 }
