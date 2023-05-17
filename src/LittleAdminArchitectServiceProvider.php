@@ -54,9 +54,9 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
 
     private function registerLivewireComponents(LittleAminManager $manager): void
     {
-        $groups = $manager->getResources();
-        $componentNames = collect(Arr::pluck($groups, 'resources.*.pages.*.component'))->flatten();
-
+        $groups = $manager->getPages();
+        $componentNames = collect(Arr::pluck($groups, '*.component'))->flatten();
+//dd($componentNames);
         foreach ($componentNames as $page => $component) {
             $class = Form::class;
             if (str($component)->afterLast('.')->startsWith('list-')) {

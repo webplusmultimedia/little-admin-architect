@@ -103,7 +103,7 @@ class Resources
         return $form;
     }
 
-    public static function getTable(Table $table): Table
+    public static function getTableColumns(Table $table): Table
     {
         return $table;
     }

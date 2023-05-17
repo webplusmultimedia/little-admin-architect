@@ -18,6 +18,8 @@ class Table extends Component implements Htmlable
 
     public ?string $routeName = null;
 
+    public ?int $rowsPerPage = null;
+
     protected null|string $pageRoute = null;
 
     protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = null;
@@ -38,17 +40,27 @@ class Table extends Component implements Htmlable
         /** @var Page $page */
         $page = app($pageClass);
 
+       // dump($page::getEditRoute());
         /** @var Resources $resource */
         $resource = $page::getResource();
-        $records = $resource::getEloquentQuery()->paginate($resource::getRowsPerPage());
-        $this->_table = $resource::getTable(\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table::make($resource::getPluralModelLabel()));
+        if (!$this->rowsPerPage){
+            $this->rowsPerPage = $resource::getRowsPerPage();
+        }
+
+        $records = $resource::getEloquentQuery()->paginate($this->rowsPerPage);
+        $this->_table = $resource::getTableColumns(\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table::make($resource::getPluralModelLabel()));
         $this->_table->records($records);
         $this->_table->applyHeaders();
+        $this->_table->setPagesForResource($page);
 
         return [
             'title' => $resource::getPluralModelLabel(),
             'table' => $this->_table,
         ];
+    }
+
+    public function paginationView() {
+        return 'little-views::table-components.pagination.pagination';
     }
 
     public function render(): View

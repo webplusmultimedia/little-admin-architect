@@ -1,9 +1,5 @@
-@php
-
-    $record = $getColumn()->getRecord();
-@endphp
 <td>
-    <div class="py-2">
+    <div class="py-2 px-2  min-w-max">
         {{ $getColumn()->getValue() }}
     </div>
 </td>

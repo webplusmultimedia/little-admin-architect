@@ -6,6 +6,9 @@ declare(strict_types=1);
 return [
 
     'prefix' => 'admin',
+    'route' =>[
+        'prefix' => 'little-admin.page',
+    ],
     'resources' => [
         'namespace' => 'App\\LittleAdmin\\Resources',
         'path' => app_path('LittleAdmin/Resources'),

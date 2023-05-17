@@ -17,8 +17,6 @@ class Page extends Component
 
     protected static LengthAwarePaginator $records;
 
-
-
     protected static \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form;
 
     protected static ?string $route = null;
@@ -28,6 +26,36 @@ class Page extends Component
     public static function getResource(): null|string|Resources
     {
         return static::$resource;
+    }
+
+    public static function getEditRoute(string $type): array
+    {
+       return static::getResource()::getPages()[$type];
+    }
+
+    public static function getEditUrl(Model $record):string
+    {
+        $path = static::getEditRoute('edit')['route'];
+        return url(str($path)
+            ->replace(['{record}'], $record->getKey())
+            ->prepend('/',config('little-admin-architect.prefix'),'/',static::getResource()::getSlug())
+            ->value());
+    }
+    public static function getCreateUrl():string
+    {
+        $path = static::getEditRoute('create')['route'];
+        return url(str($path)
+            //->replace(['{record}'], $record->getKey())
+            ->prepend('/',config('little-admin-architect.prefix'),'/',static::getResource()::getSlug())
+            ->value());
+    }
+    public static function getListUrl():string
+    {
+        $path = static::getEditRoute('index')['route'];
+        return url(str($path)
+            //->replace(['{record}'], $record->getKey())
+            ->prepend('/',config('little-admin-architect.prefix'),'/',static::getResource()::getSlug())
+            ->value());
     }
 
     public static function getPageRoute(): string

@@ -92,7 +92,15 @@ final class LittleAminManager
     {
         $resources = app('little-admin-manager')->getResources();
 
-        return collect($resources)->pluck('resources.*.pages.*')
-            ->collapse()->all();
+      /*collect($resources)
+           ->map(function ($value,$key){
+               return collect($value)->collapse()->toArray();
+           })
+           ->dd();*/
+
+        return collect($resources)
+            ->map(function ($value,$key){
+                return collect($value)->collapse()->toArray();
+            })->all();
     }
 }

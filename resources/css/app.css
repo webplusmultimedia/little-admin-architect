@@ -40,13 +40,18 @@
     [multiple],
     textarea,
     select {
-        @apply text-black text-[1rem]  py-3 px-2 w-full border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500   dark:border-blue-300 shadow-sm disabled:opacity-50 duration-100 rounded;
+        @apply text-black text-[1rem] border  py-3 px-2 w-full border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500   dark:border-blue-300 shadow-sm disabled:opacity-50 duration-100 rounded;
     }
 
     [type="checkbox"]{
-        @apply text-primary-500 py-2 px-2 border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500 shadow-sm disabled:opacity-50 duration-75 indeterminate:bg-gray-300 rounded
+        @apply text-primary-500 py-2 px-2 border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500 shadow-sm disabled:opacity-50 duration-75 indeterminate:bg-gray-300 rounded appearance-none;
     }
-
+    [type="radio"]{
+        @apply  appearance-none text-primary-500 py-2 px-2 border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500 shadow-sm disabled:opacity-50 duration-75 indeterminate:bg-transparent rounded-full invalid:bg-transparent;
+    }
+    .little-admin-fildset{
+        @apply before:content-[''] before:absolute before:left-0 before:right-0 before:top-5 before:-bottom-1 before:border before:border-gray-300 before:rounded-lg before:pointer-events-none
+    }
     label{
         @apply text-[1rem]
     }

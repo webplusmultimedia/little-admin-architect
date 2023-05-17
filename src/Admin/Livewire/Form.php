@@ -17,9 +17,10 @@ class Form extends Component implements Htmlable
 
     public ?Model $data = null;
 
-    protected null|string $pageRoute = null;
-
     public bool $initialized = false;
+
+    public ?string $previousPage = null;
+    protected null|string $pageRoute = null;
 
     protected ?string $routeName = null;
 
@@ -35,9 +36,10 @@ class Form extends Component implements Htmlable
 
     protected array $formDatas = [];
 
+
     public function mount(?Model $data, ?string $pageRoute): void
     {
-
+        $this->previousPage = url()->previous();
         $this->routeName = request()->route()->getName();
         $this->pageRoute = $pageRoute;
         $this->formDatas = $this->buildConfig();

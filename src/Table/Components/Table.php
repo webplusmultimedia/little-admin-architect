@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components;
 
+use Closure;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasColumns;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeader;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Header;
@@ -13,13 +17,15 @@ final class Table
 {
     use HasColumns;
     use HasHeader;
+
     private string $view = 'table';
 
     protected array $sortColumns = [];
+    private ?LengthAwarePaginator $records = NULL;
 
-    private ?LengthAwarePaginator $records = null;
+    private ?string $livewireId = NULL;
+    protected Page $pageForResource;
 
-    private ?string $livewireId = null;
 
     public function getLivewireId(): ?string
     {
@@ -36,9 +42,14 @@ final class Table
         return $this->records;
     }
 
+    public function setResources(Resources $resources): void
+    {
+        $this->resources = $resources;
+    }
+
     public function hasRecords(): bool
     {
-        if ( ! $this->records) {
+        if (! $this->records) {
             return false;
         }
 
@@ -47,8 +58,17 @@ final class Table
 
     public function __construct(
         public string $title,
-    ) {
+    ) {}
 
+
+
+    public function linkEdit(Model $record): string
+    {
+        return $this->pageForResource::getEditUrl($record);
+    }
+    public function linkCreate(): string
+    {
+        return $this->pageForResource::getCreateUrl();
     }
 
     public function applyHeaders(): void
@@ -66,5 +86,9 @@ final class Table
     public function getView(): string
     {
         return config('little-admin-architect.blade-table-prefix') . '::' . $this->view;
+    }
+
+    public function setPagesForResource(Page $page) {
+        $this->pageForResource = $page;
     }
 }

@@ -20,23 +20,38 @@ class LittleAdminArchitect
     {
         $navigation = [];
         $manager = static::getResourceManager();
-        foreach ($manager->getResources() as $key => $group) {
-            //dd($group['resources']);
+        foreach ($manager->getPages() as $group => $resourcePages) {
             $pages = [];
-            foreach ($group['resources'] as $resource) {
-                foreach ($resource['pages'] as $page) {
-                    if ('list' !== $page['type']) {
+            foreach ($resourcePages as $resource) {
+
+                    if ('list' !== $resource['type']) {
                         continue;
                     }
+                    $route_name = config('little-admin-architect.route.prefix').'.' . $resource['routeName'];
                     $pages[] = [
-                        'route_name' => 'little-admin.page.' . $page['routeName'],
-                        'title' => $resource['title'],
+                        'route_name' => $route_name,
+                        'route_prefix' => config('little-admin-architect.route.prefix').'.'
+                            . str($resource['resourceSlug'])
+                                ->replace('/','.')
+                                ->beforeLast('.')
+                                ->append('.*'),
+                         'title' => $resource['resourceTitle'],
                     ];
-                }
             }
-            $navigation[$group['group']] = $pages;
+            $navigation[$group] = $pages;
         }
 
         return $navigation;
+    }
+
+    public static function getRouteForResourcePage(string $groupRessource,string $page): \Illuminate\Support\Collection
+    {
+        $manager = static::getResourceManager();
+        return collect($manager->getResources())->filter(function($group) use ($groupRessource) {
+           if ($group[ 'group' ] === $groupRessource) {
+            return true;
+            }
+            return false;
+        });
     }
 }

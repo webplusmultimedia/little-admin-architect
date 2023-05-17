@@ -2,11 +2,14 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns;
 
+use Closure;
 use Illuminate\Database\Eloquent\Model;
 
 trait HasRecord
 {
     protected Model $record;
+    protected string $type = 'text';
+    protected Closure $value ;
 
 
     public function setRecord(Model $record): static
@@ -20,9 +23,9 @@ trait HasRecord
         return $this->record;
     }
 
-    public function getValue()
+    public function getValue(): string
     {
-        return $this->record->{$this->getName()};
+        return call_user_func($this->value,$this);
     }
 
 }
