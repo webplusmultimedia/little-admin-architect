@@ -4,7 +4,7 @@
 		$header = $getHeader();
 @endphp
 <th class="text-start ">
-    <button type="button" class="inline-flex space-x-2 items-center py-2 px-2 min-w-max">
+    <button type="button" class="inline-flex space-x-2 items-center py-2 px-2 min-w-max text-sm  uppercase">
         <span class="">
             {{ $header->getLabel() }}
         </span>

@@ -19,9 +19,20 @@
 
     </div>
 
-    <div class="bg-white py-10 px-5 rounded-lg overflow-x-auto" x-data="{}">
-        <table class="table-auto w-full text-start divide-y bg-gray-50 {{--text-sm lg:text-lg--}}">
-            <thead class="bg-gray-200 border-t text-start">
+    <div class="flex flex-col bg-white py-10 px-5 rounded-lg overflow-x-auto" x-data="{}">
+        <div class="flex items-center space-x-3 mb-5">
+            <div class="flex  w-full">
+                <div class="flex items-center py-1 px-3 border border-slate-300 rounded-l-lg bg-slate-100">
+                    <x-heroicon-s-magnifying-glass class="text-slate-600 w-5"/>
+                </div>
+                <input type="search" wire:model.debounce.500ms="search"  placeholder="" class="!border-l-0 rounded-r-lg rounded-l-none border-slate-300 py-2">
+            </div>
+            <div class="flex items-center">
+                <x-little-anonyme::form-components.fields.icons.filter class="text-primary-500 w-8 stroke-1"/>
+            </div>
+        </div>
+        <table class="table-auto w-full rounded-lg text-start divide-y bg-gray-50 overflow-hidden border-collapse border border-gray-500 shadow-sm">
+            <thead class="bg-gray-100  text-start">
             <tr>
                 @foreach($table->getHeaders() as $header)
                     <x-dynamic-component :component="$header->getComponentView()" :header="$header"/>
@@ -31,7 +42,7 @@
                 </th>
             </tr>
             </thead>
-            <tbody class="divide-y">
+            <tbody class="">
             @foreach($table->getRecords() as $record)
                 <tr wire:key="{{ $table->getLivewireId() . ' .'. $record->id  }}" class="hover:bg-primary-50/50 cursor-pointer">
                     @foreach($table->getColumns() as $column)
@@ -39,7 +50,7 @@
                         <x-dynamic-component :component="$column->getView()" :column="$column"/>
                     @endforeach
                     <td class="max-w-max whitespace-nowrap">
-                        <a href="{{ $table->linkEdit($record)  }}" class="px-2 py-2 inline-flex items-center space-x-2 text-primary-500">
+                        <a href="{{ $table->linkEdit($record)  }}" class="px-2 py-3 inline-flex items-center space-x-2 text-primary-500">
                             <x-heroicon-s-pencil class="w-4 h-4 text-primary-500"/>
                             <span>Editer</span>
                         </a>

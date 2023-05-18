@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
@@ -16,18 +17,42 @@ class Table extends Component implements Htmlable
 
     public bool $initialized = true;
 
-    public ?string $routeName = null;
+    public ?string $routeName = NULL;
 
-    public ?int $rowsPerPage = null;
+    public ?int $rowsPerPage = NULL;
 
-    protected null|string $pageRoute = null;
+    public string $search= '';
 
-    protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = null;
+    protected $queryString = [
+        'search' => ['except' => '', 'as'=>'q'],
+    ];
+    protected bool $initBoot = true;
+    protected null|string $pageRoute = NULL;
+
+    protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = NULL;
+    protected array $formDatas;
 
     public function mount(string $pageRoute): void
     {
         $this->pageRoute = $pageRoute;
+        //$this->formDatas = $this->setUp();
+        $this->initBoot = false;
     }
+
+   /* public function dehydrateSearch($value)
+    {
+        $this->search = $value;
+       // dump($this->search);
+        //$this->formDatas = $this->setUp();
+        $this->initBoot = false;
+    }
+    public function booted(): void
+    {
+        if ($this->initBoot) {
+           // dump($this->search);
+            $this->formDatas = $this->setUp();
+        }
+    }*/
 
     protected function setUp()
     {
@@ -35,19 +60,23 @@ class Table extends Component implements Htmlable
 
         $pageClass = str($this->pageRoute)
             ->explode('.')
-            ->map(fn (string $segment) => str($segment)->studly())
+            ->map(fn(string $segment) => str($segment)->studly())
             ->implode('\\');
         /** @var Page $page */
         $page = app($pageClass);
 
-       // dump($page::getEditRoute());
+        // dump($page::getEditRoute());
         /** @var Resources $resource */
         $resource = $page::getResource();
-        if (!$this->rowsPerPage){
+        if (! $this->rowsPerPage) {
             $this->rowsPerPage = $resource::getRowsPerPage();
         }
 
-        $records = $resource::getEloquentQuery()->paginate($this->rowsPerPage);
+        $records = $resource::getEloquentQuery()
+            ->when($this->search, function (Builder $builder) {
+                $builder->where('titre', 'like', "%{$this->search}%");
+            })
+            ->paginate($this->rowsPerPage);
         $this->_table = $resource::getTableColumns(\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table::make($resource::getPluralModelLabel()));
         $this->_table->records($records);
         $this->_table->applyHeaders();
@@ -59,7 +88,8 @@ class Table extends Component implements Htmlable
         ];
     }
 
-    public function paginationView() {
+    public function paginationView()
+    {
         return 'little-views::table-components.pagination.pagination';
     }
 
