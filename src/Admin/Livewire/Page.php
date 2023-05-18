@@ -11,17 +11,17 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 
 class Page extends Component
 {
-    protected static ?string $resource = null;
+    protected static ?string $resource = NULL;
 
-    protected static ?Model $record = null;
+    protected static ?Model $record = NULL;
 
     protected static LengthAwarePaginator $records;
 
     protected static \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form;
 
-    protected static ?string $route = null;
+    protected static ?string $route = NULL;
 
-    protected static ?string $routeName = null;
+    protected static ?string $routeName = NULL;
 
     public static function getResource(): null|string|Resources
     {
@@ -30,31 +30,34 @@ class Page extends Component
 
     public static function getEditRoute(string $type): array
     {
-       return static::getResource()::getPages()[$type];
+        return static::getResource()::getPages()[ $type ];
     }
 
-    public static function getEditUrl(Model $record):string
+    public static function getEditUrl(Model $record): string
     {
-        $path = static::getEditRoute('edit')['route'];
+        $path = static::getEditRoute('edit')[ 'route' ];
+
         return url(str($path)
             ->replace(['{record}'], $record->getKey())
-            ->prepend('/',config('little-admin-architect.prefix'),'/',static::getResource()::getSlug())
+            ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
             ->value());
     }
-    public static function getCreateUrl():string
+
+    public static function getCreateUrl(): string
     {
-        $path = static::getEditRoute('create')['route'];
+        $path = static::getEditRoute('create')[ 'route' ];
+
         return url(str($path)
-            //->replace(['{record}'], $record->getKey())
-            ->prepend('/',config('little-admin-architect.prefix'),'/',static::getResource()::getSlug())
+            ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
             ->value());
     }
-    public static function getListUrl():string
+
+    public static function getListUrl(): string
     {
-        $path = static::getEditRoute('index')['route'];
+        $path = static::getEditRoute('index')[ 'route' ];
+
         return url(str($path)
-            //->replace(['{record}'], $record->getKey())
-            ->prepend('/',config('little-admin-architect.prefix'),'/',static::getResource()::getSlug())
+            ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
             ->value());
     }
 
@@ -87,7 +90,7 @@ class Page extends Component
         return str(static::class)
             ->replace('\\', '.')
             ->explode('.')
-            ->map(fn ($segment) => (string) str($segment)->kebab())
+            ->map(fn($segment) => (string) str($segment)->kebab())
             ->implode('.');
     }
 

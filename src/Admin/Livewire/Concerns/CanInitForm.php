@@ -27,7 +27,7 @@ trait CanInitForm
 
         $this->_form->livewireId($this->id);
         $this->_form->bind($this->data);
-        //$this->_form->title($resource::getModelLabel());
+        $this->_form->setPagesForResource($page);
 
         $this->datasRules = $this->_form->getRules();
         $this->attributesRules = $this->_form->getAttributesRules();

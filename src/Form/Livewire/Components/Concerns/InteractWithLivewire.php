@@ -14,8 +14,8 @@ trait InteractWithLivewire
             $datas = $livewire->validate(rules: $this->getRules(), attributes: $this->getAttributesRules());
             if ( ! $livewire->data?->exists) {
                 $livewire->data?->fill($this->values($datas))->save();
-                if ($edit_route = $this->getEditRoute($livewire->routeName)) {
-                    redirect()->route($edit_route, ['record' => $livewire->data->id]);
+                if ($edit_url = $this->linkEdit($livewire->data)) {
+                    redirect(to: $edit_url);
                 }
             } else {
                 $livewire->data->update($this->values($datas));

@@ -13,6 +13,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\Has
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
+use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 
 final class Form
 {
@@ -23,6 +24,7 @@ final class Form
     use HasGridColumns;
     use HasSchema;
     use InteractWithLivewire;
+    use InteractWithPage;
 
     protected string $view = 'form';
 
@@ -37,6 +39,7 @@ final class Form
     protected string $caption = 'Enregistrer';
 
     protected ?string $livewireId = null;
+
 
     public function getLivewireId(): ?string
     {
@@ -75,11 +78,9 @@ final class Form
         return $this->bind;
     }
 
-    public function bind(?Model $bind = null): Form
+    public function bind(?Model $bind = null): void
     {
         $this->bind = $bind;
-
-        return $this;
     }
 
     public function getTitle(): string
@@ -108,8 +109,13 @@ final class Form
         return $this->mode;
     }
 
-    public function getButton(): Button
+    public function getSaveButton(): Button
     {
         return Button::make($this->caption, $this->type, $this->action)->icon('s-check');
     }
+    public function getCancelButton(): Button
+    {
+        return Button::make("Annuler", 'link', $this->linkIndex())->icon('s-arrow-uturn-left');
+    }
+
 }

@@ -26,7 +26,7 @@
                 @foreach($table->getHeaders() as $header)
                     <x-dynamic-component :component="$header->getComponentView()" :header="$header"/>
                 @endforeach
-                <th class="">
+                <th class="w-5">
                     &nbsp;
                 </th>
             </tr>
@@ -38,7 +38,7 @@
                         @php($column->setRecord($record))
                         <x-dynamic-component :component="$column->getView()" :column="$column"/>
                     @endforeach
-                    <td class="min-w-max">
+                    <td class="max-w-max whitespace-nowrap">
                         <a href="{{ $table->linkEdit($record)  }}" class="px-2 py-2 inline-flex items-center space-x-2 text-primary-500">
                             <x-heroicon-s-pencil class="w-4 h-4 text-primary-500"/>
                             <span>Editer</span>

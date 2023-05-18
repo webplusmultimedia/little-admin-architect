@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
+use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasColumns;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeader;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Header;
@@ -17,6 +18,7 @@ final class Table
 {
     use HasColumns;
     use HasHeader;
+    use InteractWithPage;
 
     private string $view = 'table';
 
@@ -24,7 +26,7 @@ final class Table
     private ?LengthAwarePaginator $records = NULL;
 
     private ?string $livewireId = NULL;
-    protected Page $pageForResource;
+
 
 
     public function getLivewireId(): ?string
@@ -62,15 +64,6 @@ final class Table
 
 
 
-    public function linkEdit(Model $record): string
-    {
-        return $this->pageForResource::getEditUrl($record);
-    }
-    public function linkCreate(): string
-    {
-        return $this->pageForResource::getCreateUrl();
-    }
-
     public function applyHeaders(): void
     {
         foreach ($this->columns as $column) {
@@ -88,7 +81,5 @@ final class Table
         return config('little-admin-architect.blade-table-prefix') . '::' . $this->view;
     }
 
-    public function setPagesForResource(Page $page) {
-        $this->pageForResource = $page;
-    }
+
 }

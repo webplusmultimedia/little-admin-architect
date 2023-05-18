@@ -10,9 +10,15 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\Abstra
 
 class Link extends AbstractComponent
 {
+
     protected function setViewPath(): string
     {
         return 'fields.button.link';
+    }
+
+    public function __construct(public ?string $url = null) {
+        parent::__construct();
+
     }
 
     protected function setUp(Field|AbstractLayout $field): void

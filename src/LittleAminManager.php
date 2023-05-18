@@ -74,9 +74,10 @@ final class LittleAminManager
 
     private function applyResources(): void
     {
-        $this->resources = cache()->remember('little-admin-resource', 10, function () {
+        $this->resources =  RegisterResources::getResourcesFromApplication(config('little-admin-architect.resources.path'));
+        /*cache()->remember('little-admin-resource', 1, function () {
             return RegisterResources::getResourcesFromApplication(config('little-admin-architect.resources.path'));
-        });
+        });*/
     }
 
     public static function getComponentNameFromBaseName(string $componentBaseName): array

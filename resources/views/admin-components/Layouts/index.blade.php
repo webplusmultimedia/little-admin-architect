@@ -66,7 +66,7 @@
                         @if($loop->first)
                             <div
                                 @class([
-                                    "text-slate-500 bg-gray-50 px-3 py-2 text-lg font-medium",
+                                    'text-slate-500 bg-gray-50 px-3 py-2 text-lg font-medium',
                                     'bg-primary-100' => request()->routeIs($navigation['route_prefix'])
                                  ])
                             >
@@ -76,9 +76,10 @@
                         <div class="flex">
                             <a href="{{ route($navigation['route_name']) }}"
                                @class([
-                                   "hover:bg-gray-50 pl-10 py-1 rounded-md grow duration-200",
-                                   'text-primary-600' => request()->routeIs($navigation['route_name'])
+                                   'hover:bg-gray-50 pl-10 py-1 rounded-md grow duration-200',
+                                   'text-primary-600' => request()->routeIs($navigation['route_resource'])
                                 ])
+
                             >
                                 {{ $navigation['title'] }}
                             </a>
