@@ -1,18 +1,17 @@
 <?php
 
-namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns;
+declare(strict_types=1);
 
-use Illuminate\Database\Eloquent\Builder;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts\AbstractColumn;
+namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns;
 
 trait CanBeSearchable
 {
-
     protected bool $searchable = false;
 
     public function searchable(): static
     {
-        $this->searchable  = true;
+        $this->searchable = true;
+
         return $this;
     }
 
@@ -20,6 +19,4 @@ trait CanBeSearchable
     {
         return $this->searchable;
     }
-
-
 }

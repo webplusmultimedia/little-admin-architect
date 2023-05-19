@@ -31,7 +31,6 @@ class RegisterResources
             foreach ($resourcesGroupe as $resourceGroupe) {
                 $resourcesFiles = $this->filesystem->files($resourceGroupe);
                 /** @var SplFileInfo $resourceFile */
-
                 foreach ($resourcesFiles as $resourceFile) {
                     $pagesDirectory = str($resourceGroupe)->append(str($resourceFile->getRealPath())
                         ->afterLast('/')
@@ -46,60 +45,59 @@ class RegisterResources
                     $pages = $this->filesystem->files($pagesDirectory);
 
                     $group[(string) str($resourceGroupe)->afterLast('/')][] = array_map(function (SplFileInfo $page) use ($resourceClassBaseName, $resourceClassBasePath, $resourceGroupe, $slug) {
-                            $pageClassBasePath = (string) str($page->getRealPath())->between('app/', '.php')->prepend('App/');
-                            $namePage = (string) str($pageClassBasePath)->afterLast('/')->kebab()->explode('-')->first();
+                        $pageClassBasePath = (string) str($page->getRealPath())->between('app/', '.php')->prepend('App/');
+                        $namePage = (string) str($pageClassBasePath)->afterLast('/')->kebab()->explode('-')->first();
 
-                            $slugPage = match ($namePage) {
-                                'edit' => $slug . '/{record}/edit',
-                                'create' => $slug . '/create',
-                                'list' => $slug ,
-                            };
-                            $routePage = match ($namePage) {
-                                'edit' => $slug . '/{record}/edit',
-                                'create' => $slug . '/create',
-                                'list' => $slug .'/index',
-                            };
+                        $slugPage = match ($namePage) {
+                            'edit' => $slug . '/{record}/edit',
+                            'create' => $slug . '/create',
+                            'list' => $slug ,
+                        };
+                        $routePage = match ($namePage) {
+                            'edit' => $slug . '/{record}/edit',
+                            'create' => $slug . '/create',
+                            'list' => $slug . '/index',
+                        };
 
-                            $typePage = match ($namePage) {
-                                'edit' => 'edit',
-                                'create' => 'create',
-                                'list' => 'list',
-                            };
+                        $typePage = match ($namePage) {
+                            'edit' => 'edit',
+                            'create' => 'create',
+                            'list' => 'list',
+                        };
 
-                            return [
-                                'group'                 => (string) str($resourceGroupe)->afterLast('/'),
-                                'resourceName'          => (string) str($resourceClassBasePath)->afterLast('/'),
-                                'resourcePlurialTitle'  => (string) str($resourceClassBaseName::getPluralModelLabel())->ucfirst(),
-                                'resourceTitle'         => (string) str($resourceClassBaseName::getModelLabel())->ucfirst(),
-                                'resourceSlug'          => $slug,
-                                'resourceRouteName' =>  config('little-admin-architect.route.prefix') . '.'
-                                    . str($slug)->replace('/','.')->append('.*'),
-                                'resourceNamespace'     => config('little-admin-architect.resources.namespace'),
-                                'resourceClassBaseName' => $resourceClassBaseName,
-                                'component'             => str($pageClassBasePath)
-                                    ->replace('/', '.')
-                                    ->explode('.')
-                                    ->map(fn($segment) => str($segment)->kebab())
-                                    ->implode('.'),
-                                'pageName'              => (string) str($pageClassBasePath)->afterLast('/'),
-                                'classBaseName'         => (string) str($pageClassBasePath)->replace('/', '\\'),
-                                'slug'                  => $slugPage,
-                                'routeClass'            => Page::class,
-                                'type'                  => $typePage,
-                                'routeName'             => str($routePage)
-                                    ->replace(['/'], '.')
-                                    ->remove(['{', '}'])
-                                    ->kebab()
-                                    ->value(),
-                            ];
-                        }, $pages);
+                        return [
+                            'group' => (string) str($resourceGroupe)->afterLast('/'),
+                            'resourceName' => (string) str($resourceClassBasePath)->afterLast('/'),
+                            'resourcePlurialTitle' => (string) str($resourceClassBaseName::getPluralModelLabel())->ucfirst(),
+                            'resourceTitle' => (string) str($resourceClassBaseName::getNavigationLabel())->ucfirst(),
+                            'resourceSlug' => $slug,
+                            'resourceRouteName' => config('little-admin-architect.route.prefix') . '.'
+                                . str($slug)->replace('/', '.')->append('.*'),
+                            'resourceNamespace' => config('little-admin-architect.resources.namespace'),
+                            'resourceClassBaseName' => $resourceClassBaseName,
+                            'component' => str($pageClassBasePath)
+                                ->replace('/', '.')
+                                ->explode('.')
+                                ->map(fn ($segment) => str($segment)->kebab())
+                                ->implode('.'),
+                            'pageName' => (string) str($pageClassBasePath)->afterLast('/'),
+                            'classBaseName' => (string) str($pageClassBasePath)->replace('/', '\\'),
+                            'slug' => $slugPage,
+                            'routeClass' => Page::class,
+                            'type' => $typePage,
+                            'routeName' => str($routePage)
+                                ->replace(['/'], '.')
+                                ->remove(['{', '}'])
+                                ->kebab()
+                                ->value(),
+                        ];
+                    }, $pages);
 
                 }
 
             }
-            return   $group ;
 
-
+            return $group;
 
         }
 

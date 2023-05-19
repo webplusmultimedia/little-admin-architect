@@ -40,6 +40,11 @@
                         @endif
                         <span>{{ $buttonCancel->getCaption() }}</span>
                     </x-little-form::button.link>
+                    @if (session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
                 </div>
 
             </div>

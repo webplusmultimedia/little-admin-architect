@@ -20,6 +20,7 @@ class Form extends Component implements Htmlable
     public bool $initialized = false;
 
     public ?string $previousPage = null;
+
     protected null|string $pageRoute = null;
 
     protected ?string $routeName = null;
@@ -36,17 +37,17 @@ class Form extends Component implements Htmlable
 
     protected array $formDatas = [];
 
-
     public function mount(?Model $data, ?string $pageRoute): void
     {
         $this->previousPage = url()->previous();
         $this->routeName = request()->route()->getName();
         $this->pageRoute = $pageRoute;
+        $this->data = $data;
         $this->formDatas = $this->buildConfig();
-        $this->_form->initDatasFormOnMount($data);
-        if ($data and ! $data->exists) {
-            $this->_form->applyDefaultValue($data);
-        }
+        $this->_form->applyDefaultValue();
+        $this->datasRules = $this->_form->getRules();
+        $this->attributesRules = $this->_form->getAttributesRules();
+
         $this->data = $data;
         $this->initialized = true;
         $this->initBoot = false;
@@ -78,6 +79,7 @@ class Form extends Component implements Htmlable
     public function save(): void
     {
         $this->_form->saveDatasForm($this);
+        session()->flash('message', 'Post successfully updated.');
         //@todo Emit message Save
 
     }

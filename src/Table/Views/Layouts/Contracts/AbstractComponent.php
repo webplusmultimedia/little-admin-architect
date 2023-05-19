@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Views\Layouts\Contracts;
 
 use Illuminate\Contracts\Support\Htmlable;
@@ -9,7 +11,6 @@ use Illuminate\View\Component;
 abstract class AbstractComponent extends Component
 {
     protected string $viewPath;
-
 
     public function render(): View|Htmlable
     {

@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns;
 
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
+
 trait CanGetRules
 {
     public function getRules(): array
     {
         $rules = [];
-        foreach ($this->fields as $field) {
-            $rules = $field->interactWithRules(rules: $rules, model: $this->getBind());
+        /** @var Field $field */
+        foreach (static::$formFields as $field) {
+            $rules = $field->interactWithRules(rules: $rules);
         }
 
         return $rules;
@@ -24,7 +27,8 @@ trait CanGetRules
     public function getAttributesRules(): array
     {
         $rules = [];
-        foreach ($this->fields as $field) {
+        /** @var Field $field */
+        foreach (static::$formFields as $field) {
             $rules = $field->applyAttributesRules($rules);
         }
 

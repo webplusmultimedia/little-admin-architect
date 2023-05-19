@@ -10,12 +10,12 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field
 trait HasSchema
 {
     /**
-     * @var array<int,Field|AbstractLayout >
+     * @var Field[]|AbstractLayout[]
      */
     protected array $fields = [];
 
     /**
-     * @return Field|AbstractLayout $this
+     * @param  Field[]|AbstractLayout[]  $fields
      */
     public function schema(array $fields): static
     {
@@ -24,6 +24,9 @@ trait HasSchema
         return $this;
     }
 
+    /**
+     * @return Field[]|AbstractLayout[]
+     */
     public function getFields(): array
     {
         return $this->fields;

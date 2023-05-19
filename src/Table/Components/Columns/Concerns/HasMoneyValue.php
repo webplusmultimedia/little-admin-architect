@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts\AbstractColumn;
@@ -7,9 +9,10 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts\Ab
 trait HasMoneyValue
 {
     protected string $thousands_separator = ' ';
-    protected string $decimal_separator = '.';
-    protected int $nb_decimal = 2;
 
+    protected string $decimal_separator = '.';
+
+    protected int $nb_decimal = 2;
 
     public function euro(): static
     {
@@ -33,7 +36,7 @@ trait HasMoneyValue
         return $this;
     }
 
-    public function customMoney(int $nb_decimal = 2, string $decimal_separator = '', string $thousands_separator = '',string $sign = '€'): static
+    public function customMoney(int $nb_decimal = 2, string $decimal_separator = '', string $thousands_separator = '', string $sign = '€'): static
     {
         $this->thousands_separator = ',';
         $this->decimal_separator = '.';

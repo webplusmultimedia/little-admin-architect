@@ -24,6 +24,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews('little-views')
             ->hasRoute('admin')
+            ->hasTranslations()
 
             //->hasMigration('create_little-admin-architect_table')
             ->hasCommand(LittleAdminArchitectCommand::class);
@@ -56,7 +57,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     {
         $groups = $manager->getPages();
         $componentNames = collect(Arr::pluck($groups, '*.component'))->flatten();
-//dd($componentNames);
+        //dd($componentNames);
         foreach ($componentNames as $page => $component) {
             $class = Form::class;
             if (str($component)->afterLast('.')->startsWith('list-')) {

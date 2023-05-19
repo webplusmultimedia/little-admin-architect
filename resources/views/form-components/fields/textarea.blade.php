@@ -10,31 +10,42 @@
     $isWired = $componentIsWired();
 
 @endphp
-<x-dynamic-component :component="$config->getWrapperView()" :id="str($config->getName())->pipe('md5')->append('-',$id)"
-    {{ $attributes->class('')->merge(['class'=> $config->getColSpan()]) }}
->
-    <x-dynamic-component
-        :component="$config->getViewComponentForLabel()"
-        :id="$id" class="form-label"
-        :label="$config->getLabel()"
-        :showRequired="$isShowSignRequiredOnLabel()"
+@if($config->isHidden())
+    <x-little-anonyme::form-components.fields.partials.hidden-field
+        {{ $attributes->except(['field'])->merge([
+                   'wire:model' . $config->getWireModifier() => $config->getWireName(),
+                   'id' => $id,
+                   'type' => 'hidden',
+                   ])
+                   }}
     />
-    <div class="">
-        {{-- @if($prepend)
-             <x:form::partials.addon :addon="$prepend"/>
-         @endif--}}
-        <textarea {{ $attributes->merge([
+@else
+    <x-dynamic-component :component="$config->getWrapperView()" :id="$config->getWrapperId()"
+        {{ $attributes->class('')->merge(['class'=> $config->getColSpan()]) }}
+    >
+        <x-dynamic-component
+            :component="$config->getViewComponentForLabel()"
+            :id="$id" class="form-label"
+            :label="$config->getLabel()"
+            :showRequired="$isShowSignRequiredOnLabel()"
+        />
+        <div class="">
+            {{-- @if($prepend)
+                 <x:form::partials.addon :addon="$prepend"/>
+             @endif--}}
+            <textarea {{ $attributes->merge([
                 'wire:model' . $getComponentLivewireModifier() =>  $config->getWireName(),
                 'id' => $id,
 				'rows' => $config->getRows(),
                 'placeholder' => $config->getPlaceHolder(),
                 'aria-describedby' => $id
             ])}}></textarea>
-        {{--
-          @if($append)
-              <x:form::partials.addon :addon="$append"/>
-          @endif--}}
-        <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()"/>
-        <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage"/>
-    </div>
-</x-dynamic-component>
+            {{--
+              @if($append)
+                  <x:form::partials.addon :addon="$append"/>
+              @endif--}}
+            <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()"/>
+            <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage"/>
+        </div>
+    </x-dynamic-component>
+@endif

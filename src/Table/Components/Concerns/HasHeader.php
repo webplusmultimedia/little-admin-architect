@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Header;
@@ -7,13 +9,12 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Header;
 trait HasHeader
 {
     /**
-     * @var array<int,Header> $headers
+     * @var Header[]
      */
     protected array $headers = [];
 
-
     /**
-     * @return array<int,Header>
+     * @return Header[]
      */
     public function getHeaders(): array
     {
@@ -26,5 +27,4 @@ trait HasHeader
 
         return $this;
     }
-
 }

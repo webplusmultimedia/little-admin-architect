@@ -13,33 +13,38 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
 
 class Resources
 {
-    protected static ?string $breadcrumb = NULL;
+    protected static ?string $breadcrumb = null;
 
     protected static bool $isGloballySearchable = true;
 
-    protected static ?string $modelLabel = NULL;
+    protected static ?string $modelLabel = null;
 
-    protected static ?string $model = NULL;
+    protected static ?string $model = null;
 
-    protected static ?string $navigationGroup = NULL;
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationIcon = NULL;
+    protected static ?string $navigationIcon = null;
 
-    protected static ?string $activeNavigationIcon = NULL;
+    protected static ?string $activeNavigationIcon = null;
 
-    protected static ?string $navigationLabel = NULL;
+    protected static ?string $navigationLabel = null;
 
-    protected static ?int $navigationSort = NULL;
+    public static function getNavigationLabel(): ?string
+    {
+        return static::$navigationLabel ?? static::getPluralModelLabel();
+    }
 
-    protected static ?string $recordRouteKeyName = NULL;
+    protected static ?int $navigationSort = null;
+
+    protected static ?string $recordRouteKeyName = null;
 
     protected static bool $shouldRegisterNavigation = true;
 
-    protected static ?string $pluralModelLabel = NULL;
+    protected static ?string $pluralModelLabel = null;
 
-    protected static ?string $recordTitleAttribute = NULL;
+    protected static ?string $recordTitleAttribute = null;
 
-    protected static ?string $slug = NULL;
+    protected static ?string $slug = null;
 
     protected static string|array $middlewares = [];
 
@@ -61,13 +66,6 @@ class Resources
         return static::$breadcrumb ?? Str::headline(static::getPluralModelLabel());
     }
 
-    public static function getModelLabel(): string
-    {
-        return static::$modelLabel ?? (string) str(class_basename(static::getModel()))
-            ->kebab()
-            ->replace('-', ' ');
-    }
-
     public static function getEloquentQuery(): Builder
     {
         return static::getModel()::query();
@@ -83,6 +81,13 @@ class Resources
     public static function getPages(): array
     {
         return [];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return static::$modelLabel ?? (string) str(class_basename(static::getModel()))
+            ->kebab()
+            ->replace('-', ' ');
     }
 
     public static function getPluralModelLabel(): string
@@ -118,7 +123,7 @@ class Resources
             ->afterLast('\\Models\\')
             ->plural()
             ->explode('\\')
-            ->map(fn(string $string) => Str::of($string)->kebab()->slug())
+            ->map(fn (string $string) => Str::of($string)->kebab()->slug())
             ->implode('/');
     }
 
@@ -144,7 +149,7 @@ class Resources
                 ->middleware(static::getMiddlewares())
                 ->group(function (): void {
                     foreach (static::getPages() as $name => $page) {
-                        Route::get($page[ 'route' ], $page[ 'class' ])->name($name);
+                        Route::get($page['route'], $page['class'])->name($name);
                     }
                 });
         };

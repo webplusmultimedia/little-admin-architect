@@ -6,7 +6,7 @@
 
 <div {{ $attributes->class("pb-3 grid gap-1 border border-gray-300 rounded-md bg-white overflow-hidden")->merge(['class'=>$config->getColSpan()]) }}
      x-data="{}"
-     wire:key="{{str($config->title)->pipe('md5')->append('-',str($config->title)->kebab())}}"
+     wire:key="{{ $config->getWireKey()  }}"
 >
     @if($config->title )
         <div class="bg-gray-100">

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts\AbstractColumn;
@@ -7,27 +9,25 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts\Ab
 trait HasColumns
 {
     /**
-     * @var array<int,AbstractColumn>
+     * @var AbstractColumn[]
      */
     protected array $columns = [];
 
     /**
-     * @param array<int,AbstractColumn> $columns
-     *
-     * @return static
+     * @param  AbstractColumn[]  $columns
      */
     public function columns(array $columns): static
     {
         $this->columns = $columns;
+
         return $this;
     }
 
     /**
-     * @return array<int,AbstractColumn>
+     * @return AbstractColumn[]
      */
     public function getColumns(): array
     {
         return $this->columns;
     }
-
 }

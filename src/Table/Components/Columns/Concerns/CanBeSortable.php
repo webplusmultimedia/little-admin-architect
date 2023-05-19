@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns;
 
 use Closure;
@@ -7,16 +9,19 @@ use Closure;
 trait CanBeSortable
 {
     protected bool $sortable = false;
+
     protected string $direction = 'asc';
 
     public function getDirection(): string
     {
         return $this->direction;
     }
-/** @todo : define sort on closure and array */
+
+    /** @todo : define sort on closure and array */
     public function sortable(null|array|Closure $sort = null): static
     {
         $this->sortable = true;
+
         return $this;
     }
 
@@ -24,5 +29,4 @@ trait CanBeSortable
     {
         return $this->sortable;
     }
-
 }

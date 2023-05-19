@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns;
 
 trait HasLivewireId
@@ -9,6 +11,7 @@ trait HasLivewireId
     public function livewireId(string $id)
     {
         $this->livewireId = $id;
+
         return $this;
     }
 
@@ -19,6 +22,6 @@ trait HasLivewireId
 
     public function getWireId()
     {
-        return str($this->getLabel())->slug()->prepend($this->getLivewireId(),'.')->append('.',$this->getRecord()->getKey());
+        return str($this->getLabel())->slug()->prepend($this->getLivewireId(), '.')->append('.', $this->getRecord()->getKey());
     }
 }

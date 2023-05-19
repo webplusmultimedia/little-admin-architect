@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns;
 
 use Closure;
@@ -8,13 +10,15 @@ use Illuminate\Database\Eloquent\Model;
 trait HasRecord
 {
     protected Model $record;
-    protected string $type = 'text';
-    protected Closure $value ;
 
+    protected string $type = 'text';
+
+    protected Closure $value;
 
     public function setRecord(Model $record): static
     {
         $this->record = $record;
+
         return $this;
     }
 
@@ -23,9 +27,8 @@ trait HasRecord
         return $this->record;
     }
 
-    public function getValue(): string
+    public function getValue(): mixed
     {
-        return call_user_func($this->value,$this);
+        return call_user_func($this->value, $this);
     }
-
 }

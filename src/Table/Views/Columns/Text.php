@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Views\Columns;
 
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\TextColumn;
@@ -11,7 +13,9 @@ class Text extends AbstractColumn
 
     public function __construct(
         protected TextColumn $column,
-    ) {}
+    ) {
+    }
+
     public function getColumn(): TextColumn
     {
         return $this->column;

@@ -13,8 +13,8 @@ trait InteractWithWrapper
         return $this->wrapperView;
     }
 
-    public function getWrapperId()
+    public function getWrapperId(): string
     {
-        return str($this->name)->pipe('md5')->append('-', $this->getWireName());
+        return str($this->name)->pipe('md5')->append('-', $this->getWireName())->value();
     }
 }

@@ -10,7 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\LittleAminManager;
 $manager = app('little-admin-manager');
 Route::prefix(config('little-admin-architect.prefix'))
     ->middleware('web')
-    ->name(config('little-admin-architect.route.prefix').'.')
+    ->name(config('little-admin-architect.route.prefix') . '.')
     ->group(function () use ($manager): void {
         foreach ($manager->getPages() as $resource => $pages) {
             foreach ($pages as $page) {

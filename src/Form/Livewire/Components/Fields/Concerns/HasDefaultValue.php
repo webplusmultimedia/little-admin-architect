@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
-use Illuminate\Database\Eloquent\Model;
-
 trait HasDefaultValue
 {
     protected mixed $defaultValue = null;
 
-    public function applyDefaultValue(?Model $model): void
+    public function applyDefaultValue(): void
     {
-        if ($this->defaultValue and $model) {
-            $model->{$this->name} = $this->defaultValue;
+        if ($this->defaultValue and $this->record) {
+            $this->record->{$this->name} = $this->defaultValue;
         }
     }
 

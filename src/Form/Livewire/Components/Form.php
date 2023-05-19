@@ -10,6 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\Can
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanInitDatasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanValidatedValues;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasDefaultValue;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasFields;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
@@ -21,6 +22,7 @@ final class Form
     use CanInitDatasForm;
     use CanValidatedValues;
     use HasDefaultValue;
+    use HasFields;
     use HasGridColumns;
     use HasSchema;
     use InteractWithLivewire;
@@ -39,7 +41,6 @@ final class Form
     protected string $caption = 'Enregistrer';
 
     protected ?string $livewireId = null;
-
 
     public function getLivewireId(): ?string
     {
@@ -78,9 +79,10 @@ final class Form
         return $this->bind;
     }
 
-    public function bind(?Model $bind = null): void
+    public function bind(?Model $record = null): void
     {
-        $this->bind = $bind;
+        $this->bind = $record;
+        $this->initDatasFormOnMount($record);
     }
 
     public function getTitle(): string
@@ -113,9 +115,9 @@ final class Form
     {
         return Button::make($this->caption, $this->type, $this->action)->icon('s-check');
     }
+
     public function getCancelButton(): Button
     {
-        return Button::make("Annuler", 'link', $this->linkIndex())->icon('s-arrow-uturn-left');
+        return Button::make('Annuler', 'link', $this->linkIndex())->icon('s-arrow-uturn-left');
     }
-
 }

@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats;
 
 use Illuminate\Database\Eloquent\Model;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanGetRules;
+use Illuminate\Support\Str;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanInitDatasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanValidatedValues;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasColSpan;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
 
 abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
 {
-    use CanGetRules;
+    //use CanGetRules;
     use CanInitDatasForm;
     use CanValidatedValues;
     use HasColSpan;
-    use HasDefaultValue;
+
+    //use HasDefaultValue;
     use HasGridColumns;
     use HasSchema;
 
@@ -55,6 +55,13 @@ abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttrib
         $this->bind = $bind;
 
         return $this;
+    }
+
+    public function getWireKey()
+    {
+        $title = $this->title ?? Str::random(5);
+
+        return str($title)->append('-', str($title)->kebab());
     }
 
     public function getFieldView(): string

@@ -10,6 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\Can
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\CanInteractWithRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\CanValidateValuesForRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeDisabled;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeHidden;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeNullable;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeRequired;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeWireModifier;
@@ -29,6 +30,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 abstract class Field extends AbstractField implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
 {
     use CanBeDisabled;
+    use CanBeHidden;
     use CanBeNullable;
     use CanBeRequired;
     use CanBeWireModifier;
@@ -66,7 +68,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         return new static(name: $name, label: $label);
     }
 
-    protected function record(Model $model): void
+    public function record(Model $model): void
     {
         $this->record = $model;
     }

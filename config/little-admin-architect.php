@@ -6,7 +6,7 @@ declare(strict_types=1);
 return [
 
     'prefix' => 'admin',
-    'route' =>[
+    'route' => [
         'prefix' => 'little-admin.page',
     ],
     'resources' => [
