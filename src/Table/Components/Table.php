@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components;
 
-use Closure;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasColumns;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeader;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasSearchableColums;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Header;
 
 final class Table
@@ -19,6 +17,7 @@ final class Table
     use HasColumns;
     use HasHeader;
     use InteractWithPage;
+    use HasSearchableColums;
 
     private string $view = 'table';
 
@@ -33,10 +32,16 @@ final class Table
     {
         return $this->livewireId;
     }
+    public function livewireId(string $livewireId): Table
+    {
+        $this->livewireId = $livewireId;
+        return $this;
+    }
 
-    public function records(LengthAwarePaginator $records): void
+    public function records(LengthAwarePaginator $records): Table
     {
         $this->records = $records;
+        return $this;
     }
 
     public function getRecords(): ?LengthAwarePaginator
@@ -64,11 +69,12 @@ final class Table
 
 
 
-    public function applyHeaders(): void
+    public function applyHeaders(): Table
     {
         foreach ($this->columns as $column) {
             $this->headers(Header::make($column));
         }
+        return $this;
     }
 
     public static function make(string $title = ''): Table

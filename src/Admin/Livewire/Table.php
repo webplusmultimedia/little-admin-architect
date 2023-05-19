@@ -71,17 +71,19 @@ class Table extends Component implements Htmlable
         if (! $this->rowsPerPage) {
             $this->rowsPerPage = $resource::getRowsPerPage();
         }
-
+        $this->_table = $resource::getTableColumns(\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table::make($resource::getPluralModelLabel()));
+        $this->_table
+            ->livewireId($this->id)
+            ->applySearchableColumns()
+            ->applyHeaders()
+            ->setPagesForResource($page);
         $records = $resource::getEloquentQuery()
             ->when($this->search, function (Builder $builder) {
-                $builder->where('titre', 'like', "%{$this->search}%");
+                $this->_table->searchQuery($builder,$this->search);
+                //$builder->where('titre', 'like', "%{$this->search}%");
             })
             ->paginate($this->rowsPerPage);
-        $this->_table = $resource::getTableColumns(\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table::make($resource::getPluralModelLabel()));
         $this->_table->records($records);
-        $this->_table->applyHeaders();
-        $this->_table->setPagesForResource($page);
-
         return [
             'title' => $resource::getPluralModelLabel(),
             'table' => $this->_table,

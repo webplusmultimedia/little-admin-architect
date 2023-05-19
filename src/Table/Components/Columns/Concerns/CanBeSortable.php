@@ -4,7 +4,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concer
 
 use Closure;
 
-trait HasSortable
+trait CanBeSortable
 {
     protected bool $sortable = false;
     protected string $direction = 'asc';

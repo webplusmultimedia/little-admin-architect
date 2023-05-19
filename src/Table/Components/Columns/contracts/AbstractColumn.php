@@ -3,19 +3,23 @@
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts;
 
 use Illuminate\Database\Eloquent\Model;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\CanBeSearchable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasDateTimeValue;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasLabel;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasLivewireId;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasMoneyValue;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasRecord;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasSortable;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\CanBeSortable;
 
 abstract class AbstractColumn
 {
-    use HasSortable;
+    use CanBeSortable;
     use HasLabel;
     use HasRecord;
     use HasDateTimeValue;
     use HasMoneyValue;
+    use HasLivewireId;
+    use CanBeSearchable;
 
     protected string $view = 'text';
     public function __construct(
@@ -45,4 +49,6 @@ abstract class AbstractColumn
     {
         return config('little-admin-architect.blade-table-prefix') . '::' . $view;
     }
+
+
 }
