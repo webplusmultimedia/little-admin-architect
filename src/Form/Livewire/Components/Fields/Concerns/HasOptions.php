@@ -12,7 +12,10 @@ trait HasOptions
 
     public function options(array|Collection $options): static
     {
-        $this->options = $options;
+        if ($options  instanceof Collection ){
+            $options = $options->toArray();
+        }
+        $this->options =  $options;
         $this->addRules('array');
         $this->addRules('in:' . implode(',', array_keys($options)));
 

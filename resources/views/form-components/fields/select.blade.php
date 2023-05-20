@@ -29,6 +29,7 @@
                  @if($config->isRequired()) required @endif
                  @if($config->isDisabled()) disabled @endif
         >
+            <option value="" >----- {{ $config->getPlaceHolder()??__('little-admin-architect::form.select.option.empty-placeholder') }} -----</option>
             @foreach($config->getOptions() as $key => $option)
                 @php($idGroup = str($key)->slug()->append($id))
                 <option value="{{ $key }}">{{ $option }}</option>

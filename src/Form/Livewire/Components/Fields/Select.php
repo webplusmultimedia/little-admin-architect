@@ -2,6 +2,7 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields;
 
+use Illuminate\Support\Collection;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanSearchWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasOptions;
 
@@ -12,9 +13,12 @@ class Select extends Field
 
     protected string $view = 'select';
 
-    public function options(array $options): static
+    public function options(array|Collection $options): static
     {
-        $this->options = $options;
+        if ($options  instanceof Collection ){
+            $options = $options->toArray();
+        }
+        $this->options =  $options;
         $this->addRules('in:' . implode(',', array_keys($options)));
 
         return $this;

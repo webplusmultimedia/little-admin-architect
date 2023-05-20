@@ -48,7 +48,7 @@ class ComponentForm extends Component
         $this->data = $data;
         $this->initialized = true;
         $this->initBoot = false;
-        dump($this->getOptionsUsing('data.etat'));
+        dump($this->getOptionsUsing('data.categorie_id'));
     }
 
     protected function rules(): array
