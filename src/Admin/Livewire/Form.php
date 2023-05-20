@@ -44,7 +44,9 @@ class Form extends Component implements Htmlable
         $this->pageRoute = $pageRoute;
         $this->data = $data;
         $this->formDatas = $this->buildConfig();
-        $this->_form->applyDefaultValue();
+        if(!$data?->exists) {
+            $this->_form->applyDefaultValue();
+        }
         $this->datasRules = $this->_form->getRules();
         $this->attributesRules = $this->_form->getAttributesRules();
 

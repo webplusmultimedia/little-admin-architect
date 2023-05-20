@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Closure;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeWired;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasAddon;
@@ -18,40 +20,31 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasVali
 
 class Select extends AbstractComponent
 {
-    use CanBeWired;
-    use HasAddon;
-    use HasFloatingLabel;
     use HasId;
     use HasLabel;
     use HasName;
-    use HasOptions;
-    use HasPlaceholder;
     use HasValidation;
+    use HasPlaceholder;
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
-        public string $name,
-        public array $options,
-        protected string|null $id = null,
-        protected array|object|null $bind = null,
-        protected string|false|null $label = null,
-        protected bool|null $floatingLabel = null,
-        protected string|false|null $placeholder = null,
-        public bool $allowPlaceholderToBeSelected = false,
-        protected string|Closure|null $prepend = null,
-        protected string|Closure|null $append = null,
-        protected int|string|array|null $selected = null,
-        public string|null $caption = null,
-        protected bool|null $displayValidationSuccess = null,
-        protected bool|null $displayValidationFailure = null,
-        protected string|null $errorBag = null,
-        public bool $marginBottom = true
+        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Radio $field,
+        public null|string $name = null,
     ) {
         parent::__construct();
+        $this->setUp($field);
     }
 
     protected function setViewPath(): string
     {
         return 'select';
+    }
+
+    protected function setUp(AbstractLayout|Field $field): void
+    {
+        $this->field = $field;
+        $this->placeholder = $field->getPlaceHolder();
+        $this->isRequiredField = $field->isRequired();
+        $this->name = $field->getName();
     }
 }

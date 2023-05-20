@@ -1,50 +1,42 @@
 @php
-    $id = $getId() ?: $getDefaultId('select');
-    $label = $getLabel();
-    $displayFloatingLabel = $shouldDisplayFloatingLabel();
-    $placeholder = $getPlaceholder($label);
-    $prepend = $getPrepend();
-    $append = $getAppend();
-    $errorMessage = $getErrorMessage($errors);
-    $multipleMode = (bool) $attributes->filter(fn($value, $key) => $key === 'multiple')->first();
-    $validationClass = $getValidationClass($errors);
-    $isWired = $componentIsWired();
+
+    use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Select;
+/** @var Select $config */
+    $config = $getConfig();
+    $id = $config->getId();
+
+    $errorMessage =  $getErrorMessage($errors);
+
 @endphp
-<div @class(['form-floating' => $displayFloatingLabel, 'mb-3' => $marginBottom])>
-    @if(($prepend || $append) && ! $displayFloatingLabel)
-        <x:form::partials.label :id="$id" class="form-label" :label="$label"/>
-        <div class="input-group">
-    @endif
-        @if(! $prepend && ! $append && ! $displayFloatingLabel)
-            <x:form::partials.label :id="$id" class="form-label" :label="$label"/>
-        @endif
-        @if($prepend && ! $displayFloatingLabel)
-            <x:form::partials.addon :addon="$prepend"/>
-        @endif
-        <select {{ $attributes->merge([
-            'wire:model' . $getComponentLivewireModifier() => $isWired && ! $hasComponentNativeLivewireModelBinding()? $name : null,
-            'id' => $id,
-            'class' => 'form-select' . ($validationClass ? ' ' . $validationClass : null),
-            'name' => $name . ($multipleMode ? '[]' : null),
-            'placeholder' => $placeholder,
-            'aria-describedby' => $caption ? $id . '-caption' : null,
-        ]) }}>
-            @if($placeholder)
-                <option value="" selected{!! $allowPlaceholderToBeSelected ? null : ' disabled hidden' !!}>{{ $placeholder }}</option>
-            @endif
-            @foreach($options as $value => $label)
-                <option value="{{ $value }}"{!! $isSelected($name, $value) && ! $isWired ? ' selected="selected"' : null !!}>{{ $label }}</option>
+@if($config->isHidden())
+    <x-little-anonyme::form-components.fields.partials.hidden-field
+        {{ $attributes->except(['field'])->merge(['wire:model' . $config->getWireModifier() => $config->getWireName(),'id' => $id, 'type' => 'hidden',]) }}
+    />
+@else
+    <x-dynamic-component :component="$config->getWrapperView()"
+                         :id="$config->getWrapperId()"
+        {{ $attributes->class('relative little-admin-fildset')->merge(['class'=> $config->getColSpan()]) }}
+    >
+        <x-dynamic-component :component="$config->getViewComponentForLabel()" :id="$id" class="form-label" :label="$config->getLabel()"
+                             :showRequired="$isShowSignRequiredOnLabel()"/>
+
+        <select  {{ $attributes->merge([
+                'wire:model' . $getComponentLivewireModifier() =>  $config->getWireName(),
+                'id' => $id,
+                'placeholder' => $config->getPlaceHolder(),
+                'aria-describedby' => $id
+            ])}}
+                 @if($config->isRequired()) required @endif
+                 @if($config->isDisabled()) disabled @endif
+        >
+            @foreach($config->getOptions() as $key => $option)
+                @php($idGroup = str($key)->slug()->append($id))
+                <option value="{{ $key }}">{{ $option }}</option>
             @endforeach
         </select>
-        @if(! $prepend && ! $append && $displayFloatingLabel)
-            <x:form::partials.label :id="$id" class="form-label" :label="$label"/>
-        @endif
-        @if($append && ! $displayFloatingLabel)
-            <x:form::partials.addon :addon="$append"/>
-        @endif
-        <x:form::partials.caption :inputId="$id" :caption="$caption"/>
-        <x:form::partials.error-message :message="$errorMessage"/>
-    @if(($prepend || $append) && ! $displayFloatingLabel)
-        </div>
-    @endif
-</div>
+
+            <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()" class="mb-1"/>
+            <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage" class="mb-1"/>
+    </x-dynamic-component>
+@endif
+

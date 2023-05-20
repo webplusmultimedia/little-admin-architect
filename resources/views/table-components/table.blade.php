@@ -68,7 +68,6 @@
                                         <span>{{ __('little-admin-architect::table.row-button.delete') }}</span>
                                     </a>
                                 </div>
-
                             </td>
                         </tr>
                     @endforeach
