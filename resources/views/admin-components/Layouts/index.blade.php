@@ -1,6 +1,6 @@
 @php use Webplusmultimedia\LittleAdminArchitect\LittleAdminArchitect; @endphp
     <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -13,7 +13,9 @@
 
     @stack('scripts')
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ route('little-admin.page.assets.style','app.css') }}">
+
+    {{--@vite([/*'resources/css/app.css',*/ 'resources/js/app.js'])--}}
 </head>
 <body class="bg-gray-100">
 <header class="bg-white sticky top-0 z-10 lg:ml-[20rem] border-b ">
@@ -97,7 +99,7 @@
     </div>
 </div>
 
-
     @livewireScripts
+<script src="{{ route('little-admin.page.assets.js','app.js') }}"></script>
 </body>
 </html>

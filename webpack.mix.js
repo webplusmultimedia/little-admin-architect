@@ -5,4 +5,6 @@ mix.js("resources/js/app.js", "app.js")
         require("tailwindcss"),
     ])
     .setPublicPath('resources/dist')
+    .sourceMaps()
+    .version()
     .disableNotifications();

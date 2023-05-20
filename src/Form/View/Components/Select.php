@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
-use Closure;
+
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeWired;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasAddon;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasFloatingLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasId;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasName;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasOptions;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasPlaceholder;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValidation;
 
@@ -28,7 +24,7 @@ class Select extends AbstractComponent
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
-        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Radio $field,
+        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Select $field,
         public null|string $name = null,
     ) {
         parent::__construct();
@@ -37,7 +33,7 @@ class Select extends AbstractComponent
 
     protected function setViewPath(): string
     {
-        return 'select';
+        return 'fields.select';
     }
 
     protected function setUp(AbstractLayout|Field $field): void

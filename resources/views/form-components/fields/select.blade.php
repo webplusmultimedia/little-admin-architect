@@ -4,7 +4,6 @@
 /** @var Select $config */
     $config = $getConfig();
     $id = $config->getId();
-
     $errorMessage =  $getErrorMessage($errors);
 
 @endphp
@@ -15,15 +14,16 @@
 @else
     <x-dynamic-component :component="$config->getWrapperView()"
                          :id="$config->getWrapperId()"
-        {{ $attributes->class('relative little-admin-fildset')->merge(['class'=> $config->getColSpan()]) }}
+        {{ $attributes->class('')->merge(['class'=> $config->getColSpan()]) }}
     >
         <x-dynamic-component :component="$config->getViewComponentForLabel()" :id="$id" class="form-label" :label="$config->getLabel()"
                              :showRequired="$isShowSignRequiredOnLabel()"/>
 
         <select  {{ $attributes->merge([
-                'wire:model' . $getComponentLivewireModifier() =>  $config->getWireName(),
+                'wire:model' . $config->getWireModifier() => $config->getWireName(),
                 'id' => $id,
                 'placeholder' => $config->getPlaceHolder(),
+                 'class' => 'py-2 px-2',
                 'aria-describedby' => $id
             ])}}
                  @if($config->isRequired()) required @endif

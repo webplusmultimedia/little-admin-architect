@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanGetRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanInitDatasForm;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanListOptionsForSelect;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanValidatedValues;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasFields;
@@ -27,6 +28,7 @@ final class Form
     use HasSchema;
     use InteractWithLivewire;
     use InteractWithPage;
+    use CanListOptionsForSelect;
 
     protected string $view = 'form';
 
@@ -83,6 +85,7 @@ final class Form
     {
         $this->bind = $record;
         $this->initDatasFormOnMount($record);
+        $this->initSelectUsing();
     }
 
     public function getTitle(): string

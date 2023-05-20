@@ -22,7 +22,7 @@
     li{
         @apply text-lg md:text-xl
     }
-    ul,ol{
+    .blog ul, .blog ol{
         @apply list-disc ml-10 mb-4
     }
     [type="text"],
@@ -44,7 +44,7 @@
     }
 
     [type="checkbox"]{
-        @apply text-primary-500 py-2 px-2 border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500 shadow-sm disabled:opacity-50 duration-75 indeterminate:bg-gray-300 rounded appearance-none;
+        @apply text-primary-500 py-2 px-2 border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500 shadow-sm disabled:opacity-50 duration-75 indeterminate:bg-gray-300 rounded ;
     }
     [type="radio"]{
         @apply  appearance-none text-primary-500 py-2 px-2 border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500 shadow-sm disabled:opacity-50 duration-75 indeterminate:bg-transparent rounded-full invalid:bg-transparent;
@@ -69,7 +69,7 @@
 
 @layer components {
     .btn{
-        @apply py-2 px-6 bg-gray-300 hover:bg-gray-500 hover:text-white hover:disabled:bg-opacity-30 disabled:bg-opacity-50 text-gray-700 duration-300 font-medium
+        @apply py-2 px-6 bg-gray-300 hover:bg-gray-500 hover:text-white /*hover:disabled:bg-opacity-30 disabled:bg-opacity-50*/ text-gray-700 duration-300 font-medium
     }
     .btn-primary{
         @apply bg-primary-500 hover:bg-primary-600 text-white

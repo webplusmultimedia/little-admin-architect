@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concer
 
 use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Select;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
 
 trait CanInitDatasForm
@@ -20,5 +21,16 @@ trait CanInitDatasForm
             $field->initDatasFormOnMount($model);
         }
 
+    }
+
+    protected function initSelectUsing(): void
+    {
+        foreach ($this->getFormFields() as $field)   {
+            if ($field instanceof Select){
+                if ($field->optionsUsing()){
+                    $this->addToListOptionsUsing($field->getWireName(),$field->optionsUsing());
+                }
+            }
+        }
     }
 }

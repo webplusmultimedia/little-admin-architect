@@ -23,12 +23,4 @@ trait InteractWithLivewire
         }
     }
 
-    protected function getEditRoute(?string $routeName): ?string
-    {
-        if (str($routeName)->endsWith('create')) {
-            return (string) str($routeName)->beforeLast('.')->append('.record.edit');
-        }
-
-        return null;
-    }
 }

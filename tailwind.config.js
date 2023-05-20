@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+        fontFamily: {
+            sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+        },
         colors: {
             'primary-datepicker' : colors.cyan,
             primary : colors.emerald,
@@ -19,6 +22,6 @@ module.exports = {
         }
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 }
 

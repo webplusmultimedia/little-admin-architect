@@ -7,10 +7,12 @@ namespace Webplusmultimedia\LittleAdminArchitect;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
+use Livewire\Component;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Form;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Mixins\SelectMixing;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Table;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
@@ -51,6 +53,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         $this->registerLivewireComponents(app('little-admin-manager'));
+        Component::mixin(new SelectMixing);
     }
 
     private function registerLivewireComponents(LittleAminManager $manager): void
