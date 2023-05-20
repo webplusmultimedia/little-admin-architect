@@ -36,14 +36,14 @@ trait CanSearchWithLivewire
         return $this->optionsUsing;
     }
 
-    public function setSearchResultsUsing(?Closure $searchResultsUsing): static
+    public function getSearchResultsUsing(?Closure $searchResultsUsing): static
     {
         $this->searchResultsUsing = $searchResultsUsing;
 
         return $this;
     }
 
-    protected function getSearchResultsUsing(): ?Closure
+    public function searchResultsUsing(): ?Closure
     {
         return $this->searchResultsUsing;
     }

@@ -30,6 +30,9 @@ trait CanInitDatasForm
                 if ($field->optionsUsing()){
                     $this->addToListOptionsUsing($field->getWireName(),$field->optionsUsing());
                 }
+                if($field->searchResultsUsing()){
+                    $this->addToSearchResultsUsing($field->getWireName(),$field->searchResultsUsing());
+                }
             }
         }
     }

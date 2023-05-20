@@ -7,16 +7,16 @@
     x-data="SelectFormComponent(
     {
             getOptionLabelUsing: async () => {
-                return await $wire.getSelectOptionLabel('@js($field->getWireName())')
+                return await $wire.getSelectOptionLabelUsing('@js($field->getWireName())')
             },
             getOptionLabelsUsing: async () => {
-                return await $wire.getSelectOptionLabels('@js($field->getWireName())')
+                return await $wire.getSelectOptionLabelsUsing('@js($field->getWireName())')
             },
             getOptionsUsing: async () => {
-                return await $wire.getSelectOptions('@js($field->getWireName())')
+                return await $wire.getSelectOptionsUsing('@js($field->getWireName())')
             },
             getSearchResultsUsing: async (search) => {
-                return await $wire.getSelectSearchResults(@js($field->getWireName()), search)
+                return await $wire.getSelectSearchResultsUsing(@js($field->getWireName()), search)
             },
             state: $wire.entangle(@js($field->getWireName())).defer
         }

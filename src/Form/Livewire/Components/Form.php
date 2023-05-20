@@ -9,6 +9,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Actions\Butt
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanGetRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanInitDatasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanListOptionsForSelect;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanSearchResultsUsingForSelect;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanValidatedValues;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasFields;
@@ -29,6 +30,7 @@ final class Form
     use InteractWithLivewire;
     use InteractWithPage;
     use CanListOptionsForSelect;
+    use CanSearchResultsUsingForSelect;
 
     protected string $view = 'form';
 
