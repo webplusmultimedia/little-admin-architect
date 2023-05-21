@@ -89,7 +89,7 @@ class Table extends Component implements Htmlable
         ];
     }
 
-    public function paginationView()
+    public function paginationView(): string
     {
         return 'little-views::table-components.pagination.pagination';
     }

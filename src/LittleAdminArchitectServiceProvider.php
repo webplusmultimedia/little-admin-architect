@@ -53,7 +53,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         $this->registerLivewireComponents(app('little-admin-manager'));
-        Component::mixin(new SelectMixing);
+        Form::mixin(new SelectMixing());
     }
 
     private function registerLivewireComponents(LittleAminManager $manager): void

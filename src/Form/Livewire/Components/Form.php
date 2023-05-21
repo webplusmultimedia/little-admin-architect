@@ -17,22 +17,23 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\Has
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Select;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 
 final class Form
 {
     use CanGetRules;
     use CanInitDatasForm;
+    use CanListOptionsForSelect;
+    use CanSearchResultsUsingForSelect;
     use CanValidatedValues;
     use HasDefaultValue;
     use HasFields;
     use HasGridColumns;
     use HasSchema;
+    use HasSelectOptionLabelUsing;
     use InteractWithLivewire;
     use InteractWithPage;
-    use CanListOptionsForSelect;
-    use CanSearchResultsUsingForSelect;
-    use HasSelectOptionLabelUsing;
 
     protected string $view = 'form';
 
@@ -90,6 +91,24 @@ final class Form
         $this->bind = $record;
         $this->initDatasFormOnMount($record);
         $this->initSelectUsing();
+    }
+
+    protected function initSelectUsing(): void
+    {
+        foreach ($this->getFormFields() as $field) {
+            if ($field instanceof Select) {
+                if ($field->optionsUsing()) {
+                    $this->addToListOptionsUsing($field->getWireName(), $field->optionsUsing());
+                }
+                if ($field->searchResultsUsing()) {
+                    $this->addToSearchResultsUsing($field->getWireName(), $field->searchResultsUsing());
+                }
+                if ($field->selectOptionLabelUsing()) {
+                    $this->addSelectOptionLabelsUsing($field->getWireName(), $field->selectOptionLabelUsing());
+                    $field->setDefaultLabelForSelect($this);
+                }
+            }
+        }
     }
 
     public function getTitle(): string

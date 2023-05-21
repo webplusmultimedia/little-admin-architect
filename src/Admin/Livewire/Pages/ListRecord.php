@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages;
 
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 
 class ListRecord extends Page
 {
@@ -14,9 +14,7 @@ class ListRecord extends Page
 
     public function mount(): void
     {
-        /** @var Resources $resource */
-        //        $resource = static::getResource();
-        //        static::$records = $resource::getEloquentQuery()->paginate(static::$rowsPerPage);
+
         /*$this->authorizeAccess();
 
         $this->fillForm();
@@ -40,7 +38,7 @@ class ListRecord extends Page
         ];
     }
 
-    public function render()
+    public function render(): View
     {
         return view('little-views::livewire.list', static::setUpPage())
             ->layout('little-views::admin-components.Layouts.index', static::setUpLayout());

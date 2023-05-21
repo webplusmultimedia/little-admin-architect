@@ -1,5 +1,4 @@
 @php
-
     use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Select;
 /** @var Select $config */
     $config = $getConfig();
@@ -19,25 +18,30 @@
         <x-dynamic-component :component="$config->getViewComponentForLabel()" :id="$id" class="form-label" :label="$config->getLabel()"
                              :showRequired="$isShowSignRequiredOnLabel()"/>
 
-        <select  {{ $attributes->merge([
+        @if($config->isSearchable())
+            <x-little-anonyme::form-components.fields.partials.select.searchSelect :field="$config" />
+
+
+        @else
+            <select {{ $attributes->merge([
                 'wire:model' . $config->getWireModifier() => $config->getWireName(),
                 'id' => $id,
                 'placeholder' => $config->getPlaceHolder(),
                  'class' => 'py-2 px-2',
                 'aria-describedby' => $id
             ])}}
-                 @if($config->isRequired()) required @endif
-                 @if($config->isDisabled()) disabled @endif
-        >
-            <option value="" >----- {{ $config->getPlaceHolder()??__('little-admin-architect::form.select.option.empty-placeholder') }} -----</option>
-            @foreach($config->getOptions() as $key => $option)
-                @php($idGroup = str($key)->slug()->append($id))
-                <option value="{{ $key }}">{{ $option }}</option>
-            @endforeach
-        </select>
+                    @if($config->isRequired()) required @endif
+                    @if($config->isDisabled()) disabled @endif
 
-            <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()" class="mb-1"/>
-            <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage" class="mb-1"/>
+            >
+                <option value="">----- {{ $config->getPlaceHolder()??__('little-admin-architect::form.select.option.empty-placeholder') }} -----</option>
+                @foreach($config->getOptions() as $key => $option)
+                    <option value="{{ $key }}">{{ $option }}</option>
+                @endforeach
+            </select>
+        @endif
+        <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()" class="mb-1"/>
+        <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage" class="mb-1"/>
     </x-dynamic-component>
 @endif
 

@@ -4,7 +4,7 @@
     $config = $getConfig()
     @endphp
 
-<div {{ $attributes->class("pb-3 grid gap-1 border border-gray-300 rounded-md bg-white overflow-hidden")->merge(['class'=>$config->getColSpan()]) }}
+<div {{ $attributes->class("pb-3 grid gap-1 border border-gray-300 rounded-md bg-white ")->merge(['class'=>$config->getColSpan()]) }}
      x-data="{}"
      wire:key="{{ $config->getWireKey()  }}"
 >

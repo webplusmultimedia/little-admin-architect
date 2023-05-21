@@ -12,7 +12,7 @@ trait CanValidatedValues
     {
         $values = [];
         if ($this->bind instanceof Model) {
-            foreach ($this->fields as $field) {
+            foreach ($this->getFormFields() as $field) {
                 $values = $field->getValidatedValues(values: $values, datas: $datas, model: $this->bind);
             }
         }

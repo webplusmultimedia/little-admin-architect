@@ -31,7 +31,8 @@ trait CanInitForm
 
         $this->datasRules = $this->_form->getRules();
         $this->attributesRules = $this->_form->getAttributesRules();
-
+        // dump($this->data,$this->datasRules );
+       // $this->resetErrorBag();
         return [
             'form' => $this->_form,
             'title' => $resource::getModelLabel(),

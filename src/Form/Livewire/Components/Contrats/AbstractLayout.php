@@ -12,11 +12,11 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
 
-abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
+abstract class AbstractLayout /*implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules*/
 {
     //use CanGetRules;
     use CanInitDatasForm;
-    use CanValidatedValues;
+    //use CanValidatedValues;
     use HasColSpan;
 
     //use HasDefaultValue;
@@ -57,11 +57,11 @@ abstract class AbstractLayout implements CanValidateValuesForRules, CanGetAttrib
         return $this;
     }
 
-    public function getWireKey()
+    public function getWireKey(): string
     {
         $title = $this->title ?? Str::random(5);
 
-        return str($title)->append('-', str($title)->kebab());
+        return (string) str($title)->append('-', str($title)->kebab());
     }
 
     public function getFieldView(): string

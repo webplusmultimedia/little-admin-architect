@@ -16,25 +16,25 @@ final class Container extends AbstractLayout
 
     protected string $colSpan = 'lg:col-span-full';
 
-    public function getValidatedValues(array $values, ?array $datas = null, ?Model $model = null): array
-    {
-        $values = array_merge($values, $this->values($datas));
-
-        return $values;
-    }
-
-    public function applyAttributesRules(array $rules): array
-    {
-        return array_merge($rules, $this->getAttributesRules());
-    }
-
-    public function interactWithRules(array $rules, ?Model $model = null): array
-    {
-        /** bind model for container **/
-        if ( ! $this->getBind()) {
-            $this->bind(bind: $model);
-        }
-
-        return array_merge($rules, $this->getRules());
-    }
+//    public function getValidatedValues(array $values, ?array $datas = null, ?Model $model = null): array
+//    {
+//        $values = array_merge($values, $this->values($datas));
+//
+//        return $values;
+//    }
+//
+//    public function applyAttributesRules(array $rules): array
+//    {
+//        return array_merge($rules, $this->getAttributesRules());
+//    }
+//
+//    public function interactWithRules(array $rules, ?Model $model = null): array
+//    {
+//        /** bind model for container **/
+//        if ( ! $this->getBind()) {
+//            $this->bind(bind: $model);
+//        }
+//
+//        return array_merge($rules, $this->getRules());
+//    }
 }

@@ -13,7 +13,7 @@ class EditRecord extends Page
 {
     protected static ?string $routeName = 'edit';
 
-    public function mount($record): void
+    public function mount(mixed $record): void
     {
         /** @var Resources $resource */
         $resource = static::getResource();

@@ -15,9 +15,9 @@ Route::prefix(config('little-admin-architect.prefix'))
     ->group(function () use ($manager): void {
         Route::prefix('asset')
             ->name('assets.')
-            ->group(function (){
-               Route::get('css/{file}',AssetsController::class)->name('style');
-               Route::get('js/{file}',AssetsController::class)->name('js');
+            ->group(function (): void {
+                Route::get('css/{file}', AssetsController::class)->name('style');
+                Route::get('js/{file}', AssetsController::class)->name('js');
             });
         foreach ($manager->getPages() as $resource => $pages) {
             foreach ($pages as $page) {

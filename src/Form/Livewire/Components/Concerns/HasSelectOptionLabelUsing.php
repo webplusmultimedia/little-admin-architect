@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns;
 
 use Closure;
 
 trait HasSelectOptionLabelUsing
 {
-     /** @var array<string,Closure> $selectOptionLabelsUsing */
-     protected array $selectOptionLabelsUsing = [];
+    /** @var array<string,Closure> */
+    protected array $selectOptionLabelsUsing = [];
 
     /**
      * @return array<string,Closure>
@@ -17,7 +19,7 @@ trait HasSelectOptionLabelUsing
         return $this->selectOptionLabelsUsing;
     }
 
-    public function addSelectOptionLabelsUsing(string $name,Closure $selectOptionLabelsUsing): void
+    public function addSelectOptionLabelsUsing(string $name, Closure $selectOptionLabelsUsing): void
     {
         $this->selectOptionLabelsUsing[$name] = $selectOptionLabelsUsing;
     }

@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns;
+
 use Closure;
+
 trait CanSearchResultsUsingForSelect
 {
-    /** @var array<string,Closure> $searchResultsUsing */
+    /** @var array<string,Closure> */
     protected array $searchResultsUsing = [];
 
     /**
@@ -15,7 +19,7 @@ trait CanSearchResultsUsingForSelect
         return $this->searchResultsUsing;
     }
 
-    protected function addToSearchResultsUsing(string $name,Closure $searchClosure): void
+    protected function addToSearchResultsUsing(string $name, Closure $searchClosure): void
     {
         $this->searchResultsUsing[$name] = $searchClosure;
     }

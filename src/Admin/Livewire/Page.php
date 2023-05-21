@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\View\View;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 
@@ -37,7 +38,7 @@ class Page extends Component
     {
         $path = static::getEditRoute('edit')['route'];
 
-        return url(str($path)
+        return (string) url(str($path)
             ->replace(['{record}'], $record->getKey())
             ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
             ->value());
@@ -47,7 +48,7 @@ class Page extends Component
     {
         $path = static::getEditRoute('create')['route'];
 
-        return url(str($path)
+        return (string) url(str($path)
             ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
             ->value());
     }
@@ -56,7 +57,7 @@ class Page extends Component
     {
         $path = static::getEditRoute('index')['route'];
 
-        return url(str($path)
+        return (string) url(str($path)
             ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
             ->value());
     }
@@ -106,7 +107,7 @@ class Page extends Component
         ];
     }
 
-    public function render()
+    public function render(): View
     {
         return view('little-views::livewire.page', static::setUpPage())
             ->layout('little-views::admin-components.Layouts.index', static::setUpLayout());

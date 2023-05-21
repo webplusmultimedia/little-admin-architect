@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
@@ -13,13 +15,10 @@ trait SelectHasDefaultLabel
         return $this->defaultLabelForSelect;
     }
 
-    public function setDefaultLabelForSelect(Form $form): mixed
+    public function setDefaultLabelForSelect(Form $form): void
     {
         if ($form->hasSelectOptionLabelsUsing() and isset($form->getSelectOptionLabelsUsing()[$this->getWireName()])) {
-            $closure = call_user_func($form->getSelectOptionLabelsUsing()[$this->getWireName()],$this->getRecord()?->{$this->getWireName()});
-            return $closure;
-           // $this->defaultLabelForSelect = $defaultLabelForSelect;
+            $this->defaultLabelForSelect = call_user_func($form->getSelectOptionLabelsUsing()[$this->getWireName()], $this->getRecord()?->{$this->getName()});
         }
-        return null;
     }
 }

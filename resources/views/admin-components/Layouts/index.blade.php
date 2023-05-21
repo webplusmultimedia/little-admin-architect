@@ -77,10 +77,10 @@
                         @endif
                         <div class="flex">
                             <a href="{{ route($navigation['route_name']) }}"
-                               @class([
-                                   'hover:bg-gray-50 pl-10 py-1 rounded-md grow duration-200',
-                                   'text-primary-600' => request()->routeIs($navigation['route_resource'])
-                                ])
+                                @class([
+                                    'hover:bg-gray-50 pl-10 py-1 rounded-md grow duration-200',
+                                    'text-primary-600' => request()->routeIs($navigation['route_resource'])
+                                 ])
 
                             >
                                 {{ $navigation['title'] }}
@@ -99,7 +99,7 @@
     </div>
 </div>
 
-    @livewireScripts
-<script src="{{ route('little-admin.page.assets.js','app.js') }}"></script>
+@livewireScripts
+<script defer src="{{ route('little-admin.page.assets.js','app.js') }}"></script>
 </body>
 </html>
