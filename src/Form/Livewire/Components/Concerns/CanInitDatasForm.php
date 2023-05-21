@@ -33,6 +33,9 @@ trait CanInitDatasForm
                 if($field->searchResultsUsing()){
                     $this->addToSearchResultsUsing($field->getWireName(),$field->searchResultsUsing());
                 }
+                if($field->selectOptionLabelUsing()){
+                    $this->addSelectOptionLabelsUsing($field->getWireName(),$field->selectOptionLabelUsing());
+                }
             }
         }
     }

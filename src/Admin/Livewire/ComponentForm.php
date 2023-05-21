@@ -48,7 +48,9 @@ class ComponentForm extends Component
         $this->data = $data;
         $this->initialized = true;
         $this->initBoot = false;
-        dump($this->getOptionsUsing('data.categorie_id'));
+       // dump($this->getOptionsUsing('data.categorie_id'),$this->getSearchResultsUsing('data.categorie_id','2'));
+
+
     }
 
     protected function rules(): array

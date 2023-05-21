@@ -5,11 +5,13 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields
 use Illuminate\Support\Collection;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanSearchWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasOptions;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\SelectHasDefaultLabel;
 
 class Select extends Field
 {
     use HasOptions;
     use CanSearchWithLivewire;
+    use SelectHasDefaultLabel;
 
     protected string $view = 'select';
 

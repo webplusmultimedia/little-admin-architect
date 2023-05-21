@@ -1,0 +1,29 @@
+<?php
+
+namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns;
+
+use Closure;
+
+trait HasSelectOptionLabelUsing
+{
+     /** @var array<string,Closure> $selectOptionLabelsUsing */
+     protected array $selectOptionLabelsUsing = [];
+
+    /**
+     * @return array<string,Closure>
+     */
+    public function getSelectOptionLabelsUsing(): array
+    {
+        return $this->selectOptionLabelsUsing;
+    }
+
+    public function addSelectOptionLabelsUsing(string $name,Closure $selectOptionLabelsUsing): void
+    {
+        $this->selectOptionLabelsUsing[$name] = $selectOptionLabelsUsing;
+    }
+
+    public function hasSelectOptionLabelsUsing(): bool
+    {
+        return count($this->selectOptionLabelsUsing) > 0;
+    }
+}

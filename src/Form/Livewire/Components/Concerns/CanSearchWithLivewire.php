@@ -12,14 +12,14 @@ trait CanSearchWithLivewire
     protected ?Closure $optionsUsing = NULL;
     protected ?Closure $searchResultsUsing = NULL;
 
-    public function selectOptionLabelUsing(Closure $optionLabel): static
+    public function getSelectOptionLabelUsing(Closure $optionLabel): static
     {
         $this->selectOptionLabelUsing = $optionLabel;
 
         return $this;
     }
 
-    public function getSelectOptionLabelUsing(): ?Closure
+    public function selectOptionLabelUsing(): ?Closure
     {
         return $this->selectOptionLabelUsing;
     }

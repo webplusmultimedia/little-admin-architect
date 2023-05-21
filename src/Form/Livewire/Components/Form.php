@@ -13,6 +13,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\Can
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanValidatedValues;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasFields;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\HasSelectOptionLabelUsing;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
@@ -31,6 +32,7 @@ final class Form
     use InteractWithPage;
     use CanListOptionsForSelect;
     use CanSearchResultsUsingForSelect;
+    use HasSelectOptionLabelUsing;
 
     protected string $view = 'form';
 

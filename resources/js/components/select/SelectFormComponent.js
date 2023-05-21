@@ -3,6 +3,9 @@ export const SelectFormComponent = (getOptionLabelUsing,getOptionLabelsUsing,get
       show : false,
       selectOption(key){
 
+      },
+      init(){
+          console.log(state)
       }
   }
 }
