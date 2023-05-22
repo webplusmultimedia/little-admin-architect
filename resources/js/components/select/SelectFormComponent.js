@@ -52,14 +52,14 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
             async ['x-on:keyup.debounce.800ms']() {
                 let term = this.$refs.search.value
                 if (!this.isSearching && term !== '') {
-                    if(!this.optionsBackup){
+                    if(!this.optionsBackup && this.hasOptionUsing ){
                         this.optionsBackup = this.options
                     }
                     this.isSearching = true
                     await this.getResultsOnSearchTerm(term)
                     this.isSearching = false
                 }
-                else {
+                else if (this.hasOptionUsing){
                     this.options = this.optionsBackup
                     this.addSelectedOptionToNewList()
                 }

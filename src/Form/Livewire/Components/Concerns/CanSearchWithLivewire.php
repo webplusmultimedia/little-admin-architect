@@ -119,7 +119,7 @@ trait CanSearchWithLivewire
     public function multiple(bool $isMultiple = true): static
     {
         $this->isMultiple = $isMultiple;
-
+        $this->addRules('array');
         return $this;
 }
 }
