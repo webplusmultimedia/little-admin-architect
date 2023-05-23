@@ -51,7 +51,7 @@ class ComponentForm extends Component
         if ( ! $data?->exists) {
             $this->_form->applyDefaultValue();
         }
-        $this->datasRules = $this->_form->getRules();
+        $this->datasRules = $this->_form->getFormRules();
         $this->attributesRules = $this->_form->getAttributesRules();
 
         $this->data = $data;
@@ -115,7 +115,7 @@ class ComponentForm extends Component
         //dump($this->datasRules);
         $this->_form->saveDatasForm($this);
         session()->flash('message', 'Post successfully updated.');
-        //@todo Emit message Save
+        //@todo Emit Event Notification message Save
 
     }
 }

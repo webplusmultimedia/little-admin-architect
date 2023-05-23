@@ -19,7 +19,8 @@ export function OptionsBuilder(options) {
 export function TagsBuilder(optionsTags) {
     let results = ''
     optionsTags.forEach((option) => {
-        results += `<div class="choice__tag"
+        results += `<div class="choice__tag" data-value="${option.value}"
+            data-label="${option.label}"
         >
             <span class="choice__tag_label">${option.label}</span>
             <svg class="choice_tag_icon" fill="currentColor"  viewBox="0 0 24 24">

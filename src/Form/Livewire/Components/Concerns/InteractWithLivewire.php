@@ -11,7 +11,7 @@ trait InteractWithLivewire
     public function saveDatasForm(Component $livewire): void
     {
         if ($this->hasRules()) {
-            $datas = $livewire->validate(rules: $this->getRules(), attributes: $this->getAttributesRules());
+            $datas = $livewire->validate(rules: $this->getFormRules(), attributes: $this->getAttributesRules());
             if ( ! $livewire->data?->exists) {
                 $livewire->data?->fill($this->values($datas))->save();
                 if ($edit_url = $this->linkEdit($livewire->data)) {

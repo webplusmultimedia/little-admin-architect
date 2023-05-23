@@ -29,7 +29,7 @@ trait CanInitForm
         $this->_form->bind($this->data);
         $this->_form->setPagesForResource($page);
 
-        $this->datasRules = $this->_form->getRules();
+        $this->datasRules = $this->_form->getFormRules();
         $this->attributesRules = $this->_form->getAttributesRules();
         //dump($this->data,$this->datasRules );
         // $this->resetErrorBag();
