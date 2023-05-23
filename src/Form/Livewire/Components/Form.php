@@ -105,7 +105,9 @@ final class Form
                 }
                 if ($field->selectOptionLabelUsing()) {
                     $this->addSelectOptionLabelsUsing($field->getWireName(), $field->selectOptionLabelUsing());
-                    $field->setDefaultLabelForSelect($this);
+                    if(!$field->isMultiple()) {
+                        $field->setDefaultLabelForSelect($this);
+                    }
                 }
             }
         }

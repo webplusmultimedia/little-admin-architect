@@ -12,7 +12,7 @@
         @js($field->getRecord()?->{$field->getName()}),
         @js($field->isMultiple()),
         @js($field->isSearchable()),
-        @js($field->optionUsingAll()),
+        @js($field->getAllLabelsForValues()),
         @js($field->hasOptionUsing()),
         @js($field->getMessagesContent()),
         @js($field->getSearchDebounce())
@@ -29,11 +29,13 @@
              :class="{'ring-2 ring-primary-500': show}"
              x-on:keyup.esc="show = false"
         >
-            <div class="choice__selected" x-text="defaultLabel" x-show="selectedOptions.value"></div>
-            <div class="choice__selected text-gray-500" x-text="msgContent.placeholder" x-show="!selectedOptions.value"></div>
+            <div class="choice__selected" x-html="defaultLabel" x-show="showChoiceSelected">
+
+            </div>
+            <div class="choice__selected text-gray-500" x-text="msgContent.placeholder" x-show="!showChoiceSelected()"></div>
             <div class="flex items-center space-x-2 z-[2]">
                 <x-heroicon-o-x-mark class="w-5 hover:text-error-400 transition"
-                                     x-show="selectedOptions.value"
+                                     x-show="showChoiceSelected"
                                      x-on:click.stop="resetOptions"
                 />
                 <x-heroicon-o-chevron-down class="w-5"/>

@@ -78,9 +78,7 @@ class ComponentForm extends Component
        $results =  $this->getOptionsUsing($name);
        $options = [];
        if ($results instanceof Collection){
-           foreach ($results as $key => $result) {
-               $options[] = ['label' => $result, 'value' => $key];
-           }
+           return $results->map(fn($value,$key) => ['value'=>$key,'label'=>$value])->values()->toArray();
        }
        return $options;
     }
@@ -90,9 +88,7 @@ class ComponentForm extends Component
         $results = $this->getSearchResultsUsing($name,$term);
         $options = [];
         if ($results instanceof Collection){
-            foreach ($results as $key => $result) {
-                $options[] = ['label' => $result, 'value' => $key];
-            }
+            return $results->map(fn($value,$key) => ['value'=>$key,'label'=>$value])->values()->toArray();
         }
         return $options;
     }

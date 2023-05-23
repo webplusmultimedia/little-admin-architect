@@ -16,7 +16,7 @@ trait CanInitForm
 
         $pageClass = str($this->pageRoute)
             ->explode('.')
-            ->map(fn (string $segment) => str($segment)->studly())
+            ->map(fn(string $segment) => str($segment)->studly())
             ->implode('\\');
         /** @var Page $page */
         $page = app($pageClass);
@@ -31,10 +31,10 @@ trait CanInitForm
 
         $this->datasRules = $this->_form->getRules();
         $this->attributesRules = $this->_form->getAttributesRules();
-        // dump($this->data,$this->datasRules );
-       // $this->resetErrorBag();
+        //dump($this->data,$this->datasRules );
+        // $this->resetErrorBag();
         return [
-            'form' => $this->_form,
+            'form'  => $this->_form,
             'title' => $resource::getModelLabel(),
         ];
     }

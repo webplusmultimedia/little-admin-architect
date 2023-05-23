@@ -33,6 +33,26 @@ trait CanSearchWithLivewire
         return $this->selectOptionLabelUsing;
     }
 
+    protected function getOptionsLabelUsingAll(): array
+    {
+        if ($this->selectOptionLabelUsing){
+            /** @var Collection $results */
+            $results = call_user_func($this->selectOptionLabelUsing(),$this->getRecord()->{$this->getName()});
+
+            return $results->map(fn($value,$key) => ['value'=>$key,'label'=>$value])->values()->toArray();
+        }
+        return [];
+    }
+
+    public function getAllLabelsForValues(): array
+    {
+        if ($this->isMultiple){
+            return $this->getOptionsLabelUsingAll();
+        }
+        return $this->optionUsingAll();
+    }
+
+
     public function getOptionsUsing(Closure $optionsUsing): static
     {
         $this->optionsUsing = $optionsUsing;
@@ -51,19 +71,14 @@ trait CanSearchWithLivewire
         return $this->optionsUsing !== NULL;
     }
 
-    public function optionUsingAll(): array
+    protected function optionUsingAll(): array
     {
         if ($this->optionsUsing) {
             if (! $this->optionsUsingResults) {
                 $this->optionsUsingResults = call_user_func($this->optionsUsing);
             }
-            $results = $this->optionsUsingResults->toArray();
-            $options = [];
-            foreach ($results as $key => $result) {
-                $options[] = ['label' => $result, 'value' => $key];
-            }
-
-            return $options;
+            $results = $this->optionsUsingResults;
+            return $results->map(fn($value,$key) => ['value'=>$key,'label'=>$value])->values()->toArray();
         }
 
         return [];

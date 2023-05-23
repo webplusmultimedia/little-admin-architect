@@ -1,4 +1,4 @@
-import {OptionsBuilder} from "./OptionsBuilder";
+import {OptionsBuilder, TagsBuilder} from "./OptionsBuilder";
 
 export function SelectFormComponent(componentId, defaultLabel, state, defaultValue, isMultiple,isSearchable,optionsUsing, hasOptionUsing, msgContent, searchDebounce) {
 
@@ -10,6 +10,7 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
         isSearching: false,
         search: null,
         defaultLabel,
+        defaultMultipleLabel : optionsUsing,
         componentId,
         state,
         defaultValue,
@@ -41,10 +42,12 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
             }
         },
         addSelectedOptionToNewList(){
-            if (this.selectedOptions.value) {
-                if (!this.options.filter(option => (option.label === this.selectedOptions.label) && (option.value === this.selectedOptions.value)).length) {
+            if (!this.isMultiple && this.selectedOptions.value) {
+                if (!Array.from(this.options).filter(option => (option.label === this.selectedOptions.label) && (option.value === this.selectedOptions.value)).length) {
                     this.options.push(this.selectedOptions)
                 }
+            }else {
+                /** @Todo for select multiple */
             }
             this.$refs.list_options.innerHTML = OptionsBuilder(this.options)
         },
@@ -67,24 +70,50 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
         },
         selectItem :{
             ['x-on:click.stop'](){
-                this.selectOptionFrom({label: this.$el.dataset.label, value: this.$el.dataset.value})
-                this.defaultLabel = this.$el.dataset.label
-                this.state = this.$el.dataset.value
-                this.$refs.search.focus()
                 if(!this.isMultiple){
+                    this.selectOptionFrom({label: this.$el.dataset.label, value: this.$el.dataset.value})
+                    this.defaultLabel = this.$el.dataset.label
+                    this.state = this.$el.dataset.value
                     this.show = false
                 }
+                else {
+                    this.defaultMultipleLabel.push({ label : this.$el.dataset.label})
+                    this.defaultLabel = TagsBuilder(this.defaultMultipleLabel)
+                    this.state.push(this.$el.dataset.value)
+
+                    /**@todo Tags */
+                }
+
+                this.$refs.search.focus()
             }
         },
         resetOptions(){
-            this.selectedOptions = {label: null, value: null}
+            if (!this.isMultiple) {
+                this.selectedOptions = {label: null, value: null}
+                this.state = null
+            }
+            else {
+                this.defaultMultipleLabel = []
+                this.state = []
+            }
             this.defaultLabel = null
-            this.state = null
+
             this.$refs.search.focus()
         },
         init() {
-            //this.selectOptionFrom({label: defaultLabel, value: defaultValue})
-            this.addSelectedOptionToNewList()
+
+            if (this.isMultiple){
+                this.defaultLabel = TagsBuilder(this.defaultMultipleLabel)
+            }
+            else {
+                this.selectOptionFrom({label: defaultLabel, value: defaultValue})
+
+                this.addSelectedOptionToNewList()
+                if (!this.state){
+                    this.state = []
+                }
+            }
+           // console.log(this.state,this.options,defaultLabel,defaultValue)
             this.$watch('show',(value)=>{
                 if(value) {
                     setTimeout(()=>{
@@ -94,6 +123,14 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
                 }
             })
         },
+        showChoiceSelected(){
+            if (!this.isMultiple){
+                return this.selectedOptions.value
+            }
+            else {
+               return this.defaultMultipleLabel.length > 0
+            }
+        }
 
     }
 }
