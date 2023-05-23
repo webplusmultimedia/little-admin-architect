@@ -101,7 +101,7 @@
         @apply px-3 py-2 text-sm font-medium hover:bg-primary-500 hover:text-white cursor-pointer transition
     }
     .choices__list--dropdown{
-        @apply absolute top-[calc(100%_+_5px)] w-full border border-gray-300 rounded-md z-[1] bg-white shadow-md overflow-hidden
+        @apply absolute top-[calc(100%_+_5px)] w-full border border-gray-300 rounded-md z-[3] bg-white shadow-md overflow-hidden
     }
     .choice__wrapper_selected{
         @apply inline-flex items-center justify-center space-x-2 py-2 px-2 border rounded border-gray-300 cursor-pointer w-full
@@ -121,9 +121,9 @@
         @apply inline-flex justify-center items-center  px-3 rounded-full bg-primary-50 text-primary-600 hover:bg-primary-100
     }
     .choice_tag_icon{
-        @apply w-4 h-4
+        @apply w-4 h-4 hover:text-error-500
     }
     .choice__tag_label{
-        @apply py-1 pr-1  border-r border-primary-600/10 whitespace-nowrap
+        @apply  pr-1  border-r border-primary-600/10 whitespace-nowrap
     }
 }

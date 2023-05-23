@@ -37,9 +37,17 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
             this.options = this.options.filter(option=> option.label.toLowerCase().match(new RegExp(term.toLowerCase())))
         },
         selectOptionFrom(item) {
-            if (item) {
+            if (item && !this.isMultiple) {
                 this.selectedOptions = item
+            }else if(item && this.isMultiple){
+                let isDuplicateTag = Array.from(this.defaultMultipleLabel).filter(option=> String(option.value) === String(item.value)).length
+                if(!isDuplicateTag) {
+                    this.defaultMultipleLabel.push(item)
+                    this.defaultLabel = TagsBuilder(this.defaultMultipleLabel)
+                    this.state.push(this.$el.dataset.value)
+                }
             }
+
         },
         addSelectedOptionToNewList(){
             if (!this.isMultiple && this.selectedOptions.value) {
@@ -52,7 +60,13 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
             this.$refs.list_options.innerHTML = OptionsBuilder(this.options)
         },
         search_terms: {
+            ['x-on:keyup.esc'](){
+                this.show = false
+            },
             async ['x-on:keyup.debounce.800ms']() {
+                let key = this.$event.key
+                /** @todo need to remove specials keys causing a (re)search */
+                console.log(key)
                 let term = this.$refs.search.value
                 if (!this.isSearching && term !== '') {
                     if(!this.optionsBackup && this.hasOptionUsing ){
@@ -62,7 +76,7 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
                     await this.getResultsOnSearchTerm(term)
                     this.isSearching = false
                 }
-                else if (this.hasOptionUsing){
+                else if (this.hasOptionUsing && this.optionsBackup){
                     this.options = this.optionsBackup
                     this.addSelectedOptionToNewList()
                 }
@@ -77,9 +91,7 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
                     this.show = false
                 }
                 else {
-                    this.defaultMultipleLabel.push({ label : this.$el.dataset.label})
-                    this.defaultLabel = TagsBuilder(this.defaultMultipleLabel)
-                    this.state.push(this.$el.dataset.value)
+                    this.selectOptionFrom({ label : this.$el.dataset.label, value: this.$el.dataset.value})
 
                     /**@todo Tags */
                 }
@@ -104,16 +116,16 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
 
             if (this.isMultiple){
                 this.defaultLabel = TagsBuilder(this.defaultMultipleLabel)
-            }
-            else {
-                this.selectOptionFrom({label: defaultLabel, value: defaultValue})
-
-                this.addSelectedOptionToNewList()
                 if (!this.state){
                     this.state = []
                 }
+                this.addSelectedOptionToNewList()
             }
-           // console.log(this.state,this.options,defaultLabel,defaultValue)
+            else {
+                this.selectOptionFrom({label: defaultLabel, value: defaultValue})
+                this.addSelectedOptionToNewList()
+            }
+
             this.$watch('show',(value)=>{
                 if(value) {
                     setTimeout(()=>{
@@ -130,6 +142,15 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
             else {
                return this.defaultMultipleLabel.length > 0
             }
+        },
+        deleteTag : {
+            ['x-on:click.stop'](){
+              let id = this.$refs.tagElement.dataset.value
+                this.state = Array.from(this.state).filter(idState=> idState !== id)
+                this.defaultMultipleLabel = Array.from(this.defaultMultipleLabel).filter(label=> String(label.value ) !== id)
+                this.defaultLabel = TagsBuilder(this.defaultMultipleLabel)
+                /** @Todo add the remove tag to list options */
+            },
         }
 
     }
