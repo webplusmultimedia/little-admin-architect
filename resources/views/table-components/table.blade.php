@@ -58,13 +58,13 @@
                                 <x-dynamic-component :component="$column->getView()" :column="$column" :livewireId="$table->getLivewireId()"/>
                             @endforeach
                             <td class="max-w-max whitespace-nowrap">
-                                <div class="px-3 inline-flex items-center space-x-2">
-                                    <a href="{{ $table->linkEdit($record)  }}" class="hover:text-primary-400 transition text-sm py-4  inline-flex items-center space-x-1 text-primary-600">
-                                        <x-heroicon-s-pencil class="w-5"/>
+                                <div class="px-3 inline-flex items-center gap-4">
+                                    <a href="{{ $table->linkEdit($record)  }}" class="hover:text-primary-400 transition text-sm font-bold py-4  inline-flex items-center space-x-1 text-primary-600">
+                                        <x-heroicon-s-pencil class="w-4 h-4" aria-hidden="true"/>
                                         <span>{{ __('little-admin-architect::table.row-button.edit') }}</span>
                                     </a>
-                                    <a href="{{ $table->linkIndex()  }}" class="hover:text-error-400 transition text-sm py-4  inline-flex items-center space-x-1 text-error-600 ">
-                                        <x-heroicon-s-x-mark class="w-6"/>
+                                    <a href="{{ $table->linkIndex()  }}" class="hover:text-error-400 transition text-sm font-bold py-4  inline-flex items-center space-x-1 text-error-600 ">
+                                        <x-heroicon-s-x-mark class="w-4 h-4 " aria-hidden="true"/>
                                         <span>{{ __('little-admin-architect::table.row-button.delete') }}</span>
                                     </a>
                                 </div>

@@ -59,15 +59,22 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
 
     public function getWireName(): string
     {
-        return $this->prefixName . '.' . $this->name;
+        return  $this->getPrefix() . $this->name;
     }
 
+    protected function getPrefix(): string
+    {
+        if ($this->record){
+            return $this->prefixName . '.';
+        }
+        return '';
+    }
     public static function make(string $name, null|string $label = null): static
     {
         return new static(name: $name, label: $label);
     }
 
-    public function record(Model $model): void
+    public function record(?Model $model): void
     {
         $this->record = $model;
     }

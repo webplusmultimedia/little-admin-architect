@@ -75,6 +75,8 @@ class ComponentForm extends Component
 
     public function getOptionUsing(string $name): array
     {
+        $this->skipRender();
+        /** @var Collection|array<null> $results */
        $results =  $this->getOptionsUsing($name);
        $options = [];
        if ($results instanceof Collection){
@@ -85,6 +87,7 @@ class ComponentForm extends Component
 
     public function getSearchResultUsing(string $name, string $term): array
     {
+        $this->skipRender();
         $results = $this->getSearchResultsUsing($name,$term);
         $options = [];
         if ($results instanceof Collection){

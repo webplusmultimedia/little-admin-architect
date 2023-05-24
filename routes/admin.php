@@ -6,11 +6,12 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 use Webplusmultimedia\LittleAdminArchitect\Http\Controllers\AssetsController;
+use Webplusmultimedia\LittleAdminArchitect\Http\Middleware\Authenticate;
 use Webplusmultimedia\LittleAdminArchitect\LittleAminManager;
 
 $manager = app('little-admin-manager');
 Route::prefix(config('little-admin-architect.prefix'))
-    ->middleware('web')
+    ->middleware(['web',Authenticate::class])
     ->name(config('little-admin-architect.route.prefix') . '.')
     ->group(function () use ($manager): void {
         Route::prefix('asset')
