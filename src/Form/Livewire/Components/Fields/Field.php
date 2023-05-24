@@ -6,9 +6,9 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields
 
 use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\ValidateValuesForRules;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\CanGetAttributesRules;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\CanInteractWithRules;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\CanValidateValuesForRules;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\CanGetAttributesRules;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\CanInteractWithRules;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\CanValidateValuesForRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeDisabled;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeHidden;
 
@@ -47,7 +47,10 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use InteractWithWrapper;
     use ValidateValuesForRules;
 
-    protected ?Model $record = null;
+    /**
+     * @var array<string,string>|Model|null $record
+     */
+    protected array|null|Model $record = null;
 
     final public function __construct(
         string $name,
@@ -62,9 +65,21 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         return  $this->getPrefix() . $this->name;
     }
 
+    public function getDataRecord(): mixed
+    {
+        if ($this->record instanceof Model){
+            return $this->getRecord()->{$this->getName()};
+        }
+        if (is_array($this->record)){
+            if (isset($this->record[$this->getName()])){
+                return $this->record[$this->getName()];
+            }
+        }
+        return null;
+    }
     protected function getPrefix(): string
     {
-        if ($this->record){
+        if ($this->record instanceof Model){
             return $this->prefixName . '.';
         }
         return '';
@@ -74,12 +89,12 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         return new static(name: $name, label: $label);
     }
 
-    public function record(?Model $model): void
+    public function record(array|null|Model $record): void
     {
-        $this->record = $model;
+        $this->record = $record;
     }
 
-    public function getRecord(): ?Model
+    public function getRecord(): array|null|Model
     {
         return $this->record;
     }

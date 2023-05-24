@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 
 trait HasSchema

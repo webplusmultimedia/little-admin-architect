@@ -13,9 +13,11 @@ trait ValidateValuesForRules
         if ($this->isDisabled()) {
             $model->{$this->name} = $model->getOriginal($this->name);
         } else {
-            $values[$this->name] = $model->{$this->name};
+            $values[$this->name] = $this->getDataRecord();
         }
 
         return $values;
     }
+
+
 }

@@ -10,7 +10,7 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats\AbstractLayout;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 
 abstract class AbstractComponent extends Component

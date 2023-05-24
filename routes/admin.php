@@ -11,7 +11,7 @@ use Webplusmultimedia\LittleAdminArchitect\LittleAminManager;
 
 $manager = app('little-admin-manager');
 Route::prefix(config('little-admin-architect.prefix'))
-    ->middleware(['web',Authenticate::class])
+    ->middleware(['web'])
     ->name(config('little-admin-architect.route.prefix') . '.')
     ->group(function () use ($manager): void {
         Route::prefix('asset')
@@ -20,9 +20,10 @@ Route::prefix(config('little-admin-architect.prefix'))
                 Route::get('css/{file}', AssetsController::class)->name('style');
                 Route::get('js/{file}', AssetsController::class)->name('js');
             });
+        Route::get('/login', config('little-admin-architect.auth.pages.login'))->name('auth.login');
         foreach ($manager->getPages() as $resource => $pages) {
             foreach ($pages as $page) {
-                Route::get($page['slug'], $page['classBaseName'])->name($page['routeName']);
+                Route::get($page['slug'], $page['classBaseName'])->name($page['routeName'])->middleware(Authenticate::class);
             }
         }
     });

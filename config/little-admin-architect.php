@@ -24,7 +24,7 @@ return [
     'auth' => [
         'guard' => env('LITTLE_ADMIN_AUTH_GUARD', 'web'),
         'pages' => [
-            'login' => \LittleAdmin\Http\Livewire\Auth\Login::class,
+            'login' => \Webplusmultimedia\LittleAdminArchitect\Http\Livewire\Login::class,
         ],
     ],
     /**

@@ -11,11 +11,16 @@ trait CanValidatedValues
     public function values(array $datas): array
     {
         $values = [];
-        if ($this->bind instanceof Model) {
+        if ($this->model instanceof Model) {
             foreach ($this->getFormFields() as $field) {
-                $values = $field->getValidatedValues(values: $values, datas: $datas, model: $this->bind);
+                $values = $field->getValidatedValues(values: $values, datas: $datas, model: $this->model);
             }
         }
+        /*if (is_array($this->model)){
+            foreach ($this->getFormFields() as $field) {
+
+            }
+        }*/
 
         return $values;
     }

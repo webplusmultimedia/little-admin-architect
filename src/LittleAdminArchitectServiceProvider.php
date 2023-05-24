@@ -16,6 +16,7 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Mixins\SelectMixing;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Table;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
+use Webplusmultimedia\LittleAdminArchitect\Http\Livewire\Login;
 
 class LittleAdminArchitectServiceProvider extends PackageServiceProvider
 {
@@ -60,7 +61,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     {
         $groups = $manager->getPages();
         $componentNames = collect(Arr::pluck($groups, '*.component'))->flatten();
-        //dd($componentNames);
+
         foreach ($componentNames as $page => $component) {
             $class = Form::class;
             if (str($component)->afterLast('.')->startsWith('list-')) {
@@ -68,5 +69,6 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
             }
             Livewire::component($component, $class);
         }
+        Livewire::component('little-admin.pages.auth.login',Login::class);
     }
 }

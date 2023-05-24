@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Arr;
 use Webplusmultimedia\LittleAdminArchitect\Support\RegisterResources;
 
 final class LittleAminManager
@@ -31,17 +32,35 @@ final class LittleAminManager
 
     private array $meta = [];
 
-    private string|Htmlable|null $theme = null;
+    private string|Htmlable|null $theme = NULL;
 
     private array $userMenuItems = [];
 
     private array $widgets = [];
 
-    private ?Closure $navigationBuilder = null;
+    private ?Closure $navigationBuilder = NULL;
 
     private array $renderHooks = [];
 
     private bool $isServing = false;
+
+    public function getUrl(): ?string {
+        $firstGroup = Arr::first($this->getNavigations());
+        if (!$firstGroup){
+            return null;
+        }
+
+        $firstItems = Arr::first($firstGroup);
+        return route($firstItems['route_name']);
+    }
+
+    public function getNavigations(): array
+    {
+        if (!count($this->navigationGroups)) {
+           return LittleAdminArchitect::getNavigationPages();
+        }
+        return  $this->navigationGroups ;
+    }
 
     public function auth(): Guard
     {
@@ -68,9 +87,7 @@ final class LittleAminManager
         $this->applyResources();
     }
 
-    public function resolveResourceBy(null|string $name = null, null|string $route = null): void
-    {
-    }
+    public function resolveResourceBy(null|string $name = NULL, null|string $route = NULL): void {}
 
     private function applyResources(): void
     {

@@ -7,17 +7,20 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Validator;
+
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\CanInitForm;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\InteractsWithForms;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\HasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form as LittleFormAlias;
 
 /**
- * @property ?Model $data
+ * @property LittleFormAlias $form
  */
-class ComponentForm extends Component
+class ComponentForm extends Component implements HasForm
 {
     use CanInitForm;
+    use InteractsWithForms;
 
     public ?Model $data = null;
 
@@ -25,21 +28,9 @@ class ComponentForm extends Component
 
     public ?string $previousPage = null;
 
-    protected null|string $pageRoute = null;
 
-    protected ?string $routeName = null;
 
-    protected bool $initBoot = true;
 
-    protected LittleFormAlias|null $_form = null;
-
-    protected array $datasRules;
-
-    protected array $attributesRules;
-
-    protected array $configParams = [];
-
-    protected array $formDatas = [];
 
     public function mount(?Model $data, ?string $pageRoute): void
     {
@@ -47,12 +38,12 @@ class ComponentForm extends Component
         $this->routeName = request()->route()->getName();
         $this->pageRoute = $pageRoute;
         $this->data = $data;
-        $this->formDatas = $this->buildConfig();
+        $this->getForm();
         if ( ! $data?->exists) {
-            $this->_form->applyDefaultValue();
+            $this->form->applyDefaultValue();
         }
-        $this->datasRules = $this->_form->getFormRules();
-        $this->attributesRules = $this->_form->getAttributesRules();
+        /*$this->datasRules = $this->form->getFormRules();
+        $this->attributesRules = $this->_form->getAttributesRules();*/
 
         $this->data = $data;
         $this->initialized = true;
@@ -63,38 +54,17 @@ class ComponentForm extends Component
 
     protected function rules(): array
     {
-        return $this->datasRules;
+        return $this->form->getFormRules();
     }
 
-    public function booted(): void
+   /* public function booted(): void
     {
         if ($this->initBoot) {
             $this->formDatas = $this->buildConfig();
         }
-    }
+    }*/
 
-    public function getOptionUsing(string $name): array
-    {
-        $this->skipRender();
-        /** @var Collection|array<null> $results */
-       $results =  $this->getOptionsUsing($name);
-       $options = [];
-       if ($results instanceof Collection){
-           return $results->map(fn($value,$key) => ['value'=>$key,'label'=>$value])->values()->toArray();
-       }
-       return $options;
-    }
 
-    public function getSearchResultUsing(string $name, string $term): array
-    {
-        $this->skipRender();
-        $results = $this->getSearchResultsUsing($name,$term);
-        $options = [];
-        if ($results instanceof Collection){
-            return $results->map(fn($value,$key) => ['value'=>$key,'label'=>$value])->values()->toArray();
-        }
-        return $options;
-    }
 
     public function init(): void
     {
@@ -116,7 +86,7 @@ class ComponentForm extends Component
     public function save(): void
     {
         //dump($this->datasRules);
-        $this->_form->saveDatasForm($this);
+        $this->form->saveDatasForm($this);
         session()->flash('message', 'Post successfully updated.');
         //@todo Emit Event Notification message Save
 

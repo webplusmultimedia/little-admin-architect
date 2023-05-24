@@ -7,7 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 
-class Form extends ComponentForm implements Htmlable
+class Form extends ComponentForm
 {
     public function render(): View
     {

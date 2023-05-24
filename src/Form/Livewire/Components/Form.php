@@ -37,7 +37,10 @@ final class Form
 
     protected string $view = 'form';
 
-    protected ?Model $model = null;
+    /**
+     * @var Model|array<string,string>|null $model
+     */
+    protected null|Model|array $model = null;
 
     protected ?string $mode = null;
 
@@ -60,8 +63,7 @@ final class Form
     }
 
     public function __construct(
-        public string $title,
-        protected Model|null $bind = null,
+        public string $title
     ) {
 
     }
@@ -81,16 +83,13 @@ final class Form
         return $this->action;
     }
 
-    public function getBind(): null|Model
-    {
-        return $this->bind;
-    }
 
-    public function bind(?Model $record = null): void
+
+    public function model(null|Model|array $record = null): void
     {
-        $this->bind = $record;
-        $this->initDatasFormOnMount($record);
-        $this->initSelectUsing();
+        $this->model = $record;
+        $this->initDatasFormOnMount($record)
+            ->initSelectUsing();
     }
 
     protected function initSelectUsing(): void
@@ -127,10 +126,10 @@ final class Form
 
     public function init(): void
     {
-        if ($this->bind && $this->bind->exists()) {
-            $this->mode = 'UPDATED';
+        if ($this->model && $this->model->exists()) {
+            $this->mode = 'UPDATED_RECORD';
         } else {
-            $this->mode = 'CREATED';
+            $this->mode = 'CREATED_RECORD';
         }
     }
 
@@ -139,6 +138,14 @@ final class Form
         return $this->mode;
     }
 
+    public function getState(): array
+    {
+        $datas =[];
+        foreach ($this->getFormFields() as $field) {
+            $datas[$field->getName()] = $field->getDataRecord();
+        }
+        return $datas;
+    }
     public function getSaveButton(): Button
     {
         return Button::make($this->caption, $this->type, $this->action)->icon('s-check');

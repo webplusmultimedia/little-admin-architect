@@ -9,7 +9,7 @@
         @js($field->getWireName()),
         @js($field->getLabelDefault()),
         $wire.entangle(@js($field->getWireName())).defer,
-        @js($field->getRecord()?->{$field->getName()}),
+        @js($field->getDataRecord()),
         @js($field->isMultiple()),
         @js($field->isSearchable()),
         @js($field->getAllLabelsForValues()),

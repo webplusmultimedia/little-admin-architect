@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contrats;
+namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;

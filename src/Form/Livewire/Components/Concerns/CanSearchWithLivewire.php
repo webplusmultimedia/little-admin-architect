@@ -35,9 +35,9 @@ trait CanSearchWithLivewire
 
     protected function getOptionsLabelUsingAll(): array
     {
-        if ($this->selectOptionLabelUsing and $this->getRecord()->{$this->getName()}){
+        if ($this->selectOptionLabelUsing and $this->getDataRecord()){
             /** @var Collection $results */
-            $results = call_user_func($this->selectOptionLabelUsing(),$this->getRecord()->{$this->getName()});
+            $results = call_user_func($this->selectOptionLabelUsing(),$this->getDataRecord());
 
             return $results->map(fn($value,$key) => ['value'=>$key,'label'=>$value])->values()->toArray();
         }
