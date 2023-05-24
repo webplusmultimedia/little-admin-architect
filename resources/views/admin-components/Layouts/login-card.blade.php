@@ -16,9 +16,9 @@
     <link rel="stylesheet" href="{{ route('little-admin.page.assets.style','app.css') }}">
 
 </head>
-<body class="bg-gray-100">
-<div class="flex w-screen h-screen items-center justify-center">
-    <div class="md:w-2/5 md:min-w-fit min-w-full mx-auto p-5 grid gap-1 border border-gray-300 rounded-md bg-white ">
+<body class="bg-gray-100 min-h-screen">
+<div class="flex min-h-screen items-center justify-center bg-gradient-to-r from-primary-100">
+    <div class="w-screen max-w-md p-5 grid gap-1 border border-gray-300 rounded-2xl bg-white ">
         {{ $slot }}
     </div>
 </div>

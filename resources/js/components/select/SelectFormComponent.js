@@ -19,6 +19,7 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
         hasOptionUsing,
         msgContent,
         searchDebounce,
+        canShowNoResult : false,
         async getOptionUsing() {
             this.options = await this.$wire.getOptionUsing(componentId)
             this.options.push(this.selectedOptions)
@@ -66,7 +67,7 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
             async ['x-on:keyup.debounce.800ms']() {
                 let key = this.$event.key
                 /** @todo need to remove specials keys causing a (re)search */
-                console.log(key)
+                this.canShowNoResult = false
                 let term = this.$refs.search.value
                 if (!this.isSearching && term !== '') {
                     if(!this.optionsBackup && this.hasOptionUsing ){
@@ -74,6 +75,7 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
                     }
                     this.isSearching = true
                     await this.getResultsOnSearchTerm(term)
+                    this.canShowNoResult = true;
                     this.isSearching = false
                 }
                 else if (this.hasOptionUsing && this.optionsBackup){
@@ -81,6 +83,12 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
                     this.addSelectedOptionToNewList()
                 }
             }
+        },
+        showNoResult(){
+            if (this.canShowNoResult){
+                return  this.options.length === 0
+            }
+            return this.canShowNoResult
         },
         selectItem :{
             ['x-on:click.stop'](){

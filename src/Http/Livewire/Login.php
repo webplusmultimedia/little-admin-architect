@@ -7,6 +7,7 @@ use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\InteractsWithForms;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\HasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\CheckBox;
@@ -86,7 +87,8 @@ class Login extends Component implements HasForm
     {
         if (! $this->_form) {
             $this->_form = Form::make(__('little-admin-architect::login.heading'))
-                ->schema($this->getFormSchemas());
+                ->schema($this->getFormSchemas())
+                ->setButtonSave(Button::make(__('little-admin-architect::login.buttons.submit.label'),'submit','authenticate'));
             $this->_form->livewireId($this->id);
         }
 

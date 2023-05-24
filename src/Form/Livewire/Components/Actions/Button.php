@@ -42,4 +42,28 @@ class Button extends AbstractField
     {
         return $this->caption;
     }
+
+    /**
+     * @param string $caption
+     *
+     * @return Button
+     */
+    public function caption(string $caption): Button
+    {
+        $this->caption = $caption;
+
+        return $this;
+}
+
+    /**
+     * @param string|null $action
+     *
+     * @return Button
+     */
+    public function action(?string $action): Button
+    {
+        $this->action = $action;
+
+        return $this;
+}
 }

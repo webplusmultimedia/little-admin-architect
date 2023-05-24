@@ -56,6 +56,7 @@
                :aria-label="msgContent.searchPrompt"
         >
         <div class="choice__searching__prompt" x-text="msgContent.searchingMessage" x-show="isSearching"></div>
+        <div class="choice__searching__prompt" x-text="msgContent.searchingNoMessage" x-show="showNoResult"></div>
         <div x-ref="list_options" class="choice__list__option" role="listbox" x-show="!isSearching">
         </div>
     </div>

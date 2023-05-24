@@ -50,6 +50,9 @@ final class Form
 
     protected string $caption = 'Enregistrer';
 
+    protected Button $buttonSave;
+    protected Button $buttonCancel;
+
     protected ?string $livewireId = null;
 
     public function getLivewireId(): ?string
@@ -65,6 +68,7 @@ final class Form
     public function __construct(
         public string $title
     ) {
+        $this->buttonSave = Button::make($this->caption, $this->type, $this->action)->icon('s-check');
 
     }
 
@@ -148,11 +152,23 @@ final class Form
     }
     public function getSaveButton(): Button
     {
-        return Button::make($this->caption, $this->type, $this->action)->icon('s-check');
+        return $this->buttonSave;
     }
 
     public function getCancelButton(): Button
     {
-        return Button::make('Annuler', 'link', $this->linkIndex())->icon('s-arrow-uturn-left');
+        $this->buttonCancel = Button::make('Annuler', 'link', $this->linkIndex())->icon('s-arrow-uturn-left');
+        return $this->buttonCancel;
+    }
+
+    public function setButtonSave(Button $button): Form
+    {
+        $this->buttonSave = $button;
+        return $this;
+    }
+    public function setButtonCancel(Button $button): Form
+    {
+        $this->buttonCancel = $button;
+        return $this;
     }
 }
