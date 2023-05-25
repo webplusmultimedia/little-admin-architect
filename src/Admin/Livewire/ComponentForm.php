@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Illuminate\Database\Eloquent\Model;
-
-use Illuminate\Support\Collection;
-
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\CanInitForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\InteractsWithForms;
@@ -27,10 +24,6 @@ class ComponentForm extends Component implements HasForm
     public bool $initialized = false;
 
     public ?string $previousPage = null;
-
-
-
-
 
     public function mount(?Model $data, ?string $pageRoute): void
     {
@@ -63,8 +56,6 @@ class ComponentForm extends Component implements HasForm
             $this->formDatas = $this->buildConfig();
         }
     }*/
-
-
 
     public function init(): void
     {

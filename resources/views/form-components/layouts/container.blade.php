@@ -9,8 +9,8 @@
      wire:key="{{ $config->getWireKey()  }}"
 >
     @if($config->title )
-        <div class="bg-gray-100">
-            <h2 class="text-2xl my-3 pl-5 text-gray-600">{{ $config->title }}</h2>
+        <div class="bg-gray-100 rounded-md">
+            <h2 class="text-lg uppercase my-3 pl-5 text-gray-600">{{ $config->title }}</h2>
         </div>
     @endif
 

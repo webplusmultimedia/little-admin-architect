@@ -6,6 +6,7 @@ declare(strict_types=1);
 return [
 
     'prefix' => 'admin',
+    'path' => env('LITTLE_ADMIN_PATH', 'admin'),
     'route' => [
         'prefix' => 'little-admin.page',
     ],
@@ -22,7 +23,7 @@ return [
         ],
     ],
     'auth' => [
-        'guard' => env('LITTLE_ADMIN_AUTH_GUARD', 'web'),
+        'guard' => env('LITTLE_ADMIN_AUTH_GUARD', 'admin'),
         'pages' => [
             'login' => \Webplusmultimedia\LittleAdminArchitect\Http\Livewire\Login::class,
         ],

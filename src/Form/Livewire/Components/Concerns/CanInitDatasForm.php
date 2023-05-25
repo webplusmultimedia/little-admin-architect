@@ -16,10 +16,12 @@ trait CanInitDatasForm
             if ($field instanceof Field) {
                 $field->record($model);
                 Form::addFormField($field);
+
                 continue;
             }
             $field->initDatasFormOnMount($model);
         }
+
         return $this;
     }
 }

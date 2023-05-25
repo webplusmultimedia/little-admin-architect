@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns;
 
 use Illuminate\Support\Collection;
@@ -9,7 +11,9 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form as Litt
 trait InteractsWithForms
 {
     protected LittleFormAlias|null $_form = null;
+
     protected array $formDatas = [];
+
     protected null|string $pageRoute = null;
 
     protected ?string $routeName = null;
@@ -27,7 +31,7 @@ trait InteractsWithForms
         try {
             return parent::__get($property);
         } catch (PropertyNotFoundException $exception) {
-            if ($property === 'form' && $form = $this->getForm()) {
+            if ('form' === $property && $form = $this->getForm()) {
                 return $form;
             }
 
@@ -43,23 +47,24 @@ trait InteractsWithForms
     {
         $this->skipRender();
         /** @var Collection|array<null> $results */
-        $results =  $this->getOptionsUsing($name);
+        $results = $this->getOptionsUsing($name);
         $options = [];
-        if ($results instanceof Collection){
-            return $results->map(fn($value,$key) => ['value'=>$key,'label'=>$value])->values()->toArray();
+        if ($results instanceof Collection) {
+            return $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
         }
+
         return $options;
     }
 
     public function getSearchResultUsing(string $name, string $term): array
     {
         $this->skipRender();
-        $results = $this->getSearchResultsUsing($name,$term);
+        $results = $this->getSearchResultsUsing($name, $term);
         $options = [];
-        if ($results instanceof Collection){
-            return $results->map(fn($value,$key) => ['value'=>$key,'label'=>$value])->values()->toArray();
+        if ($results instanceof Collection) {
+            return $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
         }
+
         return $options;
     }
-
 }

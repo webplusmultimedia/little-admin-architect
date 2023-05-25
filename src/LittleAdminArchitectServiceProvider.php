@@ -7,7 +7,6 @@ namespace Webplusmultimedia\LittleAdminArchitect;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
-use Livewire\Component;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -38,28 +37,28 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
         Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\View\\Components', config('little-admin-architect.blade-prefix'));
         Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Table\\Views', config('little-admin-architect.blade-table-prefix'));
         Blade::anonymousComponentPath(__DIR__ . '/../resources/views', 'little-anonyme');
-        app('little-admin-manager')->registerResources();
+        \Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager::registerResources();
     }
 
     public function registeringPackage(): void
     {
         $this->app->singleton(FormBinder::class, fn (Application $app) => new FormBinder());
         $this->app->bind('little-admin-architect', fn (): LittleAdminArchitect => new LittleAdminArchitect());
-        $this->app->scoped('little-admin-manager', function (): LittleAminManager {
-            return new LittleAminManager();
+        $this->app->scoped('little-admin-manager', function (): LittleAdminManager {
+            return new LittleAdminManager();
         });
 
     }
 
     public function packageBooted(): void
     {
-        $this->registerLivewireComponents(app('little-admin-manager'));
+        $this->registerLivewireComponents();
         Form::mixin(new SelectMixing());
     }
 
-    private function registerLivewireComponents(LittleAminManager $manager): void
+    private function registerLivewireComponents(): void
     {
-        $groups = $manager->getPages();
+        $groups = \Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager::getPages();
         $componentNames = collect(Arr::pluck($groups, '*.component'))->flatten();
 
         foreach ($componentNames as $page => $component) {
@@ -69,6 +68,6 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
             }
             Livewire::component($component, $class);
         }
-        Livewire::component('little-admin.pages.auth.login',Login::class);
+        Livewire::component('little-admin.pages.auth.login', Login::class);
     }
 }

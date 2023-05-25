@@ -38,7 +38,7 @@ final class Form
     protected string $view = 'form';
 
     /**
-     * @var Model|array<string,string>|null $model
+     * @var Model|array<string,string>|null
      */
     protected null|Model|array $model = null;
 
@@ -51,6 +51,7 @@ final class Form
     protected string $caption = 'Enregistrer';
 
     protected Button $buttonSave;
+
     protected Button $buttonCancel;
 
     protected ?string $livewireId = null;
@@ -87,8 +88,6 @@ final class Form
         return $this->action;
     }
 
-
-
     public function model(null|Model|array $record = null): void
     {
         $this->model = $record;
@@ -108,7 +107,7 @@ final class Form
                 }
                 if ($field->selectOptionLabelUsing()) {
                     $this->addSelectOptionLabelsUsing($field->getWireName(), $field->selectOptionLabelUsing());
-                    if(!$field->isMultiple()) {
+                    if ( ! $field->isMultiple()) {
                         $field->setDefaultLabelForSelect($this);
                     }
                 }
@@ -144,12 +143,14 @@ final class Form
 
     public function getState(): array
     {
-        $datas =[];
+        $datas = [];
         foreach ($this->getFormFields() as $field) {
             $datas[$field->getName()] = $field->getDataRecord();
         }
+
         return $datas;
     }
+
     public function getSaveButton(): Button
     {
         return $this->buttonSave;
@@ -158,17 +159,21 @@ final class Form
     public function getCancelButton(): Button
     {
         $this->buttonCancel = Button::make('Annuler', 'link', $this->linkIndex())->icon('s-arrow-uturn-left');
+
         return $this->buttonCancel;
     }
 
     public function setButtonSave(Button $button): Form
     {
         $this->buttonSave = $button;
+
         return $this;
     }
+
     public function setButtonCancel(Button $button): Form
     {
         $this->buttonCancel = $button;
+
         return $this;
     }
 }

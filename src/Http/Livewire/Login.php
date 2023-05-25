@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Http\Livewire;
 
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
@@ -26,7 +28,7 @@ class Login extends Component implements HasForm
 
     public $remember = false;
 
-    public function mount()
+    public function mount(): void
     {
 
         if (LittleAdminManager::auth()->check()) {
@@ -49,7 +51,7 @@ class Login extends Component implements HasForm
                 ->label(__('little-admin-architect::login.fields.password.label')),
             CheckBox::make('remember')
                 ->label(__('little-admin-architect::login.fields.remember.label'))
-                ->default(false)
+                ->default(false),
         ];
     }
 
@@ -69,8 +71,7 @@ class Login extends Component implements HasForm
         $this->form->model(['email' => $this->email, 'password' => $this->password, 'remember' => $this->remember]);
         $data = $this->form->getState();
 
-
-        if (! LittleAdminManager::auth()->attempt([
+        if ( ! LittleAdminManager::auth()->attempt([
             'email' => $data['email'],
             'password' => $data['password'],
         ], $data['remember'])) {
@@ -83,12 +84,13 @@ class Login extends Component implements HasForm
 
         return app(LoginResponse::class);
     }
+
     protected function getForm(): ?Form
     {
-        if (! $this->_form) {
+        if ( ! $this->_form) {
             $this->_form = Form::make(__('little-admin-architect::login.heading'))
                 ->schema($this->getFormSchemas())
-                ->setButtonSave(Button::make(__('little-admin-architect::login.buttons.submit.label'),'submit','authenticate'));
+                ->setButtonSave(Button::make(__('little-admin-architect::login.buttons.submit.label'), 'submit', 'authenticate'));
             $this->_form->livewireId($this->id);
         }
 
@@ -97,7 +99,7 @@ class Login extends Component implements HasForm
 
     public function render()
     {
-        return view('little-views::admin-components.login',['form'=>$this->form])
+        return view('little-views::admin-components.login', ['form' => $this->form])
             ->layout('little-views::admin-components.Layouts.login-card');
     }
 }

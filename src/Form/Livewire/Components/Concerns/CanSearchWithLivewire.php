@@ -10,16 +10,18 @@ use Illuminate\Support\Collection;
 trait CanSearchWithLivewire
 {
     protected int $searchDebounce = 800;
+
     protected bool $searchable = false;
 
     protected bool $isMultiple = false;
 
-    protected ?Closure $selectOptionLabelUsing = NULL;
+    protected ?Closure $selectOptionLabelUsing = null;
 
-    protected ?Closure $optionsUsing = NULL;
-    protected null|Collection $optionsUsingResults = NULL;
+    protected ?Closure $optionsUsing = null;
 
-    protected ?Closure $searchResultsUsing = NULL;
+    protected null|Collection $optionsUsingResults = null;
+
+    protected ?Closure $searchResultsUsing = null;
 
     public function getSelectOptionLabelUsing(Closure $optionLabel): static
     {
@@ -35,29 +37,30 @@ trait CanSearchWithLivewire
 
     protected function getOptionsLabelUsingAll(): array
     {
-        if ($this->selectOptionLabelUsing and $this->getDataRecord()){
+        if ($this->selectOptionLabelUsing and $this->getDataRecord()) {
             /** @var Collection $results */
-            $results = call_user_func($this->selectOptionLabelUsing(),$this->getDataRecord());
+            $results = call_user_func($this->selectOptionLabelUsing(), $this->getDataRecord());
 
-            return $results->map(fn($value,$key) => ['value'=>$key,'label'=>$value])->values()->toArray();
+            return $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
         }
+
         return [];
     }
 
     public function getAllLabelsForValues(): array
     {
-        if ($this->isMultiple){
+        if ($this->isMultiple) {
             return $this->getOptionsLabelUsingAll();
         }
+
         return $this->optionUsingAll();
     }
-
 
     public function getOptionsUsing(Closure $optionsUsing): static
     {
         $this->optionsUsing = $optionsUsing;
         /** @var Collection $options */
-        if (! $this->optionsUsingResults) {
+        if ( ! $this->optionsUsingResults) {
             $this->optionsUsingResults = call_user_func($this->optionsUsing);
         }
         $options = $this->optionsUsingResults;
@@ -68,17 +71,18 @@ trait CanSearchWithLivewire
 
     public function hasOptionUsing(): bool
     {
-        return $this->optionsUsing !== NULL;
+        return null !== $this->optionsUsing;
     }
 
     protected function optionUsingAll(): array
     {
         if ($this->optionsUsing) {
-            if (! $this->optionsUsingResults) {
+            if ( ! $this->optionsUsingResults) {
                 $this->optionsUsingResults = call_user_func($this->optionsUsing);
             }
             $results = $this->optionsUsingResults;
-            return $results->map(fn($value,$key) => ['value'=>$key,'label'=>$value])->values()->toArray();
+
+            return $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
         }
 
         return [];
@@ -118,23 +122,19 @@ trait CanSearchWithLivewire
         return $this->searchable;
     }
 
-    /**
-     * @return int
-     */
     public function getSearchDebounce(): int
     {
         return $this->searchDebounce;
     }
 
     /**
-     * @param bool $isMultiple
-     *
      * @return CanSearchWithLivewire
      */
     public function multiple(bool $isMultiple = true): static
     {
         $this->isMultiple = $isMultiple;
         $this->addRules('array');
+
         return $this;
-}
+    }
 }

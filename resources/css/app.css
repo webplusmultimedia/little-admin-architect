@@ -71,7 +71,10 @@
 
 @layer components {
     .btn{
-        @apply py-2 px-6 bg-gray-300 hover:bg-gray-500 hover:text-white /*hover:disabled:bg-opacity-30 disabled:bg-opacity-50*/ text-gray-700 duration-300 font-medium
+        @apply py-2 px-6 bg-gray-300 hover:bg-gray-500 hover:text-white text-gray-700 duration-300 font-medium
+    }
+    .rounded__btn{
+        @apply py-0 px-2 bg-gray-300 hover:bg-gray-500 hover:text-white text-gray-700 duration-300 font-medium
     }
     .btn-primary{
         @apply bg-primary-500 hover:bg-primary-600 text-white

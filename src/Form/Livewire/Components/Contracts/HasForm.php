@@ -1,14 +1,12 @@
 <?php
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts;
+declare(strict_types=1);
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
+namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts;
 
 interface HasForm
 {
-
     public function getOptionUsing(string $name): array;
+
     public function getSearchResultUsing(string $name, string $term): array;
-
-
 }

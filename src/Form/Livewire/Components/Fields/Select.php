@@ -13,9 +13,9 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 class Select extends Field
 {
     use CanSearchWithLivewire;
+    use ContainMessageForComponent;
     use HasOptions;
     use SelectHasDefaultLabel;
-    use ContainMessageForComponent;
 
     protected string $view = 'select';
 

@@ -9,10 +9,12 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field
 trait CanGetRules
 {
     protected array $formRules = [];
+
     protected array $attributesRules = [];
+
     public function getFormRules(): array
     {
-        if (count($this->formRules)>0){
+        if (count($this->formRules) > 0) {
             return $this->formRules;
         }
         $rules = [];
@@ -21,6 +23,7 @@ trait CanGetRules
             $rules = $field->interactWithRules(rules: $rules);
         }
         $this->formRules = $rules;
+
         return $rules;
     }
 
@@ -31,7 +34,7 @@ trait CanGetRules
 
     public function getAttributesRules(): array
     {
-        if (count($this->attributesRules)>0){
+        if (count($this->attributesRules) > 0) {
             return $this->attributesRules;
         }
         $rules = [];
@@ -40,6 +43,7 @@ trait CanGetRules
             $rules = $field->applyAttributesRules($rules);
         }
         $this->attributesRules = $rules;
+
         return $rules;
     }
 }

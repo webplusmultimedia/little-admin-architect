@@ -18,6 +18,4 @@ trait ValidateValuesForRules
 
         return $values;
     }
-
-
 }

@@ -11,7 +11,6 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\Ca
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\CanValidateValuesForRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeDisabled;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeHidden;
-
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeRequired;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanBeWireModifier;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\CanInitValue;
@@ -48,7 +47,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use ValidateValuesForRules;
 
     /**
-     * @var array<string,string>|Model|null $record
+     * @var array<string,string>|Model|null
      */
     protected array|null|Model $record = null;
 
@@ -62,28 +61,32 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
 
     public function getWireName(): string
     {
-        return  $this->getPrefix() . $this->name;
+        return $this->getPrefix() . $this->name;
     }
 
     public function getDataRecord(): mixed
     {
-        if ($this->record instanceof Model){
+        if ($this->record instanceof Model) {
             return $this->getRecord()->{$this->getName()};
         }
-        if (is_array($this->record)){
-            if (isset($this->record[$this->getName()])){
+        if (is_array($this->record)) {
+            if (isset($this->record[$this->getName()])) {
                 return $this->record[$this->getName()];
             }
         }
+
         return null;
     }
+
     protected function getPrefix(): string
     {
-        if ($this->record instanceof Model){
+        if ($this->record instanceof Model) {
             return $this->prefixName . '.';
         }
+
         return '';
     }
+
     public static function make(string $name, null|string $label = null): static
     {
         return new static(name: $name, label: $label);

@@ -11,7 +11,7 @@ class LittleAdminArchitect
         return 'me';
     }
 
-    public static function getResourceManager(): LittleAminManager
+    public static function getResourceManager(): LittleAdminManager
     {
         return app('little-admin-manager');
     }

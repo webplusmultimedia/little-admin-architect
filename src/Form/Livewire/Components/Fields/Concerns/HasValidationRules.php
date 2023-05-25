@@ -29,12 +29,14 @@ trait HasValidationRules
     public function exists(string $table, string|null $column = null): static
     {
         $rules = "exists:{$table}";
-        if ($column){
+        if ($column) {
             $rules .= ",{$column}";
         }
         $this->addRules($rules);
+
         return $this;
     }
+
     public function nullable(): static
     {
         $this->addRules('nullable');

@@ -17,7 +17,6 @@
                 {{ __('little-admin-architect::table.button.create',['label'=>'un']) }} {{ str($table->title)->singular() }}
             </a>
         </div>
-
     </div>
 
     <div class="flex flex-col bg-white py-10 px-5 rounded-lg overflow-x-auto" x-data="{}">
@@ -37,7 +36,7 @@
         </div>
         @if($table->hasRecords())
             <div class=" border-collapse border border-gray-200 rounded-lg overflow-hidden overflow-x-auto">
-                <table class="table-auto w-full text-start divide-y bg-gray-50 shadow-sm"
+                <table class="table-auto w-full text-start divide-y shadow-sm"
                        wire:loading.class="opacity-50"
                 >
                     <thead class="bg-gray-100 border-t text-start">
@@ -58,12 +57,12 @@
                                 <x-dynamic-component :component="$column->getView()" :column="$column" :livewireId="$table->getLivewireId()"/>
                             @endforeach
                             <td class="max-w-max whitespace-nowrap">
-                                <div class="px-3 inline-flex items-center gap-4">
-                                    <a href="{{ $table->linkEdit($record)  }}" class="hover:text-primary-400 transition text-sm font-bold py-4  inline-flex items-center space-x-1 text-primary-600">
+                                <div class="px-3 inline-flex items-center gap-3">
+                                    <a href="{{ $table->linkEdit($record)  }}" class="hover:text-primary-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-primary-200 hover:border-primary-400  inline-flex items-center space-x-1 text-primary-600">
                                         <x-heroicon-s-pencil class="w-4 h-4" aria-hidden="true"/>
                                         <span>{{ __('little-admin-architect::table.row-button.edit') }}</span>
                                     </a>
-                                    <a href="{{ $table->linkIndex()  }}" class="hover:text-error-400 transition text-sm font-bold py-4  inline-flex items-center space-x-1 text-error-600 ">
+                                    <a href="{{ $table->linkIndex()  }}" class="hover:text-error-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-error-200 hover:border-error-400  inline-flex items-center space-x-1 text-error-600 ">
                                         <x-heroicon-s-x-mark class="w-4 h-4 " aria-hidden="true"/>
                                         <span>{{ __('little-admin-architect::table.row-button.delete') }}</span>
                                     </a>

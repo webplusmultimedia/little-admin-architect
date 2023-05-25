@@ -16,6 +16,7 @@ abstract class AbstractLayout /*implements CanValidateValuesForRules, CanGetAttr
 {
     //use CanGetRules;
     use CanInitDatasForm;
+
     //use CanValidatedValues;
     use HasColSpan;
 

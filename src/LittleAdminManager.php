@@ -10,7 +10,7 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Arr;
 use Webplusmultimedia\LittleAdminArchitect\Support\RegisterResources;
 
-final class LittleAminManager
+final class LittleAdminManager
 {
     private bool $isNavigationMounted = false;
 
@@ -32,34 +32,37 @@ final class LittleAminManager
 
     private array $meta = [];
 
-    private string|Htmlable|null $theme = NULL;
+    private string|Htmlable|null $theme = null;
 
     private array $userMenuItems = [];
 
     private array $widgets = [];
 
-    private ?Closure $navigationBuilder = NULL;
+    private ?Closure $navigationBuilder = null;
 
     private array $renderHooks = [];
 
     private bool $isServing = false;
 
-    public function getUrl(): ?string {
+    public function getUrl(): ?string
+    {
         $firstGroup = Arr::first($this->getNavigations());
-        if (!$firstGroup){
+        if ( ! $firstGroup) {
             return null;
         }
 
         $firstItems = Arr::first($firstGroup);
+
         return route($firstItems['route_name']);
     }
 
     public function getNavigations(): array
     {
-        if (!count($this->navigationGroups)) {
-           return LittleAdminArchitect::getNavigationPages();
+        if ( ! count($this->navigationGroups)) {
+            return LittleAdminArchitect::getNavigationPages();
         }
-        return  $this->navigationGroups ;
+
+        return $this->navigationGroups;
     }
 
     public function auth(): Guard
@@ -87,7 +90,9 @@ final class LittleAminManager
         $this->applyResources();
     }
 
-    public function resolveResourceBy(null|string $name = NULL, null|string $route = NULL): void {}
+    public function resolveResourceBy(null|string $name = null, null|string $route = null): void
+    {
+    }
 
     private function applyResources(): void
     {
@@ -108,7 +113,7 @@ final class LittleAminManager
 
     public function getPages(): array
     {
-        $resources = app('little-admin-manager')->getResources();
+        $resources = $this->getResources();
 
         /*collect($resources)
              ->map(function ($value,$key){
