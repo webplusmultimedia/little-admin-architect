@@ -85,9 +85,9 @@
             <x-little-anonyme::table-components.partials.no-records/>
         @endif
 
+        <div class=" py-5 px-5    text-primary-400">
+            {{ $table->getRecords()->links() }}
+        </div>
+    </div>
 
-    </div>
-    <div class=" py-2 px-5  bg-slate-50 border-t text-primary-400">
-        {{ $table->getRecords()->links() }}
-    </div>
 </div>

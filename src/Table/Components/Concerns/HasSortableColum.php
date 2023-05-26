@@ -13,7 +13,7 @@ trait HasSortableColum
 
     public function sortableColumn(string $column): static
     {
-        $this->sortableColumn = $column;
+        $this->sortableColumn = $this->hasColumn($column);
 
         return $this;
     }
@@ -27,7 +27,7 @@ trait HasSortableColum
 
     public function desc(): static
     {
-        $this->sortDirection = 'asc';
+        $this->sortDirection = 'desc';
 
         return $this;
     }
