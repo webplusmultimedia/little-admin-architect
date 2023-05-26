@@ -22,18 +22,12 @@ trait CanInitTable
 
         /** @var Resources $resource */
         $resource = $page::getResource();
-        if ( ! $this->rowsPerPage) {
-            $this->rowsPerPage = $resource::getRowsPerPage();
-        }
+
         $this->_table = $resource::getTableColumns(\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table::make($resource::getPluralModelLabel()));
         $this->_table
             ->configureColumns(livewireId: $this->id, page: $page,title:$resource::getPluralModelLabel());
-        $records = $resource::getEloquentQuery()
-            ->when($this->search, function (Builder $builder): void {
-                $this->_table->searchQuery($builder, $this->search);
-            })
-            ->paginate($this->rowsPerPage);
-        $this->_table->records($records);
+        $this->_table->builder($resource::getEloquentQuery()); // builder
+
 
         return   $this->_table;
     }

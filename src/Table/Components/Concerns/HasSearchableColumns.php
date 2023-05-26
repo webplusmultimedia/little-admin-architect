@@ -14,7 +14,7 @@ trait HasSearchableColumns
     /** @var AbstractColumn[] */
     protected array $searchableColumns = [];
 
-    public function applySearchableColumns(): static
+    protected function applySearchableColumns(): void
     {
         foreach ($this->columns as $column) {
             if ($column->isSearchable()) {
@@ -26,7 +26,6 @@ trait HasSearchableColumns
             $this->showSearchBar = true;
         }
 
-        return $this;
     }
 
     protected function hasSearchableColumns(): bool

@@ -23,9 +23,9 @@ class ComponentTable extends Component implements HasTable
 
     public bool $initialized = true;
 
-    public ?string $routeName = null;
+    public ?string $routeName = NULL;
 
-    public ?int $rowsPerPage = null;
+    public ?int $rowsPerPage = NULL;
 
     public string $search = '';
 
@@ -33,14 +33,16 @@ class ComponentTable extends Component implements HasTable
      * @var array[]
      */
     protected $queryString = [
-        'search' => ['except' => '', 'as' => 'q'],
+        'search'          => ['except' => '', 'as' => 'q'],
+        'tableSortColumn' => ['except' => NULL],
+        'tableDirection'  => ['except' => NULL],
     ];
 
     protected bool $initBoot = true;
 
-    protected null|string $pageRoute = null;
+    protected null|string $pageRoute = NULL;
 
-    protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = null;
+    protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = NULL;
 
     protected array $formDatas;
 
@@ -48,9 +50,9 @@ class ComponentTable extends Component implements HasTable
     {
 
         $this->pageRoute = $pageRoute;
-        //$this->formDatas = $this->setUp();
         $this->initBoot = false;
     }
+
     public function paginationView(): string
     {
         return 'little-views::table-components.pagination.pagination';

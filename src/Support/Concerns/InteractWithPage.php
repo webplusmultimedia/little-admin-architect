@@ -11,7 +11,7 @@ trait InteractWithPage
 {
     protected Page $pageForResource;
 
-    public function setPagesForResource(Page $page): void
+    protected function setPagesForResource(Page $page): void
     {
         $this->pageForResource = $page;
     }

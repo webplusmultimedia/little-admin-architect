@@ -11,7 +11,9 @@ class Header extends AbstractComponent
     protected string $viewPath = 'layout.header';
 
     public function __construct(
-        protected \Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Header $header
+        protected \Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Header $header,
+        protected ?string $sortColumn,
+        protected ?string $sortDirection
     ) {
     }
 
@@ -19,4 +21,22 @@ class Header extends AbstractComponent
     {
         return $this->header;
     }
+
+    /**
+     * @return string
+     */
+    public function getSortColumn(): ?string
+    {
+        return $this->sortColumn;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSortDirection(): ?string
+    {
+        return $this->sortDirection;
+    }
+
+
 }

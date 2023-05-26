@@ -9,7 +9,7 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
 
 trait HasRecords
 {
-    private ?LengthAwarePaginator $records = null;
+    protected ?LengthAwarePaginator $records = null;
 
     public function records(LengthAwarePaginator $records): Table
     {

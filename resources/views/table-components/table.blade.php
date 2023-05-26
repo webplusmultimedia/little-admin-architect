@@ -2,6 +2,8 @@
     use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
     /** @var Table $table */
 	$table = $getTable();
+    $sortDirection = $table->getSortDirection();
+    $sortColumn = $table->getSortColumn();
 @endphp
 <div class="py-5 px-2">
     <div class="flex justify-between bg-white px-5 py-2 mb-8">
@@ -42,7 +44,11 @@
                     <thead class="bg-gray-100 border-t text-start">
                     <tr>
                         @foreach($table->getHeaders() as $header)
-                            <x-dynamic-component :component="$header->getComponentView()" :header="$header"/>
+                            <x-dynamic-component :component="$header->getComponentView()"
+                                                 :header="$header"
+                                                 :sort-direction="$sortDirection"
+                                                 :sort-column="$sortColumn"
+                            />
                         @endforeach
                         <th class="w-5">
                             &nbsp;
@@ -58,11 +64,13 @@
                             @endforeach
                             <td class="max-w-max whitespace-nowrap">
                                 <div class="px-3 inline-flex items-center gap-3">
-                                    <a href="{{ $table->linkEdit($record)  }}" class="hover:text-primary-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-primary-200 hover:border-primary-400  inline-flex items-center space-x-1 text-primary-600">
+                                    <a href="{{ $table->linkEdit($record)  }}"
+                                       class="hover:text-primary-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-primary-200 hover:border-primary-400  inline-flex items-center space-x-1 text-primary-600">
                                         <x-heroicon-s-pencil class="w-4 h-4" aria-hidden="true"/>
                                         <span>{{ __('little-admin-architect::table.row-button.edit') }}</span>
                                     </a>
-                                    <a href="{{ $table->linkIndex()  }}" class="hover:text-error-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-error-200 hover:border-error-400  inline-flex items-center space-x-1 text-error-600 ">
+                                    <a href="{{ $table->linkIndex()  }}"
+                                       class="hover:text-error-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-error-200 hover:border-error-400  inline-flex items-center space-x-1 text-error-600 ">
                                         <x-heroicon-s-x-mark class="w-4 h-4 " aria-hidden="true"/>
                                         <span>{{ __('little-admin-architect::table.row-button.delete') }}</span>
                                     </a>

@@ -8,6 +8,7 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasColumns;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeader;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasQueryBuilder;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasRecords;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasRowsPerPage;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasSearchableColumns;
@@ -23,11 +24,11 @@ final class Table
     use InteractWithPage;
     use HasSortableColum;
     use HasRowsPerPage;
+    use HasQueryBuilder;
 
     private string $view = 'table';
     protected string $TableTitle = '';
 
-    protected array $sortColumns = [];
 
     private ?string $livewireId = null;
 
@@ -36,11 +37,9 @@ final class Table
         return $this->livewireId;
     }
 
-    public function livewireId(string $livewireId): Table
+    protected function livewireId(string $livewireId): void
     {
         $this->livewireId = $livewireId;
-
-        return $this;
     }
 
     public function __construct(
@@ -50,21 +49,18 @@ final class Table
 
     public function configureColumns(string $livewireId, Page $page,string $title=''): void
     {
-        $this->livewireId($livewireId)
-            ->applySearchableColumns()
-            ->applyHeaders()
-            ->tableTitle($title)
-            ->setPagesForResource($page)
-       ;
+        $this->livewireId($livewireId);
+            $this->applySearchableColumns();
+            $this->applyHeaders();
+            $this->tableTitle($title);
+            $this->setPagesForResource($page);
     }
 
-    public function applyHeaders(): Table
+    protected function applyHeaders(): void
     {
         foreach ($this->columns as $column) {
             $this->headers(Header::make($column));
         }
-
-        return $this;
     }
 
     public static function make(string $title = ''): Table
@@ -82,11 +78,10 @@ final class Table
      *
      * @return Table
      */
-    public function tableTitle(string $TableTitle): Table
+    protected function tableTitle(string $TableTitle): void
     {
         $this->TableTitle = $TableTitle;
 
-        return $this;
 }
 
     /**
