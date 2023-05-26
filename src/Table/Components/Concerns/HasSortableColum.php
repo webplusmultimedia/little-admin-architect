@@ -50,7 +50,7 @@ trait HasSortableColum
 
     protected function hasColumn(?string $column): ?string
     {
-        if($column and collect($this->columns)->filter(fn(AbstractColumn $col) => $col->getName() === $column)->count()){
+        if($column and collect($this->columns)->filter(fn(AbstractColumn $col) => $col->getName() === $column and $col->isSortable())->count()){
             return $column;
         }
         return $this->sortableColumn ;
