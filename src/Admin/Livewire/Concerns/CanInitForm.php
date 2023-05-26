@@ -25,9 +25,7 @@ trait CanInitForm
         $resource = $page::getResource();
         $this->_form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
 
-        $this->_form->livewireId($this->id);
-        $this->_form->model($this->data);
-        $this->_form->setPagesForResource($page);
+        $this->_form->configureForm(model: $this->data,resource: $page,livewireId: $this->id );
 
         $this->datasRules = $this->_form->getFormRules();
         $this->attributesRules = $this->_form->getAttributesRules();

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components;
 
 use Illuminate\Database\Eloquent\Model;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanGetRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\CanInitDatasForm;
@@ -61,6 +62,12 @@ final class Form
         return $this->livewireId;
     }
 
+    public function configureForm(string $livewireId, Page $resource,?Model $model): void
+    {
+        $this->livewireId($livewireId);
+        $this->model($model);
+        $this->setPagesForResource($resource);
+    }
     public function livewireId(string $id): void
     {
         $this->livewireId = $id;
