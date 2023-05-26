@@ -37,10 +37,17 @@
             </button>
             <div class="hidden w-full md:inline-flex md:w-auto" id="navbar-default">
                 <ul class="font-medium flex flex-col items-center justify-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li x-data="{}" class="relative">
+                        <input type="text"   id="little-admin.globalResearchField" class="w-64 py-2 text-sm pr-7" placeholder="Global search">
+                        <div class="absolute right-0 top-0 bottom-0 flex items-center pr-2">
+                            <x-heroicon-o-magnifying-glass class="w-5" />
+                        </div>
+
+                    </li>
                     <li class="">
                         <a href="#"
                            class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                            <x-heroicon-o-bell-alert class="w-8 text-primary-400"/>
+                            <x-heroicon-o-bell-alert class="w-6 text-primary-400"/>
                         </a>
                     </li>
                     <li class="" x-data="{}">
@@ -52,13 +59,17 @@
                             <x-heroicon-m-user-circle class="w-10 text-slate-400"/>
                             <div x-bind="showMenu"
                                  class="absolute right-0 top-[100%_+_4px] rounded-lg bg-white z-20 shadow-md border border-primary-200 flex flex-col
-                                   min-w-[12rem] whitespace-nowrap  divide-y text-sm"
+                                   min-w-[12rem] whitespace-nowrap  divide-y text-sm overflow-hidden"
                             >
-                                <div class="px-4 py-2 hover:text-primary-600 hover:bg-primary-50"> {{ auth()->user()->name }}</div>
+                                <div class="px-4 py-2 hover:text-primary-600 hover:bg-primary-50"> {{ auth()->user()?->name }}</div>
 
                                     <form action="{{ route(config('little-admin-architect.route.prefix') .'.auth.logout') }}" method="post">
                                         @csrf
-                                        <button type="submit" class="px-4 py-2 hover:text-primary-600 hover:bg-primary-50 w-full text-left">Log Out</button>
+                                        <div class="inline-flex items-center space-x-2 px-4 py-2 hover:text-primary-600 hover:bg-primary-50/40 w-full text-left">
+                                            <x-heroicon-o-magnifying-glass class="w-5"/>
+                                            <button type="submit" class="">Log Out</button>
+                                        </div>
+
                                     </form>
 
 

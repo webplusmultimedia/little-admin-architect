@@ -1,8 +1,8 @@
 @php use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Textarea; @endphp
 @php
-    /** @var Textarea $config */
-    $config = $getConfig();
-    $id = $config->getId();
+    /** @var Textarea $field */
+    $field = $getConfig();
+    $id = $field->getId();
   /*  $prepend = $getPrepend($locale);
     $append = $getAppend($locale);*/
     $errorMessage = $getErrorMessage($errors);
@@ -10,42 +10,42 @@
     $isWired = $componentIsWired();
 
 @endphp
-@if($config->isHidden())
+@if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
         {{ $attributes->except(['field'])->merge([
-                   'wire:model' . $config->getWireModifier() => $config->getWireName(),
+                   'wire:model' . $field->getWireModifier() => $field->getWireName(),
                    'id' => $id,
                    'type' => 'hidden',
                    ])
                    }}
     />
 @else
-    <x-dynamic-component :component="$config->getWrapperView()" :id="$config->getWrapperId()"
-        {{ $attributes->class('')->merge(['class'=> $config->getColSpan()]) }}
+    <x-dynamic-component :component="$field->getWrapperView()" :id="$field->getWrapperId()"
+        {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
     >
         <x-dynamic-component
-            :component="$config->getViewComponentForLabel()"
+            :component="$field->getViewComponentForLabel()"
             :id="$id" class="form-label"
-            :label="$config->getLabel()"
-            :showRequired="$isShowSignRequiredOnLabel()"
+            :label="$field->getLabel()"
+            :showRequired="$field->isRequired()"
         />
         <div class="">
             {{-- @if($prepend)
                  <x:form::partials.addon :addon="$prepend"/>
              @endif--}}
             <textarea {{ $attributes->merge([
-                'wire:model' . $getComponentLivewireModifier() =>  $config->getWireName(),
+                'wire:model' . $getComponentLivewireModifier() =>  $field->getWireName(),
                 'id' => $id,
-				'rows' => $config->getRows(),
-                'placeholder' => $config->getPlaceHolder(),
+				'rows' => $field->getRows(),
+                'placeholder' => $field->getPlaceHolder(),
                 'aria-describedby' => $id
             ])}}></textarea>
             {{--
               @if($append)
                   <x:form::partials.addon :addon="$append"/>
               @endif--}}
-            <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()"/>
-            <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage"/>
+            <x-dynamic-component :component="$field->getViewComponentForHelperText()" :caption="$field->getHelperText()"/>
+            <x-dynamic-component :component="$field->getViewComponentForErrorMessage()" :message="$errorMessage"/>
         </div>
     </x-dynamic-component>
 @endif

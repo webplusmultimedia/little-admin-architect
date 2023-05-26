@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasId;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasName;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValidation;
 
 class CheckBoxList extends AbstractComponent
 {
     use HasId;
-    use HasLabel;
     use HasName;
     use HasValidation;
 
@@ -32,10 +29,9 @@ class CheckBoxList extends AbstractComponent
         return 'fields.check-box-list';
     }
 
-    protected function setUp(AbstractLayout|Field $field): void
+    protected function setUp(Field $field): void
     {
         $this->field = $field;
-        $this->isRequiredField = $field->isRequired();
         $this->name = $field->getName();
     }
 }

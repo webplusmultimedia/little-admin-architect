@@ -4,23 +4,20 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeChecked;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeWired;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasId;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasName;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasType;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValidation;
 
 class Checkbox extends AbstractComponent
 {
-    use CanBeChecked;
+    // use CanBeChecked;
     use CanBeWired;
     use HasId;
-    use HasLabel;
     use HasName;
     use HasType;
     use HasValidation;
@@ -29,7 +26,7 @@ class Checkbox extends AbstractComponent
 
     protected array|object|null $bind = null;
 
-    protected bool|array|null $checked = null;
+    protected bool $checked = false;
 
     public string|null $caption = null;
 
@@ -37,14 +34,14 @@ class Checkbox extends AbstractComponent
 
     public bool $toggleSwitch = false;
 
-    public function getBind()
+    public function getBind(): object|array|null
     {
         return $this->bind;
     }
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
-        Field $field,
+        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\CheckBox $field,
         public null|string $name = null,
     ) {
         parent::__construct();
@@ -56,7 +53,7 @@ class Checkbox extends AbstractComponent
         return 'fields.checkbox';
     }
 
-    protected function setUp(Field|AbstractLayout $field): void
+    protected function setUp(Field $field): void
     {
         $this->field = $field;
         $this->name = $field->getName();

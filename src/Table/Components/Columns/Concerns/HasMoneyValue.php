@@ -50,7 +50,7 @@ trait HasMoneyValue
     protected function applyToValue(): void
     {
         $this->value = function (AbstractColumn $column): string {
-            if (is_numeric($column->record->{$column->name})) {
+            if (is_float($column->record->{$column->name}) || is_int($column->record->{$column->name})) {
                 return number_format($column->record->{$column->name}, $this->nb_decimal, $this->decimal_separator, $this->thousands_separator)
                     . ' ' . $this->type;
             }

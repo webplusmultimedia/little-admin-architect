@@ -16,7 +16,7 @@ trait CanBeChecked
         }
         $dataBatch = $this->bind ?: app(FormBinder::class)->getBoundDataBatch();
 
-        return (bool) $this->checked ?? (bool) data_get($dataBatch, $this->name);
+        return (bool) $this->checked || (bool) data_get($dataBatch, $this->name);
     }
 
     public function getGroupModeCheckedStatus(int|string $groupValue): bool

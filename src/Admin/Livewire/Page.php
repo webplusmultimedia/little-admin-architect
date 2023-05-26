@@ -38,7 +38,7 @@ class Page extends Component
     {
         $path = static::getEditRoute('edit')['route'];
 
-        return (string) url(str($path)
+        return url(str($path)
             ->replace(['{record}'], $record->getKey())
             ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
             ->value());
@@ -48,7 +48,7 @@ class Page extends Component
     {
         $path = static::getEditRoute('create')['route'];
 
-        return (string) url(str($path)
+        return url(str($path)
             ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
             ->value());
     }
@@ -57,7 +57,7 @@ class Page extends Component
     {
         $path = static::getEditRoute('index')['route'];
 
-        return (string) url(str($path)
+        return url(str($path)
             ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
             ->value());
     }

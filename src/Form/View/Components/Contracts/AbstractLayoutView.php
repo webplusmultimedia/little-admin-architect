@@ -2,32 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts;
+namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Contracts;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
+use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\AbstractLayout;
 
-abstract class AbstractComponent extends Component
+abstract class AbstractLayoutView extends Component
 {
     protected string $viewPath;
 
-    protected Field $field;
+    protected AbstractLayout $field;
 
     public function __construct()
     {
         $this->viewPath = $this->setViewPath();
     }
 
-    public function getConfig(): Field
+    public function getConfig(): AbstractLayout
     {
         return $this->field;
     }
 
     abstract protected function setViewPath(): string;
 
-    abstract protected function setUp(Field $field): void;
+    abstract protected function setUp(AbstractLayout $field): void;
 
     public function render(): View|Htmlable
     {

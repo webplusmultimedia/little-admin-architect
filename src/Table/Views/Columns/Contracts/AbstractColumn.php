@@ -12,7 +12,7 @@ abstract class AbstractColumn extends Component
 {
     protected string $viewPath;
 
-    abstract public function getColumn();
+    abstract public function getColumn(): \Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts\AbstractColumn;
 
     public function render(): View|Htmlable
     {

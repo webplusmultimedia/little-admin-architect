@@ -73,7 +73,7 @@ trait HasValidation
                 $rawMessage
             ) : null;
         }
-        $_name = str($this->name)->headline()->lower() . ($locale ? ' (' . mb_strtoupper($locale) . ')' : '');
+        // $_name = str($this->name)->headline()->lower() . ($locale ? ' (' . mb_strtoupper($locale) . ')' : '');
 
         return $errorBag->first($this->getConfig()->getWireName());
     }

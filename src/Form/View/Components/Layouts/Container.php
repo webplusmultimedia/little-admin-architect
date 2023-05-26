@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Layouts;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\AbstractLayout;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
+use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Contracts\AbstractLayoutView;
 
-class Container extends AbstractComponent
+class Container extends AbstractLayoutView
 {
     public function __construct(
         \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Layouts\Container $field,
@@ -23,9 +22,8 @@ class Container extends AbstractComponent
         return 'layouts.container';
     }
 
-    protected function setUp(Field|AbstractLayout $field): void
+    protected function setUp(AbstractLayout $field): void
     {
         $this->field = $field;
-        //$this->name = $field->getName();
     }
 }

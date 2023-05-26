@@ -1,58 +1,58 @@
 @php use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Input;
-    /** @var Input $config */
-        $config = $getConfig();
-        $id = $config->getId();
+    /** @var Input $field */
+        $field = $getConfig();
+        $id = $field->getId();
         $prepend = $getPrepend();
         $append = $getAppend();
         $errorMessage =  $getErrorMessage($errors);
 
 @endphp
-@if($config->isHidden())
+@if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
      {{ $attributes->except(['field'])->merge([
-                'wire:model' . $config->getWireModifier() => $config->getWireName(),
+                'wire:model' . $field->getWireModifier() => $field->getWireName(),
                 'id' => $id,
                 'type' => 'hidden',
                 ])
                 }}
     />
 @else
-<x-dynamic-component :component="$config->getWrapperView()"
-                     :id="$config->getWrapperId()"
-                     {{ $attributes->class('')->merge(['class'=> $config->getColSpan()]) }}
-                     @class([  'hidden' => $config->getType() === 'hidden'])
+<x-dynamic-component :component="$field->getWrapperView()"
+                     :id="$field->getWrapperId()"
+                     {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
+                     @class([  'hidden' => $field->getType() === 'hidden'])
                      x-data="{ errors : $wire.__instance.errors}"
 >
-        <x-dynamic-component :component="$config->getViewComponentForLabel()" :id="$id" class="form-label" :label="$config->getLabel()"
-                             :showRequired="$isShowSignRequiredOnLabel()"/>
+        <x-dynamic-component :component="$field->getViewComponentForLabel()" :id="$id" class="form-label" :label="$field->getLabel()"
+                             :showRequired="$field->isRequired()"/>
 
         {{--  @if($prepend)
               <x:form::partials.addon :addon="$prepend"/>
           @endif--}}
         <input {{ $attributes->except(['field'])->merge([
-                'wire:model' . $config->getWireModifier() => $config->getWireName(),
+                'wire:model' . $field->getWireModifier() => $field->getWireName(),
                 'id' => $id,
                 'class' => 'py-2 px-2',
-                'type' => $type,
-                'placeholder' => $config->getPlaceHolder(),
+                'type' => $field->getType(),
+                'placeholder' => $field->getPlaceHolder(),
                 'aria-describedby' => $caption ? $id . '-caption' : NULL,
-                'minlength' => $config->getMinLength() ,
-                'maxlength' => $config->getMaxLength() ,
-                'step' => $config->getStep() ,
-                'inputmode' => $config->getInputMode() ,
-                'min' => $config->getMinValue() ,
-                'max' => $config->getMaxValue() ,
+                'minlength' => $field->getMinLength() ,
+                'maxlength' => $field->getMaxLength() ,
+                'step' => $field->getStep() ,
+                'inputmode' => $field->getInputMode() ,
+                'min' => $field->getMinValue() ,
+                'max' => $field->getMaxValue() ,
             ]) }}
-               @if($config->isRequired()) required @endif
-               @if($config->isDisabled()) disabled @endif
+               @if($field->isRequired()) required @endif
+               @if($field->isDisabled()) disabled @endif
         />
         {{--
           @if($append)
               <x:form::partials.addon :addon="$append"/>
           @endif--}}
 
-        <x-dynamic-component :component="$config->getViewComponentForHelperText()" :caption="$config->getHelperText()"/>
-        <x-dynamic-component :component="$config->getViewComponentForErrorMessage()" :message="$errorMessage"/>
+        <x-dynamic-component :component="$field->getViewComponentForHelperText()" :caption="$field->getHelperText()"/>
+        <x-dynamic-component :component="$field->getViewComponentForErrorMessage()" :message="$errorMessage"/>
 
 
 

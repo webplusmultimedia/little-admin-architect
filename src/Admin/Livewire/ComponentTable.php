@@ -1,0 +1,60 @@
+<?php
+
+namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
+
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
+use Livewire\WithPagination;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\CanInitTable;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\CanSortColumn;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\InteractsWithTable;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Contracts\HasTable;
+
+/**
+ * @property \Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $table
+ */
+class ComponentTable extends Component implements HasTable
+{
+    use CanSortColumn;
+    use CanInitTable;
+    use InteractsWithTable;
+
+    use WithPagination;
+
+    public bool $initialized = true;
+
+    public ?string $routeName = null;
+
+    public ?int $rowsPerPage = null;
+
+    public string $search = '';
+
+    /**
+     * @var array[]
+     */
+    protected $queryString = [
+        'search' => ['except' => '', 'as' => 'q'],
+    ];
+
+    protected bool $initBoot = true;
+
+    protected null|string $pageRoute = null;
+
+    protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = null;
+
+    protected array $formDatas;
+
+    public function mount(string $pageRoute): void
+    {
+
+        $this->pageRoute = $pageRoute;
+        //$this->formDatas = $this->setUp();
+        $this->initBoot = false;
+    }
+    public function paginationView(): string
+    {
+        return 'little-views::table-components.pagination.pagination';
+    }
+
+
+}

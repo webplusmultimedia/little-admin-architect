@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Http\Livewire;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Actions\Button;
@@ -17,16 +18,19 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Input
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
 use Webplusmultimedia\LittleAdminArchitect\Http\Responses\Auth\LoginResponse;
 
+/**
+ * @property Form $form
+ */
 class Login extends Component implements HasForm
 {
     use InteractsWithForms;
     use WithRateLimiting;
 
-    public $email = '';
+    public string $email = '';
 
-    public $password = '';
+    public string $password = '';
 
-    public $remember = false;
+    public bool $remember = false;
 
     public function mount(): void
     {
@@ -97,7 +101,7 @@ class Login extends Component implements HasForm
         return $this->_form;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('little-views::admin-components.login', ['form' => $this->form])
             ->layout('little-views::admin-components.Layouts.login-card');

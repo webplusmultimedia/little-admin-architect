@@ -24,7 +24,7 @@ abstract class AbstractColumn
 
     protected string $view = 'text';
 
-    public function __construct(
+    final public function __construct(
         protected string $name
     ) {
         $this->setUp();

@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class AssetsController
 {
+    /**
+     * @return Response|BinaryFileResponse|void
+     */
     public function __invoke(string $file)
     {
         switch ($file) {
@@ -52,11 +57,14 @@ class AssetsController
         abort(404);
     }
 
-    protected function getHttpDate(int $timestamp)
+    protected function getHttpDate(int $timestamp): string
     {
         return sprintf('%s GMT', gmdate('D, d M Y H:i:s', $timestamp));
     }
 
+    /**
+     * @return Response|BinaryFileResponse
+     */
     protected function pretendResponseIsFile(string $path, string $contentType)
     {
         abort_unless(

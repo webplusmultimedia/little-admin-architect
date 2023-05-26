@@ -59,12 +59,11 @@ trait CanSearchWithLivewire
     public function getOptionsUsing(Closure $optionsUsing): static
     {
         $this->optionsUsing = $optionsUsing;
-        /** @var Collection $options */
         if ( ! $this->optionsUsingResults) {
             $this->optionsUsingResults = call_user_func($this->optionsUsing);
         }
-        $options = $this->optionsUsingResults;
-        $this->addRules('in:' . implode(',', $options->keys()->toArray()));
+
+        $this->addRules('in:' . implode(',', $this->optionsUsingResults->keys()->toArray()));
 
         return $this;
     }
@@ -127,14 +126,11 @@ trait CanSearchWithLivewire
         return $this->searchDebounce;
     }
 
-    /**
-     * @return CanSearchWithLivewire
-     */
-    public function multiple(bool $isMultiple = true): static
-    {
-        $this->isMultiple = $isMultiple;
-        $this->addRules('array');
+      public function multiple(bool $isMultiple = true): static
+      {
+          $this->isMultiple = $isMultiple;
+          $this->addRules('array');
 
-        return $this;
-    }
+          return $this;
+      }
 }

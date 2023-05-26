@@ -35,13 +35,13 @@ final class Header
         return $this->column->isSortable();
     }
 
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->column->getLabel();
     }
 
-    public function getRecord(): Model
+  /*  public function getRecord(): Model
     {
         return $this->record;
-    }
+    }*/
 }

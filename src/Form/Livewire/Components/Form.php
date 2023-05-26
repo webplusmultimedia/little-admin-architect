@@ -129,11 +129,12 @@ final class Form
 
     public function init(): void
     {
-        if ($this->model && $this->model->exists()) {
+        if ($this->model instanceof Model and $this->model->exists) {
             $this->mode = 'UPDATED_RECORD';
         } else {
             $this->mode = 'CREATED_RECORD';
         }
+
     }
 
     public function mode(): ?string
