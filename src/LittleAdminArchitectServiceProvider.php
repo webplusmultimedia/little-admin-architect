@@ -12,6 +12,7 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Form;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Mixins\SelectMixing;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Modal\LittleAdminModal;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Table;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
@@ -68,6 +69,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
             }
             Livewire::component($component, $class);
         }
-        Livewire::component('little-admin.pages.auth.login', Login::class);
+        Livewire::component('little-admin.pages.auth.login', config('little-admin-architect.auth.pages.login'));
+        Livewire::component('little-admin-architect.modal', LittleAdminModal::class);
     }
 }

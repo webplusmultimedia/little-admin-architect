@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns;
 
-use Livewire\Component;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Form;
 
 trait InteractWithLivewire
 {
-    public function saveDatasForm(Component $livewire): void
+    public function saveDatasForm(Form $livewire): void
     {
         if ($this->hasRules()) {
             $datas = $livewire->validate(rules: $this->getFormRules(), attributes: $this->getAttributesRules());

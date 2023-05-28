@@ -126,6 +126,7 @@
     </div>
 </div>
 
+@livewire('little-admin-architect.modal')
 @livewireScripts
 <script defer src="{{ route('little-admin.page.assets.js','app.js') }}"></script>
 </body>

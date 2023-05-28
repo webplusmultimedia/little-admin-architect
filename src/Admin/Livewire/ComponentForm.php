@@ -50,12 +50,7 @@ class ComponentForm extends Component implements HasForm
         return $this->form->getFormRules();
     }
 
-   /* public function booted(): void
-    {
-        if ($this->initBoot) {
-            $this->formDatas = $this->buildConfig();
-        }
-    }*/
+
 
     public function init(): void
     {
@@ -74,12 +69,5 @@ class ComponentForm extends Component implements HasForm
 //        $this->validateOnly(field: $name, attributes: $this->attributesRules);
 //    }
 
-    public function save(): void
-    {
-        //dump($this->datasRules);
-        $this->form->saveDatasForm($this);
-        session()->flash('message', 'Post successfully updated.');
-        //@todo Emit Event Notification message Save
 
-    }
 }

@@ -1,0 +1,13 @@
+@layer components{
+    .modal__overlay{
+        @apply fixed flex inset-0 bg-slate-900/50 backdrop-blur-sm h-full md:h-screen w-full  justify-center md:items-start items-center pt-10 md:pt-0 z-10
+    }
+
+    .modal{
+        @apply relative w-full h-full md:max-w-6xl mx-auto md:h-5/6 bg-white md:rounded-r md:shadow-lg
+    }
+
+    .modal__body{
+        @apply px-3 py-2 md:px-5 md:py-5 overflow-y-auto h-full w-full
+    }
+}

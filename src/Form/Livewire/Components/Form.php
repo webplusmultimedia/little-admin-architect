@@ -20,6 +20,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Select;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasModal;
 
 final class Form
 {
@@ -35,15 +36,16 @@ final class Form
     use HasSelectOptionLabelUsing;
     use InteractWithLivewire;
     use InteractWithPage;
+    use HasModal;
 
     protected string $view = 'form';
 
     /**
      * @var Model|array<string,string>|null
      */
-    protected null|Model|array $model = null;
+    protected null|Model|array $model = NULL;
 
-    protected ?string $mode = null;
+    protected ?string $mode = NULL;
 
     protected string $action = 'save';
 
@@ -55,19 +57,20 @@ final class Form
 
     protected Button $buttonCancel;
 
-    protected ?string $livewireId = null;
+    protected ?string $livewireId = NULL;
 
     public function getLivewireId(): ?string
     {
         return $this->livewireId;
     }
 
-    public function configureForm(string $livewireId, Page $resource,?Model $model): void
+    public function configureForm(string $livewireId, Page $resource, ?Model $model): void
     {
         $this->livewireId($livewireId);
         $this->model($model);
         $this->setPagesForResource($resource);
     }
+
     public function livewireId(string $id): void
     {
         $this->livewireId = $id;
@@ -75,7 +78,8 @@ final class Form
 
     public function __construct(
         public string $title
-    ) {
+    )
+    {
         $this->buttonSave = Button::make($this->caption, $this->type, $this->action)->icon('s-check');
 
     }
@@ -95,11 +99,11 @@ final class Form
         return $this->action;
     }
 
-    public function model(null|Model|array $record = null): void
+    public function model(null|Model|array $record = NULL): void
     {
         $this->model = $record;
-        $this->initDatasFormOnMount($record)
-            ->initSelectUsing();
+        $this->initDatasFormOnMount($record);
+        $this->initSelectUsing();
     }
 
     protected function initSelectUsing(): void
@@ -114,7 +118,7 @@ final class Form
                 }
                 if ($field->selectOptionLabelUsing()) {
                     $this->addSelectOptionLabelsUsing($field->getWireName(), $field->selectOptionLabelUsing());
-                    if ( ! $field->isMultiple()) {
+                    if (! $field->isMultiple()) {
                         $field->setDefaultLabelForSelect($this);
                     }
                 }
@@ -153,7 +157,7 @@ final class Form
     {
         $datas = [];
         foreach ($this->getFormFields() as $field) {
-            $datas[$field->getName()] = $field->getDataRecord();
+            $datas[ $field->getName() ] = $field->getDataRecord();
         }
 
         return $datas;

@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Support\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 
 trait InteractWithPage
 {
@@ -14,6 +15,11 @@ trait InteractWithPage
     protected function setPagesForResource(Page $page): void
     {
         $this->pageForResource = $page;
+    }
+
+    public function getResourcePage(): Resources
+    {
+        return $this->pageForResource::getResource();
     }
 
     public function linkEdit(Model $record): string

@@ -27,6 +27,7 @@ class Resources
 
     protected static ?string $activeNavigationIcon = null;
 
+
     protected static ?string $navigationLabel = null;
 
     public static function getNavigationLabel(): ?string
@@ -61,6 +62,10 @@ class Resources
 
     protected static bool $shouldIgnorePolicies = false;
 
+    public static function getRecordTitleAttribute(): ?string
+    {
+        return static::$recordTitleAttribute;
+    }
     public static function getBreadcrumb(): string
     {
         return static::$breadcrumb ?? Str::headline(static::getPluralModelLabel());

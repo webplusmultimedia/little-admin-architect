@@ -12,7 +12,6 @@ trait InteractsWithTable
         try {
             return parent::__get($property);
         } catch (PropertyNotFoundException $exception) {
-            /** @var Table $table */
             if ('table' === $property && $table = $this->getTable()) {
                 return $table;
             }

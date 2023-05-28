@@ -30,7 +30,7 @@ final class Table
     protected string $TableTitle = '';
 
 
-    private ?string $livewireId = null;
+    private ?string $livewireId = NULL;
 
     public function getLivewireId(): ?string
     {
@@ -44,16 +44,16 @@ final class Table
 
     public function __construct(
         public string $title,
-    ) {
-    }
+    ) {}
 
-    public function configureColumns(string $livewireId, Page $page,string $title=''): void
+    public function configureColumns(string $livewireId, Page $page, string $title = ''): void
     {
         $this->livewireId($livewireId);
-            $this->applySearchableColumns();
-            $this->applyHeaders();
-            $this->tableTitle($title);
-            $this->setPagesForResource($page);
+        $this->applySearchableColumns();
+        $this->applyHeaders();
+        $this->tableTitle($title);
+        $this->setPagesForResource($page);
+        $this->builder($page::getResource()::getEloquentQuery());
     }
 
     protected function applyHeaders(): void
@@ -73,20 +73,11 @@ final class Table
         return config('little-admin-architect.blade-table-prefix') . '::' . $this->view;
     }
 
-    /**
-     * @param string $TableTitle
-     *
-     * @return Table
-     */
     protected function tableTitle(string $TableTitle): void
     {
         $this->TableTitle = $TableTitle;
+    }
 
-}
-
-    /**
-     * @return string
-     */
     public function getTableTitle(): string
     {
         return $this->TableTitle;

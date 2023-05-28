@@ -10,7 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
 
 trait CanInitDatasForm
 {
-    public function initDatasFormOnMount(null|array|Model $model): static
+    public function initDatasFormOnMount(null|array|Model $model): void
     {
         foreach ($this->fields as $field) {
             if ($field instanceof Field) {
@@ -22,6 +22,5 @@ trait CanInitDatasForm
             $field->initDatasFormOnMount($model);
         }
 
-        return $this;
     }
 }

@@ -1,3 +1,5 @@
+@import "select.css";
+@import url('modal.css');
 
 @tailwind base;
 @tailwind components;
@@ -26,7 +28,9 @@
     .blog ul, .blog ol{
         @apply list-disc ml-10 mb-4
     }
-    [x-cloak]  { @apply hidden }
+
+    [x-cloak]  { @apply !hidden }
+
     [type="text"],
     [type="email"],
     [type="url"],
@@ -95,38 +99,4 @@
         @apply bg-warning-300 hover:bg-warning-500 text-warning-700
     }
 }
-@layer components {
-   .choice__list__option{
-       @apply max-h-40 overflow-y-auto overflow-x-hidden;
-       scrollbar-width: thin;
-   }
-    .choice__option{
-        @apply px-3 py-2 text-sm font-medium hover:bg-primary-500 hover:text-white cursor-pointer transition
-    }
-    .choices__list--dropdown{
-        @apply absolute top-[calc(100%_+_5px)] w-full border border-gray-300 rounded-md z-[3] bg-white shadow-md overflow-hidden
-    }
-    .choice__wrapper_selected{
-        @apply inline-flex items-center justify-center space-x-2 py-2 px-2 border rounded border-gray-300 cursor-pointer w-full
-    }
-    .choice__selected{
-        @apply cursor-pointer w-full overflow-hidden inline-flex flex-wrap gap-y-2 space-x-1
-    }
-    .choice__search{
-        @apply text-sm px-3 py-2  focus:!ring-0 focus:border-gray-300 transition-none rounded-none rounded-t border-0 border-b border-gray-300
 
-    }
-    .choice__searching__prompt{
-        @apply text-sm px-3 py-2 text-gray-500
-    }
-
-    .choice__tag{
-        @apply inline-flex justify-center items-center  px-3 rounded-full bg-primary-50 text-primary-600 hover:bg-primary-100
-    }
-    .choice_tag_icon{
-        @apply w-4 h-4 hover:text-error-500
-    }
-    .choice__tag_label{
-        @apply  pr-1  border-r border-primary-600/10 whitespace-nowrap
-    }
-}
