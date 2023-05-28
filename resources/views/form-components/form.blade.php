@@ -7,11 +7,9 @@
     $buttonCancel = $form->getCancelButton();
 @endphp
 <div class="py-5 px-2">
-    <div class="flex flex-col bg-white px-5 py-2 mb-8">
-        <h1 class="text-2xl mb-0">{{ __($form->title) }}</h1>
-        <p>
-            title / xxxx / edit
-        </p>
+    <div class="flex flex-col bg-white px-5 py-2 mb-8 text-lg font-bold">
+        {{--<h1 >{{ __($form->title) }}</h1>--}}
+        <h2 class="text-2xl !m-0">{{ $getTitleForm() }}</h2>
     </div>
 
     <div class="" x-data="{}">

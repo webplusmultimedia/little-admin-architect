@@ -9,8 +9,10 @@
             <div class="flex items-center py-1 px-3 border border-slate-300 rounded-l-lg bg-slate-100">
                 <x-heroicon-s-magnifying-glass class="text-slate-600 w-5"/>
             </div>
-            <input type="search" wire:model.debounce.500ms="search" placeholder="{{ __('little-admin-architect::table.search-bar.placeholder',['fieldsText'=>$table->getFieldSearchText()]) }}"
-                   class="!border-l-0 rounded-r-lg rounded-l-none border-slate-300 py-2">
+            <input type="search" wire:model.debounce.500ms="search"
+                   placeholder="{{ __('little-admin-architect::table.search-bar.placeholder',['fieldsText'=>$table->getFieldSearchText()]) }}"
+                   class="!border-l-0 rounded-r-lg rounded-l-none border-slate-300 py-2"
+            >
         </div>
     @endif
     <div class="justify-end flex items-center">

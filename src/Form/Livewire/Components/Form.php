@@ -188,4 +188,12 @@ final class Form
 
         return $this;
     }
+
+    /**
+     * @return array|Model|null
+     */
+    public function getRecord(): Model|array|null
+    {
+        return $this->model;
+    }
 }

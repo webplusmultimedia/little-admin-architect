@@ -101,11 +101,11 @@ class Resources
             return (string) $label;
         }
 
-        /*  if (locale_has_pluralization()) {
-              return Str::plural(static::getModelLabel());
-          }*/
 
-        return static::getModelLabel();
+              return Str::plural(static::getModelLabel());
+
+
+       // return static::getModelLabel();
     }
 
     public static function getFormSchema(Form $form): Form

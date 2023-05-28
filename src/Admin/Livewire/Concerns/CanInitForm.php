@@ -27,8 +27,8 @@ trait CanInitForm
 
         $this->_form->configureForm(model: $this->data,resource: $page,livewireId: $this->id );
 
-        $this->datasRules = $this->_form->getFormRules();
-        $this->attributesRules = $this->_form->getAttributesRules();
+       /* $this->datasRules = $this->_form->getFormRules();
+        $this->attributesRules = $this->_form->getAttributesRules();*/
         //dump($this->data,$this->datasRules );
         // $this->resetErrorBag();
         $this->formDatas = [

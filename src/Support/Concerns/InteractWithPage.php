@@ -17,7 +17,7 @@ trait InteractWithPage
         $this->pageForResource = $page;
     }
 
-    public function getResourcePage(): Resources
+    public function getResourcePage(): Resources|string|null
     {
         return $this->pageForResource::getResource();
     }

@@ -25,4 +25,16 @@ final class Form extends Component
     {
         return view('little-views::form-components.form');
     }
+
+    public function getTitleForm(): mixed
+    {
+        if($this->form->getResourcePage() and $title = $this->form->getResourcePage()::getRecordTitleAttribute()){
+            $record = $this->form->getRecord();
+            if ($record->exists) {
+                return __('little-admin-architect::form.edit.title', ['title' => $record->{$title}]);
+            }
+            return __('little-admin-architect::form.create.title', ['title' => $this->form->title]);
+        }
+        return NULL;
+    }
 }
