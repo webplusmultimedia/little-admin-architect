@@ -11,6 +11,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
 
 class EditRecord extends Page
 {
+    protected static mixed $key = null;
     protected static ?string $routeName = 'edit';
 
     public function mount(mixed $record): void
@@ -18,8 +19,9 @@ class EditRecord extends Page
         /** @var Resources $resource */
         $resource = static::getResource();
         static::$form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
-        $model = $resource::getEloquentQuery()->getModel();
-        static::$record = $resource::getEloquentQuery()->where($model->getKeyName(), $record)->firstOrFail();
+        static::$key = $record;
+       /* $model = $resource::getEloquentQuery()->getModel();
+        static::$record = $resource::getEloquentQuery()->where($model->getKeyName(), $record)->firstOrFail();*/
         /*$this->authorizeAccess();
 
         $this->fillForm();
@@ -31,7 +33,7 @@ class EditRecord extends Page
     {
         return [
             'component' => static::getComponent(),
-            'data' => static::$record,
+            'data' => static::$key,
             'pageRoute' => static::getComponent(),
             'id' => Str::random(10),
         ];

@@ -12,15 +12,15 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
 class CreateRecord extends Page
 {
     protected static ?string $routeName = 'create';
-
+    protected static mixed $key = null;
     public function mount(): void
     {
 
         /** @var Resources $resource */
         $resource = static::getResource();
-        static::$form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
+        /*static::$form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
 
-        static::$record = new ($resource::getModel());
+        static::$record = new ($resource::getModel());*/
         //static::$form->bind(static::$record);
 
         /*$this->authorizeAccess();
@@ -34,7 +34,7 @@ class CreateRecord extends Page
     {
         return [
             'component' => static::getComponent(),
-            'data' => static::$record,
+            'data' => static::$key,
             'pageRoute' => static::getComponent(),
             'id' => Str::random(10),
         ];

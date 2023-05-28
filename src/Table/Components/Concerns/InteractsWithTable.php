@@ -23,4 +23,5 @@ trait InteractsWithTable
             throw $exception;
         }
     }
+
 }

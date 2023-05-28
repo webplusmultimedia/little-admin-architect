@@ -9,11 +9,15 @@ use Illuminate\View\Component;
 
 final class Form extends Component
 {
+    protected string $view = 'form';
     public function __construct(
         protected \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form,
         public string $method = 'GET',
         public array|object|null $bind = null,
     ) {
+        if ($this->form->hasModal()){
+            $this->view = 'form-modal';
+        }
     }
 
     public function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form
@@ -21,9 +25,13 @@ final class Form extends Component
         return $this->form;
     }
 
+    protected function getView()
+    {
+        return 'little-views::form-components.' . $this->view;
+    }
     public function render(): View
     {
-        return view('little-views::form-components.form');
+        return view($this->getView());
     }
 
     public function getTitleForm(): mixed

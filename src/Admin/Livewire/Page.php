@@ -29,14 +29,14 @@ class Page extends Component
         return static::$resource;
     }
 
-    public static function getEditRoute(string $type): array
+    public static function getRouteForPage(string $type): array
     {
         return static::getResource()::getPages()[$type];
     }
 
     public static function getEditUrl(Model $record): string
     {
-        $path = static::getEditRoute('edit')['route'];
+        $path = static::getRouteForPage('edit')['route'];
 
         return url(str($path)
             ->replace(['{record}'], $record->getKey())
@@ -46,7 +46,7 @@ class Page extends Component
 
     public static function getCreateUrl(): string
     {
-        $path = static::getEditRoute('create')['route'];
+        $path = static::getRouteForPage('create')['route'];
 
         return url(str($path)
             ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
@@ -55,7 +55,7 @@ class Page extends Component
 
     public static function getListUrl(): string
     {
-        $path = static::getEditRoute('index')['route'];
+        $path = static::getRouteForPage('index')['route'];
 
         return url(str($path)
             ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
@@ -66,7 +66,15 @@ class Page extends Component
     {
         return (string) str(static::class)->replace('\\', '.');
     }
-
+    public static function getComponentForPage(string $name): string
+    {
+        $pageClass = self::getRouteForPage($name)['class'];
+        return str($pageClass)
+            ->replace('\\', '.')
+            ->explode('.')
+            ->map(fn ($segment) => (string) str($segment)->kebab())
+            ->implode('.');
+    }
     protected static function title(): string
     {
         return (static::getResource())::getModelLabel();
@@ -76,6 +84,8 @@ class Page extends Component
     {
         return static::$form;
     }
+
+
 
     public static function route(string $path): array
     {

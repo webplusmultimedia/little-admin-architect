@@ -977,11 +977,8 @@ label {
   position: fixed;
   inset: 0px;
   z-index: 10;
-  display: flex;
   height: 100%;
   width: 100%;
-  align-items: center;
-  justify-content: center;
   background-color: rgb(15 23 42 / 0.5);
   padding-top: 2.5rem;
   --tw-backdrop-blur: blur(4px);
@@ -991,29 +988,80 @@ label {
 @media (min-width: 768px) {
   .modal__overlay {
     height: 100vh;
-    align-items: flex-start;
     padding-top: 0px;
   }
 }
 .modal {
-  position: relative;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+@media (min-width: 1024px) {
+  .modal {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+.modal {
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .modal {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+  .modal {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  .modal {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+  .modal {
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px) {
+  .modal {
+    max-width: 1536px;
+  }
+}
+.modal {
   margin-left: auto;
   margin-right: auto;
-  height: 100%;
-  width: 100%;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  overflow: hidden;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 @media (min-width: 768px) {
   .modal {
-    height: 83.333333%;
-    max-width: 72rem;
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
     --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
+}
+.modal__head {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  align-self: flex-start;
+  border-bottom-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 .btn {
   --tw-bg-opacity: 1;
@@ -1136,14 +1184,11 @@ label {
 .col-span-full {
   grid-column: 1 / -1;
 }
-.m-16 {
-  margin: 4rem;
-}
-.m-0 {
-  margin: 0px;
-}
 .\!m-0 {
   margin: 0px !important;
+}
+.m-16 {
+  margin: 4rem;
 }
 .mx-auto {
   margin-left: auto;
@@ -1225,8 +1270,15 @@ label {
 .h-8 {
   height: 2rem;
 }
-.h-full {
-  height: 100%;
+.max-h-\[100vh_-_20em\] {
+  max-height: 100vh - 20em;
+}
+.max-h-fit {
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+}
+.max-h-\[calc\(100vh_-_20em\)\] {
+  max-height: calc(100vh - 20em);
 }
 .min-h-screen {
   min-height: 100vh;
@@ -1335,6 +1387,9 @@ label {
 }
 .flex-wrap {
   flex-wrap: wrap;
+}
+.items-start {
+  align-items: flex-start;
 }
 .items-center {
   align-items: center;

@@ -24,21 +24,22 @@ class ComponentForm extends Component implements HasForm
     public bool $initialized = false;
 
     public ?string $previousPage = null;
+    protected mixed $key = null;
 
-    public function mount(?Model $data, ?string $pageRoute): void
+    public function mount(mixed $key, ?string $pageRoute): void
     {
         $this->previousPage = url()->previous();
         $this->routeName = request()->route()->getName();
         $this->pageRoute = $pageRoute;
-        $this->data = $data;
-        $this->getForm();
-        if ( ! $data?->exists) {
-            $this->form->applyDefaultValue();
-        }
-        /*$this->datasRules = $this->form->getFormRules();
-        $this->attributesRules = $this->_form->getAttributesRules();*/
+        $this->key = $key;
 
-        $this->data = $data;
+        $this->getForm();
+        /*if ( ! $this->data?->exists) {
+            $this->form->applyDefaultValue();
+        }*/
+
+
+
         $this->initialized = true;
         $this->initBoot = false;
         // dump($this->getOptionsUsing('data.categorie_id'),$this->getSearchResultsUsing('data.categorie_id','2'));
@@ -50,24 +51,9 @@ class ComponentForm extends Component implements HasForm
         return $this->form->getFormRules();
     }
 
-
-
     public function init(): void
     {
         $this->initialized = true;
     }
-
-//    public function updated(string $name, mixed $value): void
-//    {
-//       /* $validator = Validator::make(data:[$name => $value],rules: $this->getRules(),attributes: $this->attributesRules);
-//        if ($validator->fails()){
-//            $this->addError($name,$validator->getMessageBag()->first());
-//        }*/
-//
-//
-//        //$this->validate(rules: $this->getRules(), attributes: $this->attributesRules);
-//        $this->validateOnly(field: $name, attributes: $this->attributesRules);
-//    }
-
 
 }

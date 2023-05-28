@@ -6,8 +6,14 @@ trait HasModal
 {
     protected bool $isModal = false;
 
-    protected function hasModal(): bool
+    public function hasModal(): bool
     {
         return $this->isModal;
+    }
+
+    public function onModal(): static
+    {
+        $this->isModal = true;
+        return $this;
     }
 }

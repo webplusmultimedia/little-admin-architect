@@ -14,7 +14,7 @@ class LittleAdminModal extends Component
 
     public null|string $activeComponent;
 
-    protected $listeners = ['open-modal'=>'openModal'];
+    protected $listeners = ['open-modal-architect'=>'openModal'];
 
     public function openModal(string $component, array $attributes = []): void
     {

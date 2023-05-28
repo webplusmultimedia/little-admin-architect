@@ -1,5 +1,5 @@
 <div
-    class="modal__overlay"
+    class="modal__overlay flex items-center justify-center"
     x-cloak
     x-data="ModalComponent({name:$wire.name})"
     x-show="show"
@@ -16,7 +16,7 @@
          x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
     >
         @forelse($components as $id => $component)
-            <div x-show.immediate="activeComponent === '{{ $id }}'" x-ref="{{ $id }}" wire:key="{{ $id }}" class="h-full grid grid-cols-1">
+            <div x-show.immediate="activeComponent === '{{ $id }}'" x-ref="{{ $id }}" wire:key="{{ $id }}" class="w-full">
                 @livewire($component['name'], $component['attributes'], key($id))
             </div>
         @empty

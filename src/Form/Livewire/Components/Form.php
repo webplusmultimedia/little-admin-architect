@@ -20,6 +20,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Conce
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Concerns\HasSchema;
 use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Select;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
+use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithRecord;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasModal;
 
 final class Form
@@ -37,6 +38,7 @@ final class Form
     use InteractWithLivewire;
     use InteractWithPage;
     use HasModal;
+    use InteractWithRecord;
 
     protected string $view = 'form';
 

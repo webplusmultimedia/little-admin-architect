@@ -12,7 +12,7 @@ trait InteractWithPage
 {
     protected Page $pageForResource;
 
-    protected function setPagesForResource(Page $page): void
+    public function setPagesForResource(Page $page): void
     {
         $this->pageForResource = $page;
     }
@@ -35,5 +35,15 @@ trait InteractWithPage
     public function linkIndex(): string
     {
         return $this->pageForResource::getListUrl();
+    }
+
+    public function hasModalForm(): bool
+    {
+        return $this->pageForResource::getForm()->hasModal();
+    }
+
+    public function getPage(): Page
+    {
+        return $this->pageForResource;
     }
 }

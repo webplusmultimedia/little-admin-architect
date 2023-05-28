@@ -2,13 +2,13 @@
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
-use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\CanInitTable;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\CanSortColumn;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\InteractsWithTable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Contracts\HasTable;
+use Webplusmultimedia\LittleAdminArchitect\Table\Concerns\InteractsWithModalForm;
 
 /**
  * @property \Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $table
@@ -18,6 +18,7 @@ class ComponentTable extends Component implements HasTable
     use CanSortColumn;
     use CanInitTable;
     use InteractsWithTable;
+    use InteractsWithModalForm;
 
     use WithPagination;
 
