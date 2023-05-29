@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Livewire\Component;
@@ -15,18 +17,17 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Concerns\InteractsWithModalForm
  */
 class ComponentTable extends Component implements HasTable
 {
-    use CanSortColumn;
     use CanInitTable;
-    use InteractsWithTable;
+    use CanSortColumn;
     use InteractsWithModalForm;
-
+    use InteractsWithTable;
     use WithPagination;
 
     public bool $initialized = true;
 
-    public ?string $routeName = NULL;
+    public ?string $routeName = null;
 
-    public ?int $rowsPerPage = NULL;
+    public ?int $rowsPerPage = null;
 
     public string $search = '';
 
@@ -34,22 +35,21 @@ class ComponentTable extends Component implements HasTable
      * @var array[]
      */
     protected $queryString = [
-        'search'          => ['except' => '', 'as' => 'q'],
-        'tableSortColumn' => ['except' => NULL],
-        'tableDirection'  => ['except' => NULL],
+        'search' => ['except' => '', 'as' => 'q'],
+        'tableSortColumn' => ['except' => null],
+        'tableDirection' => ['except' => null],
     ];
 
     protected bool $initBoot = true;
 
-    protected null|string $pageRoute = NULL;
+    protected null|string $pageRoute = null;
 
-    protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = NULL;
+    protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = null;
 
     protected array $formDatas;
 
     public function mount(string $pageRoute): void
     {
-
         $this->pageRoute = $pageRoute;
         $this->initBoot = false;
     }
@@ -58,6 +58,4 @@ class ComponentTable extends Component implements HasTable
     {
         return 'little-views::table-components.pagination.pagination';
     }
-
-
 }

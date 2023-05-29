@@ -12,7 +12,9 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
 class CreateRecord extends Page
 {
     protected static ?string $routeName = 'create';
+
     protected static mixed $key = null;
+
     public function mount(): void
     {
 

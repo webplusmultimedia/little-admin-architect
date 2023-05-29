@@ -33,11 +33,11 @@ final class Form
     use HasDefaultValue;
     use HasFields;
     use HasGridColumns;
+    use HasModal;
     use HasSchema;
     use HasSelectOptionLabelUsing;
     use InteractWithLivewire;
     use InteractWithPage;
-    use HasModal;
     use InteractWithRecord;
 
     protected string $view = 'form';
@@ -45,9 +45,9 @@ final class Form
     /**
      * @var Model|array<string,string>|null
      */
-    protected null|Model|array $model = NULL;
+    protected null|Model|array $model = null;
 
-    protected ?string $mode = NULL;
+    protected ?string $mode = null;
 
     protected string $action = 'save';
 
@@ -59,7 +59,7 @@ final class Form
 
     protected Button $buttonCancel;
 
-    protected ?string $livewireId = NULL;
+    protected ?string $livewireId = null;
 
     public function getLivewireId(): ?string
     {
@@ -80,8 +80,7 @@ final class Form
 
     public function __construct(
         public string $title
-    )
-    {
+    ) {
         $this->buttonSave = Button::make($this->caption, $this->type, $this->action)->icon('s-check');
 
     }
@@ -101,7 +100,7 @@ final class Form
         return $this->action;
     }
 
-    public function model(null|Model|array $record = NULL): void
+    public function model(null|Model|array $record = null): void
     {
         $this->model = $record;
         $this->initDatasFormOnMount($record);
@@ -120,7 +119,7 @@ final class Form
                 }
                 if ($field->selectOptionLabelUsing()) {
                     $this->addSelectOptionLabelsUsing($field->getWireName(), $field->selectOptionLabelUsing());
-                    if (! $field->isMultiple()) {
+                    if ( ! $field->isMultiple()) {
                         $field->setDefaultLabelForSelect($this);
                     }
                 }
@@ -159,7 +158,7 @@ final class Form
     {
         $datas = [];
         foreach ($this->getFormFields() as $field) {
-            $datas[ $field->getName() ] = $field->getDataRecord();
+            $datas[$field->getName()] = $field->getDataRecord();
         }
 
         return $datas;
@@ -191,9 +190,6 @@ final class Form
         return $this;
     }
 
-    /**
-     * @return array|Model|null
-     */
     public function getRecord(): Model|array|null
     {
         return $this->model;

@@ -37,6 +37,4 @@ class Header extends AbstractComponent
     {
         return $this->sortDirection;
     }
-
-
 }

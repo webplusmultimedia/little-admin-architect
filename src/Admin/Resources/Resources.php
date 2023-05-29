@@ -27,7 +27,6 @@ class Resources
 
     protected static ?string $activeNavigationIcon = null;
 
-
     protected static ?string $navigationLabel = null;
 
     public static function getNavigationLabel(): ?string
@@ -66,6 +65,7 @@ class Resources
     {
         return static::$recordTitleAttribute;
     }
+
     public static function getBreadcrumb(): string
     {
         return static::$breadcrumb ?? Str::headline(static::getPluralModelLabel());
@@ -101,11 +101,9 @@ class Resources
             return (string) $label;
         }
 
+        return Str::plural(static::getModelLabel());
 
-              return Str::plural(static::getModelLabel());
-
-
-       // return static::getModelLabel();
+        // return static::getModelLabel();
     }
 
     public static function getFormSchema(Form $form): Form

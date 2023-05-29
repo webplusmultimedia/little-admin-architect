@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
 trait HasModal
@@ -14,6 +16,7 @@ trait HasModal
     public function onModal(): static
     {
         $this->isModal = true;
+
         return $this;
     }
 }

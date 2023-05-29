@@ -10,12 +10,13 @@ use Illuminate\View\Component;
 final class Form extends Component
 {
     protected string $view = 'form';
+
     public function __construct(
         protected \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form,
         public string $method = 'GET',
         public array|object|null $bind = null,
     ) {
-        if ($this->form->hasModal()){
+        if ($this->form->hasModal()) {
             $this->view = 'form-modal';
         }
     }
@@ -29,6 +30,7 @@ final class Form extends Component
     {
         return 'little-views::form-components.' . $this->view;
     }
+
     public function render(): View
     {
         return view($this->getView());
@@ -36,13 +38,15 @@ final class Form extends Component
 
     public function getTitleForm(): mixed
     {
-        if($this->form->getResourcePage() and $title = $this->form->getResourcePage()::getRecordTitleAttribute()){
+        if ($this->form->getResourcePage() and $title = $this->form->getResourcePage()::getRecordTitleAttribute()) {
             $record = $this->form->getRecord();
             if ($record->exists) {
                 return __('little-admin-architect::form.edit.title', ['title' => $record->{$title}]);
             }
+
             return __('little-admin-architect::form.create.title', ['title' => $this->form->title]);
         }
-        return NULL;
+
+        return null;
     }
 }

@@ -66,15 +66,18 @@ class Page extends Component
     {
         return (string) str(static::class)->replace('\\', '.');
     }
+
     public static function getComponentForPage(string $name): string
     {
         $pageClass = self::getRouteForPage($name)['class'];
+
         return str($pageClass)
             ->replace('\\', '.')
             ->explode('.')
             ->map(fn ($segment) => (string) str($segment)->kebab())
             ->implode('.');
     }
+
     protected static function title(): string
     {
         return (static::getResource())::getModelLabel();
@@ -84,8 +87,6 @@ class Page extends Component
     {
         return static::$form;
     }
-
-
 
     public static function route(string $path): array
     {

@@ -24,6 +24,7 @@ class ComponentForm extends Component implements HasForm
     public bool $initialized = false;
 
     public ?string $previousPage = null;
+
     protected mixed $key = null;
 
     public function mount(mixed $key, ?string $pageRoute): void
@@ -37,8 +38,6 @@ class ComponentForm extends Component implements HasForm
         /*if ( ! $this->data?->exists) {
             $this->form->applyDefaultValue();
         }*/
-
-
 
         $this->initialized = true;
         $this->initBoot = false;
@@ -55,5 +54,4 @@ class ComponentForm extends Component implements HasForm
     {
         $this->initialized = true;
     }
-
 }

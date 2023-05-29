@@ -16,7 +16,6 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Modal\LittleAdminModal
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Table;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
-use Webplusmultimedia\LittleAdminArchitect\Http\Livewire\Login;
 
 class LittleAdminArchitectServiceProvider extends PackageServiceProvider
 {

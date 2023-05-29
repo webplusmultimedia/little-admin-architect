@@ -13,7 +13,7 @@ return [
         'delete' => 'Supprimer',
         'view' => 'Voir',
     ],
-    'search-bar'=>[
-        'placeholder' => 'Rechercher par :fieldsText ...'
-    ]
+    'search-bar' => [
+        'placeholder' => 'Rechercher par :fieldsText ...',
+    ],
 ];

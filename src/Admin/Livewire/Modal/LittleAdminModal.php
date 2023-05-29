@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Modal;
 
 use Livewire\Component;
@@ -14,17 +16,19 @@ class LittleAdminModal extends Component
 
     public null|string $activeComponent;
 
-    protected $listeners = ['open-modal-architect'=>'openModal'];
+    public null|string $livewireTableId = null;
 
-    public function openModal(string $component, array $attributes = []): void
+    protected $listeners = ['open-modal-architect' => 'openModal'];
+
+    public function openModal(string $component, array $attributes = [], null|string $livewireId = null): void
     {
-        $id = md5($component.serialize($attributes));
+        $id = md5($component . serialize($attributes));
         $this->components[$id] = [
             'name' => $component,
             'attributes' => $attributes,
         ];
         $this->activeComponent = $id;
-        $this->emit('adminShowModal', $id);
+        $this->emit('adminShowModal', $id, $livewireId);
     }
 
     public function render()

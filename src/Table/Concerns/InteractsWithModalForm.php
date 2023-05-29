@@ -1,13 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Concerns;
 
 trait InteractsWithModalForm
 {
-    public function showModalForm(mixed $key = null)
+    protected string $modalPage = 'edit';
+
+    public function showModalForm(mixed $key = null): void
     {
-        $component = $this->table->getPage()::getComponentForPage('edit');
-        //$record = $this->table->fill($key);
-        $this->emit('open-modal-architect',$component,['pageRoute' => $component, 'key'=>$key]);
+        if ( ! $key) {
+            $this->modalPage = 'create';
+        }
+        $component = $this->table->getPage()::getComponentForPage($this->modalPage);
+        $this->emit('open-modal-architect', $component, ['pageRoute' => $component, 'key' => $key], $this->id);
     }
 }

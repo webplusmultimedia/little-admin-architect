@@ -14,10 +14,20 @@
             </p>
         </div>
         <div class="flex items-center">
-            <a href="{{ $table->linkCreate() }}" class="btn btn-primary"
-            >
-                {{ __('little-admin-architect::table.button.create',['label'=>'un']) }} {{ str($table->title)->singular() }}
-            </a>
+            @if($table->hasModalForm())
+                <button  type="button" class="btn btn-success inline-flex items-center justify-center space-x-2"
+                      wire:click.stop="showModalForm()"
+                >
+                    <x-heroicon-s-pencil class="w-4 h-4" aria-hidden="true"/>
+                    <span>{{ __('little-admin-architect::table.button.create',['label'=>'un']) }} {{ str($table->title)->singular() }}</span>
+                </button>
+            @else
+                <a href="{{ $table->linkCreate() }}" class="btn btn-primary"
+                >
+                    {{ __('little-admin-architect::table.button.create',['label'=>'un']) }} {{ str($table->title)->singular() }}
+                </a>
+            @endif
+
         </div>
     </div>
     <div class="flex flex-col bg-white py-10 px-5 rounded-lg overflow-x-auto" x-data="{}">
@@ -26,6 +36,7 @@
             <div class=" border-collapse border border-gray-200 rounded-lg overflow-hidden overflow-x-auto">
                 <table class="table-auto w-full text-start divide-y shadow-sm"
                        wire:loading.class.delay="opacity-50"
+                       x-data="TableComponent({ livewireId : $wire.__instance.id })"
                 >
                     <thead class="bg-gray-100 border-t text-start">
                     <tr>
@@ -54,7 +65,6 @@
                                         <div  class="hover:text-primary-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-primary-200 hover:border-primary-400  inline-flex items-center space-x-1 text-primary-600"
                                               wire:click="showModalForm({{$record->getKey()}})"
                                         >
-
                                             <x-heroicon-s-pencil class="w-4 h-4" aria-hidden="true"/>
                                             <span>{{ __('little-admin-architect::table.row-button.edit') }}</span>
                                         </div>

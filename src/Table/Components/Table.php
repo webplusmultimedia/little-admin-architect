@@ -20,19 +20,19 @@ final class Table
 {
     use HasColumns;
     use HasHeader;
-    use HasRecords;
-    use HasSearchableColumns;
-    use InteractWithPage;
-    use HasSortableColum;
-    use HasRowsPerPage;
     use HasQueryBuilder;
+    use HasRecords;
+    use HasRowsPerPage;
+    use HasSearchableColumns;
+    use HasSortableColum;
+    use InteractWithPage;
     use InteractWithRecord;
 
     private string $view = 'table';
+
     protected string $TableTitle = '';
 
-
-    private ?string $livewireId = NULL;
+    private ?string $livewireId = null;
 
     public function getLivewireId(): ?string
     {
@@ -46,7 +46,8 @@ final class Table
 
     public function __construct(
         public string $title,
-    ) {}
+    ) {
+    }
 
     public function configureColumns(string $livewireId, Page $page, string $title = ''): void
     {

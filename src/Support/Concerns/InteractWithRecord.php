@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
@@ -12,11 +14,13 @@ trait InteractWithRecord
     {
         $resource = $this->getResourcePage();
         $model = $resource::getEloquentQuery()->getModel();
-        if($key){
+        if ($key) {
             $this->model($resource::getEloquentQuery()->where($model->getKeyName(), $key)->firstOrFail());
+
             return $this->model;
         }
-        $this->model(new $model);
+        $this->model(new $model());
+
         return $this->model;
     }
 }

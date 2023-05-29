@@ -52,8 +52,8 @@ trait HasSearchableColumns
     public function getFieldSearchText()
     {
         return collect($this->columns)
-            ->filter(fn(AbstractColumn $column) => $column->isSearchable())
-            ->map(fn(AbstractColumn $column)=> $column->getLabel())
+            ->filter(fn (AbstractColumn $column) => $column->isSearchable())
+            ->map(fn (AbstractColumn $column) => $column->getLabel())
             ->implode(', ');
     }
 }

@@ -44,8 +44,8 @@ return [
      */
     'blade-prefix' => 'little-form',
     'blade-table-prefix' => 'little-table',
-    'table' =>[
-      'rowsPerPage' => 20
+    'table' => [
+        'rowsPerPage' => 20,
     ],
 
     'grid' => [

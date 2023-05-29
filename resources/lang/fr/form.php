@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 return [
     'edit' => [
-      'title' =>'Edition : :title',
+        'title' => 'Edition : :title',
     ],
     'create' => [
-      'title' =>'Création : :title',
+        'title' => 'Création : :title',
     ],
     'select' => [
         'search-prompt' => 'Taper ici pour rechercher...',

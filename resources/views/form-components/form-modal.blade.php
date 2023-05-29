@@ -32,13 +32,13 @@
                                          class="!opacity-100"/>
                 </x-little-form::button.submit>
 
-                <x-little-form::button.link class="" wire:loading.attr="disabled" wire:target="{{ $buttonCancel->getAction() }}"
-                                            wire:loading.class.delay="opacity-70 cursor-wait" :url="$buttonCancel->getAction()">
+                <x-little-anonyme::form-components.fields.button.text  wire:loading.attr="disabled" wire:target="{{ $buttonCancel->getAction() }}"
+                                            wire:loading.class.delay="opacity-70 cursor-wait" >
                     @if($buttonCancel->hasIcon())
                         <x-little-anonyme::form-components.fields.icons.hero-icon :name="$buttonCancel->getViewIcon()"/>
                     @endif
                     <span>{{ $buttonCancel->getCaption() }}</span>
-                </x-little-form::button.link>
+                </x-little-anonyme::form-components.fields.button.text>
                 @if (session()->has('message'))
                     <div class="alert alert-success">
                         {{ session('message') }}

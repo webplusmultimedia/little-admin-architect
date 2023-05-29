@@ -17,6 +17,7 @@ class Form extends ComponentForm
     {
         return $this->render()->render();
     }
+
     public function save(): void
     {
         $this->form->saveDatasForm($this);

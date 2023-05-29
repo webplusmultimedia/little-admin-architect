@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns;
 
-use Illuminate\Database\Eloquent\Builder;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
@@ -25,17 +26,17 @@ trait CanInitTable
 
         $this->_table = $resource::getTableColumns(\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table::make($resource::getPluralModelLabel()));
         $this->_table
-            ->configureColumns(livewireId: $this->id, page: $page,title:$resource::getPluralModelLabel());
+            ->configureColumns(livewireId: $this->id, page: $page, title: $resource::getPluralModelLabel());
 
-
-        return   $this->_table;
+        return $this->_table;
     }
 
     protected function getTable(): Table
     {
-        if (!$this->_table){
+        if ( ! $this->_table) {
             $this->_table = $this->setUp();
         }
+
         return $this->_table;
     }
 }

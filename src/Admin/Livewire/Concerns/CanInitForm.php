@@ -25,20 +25,18 @@ trait CanInitForm
         $resource = $page::getResource();
         $this->_form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
         $this->_form->setPagesForResource($page);
-        if(!$this->data){
+        if ( ! $this->data) {
             $this->data = $this->_form->fill($this->key);
             $this->_form->livewireId($this->id);
-            if (!$this->data?->exists) {
+            if ( ! $this->data?->exists) {
                 $this->_form->applyDefaultValue();
             }
-        }
-        else{
+        } else {
             $this->_form->configureForm(livewireId: $this->id, resource: $page, model: $this->data);
         }
 
-
-       /* $this->datasRules = $this->_form->getFormRules();
-        $this->attributesRules = $this->_form->getAttributesRules();*/
+        /* $this->datasRules = $this->_form->getFormRules();
+         $this->attributesRules = $this->_form->getAttributesRules();*/
         //dump($this->data,$this->datasRules );
         // $this->resetErrorBag();
         $this->formDatas = [

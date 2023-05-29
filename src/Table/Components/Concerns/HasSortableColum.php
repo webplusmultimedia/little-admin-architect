@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts\AbstractColumn;
 
 trait HasSortableColum
 {
-    protected ?string $sortableColumn = NULL;
-    protected ?string $sortDirection = NULL;
+    protected ?string $sortableColumn = null;
+
+    protected ?string $sortDirection = null;
 
     protected string $defaultDirection = 'asc';
 
@@ -32,10 +35,10 @@ trait HasSortableColum
         return $this;
     }
 
-    public function applyParamsForSortingColumn(?string $column, ?string $direction = NULL): void
+    public function applyParamsForSortingColumn(?string $column, ?string $direction = null): void
     {
-            $this->sortableColumn = $this->hasColumn($column);
-            $this->sortDirection =  $this->hasDirection($direction);
+        $this->sortableColumn = $this->hasColumn($column);
+        $this->sortDirection = $this->hasDirection($direction);
     }
 
     public function getSortColumn(): ?string
@@ -50,17 +53,19 @@ trait HasSortableColum
 
     protected function hasColumn(?string $column): ?string
     {
-        if($column and collect($this->columns)->filter(fn(AbstractColumn $col) => $col->getName() === $column and $col->isSortable())->count()){
+        if ($column and collect($this->columns)->filter(fn (AbstractColumn $col) => $col->getName() === $column and $col->isSortable())->count()) {
             return $column;
         }
-        return $this->sortableColumn ;
+
+        return $this->sortableColumn;
     }
 
     protected function hasDirection(?string $dir): string
     {
-        if($dir and in_array($dir,['asc','desc'])){
+        if ($dir and in_array($dir, ['asc', 'desc'])) {
             return $dir;
         }
-        return  $this->sortDirection??$this->defaultDirection;
+
+        return $this->sortDirection ?? $this->defaultDirection;
     }
 }
