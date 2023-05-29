@@ -26,7 +26,6 @@ final class Table
     use HasSearchableColumns;
     use HasSortableColum;
     use InteractWithPage;
-    use InteractWithRecord;
 
     private string $view = 'table';
 

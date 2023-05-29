@@ -13,8 +13,8 @@ trait InteractsWithTable
         try {
             return parent::__get($property);
         } catch (PropertyNotFoundException $exception) {
-            if ('table' === $property && $table = $this->getTable()) {
-                return $table;
+            if ($property === 'table') {
+                return $this->getTable();
             }
 
             /*if ($property === 'modal') {
