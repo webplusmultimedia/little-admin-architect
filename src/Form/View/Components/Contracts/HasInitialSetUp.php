@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Contracts;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
 
 interface HasInitialSetUp
 {

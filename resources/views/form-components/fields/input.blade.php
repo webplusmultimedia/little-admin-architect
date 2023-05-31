@@ -1,4 +1,4 @@
-@php use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Input;
+@php use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Input;
     /** @var Input $field */
         $field = $getConfig();
         $id = $field->getId();
@@ -9,20 +9,20 @@
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
-     {{ $attributes->except(['field'])->merge([
-                'wire:model' . $field->getWireModifier() => $field->getWireName(),
-                'id' => $id,
-                'type' => 'hidden',
-                ])
-                }}
+            {{ $attributes->except(['field'])->merge([
+                       'wire:model' . $field->getWireModifier() => $field->getWireName(),
+                       'id' => $id,
+                       'type' => 'hidden',
+                       ])
+                       }}
     />
 @else
-<x-dynamic-component :component="$field->getWrapperView()"
-                     :id="$field->getWrapperId()"
-                     {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
-                     @class([  'hidden' => $field->getType() === 'hidden'])
-                     x-data="{ errors : $wire.__instance.errors}"
->
+    <x-dynamic-component :component="$field->getWrapperView()"
+                         :id="$field->getWrapperId()"
+                         {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
+                         @class([  'hidden' => $field->getType() === 'hidden'])
+                         x-data="{ errors : $wire.__instance.errors}"
+    >
         <x-dynamic-component :component="$field->getViewComponentForLabel()" :id="$id" class="form-label" :label="$field->getLabel()"
                              :showRequired="$field->isRequired()"/>
 
@@ -55,6 +55,5 @@
         <x-dynamic-component :component="$field->getViewComponentForErrorMessage()" :message="$errorMessage"/>
 
 
-
-</x-dynamic-component>
+    </x-dynamic-component>
 @endif

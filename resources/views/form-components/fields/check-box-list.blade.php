@@ -1,5 +1,5 @@
 @php
-    use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\CheckBoxList;
+    use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\CheckBoxList;
 /** @var CheckBoxList $field */
     $field = $getConfig();
     $id = $field->getId();
@@ -9,17 +9,17 @@
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
-        {{ $attributes->except(['field'])->merge([
-                   'wire:model' . $field->getWireModifier() => $field->getWireName(),
-                   'id' => $id,
-                   'type' => 'hidden',
-                   ])
-        }}
+            {{ $attributes->except(['field'])->merge([
+                       'wire:model' . $field->getWireModifier() => $field->getWireName(),
+                       'id' => $id,
+                       'type' => 'hidden',
+                       ])
+            }}
     />
 @else
     <x-dynamic-component :component="$field->getWrapperView()"
                          :id="$field->getWrapperId()"
-        {{ $attributes->merge(['class'=> $field->getColSpan()]) }}
+            {{ $attributes->merge(['class'=> $field->getColSpan()]) }}
     >
         <div {{ $attributes->class('grid auto-rows-min')->merge(['class'=> $field->getColumns()]) }}>
             <div class="col-span-full  py-3 text-sm font-bold uppercase text-slate-600">

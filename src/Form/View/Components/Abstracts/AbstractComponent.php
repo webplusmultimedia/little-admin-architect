@@ -7,7 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
 
 abstract class AbstractComponent extends Component
 {

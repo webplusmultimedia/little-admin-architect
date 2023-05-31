@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeChecked;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeWired;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasId;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasName;
@@ -41,8 +40,8 @@ class Checkbox extends AbstractComponent
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
-        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\CheckBox $field,
-        public null|string $name = null,
+		\Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\CheckBox $field,
+		public null|string                                                      $name = null,
     ) {
         parent::__construct();
         $this->setUp($field);

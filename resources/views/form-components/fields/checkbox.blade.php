@@ -1,4 +1,4 @@
-@php use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\CheckBox;
+@php use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\CheckBox;
     /** @var CheckBox $field */
     $field = $getConfig();
     $id = $field->getId();
@@ -7,12 +7,12 @@
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
-        {{ $attributes->except(['field'])->merge([
-                   'wire:model' . $field->getWireModifier() => $field->getWireName(),
-                   'id' => $id,
-                   'type' => 'hidden',
-                   ])
-                   }}
+            {{ $attributes->except(['field'])->merge([
+                       'wire:model' . $field->getWireModifier() => $field->getWireName(),
+                       'id' => $id,
+                       'type' => 'hidden',
+                       ])
+                       }}
     />
 @else
     <x-dynamic-component :component="$field->getWrapperView()"
@@ -28,8 +28,8 @@
             >
                 @if($field->getType() === 'switch')
                     <x-little-anonyme::form-components.fields.partials.toggle-switch
-                        {{ $attributes->merge(['wire:model' . $field->getWireModifier() => ($field->getWireName())]) }}
-                        :id="$id"
+                            {{ $attributes->merge(['wire:model' . $field->getWireModifier() => ($field->getWireName())]) }}
+                            :id="$id"
 
                     />
                 @else

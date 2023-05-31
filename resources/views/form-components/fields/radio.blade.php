@@ -1,6 +1,6 @@
 @php
 
-    use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Radio;
+    use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Radio;
     /** @var Radio $field */
     $field = $getConfig();
 
@@ -11,17 +11,17 @@
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
-        {{ $attributes->except(['field'])->merge([
-                   'wire:model' . $field->getWireModifier() => $field->getWireName(),
-                   'id' => $id,
-                   'type' => 'hidden',
-                   ])
-        }}
+            {{ $attributes->except(['field'])->merge([
+                       'wire:model' . $field->getWireModifier() => $field->getWireName(),
+                       'id' => $id,
+                       'type' => 'hidden',
+                       ])
+            }}
     />
 @else
     <x-dynamic-component :component="$field->getWrapperView()"
                          :id="$field->getWrapperId()"
-        {{ $attributes->class('relative little-admin-fildset')->merge(['class'=> $field->getColSpan()]) }}
+            {{ $attributes->class('relative little-admin-fildset')->merge(['class'=> $field->getColSpan()]) }}
     >
         <div {{ $attributes->class('grid px-4')->merge(['class'=> $field->getColumns()]) }} >
             <div class="col-span-full inline-flex item-center  py-3 text-sm font-bold uppercase text-slate-600">

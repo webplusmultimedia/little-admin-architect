@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Field;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\AbstractComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\CanBeWired;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasAddon;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasFloatingLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasId;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasName;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasValidation;
@@ -27,10 +26,10 @@ class Textarea extends AbstractComponent
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
-        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Textarea $field,
-        public string $name = '',
-        public string|null $caption = null,
-        public array $locales = [null],
+		\Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Textarea $field,
+		public string                                                           $name = '',
+		public string|null                                                      $caption = null,
+		public array                                                            $locales = [null],
     ) {
         parent::__construct();
         $this->setUp($field);

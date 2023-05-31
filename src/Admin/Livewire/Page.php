@@ -18,7 +18,7 @@ class Page extends Component
 
     protected static LengthAwarePaginator $records;
 
-    protected static \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form;
+    protected static \Webplusmultimedia\LittleAdminArchitect\Form\Components\Form $form;
 
     protected static ?string $route = null;
 
@@ -83,7 +83,7 @@ class Page extends Component
         return (static::getResource())::getModelLabel();
     }
 
-    public static function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form
+    public static function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Components\Form
     {
         return static::$form;
     }

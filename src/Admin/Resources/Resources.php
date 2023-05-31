@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
 
 class Resources

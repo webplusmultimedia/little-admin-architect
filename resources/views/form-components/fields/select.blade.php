@@ -1,5 +1,5 @@
 @php
-    use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Select;
+    use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Select;
 /** @var Select $field */
     $field = $getConfig();
     $id = $field->getId();
@@ -8,19 +8,18 @@
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
-        {{ $attributes->except(['field'])->merge(['wire:model' . $field->getWireModifier() => $field->getWireName(),'id' => $id, 'type' => 'hidden',]) }}
+            {{ $attributes->except(['field'])->merge(['wire:model' . $field->getWireModifier() => $field->getWireName(),'id' => $id, 'type' => 'hidden',]) }}
     />
 @else
     <x-dynamic-component :component="$field->getWrapperView()"
                          :id="$field->getWrapperId()"
-        {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
+            {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
     >
         <x-dynamic-component :component="$field->getViewComponentForLabel()" :id="$id" class="form-label" :label="$field->getLabel()"
                              :showRequired="$field->isRequired()"/>
 
         @if($field->isSearchable())
-            <x-little-anonyme::form-components.fields.partials.select.searchSelect :field="$field" />
-
+            <x-little-anonyme::form-components.fields.partials.select.searchSelect :field="$field"/>
 
         @else
             <select {{ $attributes->merge([

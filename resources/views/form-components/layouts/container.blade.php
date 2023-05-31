@@ -1,8 +1,8 @@
-@php use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Layouts\Container; @endphp
+@php use Webplusmultimedia\LittleAdminArchitect\Form\Components\Layouts\Container; @endphp
 @php
     /** @var Container $config */
     $config = $getConfig()
-    @endphp
+@endphp
 
 <div {{ $attributes->class("pb-3 grid gap-1 border border-gray-300 rounded-md bg-white ")->merge(['class'=>$config->getColSpan()]) }}
      x-data="{}"
@@ -17,7 +17,7 @@
 
     <div {{ $attributes->class(" py-3 grid grid-cols-1 gap-3 px-5")->merge(['class'=>$config->getColumns()]) }}>
         @foreach($config->getFields() as $field)
-            <x-dynamic-component :component="$field->getFieldView()"    :field="$field" />
+            <x-dynamic-component :component="$field->getFieldView()" :field="$field"/>
         @endforeach
     </div>
 

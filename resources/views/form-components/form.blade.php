@@ -1,5 +1,5 @@
 @php
-    use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
+    use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 	/**@var Form $form */
 	$form = $getForm();
@@ -28,7 +28,8 @@
                             <x-little-anonyme::form-components.fields.icons.hero-icon :name="$button->getViewIcon()"/>
                         @endif
                         <span>{{ $button->getCaption() }}</span>
-                        <x-little-form::icon name="loader" wire:loading.delay="wire:loading.delay" wire:target="{{ $button->getAction() }}" class="!opacity-100"/>
+                        <x-little-form::icon name="loader" wire:loading.delay="wire:loading.delay" wire:target="{{ $button->getAction() }}"
+                                             class="!opacity-100"/>
                     </x-little-form::button.submit>
 
                     <x-little-form::button.link class="" wire:loading.attr="disabled" wire:target="{{ $buttonCancel->getAction() }}"

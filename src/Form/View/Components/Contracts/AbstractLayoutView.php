@@ -7,7 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Contracts;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\AbstractLayout;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\AbstractLayout;
 
 abstract class AbstractLayoutView extends Component
 {

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Layouts;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\AbstractLayout;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Contracts\AbstractLayoutView;
 
 class Container extends AbstractLayoutView
 {
     public function __construct(
-        \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Layouts\Container $field,
-        public null|string $name = null,
+		\Webplusmultimedia\LittleAdminArchitect\Form\Components\Layouts\Container $field,
+		public null|string                                                        $name = null,
     ) {
         parent::__construct();
         $this->setUp($field);

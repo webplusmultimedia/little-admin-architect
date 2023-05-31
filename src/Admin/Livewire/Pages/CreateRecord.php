@@ -7,7 +7,6 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages;
 use Illuminate\Support\Str;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
 
 class CreateRecord extends Page
 {

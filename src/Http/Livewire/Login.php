@@ -10,12 +10,12 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Actions\Button;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Concerns\InteractsWithForms;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Contracts\HasForm;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\CheckBox;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Input;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Button;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithForms;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\HasForm;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\CheckBox;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Input;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 use Webplusmultimedia\LittleAdminArchitect\Http\Responses\Auth\LoginResponse;
 
 /**

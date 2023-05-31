@@ -12,16 +12,16 @@ final class Form extends Component
     protected string $view = 'form';
 
     public function __construct(
-        protected \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form $form,
-        public string $method = 'GET',
-        public array|object|null $bind = null,
+        protected \Webplusmultimedia\LittleAdminArchitect\Form\Components\Form $form,
+        public string                                                          $method = 'GET',
+        public array|object|null                                               $bind = null,
     ) {
         if ($this->form->hasModal()) {
             $this->view = 'form-modal';
         }
     }
 
-    public function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form
+    public function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Components\Form
     {
         return $this->form;
     }

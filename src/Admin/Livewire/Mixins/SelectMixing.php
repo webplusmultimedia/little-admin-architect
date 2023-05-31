@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Mixins;
 
 use Closure;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\ComponentForm;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 /** @mixin ComponentForm */
 class SelectMixing

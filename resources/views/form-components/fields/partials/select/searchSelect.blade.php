@@ -1,4 +1,4 @@
-@php use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Fields\Select; @endphp
+@php use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Select; @endphp
 @props([
 	/** @var Select $field */
 	'field'
@@ -25,7 +25,7 @@
          aria-haspopup="true"
          x-bind:aria-expanded="show"
     >
-        <div class="choice__wrapper_selected"  x-on:click="show = true"
+        <div class="choice__wrapper_selected" x-on:click="show = true"
              :class="{'ring-2 ring-primary-500': show}"
              x-on:keyup.esc="show = false"
         >

@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
-use Webplusmultimedia\LittleAdminArchitect\Form\Livewire\Components\Form;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 trait CanInitForm
 {
