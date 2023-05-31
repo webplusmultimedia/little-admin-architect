@@ -1,4 +1,5 @@
-<div class="" wire:key="">
+@php use Illuminate\Support\Str; @endphp
+<div class="" wire:key="{{ Str::random()  }}">
     @if($initialized)
         <x-dynamic-component :component="$table->getView()" :table="$table"/>
     @else

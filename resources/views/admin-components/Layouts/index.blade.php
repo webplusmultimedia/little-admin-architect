@@ -23,7 +23,7 @@
         <div class="container flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="https://flowbite.com/" class="flex items-center">
                 <x-little-anonyme::form-components.fields.icons.logo class="h-8"/>
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{{ strtoupper($title) }}</span>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white uppercase">{{ $title }}</span>
             </a>
             <button data-collapse-toggle="navbar-default" type="button"
                     class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"

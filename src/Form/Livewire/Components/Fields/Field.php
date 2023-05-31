@@ -67,13 +67,13 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     public function getDataRecord(): mixed
     {
         if ($this->record instanceof Model) {
-            return $this->getRecord()->{$this->getName()};
+            return $this->getValue();
         }
-        if (is_array($this->record)) {
+        /*if (is_array($this->record)) {
             if (isset($this->record[$this->getName()])) {
                 return $this->record[$this->getName()];
             }
-        }
+        }*/
 
         return null;
     }

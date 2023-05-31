@@ -28,9 +28,9 @@ trait CanInitForm
         if ( ! $this->data) {
             $this->data = $this->_form->fill($this->key);
             $this->_form->livewireId($this->id);
-            if ( ! $this->data->exists) {
+           /* if ( ! $this->data->exists) {
                 $this->_form->applyDefaultValue();
-            }
+            }*/
         } else {
             $this->_form->configureForm(livewireId: $this->id, resource: $page, model: $this->data);
         }

@@ -1,5 +1,5 @@
 @import "select.css";
-@import url('modal.css');
+@import "modal.css";
 
 @tailwind base;
 @tailwind components;

@@ -15,14 +15,14 @@ trait InteractWithLivewire
             if ( ! $livewire->data?->exists) {
                 $livewire->data?->fill($this->values($datas))->save();
                 if ($this->hasModal()) {
-                    $livewire->dispatchBrowserEvent('close.modal');
+                    $livewire->dispatchBrowserEvent($this->eventForCloseModal);
                 } elseif ($edit_url = $this->linkEdit($livewire->data)) {
                     redirect(to: $edit_url);
                 }
             } else {
                 $livewire->data->update($this->values($datas));
                 if ($this->hasModal()) {
-                    $livewire->dispatchBrowserEvent('close.modal');
+                    $livewire->dispatchBrowserEvent($this->eventForCloseModal);
                 }
             }
         }

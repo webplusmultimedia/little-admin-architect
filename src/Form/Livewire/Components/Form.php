@@ -41,6 +41,7 @@ final class Form
     use InteractWithRecord;
 
     protected string $view = 'form';
+    protected string $eventForCloseModal = 'close.modal';
 
     /**
      * @var Model|array<string,string>|null
@@ -146,7 +147,6 @@ final class Form
         } else {
             $this->mode = 'CREATED_RECORD';
         }
-
     }
 
     public function mode(): ?string

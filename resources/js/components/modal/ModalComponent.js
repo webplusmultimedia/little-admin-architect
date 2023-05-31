@@ -1,4 +1,4 @@
-export default  ModalComponent
+export default ModalComponent
 
 
 function ModalComponent({name}) {
@@ -9,13 +9,13 @@ function ModalComponent({name}) {
         showActiveComponent: true,
         activeComponent: false,
         componentHistory: [],
-        livewireTableId : null,
-        setActiveModalComponent(id,livewireId = null, skip = false) {
+        livewireTableId: null,
+        setActiveModalComponent(id, livewireId = null, skip = false) {
             this.show = true;
 
             if (this.activeComponent !== id) {
                 if (this.activeComponent !== false && skip === false) {
-                    this.componentHistory.push({component : this.activeComponent, id: livewireId});
+                    this.componentHistory.push({component: this.activeComponent, id: livewireId});
                 }
                 if (this.activeComponent === false) {
                     this.activeComponent = id
@@ -32,26 +32,25 @@ function ModalComponent({name}) {
         },
         closeModal() {
             this.show = false
-            Livewire.emit('close.modal')
+            this.$dispatch('close.modal')
         },
         removeModalToDom() {
-            this.activeComponent = false
             this.show = false
+            this.$refs[this.activeComponent].remove()
+            this.activeComponent = false
             this.livewireTableId = null
             this.$wire.components = []
             this.$wire.render()
         },
         init() {
-            Livewire.on('adminShowModal', (id,livewireTableId) => {
-                this.setActiveModalComponent(id,livewireTableId);
+            Livewire.on('adminShowModal', (id, livewireTableId) => {
+                this.setActiveModalComponent(id, livewireTableId);
             });
 
             window.addEventListener('close.modal', () => {
-                if(this.livewireTableId){
-                    this.$dispatch(this.livewireTableId+'.after.close')
-                    console.log('fff')
+                if (this.livewireTableId) {
+                    this.$dispatch(this.livewireTableId + '.after.close')
                 }
-
                 this.removeModalToDom()
             })
         }

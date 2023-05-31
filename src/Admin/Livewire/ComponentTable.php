@@ -25,6 +25,7 @@ class ComponentTable extends Component implements HasTable
 
     public bool $initialized = true;
 
+
     public ?string $routeName = null;
 
     public ?int $rowsPerPage = null;
@@ -47,6 +48,11 @@ class ComponentTable extends Component implements HasTable
     protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = null;
 
     protected array $formDatas;
+
+    public function updatingSearch(): void
+    {
+            $this->resetPage();
+    }
 
     public function mount(string $pageRoute): void
     {

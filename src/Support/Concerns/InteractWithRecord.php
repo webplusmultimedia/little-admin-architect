@@ -20,7 +20,7 @@ trait InteractWithRecord
             return $this->model;
         }
         $this->model(new $model());
-
+        $this->applyDefaultValue();
         return $this->model;
     }
 }

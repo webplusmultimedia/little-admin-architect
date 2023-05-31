@@ -101,7 +101,7 @@ class Resources
             return (string) $label;
         }
 
-        return Str::plural(static::getModelLabel());
+        return (string) str(Str::plural(static::getModelLabel()))->lower()->ucfirst();
 
         // return static::getModelLabel();
     }
@@ -122,7 +122,8 @@ class Resources
             return (string) static::$slug;
         }
 
-        return Str::of(static::getModel())
+
+        return str(static::getResourceName())->append('/') . Str::of(static::getModel())
             ->afterLast('\\Models\\')
             ->plural()
             ->explode('\\')
@@ -130,11 +131,15 @@ class Resources
             ->implode('/');
     }
 
+    public static function getResourceName(): string
+    {
+       return (string) str(class_basename(static::class))->before('Resource')->lower();
+    }
     public static function getRouteBaseName(): string
     {
         $slug = static::getSlug();
 
-        return "filament.resources.{$slug}";
+        return config('little-admin-architect.route.prefix') . ".{$slug}";
     }
 
     public static function getRecordRouteKeyName(): ?string

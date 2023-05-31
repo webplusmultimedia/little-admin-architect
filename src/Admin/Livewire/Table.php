@@ -12,7 +12,8 @@ class Table extends ComponentTable implements Htmlable
     public function render(): View
     {
         $this->table->applyParamsForSortingColumn(column: $this->tableSortColumn, direction: $this->tableDirection);
-        $this->table->applyQueryToRecord($this->search);
+
+        $this->table->applyQueryToRecords($this->search);
 
         return view('little-views::livewire.table', ['title' => $this->table->getTableTitle(), 'table' => $this->table]);
     }

@@ -80,7 +80,7 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
                 }
                 else if (this.hasOptionUsing && this.optionsBackup){
                     this.options = this.optionsBackup
-                    this.addSelectedOptionToNewList()
+
                 }
             }
         },
@@ -92,6 +92,7 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
         },
         selectItem :{
             ['x-on:click.stop'](){
+                console.log('select',this.$el.dataset)
                 if(!this.isMultiple){
                     this.selectOptionFrom({label: this.$el.dataset.label, value: this.$el.dataset.value})
                     this.defaultLabel = this.$el.dataset.label
@@ -121,25 +122,22 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
             this.$refs.search.focus()
         },
         init() {
-
             if (this.isMultiple){
                 this.defaultLabel = TagsBuilder(this.defaultMultipleLabel)
                 if (!this.state){
                     this.state = []
                 }
-                this.addSelectedOptionToNewList()
             }
             else {
                 this.selectOptionFrom({label: defaultLabel, value: defaultValue})
-                this.addSelectedOptionToNewList()
             }
+            this.$nextTick(()=>this.addSelectedOptionToNewList())
 
             this.$watch('show',(value)=>{
                 if(value) {
                     setTimeout(()=>{
                         this.$refs.search.focus()
                     },5)
-
                 }
             })
         },
