@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns;
 
 use Carbon\CarbonInterface;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts\AbstractColumn;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\TextColumn;
 
 trait HasDateTimeValue
 {
@@ -15,7 +15,7 @@ trait HasDateTimeValue
     {
         $this->type = 'date';
         $this->dateFormat = $format;
-        $this->value = function (AbstractColumn $column) {
+        $this->value = function (TextColumn $column) {
             if ($column->record->{$column->name} instanceof CarbonInterface) {
                 return $column->record->{$column->name}->format($column->dateFormat);
             }
@@ -30,7 +30,7 @@ trait HasDateTimeValue
     {
         $this->type = 'datetime';
         $this->dateFormat = $format;
-        $this->value = function (AbstractColumn $column) {
+        $this->value = function (TextColumn $column) {
             if ($column->record->{$column->name} instanceof CarbonInterface) {
                 return $column->record->{$column->name}->format($column->dateFormat);
             }
