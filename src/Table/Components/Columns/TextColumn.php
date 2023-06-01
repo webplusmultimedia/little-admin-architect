@@ -12,5 +12,6 @@ class TextColumn extends AbstractColumn
 {
     use HasDateTimeValue;
     use HasMoneyValue;
+
     protected string $view = 'text';
 }
