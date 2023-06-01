@@ -6,20 +6,16 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contra
 
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\CanBeSearchable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\CanBeSortable;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasDateTimeValue;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasLivewireId;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasMoneyValue;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasRecord;
 
 abstract class AbstractColumn
 {
     use CanBeSearchable;
     use CanBeSortable;
-    use HasDateTimeValue;
     use HasLabel;
     use HasLivewireId;
-    use HasMoneyValue;
     use HasRecord;
 
     protected string $view = 'text';
