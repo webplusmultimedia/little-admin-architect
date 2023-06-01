@@ -44,29 +44,30 @@ class RegisterResources
                     $slug = $resourceClassBaseName::getSlug();
                     $pages = $this->filesystem->files($pagesDirectory);
 
-                    $group[(string) str($resourceGroupe)->afterLast('/')][] = array_map(function (SplFileInfo $page) use ($resourceClassBaseName, $resourceClassBasePath, $resourceGroupe, $slug) {
+                    $group[(string) str(string: $resourceGroupe)->afterLast('/')][] = array_map(callback: function (SplFileInfo $page) use ($resourceClassBaseName, $resourceClassBasePath, $resourceGroupe, $slug) {
                         $pageClassBasePath = (string) str($page->getRealPath())->between('app/', '.php')->prepend('App/');
+                        /** @var string $namePage */
                         $namePage = (string) str($pageClassBasePath)->afterLast('/')->kebab()->explode('-')->first();
 
                         $slugPage = match ($namePage) {
                             'edit' => $slug . '/{record}/edit',
                             'create' => $slug . '/create',
-                            'list' => $slug ,
+                            default => $slug ,
                         };
                         $routePage = match ($namePage) {
                             'edit' => $slug . '/{record}/edit',
                             'create' => $slug . '/create',
-                            'list' => $slug . '/index',
+                            default => $slug . '/index',
                         };
 
                         $typePage = match ($namePage) {
                             'edit' => 'edit',
                             'create' => 'create',
-                            'list' => 'list',
+                            default => 'list',
                         };
 
                         return [
-                            'group' => (string) str($resourceGroupe)->afterLast('/'),
+                            'group' => (string) str(string: $resourceGroupe)->afterLast('/'),
                             'resourceName' => (string) str($resourceClassBasePath)->afterLast('/'),
                             'resourcePlurialTitle' => (string) str($resourceClassBaseName::getPluralModelLabel())->ucfirst(),
                             'resourceTitle' => (string) str($resourceClassBaseName::getNavigationLabel())->ucfirst(),
@@ -91,7 +92,7 @@ class RegisterResources
                                 ->kebab()
                                 ->value(),
                         ];
-                    }, $pages);
+                    }, array: $pages);
 
                 }
 

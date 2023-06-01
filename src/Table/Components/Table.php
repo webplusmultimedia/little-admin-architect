@@ -6,7 +6,6 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components;
 
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
-use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithRecord;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasColumns;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeader;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasQueryBuilder;

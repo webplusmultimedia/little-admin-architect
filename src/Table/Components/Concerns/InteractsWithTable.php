@@ -13,7 +13,7 @@ trait InteractsWithTable
         try {
             return parent::__get($property);
         } catch (PropertyNotFoundException $exception) {
-            if ($property === 'table') {
+            if ('table' === $property) {
                 return $this->getTable();
             }
 

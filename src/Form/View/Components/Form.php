@@ -13,8 +13,8 @@ final class Form extends Component
 
     public function __construct(
         protected \Webplusmultimedia\LittleAdminArchitect\Form\Components\Form $form,
-        public string                                                          $method = 'GET',
-        public array|object|null                                               $bind = null,
+        public string $method = 'GET',
+        public array|object|null $bind = null,
     ) {
         if ($this->form->hasModal()) {
             $this->view = 'form-modal';

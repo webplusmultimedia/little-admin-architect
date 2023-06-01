@@ -25,7 +25,6 @@ class ComponentTable extends Component implements HasTable
 
     public bool $initialized = true;
 
-
     public ?string $routeName = null;
 
     public ?int $rowsPerPage = null;
@@ -51,7 +50,7 @@ class ComponentTable extends Component implements HasTable
 
     public function updatingSearch(): void
     {
-            $this->resetPage();
+        $this->resetPage();
     }
 
     public function mount(string $pageRoute): void

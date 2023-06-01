@@ -21,6 +21,7 @@ trait InteractWithRecord
         }
         $this->model(new $model());
         $this->applyDefaultValue();
+
         return $this->model;
     }
 }

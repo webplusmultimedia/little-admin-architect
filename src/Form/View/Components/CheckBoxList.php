@@ -17,8 +17,8 @@ class CheckBoxList extends AbstractComponent
     use HasValidation;
 
     public function __construct(
-		\Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\CheckBoxList $field,
-		public null|string                                                          $name = null,
+        \Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\CheckBoxList $field,
+        public null|string $name = null,
     ) {
         parent::__construct();
         $this->setUp($field);

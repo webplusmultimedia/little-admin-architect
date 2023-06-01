@@ -14,24 +14,24 @@ class LittleAdminModal extends Component
 
     public bool $isOpen = false;
 
-    public null|string $activeComponent = NULL;
+    public null|string $activeComponent = null;
 
-    public null|string $livewireTableId = NULL;
+    public null|string $livewireTableId = null;
 
     protected $listeners = ['open-modal-architect' => 'openModal'];
 
-    public function openModal(string $component, array $attributes = [], null|string $livewireId = NULL): void
+    public function openModal(string $component, array $attributes = [], null|string $livewireId = null): void
     {
         $id = md5($component . serialize($attributes));
-        $this->components[ $id ] = [
-            'name'       => $component,
+        $this->components[$id] = [
+            'name' => $component,
             'attributes' => $attributes,
         ];
         $this->activeComponent = $id;
         $this->emit('adminShowModal', $id, $livewireId);
     }
 
-    public function killComponent()
+    public function killComponent(): void
     {
         $this->skipRender();
         $this->reset('components', 'activeComponent', 'livewireTableId');

@@ -122,7 +122,6 @@ class Resources
             return (string) static::$slug;
         }
 
-
         return str(static::getResourceName())->append('/') . Str::of(static::getModel())
             ->afterLast('\\Models\\')
             ->plural()
@@ -133,8 +132,9 @@ class Resources
 
     public static function getResourceName(): string
     {
-       return (string) str(class_basename(static::class))->before('Resource')->lower();
+        return (string) str(class_basename(static::class))->before('Resource')->lower();
     }
+
     public static function getRouteBaseName(): string
     {
         $slug = static::getSlug();

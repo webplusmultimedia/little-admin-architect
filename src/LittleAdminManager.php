@@ -12,37 +12,37 @@ use Webplusmultimedia\LittleAdminArchitect\Support\RegisterResources;
 
 final class LittleAdminManager
 {
-  //  private bool $isNavigationMounted = false;
+    //  private bool $isNavigationMounted = false;
 
     private array $navigationGroups = [];
 
-  //  private array $navigationItems = [];
+    //  private array $navigationItems = [];
 
-   // private array $pages = [];
+    // private array $pages = [];
 
     private array $resources = [];
 
-   // private array $beforeCoreScripts = [];
+    // private array $beforeCoreScripts = [];
 
-  //  private array $scripts = [];
+    //  private array $scripts = [];
 
-  //  private array $scriptData = [];
+    //  private array $scriptData = [];
 
     private array $styles = [];
 
-  //  private array $meta = [];
+    //  private array $meta = [];
 
-   // private string|Htmlable|null $theme = null;
+    // private string|Htmlable|null $theme = null;
 
-  //  private array $userMenuItems = [];
+    //  private array $userMenuItems = [];
 
-  //  private array $widgets = [];
+    //  private array $widgets = [];
 
-  //  private ?Closure $navigationBuilder = null;
+    //  private ?Closure $navigationBuilder = null;
 
-  //  private array $renderHooks = [];
+    //  private array $renderHooks = [];
 
- //   private bool $isServing = false;
+    //   private bool $isServing = false;
 
     public function getUrl(): ?string
     {

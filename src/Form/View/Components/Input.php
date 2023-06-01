@@ -24,8 +24,8 @@ class Input extends AbstractComponent
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
-		\Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Input $field,
-		public null|string                                                   $name = null,
+        \Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Input $field,
+        public null|string $name = null,
     ) {
         parent::__construct();
         $this->setUp($field);

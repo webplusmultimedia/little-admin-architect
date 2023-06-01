@@ -26,10 +26,10 @@ class Textarea extends AbstractComponent
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
-		\Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Textarea $field,
-		public string                                                           $name = '',
-		public string|null                                                      $caption = null,
-		public array                                                            $locales = [null],
+        \Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Textarea $field,
+        public string $name = '',
+        public string|null $caption = null,
+        public array $locales = [null],
     ) {
         parent::__construct();
         $this->setUp($field);

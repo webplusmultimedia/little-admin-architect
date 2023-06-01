@@ -41,6 +41,7 @@ final class Form
     use InteractWithRecord;
 
     protected string $view = 'form';
+
     protected string $eventForCloseModal = 'close.modal';
 
     /**
