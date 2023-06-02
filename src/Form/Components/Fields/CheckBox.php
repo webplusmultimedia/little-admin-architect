@@ -27,6 +27,14 @@ class CheckBox extends Field
         return $this;
     }
 
+    public function applyDefaultValue(): void
+    {
+        if ( ! $this->record->{$this->name}) {
+            $this->record->{$this->name} = false;
+        }
+        parent::applyDefaultValue();
+    }
+
     public function initDatasFormOnMount(?Model $model): void
     {
         if ($model) {
