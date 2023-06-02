@@ -1,6 +1,17 @@
 import {OptionsBuilder, TagsBuilder} from "./OptionsBuilder";
 
-export function SelectFormComponent(componentId, defaultLabel, state, defaultValue, isMultiple,isSearchable,optionsUsing, hasOptionUsing, msgContent, searchDebounce) {
+export function SelectFormComponent({
+                                        componentId,
+                                        defaultLabel,
+                                        state,
+                                        defaultValue,
+                                        isMultiple,
+                                        isSearchable,
+                                        optionsUsing,
+                                        hasOptionUsing,
+                                        msgContent,
+                                        searchDebounce
+                                    }) {
 
     return {
         show: false,
@@ -28,14 +39,16 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
         async getResultsOnSearchTerm(term) {
             if (!this.hasOptionUsing) {
                 this.options = await this.$wire.getSearchResultUsing(componentId, term)
+                this.addSelectedOptionToNewList()
             }
             if (this.hasOptionUsing){
-                this.searchInOptions(term)
+                this.options = this.searchInOptions(term)
+                this.$refs.list_options.innerHTML = OptionsBuilder(this.options)
             }
-            this.addSelectedOptionToNewList()
+
         },
         searchInOptions(term) {
-            this.options = this.options.filter(option=> option.label.toLowerCase().match(new RegExp(term.toLowerCase())))
+            return this.options.filter(option => option.label.toLowerCase().match(new RegExp(term.toLowerCase(), 'g')))
         },
         selectOptionFrom(item) {
             if (item && !this.isMultiple) {
@@ -55,8 +68,6 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
                 if (!Array.from(this.options).filter(option => (option.label === this.selectedOptions.label) && (option.value === this.selectedOptions.value)).length) {
                     this.options.push(this.selectedOptions)
                 }
-            }else {
-                /** @Todo for select multiple */
             }
             this.$refs.list_options.innerHTML = OptionsBuilder(this.options)
         },
@@ -80,7 +91,7 @@ export function SelectFormComponent(componentId, defaultLabel, state, defaultVal
                 }
                 else if (this.hasOptionUsing && this.optionsBackup){
                     this.options = this.optionsBackup
-
+                    this.$refs.list_options.innerHTML = OptionsBuilder(this.options)
                 }
             }
         },

@@ -6,16 +6,18 @@
 <div class="relative"
      x-cloak
      x-data="SelectFormComponent(
-        @js($field->getWireName()),
-        @js($field->getLabelDefault()),
-        $wire.entangle(@js($field->getWireName())).defer,
-        @js($field->getDataRecord()),
-        @js($field->isMultiple()),
-        @js($field->isSearchable()),
-        @js($field->getAllLabelsForValues()),
-        @js($field->hasOptionUsing()),
-        @js($field->getMessagesContent()),
-        @js($field->getSearchDebounce())
+     {
+        componentId: @js($field->getWireName()),
+        defaultLabel: @js($field->getLabelDefault()),
+        state : $wire.entangle(@js($field->getWireName())).defer,
+        defaultValue : @js($field->getDataRecord()),
+        isMultiple : @js($field->isMultiple()),
+        isSearchable : @js($field->isSearchable()),
+        optionsUsing : @js($field->getAllLabelsForValues()),
+        hasOptionUsing : @js($field->hasOptionUsing()),
+        msgContent : @js($field->getMessagesContent()),
+        searchDebounce : @js($field->getSearchDebounce()),
+     }
     )"
      wire:ignore
     {{ $attributes }}
