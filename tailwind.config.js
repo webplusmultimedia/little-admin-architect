@@ -15,11 +15,12 @@ module.exports = {
             'primary-datepicker' : colors.cyan,
             primary : colors.cyan,
             secondary : colors.lime,
-            info : colors.indigo,
-            error : colors.red,
+            info : "#009399",
+            error : colors.pink,
             warning : colors.yellow,
             success : colors.emerald,
-            primaire : '#f46316'
+            primaire : '#f46316',
+            danger : '#d7035f'
         }
     },
   },

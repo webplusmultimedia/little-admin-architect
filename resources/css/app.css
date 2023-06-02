@@ -1,35 +1,43 @@
 @import "select.css";
 @import "modal.css";
+@import "colors.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-    /**/ body{
-    @apply text-gray-600
-}
-    h1{
-        @apply text-6xl lg:text-8xl font-bold uppercase mt-4 mb-2 relative text-primary-900
-        /*after:absolute after:-bottom-0 after:left-0 after:content-[''] after:h-2 after:w-10 after:bg-primary-600*/
+    body {
+        @apply text-gray-600
     }
-    h2{
+
+    h1 {
+        @apply text-6xl lg:text-8xl font-bold uppercase mt-4 mb-2 relative text-primary-900
+    }
+
+    h2 {
         @apply text-3xl lg:text-5xl font-medium mt-4 mb-2 text-primary-500
     }
-    .container{
+
+    .container {
         @apply px-2 lg:px-0
     }
-    p{
+
+    p {
         @apply mb-4 leading-relaxed text-lg md:text-xl
     }
-    li{
+
+    li {
         @apply text-lg md:text-xl
     }
-    .blog ul, .blog ol{
+
+    .blog ul, .blog ol {
         @apply list-disc ml-10 mb-4
     }
 
-    [x-cloak]  { @apply !hidden }
+    [x-cloak] {
+        @apply !hidden
+    }
 
     [type="text"],
     [type="email"],
@@ -49,53 +57,64 @@
         @apply text-black text-[1rem] border  py-3 px-2 w-full border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500   dark:border-blue-300 shadow-sm disabled:opacity-50 duration-100 rounded;
     }
 
-    [type="checkbox"]{
+    [type="checkbox"] {
         @apply text-primary-500 py-2 px-2 border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500 shadow-sm disabled:opacity-50 duration-75 indeterminate:bg-gray-300 rounded ;
     }
-    [type="radio"]{
-        @apply  appearance-none text-primary-500 py-2 px-2 border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500 shadow-sm disabled:opacity-50 duration-75 indeterminate:bg-transparent rounded-full invalid:bg-transparent;
+
+    [type="radio"] {
+        @apply appearance-none text-primary-500 py-2 px-2 border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500 shadow-sm disabled:opacity-50 duration-75 indeterminate:bg-transparent rounded-full invalid:bg-transparent;
     }
-    .little-admin-fildset{
+
+    .little-admin-fildset {
         @apply before:content-[''] before:absolute before:left-0 before:right-0 before:top-5 before:-bottom-1 before:border before:border-gray-300 before:rounded-lg before:pointer-events-none
     }
-    label{
+
+    label {
         @apply text-[1rem]
     }
 }
 
 
 @layer components {
-    .btn{
+    .btn {
         @apply py-3 px-2 bg-primary-500 hover:bg-primary-600 text-white disabled:bg-primary-200
     }
-    .group-btn{
+
+    .group-btn {
         @apply flex gap-2
     }
 }
 
 @layer components {
-    .btn{
+    .btn {
         @apply py-2 px-6 bg-gray-300 hover:bg-gray-500 hover:text-white text-gray-700 duration-300 font-medium
     }
-    .rounded__btn{
+
+    .rounded__btn {
         @apply py-0 px-2 bg-gray-300 hover:bg-gray-500 hover:text-white text-gray-700 duration-300 font-medium
     }
-    .btn-primary{
+
+    .btn-primary {
         @apply bg-primary-500 hover:bg-primary-600 text-white
     }
-    .btn-secondary{
+
+    .btn-secondary {
         @apply bg-secondary-500 hover:bg-secondary-600 text-white
     }
-    .btn-info{
+
+    .btn-info {
         @apply bg-info-500 hover:bg-info-600 text-white
     }
-    .btn-success{
+
+    .btn-success {
         @apply bg-success-500 hover:bg-success-600 text-white
     }
-    .btn-error{
+
+    .btn-error {
         @apply bg-error-500 hover:bg-error-600 text-white
     }
-    .btn-warning{
+
+    .btn-warning {
         @apply bg-warning-300 hover:bg-warning-500 text-warning-700
     }
 }

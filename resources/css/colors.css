@@ -1,0 +1,36 @@
+@layer base {
+    .text-success{
+        @apply text-success-500
+    }
+    .text-primary{
+        @apply text-primary-500
+    }
+
+    .text-error{
+        @apply text-danger
+    }
+    .text-warning{
+        @apply text-warning-500
+    }
+
+    .text-tag-success{
+        @apply bg-success-500
+    }
+    .text-tag-primary{
+        @apply bg-primary-500
+    }
+    .text-tag-danger{
+        @apply bg-danger
+    }
+
+    .text-tag-warning{
+        @apply bg-warning-500
+    }
+    .text-tag-info{
+        @apply bg-info
+    }
+    .text-tag{
+        @apply text-white
+    }
+
+}

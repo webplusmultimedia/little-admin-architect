@@ -9,25 +9,42 @@ trait HasColors
     /**
      * @var array<string,string>|null
      */
-    protected ?array $valuesForColor = null;
+    protected ?array $valuesForTextColor = null;
+
+    protected ?array $valuesForBgColor = null;
 
     public function color(array $valuesForColor): static
     {
-        $this->valuesForColor = $valuesForColor;
+        $this->valuesForTextColor = $valuesForColor;
 
         return $this;
     }
 
-    public function hasColors(): bool
+    public function bgColor(array $bgColor): static
     {
-        return is_array($this->valuesForColor);
+        $this->valuesForBgColor = $bgColor;
+
+        return $this;
+    }
+
+    public function hasTextColor(): bool
+    {
+        return is_array($this->valuesForTextColor);
+    }
+
+    public function hasBgColor(): bool
+    {
+        return is_array($this->valuesForBgColor);
     }
 
     public function getColor($value): string|null
     {
 
-        if ($this->hasColors() and isset($this->valuesForColor[$value])) {
-            return str('text-')->append($this->valuesForColor[$value], '-500')->value();
+        if ($this->hasTextColor() and isset($this->valuesForTextColor[$value])) {
+            return str('text-')->append($this->valuesForTextColor[$value])->value();
+        }
+        if ($this->hasBgColor() and isset($this->valuesForBgColor[$value])) {
+            return str('text-tag-')->append($this->valuesForBgColor[$value])->value();
         }
 
         return null;
