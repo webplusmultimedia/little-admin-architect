@@ -18,13 +18,14 @@ trait HasColors
         return $this;
     }
 
-    public function hasColors()
+    public function hasColors(): bool
     {
-        return ! $this->valuesForColor;
+        return is_array($this->valuesForColor);
     }
 
     public function getColor($value): string|null
     {
+
         if ($this->hasColors() and isset($this->valuesForColor[$value])) {
             return str('text-')->append($this->valuesForColor[$value], '-500')->value();
         }

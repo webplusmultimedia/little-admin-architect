@@ -19,6 +19,7 @@ module.exports = {
             error : colors.red,
             warning : colors.yellow,
             success : colors.emerald,
+            primaire : '#f46316'
         }
     },
   },

@@ -7,9 +7,8 @@ namespace Webplusmultimedia\LittleAdminArchitect\Tests;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Facade;
-use Livewire\Livewire;
+use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Modal\LittleAdminModal;
 use Webplusmultimedia\LittleAdminArchitect\LittleAdminArchitectServiceProvider;
 
 class TestCase extends Orchestra
@@ -17,7 +16,6 @@ class TestCase extends Orchestra
     protected function setUp(): void
     {
         parent::setUp();
-        $this->registerLivewireComponents();
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'Webplusmultimedia\\LittleAdminArchitect\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
@@ -26,6 +24,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
+            LivewireServiceProvider::class,
             LittleAdminArchitectServiceProvider::class,
         ];
     }
@@ -56,11 +55,5 @@ class TestCase extends Orchestra
     public function makeACleanSlate(): void
     {
         Artisan::call('view:clear');
-    }
-
-    protected function registerLivewireComponents(): void
-    {
-        /* Livewire::component('little-admin.pages.auth.login', \Webplusmultimedia\LittleAdminArchitect\Http\Livewire\Login::class);
-         Livewire::component('little-admin-architect.modal', LittleAdminModal::class);*/
     }
 }

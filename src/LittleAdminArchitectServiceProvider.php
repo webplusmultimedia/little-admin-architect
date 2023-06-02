@@ -68,10 +68,8 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
             }
             Livewire::component($component, $class);
         }
-        if ( ! $this->app->runningInConsole()) {
-            Livewire::component('little-admin.pages.auth.login', config('little-admin-architect.auth.pages.login'));
-            Livewire::component('little-admin-architect.modal', LittleAdminModal::class);
-        }
 
+        Livewire::component('little-admin.pages.auth.login', config('little-admin-architect.auth.pages.login'));
+        Livewire::component('little-admin-architect.modal', LittleAdminModal::class);
     }
 }
