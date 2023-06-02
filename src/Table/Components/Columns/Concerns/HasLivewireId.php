@@ -8,7 +8,7 @@ trait HasLivewireId
 {
     protected string $livewireId;
 
-    public function livewireId(string $id)
+    public function livewireId(string $id): static
     {
         $this->livewireId = $id;
 
@@ -20,8 +20,12 @@ trait HasLivewireId
         return $this->livewireId;
     }
 
-    public function getWireId()
+    public function getWireId(): string
     {
-        return str($this->getLabel())->slug()->prepend($this->getLivewireId(), '.')->append('.', $this->getRecord()->getKey());
+        return str($this->getLabel())
+            ->slug()
+            ->prepend($this->getLivewireId(), '.')
+            ->append('.', $this->getRecord()->getKey())
+            ->value();
     }
 }

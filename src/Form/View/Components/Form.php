@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\Component;
 
 final class Form extends Component
@@ -26,7 +27,7 @@ final class Form extends Component
         return $this->form;
     }
 
-    protected function getView()
+    protected function getView(): string
     {
         return 'little-views::form-components.' . $this->view;
     }
@@ -40,7 +41,7 @@ final class Form extends Component
     {
         if ($this->form->getResourcePage() and $title = $this->form->getResourcePage()::getRecordTitleAttribute()) {
             $record = $this->form->getRecord();
-            if ($record->exists) {
+            if ($record instanceof Model and $record->exists) {
                 return __('little-admin-architect::form.edit.title', ['title' => $record->{$title}]);
             }
 

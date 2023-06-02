@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Modal;
 
+use Illuminate\View\View;
 use Livewire\Component;
 
 class LittleAdminModal extends Component
@@ -18,6 +19,9 @@ class LittleAdminModal extends Component
 
     public null|string $livewireTableId = null;
 
+    /**
+     * @var string[]
+     */
     protected $listeners = ['open-modal-architect' => 'openModal'];
 
     public function openModal(string $component, array $attributes = [], null|string $livewireId = null): void
@@ -37,7 +41,7 @@ class LittleAdminModal extends Component
         $this->reset('components', 'activeComponent', 'livewireTableId');
     }
 
-    public function render()
+    public function render(): View
     {
         return view('little-views::admin-components.components.modal');
     }

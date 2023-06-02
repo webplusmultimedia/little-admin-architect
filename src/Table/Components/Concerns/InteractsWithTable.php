@@ -5,9 +5,16 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
 use Livewire\Exceptions\PropertyNotFoundException;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
 
 trait InteractsWithTable
 {
+    /**
+     * @param  mixed  $property
+     * @return mixed|Table
+     *
+     * @throws PropertyNotFoundException
+     */
     public function __get($property)
     {
         try {

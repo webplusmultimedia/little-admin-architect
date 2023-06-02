@@ -26,6 +26,12 @@ trait InteractsWithForms
 
     protected array $configParams = [];
 
+    /**
+     * @param  mixed  $property
+     * @return mixed
+     *
+     * @throws PropertyNotFoundException
+     */
     public function __get($property)
     {
         try {

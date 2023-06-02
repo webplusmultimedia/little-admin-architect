@@ -20,6 +20,9 @@ final class LittleAdminManager
 
     // private array $pages = [];
 
+    /**
+     * @var array<int,string[]>
+     */
     private array $resources = [];
 
     // private array $beforeCoreScripts = [];
@@ -97,6 +100,7 @@ final class LittleAdminManager
     private function applyResources(): void
     {
         $this->resources = RegisterResources::getResourcesFromApplication(config('little-admin-architect.resources.path'));
+
         /*cache()->remember('little-admin-resource', 1, function () {
             return RegisterResources::getResourcesFromApplication(config('little-admin-architect.resources.path'));
         });*/
@@ -115,14 +119,8 @@ final class LittleAdminManager
     {
         $resources = $this->getResources();
 
-        /*collect($resources)
-             ->map(function ($value,$key){
-                 return collect($value)->collapse()->toArray();
-             })
-             ->dd();*/
-
         return collect($resources)
-            ->map(function ($value, $key) {
+            ->map(function (array $value) {
                 return collect($value)->collapse()->toArray();
             })->all();
     }

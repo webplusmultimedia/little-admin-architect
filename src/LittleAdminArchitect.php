@@ -21,6 +21,7 @@ class LittleAdminArchitect
         $navigation = [];
         $manager = static::getResourceManager();
         foreach ($manager->getPages() as $group => $resourcePages) {
+
             $pages = [];
             foreach ($resourcePages as $resource) {
 
@@ -40,6 +41,7 @@ class LittleAdminArchitect
                     'route_resource' => $resource['resourceRouteName'],
                 ];
             }
+
             $navigation[$group] = $pages;
         }
 

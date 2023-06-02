@@ -22,7 +22,7 @@
                     <span>{{ __('little-admin-architect::table.button.create',['label'=>'un']) }} {{ str($table->title)->singular() }}</span>
                 </button>
             @else
-                <a href="{{ $table->linkCreate() }}" class="btn btn-primary"
+                <a href="{{ url($table->linkCreate()) }}" class="btn btn-primary"
                 >
                     {{ __('little-admin-architect::table.button.create',['label'=>'un']) }} {{ str($table->title)->singular() }}
                 </a>
@@ -69,14 +69,14 @@
                                             <span>{{ __('little-admin-architect::table.row-button.edit') }}</span>
                                         </div>
                                     @else
-                                        <a href="{{ $table->linkEdit($record)  }}"
+                                        <a href="{{ url($table->linkEdit($record))  }}"
                                            class="hover:text-primary-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-primary-200 hover:border-primary-400  inline-flex items-center space-x-1 text-primary-600">
                                             <x-heroicon-s-pencil class="w-4 h-4" aria-hidden="true"/>
                                             <span>{{ __('little-admin-architect::table.row-button.edit') }}</span>
                                         </a>
                                     @endif
 
-                                    <a href="{{ $table->linkIndex()  }}"
+                                    <a href="{{ url($table->linkIndex())  }}"
                                        class="hover:text-error-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-error-200 hover:border-error-400  inline-flex items-center space-x-1 text-error-600 ">
                                         <x-heroicon-s-x-mark class="w-4 h-4 " aria-hidden="true"/>
                                         <span>{{ __('little-admin-architect::table.row-button.delete') }}</span>

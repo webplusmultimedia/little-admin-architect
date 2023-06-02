@@ -15,13 +15,14 @@ trait InteractWithRecord
         $resource = $this->getResourcePage();
         $model = $resource::getEloquentQuery()->getModel();
         if ($key) {
-            $this->model($resource::getEloquentQuery()->where($model->getKeyName(), $key)->firstOrFail());
+            $model = $resource::getEloquentQuery()->where($model->getKeyName(), $key)->firstOrFail();
+            $this->model($model);
 
-            return $this->model;
+            return $model;
         }
-        $this->model(new $model());
+        $this->model($model);
         $this->applyDefaultValue();
 
-        return $this->model;
+        return $model;
     }
 }

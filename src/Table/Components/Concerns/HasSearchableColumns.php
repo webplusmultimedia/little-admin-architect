@@ -49,7 +49,7 @@ trait HasSearchableColumns
         return count($this->searchableColumns) > 0;
     }
 
-    public function getFieldSearchText()
+    public function getFieldSearchText(): string
     {
         return collect($this->columns)
             ->filter(fn (AbstractColumn $column) => $column->isSearchable())

@@ -38,28 +38,28 @@ class Page extends Component
     {
         $path = static::getRouteForPage('edit')['route'];
 
-        return url(str($path)
+        return str($path)
             ->replace(['{record}'], $record->getKey())
             ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
-            ->value());
+            ->value();
     }
 
     public static function getCreateUrl(): string
     {
         $path = static::getRouteForPage('create')['route'];
 
-        return url(str($path)
+        return str($path)
             ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
-            ->value());
+            ->value();
     }
 
     public static function getListUrl(): string
     {
         $path = static::getRouteForPage('index')['route'];
 
-        return url(str($path)
+        return str($path)
             ->prepend('/', config('little-admin-architect.prefix'), '/', static::getResource()::getSlug())
-            ->value());
+            ->value();
     }
 
     public static function getPageRoute(): string

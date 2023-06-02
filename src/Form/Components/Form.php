@@ -102,7 +102,14 @@ final class Form
         return $this->action;
     }
 
-    public function model(null|Model|array $record = null): void
+    public function model(Model $record): void
+    {
+        $this->model = $record;
+        $this->initDatasFormOnMount($record);
+        $this->initSelectUsing();
+    }
+
+    public function modelArray(array $record): void
     {
         $this->model = $record;
         $this->initDatasFormOnMount($record);

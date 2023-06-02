@@ -75,7 +75,7 @@ class AssetsController
         $cacheControl = 'public, max-age=31536000';
         $expires = strtotime('+1 year');
 
-        $lastModified = filemtime($path);
+        $lastModified = (int) filemtime($path);
 
         if (@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'] ?? '') === $lastModified) {
             return response()->noContent(304, [
