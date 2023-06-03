@@ -13,13 +13,8 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasSc
 
 abstract class AbstractLayout /*implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules*/
 {
-    //use CanGetRules;
     use CanInitDatasForm;
-
-    //use CanValidatedValues;
     use HasColSpan;
-
-    //use HasDefaultValue;
     use HasGridColumns;
     use HasSchema;
 
@@ -27,17 +22,12 @@ abstract class AbstractLayout /*implements CanValidateValuesForRules, CanGetAttr
 
     protected Model|null $bind = null;
 
-    final public function __construct(
+    public function __construct(
         public ?string $title = null,
         int $columns = 2,
     ) {
         $this->columns($columns);
         $this->afterMake();
-    }
-
-    public static function make(?string $title = null, int $columns = 2): static
-    {
-        return new static(title: $title,columns: $columns);
     }
 
     protected function afterMake(): void

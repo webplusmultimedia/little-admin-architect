@@ -20,9 +20,9 @@
 <body class="bg-gray-100">
 <header class="bg-white sticky top-0 z-10 lg:ml-[20rem] border-b ">
     <nav class="bg-white border-gray-200 dark:bg-gray-900 ml-0">
-        <div class="container flex flex-wrap items-center justify-between mx-auto p-4">
+        <div class="container flex flex-wrap items-center justify-between mx-auto py-4">
             <div class="flex items-center">
-                <x-little-anonyme::form-components.fields.icons.logo class="h-8"/>
+                {{--<x-little-anonyme::form-components.fields.icons.logo class="h-8"/>--}}
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white uppercase">{{ $title }}</span>
             </div>
             <button data-collapse-toggle="navbar-default" type="button"
