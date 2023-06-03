@@ -51,7 +51,7 @@ function ModalComponent({name}) {
                 if (this.livewireTableId) {
                     this.$dispatch(this.livewireTableId + '.after.close')
                 }
-                this.removeModalToDom()
+                setTimeout(() => this.removeModalToDom(),1)
             })
         }
     })

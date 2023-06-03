@@ -1,0 +1,24 @@
+@layer components {
+    .wrapper-web-notification{
+        @apply fixed top-2 right-6 max-w-[30rem] min-w-[25rem] flex flex-col gap-3 z-40
+
+    }
+    .web-notification{
+        @apply relative flex gap-5 items-center p-3  rounded shadow
+        before:content-[''] before:absolute before:bottom-0 before:left-0 before:right-0  before:h-1
+    }
+
+    .web-notification.success{
+        @apply before:bg-success-600 text-success-600 bg-success-100
+    }
+
+    .web-notification.info{
+        @apply text-cyan-600 bg-cyan-100 before:bg-cyan-600
+    }
+    .web-notification.warning{
+        @apply text-amber-600 bg-warning-100 before:bg-warning-600
+    }
+    .web-notification.danger{
+        @apply text-error-600 bg-error-100 before:bg-error-600
+    }
+}

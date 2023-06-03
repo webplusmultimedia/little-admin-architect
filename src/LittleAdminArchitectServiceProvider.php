@@ -16,6 +16,7 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Modal\LittleAdminModal
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Table;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
+use Webplusmultimedia\LittleAdminArchitect\Support\Components\Livewire\Notification;
 
 class LittleAdminArchitectServiceProvider extends PackageServiceProvider
 {
@@ -71,5 +72,6 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
 
         Livewire::component('little-admin.pages.auth.login', config('little-admin-architect.auth.pages.login'));
         Livewire::component('little-admin-architect.modal', LittleAdminModal::class);
+        Livewire::component('little-admin-notification', Notification::class);
     }
 }

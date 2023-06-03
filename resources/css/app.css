@@ -1,6 +1,7 @@
 @import "select.css";
 @import "modal.css";
 @import "colors.css";
+@import "notification.css";
 
 @tailwind base;
 @tailwind components;

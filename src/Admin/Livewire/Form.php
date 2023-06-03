@@ -21,7 +21,7 @@ class Form extends ComponentForm
     public function save(): void
     {
         $this->form->saveDatasForm($this);
-        session()->flash('message', 'Post successfully updated.');
+
         //@todo Emit Event Notification message Save
 
     }

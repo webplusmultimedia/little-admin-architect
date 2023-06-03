@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\CanInitForm;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\HasNotification;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithForms;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\HasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAlias;
@@ -17,6 +18,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAli
 class ComponentForm extends Component implements HasForm
 {
     use CanInitForm;
+    use HasNotification;
     use InteractsWithForms;
 
     public ?Model $data = null;
