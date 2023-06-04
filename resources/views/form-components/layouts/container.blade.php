@@ -1,25 +1,17 @@
 @php use Webplusmultimedia\LittleAdminArchitect\Form\Components\Layouts\Container; @endphp
 @php
-    /** @var Container $config */
-    $config = $getConfig()
+    /** @var Container $container */
+    $container = $getConfig()
 @endphp
 
-<div {{ $attributes->class("pb-3 grid gap-1 border border-gray-300 rounded-md bg-white ")->merge(['class'=>$config->getColSpan()]) }}
+<div {{ $attributes->class("la__form__container__wrapper")->merge(['class'=>$container->getColSpan()]) }}
      x-data="{}"
-     wire:key="{{ $config->getWireKey()  }}"
+     wire:key="{{ $container->getWireKey()  }}"
 >
-    @if($config->title )
-        <div class="bg-gray-100 rounded-md">
-            <h2 class="text-lg uppercase my-3 pl-5 text-gray-600">{{ $config->title }}</h2>
+    @if($container->title )
+        <div class="bg-gray-50 rounded-t-md py-3">
+            <h2 class="text-lg m-0 uppercase pl-5">{{ $container->title }}</h2>
         </div>
     @endif
-
-
-    <div {{ $attributes->class(" py-3 grid grid-cols-1 gap-3 px-5")->merge(['class'=>$config->getColumns()]) }}>
-        @foreach($config->getFields() as $field)
-            <x-dynamic-component :component="$field->getFieldView()" :field="$field"/>
-        @endforeach
-    </div>
-
-
+    <x-little-anonyme::form-components.layouts.fields :container="$container"/>
 </div>

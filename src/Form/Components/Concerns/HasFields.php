@@ -22,6 +22,16 @@ trait HasFields
         return static::$formFields;
     }
 
+    public function removeHiddenFieldsOnForm(): void
+    {
+        foreach (self::$formFields as $key => $field) {
+            $field->modeForm($this->mode);
+            if ($field->isHiddenOnForm()) {
+                unset(self::$formFields[$key]);
+            }
+        }
+    }
+
     protected function hasFormFields(): bool
     {
         return count(static::$formFields) > 0;

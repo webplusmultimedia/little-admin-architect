@@ -49,6 +49,10 @@ final class Form
      */
     protected null|Model|array $model = null;
 
+    public const CREATED = 'CREATED';
+
+    public const UPDATED = 'UPDATED';
+
     protected ?string $mode = null;
 
     protected string $action = 'save';
@@ -68,7 +72,7 @@ final class Form
         return $this->livewireId;
     }
 
-    public function configureForm(string $livewireId, Page $resource, ?Model $model): void
+    public function configureForm(string $livewireId, Page $resource, Model $model): void
     {
         $this->livewireId($livewireId);
         $this->model($model);
@@ -105,7 +109,9 @@ final class Form
     public function model(Model $record): void
     {
         $this->model = $record;
+        $this->initMode();
         $this->initDatasFormOnMount($record);
+        $this->removeHiddenFieldsOnForm();
         $this->initSelectUsing();
     }
 
@@ -148,12 +154,12 @@ final class Form
         return $this;
     }
 
-    public function init(): void
+    public function initMode(): void
     {
         if ($this->model instanceof Model and $this->model->exists) {
-            $this->mode = 'UPDATED_RECORD';
+            $this->mode = self::UPDATED;
         } else {
-            $this->mode = 'CREATED_RECORD';
+            $this->mode = self::CREATED;
         }
     }
 

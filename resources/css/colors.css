@@ -14,17 +14,17 @@
     }
 
     .text-tag-success{
-        @apply bg-success-500
+        @apply bg-success-100 text-success-600
     }
     .text-tag-primary{
-        @apply bg-primary-500
+        @apply bg-primary-100  text-primary-600
     }
     .text-tag-danger{
-        @apply bg-danger
+        @apply bg-danger text-error-600
     }
 
     .text-tag-warning{
-        @apply bg-warning-500
+        @apply bg-warning-100 text-warning-600
     }
     .text-tag-info{
         @apply bg-info

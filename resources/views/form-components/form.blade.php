@@ -7,8 +7,7 @@
     $buttonCancel = $form->getCancelButton();
 @endphp
 <div class="py-5 px-2">
-    <div class="flex flex-col bg-white px-5 py-2 mb-8 text-lg font-bold">
-        {{--<h1 >{{ __($form->title) }}</h1>--}}
+    <div class="flex flex-col bg-white px-5 py-2 mb-8 text-lg font-bold rounded-md shadow-sm">
         <h2 class="text-2xl !m-0">{{ $getTitleForm() }}</h2>
     </div>
 

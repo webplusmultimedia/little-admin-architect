@@ -1,15 +1,15 @@
 @layer components {
     .wrapper-web-notification{
-        @apply fixed top-2 right-6 max-w-[30rem] min-w-[25rem] flex flex-col gap-3 z-40
+        @apply fixed top-6 right-6 max-w-[30rem] min-w-[25rem] flex flex-col gap-3 z-40
 
     }
     .web-notification{
-        @apply relative flex gap-5 items-center p-3  rounded shadow
+        @apply relative flex gap-5 items-center p-3  rounded-xl shadow border border-success-200 overflow-hidden
         before:content-[''] before:absolute before:bottom-0 before:left-0 before:right-0  before:h-1
     }
 
     .web-notification.success{
-        @apply before:bg-success-600 text-success-600 bg-success-100
+        @apply before:bg-success-600 text-success-600 bg-success-50
     }
 
     .web-notification.info{

@@ -19,13 +19,13 @@ trait InteractWithLivewire
                 } elseif ($edit_url = $this->linkEdit($livewire->data)) {
                     redirect(to: $edit_url);
                 }
-                $livewire->notification()->success('That all Folk')->send();
+                $livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
             } else {
                 $livewire->data->update($this->values($datas));
                 if ($this->hasModal()) {
                     $livewire->dispatchBrowserEvent($this->eventForCloseModal);
                 }
-                $livewire->notification()->success('That all Folk')->send();
+                $livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
             }
         }
     }

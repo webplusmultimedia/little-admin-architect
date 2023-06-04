@@ -9,6 +9,9 @@ return [
     'create' => [
         'title' => 'Création : :title',
     ],
+    'message' => [
+        'success' => 'Enregistré',
+    ],
     'select' => [
         'search-prompt' => 'Taper ici pour rechercher...',
         'searching-message' => 'Recherche en cours...',

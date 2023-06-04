@@ -1,0 +1,11 @@
+@layer components {
+    .la__form__container__wrapper {
+        @apply pb-3 grid gap-1 border border-gray-300 rounded-md bg-white
+    }
+    .la__form__grid__wrapper {
+        @apply grid gap-5 grid-cols-12 col-span-full
+    }
+    .la__form__grid__content {
+        @apply  py-3 grid grid-cols-1 gap-6 content-start
+    }
+}
