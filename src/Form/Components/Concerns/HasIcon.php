@@ -27,6 +27,6 @@ trait HasIcon
 
     public function getViewIcon(): string
     {
-        return 'heroicon-' . $this->icon;
+        return $this->icon;
     }
 }

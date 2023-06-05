@@ -112,7 +112,7 @@
         @apply bg-success-500 hover:bg-success-600 text-white
     }
 
-    .btn-error {
+    .btn-danger {
         @apply bg-error-500 hover:bg-error-600 text-white
     }
 

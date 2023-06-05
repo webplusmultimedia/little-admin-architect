@@ -2,5 +2,4 @@
     x-data="LittleAdminNotification"
      id="little-admin-m-modal_wrapper"
 >
-
 </div>

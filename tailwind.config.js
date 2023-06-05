@@ -21,7 +21,17 @@ module.exports = {
             success : colors.emerald,
             primaire : '#f46316',
             danger : '#d7035f'
+        },
+        keyframes :{
+            transop : {
+                '0%' : { transform : 'translateX(100%)', opacity : 0},
+                '100%' : { transform : 'translateX(0)', opacity : 1},
+            }
+        },
+        animation : {
+            notif : 'transop 0.2s ease-in-out'
         }
+
     },
   },
   plugins: [require('@tailwindcss/forms')],

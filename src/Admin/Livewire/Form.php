@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Illuminate\Contracts\View\View;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\ComponentForm;
 
 class Form extends ComponentForm
 {
@@ -21,8 +22,5 @@ class Form extends ComponentForm
     public function save(): void
     {
         $this->form->saveDatasForm($this);
-
-        //@todo Emit Event Notification message Save
-
     }
 }

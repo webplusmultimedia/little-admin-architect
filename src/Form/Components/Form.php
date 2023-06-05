@@ -87,7 +87,7 @@ final class Form
     public function __construct(
         public string $title
     ) {
-        $this->buttonSave = Button::make($this->caption, $this->type, $this->action)->icon('s-check');
+        $this->buttonSave = Button::make(trans('little-admin-architect::form.button.save'), $this->type, $this->action)->icon('heroicon-s-check');
 
     }
 
@@ -185,7 +185,7 @@ final class Form
 
     public function getCancelButton(): Button
     {
-        $this->buttonCancel = Button::make('Annuler', 'link', $this->linkIndex())->icon('s-arrow-uturn-left');
+        $this->buttonCancel = Button::make(trans('little-admin-architect::form.button.cancel'), 'link', $this->linkIndex())->icon('heroicon-s-arrow-uturn-left');
 
         return $this->buttonCancel;
     }

@@ -9,6 +9,10 @@ return [
     'create' => [
         'title' => 'Création : :title',
     ],
+    'button' => [
+        'save' => 'Enregistrer',
+        'cancel' => 'Annuler',
+    ],
     'message' => [
         'success' => 'Enregistré',
     ],

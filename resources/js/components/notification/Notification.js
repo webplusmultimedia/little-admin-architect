@@ -25,7 +25,7 @@ export function notificationBuilder(message, type = 'success') {
         count: 100,
         wrapperId: null,
         Id: null,
-        delay: 4000,
+        delay: 6000,
         getModalWrapper() {
             this.wrapperId = `little-admin-${Math.round(Math.random() * 100)}`
             return `<div class="wrapper-web-notification" id="little-admin-m-modal_wrapper"></div>`
@@ -34,17 +34,15 @@ export function notificationBuilder(message, type = 'success') {
         getModal() {
             this.Id = `little-admin-${Math.random().toString(36).slice(2)}`
             this.widthVar = '--' + this.Id + '-width'
-            return `<div class="web-notification ${this.type}" id="${this.Id}" style="${this.widthVar}:100%">
+            return `<div class="web-notification ${this.type}" id="${this.Id}" style="${this.widthVar}:100%" >
                         <div class=""> ${Icons()[this.type]} </div>
                         <div>${this.message}</div>
                         <span class="${this.type} h-1 absolute bottom-0 right-0 " style="width: var(${this.widthVar});background-color: inherit"></span>
                     </div>`
         },
         show() {
-           /* if (!document.getElementById('little-admin-m-modal_wrapper')) {
-                document.body.insertAdjacentHTML('beforeend', this.getModalWrapper())
-            }*/
             document.getElementById('little-admin-m-modal_wrapper').insertAdjacentHTML('beforeend', this.getModal())
+            document.getElementById(this.Id).classList.add('animate-notif')
             let i = 1
             const  el = document.getElementById(this.Id),
                 interval_id = setInterval(() => {

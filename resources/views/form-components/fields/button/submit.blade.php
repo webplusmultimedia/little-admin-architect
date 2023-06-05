@@ -3,7 +3,7 @@
     'type' => 'submit',
     'title' => $attributes->has('title')
         ? $attributes->get('title')
-        : ($slot->isNotEmpty() ? strip_tags($slot) : null),
+        : null,
 ]) !!}
     {{ $attributes->has('wire')?:$attributes->get('wire') }}
 >

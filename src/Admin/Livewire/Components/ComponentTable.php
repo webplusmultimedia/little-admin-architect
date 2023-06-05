@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
+namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components;
 
 use Livewire\Component;
 use Livewire\WithPagination;
