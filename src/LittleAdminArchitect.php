@@ -34,10 +34,10 @@ class LittleAdminArchitect
                     'route_prefix' => config('little-admin-architect.route.prefix') . '.'
                         . str($resource['resourceSlug'])
                             ->replace('/', '.')
-
                             ->beforeLast('.')
                             ->append('.*'),
                     'title' => $resource['resourceTitle'],
+                    'icon' => $resource['icon'],
                     'route_resource' => $resource['resourceRouteName'],
                 ];
             }

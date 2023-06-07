@@ -43,8 +43,8 @@ class RegisterResources
                     $resourceClassBaseName = (string) str($resourceClassBasePath)->replace('/', '\\');
                     $slug = $resourceClassBaseName::getSlug();
                     $pages = $this->filesystem->files($pagesDirectory);
-
-                    $group[(string) str(string: $resourceGroupe)->afterLast('/')][] = array_map(callback: function (SplFileInfo $page) use ($resourceClassBaseName, $resourceClassBasePath, $resourceGroupe, $slug) {
+                    $groupName = (string) str(string: $resourceGroupe)->afterLast('/');
+                    $group[$groupName][] = array_map(callback: function (SplFileInfo $page) use ($groupName, $resourceClassBaseName, $resourceClassBasePath, $slug) {
                         $pageClassBasePath = (string) str($page->getRealPath())->between('app/', '.php')->prepend('App/');
                         /** @var string $namePage */
                         $namePage = (string) str($pageClassBasePath)->afterLast('/')->kebab()->explode('-')->first();
@@ -67,7 +67,7 @@ class RegisterResources
                         };
 
                         return [
-                            'group' => (string) str(string: $resourceGroupe)->afterLast('/'),
+                            'group' => $groupName,
                             'resourceName' => (string) str($resourceClassBasePath)->afterLast('/'),
                             'resourcePlurialTitle' => (string) str($resourceClassBaseName::getPluralModelLabel())->ucfirst(),
                             'resourceTitle' => (string) str($resourceClassBaseName::getNavigationLabel())->ucfirst(),
@@ -85,6 +85,7 @@ class RegisterResources
                             'classBaseName' => (string) str($pageClassBasePath)->replace('/', '\\'),
                             'slug' => $slugPage,
                             'routeClass' => Page::class,
+                            'icon' => $resourceClassBaseName::getNavigationIcon(),
                             'type' => $typePage,
                             'routeName' => str($routePage)
                                 ->replace(['/'], '.')

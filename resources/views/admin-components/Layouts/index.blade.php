@@ -95,22 +95,31 @@
                         @if($loop->first)
                             <div
                                 @class([
-                                    'text-slate-500 bg-gray-50 px-3 py-2 text-lg font-medium',
-                                    'bg-primary-100' => request()->routeIs($navigation['route_prefix'])
+                                    'bg-gray-50 px-3 py-2 text-lg font-medium',
+                                    'text-primary-600 font-bold bg-primary-50' => request()->routeIs($navigation['route_prefix']),
+                                    'text-slate-500 bg-slate-50' => !request()->routeIs($navigation['route_prefix']),
                                  ])
                             >
                                 {{ $group }}
                             </div>
                         @endif
                         <div class="flex">
+
                             <a href="{{ route($navigation['route_name']) }}"
                                 @class([
-                                    'hover:bg-gray-50 pl-10 py-1 rounded-md grow duration-200',
-                                    'text-primary-600' => request()->routeIs($navigation['route_resource'])
+                                    'inline-flex items-center space-x-2 pl-10 hover:bg-gray-50 py-1 rounded-md grow duration-200',
+                                    'text-primary-600 font-bold' => request()->routeIs($navigation['route_resource']),
+                                    'text-slate-500' => !request()->routeIs($navigation['route_resource']),
                                  ])
 
                             >
-                                {{ $navigation['title'] }}
+                                @if($navigation['icon'])
+                                    <x-dynamic-component :component="$navigation['icon']" class="w-5"/>
+                                @else
+                                    <x-heroicon-o-chevron-double-right class="w-5"/>
+                                @endif
+
+                              <span>{{ $navigation['title'] }}</span>
                             </a>
                         </div>
                     @endforeach

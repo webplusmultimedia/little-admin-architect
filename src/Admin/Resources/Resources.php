@@ -29,11 +29,6 @@ class Resources
 
     protected static ?string $navigationLabel = null;
 
-    public static function getNavigationLabel(): ?string
-    {
-        return static::$navigationLabel ?? static::getPluralModelLabel();
-    }
-
     protected static ?int $navigationSort = null;
 
     protected static ?string $recordRouteKeyName = null;
@@ -60,6 +55,16 @@ class Resources
     protected static bool $shouldAuthorizeWithGate = false;
 
     protected static bool $shouldIgnorePolicies = false;
+
+    public static function getNavigationLabel(): ?string
+    {
+        return static::$navigationLabel ?? static::getPluralModelLabel();
+    }
+
+    public static function getNavigationIcon(): ?string
+    {
+        return static::$navigationIcon;
+    }
 
     public static function getRecordTitleAttribute(): ?string
     {
