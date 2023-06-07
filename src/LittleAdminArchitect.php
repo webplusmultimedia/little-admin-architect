@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect;
 
+use Illuminate\Support\Arr;
+
 class LittleAdminArchitect
 {
     public function getMe(): string
@@ -29,7 +31,7 @@ class LittleAdminArchitect
                     continue;
                 }
                 $route_name = config('little-admin-architect.route.prefix') . '.' . $resource['routeName'];
-                $pages[] = [
+                $pages[$resource['sort']] = [
                     'route_name' => $route_name,
                     'route_prefix' => config('little-admin-architect.route.prefix') . '.'
                         . str($resource['resourceSlug'])
@@ -42,7 +44,8 @@ class LittleAdminArchitect
                 ];
             }
 
-            $navigation[$group] = $pages;
+            $navigation[$group] = collect($pages)->sortKeys(SORT_ASC)->toArray();
+
         }
 
         return $navigation;

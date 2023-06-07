@@ -86,6 +86,7 @@ class RegisterResources
                             'slug' => $slugPage,
                             'routeClass' => Page::class,
                             'icon' => $resourceClassBaseName::getNavigationIcon(),
+                            'sort' => $resourceClassBaseName::getNavigationSort(),
                             'type' => $typePage,
                             'routeName' => str($routePage)
                                 ->replace(['/'], '.')

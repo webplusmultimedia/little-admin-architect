@@ -10,6 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasColumns;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeader;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasQueryBuilder;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasRecords;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasRowActions;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasRowsPerPage;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasSearchableColumns;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasSortableColum;
@@ -25,6 +26,7 @@ final class Table
     use HasSearchableColumns;
     use HasSortableColum;
     use InteractWithPage;
+    use HasRowActions;
 
     private string $view = 'table';
 
@@ -59,6 +61,7 @@ final class Table
 
     protected function applyHeaders(): void
     {
+
         foreach ($this->columns as $column) {
             $this->headers(Header::make($column));
         }

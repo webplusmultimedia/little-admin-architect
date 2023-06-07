@@ -7,6 +7,7 @@ return [
         'create' => 'Créer :label',
         'cancel' => 'Annuler',
         'save' => 'Enregistrer',
+        'edit' => 'Editer',
     ],
     'row-button' => [
         'edit' => 'Editer',

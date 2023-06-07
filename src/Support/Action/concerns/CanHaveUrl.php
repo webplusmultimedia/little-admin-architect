@@ -11,6 +11,7 @@ trait CanHaveUrl
     public function url(string $url): static
     {
         $this->url = $url;
+        $this->type = 'link';
 
         return $this;
     }

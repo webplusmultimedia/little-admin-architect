@@ -116,10 +116,9 @@
                                 @if($navigation['icon'])
                                     <x-dynamic-component :component="$navigation['icon']" class="w-5"/>
                                 @else
-                                    <x-heroicon-o-chevron-double-right class="w-5"/>
+                                    <x-heroicon-o-chevron-double-right class="w-5 h-5"/>
                                 @endif
-
-                              <span>{{ $navigation['title'] }}</span>
+                                <span>{{ $navigation['title'] }}</span>
                             </a>
                         </div>
                     @endforeach

@@ -66,6 +66,11 @@ class Resources
         return static::$navigationIcon;
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return static::$navigationSort;
+    }
+
     public static function getRecordTitleAttribute(): ?string
     {
         return static::$recordTitleAttribute;
