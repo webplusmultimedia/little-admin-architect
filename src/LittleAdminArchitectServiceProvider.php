@@ -37,6 +37,8 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     {
         Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Form\\View\\Components', config('little-admin-architect.blade-prefix'));
         Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Table\\Views', config('little-admin-architect.blade-table-prefix'));
+        Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Support\\Action\\views', 'little-action');
+        Blade::componentNamespace('Webplusmultimedia\\LittleAdminArchitect\\Support\\Components\\Modal', 'little-modal');
         Blade::anonymousComponentPath(__DIR__ . '/../resources/views', 'little-anonyme');
         \Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager::registerResources();
     }

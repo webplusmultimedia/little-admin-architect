@@ -6,8 +6,8 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components;
 
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\CanInitForm;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\HasNotification;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanInitForm;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\HasNotification;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithForms;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\HasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAlias;

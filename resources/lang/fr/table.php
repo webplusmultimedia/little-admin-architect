@@ -8,7 +8,9 @@ return [
         'cancel' => 'Annuler',
         'save' => 'Enregistrer',
         'edit' => 'Editer',
+        'delete' => 'Supprimer',
     ],
+
     'row-button' => [
         'edit' => 'Editer',
         'delete' => 'Supprimer',

@@ -8,6 +8,7 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\CanBeDisabled
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasColor;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasIcon;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasLabel;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasName;
 
 abstract class BaseAction
 {
@@ -15,4 +16,5 @@ abstract class BaseAction
     use HasColor;
     use HasIcon;
     use HasLabel;
+    use HasName;
 }

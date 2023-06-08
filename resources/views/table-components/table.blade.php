@@ -15,14 +15,14 @@
         </div>
         <div class="flex items-center">
             @if($table->hasModalForm())
-                <button  type="button" class="btn btn-success inline-flex items-center justify-center space-x-2"
+                <button  type="button" class="btn btn-medium btn-success inline-flex items-center justify-center space-x-2"
                       wire:click.stop="showModalForm()"
                 >
                     <x-heroicon-s-pencil class="w-4 h-4" aria-hidden="true"/>
                     <span>{{ __('little-admin-architect::table.button.create',['label'=>'un']) }} {{ str($table->title)->singular() }}</span>
                 </button>
             @else
-                <a href="{{ url($table->linkCreate()) }}" class="btn btn-primary"
+                <a href="{{ url($table->linkCreate()) }}" class="btn btn-success btn-medium"
                 >
                     {{ __('little-admin-architect::table.button.create',['label'=>'un']) }} {{ str($table->title)->singular() }}
                 </a>
@@ -61,26 +61,9 @@
                             @endforeach
                             <td class="max-w-max whitespace-nowrap">
                                 <div class="px-3 inline-flex items-center gap-3">
-                                    @if($table->hasModalForm())
-                                        <div  class="hover:text-primary-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-primary-200 hover:border-primary-400  inline-flex items-center space-x-1 text-primary-600"
-                                              wire:click="showModalForm({{$record->getKey()}})"
-                                        >
-                                            <x-heroicon-s-pencil class="w-4 h-4" aria-hidden="true"/>
-                                            <span>{{ __('little-admin-architect::table.row-button.edit') }}</span>
-                                        </div>
-                                    @else
-                                        <a href="{{ url($table->linkEdit($record))  }}"
-                                           class="hover:text-primary-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-primary-200 hover:border-primary-400  inline-flex items-center space-x-1 text-primary-600">
-                                            <x-heroicon-s-pencil class="w-4 h-4" aria-hidden="true"/>
-                                            <span>{{ __('little-admin-architect::table.row-button.edit') }}</span>
-                                        </a>
-                                    @endif
-
-                                    <a href="{{ url($table->linkIndex())  }}"
-                                       class="hover:text-error-500 bg-white transition text-sm font-bold py-1 px-3 rounded-full border border-error-200 hover:border-error-400  inline-flex items-center space-x-1 text-error-600 ">
-                                        <x-heroicon-s-x-mark class="w-4 h-4 " aria-hidden="true"/>
-                                        <span>{{ __('little-admin-architect::table.row-button.delete') }}</span>
-                                    </a>
+                                    @foreach($table->getRowActions($record) as $action)
+                                        <x-little-action::action :action="$action"/>
+                                    @endforeach
                                 </div>
                             </td>
                         </tr>
@@ -96,5 +79,5 @@
             {{ $table->getRecords()->links() }}
         </div>
     </div>
-
+     {{  $table->getActionModal() }}
 </div>

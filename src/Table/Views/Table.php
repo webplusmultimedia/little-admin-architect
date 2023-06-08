@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Views;
 
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
-class Table extends Component
+class Table extends Component implements Htmlable
 {
     public function __construct(
         protected \Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $table
@@ -19,8 +21,13 @@ class Table extends Component
         return $this->table;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('little-views::table-components.table');
+    }
+
+    public function toHtml(): string
+    {
+        return $this->render()->render();
     }
 }

@@ -12,6 +12,7 @@ return [
     'button' => [
         'save' => 'Enregistrer',
         'cancel' => 'Annuler',
+        'delete' => 'Supprimer',
     ],
     'message' => [
         'success' => 'Enregistré',
@@ -24,5 +25,8 @@ return [
         'option' => [
             'empty-placeholder' => 'Selection d\'une option',
         ],
+    ],
+    'confirm_dialog' => [
+        'question' => 'Voulez-vous vraiment supprimer cet enregistrement ?',
     ],
 ];

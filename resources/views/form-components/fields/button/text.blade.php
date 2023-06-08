@@ -1,5 +1,5 @@
 <button {!! $attributes->merge([
-    'class' => 'flex justify-center items-center space-x-1 btn',
+    'class' => 'flex justify-center items-center space-x-1 btn btn-medium',
     'type' => 'submit',
 ]) !!}
     {{ $attributes->has('wire')?:$attributes->get('wire') }}

@@ -47,6 +47,16 @@ text-tag-warning
 text-tag-danger
 text-tag-primary
 text-tag
+btn-outline
+btn-outline-primary
+btn-outline-warning
+btn-outline-success
+btn-outline-danger
+btn-outline-info
+btn-rounded
+btn-small
+modal__small
+modal__large
 "
 
 ></div>

@@ -10,10 +10,10 @@ trait ContainMessageForComponent
     {
         return [
             'maxItemsMessage' => 5,
-            'searchingMessage' => __('little-admin-architect::form.select.searching-message'),
-            'searchingNoMessage' => __('little-admin-architect::form.select.searching-no-message'),
-            'searchPrompt' => __('little-admin-architect::form.select.search-prompt'),
-            'placeholder' => __('little-admin-architect::form.select.placeholder'),
+            'searchingMessage' => trans('little-admin-architect::form.select.searching-message'),
+            'searchingNoMessage' => trans('little-admin-architect::form.select.searching-no-message'),
+            'searchPrompt' => trans('little-admin-architect::form.select.search-prompt'),
+            'placeholder' => trans('little-admin-architect::form.select.placeholder'),
         ];
     }
 }

@@ -6,6 +6,7 @@
 >
     {{-- Modal --}}
     <div class="modal" id="{{ $name }}" tabindex="-1" aria-labelledby="{{ $name }}Label" aria-hidden="true"
+         :class="{ {{$maxWidth}} : true }"
          @click.outside="closeModal"
          x-show="show && showActiveComponent"
          x-transition:enter="ease-out duration-300"

@@ -7,10 +7,13 @@ namespace Webplusmultimedia\LittleAdminArchitect\Support\Concerns;
 use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 trait InteractWithPage
 {
     protected Page $pageForResource;
+
+    protected ?Form $form = null;
 
     public function setPagesForResource(Page $page): void
     {
@@ -39,7 +42,11 @@ trait InteractWithPage
 
     public function hasModalForm(): bool
     {
-        return $this->pageForResource::getForm()->hasModal();
+        if ( ! $this->form) {
+            $this->form = $this->pageForResource::getForm();
+        }
+
+        return $this->form->hasModal();
     }
 
     public function getPage(): Page

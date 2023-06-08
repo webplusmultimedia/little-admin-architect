@@ -19,6 +19,8 @@ class LittleAdminModal extends Component
 
     public null|string $livewireTableId = null;
 
+    public string $maxWidth = 'modal__large';
+
     /**
      * @var string[]
      */

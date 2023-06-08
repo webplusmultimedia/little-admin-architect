@@ -6,8 +6,9 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\CanInitTable;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Concerns\CanSortColumn;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanInitTable;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanSortColumn;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\HasMountTableAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\InteractsWithTable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Contracts\HasTable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Concerns\InteractsWithModalForm;
@@ -19,6 +20,7 @@ class ComponentTable extends Component implements HasTable
 {
     use CanInitTable;
     use CanSortColumn;
+    use HasMountTableAction;
     use InteractsWithModalForm;
     use InteractsWithTable;
     use WithPagination;
@@ -30,6 +32,12 @@ class ComponentTable extends Component implements HasTable
     public ?int $rowsPerPage = null;
 
     public string $search = '';
+
+    public ?string $mountTableAction = null;
+
+    public array $mountTableActionData = [];
+
+    public mixed $mountTableActionRecord = null;
 
     /**
      * @var array[]
@@ -53,7 +61,7 @@ class ComponentTable extends Component implements HasTable
         $this->resetPage();
     }
 
-    public function mount(string $pageRoute): void
+    public function mount(string $pageRoute, ?array $mounts = null): void
     {
         $this->pageRoute = $pageRoute;
         $this->initBoot = false;

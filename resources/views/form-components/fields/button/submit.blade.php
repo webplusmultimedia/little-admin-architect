@@ -1,11 +1,7 @@
-<button {!! $attributes->merge([
-    'class' => 'flex justify-center items-center space-x-1 btn' . ($attributes->has('class') ? null : ' btn-primary'),
-    'type' => 'submit',
-    'title' => $attributes->has('title')
-        ? $attributes->get('title')
-        : null,
+<button type="submit" {!! $attributes->merge([
+    'class' => 'flex justify-center items-center space-x-1 btn btn-medium' . ($attributes->has('class') ? null : ' btn-primary')
 ]) !!}
-    {{ $attributes->has('wire')?:$attributes->get('wire') }}
+    {{ $attributes->except('class') }}
 >
     {{ $slot->isNotEmpty() ? $slot : __('Submit') }}
 </button>

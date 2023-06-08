@@ -8,18 +8,28 @@ trait HasColor
 {
     protected string $color = 'primary';
 
-    protected string $btnStyle= 'btn-';
+    protected string $btnStyle = 'btn-';
+
     protected bool $outline = false;
 
+    protected bool $isSmall = false;
+
     protected bool $roundedFull = false;
+
+    public function small(): static
+    {
+        $this->isSmall = true;
+        //$this->btnStyle = str($this->btnStyle)->prepend('btn-small ')->value();
+        return $this;
+    }
 
     public function outline(): static
     {
         $this->outline = true;
-        $this->btnStyle = 'btn-outline-';
 
         return $this;
     }
+
     public function warning(): static
     {
         $this->color = 'warning';
@@ -41,19 +51,30 @@ trait HasColor
         return $this;
     }
 
-    public function getColor(): string
+    public function getClass(): string
     {
-        if ($this->roundedFull){
+        if ($this->outline) {
+            $this->btnStyle = 'btn-outline btn-outline-' . $this->color;
+        } else {
+            $this->btnStyle .= $this->color;
+        }
+
+        if ($this->roundedFull) {
             $this->btnStyle = str($this->btnStyle)->prepend('btn-rounded ')->value();
         }
-        return $this->btnStyle . $this->color;
+        if ($this->isSmall) {
+            $this->btnStyle = str($this->btnStyle)->prepend('btn-small ')->value();
+        } else {
+            $this->btnStyle = str($this->btnStyle)->prepend('btn-medium ')->value();
+        }
+
+        return $this->btnStyle;
     }
 
-
-    public function roundedFull(bool $roundedFull = true): HasColor
+    public function roundedFull(bool $roundedFull = true): static
     {
         $this->roundedFull = $roundedFull;
 
         return $this;
-}
+    }
 }

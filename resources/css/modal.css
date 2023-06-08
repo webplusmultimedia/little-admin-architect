@@ -4,7 +4,7 @@
     }
 
     .modal{
-        @apply   container mx-auto bg-white md:rounded-lg md:shadow-lg max-h-fit overflow-hidden
+        @apply mx-auto bg-white md:rounded-lg md:shadow-lg max-h-fit overflow-hidden
     }
 
     .modal__body{
@@ -12,5 +12,11 @@
     }
     .modal__head{
         @apply bg-gray-50 flex justify-between items-center border-b border-gray-200 self-start w-full py-4 px-6;
+    }
+    .modal__large{
+        @apply   mx-2 md:mx-0 container p-0
+    }
+    .modal__small{
+        @apply w-full mx-2 md:mx-0 md:max-w-md lg:max-w-lg
     }
 }

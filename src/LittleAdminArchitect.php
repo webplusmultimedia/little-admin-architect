@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect;
 
-use Illuminate\Support\Arr;
-
 class LittleAdminArchitect
 {
     public function getMe(): string

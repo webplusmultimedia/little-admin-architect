@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\Action;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\DeleteAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\EditAction;
 
 trait HasRowActions
@@ -11,31 +14,54 @@ trait HasRowActions
     /**
      * @var Action[]
      */
-    protected array $rowActions =[];
+    protected array $rowActions = [];
 
     /**
-     * @param Action[] $actions
-     *
-     * @return static
+     * @param  Action[]  $actions
      */
     public function actions(array $actions = []): static
     {
         $this->rowActions = $actions;
+
         return $this;
     }
 
-    public function getRowActions(): array
+    /**
+     * @return Action[]
+     */
+    public function getRowActions(Model $record): array
     {
+        foreach ($this->rowActions as $rowAction) {
+            if ($rowAction instanceof EditAction) {
+                $this->applyRecordToEditAction($record, $rowAction);
+            }
+            if ($rowAction instanceof DeleteAction) {
+                $this->applyRecordToDeleteAction($record, $rowAction);
+            }
+
+        }
+
         return $this->rowActions;
     }
 
-    public function getEditAction( ): ?Action
+    protected function applyRecordToEditAction(Model $record, Action $rowAction): void
     {
-        foreach ($this->rowActions as $rowAction) {
-            if ($rowAction instanceof EditAction){
-               return $rowAction;
-            }
+        if ( ! $this->hasModalForm()) {
+            $rowAction->url($this->linkEdit($record));
+        } else {
+            $rowAction->wireClick("showModalForm({$record->getKey()})");
         }
-        return NULL;
+    }
+
+    protected function applyRecordToDeleteAction(Model $record, Action $rowAction): void
+    {
+        $rowAction->wireClick("mountTableAction('delete',{$record->getKey()})");
+    }
+
+    public function getActionByName(string $name): ?Action
+    {
+        return collect($this->rowActions)->filter(/**
+         * @param  Action  $ra
+         */ fn ($ra) => $ra->getName() === $name)->first();
     }
 }
