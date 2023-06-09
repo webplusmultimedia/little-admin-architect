@@ -10,7 +10,9 @@ return [
         'edit' => 'Editer',
         'delete' => 'Supprimer',
     ],
-
+    'notification' => [
+        'delete' => 'L\'enregistrement a bien été supprimé.',
+    ],
     'row-button' => [
         'edit' => 'Editer',
         'delete' => 'Supprimer',

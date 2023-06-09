@@ -44,7 +44,7 @@ trait HasRowActions
         return $this->rowActions;
     }
 
-    protected function applyRecordToEditAction(Model $record, Action $rowAction): void
+    protected function applyRecordToEditAction(Model $record, EditAction $rowAction): void
     {
         if ( ! $this->hasModalForm()) {
             $rowAction->url($this->linkEdit($record));
@@ -53,9 +53,9 @@ trait HasRowActions
         }
     }
 
-    protected function applyRecordToDeleteAction(Model $record, Action $rowAction): void
+    protected function applyRecordToDeleteAction(Model $record, DeleteAction $rowAction): void
     {
-        $rowAction->wireClick("mountTableAction('delete',{$record->getKey()})");
+        $rowAction->wireClick("mountTableAction('{$rowAction->getName()}',{$record->getKey()})");
     }
 
     public function getActionByName(string $name): ?Action

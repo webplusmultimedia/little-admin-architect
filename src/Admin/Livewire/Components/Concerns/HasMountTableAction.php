@@ -45,6 +45,7 @@ trait HasMountTableAction
         }
 
         $id = $this->id . '-action-table';
+        $this->notification()->success(trans('little-admin-architect::table.notification.delete'))->send();
         $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
     }
 

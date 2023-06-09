@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanInitTable;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanSortColumn;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\HasMountTableAction;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\HasNotification;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\InteractsWithTable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Contracts\HasTable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Concerns\InteractsWithModalForm;
@@ -21,6 +22,7 @@ class ComponentTable extends Component implements HasTable
     use CanInitTable;
     use CanSortColumn;
     use HasMountTableAction;
+    use HasNotification;
     use InteractsWithModalForm;
     use InteractsWithTable;
     use WithPagination;

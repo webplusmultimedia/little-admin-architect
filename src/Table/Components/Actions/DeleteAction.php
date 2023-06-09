@@ -13,7 +13,7 @@ class DeleteAction extends Action
     {
         $this->label(trans('little-admin-architect::table.button.delete'))
             ->roundedFull()
-            ->name('delete')
+            ->name(trans('little-admin-architect::table.button.delete'))
             ->action(fn (Model $record) => $record->delete())
             ->danger()
             ->requireConfirmation()
@@ -21,6 +21,7 @@ class DeleteAction extends Action
             ->small()
             ->icon('heroicon-s-x-mark')
             ->outline();
+
     }
 
     public static function make(): DeleteAction

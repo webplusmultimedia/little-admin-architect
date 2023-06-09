@@ -34,11 +34,11 @@
     }
 
     .btn-success {
-        @apply bg-success-500 hover:bg-success-600 text-white
+        @apply bg-success-600 hover:bg-success-700 text-white
     }
 
     .btn-danger {
-        @apply bg-error-500 hover:bg-error-600 text-white
+        @apply bg-error-600 hover:bg-error-700 text-white
     }
 
     .btn-warning {

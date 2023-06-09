@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Contracts\View\View;
+use Illuminate\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\ComponentTable;
 
 class Table extends ComponentTable implements Htmlable
