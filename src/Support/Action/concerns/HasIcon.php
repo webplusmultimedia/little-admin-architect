@@ -21,9 +21,10 @@ trait HasIcon
 
     public function getIcon(): null|string
     {
-        if (is_callable($this->icon)){
-            return call_user_func($this->icon,$this->record);
+        if (is_callable($this->icon)) {
+            return call_user_func($this->icon, $this->record);
         }
+
         return $this->icon;
     }
 

@@ -14,33 +14,34 @@ trait HasMountTableAction
     {
         $id = $this->id . '-action-table';
         $action = $this->table->getActionByName($method);
-        if (! $action) {
+        if ( ! $action) {
             throw new Exception('Aucune action trouvée');
         }
+        $record = $this->getRecordForMount($key);
         if ($action->isRequireConfirmation()) {
             $this->mountTableAction = $method;
             $this->mountTableActionRecord = $key;
+            $action->record($record);
             $this->table->getActionModal()->content(
                 ConfirmationDialog::make(title: $this->getTitleForModal($key),
                     subtitle: $action->getConfirmQuestion(),
-                    actionLabel: $action->getName()
+                    actionLabel: $action->getLabel() ?? $action->getName()
                 )
             )->maxWidthSmall();
             $this->dispatchBrowserEvent('show-modal', ['id' => $id]);
         } else {
-            $record = $this->getRecordForMount($key);
+
             if ($action->getAction()) {
                 call_user_func($action->getAction(), $record, $this);
             }
             $this->notification()->success('Save')->send();
-           // dump($action->getName());
         }
     }
 
     public function CallMountTableAction(): void
     {
         $action = $this->table->getActionByName($this->mountTableAction);
-        if (! $action) {
+        if ( ! $action) {
             throw new Exception('Aucune action trouvée');
         }
         if ($action->isRequireConfirmation()) {
@@ -53,7 +54,6 @@ trait HasMountTableAction
             $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
         }
 
-
     }
 
     private function getRecordForMount(mixed $key): Model
@@ -61,7 +61,7 @@ trait HasMountTableAction
 
         $model = $this->table->getResourcePage()::getEloquentQuery()->getModel();
 
-        if (! $record = $model->where($model->getKeyName(), $key)->first()) {
+        if ( ! $record = $model->where($model->getKeyName(), $key)->first()) {
             throw new Exception('Aucune donnée disponible');
         }
 

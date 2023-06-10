@@ -49,7 +49,7 @@ trait HasRowActions
         return $this->rowActions;
     }
 
-    protected function applyRecordToEditAction( EditAction $rowAction): void
+    protected function applyRecordToEditAction(EditAction $rowAction): void
     {
         if ( ! $this->hasModalForm()) {
             $rowAction->url($this->linkEdit($rowAction->getRecord()));
@@ -58,7 +58,7 @@ trait HasRowActions
         }
     }
 
-    protected function applyRecordToDeleteAction( DeleteAction $rowAction): void
+    protected function applyRecordToDeleteAction(DeleteAction $rowAction): void
     {
         $rowAction->wireClick("mountTableAction('{$rowAction->getName()}',{$rowAction->getRecord()->getKey()})");
     }
@@ -72,9 +72,11 @@ trait HasRowActions
         }
     }
 
-    public function applyWireClickToRowAction(RowAction $rowAction) {
+    public function applyWireClickToRowAction(RowAction $rowAction): void
+    {
         $rowAction->wireClick("mountTableAction('{$rowAction->getName()}',{$rowAction->getRecord()->getKey()})");
     }
+
     public function getActionByName(string $name): ?Action
     {
         return collect($this->rowActions)->filter(/**

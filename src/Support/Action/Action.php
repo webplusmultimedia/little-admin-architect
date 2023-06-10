@@ -19,6 +19,7 @@ abstract class Action extends BaseAction
     use CanRequireConfirmation;
     use HasAction;
     use HasButton;
-    use HasModal;
+
+    //use HasModal;
     use InteractWithLivewire;
 }

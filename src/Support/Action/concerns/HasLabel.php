@@ -8,7 +8,7 @@ use Closure;
 
 trait HasLabel
 {
-    protected string | Closure $label = '';
+    protected string|Closure|null $label = null;
 
     public function label(string|Closure $label): static
     {
@@ -17,11 +17,12 @@ trait HasLabel
         return $this;
     }
 
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
-        if (is_callable($this->label)){
-            return call_user_func($this->label,$this->record);
+        if (is_callable($this->label)) {
+            return call_user_func($this->label, $this->record);
         }
+
         return $this->label;
     }
 }

@@ -56,14 +56,15 @@ trait HasColor
     public function color(Closure $color): static
     {
         $this->color = $color;
+
         return $this;
     }
 
     public function getClass(): string
     {
         $color = $this->color;
-        if (is_callable($this->color)){
-            $color = call_user_func($this->color,$this->getRecord());
+        if (is_callable($this->color)) {
+            $color = call_user_func($this->color, $this->getRecord());
         }
 
         if ($this->outline) {

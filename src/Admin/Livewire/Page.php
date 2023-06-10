@@ -88,6 +88,13 @@ class Page extends Component
         return static::$form;
     }
 
+    public static function getActions(): array
+    {
+        return [
+
+        ];
+    }
+
     public static function route(string $path): array
     {
         return [

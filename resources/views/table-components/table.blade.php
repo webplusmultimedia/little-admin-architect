@@ -60,9 +60,9 @@
                                 <x-dynamic-component :component="$column->getView()" :column="$column" :livewireId="$table->getLivewireId()"/>
                             @endforeach
                             <td class="max-w-max whitespace-nowrap">
-                                <div class="px-3 inline-flex items-center gap-3">
+                                <div class="px-3 w-full inline-flex gap-2 items-center justify-end">
                                     @foreach($table->getRowActions($record) as $action)
-                                        <x-little-action::action :action="$action"/>
+                                        <x-little-action::table-row-action :action="$action"/>
                                     @endforeach
                                 </div>
                             </td>

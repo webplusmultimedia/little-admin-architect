@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns;
 
 use Illuminate\Database\Eloquent\Model;
 
 trait HasRecord
 {
-    protected Model $record ;
+    protected Model $record;
 
     public function record(Model $record): static
     {
@@ -19,5 +21,4 @@ trait HasRecord
     {
         return $this->record;
     }
-
 }
