@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns;
 
+use Closure;
+
 trait HasIcon
 {
-    protected string|null $icon = null;
+    protected string|Closure|null $icon = null;
 
     protected string  $iconPosition = 'before';
 
-    public function icon(string $icon): static
+    public function icon(string|Closure $icon): static
     {
         $this->icon = $icon;
 
@@ -19,6 +21,9 @@ trait HasIcon
 
     public function getIcon(): null|string
     {
+        if (is_callable($this->icon)){
+            return call_user_func($this->icon,$this->record);
+        }
         return $this->icon;
     }
 

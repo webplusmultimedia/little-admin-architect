@@ -61,6 +61,7 @@ final class Table
         $this->setPagesForResource($page);
         $this->builder($page::getResource()::getEloquentQuery());
         if (count($this->rowActions)) {
+            $this->applyDefaultForRowActions();
             $this->actionModal(Modal::make($this->livewireId . '-action-table'));
         }
 

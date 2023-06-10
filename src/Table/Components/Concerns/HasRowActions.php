@@ -58,6 +58,14 @@ trait HasRowActions
         $rowAction->wireClick("mountTableAction('{$rowAction->getName()}',{$record->getKey()})");
     }
 
+    protected function applyDefaultForRowActions(): void
+    {
+        foreach ($this->rowActions as $rowAction) {
+            $rowAction->roundedFull()
+                ->small()
+                ->outline();
+        }
+    }
     public function getActionByName(string $name): ?Action
     {
         return collect($this->rowActions)->filter(/**

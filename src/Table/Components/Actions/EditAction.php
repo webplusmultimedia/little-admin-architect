@@ -11,11 +11,8 @@ class EditAction extends Action
     public function __construct()
     {
         $this->label(trans('little-admin-architect::table.button.edit'))
-            ->roundedFull()
-            ->small()
             ->name('edit')
-            ->icon('heroicon-s-pencil')
-            ->outline();
+            ->icon('heroicon-s-pencil');
     }
 
     public static function make(): EditAction

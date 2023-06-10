@@ -12,16 +12,12 @@ class DeleteAction extends Action
     public function __construct()
     {
         $this->label(trans('little-admin-architect::table.button.delete'))
-            ->roundedFull()
             ->name(trans('little-admin-architect::table.button.delete'))
             ->action(fn (Model $record) => $record->delete())
             ->danger()
             ->requireConfirmation()
             ->confirmQuestion(trans('little-admin-architect::form.confirm_dialog.question'))
-            ->small()
-            ->icon('heroicon-s-x-mark')
-            ->outline();
-
+            ->icon('heroicon-s-x-mark');
     }
 
     public static function make(): DeleteAction

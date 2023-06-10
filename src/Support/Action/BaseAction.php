@@ -9,6 +9,7 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasColor;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasIcon;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasName;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasRecord;
 
 abstract class BaseAction
 {
@@ -17,4 +18,5 @@ abstract class BaseAction
     use HasIcon;
     use HasLabel;
     use HasName;
+    use HasRecord;
 }
