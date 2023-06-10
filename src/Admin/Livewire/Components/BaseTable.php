@@ -17,7 +17,7 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Concerns\InteractsWithModalForm
 /**
  * @property \Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $table
  */
-class ComponentTable extends Component implements HasTable
+class BaseTable extends Component implements HasTable
 {
     use CanInitTable;
     use CanSortColumn;

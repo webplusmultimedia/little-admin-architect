@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Illuminate\Contracts\View\View;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\ComponentForm;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 
-class Form extends ComponentForm
+class Form extends BaseForm
 {
     public function render(): View
     {

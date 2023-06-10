@@ -15,7 +15,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAli
 /**
  * @property LittleFormAlias $form
  */
-class ComponentForm extends Component implements HasForm
+class BaseForm extends Component implements HasForm
 {
     use CanInitForm;
     use HasNotification;

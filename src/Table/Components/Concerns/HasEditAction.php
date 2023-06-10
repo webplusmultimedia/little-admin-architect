@@ -10,22 +10,36 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\TableAction\
 trait HasEditAction
 {
     /**
-     * @var TableAction[] $editAction
+     * @var TableAction[]
      */
-    protected array $editAction = [];
+    protected array $editActions = [];
 
     /**
      * @param  TableAction[]  $editActions
      */
-    public function editAction(array $editActions): static
+    public function editActions(array $editActions): static
     {
         foreach ($editActions as $editAction) {
             if ($editAction instanceof EditAction) {
-                $editAction->url($this->linkIndex());
+                $editAction->url($this->linkCreate())
+                    ->label(
+                        str(__('little-admin-architect::table.button.create', ['label' => 'un ']))->append($this->title)->singular()->value()
+                    );
+                if ($this->hasModalForm()) {
+                    $editAction->wireClick('showModalForm()');
+                }
             }
         }
-        $this->editAction = $editActions;
+        $this->editActions = $editActions;
 
         return $this;
+    }
+
+    /**
+     * @return TableAction[]
+     */
+    public function getEditActions(): array
+    {
+        return $this->editActions;
     }
 }

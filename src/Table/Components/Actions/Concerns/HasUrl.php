@@ -6,11 +6,14 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Concer
 
 trait HasUrl
 {
-    public null|string $url = null;
+    protected null|string $url = null;
+
+    protected string $type = 'button';
 
     public function url(string $url): static
     {
         $this->url = $url;
+        $this->type = 'link';
 
         return $this;
     }
@@ -18,5 +21,10 @@ trait HasUrl
     public function getUrl(): ?string
     {
         return $this->url;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
     }
 }

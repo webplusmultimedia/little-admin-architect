@@ -1,8 +1,7 @@
 <div class="">
     @if($action->getType() === 'link')
         <a href="{{ url($action->getUrl()) }}"
-            @class([ $action->getClass(),'inline-flex items-center justify-center space-x-1' ])
-            {{ $action->getAlpineDispatch() }}
+            @class([ $action->getClass(),'btn inline-flex items-center justify-center space-x-1' ])
         >
             @if($action->getIconPosition()==='before' and $action->getIcon())
                 <x-dynamic-component :component="$action->getIcon()" class="w-4 h-4"  aria-hidden="true"/>
@@ -14,9 +13,9 @@
         </a>
     @else
         <button
-            @class([ $action->getClass(),'inline-flex items-center justify-center space-x-1' ])
-            wire:click="{{ $action->getWireClickAction() }}"
-            wire:loading.attr="disabled" wire:target="mountTableAction"
+            @class([ $action->getClass(),'btn inline-flex items-center justify-center space-x-1' ])
+            wire:click.stop="{{ $action->getWireClickAction() }}"
+            wire:loading.attr="disabled" wire:target="{{  $action->getWireClickAction() }}"
         >
             @if($action->getIconPosition()==='before' and $action->getIcon())
                 <x-dynamic-component :component="$action->getIcon()" class="w-4 h-4"  aria-hidden="true"/>

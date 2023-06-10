@@ -8,6 +8,11 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\Ta
 
 class EditAction extends TableAction
 {
+    public function __construct()
+    {
+
+    }
+
     public static function make(): EditAction
     {
         return new self();

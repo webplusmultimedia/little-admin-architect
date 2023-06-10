@@ -6,9 +6,9 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\ComponentTable;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseTable;
 
-class Table extends ComponentTable implements Htmlable
+class Table extends BaseTable implements Htmlable
 {
     public function render(): View
     {

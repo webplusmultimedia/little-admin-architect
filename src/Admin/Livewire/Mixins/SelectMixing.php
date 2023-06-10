@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Mixins;
 
 use Closure;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\ComponentForm;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
-/** @mixin ComponentForm */
+/** @mixin BaseForm */
 class SelectMixing
 {
     public function getOptionsUsing(): Closure

@@ -8,26 +8,15 @@
 <div class="py-5 px-2">
     <div class="flex justify-between bg-white px-5 py-2 mb-8">
         <div class="">
-            <h1 class="text-2xl mb-0">{{ __($table->title) }}</h1>
+            <h1 class="text-2xl mb-0">{{ $table->title }}</h1>
             <p class="inline-flex items-center space-x-2 text-sm">
                 <span>{{ $table->title }}</span> <span>/</span> <span class="text-gray-400">Liste</span>
             </p>
         </div>
         <div class="flex items-center">
-            @if($table->hasModalForm())
-                <button  type="button" class="btn btn-medium btn-success inline-flex items-center justify-center space-x-2"
-                      wire:click.stop="showModalForm()"
-                >
-                    <x-heroicon-s-pencil class="w-4 h-4" aria-hidden="true"/>
-                    <span>{{ __('little-admin-architect::table.button.create',['label'=>'un']) }} {{ str($table->title)->singular() }}</span>
-                </button>
-            @else
-                <a href="{{ url($table->linkCreate()) }}" class="btn btn-success btn-medium"
-                >
-                    {{ __('little-admin-architect::table.button.create',['label'=>'un']) }} {{ str($table->title)->singular() }}
-                </a>
-            @endif
-
+            @foreach($table->getEditActions() as $editAction)
+                <x-little-action::table-action :action="$editAction"/>
+            @endforeach
         </div>
     </div>
     <div class="flex flex-col bg-white py-10 px-5 rounded-lg overflow-x-auto" x-data="{}">

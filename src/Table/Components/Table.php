@@ -66,8 +66,7 @@ final class Table
             $this->applyDefaultForRowActions();
             $this->actionModal(Modal::make($this->livewireId . '-action-table'));
         }
-        $this->editAction($this->pageForResource::getActions());
-        dd($this->editAction);
+        $this->editActions($this->pageForResource::getActions());
 
     }
 
