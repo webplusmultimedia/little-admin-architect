@@ -10,7 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\TableAction\
 trait HasEditAction
 {
     /**
-     * @var TableAction[] $editAction
+     * @var TableAction[]
      */
     protected array $editAction = [];
 
