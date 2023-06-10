@@ -4,11 +4,11 @@
             @class([ $action->getClass(),'inline-flex items-center justify-center space-x-1' ])
             {{ $action->getAlpineDispatch() }}
         >
-            @if($action->getIconPosition()==='before')
+            @if($action->getIconPosition()==='before' and $action->getIcon())
                 <x-dynamic-component :component="$action->getIcon()" class="w-4 h-4"  aria-hidden="true"/>
             @endif
             <span>{{ $action->getLabel() }}</span>
-            @if($action->getIconPosition()==='after')
+            @if($action->getIconPosition()==='after' and $action->getIcon())
                 <x-dynamic-component :component="$action->getIcon()" class="w-4 h-4"  aria-hidden="true"/>
             @endif
         </a>
@@ -16,13 +16,13 @@
         <button
             @class([ $action->getClass(),'inline-flex items-center justify-center space-x-1' ])
             wire:click="{{ $action->getWireClickAction() }}"
-
+            wire:loading.attr="disabled" wire:target="mountTableAction"
         >
-            @if($action->getIconPosition()==='before')
+            @if($action->getIconPosition()==='before' and $action->getIcon())
                 <x-dynamic-component :component="$action->getIcon()" class="w-4 h-4"  aria-hidden="true"/>
             @endif
             <span>{{ $action->getLabel() }}</span>
-            @if($action->getIconPosition()==='after')
+            @if($action->getIconPosition()==='after' and $action->getIcon())
                 <x-dynamic-component :component="$action->getIcon()" class="w-4 h-4"  aria-hidden="true"/>
             @endif
         </button>

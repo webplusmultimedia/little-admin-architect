@@ -62,7 +62,6 @@
                             <td class="max-w-max whitespace-nowrap">
                                 <div class="px-3 inline-flex items-center gap-3">
                                     @foreach($table->getRowActions($record) as $action)
-                                        @php($action->record($record))
                                         <x-little-action::action :action="$action"/>
                                     @endforeach
                                 </div>

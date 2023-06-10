@@ -12,29 +12,35 @@ trait HasMountTableAction
 {
     public function mountTableAction(string $method, mixed $key): void
     {
-        $this->mountTableAction = $method;
-        $this->mountTableActionRecord = $key;
-
         $id = $this->id . '-action-table';
-        $action = $this->table->getActionByName($this->mountTableAction);
-        if ( ! $action) {
+        $action = $this->table->getActionByName($method);
+        if (! $action) {
             throw new Exception('Aucune action trouvée');
         }
         if ($action->isRequireConfirmation()) {
+            $this->mountTableAction = $method;
+            $this->mountTableActionRecord = $key;
             $this->table->getActionModal()->content(
                 ConfirmationDialog::make(title: $this->getTitleForModal($key),
                     subtitle: $action->getConfirmQuestion(),
                     actionLabel: $action->getName()
                 )
             )->maxWidthSmall();
+            $this->dispatchBrowserEvent('show-modal', ['id' => $id]);
+        } else {
+            $record = $this->getRecordForMount($key);
+            if ($action->getAction()) {
+                call_user_func($action->getAction(), $record, $this);
+            }
+            $this->notification()->success('Save')->send();
+           // dump($action->getName());
         }
-        $this->dispatchBrowserEvent('show-modal', ['id' => $id]);
     }
 
     public function CallMountTableAction(): void
     {
         $action = $this->table->getActionByName($this->mountTableAction);
-        if ( ! $action) {
+        if (! $action) {
             throw new Exception('Aucune action trouvée');
         }
         if ($action->isRequireConfirmation()) {
@@ -42,11 +48,12 @@ trait HasMountTableAction
             if ($action->getAction()) {
                 call_user_func($action->getAction(), $record, $this);
             }
+            $id = $this->id . '-action-table';
+            $this->notification()->success(trans('little-admin-architect::table.notification.delete'))->send();
+            $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
         }
 
-        $id = $this->id . '-action-table';
-        $this->notification()->success(trans('little-admin-architect::table.notification.delete'))->send();
-        $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
+
     }
 
     private function getRecordForMount(mixed $key): Model
@@ -54,7 +61,7 @@ trait HasMountTableAction
 
         $model = $this->table->getResourcePage()::getEloquentQuery()->getModel();
 
-        if ( ! $record = $model->where($model->getKeyName(), $key)->first()) {
+        if (! $record = $model->where($model->getKeyName(), $key)->first()) {
             throw new Exception('Aucune donnée disponible');
         }
 

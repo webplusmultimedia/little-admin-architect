@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\Action;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\DeleteAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\EditAction;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\RowAction;
 
 trait HasRowActions
 {
@@ -32,11 +33,15 @@ trait HasRowActions
     public function getRowActions(Model $record): array
     {
         foreach ($this->rowActions as $rowAction) {
+            $rowAction->record($record);
             if ($rowAction instanceof EditAction) {
-                $this->applyRecordToEditAction($record, $rowAction);
+                $this->applyRecordToEditAction($rowAction);
             }
             if ($rowAction instanceof DeleteAction) {
-                $this->applyRecordToDeleteAction($record, $rowAction);
+                $this->applyRecordToDeleteAction($rowAction);
+            }
+            if ($rowAction instanceof RowAction) {
+                $this->applyWireClickToRowAction($rowAction);
             }
 
         }
@@ -44,18 +49,18 @@ trait HasRowActions
         return $this->rowActions;
     }
 
-    protected function applyRecordToEditAction(Model $record, EditAction $rowAction): void
+    protected function applyRecordToEditAction( EditAction $rowAction): void
     {
         if ( ! $this->hasModalForm()) {
-            $rowAction->url($this->linkEdit($record));
+            $rowAction->url($this->linkEdit($rowAction->getRecord()));
         } else {
-            $rowAction->wireClick("showModalForm({$record->getKey()})");
+            $rowAction->wireClick("showModalForm({$rowAction->getRecord()->getKey()})");
         }
     }
 
-    protected function applyRecordToDeleteAction(Model $record, DeleteAction $rowAction): void
+    protected function applyRecordToDeleteAction( DeleteAction $rowAction): void
     {
-        $rowAction->wireClick("mountTableAction('{$rowAction->getName()}',{$record->getKey()})");
+        $rowAction->wireClick("mountTableAction('{$rowAction->getName()}',{$rowAction->getRecord()->getKey()})");
     }
 
     protected function applyDefaultForRowActions(): void
@@ -65,6 +70,10 @@ trait HasRowActions
                 ->small()
                 ->outline();
         }
+    }
+
+    public function applyWireClickToRowAction(RowAction $rowAction) {
+        $rowAction->wireClick("mountTableAction('{$rowAction->getName()}',{$rowAction->getRecord()->getKey()})");
     }
     public function getActionByName(string $name): ?Action
     {

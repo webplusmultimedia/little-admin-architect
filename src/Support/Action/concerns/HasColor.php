@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns;
 
+use Closure;
+
 trait HasColor
 {
-    protected string $color = 'primary';
+    protected string|Closure $color = 'primary';
 
     protected string $btnStyle = 'btn-';
 
@@ -51,12 +53,23 @@ trait HasColor
         return $this;
     }
 
+    public function color(Closure $color): static
+    {
+        $this->color = $color;
+        return $this;
+    }
+
     public function getClass(): string
     {
+        $color = $this->color;
+        if (is_callable($this->color)){
+            $color = call_user_func($this->color,$this->getRecord());
+        }
+
         if ($this->outline) {
-            $this->btnStyle = 'btn-outline btn-outline-' . $this->color;
+            $this->btnStyle = 'btn-outline btn-outline-' . $color;
         } else {
-            $this->btnStyle .= $this->color;
+            $this->btnStyle .= $color;
         }
 
         if ($this->roundedFull) {
