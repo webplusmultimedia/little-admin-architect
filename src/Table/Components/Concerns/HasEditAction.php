@@ -26,8 +26,7 @@ trait HasEditAction
                 );
                 if ($this->hasModalForm()) {
                     $editAction->wireClick('showModalForm()');
-                }
-                else{
+                } else {
                     $editAction->url($this->linkCreate());
                 }
             }
