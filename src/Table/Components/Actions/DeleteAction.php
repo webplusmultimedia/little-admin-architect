@@ -13,6 +13,7 @@ class DeleteAction extends Action
     {
         $this->label(trans('little-admin-architect::table.button.delete'))
             ->name(trans('little-admin-architect::table.button.delete'))
+            ->notificationText(trans('little-admin-architect::table.notification.delete'))
             ->action(fn (Model $record) => $record->delete())
             ->danger()
             ->requireConfirmation()

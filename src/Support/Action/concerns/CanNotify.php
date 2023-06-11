@@ -8,6 +8,8 @@ trait CanNotify
 {
     protected ?string $eventNotification = null;
 
+    protected ?string $notificationText = null;
+
     protected ?string $eventTarget = null;
 
     public function eventNotification(string $event): static
@@ -31,5 +33,21 @@ trait CanNotify
         }
 
         return null;
+    }
+
+    public function notificationText(?string $notificationText): static
+    {
+        $this->notificationText = $notificationText;
+
+        return $this;
+    }
+
+    public function getNotificationText(): string
+    {
+        if ( ! $this->notificationText) {
+            $this->notificationText = trans('little-admin-architect::action.notification');
+        }
+
+        return $this->notificationText;
     }
 }

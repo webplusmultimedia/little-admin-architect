@@ -40,8 +40,12 @@ trait CanRequireConfirmation
         return $this;
     }
 
-    public function getConfirmQuestion(): ?string
+    public function getConfirmQuestion(): string
     {
+        if ( ! $this->confirmQuestion) {
+            $this->confirmQuestion = trans('little-admin-architect::action.question');
+        }
+
         return $this->confirmQuestion;
     }
 }

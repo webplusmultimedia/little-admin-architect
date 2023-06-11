@@ -50,7 +50,7 @@ trait HasMountTableAction
                 call_user_func($action->getAction(), $record, $this);
             }
             $id = $this->id . '-action-table';
-            $this->notification()->success(trans('little-admin-architect::table.notification.delete'))->send();
+            $this->notification()->success($action->getNotificationText())->send();
             $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
         }
 
