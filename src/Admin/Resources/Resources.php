@@ -177,4 +177,13 @@ class Resources
     {
         return static::$middlewares;
     }
+
+    protected static function getUrl(string $name): ?array
+    {
+        if (isset(static::getPages()[$name]) and $url = static::getPages()[$name]) {
+            return $url;
+        }
+
+        return null;
+    }
 }

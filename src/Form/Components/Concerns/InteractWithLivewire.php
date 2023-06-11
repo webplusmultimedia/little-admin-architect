@@ -4,28 +4,26 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns;
 
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Form;
-
 trait InteractWithLivewire
 {
-    public function saveDatasForm(Form $livewire): void
+    public function saveDatasForm(): void
     {
         if ($this->hasRules()) {
-            $datas = $livewire->validate(rules: $this->getFormRules(), attributes: $this->getAttributesRules());
-            if ( ! $livewire->data?->exists) {
-                $livewire->data?->fill($this->values($datas))->save();
+            $datas = $this->livewire->validate(rules: $this->getFormRules(), attributes: $this->getAttributesRules());
+            if ( ! $this->livewire->data?->exists) {
+                $this->livewire->data?->fill($this->values($datas))->save();
                 if ($this->hasModal()) {
-                    $livewire->dispatchBrowserEvent($this->eventForCloseModal);
-                } elseif ($edit_url = $this->linkEdit($livewire->data)) {
+                    $this->livewire->dispatchBrowserEvent($this->eventForCloseModal);
+                } elseif ($edit_url = $this->linkEdit($this->livewire->data)) {
                     redirect(to: $edit_url);
                 }
-                $livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
+                $this->livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
             } else {
-                $livewire->data->update($this->values($datas));
+                $this->livewire->data->update($this->values($datas));
                 if ($this->hasModal()) {
-                    $livewire->dispatchBrowserEvent($this->eventForCloseModal);
+                    $this->livewire->dispatchBrowserEvent($this->eventForCloseModal);
                 }
-                $livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
+                $this->livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
             }
         }
     }

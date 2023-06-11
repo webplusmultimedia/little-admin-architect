@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components;
 
 use Illuminate\Database\Eloquent\Model;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanGetRules;
@@ -42,6 +43,8 @@ final class Form
 
     protected string $view = 'form';
 
+    protected BaseForm $livewire;
+
     protected string $eventForCloseModal = 'close.modal';
 
     /**
@@ -72,9 +75,10 @@ final class Form
         return $this->livewireId;
     }
 
-    public function configureForm(string $livewireId, Page $resource, Model $model): void
+    public function configureForm(BaseForm $livewire, Page $resource, Model $model): void
     {
-        $this->livewireId($livewireId);
+        $this->livewire = $livewire;
+        $this->livewireId($livewire->id);
         $this->model($model);
         $this->setPagesForResource($resource);
     }
@@ -85,7 +89,7 @@ final class Form
     }
 
     public function __construct(
-        public string $title
+        public string $title = ''
     ) {
         $this->buttonSave = Button::make(trans('little-admin-architect::form.button.save'), $this->type, $this->action)->icon('heroicon-s-check');
 
@@ -172,7 +176,7 @@ final class Form
     {
         $datas = [];
         foreach ($this->getFormFields() as $field) {
-            $datas[$field->getName()] = $field->getDataRecord();
+            $datas[$field->getName()] = $field->getState();
         }
 
         return $datas;

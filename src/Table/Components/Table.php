@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components;
 
+use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\Modal;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
@@ -37,6 +38,8 @@ final class Table
 
     protected string $TableTitle = '';
 
+    protected Component $livewire;
+
     private ?string $livewireId = null;
 
     public function getLivewireId(): ?string
@@ -54,9 +57,10 @@ final class Table
     ) {
     }
 
-    public function configureColumns(string $livewireId, Page $page, string $title = ''): void
+    public function configureColumns(Component $livewire, Page $page, string $title = ''): void
     {
-        $this->livewireId($livewireId);
+        $this->livewire = $livewire;
+        $this->livewireId($livewire->id);
         $this->applySearchableColumns();
         $this->applyHeaders();
         $this->tableTitle($title);

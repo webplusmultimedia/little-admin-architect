@@ -56,4 +56,9 @@ class BaseForm extends Component implements HasForm
     {
         $this->initialized = true;
     }
+
+    public function save(): void
+    {
+        $this->form->saveDatasForm();
+    }
 }

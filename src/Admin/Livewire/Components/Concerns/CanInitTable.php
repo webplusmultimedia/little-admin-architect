@@ -26,7 +26,7 @@ trait CanInitTable
 
         $this->_table = $resource::getTableColumns(\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table::make($resource::getPluralModelLabel()));
         $this->_table
-            ->configureColumns(livewireId: $this->id, page: $page, title: $resource::getPluralModelLabel());
+            ->configureColumns(livewire: $this, page: $page, title: $resource::getPluralModelLabel());
 
         return $this->_table;
     }

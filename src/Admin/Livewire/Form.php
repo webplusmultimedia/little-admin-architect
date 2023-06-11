@@ -18,9 +18,4 @@ class Form extends BaseForm
     {
         return $this->render()->render();
     }
-
-    public function save(): void
-    {
-        $this->form->saveDatasForm($this);
-    }
 }

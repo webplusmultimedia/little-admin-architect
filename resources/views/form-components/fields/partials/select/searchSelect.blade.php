@@ -10,7 +10,7 @@
         componentId: @js($field->getWireName()),
         defaultLabel: @js($field->getLabelDefault()),
         state : $wire.entangle(@js($field->getWireName())).defer,
-        defaultValue : @js($field->getDataRecord()),
+        defaultValue : @js($field->getState()),
         isMultiple : @js($field->isMultiple()),
         isSearchable : @js($field->isSearchable()),
         optionsUsing : @js($field->getAllLabelsForValues()),
@@ -20,7 +20,7 @@
      }
     )"
      wire:ignore
-    {{ $attributes }}
+        {{ $attributes }}
 >
     <div class=""
          role="combobox" aria-autocomplete="list"

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
 use Illuminate\Database\Eloquent\Model;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanEvaluateFunction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\ValidateValuesForRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanGetAttributesRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanInteractWithRules;
@@ -33,6 +34,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use CanBeHidden;
     use CanBeRequired;
     use CanBeWireModifier;
+    use CanEvaluateFunction;
     use CanHideOnForm;
     use CanInitValue;
     use HasColSpan;
@@ -66,7 +68,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         return $this->getPrefix() . $this->name;
     }
 
-    public function getDataRecord(): mixed
+    public function getState(): mixed
     {
         if ($this->record instanceof Model) {
             return $this->getValue();

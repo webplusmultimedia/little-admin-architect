@@ -22,6 +22,11 @@ trait HasFields
         return static::$formFields;
     }
 
+    protected function getFormFieldByName(string $name): ?Field
+    {
+        return collect(self::$formFields)->filter(fn (Field $field) => $field->getName() === $name)->first();
+    }
+
     public function removeHiddenFieldsOnForm(): void
     {
         foreach (self::$formFields as $key => $field) {

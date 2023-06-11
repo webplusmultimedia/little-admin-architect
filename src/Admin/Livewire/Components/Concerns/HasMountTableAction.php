@@ -32,9 +32,9 @@ trait HasMountTableAction
         } else {
 
             if ($action->getAction()) {
-                call_user_func($action->getAction(), $record, $this);
+                app()->call($action->getAction(), ['record' => $record, 'livewire' => $this]);
             }
-            $this->notification()->success('Save')->send();
+            $this->notification()->success($action->getNotificationText())->send();
         }
     }
 
@@ -47,7 +47,7 @@ trait HasMountTableAction
         if ($action->isRequireConfirmation()) {
             $record = $this->getRecordForMount($this->mountTableActionRecord);
             if ($action->getAction()) {
-                call_user_func($action->getAction(), $record, $this);
+                app()->call($action->getAction(), ['record' => $record, 'livewire' => $this]);
             }
             $id = $this->id . '-action-table';
             $this->notification()->success($action->getNotificationText())->send();

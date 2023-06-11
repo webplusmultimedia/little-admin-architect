@@ -12,39 +12,40 @@ trait CanInitForm
 {
     protected function buildConfig(): Form
     {
-        $this->pageRoute = $this->pageRoute ?? request()->collect('fingerprint')->get('name');
-
-        $pageClass = str($this->pageRoute)
-            ->explode('.')
-            ->map(fn (string $segment) => str($segment)->studly())
-            ->implode('\\');
-        /** @var Page $page */
-        $page = app($pageClass);
+        $page = $this->getResourcePage();
 
         /** @var Resources $resource */
         $resource = $page::getResource();
         $this->_form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
         $this->_form->setPagesForResource($page);
-        if ( ! $this->data) {
+        if (! $this->data) {
             $this->data = $this->_form->fill($this->key);
-            $this->_form->livewireId($this->id);
-            /* if ( ! $this->data->exists) {
-                 $this->_form->applyDefaultValue();
-             }*/
-        } else {
-            $this->_form->configureForm(livewireId: $this->id, resource: $page, model: $this->data);
         }
+        $this->_form->configureForm(livewire: $this, resource: $page, model: $this->data);
+
         $this->formDatas = [
-            'form' => $this->_form,
+            'form'  => $this->_form,
             'title' => $resource::getModelLabel(),
         ];
 
         return $this->_form;
     }
 
+    protected function getResourcePage(): Page
+    {
+        $this->pageRoute = $this->pageRoute ?? request()->collect('fingerprint')->get('name');
+
+        $pageClass = str($this->pageRoute)
+            ->explode('.')
+            ->map(fn(string $segment) => str($segment)->studly())
+            ->implode('\\');
+
+        return app($pageClass);
+    }
+
     protected function getForm(): ?Form
     {
-        if ( ! $this->_form) {
+        if (! $this->_form) {
             $this->_form = $this->buildConfig();
         }
 
