@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
 use Illuminate\Database\Eloquent\Model;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanEvaluateFunction;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\ValidateValuesForRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanGetAttributesRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanInteractWithRules;
@@ -14,6 +14,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBe
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBeHidden;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBeRequired;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBeWireModifier;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanEvaluateFunction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanHideOnForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanInitValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasColSpan;
@@ -55,6 +56,8 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
      */
     protected array|null|Model $record = null;
 
+    protected BaseForm $livewire;
+
     final public function __construct(
         string $name,
         ?string $label = null,
@@ -89,6 +92,11 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         }
 
         return '';
+    }
+
+    public function livewire(BaseForm $livewire): void
+    {
+        $this->livewire = $livewire;
     }
 
     public static function make(string $name, null|string $label = null): static

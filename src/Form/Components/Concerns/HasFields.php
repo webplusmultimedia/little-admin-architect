@@ -30,7 +30,6 @@ trait HasFields
     public function removeHiddenFieldsOnForm(): void
     {
         foreach (self::$formFields as $key => $field) {
-            $field->modeForm($this->mode);
             if ($field->isHiddenOnForm()) {
                 unset(self::$formFields[$key]);
             }

@@ -4,41 +4,42 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
 
+use Closure;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 trait CanHideOnForm
 {
-    protected bool $hideOnCreated = false;
+    protected bool|Closure $hideOnCreated = false;
 
-    protected bool $hideOnUpdated = false;
+    protected bool|Closure $hideOnUpdated = false;
 
-    protected string $modeForm;
+    protected string $statusForm;
 
-    public function hideOnCreate(): static
+    public function hideOnCreate(bool|Closure $hide = true): static
     {
-        $this->hideOnCreated = true;
+        $this->hideOnCreated = $hide;
 
         return $this;
     }
 
-    public function hideOnUpdate(): static
+    public function hideOnUpdate(bool|Closure $hide = true): static
     {
-        $this->hideOnUpdated = true;
+        $this->hideOnUpdated = $hide;
 
         return $this;
     }
 
     public function isHiddenOnForm(): bool
     {
-        if (Form::UPDATED === $this->modeForm) {
-            return $this->hideOnUpdated;
+        if (Form::UPDATED === $this->statusForm) {
+            return $this->evaluate($this->hideOnUpdated);
         }
 
-        return $this->hideOnCreated;
+        return $this->evaluate($this->hideOnCreated);
     }
 
-    public function modeForm(string $mode): void
+    public function statusForm(string $mode): void
     {
-        $this->modeForm = $mode;
+        $this->statusForm = $mode;
     }
 }

@@ -56,7 +56,7 @@ final class Form
 
     public const UPDATED = 'UPDATED';
 
-    protected ?string $mode = null;
+    protected ?string $statusForm = null;
 
     protected string $action = 'save';
 
@@ -75,10 +75,8 @@ final class Form
         return $this->livewireId;
     }
 
-    public function configureForm(BaseForm $livewire, Page $resource, Model $model): void
+    public function configureForm(Page $resource, Model $model): void
     {
-        $this->livewire = $livewire;
-        $this->livewireId($livewire->id);
         $this->model($model);
         $this->setPagesForResource($resource);
     }
@@ -112,17 +110,19 @@ final class Form
 
     public function model(Model $record): void
     {
-        $this->model = $record;
-        $this->initMode();
-        $this->initDatasFormOnMount($record);
-        $this->removeHiddenFieldsOnForm();
-        $this->initSelectUsing();
+        if ( ! $this->model) {
+            $this->model = $record;
+            $this->initMode();
+            $this->initDatasFormOnMount($record, $this->getLivewire());
+            $this->removeHiddenFieldsOnForm();
+            $this->initSelectUsing();
+        }
     }
 
     public function modelArray(array $record): void
     {
         $this->model = $record;
-        $this->initDatasFormOnMount($record);
+        $this->initDatasFormOnMount($record, $this->getLivewire());
         $this->initSelectUsing();
     }
 
@@ -161,15 +161,15 @@ final class Form
     public function initMode(): void
     {
         if ($this->model instanceof Model and $this->model->exists) {
-            $this->mode = self::UPDATED;
+            $this->statusForm = self::UPDATED;
         } else {
-            $this->mode = self::CREATED;
+            $this->statusForm = self::CREATED;
         }
     }
 
-    public function mode(): ?string
+    public function getStatusForm(): ?string
     {
-        return $this->mode;
+        return $this->statusForm;
     }
 
     public function getState(): array
@@ -211,5 +211,10 @@ final class Form
     public function getRecord(): Model|array|null
     {
         return $this->model;
+    }
+
+    public function getLivewire(): BaseForm
+    {
+        return $this->livewire;
     }
 }

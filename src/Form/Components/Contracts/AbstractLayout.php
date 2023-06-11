@@ -17,6 +17,7 @@ abstract class AbstractLayout /*implements CanValidateValuesForRules, CanGetAttr
     use HasColSpan;
     use HasGridColumns;
     use HasSchema;
+    use \Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasForm;
 
     protected string $view = 'layouts.container';
 

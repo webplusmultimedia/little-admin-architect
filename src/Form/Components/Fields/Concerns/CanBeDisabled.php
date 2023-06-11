@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
 
+use Closure;
+
 trait CanBeDisabled
 {
-    protected bool $disabled = false;
+    protected bool|Closure $disabled = false;
 
-    public function disabled(bool $canDisabled = true): static
+    public function disabled(bool|Closure $canDisabled = true): static
     {
         $this->disabled = $canDisabled;
 
@@ -17,6 +19,6 @@ trait CanBeDisabled
 
     public function isDisabled(): bool
     {
-        return $this->disabled;
+        return $this->evaluate($this->disabled);
     }
 }

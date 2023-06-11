@@ -18,13 +18,14 @@ trait CanInitForm
         $resource = $page::getResource();
         $this->_form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
         $this->_form->setPagesForResource($page);
-        if (! $this->data) {
+        $this->_form->setLivewireComponent($this);
+        if ( ! $this->data) {
             $this->data = $this->_form->fill($this->key);
         }
-        $this->_form->configureForm(livewire: $this, resource: $page, model: $this->data);
+        $this->_form->configureForm(resource: $page, model: $this->data);
 
         $this->formDatas = [
-            'form'  => $this->_form,
+            'form' => $this->_form,
             'title' => $resource::getModelLabel(),
         ];
 
@@ -37,7 +38,7 @@ trait CanInitForm
 
         $pageClass = str($this->pageRoute)
             ->explode('.')
-            ->map(fn(string $segment) => str($segment)->studly())
+            ->map(fn (string $segment) => str($segment)->studly())
             ->implode('\\');
 
         return app($pageClass);
@@ -45,7 +46,7 @@ trait CanInitForm
 
     protected function getForm(): ?Form
     {
-        if (! $this->_form) {
+        if ( ! $this->_form) {
             $this->_form = $this->buildConfig();
         }
 
