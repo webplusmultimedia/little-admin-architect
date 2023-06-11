@@ -21,12 +21,14 @@ trait HasEditAction
     {
         foreach ($editActions as $editAction) {
             if ($editAction instanceof EditAction) {
-                $editAction->url($this->linkCreate())
-                    ->label(
-                        str(__('little-admin-architect::table.button.create', ['label' => 'un ']))->append($this->title)->singular()->value()
-                    );
+                $editAction->label(
+                    str(__('little-admin-architect::table.button.create', ['label' => 'un ']))->append($this->title)->singular()->value()
+                );
                 if ($this->hasModalForm()) {
                     $editAction->wireClick('showModalForm()');
+                }
+                else{
+                    $editAction->url($this->linkCreate());
                 }
             }
         }
