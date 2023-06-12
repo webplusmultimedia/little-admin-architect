@@ -19,6 +19,7 @@
 @else
     <x-dynamic-component :component="$field->getWrapperView()"
                          :id="$field->getWrapperId()"
+                         @class(['disabled__field' => $field->isDisabled()])
             {{ $attributes->merge(['class'=> $field->getColSpan()]) }}
     >
         <div {{ $attributes->class('grid auto-rows-min')->merge(['class'=> $field->getColumns()]) }}>

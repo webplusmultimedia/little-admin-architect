@@ -21,6 +21,7 @@
 @else
     <x-dynamic-component :component="$field->getWrapperView()"
                          :id="$field->getWrapperId()"
+        @class(['disabled__field' => $field->isDisabled()])
             {{ $attributes->class('relative little-admin-fildset')->merge(['class'=> $field->getColSpan()]) }}
     >
         <div {{ $attributes->class('grid px-4')->merge(['class'=> $field->getColumns()]) }} >

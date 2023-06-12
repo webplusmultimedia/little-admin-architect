@@ -1,0 +1,5 @@
+@layer components {
+    .form-label{
+        @apply inline-flex items-center space-x-3 font-medium text-slate-700
+    }
+}

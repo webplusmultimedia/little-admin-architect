@@ -12,18 +12,18 @@
                        'id' => $id,
                        'type' => 'hidden',
                        ])
-                       }}
+            }}
     />
 @else
     <x-dynamic-component :component="$field->getWrapperView()"
-
                          {{ $attributes->class('flex items-center')->merge(['class'=> $field->getColSpan()]) }}
                          :id="$field->getWrapperId()"
     >
         <div>
             <x-dynamic-component :component="$field->getViewComponentForLabel()"
                                  :id="$id"
-                                 class=" items-center gap-2" :label="$field->getLabel()"
+                                 @class(['disabled__field' => $field->isDisabled(),"inline-flex items-center gap-2"])
+                                 :label="$field->getLabel()"
                                  :showRequired="$field->isRequired()"
             >
                 @if($field->getType() === 'switch')

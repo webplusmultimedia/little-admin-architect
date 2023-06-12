@@ -3,7 +3,8 @@
 	/** @var Select $field */
 	'field'
 ])
-<div class="relative"
+<div
+     @class(['disabled__field' => $field->isDisabled(),"relative"])
      x-cloak
      x-data="SelectFormComponent(
      {
@@ -21,6 +22,7 @@
     )"
      wire:ignore
         {{ $attributes }}
+
 >
     <div class=""
          role="combobox" aria-autocomplete="list"

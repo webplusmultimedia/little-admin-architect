@@ -1,5 +1,6 @@
 @import "button.css";
 @import "select.css";
+@import "label.css";
 @import "form-container.css";
 @import "modal.css";
 @import "colors.css";
@@ -74,6 +75,9 @@
 
     label {
         @apply text-[1rem]
+    }
+    .disabled__field{
+        @apply pointer-events-none opacity-70
     }
 }
 
