@@ -18,7 +18,6 @@ trait HasSearchableColumns
     {
         foreach ($this->columns as $column) {
             if ($column->isSearchable()) {
-
                 $this->searchableColumns[] = $column;
             }
         }

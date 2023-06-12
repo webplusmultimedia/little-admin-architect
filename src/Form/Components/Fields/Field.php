@@ -7,7 +7,6 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithEvaluateFunction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\ValidateValuesForRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanGetAttributesRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanInteractWithRules;
@@ -16,6 +15,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBe
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBeHidden;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBeRequired;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBeWireModifier;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanDehydrate;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanHideOnForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanHydrate;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanInitValue;
@@ -31,6 +31,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\Inter
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithWrapper;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateFunction;
+use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractsWithEvaluateFunction;
 
 abstract class Field extends AbstractField implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
 {
@@ -38,6 +39,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use CanBeHidden;
     use CanBeRequired;
     use CanBeWireModifier;
+    use CanDehydrate;
     use CanEvaluateFunction;
     use CanHideOnForm;
     use CanHydrate;

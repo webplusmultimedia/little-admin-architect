@@ -94,8 +94,7 @@ class Login extends Component implements HasForm
         if ( ! $this->_form) {
             $this->_form = Form::make(__('little-admin-architect::login.heading'))
                 ->schema($this->getFormSchemas())
-                ->setButtonSave(Button::make(trans('little-admin-architect::login.buttons.submit.label'), 'submit', 'authenticate'))
-                /*->livewireComponent($this)*/;
+                ->setButtonSave(Button::make(trans('little-admin-architect::login.buttons.submit.label'), 'submit', 'authenticate'));
         }
 
         return $this->_form;

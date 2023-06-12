@@ -8,6 +8,8 @@ trait CanBeSearchable
 {
     protected bool $searchable = false;
 
+    protected ?string $search = null;
+
     public function searchable(): static
     {
         $this->searchable = true;
@@ -18,5 +20,17 @@ trait CanBeSearchable
     public function isSearchable(): bool
     {
         return $this->searchable;
+    }
+
+    public function setSearch(?string $search): static
+    {
+        $this->search = $search;
+
+        return $this;
+    }
+
+    public function getSearch(): ?string
+    {
+        return $this->search;
     }
 }

@@ -8,9 +8,7 @@ trait CanEvaluateFunction
 {
     protected array $defaultParameters = [];
 
-    /**
-     * @param  array<int,string>  $excludes
-     */
+    /** @param  array<int,string>  $excludes , can be 'set', 'get', 'state' or 'status' for field  */
     public function evaluate(mixed $closure, array $excludes = []): mixed
     {
         if (is_callable($closure)) {

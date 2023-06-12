@@ -15,9 +15,6 @@ trait CanInitDatasForm
         foreach ($this->fields as $field) {
             if ($field instanceof Field) {
                 $field->record($model);
-                /*if (!is_array($model)) {
-                    $field->livewire($livewire);
-                }*/
                 $field->statusForm($this->getStatusForm());
                 Form::addFormField($field);
 
@@ -25,7 +22,6 @@ trait CanInitDatasForm
             }
 
             $field->setStatusForm($this->getStatusForm());
-
             $field->initDatasFormOnMount($model);
         }
 

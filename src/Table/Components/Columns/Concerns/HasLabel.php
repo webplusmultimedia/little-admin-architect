@@ -14,7 +14,7 @@ trait HasLabel
 
     protected ?string $label = null;
 
-    public function label(null|string $label): static
+    public function label(string $label): static
     {
         $this->label = str($label)->ucfirst()->value();
 
@@ -25,9 +25,4 @@ trait HasLabel
     {
         return $this->label ?? str($this->name)->headline()->lower()->ucfirst()->value();
     }
-
-   /* public function getViewComponentForLabel(): string
-    {
-        return $this->getViewComponent('partials.label');
-    }*/
 }

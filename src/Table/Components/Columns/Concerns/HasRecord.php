@@ -27,7 +27,7 @@ trait HasRecord
         return $this->record;
     }
 
-    public function getValue(): mixed
+    public function getState(): mixed
     {
         return call_user_func($this->value, $this);
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns;
+namespace Webplusmultimedia\LittleAdminArchitect\Support\Concerns;
 
 use Closure;
 

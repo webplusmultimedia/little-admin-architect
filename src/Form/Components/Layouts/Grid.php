@@ -52,10 +52,8 @@ final class Grid extends AbstractLayout
         /** @var GridColumn $column */
         foreach ($this->gridColumns as $column) {
             foreach ($column->getFields() as $field) {
-
                 if ($field instanceof Field) {
                     $field->record($model);
-                    //$field->livewire($livewire);
                     $field->statusForm($this->getStatusForm());
                     Form::addFormField($field);
 

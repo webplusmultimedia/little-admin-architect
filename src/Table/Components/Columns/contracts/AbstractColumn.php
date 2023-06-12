@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts;
 
+use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateFunction;
+use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractsWithEvaluateFunction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\CanBeSearchable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\CanBeSortable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasLabel;
@@ -14,9 +16,11 @@ abstract class AbstractColumn
 {
     use CanBeSearchable;
     use CanBeSortable;
+    use CanEvaluateFunction;
     use HasLabel;
     use HasLivewireId;
     use HasRecord;
+    use InteractsWithEvaluateFunction;
 
     protected string $view = 'text';
 
@@ -49,5 +53,10 @@ abstract class AbstractColumn
     public function getComponentView(string $view): string
     {
         return config('little-admin-architect.blade-table-prefix') . '::' . $view;
+    }
+
+    public function getDefaultParameters(): array
+    {
+        return ['state' => $this->getState(), 'search' => $this->getSearch(), 'column' => $this, 'record' => $this->getRecord()];
     }
 }
