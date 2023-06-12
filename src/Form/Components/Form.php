@@ -10,6 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanGetRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanInitDatasForm;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanInteractsWithState;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanListOptionsForSelect;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanSearchResultsUsingForSelect;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanValidatedValues;
@@ -28,6 +29,7 @@ final class Form
 {
     use CanGetRules;
     use CanInitDatasForm;
+    use CanInteractsWithState;
     use CanListOptionsForSelect;
     use CanSearchResultsUsingForSelect;
     use CanValidatedValues;

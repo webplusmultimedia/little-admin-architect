@@ -13,7 +13,7 @@ trait CanBeWireModifier
      */
     protected bool $isWireLazy = false;
 
-    public function lazy(): static
+    public function reactive(): static
     {
         $this->wireModifier = '.lazy';
         $this->isWireLazy = true;

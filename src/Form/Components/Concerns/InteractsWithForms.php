@@ -16,8 +16,6 @@ trait InteractsWithForms
 
     protected null|string $pageRoute = null;
 
-    protected ?string $routeName = null;
-
     protected bool $initBoot = true;
 
     protected array $datasRules;

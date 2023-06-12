@@ -25,4 +25,14 @@ trait InteractWithRecord
 
         return $model;
     }
+
+    protected function getDataRecordByName(string $name): mixed
+    {
+        return $this->record->{$name};
+    }
+
+    protected function setDataToRecordByName(string $name, mixed $value): void
+    {
+        $this->record->{$name} = $value;
+    }
 }

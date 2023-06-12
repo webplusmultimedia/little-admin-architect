@@ -16,6 +16,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBe
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBeWireModifier;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanEvaluateFunction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanHideOnForm;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanHydrate;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanInitValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasColSpan;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasDefaultValue;
@@ -37,6 +38,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use CanBeWireModifier;
     use CanEvaluateFunction;
     use CanHideOnForm;
+    use CanHydrate;
     use CanInitValue;
     use HasColSpan;
     use HasDefaultValue;

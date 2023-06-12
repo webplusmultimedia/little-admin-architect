@@ -17,6 +17,7 @@ trait CanInitDatasForm
             if ($field instanceof Field) {
                 $field->record($model);
                 $field->livewire($livewire);
+                $field->hydrateState();
                 $field->statusForm($this->statusForm ?? $this->getStatusForm());
                 Form::addFormField($field);
 

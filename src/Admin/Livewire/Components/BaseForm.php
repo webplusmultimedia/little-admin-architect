@@ -32,7 +32,6 @@ class BaseForm extends Component implements HasForm
     public function mount(mixed $key, ?string $pageRoute): void
     {
         $this->previousPage = url()->previous();
-        $this->routeName = request()->route()->getName();
         $this->pageRoute = $pageRoute;
         $this->key = $key;
 

@@ -9,7 +9,7 @@ trait CanEvaluateFunction
     public function evaluate(mixed $closure): mixed
     {
         if (is_callable($closure)) {
-            return app()->call($closure, ['livewire' => $this->livewire, 'record' => $this->getRecord(), 'state' => $this->getState()]);
+            return app()->call($closure, ['livewire' => $this->livewire, 'record' => $this->getRecord(), 'state' => $this->getState(), 'status' => $this->getStatusForm()]);
         }
 
         return $closure;

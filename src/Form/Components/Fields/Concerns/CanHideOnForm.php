@@ -42,4 +42,9 @@ trait CanHideOnForm
     {
         $this->statusForm = $mode;
     }
+
+    public function getStatusForm(): string
+    {
+        return $this->statusForm;
+    }
 }
