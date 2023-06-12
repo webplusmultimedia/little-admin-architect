@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components;
 
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\View\View;
+use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanGetRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanInitDatasForm;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanInteractsWithState;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanListOptionsForSelect;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanSearchResultsUsingForSelect;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanValidatedValues;
@@ -25,11 +27,10 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithRecord;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasModal;
 
-final class Form
+final class Form implements Htmlable
 {
     use CanGetRules;
     use CanInitDatasForm;
-    use CanInteractsWithState;
     use CanListOptionsForSelect;
     use CanSearchResultsUsingForSelect;
     use CanValidatedValues;
@@ -45,7 +46,7 @@ final class Form
 
     protected string $view = 'form';
 
-    protected BaseForm $livewire;
+    protected BaseForm|Component $livewire;
 
     protected string $eventForCloseModal = 'close.modal';
 
@@ -115,7 +116,7 @@ final class Form
         if ( ! $this->model) {
             $this->model = $record;
             $this->initMode();
-            $this->initDatasFormOnMount($record, $this->getLivewire());
+            $this->initDatasFormOnMount($this->model);
             $this->removeHiddenFieldsOnForm();
             $this->initSelectUsing();
         }
@@ -124,7 +125,8 @@ final class Form
     public function modelArray(array $record): void
     {
         $this->model = $record;
-        $this->initDatasFormOnMount($record, $this->getLivewire());
+        $this->statusForm = 'CREATED';
+        $this->initDatasFormOnMount($record);
         $this->initSelectUsing();
     }
 
@@ -179,6 +181,8 @@ final class Form
         $datas = [];
         foreach ($this->getFormFields() as $field) {
             $datas[$field->getName()] = $field->getState();
+
+            $field->hydrateState();
         }
 
         return $datas;
@@ -215,8 +219,25 @@ final class Form
         return $this->model;
     }
 
-    public function getLivewire(): BaseForm
+    public function livewireComponent(Component $livewire): Form
+    {
+        $this->livewire = $livewire;
+
+        return $this;
+    }
+
+    protected function getLivewireComponent(): Component
     {
         return $this->livewire;
+    }
+
+    protected function render(): View
+    {
+        return view($this->getView(), ['form' => $this]);
+    }
+
+    public function toHtml(): string
+    {
+        return $this->render()->render();
     }
 }

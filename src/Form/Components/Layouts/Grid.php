@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Layouts;
 
 use Illuminate\Database\Eloquent\Model;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\AbstractLayout;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
@@ -48,7 +47,7 @@ final class Grid extends AbstractLayout
         return $this->gridColumns;
     }
 
-    public function initDatasFormOnMount(null|array|Model $model, BaseForm $livewire): void
+    public function initDatasFormOnMount(null|array|Model $model): void
     {
         /** @var GridColumn $column */
         foreach ($this->gridColumns as $column) {
@@ -56,14 +55,14 @@ final class Grid extends AbstractLayout
 
                 if ($field instanceof Field) {
                     $field->record($model);
-                    $field->livewire($livewire);
-                    $field->statusForm($this->form->getStatusForm());
+                    //$field->livewire($livewire);
+                    $field->statusForm($this->getStatusForm());
                     Form::addFormField($field);
 
                     continue;
                 }
-                $field->setStatusForm($this->statusForm);
-                $field->initDatasFormOnMount($model, $livewire);
+                $field->setStatusForm($this->getStatusForm());
+                $field->initDatasFormOnMount($model);
             }
         }
     }

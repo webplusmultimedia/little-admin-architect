@@ -60,4 +60,9 @@ class BaseForm extends Component implements HasForm
     {
         $this->form->saveDatasForm();
     }
+
+    public function dehydrate(): void
+    {
+        $this->form->getState();
+    }
 }

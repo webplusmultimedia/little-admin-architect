@@ -80,7 +80,7 @@ class Login extends Component implements HasForm
             'password' => $data['password'],
         ], $data['remember'])) {
             throw ValidationException::withMessages([
-                'email' => __('little-admin-architect::login.messages.failed'),
+                'email' => trans('little-admin-architect::login.messages.failed'),
             ]);
         }
 
@@ -94,8 +94,8 @@ class Login extends Component implements HasForm
         if ( ! $this->_form) {
             $this->_form = Form::make(__('little-admin-architect::login.heading'))
                 ->schema($this->getFormSchemas())
-                ->setButtonSave(Button::make(trans('little-admin-architect::login.buttons.submit.label'), 'submit', 'authenticate'));
-            $this->_form->livewireId($this->id);
+                ->setButtonSave(Button::make(trans('little-admin-architect::login.buttons.submit.label'), 'submit', 'authenticate'))
+                /*->livewireComponent($this)*/;
         }
 
         return $this->_form;

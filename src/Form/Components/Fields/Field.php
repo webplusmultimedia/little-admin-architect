@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
 use Illuminate\Database\Eloquent\Model;
+use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithEvaluateFunction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\ValidateValuesForRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanGetAttributesRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanInteractWithRules;
@@ -14,7 +16,6 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBe
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBeHidden;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBeRequired;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanBeWireModifier;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanEvaluateFunction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanHideOnForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanHydrate;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanInitValue;
@@ -29,6 +30,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasVa
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithAttributeRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithWrapper;
+use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateFunction;
 
 abstract class Field extends AbstractField implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
 {
@@ -48,6 +50,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use HasName;
     use HasPlaceholder;
     use HasValidationRules;
+    use InteractsWithEvaluateFunction;
     use InteractWithAttributeRules;
     use InteractWithRules;
     use InteractWithWrapper;
@@ -58,7 +61,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
      */
     protected array|null|Model $record = null;
 
-    protected BaseForm $livewire;
+    protected BaseForm|Component $livewire;
 
     final public function __construct(
         string $name,
@@ -96,7 +99,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         return '';
     }
 
-    public function livewire(BaseForm $livewire): void
+    public function livewire(BaseForm|Component $livewire): void
     {
         $this->livewire = $livewire;
     }
@@ -114,5 +117,10 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     public function getRecord(): array|null|Model
     {
         return $this->record;
+    }
+
+    public function getDefaultParameters(): array
+    {
+        return [/*'livewire' => $this->livewire,*/ 'set' => $this->set(), 'get' => $this->get(), 'state' => $this->getState(), 'status' => $this->getStatusForm()];
     }
 }
