@@ -180,9 +180,10 @@ final class Form implements Htmlable
     {
         $datas = [];
         foreach ($this->getFormFields() as $field) {
+            /** @todo : remove relations fields for preventing save */
             $field->hydrateState();
-            $field->dehydrateState();
-            $datas[$field->getName()] = $field->getState();
+            $name = $field->getName();
+            $datas[$field->getName()] = $this->model->{$name} = $field->dehydrateState() ?? $field->getState();
         }
 
         return $datas;

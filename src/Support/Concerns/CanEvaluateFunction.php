@@ -23,7 +23,7 @@ trait CanEvaluateFunction
 
     protected function getParameters(array $excludes): array
     {
-        return collect($this->getDefaultParameters())->filter(fn ($value, $key) => ! in_array($key, $excludes))->toArray();
+        return collect($this->getDefaultParameters())->filter(fn (mixed $value, string $key) => ! in_array($key, $excludes))->all();
     }
 
     protected function getDefaultParameters(): array

@@ -80,6 +80,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
 
     public function getState(): mixed
     {
+        $value = null;
         if ($this->record instanceof Model) {
             return $this->getValue();
         }
@@ -123,6 +124,6 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
 
     public function getDefaultParameters(): array
     {
-        return [/*'livewire' => $this->livewire,*/ 'set' => $this->set(), 'get' => $this->get(), 'state' => $this->getState(), 'status' => $this->getStatusForm()];
+        return ['set' => $this->set(), 'get' => $this->get(), 'state' => $this->getState(), 'status' => $this->getStatusForm()];
     }
 }

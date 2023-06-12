@@ -17,9 +17,11 @@ trait InteractWithRecord
         if ($key) {
             $model = $resource::getEloquentQuery()->where($model->getKeyName(), $key)->firstOrFail();
             $this->model($model);
+            $this->record = $model;
 
             return $model;
         }
+        $this->record = $model;
         $this->model($model);
         $this->applyDefaultValue();
 
