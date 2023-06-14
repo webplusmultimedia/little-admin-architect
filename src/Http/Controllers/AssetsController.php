@@ -29,7 +29,6 @@ class AssetsController
             case 'echo.js.map':
                 return $this->pretendResponseIsFile(__DIR__ . '/../../../dist/echo.js.map', 'application/json; charset=utf-8');
         }
-
         /*if (Str::endsWith($file, '.js')) {
             $name = Str::beforeLast($file, '.js');
 

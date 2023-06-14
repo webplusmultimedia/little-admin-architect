@@ -13,7 +13,11 @@ trait HasState
             /** @todo : remove relations fields for preventing save */
             $field->hydrateState();
             $name = $field->getName();
-            $datas[$field->getName()] = $this->model->{$name} = $field->dehydrateState() ?? $field->getState();
+            if ( ! is_array($this->model)) {
+                $datas[$field->getName()] = $this->model->{$name} = $field->dehydrateState() ?? $field->getState();
+            } else {
+                $datas[$field->getName()] = $this->model[$name] = $field->dehydrateState() ?? $field->getState();
+            }
         }
 
         return $datas;

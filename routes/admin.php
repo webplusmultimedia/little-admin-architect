@@ -13,11 +13,9 @@ Route::prefix(config('little-admin-architect.prefix'))
     ->middleware(['web'])
     ->name(config('little-admin-architect.route.prefix') . '.')
     ->group(function (): void {
-        Route::prefix('asset')
-            ->name('assets.')
+        Route::prefix('assets')
             ->group(function (): void {
-                Route::get('css/{file}', AssetsController::class)->name('style');
-                Route::get('js/{file}', AssetsController::class)->name('js');
+                Route::get('{file}', AssetsController::class)->where('file', '.*')->name('assets');
             });
         Route::get('/login', config('little-admin-architect.auth.pages.login'))->name('auth.login');
         Route::post('/logout', function (Request $request): LogoutResponse {
