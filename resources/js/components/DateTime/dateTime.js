@@ -8,7 +8,7 @@ import {getModelValue, Period} from "./Support/dateSupport"
  * @param {string} dateFrom
  * @param {string|null} dateTo
  */
-export function webplusDateTime(dayDate, config,dateFrom,dateTo) {
+export function webplusDateTime({dayDate, config, dateFrom, dateTo}) {
     return {
         /**
          * @type {{start_at: null|Date, end_at: null|Date}}
@@ -115,8 +115,10 @@ export function webplusDateTime(dayDate, config,dateFrom,dateTo) {
          */
         selectedDay: null,
         dayDate,
+        dateTo,
+        dateFrom,
         get_selectedDay() {
-            return dayDate.initialValue
+            return dayDate
         },
         set_selectedDay(dateOrRange) {
             if (!dateOrRange){
@@ -269,7 +271,12 @@ export function webplusDateTime(dayDate, config,dateFrom,dateTo) {
         init() {
             checkConfig(this)
             this.$watch('dayDate',value=>{
-                console.log(value)
+                if(this.configTypeMatch('range')){
+                    this.dateTo = value?value[0]:null
+                    this.dateFrom = value?value[1]:null
+                    return
+                }
+                this.dateTo = value
             })
         }
 

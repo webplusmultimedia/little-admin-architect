@@ -10,15 +10,31 @@ trait HasRangeDate
 
     protected ?string $dateFrom = null;
 
-    public function dateFrom(string $dateFrom): static
+    public function range(): static
     {
-        $this->dateFrom = $dateFrom;
+        $this->getConfig()->type = 'range';
 
         return $this;
     }
 
-    public function getDateFromWireName(): string
+    public function dateFrom(string $fieldName): static
     {
+        $this->dateFrom = $fieldName;
+
+        return $this;
+    }
+
+    public function getDateFromWireName(): ?string
+    {
+        if ( ! $this->dateFrom) {
+            return null;
+        }
+
         return $this->getPrefix() . $this->dateFrom;
+    }
+
+    public function getDateFromName(): ?string
+    {
+        return $this->dateFrom;
     }
 }

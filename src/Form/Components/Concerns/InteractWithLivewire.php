@@ -14,8 +14,10 @@ trait InteractWithLivewire
             if ($this->livewire instanceof BaseForm) {
                 /** @TODO : Validate with laravel Validation */
                 $datas = $this->livewire->validate(rules: $this->getFormRules(), attributes: $this->getAttributesRules());
+                $datas = $this->values($datas);
+
                 if ( ! $this->livewire->data?->exists) {
-                    $this->livewire->data?->fill($this->values($datas))->save();
+                    $this->livewire->data?->fill($datas)->save();
                     if ($this->hasModal()) {
                         $this->livewire->dispatchBrowserEvent($this->eventForCloseModal);
                     } elseif ($edit_url = $this->linkEdit($this->livewire->data)) {
@@ -23,7 +25,7 @@ trait InteractWithLivewire
                     }
                     $this->livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
                 } else {
-                    $this->livewire->data->update($this->values($datas));
+                    $this->livewire->data->update($datas);
                     if ($this->hasModal()) {
                         $this->livewire->dispatchBrowserEvent($this->eventForCloseModal);
                     }

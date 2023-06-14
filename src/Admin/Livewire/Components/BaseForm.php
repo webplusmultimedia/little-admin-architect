@@ -31,14 +31,12 @@ class BaseForm extends Component implements HasForm
 
     public function mount(mixed $key, ?string $pageRoute): void
     {
+        //@Todo : Can update or edit
         $this->previousPage = url()->previous();
         $this->pageRoute = $pageRoute;
         $this->key = $key;
 
         $this->getForm();
-        /*if ( ! $this->data?->exists) {
-            $this->form->applyDefaultValue();
-        }*/
 
         $this->initialized = true;
         $this->initBoot = false;

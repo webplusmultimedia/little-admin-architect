@@ -2,19 +2,20 @@
     use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\DateTimePicker;
     /** @var DateTimePicker $field */
     $field = $getConfig();
+    $id = $field->getId();
+    $errorMessage =  $getErrorMessage($errors);
 @endphp
 @if($field->isHidden())
     @if($field->getConfig()->type!=='range')
         <x-little-anonyme::form-components.fields.partials.hidden-field
-        {{ $attributes->except(['field'])->merge([
-                   'wire:model' . $field->getWireModifier() => $field->getWireName(),
-                   'id' => $id,
-                   'type' => 'hidden',
-                   ])
-        }}
+            {{ $attributes->except(['field'])->merge([
+                       'wire:model' . $field->getWireModifier() => $field->getWireName(),
+                       'id' => $id,
+                       'type' => 'hidden',
+                       ])
+            }}
+        />
     @endif
-
-    />
 @else
     <x-dynamic-component :component="$field->getWrapperView()"
                          :id="$field->getWrapperId()"
@@ -23,25 +24,26 @@
     >
         <x-dynamic-component :component="$field->getViewComponentForLabel()" :id="$id" class="form-label" :label="$field->getLabel()"
                              :showRequired="$field->isRequired()"/>
-        <div>
+        <div x-data="{}">
             <div
-                x-data="webplusDateTime(
-                @js($field->getComponentValue()) ,
-                @js($field->getConfig()),
-                @js($config),@entangle($field->getWireName()).defer,
-                @entangle($field->getDateFromWireName()).defer)"
+                x-data="webplusDateTime({
+                   dayDate : @js($field->getComponentValue()) ,
+                   config :  @js($field->getConfig()),
+                   dateTo : $wire.entangle(@js($field->getWireName())){{ $field->getWireModifier() }},
+                   dateFrom : @if($field->getDateFromWireName()) $wire.entangle(@js($field->getDateFromWireName())).defer @else @js(null)@endif
+                    })"
                 x-id="['text-input']"
                 class="relative"
                 x-cloak
                 wire:ignore
             >
-                <div class="relative">
+                <div class="relative"  >
                     <div class="relative">
-                        <input type="text" x-model="value" :id="$id('text-input')" x-on:click="toggle" class="cursor-pointer"
+                        <input type="text" x-model="value" :id="$id('text-input')" x-on:click="toggle" class="cursor-pointer py-2 px-2"
                                readonly
                         >
                         <button x-on:click.prevent="clearDate" x-show="selectedDay" class="absolute right-3 bottom-0 top-0">
-                            <x-heroicon-o-x-mark class="w-3 text-gray-300 hover:text-red-600"/>
+                            <x-heroicon-o-x-mark class="w-5 h-auto text-gray-400 hover:text-red-700"/>
                         </button>
                     </div>
                     <div class="fixed top-0 bottom-0 right-0 left-0 bg-gray-600 bg-opacity-60 bg-blend-darken backdrop-blur-sm z-20 sm:hidden"

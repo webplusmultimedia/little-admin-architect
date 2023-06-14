@@ -19,6 +19,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanValidated
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasFields;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasSelectOptionLabelUsing;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasState;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasSchema;
@@ -40,6 +41,7 @@ final class Form implements Htmlable
     use HasModal;
     use HasSchema;
     use HasSelectOptionLabelUsing;
+    use HasState;
     use InteractWithLivewire;
     use InteractWithPage;
     use InteractWithRecord;
@@ -113,6 +115,7 @@ final class Form implements Htmlable
 
     public function model(Model $record): void
     {
+
         if ( ! $this->model) {
             $this->model = $record;
             $this->initMode();
@@ -174,19 +177,6 @@ final class Form implements Htmlable
     public function getStatusForm(): ?string
     {
         return $this->statusForm;
-    }
-
-    public function getState(): array
-    {
-        $datas = [];
-        foreach ($this->getFormFields() as $field) {
-            /** @todo : remove relations fields for preventing save */
-            $field->hydrateState();
-            $name = $field->getName();
-            $datas[$field->getName()] = $this->model->{$name} = $field->dehydrateState() ?? $field->getState();
-        }
-
-        return $datas;
     }
 
     public function getSaveButton(): Button
