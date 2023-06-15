@@ -25,13 +25,16 @@ final class LittleAdminManager
      */
     private array $resources = [];
 
-    // private array $beforeCoreScripts = [];
+    protected array $beforeCoreScripts = [];
 
-    //  private array $scripts = [];
+   protected array $scripts = [];
 
     //  private array $scriptData = [];
 
-    private array $styles = [];
+    /**
+     * @var string[] $styles
+     */
+    protected array $styles = [];
 
     //  private array $meta = [];
 
