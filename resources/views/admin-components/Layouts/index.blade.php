@@ -1,4 +1,7 @@
 @php use Webplusmultimedia\LittleAdminArchitect\LittleAdminArchitect; @endphp
+    @props([
+        'title' => NULL
+    ])
     <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -6,7 +9,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title?? config('app.name', 'Laravel') }}</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
     @livewireStyles
@@ -14,9 +17,6 @@
     @stack('scripts')
     <!-- Scripts -->
     <link rel="stylesheet" href="{{ route('little-admin.page.assets','app.css') }}">
-    <link rel="stylesheet" href="{{ route('little-admin.page.assets','autre/app.css') }}">
-
-    {{--@vite([/*'resources/css/app.css',*/ 'resources/js/app.js'])--}}
 </head>
 <body class="bg-gray-100">
 <header class="bg-white sticky top-0 z-10 lg:ml-[20rem] border-b ">
@@ -62,7 +62,7 @@
                                  class="absolute right-0 top-[100%_+_4px] rounded-lg bg-white z-20 shadow-md border border-primary-200 flex flex-col
                                    min-w-[12rem] whitespace-nowrap  divide-y text-sm overflow-hidden"
                             >
-                                <div class="px-4 py-2 hover:text-primary-600 hover:bg-primary-50"> {{ auth()->user()?->name }}</div>
+                                <div class="px-4 py-2 hover:text-primary-600 hover:bg-primary-50"> {{ auth()->user()->name }}</div>
 
                                 <form action="{{ route(config('little-admin-architect.route.prefix') .'.auth.logout') }}" method="post">
                                     @csrf
