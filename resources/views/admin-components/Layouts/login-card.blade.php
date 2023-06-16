@@ -13,7 +13,7 @@
 
     @stack('scripts')
     <!-- Scripts -->
-    <link rel="stylesheet" href="{{ route('little-admin.page.assets.style','app.css') }}">
+    <link rel="stylesheet" href="{{ route('little-admin.page.assets','app.css') }}">
 
 </head>
 <body class="bg-gray-100 min-h-screen">
@@ -24,6 +24,6 @@
 </div>
 
 @livewireScripts
-<script defer src="{{ route('little-admin.page.assets.js','app.js') }}"></script>
+<script defer src="{{ route('little-admin.page.assets','app.js') }}"></script>
 </body>
 </html>

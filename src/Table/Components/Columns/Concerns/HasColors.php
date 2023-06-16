@@ -37,14 +37,15 @@ trait HasColors
         return is_array($this->valuesForBgColor);
     }
 
-    public function getColor(string $value): string|null
+    public function getColor(?string $value): string|null
     {
-
-        if ($this->hasTextColor() and isset($this->valuesForTextColor[$value])) {
-            return str('text-')->append($this->valuesForTextColor[$value])->value();
-        }
-        if ($this->hasBgColor() and isset($this->valuesForBgColor[$value])) {
-            return str('text-tag-')->append($this->valuesForBgColor[$value])->value();
+        if($value) {
+            if ($this->hasTextColor() and isset($this->valuesForTextColor[ $value ])) {
+                return str('text-')->append($this->valuesForTextColor[ $value ])->value();
+            }
+            if ($this->hasBgColor() and isset($this->valuesForBgColor[ $value ])) {
+                return str('text-tag-')->append($this->valuesForBgColor[ $value ])->value();
+            }
         }
 
         return null;

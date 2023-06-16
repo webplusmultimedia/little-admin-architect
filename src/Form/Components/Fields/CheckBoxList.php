@@ -23,4 +23,12 @@ class CheckBoxList extends Field
             }
         }
     }
+
+    public function getValue(): mixed
+    {
+        if($this->getRecord()->{$this->getName()}) {
+            return $this->getRecord()->{$this->getName()};
+        }
+        return [];
+    }
 }
