@@ -25,9 +25,9 @@ final class LittleAdminManager
      */
     private array $resources = [];
 
-    private array $beforeCoreScripts = [];
+    // private array $beforeCoreScripts = [];
 
-    private array $scripts = [];
+    //private array $scripts = [];
 
     //  private array $scriptData = [];
 
