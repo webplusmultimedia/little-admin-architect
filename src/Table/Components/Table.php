@@ -10,7 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\Modal;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasActionModal;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasColumns;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasEditAction;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeaderAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeader;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasQueryBuilder;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasRecords;
@@ -24,7 +24,7 @@ final class Table
 {
     use HasActionModal;
     use HasColumns;
-    use HasEditAction;
+    use HasHeaderAction;
     use HasHeader;
     use HasQueryBuilder;
     use HasRecords;
@@ -70,7 +70,7 @@ final class Table
             $this->applyDefaultForRowActions();
             $this->actionModal(Modal::make($this->livewireId . '-action-table'));
         }
-        $this->editActions($this->pageForResource::getActions());
+        $this->headerActions($this->pageForResource::getActions());
 
     }
 

@@ -6,14 +6,14 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\TableA
 
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\TableAction;
 
-class EditAction extends TableAction
+class CreateAction extends TableAction
 {
     public function __construct()
     {
 
     }
 
-    public static function make(): EditAction
+    public static function make(): CreateAction
     {
         return new self();
     }

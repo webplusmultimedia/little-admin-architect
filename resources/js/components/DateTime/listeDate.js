@@ -64,8 +64,9 @@ export function listeDate(date) {
                     'line-through cursor-not-allowed hover:bg-transparent': this.isDisabled(),
                     'focus:ring-2 focus:ring-offset-2 focus:ring-primary-datepicker-400 hover:bg-primary-datepicker-200': !this.isDisabled() && !this.configTypeMatch('range'),
                     'hover:bg-primary-datepicker-200': !this._periodRange && this.configTypeMatch('range'),
-                    'ring-2 ring-offset-2 ring-primary-datepicker-200': this.isCurrentDate() && (this.configTypeMatch('range') && !this._periodRange && !this.isInRange()),
-                    'ring-2 ring-offset-2 ring-primary-datepicker-400  bg-primary-datepicker-300  text-slate-700 font-bold': this.isSelectDay() && !this.configTypeMatch('range'),
+                    'ring-2 ring-offset-2 ring-primary-datepicker-200': this.isCurrentDate() && ((this.configTypeMatch('range') && !this._periodRange && !this.isInRange()) ||
+                        (this.configTypeMatch('date'))),
+                    'ring-2 ring-offset-2 ring-primary-datepicker-400  bg-primary-datepicker-300  text-slate-700 font-bold': this.isSelectDay() && this.configTypeMatch('date'),
                 }
             },
             [':disabled']() {

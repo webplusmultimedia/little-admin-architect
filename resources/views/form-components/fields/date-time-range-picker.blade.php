@@ -30,7 +30,7 @@
                    dayDate : @js($field->getComponentValue()) ,
                    config :  @js($field->getConfig()),
                    dateTo : $wire.entangle(@js($field->getWireName())){{ $field->getWireModifier() }},
-                   dateFrom : @if($field->getDateFromWireName()) $wire.entangle(@js($field->getDateFromWireName())).defer @else @js(null)@endif
+                   dateFrom : @if($field->getDateFromWireName()) $wire.entangle(@js($field->getDateFromWireName())).defer @else @js(null) @endif
                     })"
                 x-id="['text-input']"
                 class="relative"

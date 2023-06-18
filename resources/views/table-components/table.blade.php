@@ -14,8 +14,8 @@
             </p>
         </div>
         <div class="flex items-center">
-            @foreach($table->getEditActions() as $editAction)
-                <x-little-action::table-action :action="$editAction"/>
+            @foreach($table->getHeaderActions() as $headerAction)
+                <x-little-action::table-action :action="$headerAction"/>
             @endforeach
         </div>
     </div>
@@ -68,5 +68,5 @@
             {{ $table->getRecords()->links() }}
         </div>
     </div>
-     {{  $table->getActionModal() }}
+    {{  $table->getActionModal() }}
 </div>

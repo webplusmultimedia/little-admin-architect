@@ -60,8 +60,9 @@ trait HasConfigDateTime
     public function getComponentValue(): array|Carbon|string|null
     {
         $this->addRules('date');
+        $value = $this->getValue();
         if ('range' !== $this->getConfig()->type) {
-            return $this->getValue();
+            return $value;
         }
         if ( ! $this->dateFrom) {
             throw new FieldException('Need dateFrom for range values (dateFrom("fieldName") method)');
