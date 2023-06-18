@@ -2,6 +2,10 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## add some methods to resource - 2023-06-18
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.1.0-alpha...v0.1.01-alpha
+
 ## add minimum working - 2023-06-15
 
 - 
