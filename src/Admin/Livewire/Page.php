@@ -125,6 +125,12 @@ class Page extends Component
         ];
     }
 
+
+    public static function mutateFormDataBeforeCreate(array $data): array
+    {
+        return $data;
+    }
+
     public function render(): View
     {
         return view('little-views::livewire.page', static::setUpPage())

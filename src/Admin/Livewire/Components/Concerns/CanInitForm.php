@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages\CreateRecord;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages\EditRecord;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
@@ -13,6 +15,7 @@ trait CanInitForm
     protected function buildConfig(): Form
     {
         $page = $this->getResourcePage();
+
 
         /** @var Resources $resource */
         $resource = $page::getResource();
@@ -32,7 +35,7 @@ trait CanInitForm
         return $this->_form;
     }
 
-    protected function getResourcePage(): Page
+    protected function getResourcePage(): EditRecord|CreateRecord
     {
         $this->pageRoute = $this->pageRoute ?? request()->collect('fingerprint')->get('name');
 
