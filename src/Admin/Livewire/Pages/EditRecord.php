@@ -15,8 +15,6 @@ class EditRecord extends Page
 
     protected static ?string $routeName = 'edit';
 
-
-
     public function mount(mixed $record): void
     {
         /** @var Resources $resource */
@@ -40,10 +38,5 @@ class EditRecord extends Page
             'pageRoute' => static::getComponent(),
             'id' => Str::random(10),
         ];
-    }
-
-    protected static  function mutateFormDataBeforeSave(array $data): array
-    {
-        return $data;
     }
 }

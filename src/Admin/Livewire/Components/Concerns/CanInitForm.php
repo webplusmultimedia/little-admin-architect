@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns;
 
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages\CreateRecord;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages\EditRecord;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
@@ -15,7 +14,6 @@ trait CanInitForm
     protected function buildConfig(): Form
     {
         $page = $this->getResourcePage();
-
 
         /** @var Resources $resource */
         $resource = $page::getResource();

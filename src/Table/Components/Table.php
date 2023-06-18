@@ -10,8 +10,8 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\Modal;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasActionModal;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasColumns;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeaderAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeader;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeaderAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasQueryBuilder;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasRecords;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasRowActions;
@@ -24,8 +24,8 @@ final class Table
 {
     use HasActionModal;
     use HasColumns;
-    use HasHeaderAction;
     use HasHeader;
+    use HasHeaderAction;
     use HasQueryBuilder;
     use HasRecords;
     use HasRowActions;
