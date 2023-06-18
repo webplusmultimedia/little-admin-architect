@@ -41,4 +41,9 @@ class EditRecord extends Page
             'id' => Str::random(10),
         ];
     }
+
+    protected static  function mutateFormDataBeforeSave(array $data): array
+    {
+        return $data;
+    }
 }

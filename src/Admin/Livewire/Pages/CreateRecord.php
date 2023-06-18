@@ -31,6 +31,10 @@ class CreateRecord extends Page
         $this->previousUrl = url()->previous();*/
     }
 
+    protected static  function mutateFormDataBeforeCreate(array $data): array
+    {
+        return $data;
+    }
     protected static function setUpPage(): array
     {
         return [
