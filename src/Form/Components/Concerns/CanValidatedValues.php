@@ -24,4 +24,13 @@ trait CanValidatedValues
 
         return $values;
     }
+
+    protected function restoreValueAfterSavedUsing(): void
+    {
+        if ($this->model instanceof Model) {
+            foreach ($this->getFormFields() as $field) {
+                $field->afterSavedUsing();
+            }
+        }
+    }
 }

@@ -13,7 +13,7 @@ module.exports = {
             sans: ['Figtree', ...defaultTheme.fontFamily.sans],
         },
         colors: {
-            'primary-datepicker' : colors.cyan,
+            'primary-datepicker' : colors.yellow,
             primary : colors.yellow,
             secondary : colors.lime,
             info : {...colors.cyan,...{DEFAULT : "#009399"}} ,

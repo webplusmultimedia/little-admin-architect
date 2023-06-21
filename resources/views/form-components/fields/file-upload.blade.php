@@ -45,9 +45,18 @@
                  x-id="['file-input']"
                  wire:ignore
             >
-                <input type="file"  :id="$id('file-input')" x-ref="file_input" class="hidden">
-                <div class="flex items-center justify-center w-full py-3 border rounded-lg border-gray-300" role="button">
-                    <x-heroicon-o-arrow-down-tray class="w-5 h-auto text-gray-400"/>
+                <input type="file"  :id="$id('file-input')"
+                       x-ref="file_input"
+                       class="hidden"
+                    {{ $field->isMultiple()?'multiple':'' }}
+                    {{ $field->isDisabled()?'disabled':'' }}
+                    accept="{{  $field->getAcceptFileTypes() }}"
+                >
+                <div class="la-dropzone" role="button"
+                     x-bind="dropZone"
+                     x-ref="dropzone"
+                >
+                    <x-heroicon-o-arrow-down-tray class="w-5 h-auto"/>
                 </div>
             </div>
 

@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
+
 trait HasFileDirectory
 {
-    protected string $disk = 'public';
+    protected ?string $disk = null;
 
     protected string $directory = '';
 
@@ -18,7 +21,7 @@ trait HasFileDirectory
 
     protected ?int $maxFiles = null;
 
-    protected array $acceptedFileTypes = ['image/*'];
+    protected array $acceptedFileTypes = ['image/jpg', 'image/png'];
 
     protected bool $isMultiple = false;
 
@@ -43,9 +46,14 @@ trait HasFileDirectory
         return $this;
     }
 
-    public function getDisk(): string
+    public function getDisk(): Filesystem
     {
-        return $this->disk;
+        return Storage::disk($this->getDiskName());
+    }
+
+    public function getDiskName(): string
+    {
+        return $this->disk ?? config('little-admin-architect.forms.default_filesystem_disk');
     }
 
     public function getDirectory(): string
@@ -70,6 +78,11 @@ trait HasFileDirectory
         $this->addRules('mimetypes:' . implode(',', $this->acceptedFileTypes));
 
         return $this->acceptedFileTypes;
+    }
+
+    public function getAcceptFileTypes(): string
+    {
+        return implode(',', $this->acceptedFileTypes);
     }
 
     public function getMaxSize(): ?int

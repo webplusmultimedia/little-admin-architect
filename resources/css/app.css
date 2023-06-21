@@ -5,6 +5,7 @@
 @import "modal.css";
 @import "colors.css";
 @import "notification.css";
+@import "la-file-upload.css";
 
 @tailwind base;
 @tailwind components;

@@ -26,6 +26,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasId
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasName;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasPlaceHolder;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasState;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasValidationRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithAttributeRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithRules;
@@ -72,6 +73,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     ) {
         $this->label = $label;
         $this->name = $name;
+        $this->setUp();
     }
 
     public function getWireName(): string
@@ -111,5 +113,9 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     public function getDefaultParameters(): array
     {
         return ['set' => $this->set(), 'get' => $this->get(), 'state' => $this->getState(), 'status' => $this->getStatusForm(), 'component' => $this];
+    }
+
+    protected function setUp(): void
+    {
     }
 }

@@ -68,7 +68,7 @@ trait HasConfigDateTime
             throw new FieldException('Need dateFrom for range values (dateFrom("fieldName") method)');
         }
         $this->addRules('before:' . $this->getPrefix() . $this->dateFrom);
-        if ( ! $this->getRecord()->{$this->getName()} or ! $this->getRecord()->{$this->dateFrom}) {
+        if ( ! $this->getValue() or ! $this->getRecord()->{$this->dateFrom}) {
             return null;
         }
 

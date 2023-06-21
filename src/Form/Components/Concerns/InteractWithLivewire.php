@@ -22,6 +22,7 @@ trait InteractWithLivewire
                     } elseif ($edit_url = $this->linkEdit($this->livewire->data)) {
                         redirect(to: $edit_url);
                     }
+                    $this->restoreValueAfterSavedUsing();
                     $this->livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
                 } else {
                     $datas = $this->pageForResource::getMutateFormDataBeforeSave($this->values($datas));
@@ -29,6 +30,7 @@ trait InteractWithLivewire
                     if ($this->hasModal()) {
                         $this->livewire->dispatchBrowserEvent($this->eventForCloseModal);
                     }
+                    $this->restoreValueAfterSavedUsing();
                     $this->livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
                 }
             }

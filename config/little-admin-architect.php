@@ -33,6 +33,9 @@ return [
      * Success status will be display when errors are sent to the view with no matching with the component name.
      */
     'display_validation_success' => true,
+    'forms' => [
+        'default_filesystem_disk' => 'public',
+    ],
 
     /**
      * Whether form input/textarea/checkbox/radio/switch components should display their validation failure.

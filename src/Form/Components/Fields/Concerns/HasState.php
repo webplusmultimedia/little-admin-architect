@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
+namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -6,8 +6,8 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
 use Illuminate\Support\Collection;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanSearchWithLivewire;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\ContainMessageForComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasOptions;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\Select\ContainMessageForComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\SelectHasDefaultLabel;
 
 class Select extends Field

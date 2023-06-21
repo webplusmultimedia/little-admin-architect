@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
+namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\Select;
 
 trait ContainMessageForComponent
 {
