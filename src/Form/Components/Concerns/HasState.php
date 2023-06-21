@@ -14,9 +14,9 @@ trait HasState
             $field->hydrateState();
             $name = $field->getName();
             if ( ! is_array($this->model)) {
-                $datas[$field->getName()] = $this->model->{$name} = $field->dehydrateState() ?? $field->getState();
+                $datas[$name] = $this->model->{$name} = $field->dehydrateState() ?? $field->getState();
             } else {
-                $datas[$field->getName()] = $this->model[$name] = $field->dehydrateState() ?? $field->getState();
+                $datas[$name] = $this->model[$name] = $field->dehydrateState() ?? $field->getState();
             }
         }
 

@@ -51,6 +51,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use HasLabel;
     use HasName;
     use HasPlaceholder;
+    use HasState;
     use HasValidationRules;
     use InteractsWithEvaluateFunction;
     use InteractWithAttributeRules;
@@ -76,21 +77,6 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     public function getWireName(): string
     {
         return $this->getPrefix() . $this->name;
-    }
-
-    public function getState(): mixed
-    {
-        $value = null;
-        if ($this->record instanceof Model) {
-            return $this->getValue();
-        }
-        if (is_array($this->record)) {
-            if (isset($this->record[$this->getName()])) {
-                return $this->record[$this->getName()];
-            }
-        }
-
-        return null;
     }
 
     protected function getPrefix(): string
@@ -124,6 +110,6 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
 
     public function getDefaultParameters(): array
     {
-        return ['set' => $this->set(), 'get' => $this->get(), 'state' => $this->getState(), 'status' => $this->getStatusForm()];
+        return ['set' => $this->set(), 'get' => $this->get(), 'state' => $this->getState(), 'status' => $this->getStatusForm(), 'component' => $this];
     }
 }

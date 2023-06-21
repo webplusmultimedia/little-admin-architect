@@ -17,7 +17,7 @@ trait CanHydrate
         return $this;
     }
 
-    public function hydrateState(): ?Closure
+    public function hydrateState(): mixed
     {
         return $this->evaluate($this->hydrate);
     }

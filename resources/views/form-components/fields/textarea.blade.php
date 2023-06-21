@@ -3,31 +3,29 @@
     /** @var Textarea $field */
     $field = $getConfig();
     $id = $field->getId();
-  /*  $prepend = $getPrepend($locale);
-    $append = $getAppend($locale);*/
     $errorMessage = $getErrorMessage($errors);
-    $validationClass = $getValidationClass($errors);
     $isWired = $componentIsWired();
 
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
-            {{ $attributes->except(['field'])->merge([
-                       'wire:model' . $field->getWireModifier() => $field->getWireName(),
-                       'id' => $id,
-                       'type' => 'hidden',
-                       ])
-                       }}
+        {{ $attributes->except(['field'])
+            ->merge([
+                   'wire:model' . $field->getWireModifier() => $field->getWireName(),
+                   'id' => $id,
+                   'type' => 'hidden',
+            ])
+        }}
     />
 @else
     <x-dynamic-component :component="$field->getWrapperView()" :id="$field->getWrapperId()"
-            {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
+        {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
     >
         <x-dynamic-component
-                :component="$field->getViewComponentForLabel()"
-                :id="$id" class="form-label"
-                :label="$field->getLabel()"
-                :showRequired="$field->isRequired()"
+            :component="$field->getViewComponentForLabel()"
+            :id="$id" class="form-label"
+            :label="$field->getLabel()"
+            :showRequired="$field->isRequired()"
         />
         <div class="">
             {{-- @if($prepend)

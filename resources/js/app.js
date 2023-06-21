@@ -11,6 +11,7 @@ import time from "./components/DateTime/time";
 import {listeDate} from "./components/DateTime/listeDate";
 import {btnUpDownDate} from "./components/DateTime/btnUpDownDate";
 import timePicker from "./components/DateTime/timePicker";
+import {fileUpload} from "./components/fileUpload/fileUpload";
 
 Alpine.data('SelectFormComponent',SelectFormComponent)
 Alpine.data('DropdownMenu',DropdownMenu)
@@ -23,6 +24,7 @@ Alpine.data('listeDate', listeDate)
 Alpine.data('time', time)
 Alpine.data('btnUpDownDate', btnUpDownDate)
 Alpine.data('timePicker', timePicker)
+Alpine.data('fileUpload',fileUpload)
 
 window.Alpine = Alpine;
 

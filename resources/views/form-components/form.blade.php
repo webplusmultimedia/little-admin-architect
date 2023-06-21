@@ -12,7 +12,7 @@
     </div>
 
     <div class="" x-data="{}">
-        <form wire:submit.prevent="save" x-data="{ livewireId : $wire.__instance.id }" novalidate>
+        <form wire:submit.prevent="save" x-data="{ livewireId : $wire.__instance.id ,isUploadingFile : false}" novalidate>
             {{ $slot ?? NULL }}
             <div {{ $attributes->class("grid gap-5")->merge(['class'=>$form->getColumns()]) }}>
                 @foreach($form->getFields() as $field)
@@ -32,6 +32,7 @@
                     </x-little-form::button.submit>
 
                     <x-little-form::button.link class="" wire:loading.attr="disabled" wire:target="{{ $buttonCancel->getAction() }}"
+                                                x-bind:disable="isUploadingFile"
                                                 wire:loading.class.delay="opacity-70 cursor-wait" :url="$buttonCancel->getAction()">
                         @if($buttonCancel->hasIcon())
                             <x-little-anonyme::form-components.fields.icons.hero-icon :name="$buttonCancel->getViewIcon()"/>
