@@ -25,10 +25,10 @@ class Radio extends AbstractComponentAlias
         $this->setUp($field);
     }
 
-   protected function setViewPath(): string
-   {
-       return 'fields.radio';
-   }
+    protected function setViewPath(): string
+    {
+        return 'fields.radio';
+    }
 
     protected function setUp(Field $field): void
     {

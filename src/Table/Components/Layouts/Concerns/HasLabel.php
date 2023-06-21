@@ -26,8 +26,8 @@ trait HasLabel
         return $this->label ?? str($this->name)->headline()->lower()->ucfirst()->value();
     }
 
-   /* public function getViewComponentForLabel(): string
-    {
-        return $this->getViewComponent('partials.label');
-    }*/
+    /* public function getViewComponentForLabel(): string
+     {
+         return $this->getViewComponent('partials.label');
+     }*/
 }

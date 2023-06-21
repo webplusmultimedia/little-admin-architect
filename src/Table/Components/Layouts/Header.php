@@ -40,8 +40,8 @@ final class Header
         return $this->column->getLabel();
     }
 
-  /*  public function getRecord(): Model
-    {
-        return $this->record;
-    }*/
+    /*  public function getRecord(): Model
+      {
+          return $this->record;
+      }*/
 }

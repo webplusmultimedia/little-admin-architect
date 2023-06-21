@@ -126,11 +126,11 @@ trait CanSearchWithLivewire
         return $this->searchDebounce;
     }
 
-      public function multiple(bool $isMultiple = true): static
-      {
-          $this->isMultiple = $isMultiple;
-          $this->addRules('array');
+    public function multiple(bool $isMultiple = true): static
+    {
+        $this->isMultiple = $isMultiple;
+        $this->addRules('array');
 
-          return $this;
-      }
+        return $this;
+    }
 }
