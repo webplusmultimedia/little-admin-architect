@@ -61,15 +61,13 @@ trait InteractsWithForms
             if ('dehydrate' === $method /*|| str($method)->startsWith('dehydrate')*/) {
                 $this->form->dehydrateState();
             }
-            /* if ('updating' === $method) {
-                 dump('updating');
-                 $this->form->updating(...$params);
-                 //$this->form->getDehydrateFormRules();
-             }*/
+            /*if ('updating' === $method) {
+                //dump('updating');
+                $this->form->updating(...$params);
+            }*/
             if ('updated' === $method) {
                 //dump('updated');
                 $this->form->updated(...$params);
-                //$this->form->getDehydrateFormRules();
             }
         } catch (BadMethodCallException $exception) {
             throw new BadMethodCallException(sprintf(

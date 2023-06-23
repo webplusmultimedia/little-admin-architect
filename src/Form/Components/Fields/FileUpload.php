@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
-use Exception;
 use Illuminate\Support\Str;
 use League\Flysystem\UnableToCheckFileExistence;
 use Livewire\TemporaryUploadedFile;
@@ -43,7 +42,7 @@ class FileUpload extends Field
                         return false;
                     }
                 })
-                    ->map(static function (string|array $file, mixed $key): array {
+                    /*->map(static function (string|array $file, mixed $key) {
                         if (is_array($file)) {
                             if (str($file[key($file)])->startsWith('livewire-file:')) {
                                 return [key($file) => $file[key($file)]];
@@ -52,9 +51,9 @@ class FileUpload extends Field
                         }
 
                         return $file;
-                    })
+                    })*/
                     ->all();
-                //dump($files);
+                // dump($files);
                 $component->state($files);
             }
 
@@ -67,25 +66,12 @@ class FileUpload extends Field
 
             // dump('updated', $state);
             $files = collect($state);
-            $files = $files->map(function (string|array|TemporaryUploadedFile $file, $key) {
-
-                if ($file instanceof TemporaryUploadedFile) {
-                    return [(string) Str::uuid() => $file->serializeForLivewireResponse()];
+            $files = $files->filter(function (string|array $file, $key): bool {
+                if (is_string($file)) {
+                    return true;
                 }
 
-                if (is_array($file)) {
-                    if ($file[key($file)] instanceof TemporaryUploadedFile) {
-                        dump($file);
-
-                        return [(string) Str::uuid() => $file[key($file)]->serializeForLivewireResponse()];
-                    }
-                    if (str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
-                        return $file;
-                    }
-                    // return str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::createFromLivewire($file[key($file)])->exists();
-                }
-
-                return [$key => $file];
+                return (bool) (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists());
             })->all();
             //dump($files);
             $component->state($files);
@@ -97,37 +83,20 @@ class FileUpload extends Field
                 return;
             }
             $files = collect($state);
-            //dump('dehydrated', $state);
-            $files = $files->filter(static function (mixed $file) use ($component): bool {
+            // dump('dehydrated', $state);
+            $files = $files->filter(static function (string|array $file) use ($component): bool {
                 try {
-                    if (is_array($file)) {
-                        if ($file[key($file)] instanceof TemporaryUploadedFile) {
-                            return $file[key($file)]->exists();
-                        }
-                        // dump($file[key($file) ]);
-                        try {
-                            return str($file[key($file)])->startsWith('livewire-file:');
-                        } catch (Exception $e) {
-                            //dd($file[key($file)], $file, $e->getMessage());
-                            return false;
-                        }
+                    if (is_string($file)) {
+                        return blank($file) || $component->getDisk()->exists($component->getPathFile($file));
                     }
 
-                    return blank($file) || $component->getDisk()->exists($file);
+                    return (bool) (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists());
+
+                    //return blank($file) || $component->getDisk()->exists($component->getPathFile($file));
                 } catch (UnableToCheckFileExistence $exception) {
                     return false;
                 }
             })
-                ->map(static function (string|array $file, mixed $key): array {
-                    if (is_array($file)) {
-                        if (str($file[key($file)])->startsWith('livewire-file:')) {
-                            return [key($file) => $file[key($file)]];
-                        }
-                        //return $file;
-                    }
-
-                    return [/*(is_int($key) ? (string) Str::uuid() : $key) =>*/ $file];
-                })
                 ->all();
             //dump($files);
             $component->state($files);
@@ -148,7 +117,7 @@ class FileUpload extends Field
                 }
 
                 return null;
-            })->filter(fn (?string $file) => is_string($file))->all();
+            })/*->filter(fn (string $file) => is_string($file))*/ ->all();
             if (blank($state)) {
                 $component->state(null);
 
@@ -161,16 +130,21 @@ class FileUpload extends Field
 
     }
 
-    public function saveAttachement(array $filePath): string
+    public function saveAttachement(array $filePath): ?string
     {
         $file = TemporaryUploadedFile::unserializeFromLivewireRequest($filePath[key($filePath)]);
-        $name = $this->isPreserveFilenames() ? Str::slug($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension() : key($filePath) . '.' . $file->getClientOriginalExtension();
+        $newName = $this->isPreserveFilenames() ? Str::slug($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension() : key($filePath) . '.' . $file->getClientOriginalExtension();
 
         $methodStore = 'public' === $this->evaluate($this->visibility) ? 'storePubliclyAs' : 'storeAs';
-        $path = $file->storeAs($this->getBaseDirectory(), $name);
-        $file->delete();
+        $path = $file->storePubliclyAs($this->getBaseDirectory(), $newName, $this->getDiskName()); //$this->getDisk()->move($file->path(),$this->getPathFile($newName));
+        if ($path) {
+            $file->delete();
 
-        return $name;
+            return $newName;
+        }
+
+        return null;
+
     }
 
     public function dehydrateRules(array $rules): array
@@ -216,8 +190,8 @@ class FileUpload extends Field
 
                 return $file;
             })->all();
-
             $this->state($files);
+            //dump($files,$this->getState());
 
             return;
         }

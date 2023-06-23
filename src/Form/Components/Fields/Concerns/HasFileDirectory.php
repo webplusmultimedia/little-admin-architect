@@ -71,9 +71,9 @@ trait HasFileDirectory
         return $this->directory;
     }
 
-    public function getPathFile(string $file)
+    public function getPathFile(string $file): string
     {
-        return $this->getBaseDirectory() . $file;
+        return trim($this->getBaseDirectory() . $file, '/');
     }
 
     public function isPreserveFilenames(): bool
