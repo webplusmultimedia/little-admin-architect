@@ -48,7 +48,13 @@ trait InteractsWithForms
         }
     }
 
-    public function __call($method, $params): void // @phpstan-ignore argument.type
+    /**
+     * @param string $method
+     * @param array $params
+     *
+     * @return void
+     */
+    public function __call($method, $params): void
     {
 
         try {
