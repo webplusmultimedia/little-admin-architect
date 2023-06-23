@@ -82,10 +82,9 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             this.$watch('state', value => {
                 console.log(value)
             });
-            let photos = await this.$wire.getUploadFileUrls(path)
-            if (photos){
-                this.photos = photos
-            }
+
+            this.photos = await this.$wire.getUploadFileUrls(path) ?? []
+              console.log(this.photos);
         }
     }
 }

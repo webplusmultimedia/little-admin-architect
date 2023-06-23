@@ -6,11 +6,11 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns;
 
 trait InteractsWithUploadFiles
 {
-    public function getUploadFileUrlsUsing(string $path): false|array
+    public function getUploadFileUrlsUsing(string $path): ?array
     {
         $field = $this->getFormFieldByPath($path);
         if ( ! $field or ! method_exists($field, 'getUploadFileUrlsUsing')) {
-            return false;
+            return null;
         }
 
         return $field->getUploadFileUrlsUsing();

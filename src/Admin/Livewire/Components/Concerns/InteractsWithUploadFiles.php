@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Conce
 
 trait InteractsWithUploadFiles
 {
-    public function getUploadFileUrls(string $path): false|array
+    public function getUploadFileUrls(string $path): ?array
     {
         $this->skipRender();
 
