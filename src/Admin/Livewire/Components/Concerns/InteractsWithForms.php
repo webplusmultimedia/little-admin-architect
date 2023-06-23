@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns;
+namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns;
 
+use BadMethodCallException;
 use Illuminate\Support\Collection;
 use Livewire\Exceptions\PropertyNotFoundException;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAlias;
@@ -44,6 +45,36 @@ trait InteractsWithForms
             }*/
 
             throw $exception;
+        }
+    }
+
+    public function __call($method, $params): void // @phpstan-ignore argument.type
+    {
+
+        try {
+            parent::__call($method, $params);
+
+            if ('hydrate' === $method /*|| str($method)->startsWith('hydrate')*/) {
+                $this->form->hydrateState();
+
+            }
+            if ('dehydrate' === $method /*|| str($method)->startsWith('dehydrate')*/) {
+                $this->form->dehydrateState();
+            }
+            /* if ('updating' === $method) {
+                 dump('updating');
+                 $this->form->updating(...$params);
+                 //$this->form->getDehydrateFormRules();
+             }*/
+            if ('updated' === $method) {
+                //dump('updated');
+                $this->form->updated(...$params);
+                //$this->form->getDehydrateFormRules();
+            }
+        } catch (BadMethodCallException $exception) {
+            throw new BadMethodCallException(sprintf(
+                'Method %s::%s does not exist.', static::class, $method
+            ));
         }
     }
 

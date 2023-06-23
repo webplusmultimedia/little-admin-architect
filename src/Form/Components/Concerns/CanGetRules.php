@@ -12,7 +12,24 @@ trait CanGetRules
 
     protected array $attributesRules = [];
 
-    public function getFormRules(): array
+    protected function getRulesBeforeValidate(): array
+    {
+        $rules = [];
+        /** @var Field $field */
+        foreach (static::$formFields as $field) {
+            $rules = $field->beforeSaveRulesUsing(rules: $rules);
+        }
+        $this->formRules = $rules;
+
+        return $rules;
+    }
+
+    public function getFormsRules(): array
+    {
+        return $this->formRules;
+    }
+
+    public function getDehydrateFormRules(): array
     {
         if (count($this->formRules) > 0) {
             return $this->formRules;
@@ -20,7 +37,22 @@ trait CanGetRules
         $rules = [];
         /** @var Field $field */
         foreach (static::$formFields as $field) {
-            $rules = $field->interactWithRules(rules: $rules);
+            $rules = $field->dehydrateRules(rules: $rules);
+        }
+        $this->formRules = $rules;
+
+        return $rules;
+    }
+
+    public function getHydrateFormRules(): array
+    {
+        if (count($this->formRules) > 0) {
+            return $this->formRules;
+        }
+        $rules = [];
+        /** @var Field $field */
+        foreach (static::$formFields as $field) {
+            $rules = $field->hydrateRules(rules: $rules);
         }
         $this->formRules = $rules;
 
@@ -29,7 +61,7 @@ trait CanGetRules
 
     public function hasRules(): bool
     {
-        return count($this->getFormRules()) > 0;
+        return count($this->getFormsRules()) > 0;
     }
 
     public function getAttributesRules(): array

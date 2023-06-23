@@ -2,19 +2,19 @@
     use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 	/**@var Form $form */
-	$form = $getForm();
+	//$form = $this->getForm();
     $button = $form->getSaveButton();
     $buttonCancel = $form->getCancelButton();
 @endphp
 <div class="py-5 px-2">
     <div class="flex flex-col bg-white px-5 py-2 mb-8 text-lg font-bold rounded-md shadow-sm">
-        <h2 class="text-2xl !m-0">{{ $getTitleForm() }}</h2>
+        <h2 class="text-2xl !m-0">{{ $this->getTitleForm() }}</h2>
     </div>
 
     <div class="" x-data="{}">
         <form wire:submit.prevent="save" x-data="{ livewireId : $wire.__instance.id ,isUploadingFile : false}" novalidate>
             {{ $slot ?? NULL }}
-            <div {{ $attributes->class("grid gap-5")->merge(['class'=>$form->getColumns()]) }}>
+            <div  @class(["grid gap-5", $form->getColumns()]) >
                 @foreach($form->getFields() as $field)
                     <x-dynamic-component :component="$field->getFieldView()" :field="$field"/>
                 @endforeach

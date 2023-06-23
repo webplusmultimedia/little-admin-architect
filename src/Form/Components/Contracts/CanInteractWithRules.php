@@ -6,5 +6,5 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts;
 
 interface CanInteractWithRules
 {
-    public function interactWithRules(array $rules): array;
+    public function dehydrateRules(array $rules): array;
 }

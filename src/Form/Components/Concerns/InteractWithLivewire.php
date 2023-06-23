@@ -13,7 +13,7 @@ trait InteractWithLivewire
         if ($this->hasRules()) {
             if ($this->livewire instanceof BaseForm) {
                 /** @TODO : Validate with laravel Validation */
-                $datas = $this->livewire->validate(rules: $this->getFormRules(), attributes: $this->getAttributesRules());
+                $datas = $this->livewire->validate(rules: $this->getRulesBeforeValidate(), attributes: $this->getAttributesRules());
                 if ( ! $this->livewire->data?->exists) {
                     $datas = $this->pageForResource::getMutateFormDataBeforeCreate($this->values($datas));
                     $this->livewire->data?->fill($datas)->save();
@@ -22,7 +22,7 @@ trait InteractWithLivewire
                     } elseif ($edit_url = $this->linkEdit($this->livewire->data)) {
                         redirect(to: $edit_url);
                     }
-                    $this->restoreValueAfterSavedUsing();
+                    //$this->restoreValueAfterSavedUsing();
                     $this->livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
                 } else {
                     $datas = $this->pageForResource::getMutateFormDataBeforeSave($this->values($datas));
@@ -30,7 +30,7 @@ trait InteractWithLivewire
                     if ($this->hasModal()) {
                         $this->livewire->dispatchBrowserEvent($this->eventForCloseModal);
                     }
-                    $this->restoreValueAfterSavedUsing();
+                    //$this->restoreValueAfterSavedUsing();
                     $this->livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
                 }
             }

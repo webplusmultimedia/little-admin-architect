@@ -45,7 +45,12 @@ trait CanInitForm
         return app($pageClass);
     }
 
-    protected function getForm(): ?Form
+    public function getTitleForm(): string
+    {
+        return $this->_form->getTitle();
+    }
+
+    public function getForm(): ?Form
     {
         if ( ! $this->_form) {
             $this->_form = $this->buildConfig();

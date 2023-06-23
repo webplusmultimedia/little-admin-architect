@@ -9,9 +9,9 @@ use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Livewire\Component;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\InteractsWithForms;
 use Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Button;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithForms;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\HasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\CheckBox;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Input;
@@ -40,6 +40,7 @@ class Login extends Component implements HasForm
         }
 
         $this->form->modelArray(['email' => $this->email, 'password' => $this->password, 'remember' => $this->remember]);
+
     }
 
     protected function getFormSchemas(): array

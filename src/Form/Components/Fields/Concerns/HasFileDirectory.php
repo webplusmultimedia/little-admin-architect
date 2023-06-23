@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
 
+use Closure;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,7 +12,11 @@ trait HasFileDirectory
 {
     protected ?string $disk = null;
 
-    protected string $directory = '';
+    protected string $baseDirectory = 'attachements';
+
+    protected ?string $directory = null;
+
+    protected string|Closure $visibility = 'public';
 
     protected bool $preserveFilenames = false;
 
@@ -56,9 +61,19 @@ trait HasFileDirectory
         return $this->disk ?? config('little-admin-architect.forms.default_filesystem_disk');
     }
 
-    public function getDirectory(): string
+    protected function getBaseDirectory(): string
+    {
+        return implode('/', [$this->baseDirectory, $this->directory]);
+    }
+
+    protected function getDirectory(): ?string
     {
         return $this->directory;
+    }
+
+    public function getPathFile(string $file)
+    {
+        return $this->getBaseDirectory() . $file;
     }
 
     public function isPreserveFilenames(): bool
@@ -75,8 +90,6 @@ trait HasFileDirectory
 
     public function getAcceptedFileTypes(): array
     {
-        $this->addRules('mimetypes:' . implode(',', $this->acceptedFileTypes));
-
         return $this->acceptedFileTypes;
     }
 
@@ -87,10 +100,6 @@ trait HasFileDirectory
 
     public function getMaxSize(): ?int
     {
-        if ($this->maxSize) {
-            $this->addRules('max:' . $this->maxSize);
-        }
-
         return $this->maxSize;
     }
 
@@ -101,10 +110,6 @@ trait HasFileDirectory
 
     public function getMinSize(): ?int
     {
-        if ($this->minSize) {
-            $this->addRules('min:' . $this->minSize);
-        }
-
         return $this->minSize;
     }
 
@@ -139,5 +144,53 @@ trait HasFileDirectory
     public function isMultiple(): bool
     {
         return $this->isMultiple;
+    }
+
+    public function visibility(string|Closure $visibility): static
+    {
+        $this->visibility = $visibility;
+
+        return $this;
+    }
+
+    protected function getVisibility(): string|Closure
+    {
+        return $this->visibility;
+    }
+
+    protected function getDehydrateRules(): array
+    {
+        $this->rules = [];
+        $this->addRules('nullable');
+        $this->addRules('array');
+        if ($this->isMultiple and $this->maxFiles) {
+            $this->addRules('max:' . $this->maxFiles);
+        }
+
+        return $this->rules;
+    }
+
+    protected function getBeforeSaveRules(): array
+    {
+        $this->rules = [];
+        $this->addRules('nullable');
+        $this->addRules('array');
+
+        return $this->rules;
+    }
+
+    protected function getHydrateRules(): array
+    {
+        $this->rules = [];
+        $this->addRules('array');
+        if ($this->minSize) {
+            $this->addRules('min:' . $this->minSize);
+        }
+        if ($this->maxSize) {
+            $this->addRules('max:' . $this->maxSize);
+        }
+        $this->addRules('mimetypes:' . implode(',', $this->acceptedFileTypes));
+
+        return $this->rules;
     }
 }

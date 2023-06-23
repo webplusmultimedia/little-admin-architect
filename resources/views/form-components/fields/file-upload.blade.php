@@ -28,12 +28,12 @@
         <div class="">
             <div class=""
                 x-data="fileUpload({
-
                     fieldName : @js($field->getWireName()),
                     minSize : @js($field->getMinSize()),
                     maxSize : @js($field->getMaxSize()),
                     maxFiles : @js($field->getMaxFiles()),
                     acceptedFileTypes : @js($field->getAcceptedFileTypes()),
+                    multiple : {{  $field->isMultiple()?'true':'false' }},
 
                     state : $wire.entangle(@js($field->getWireName())){{ $field->getWireModifier() }},
 

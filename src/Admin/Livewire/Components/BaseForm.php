@@ -6,9 +6,10 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components;
 
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanInitForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\HasNotification;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithForms;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\InteractsWithForms;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\HasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAlias;
 
@@ -20,6 +21,7 @@ class BaseForm extends Component implements HasForm
     use CanInitForm;
     use HasNotification;
     use InteractsWithForms;
+    use WithFileUploads;
 
     public ?Model $data = null;
 
@@ -36,7 +38,7 @@ class BaseForm extends Component implements HasForm
         $this->pageRoute = $pageRoute;
         $this->key = $key;
 
-        $this->getForm();
+        $this->getForm()->hydrateState();
 
         $this->initialized = true;
         $this->initBoot = false;
@@ -46,7 +48,7 @@ class BaseForm extends Component implements HasForm
 
     protected function rules(): array
     {
-        return $this->form->getFormRules();
+        return $this->form->getFormsRules();
     }
 
     public function init(): void
@@ -57,10 +59,5 @@ class BaseForm extends Component implements HasForm
     public function save(): void
     {
         $this->form->saveDatasForm();
-    }
-
-    public function dehydrate(): void
-    {
-        $this->form->getState();
     }
 }

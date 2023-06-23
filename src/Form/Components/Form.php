@@ -15,6 +15,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanGetRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanInitDatasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanListOptionsForSelect;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanSearchResultsUsingForSelect;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanUpdatedDatas;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanValidatedValues;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasFields;
@@ -34,6 +35,7 @@ final class Form implements Htmlable
     use CanInitDatasForm;
     use CanListOptionsForSelect;
     use CanSearchResultsUsingForSelect;
+    use CanUpdatedDatas;
     use CanValidatedValues;
     use HasDefaultValue;
     use HasFields;
@@ -105,7 +107,7 @@ final class Form implements Htmlable
 
     public function getView(): string
     {
-        return config('little-admin-architect.blade-prefix') . '::' . $this->view;
+        return 'little-views::form-components.' . $this->view;
     }
 
     public function getAction(): ?string

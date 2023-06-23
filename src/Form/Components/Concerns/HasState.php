@@ -11,15 +11,33 @@ trait HasState
         $datas = [];
         foreach ($this->getFormFields() as $field) {
             /** @todo : remove relations fields for preventing save */
-            $field->hydrateState();
+            // $field->hydrateState();
             $name = $field->getName();
             if ( ! is_array($this->model)) {
-                $datas[$name] = $this->model->{$name} = $field->dehydrateState() ?? $field->getState();
+                $datas[$name] = $this->model->{$name} = $field->getState();
             } else {
-                $datas[$name] = $this->model[$name] = $field->dehydrateState() ?? $field->getState();
+                $datas[$name] = $this->model[$name] = $field->getState();
             }
         }
 
         return $datas;
+    }
+
+    public function hydrateState(): void
+    {
+        foreach ($this->getFormFields() as $field) {
+            /** @todo : remove relations fields for preventing save */
+            $field->hydrateState();
+        }
+        $this->getHydrateFormRules();
+    }
+
+    public function dehydrateState(): void
+    {
+        foreach ($this->getFormFields() as $field) {
+            /** @todo : remove relations fields for preventing save */
+            $field->dehydrateState();
+        }
+        $this->getDehydrateFormRules();
     }
 }

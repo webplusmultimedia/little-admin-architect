@@ -17,8 +17,10 @@ trait CanDehydrate
         return $this;
     }
 
-    public function dehydrateState(): mixed
+    public function dehydrateState(): void
     {
-        return $this->evaluate(closure: $this->dehydrate, excludes: ['set', 'get']);
+        if ($this->dehydrate) {
+            $this->setState($this->evaluate(closure: $this->dehydrate, excludes: ['set', 'get']));
+        }
     }
 }

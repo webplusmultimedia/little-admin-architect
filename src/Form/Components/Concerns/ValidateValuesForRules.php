@@ -20,14 +20,18 @@ trait ValidateValuesForRules
 
     public function getValidatedValues(array $values, null|array $datas = null, Model $model = null): array
     {
+        /* Can do some stuff before datas is saving | return false to deny value from saving */
         if ( ! $this->beforeValidateValueUsing()) {
             return $values;
         }
+        /* Restore datas if field is disable before saving datas */
         if ($this->isDisabled()) {
             if ($model) {
+                /* Restore datas if field is disable before saving datas */
                 $model->{$this->name} = $model->getOriginal($this->name);
             }
         } else {
+            /* set value if field is disable before saving datas */
             $values[$this->name] = $this->getState();
         }
 
@@ -36,10 +40,10 @@ trait ValidateValuesForRules
 
     protected function beforeValidateValueUsing(): bool
     {
-        if (Form::UPDATED === $this->statusForm and ! $this->beforeUpdatedValidateValueUsing) {
+        if (Form::UPDATED === $this->statusForm and $this->beforeUpdatedValidateValueUsing) {
             return $this->evaluate($this->beforeUpdatedValidateValueUsing);
         }
-        if (Form::CREATED === $this->statusForm and ! $this->beforeCreatedValidateValueUsing) {
+        if (Form::CREATED === $this->statusForm and $this->beforeCreatedValidateValueUsing) {
             return $this->evaluate($this->beforeCreatedValidateValueUsing);
         }
 
@@ -48,10 +52,10 @@ trait ValidateValuesForRules
 
     public function afterSavedUsing(): void
     {
-        if (Form::UPDATED === $this->statusForm and ! $this->afterUpdatedValidateValueUsing) {
+        if (Form::UPDATED === $this->statusForm and $this->afterUpdatedValidateValueUsing) {
             $this->evaluate($this->afterUpdatedValidateValueUsing);
         }
-        if (Form::CREATED === $this->statusForm and ! $this->afterCreatedValidateValueUsing) {
+        if (Form::CREATED === $this->statusForm and $this->afterCreatedValidateValueUsing) {
             $this->evaluate($this->afterCreatedValidateValueUsing);
         }
     }
