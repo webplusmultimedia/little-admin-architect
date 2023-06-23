@@ -1,0 +1,17 @@
+@layer components {
+    .la-file-upload-gallery-wrapper{
+        @apply grid-cols-1 grid  md:grid-cols-3 gap-2  py-2 md:flex-wrap
+    }
+    .la-file-upload-image-wrapper{
+        @apply relative flex md:col-span-1 border border-gray-100 rounded-lg h-48 overflow-hidden
+    }
+    .la-file-upload-image-infos{
+        @apply absolute top-0 left-0 right-0 pt-2 pb-4 px-3
+    }
+    .la-file-upload-image-infos-gradient{
+        @apply bg-gradient-to-b from-black/70 from-55% via-black/70 via-60% to-transparent rounded-t-lg
+    }
+    .la-file-upload-image-infos-gradient-new{
+        @apply bg-gradient-to-b from-success-600/70 from-55% via-success-600/70 via-60% to-transparent rounded-t-lg
+    }
+}

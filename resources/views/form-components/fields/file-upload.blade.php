@@ -56,12 +56,17 @@
                      x-bind="dropZone"
                      x-ref="dropzone"
                 >
-                    <x-heroicon-o-arrow-down-tray class="w-5 h-auto"/>
+                    <span class="inline-flex gap-3">
+                       <x-heroicon-o-arrow-down-tray class="w-5 h-auto"/> <span>Drag & Drop ou cliquer ICI</span>
+                    </span>
+
                 </div>
                 <div class="flex px-3" x-show="startUpload">
                     <span class="text-primary-600 text-lg" x-text="progress"></span>
                 </div>
-                <div class="grid grid-cols-3 gap-2"></div>
+                <div class="la-file-upload-gallery-wrapper" x-ref="galleryImages">
+
+                </div>
             </div>
 
             <x-dynamic-component :component="$field->getViewComponentForHelperText()" :caption="$field->getHelperText()"/>

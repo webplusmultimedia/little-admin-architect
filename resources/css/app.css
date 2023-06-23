@@ -6,6 +6,7 @@
 @import "colors.css";
 @import "notification.css";
 @import "la-file-upload.css";
+@import "file-upload.css";
 
 @tailwind base;
 @tailwind components;

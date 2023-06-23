@@ -203,15 +203,15 @@ class FileUpload extends Field
             if (is_array($file)) {
                 continue;
             }
-            if ($url = $this->getUrlForLa($file)) {
-                $files[] = $url;
+            if ($details = $this->getUrlForLa($file)) {
+                $files[] = $details;
             }
         }
 
         return $files;
     }
 
-    protected function getUrlForLa(string $_file): ?string
+    protected function getUrlForLa(string $_file): ?array
     {
         $file = $this->getPathFile($_file);
 
@@ -225,6 +225,10 @@ class FileUpload extends Field
             return null;
         }
 
-        return $storage->url($file);
+        return [
+            'url' => $storage->url($file),
+            'size' => round($storage->size($file) / 1000, 2) . 'kb',
+            'name' => basename($storage->path($file)),
+        ];
     }
 }

@@ -1,5 +1,6 @@
 import {uuid} from "./support/file";
-import {Success} from "../notification/Notification";
+import {Success, Warning} from "../notification/Notification";
+import {gallery} from "./support/gallery";
 
 /**
  *
@@ -22,6 +23,12 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         async uploadUsing(fileKey, file) {
             await this.$wire.upload(`${path}`, file, (uploadedFilename) => {
                     Success('file ok : ' + uploadedFilename)
+                    this.photos.push({
+                        'url': URL.createObjectURL(file),
+                        'size' : parseFloat(file.size/1000) +'Kb',
+                        'name' : file.name,
+                        'new' : true
+                    })
                     this.startUpload = false
                 }
                 ,
@@ -44,12 +51,10 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             },
             async ['@drop.prevent.stop']() {
                 if (this.$event.target.classList.contains('la-dropzone')) {
-
-                    console.log(this.$event.dataTransfer.files)
                     this.startUpload = true
                     await this.saveFileUsing(this.$event.dataTransfer.files)
                     this.$refs.dropzone.classList.remove('border-primary-500', 'text-primary-500')
-                    //SaveFilesAction(ImageSupport().getDesireFiles(this.$event.dataTransfer.files), this.$data)
+                    this.startUpload = false
                 }
             },
             ['@dragenter.prevent.stop']() {
@@ -65,11 +70,24 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         },
         /** @param {File[]} files */
         async saveFileUsing(files) {
-            Array.from(files).filter(async (file) => {
-                if (this.isProvidedMimeType(file)) {
-                    await this.uploadUsing(uuid(), file);
+            Array.from(files).forEach(async (file) => {
+
+                if (!this.isFileSize(file) && !this.isProvidedMimeType(file)) {
+                    setTimeout(() => {
+                        Warning(`Le fichier ${file.name} ne peut être téléversé`)
+                    }, 2)
+                    return;
                 }
+
+                await this.uploadUsing(uuid(), file);
             })
+        },
+        /**
+         * @param {File} file
+         * @returns {boolean}
+         */
+        isFileSize(file) {
+            return file.size < maxSize
         },
         /**
          * @param {File} file
@@ -79,12 +97,14 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             return acceptedFileTypes.find(type => type === file.type);
         },
         async init() {
-            this.$watch('state', value => {
-                console.log(value)
+            this.$watch('state', async value => {
+
+            });
+            this.$watch('photos', value => {
+                this.$refs.galleryImages.innerHTML = gallery(value).getGallery()
             });
 
             this.photos = await this.$wire.getUploadFileUrls(path) ?? []
-              console.log(this.photos);
         }
     }
 }

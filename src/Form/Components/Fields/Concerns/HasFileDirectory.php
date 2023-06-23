@@ -20,7 +20,7 @@ trait HasFileDirectory
 
     protected bool $preserveFilenames = false;
 
-    protected ?int $minSize = null;
+    protected ?int $minSize = 2048;
 
     protected ?int $maxSize = null;
 
