@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Str;
 use League\Flysystem\UnableToCheckFileExistence;
 use Livewire\TemporaryUploadedFile;
@@ -193,5 +194,37 @@ class FileUpload extends Field
             return;
         }
 
+    }
+
+    public function getUploadFileUrlsUsing(): array
+    {
+        $files = [];
+        foreach ($this->getState() as $file) {
+            if (is_array($file)) {
+                continue;
+            }
+            if ($url = $this->getUrlForLa($file)) {
+                $files[] = $url;
+            }
+        }
+
+        return $files;
+    }
+
+    protected function getUrlForLa(string $_file): ?string
+    {
+        $file = $this->getPathFile($_file);
+
+        /** @var FilesystemAdapter $storage */
+        $storage = $this->getDisk();
+        try {
+            if ( ! $storage->exists($file)) {
+                return null;
+            }
+        } catch (UnableToCheckFileExistence $exception) {
+            return null;
+        }
+
+        return $storage->url($file);
     }
 }

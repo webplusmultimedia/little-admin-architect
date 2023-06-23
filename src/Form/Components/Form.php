@@ -21,6 +21,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasDefaultVa
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasFields;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasSelectOptionLabelUsing;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasState;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithUploadFiles;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasSchema;
@@ -44,6 +45,7 @@ final class Form implements Htmlable
     use HasSchema;
     use HasSelectOptionLabelUsing;
     use HasState;
+    use InteractsWithUploadFiles;
     use InteractWithLivewire;
     use InteractWithPage;
     use InteractWithRecord;

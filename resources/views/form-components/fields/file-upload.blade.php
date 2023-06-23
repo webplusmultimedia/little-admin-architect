@@ -58,6 +58,10 @@
                 >
                     <x-heroicon-o-arrow-down-tray class="w-5 h-auto"/>
                 </div>
+                <div class="flex px-3" x-show="startUpload">
+                    <span class="text-primary-600 text-lg" x-text="progress"></span>
+                </div>
+                <div class="grid grid-cols-3 gap-2"></div>
             </div>
 
             <x-dynamic-component :component="$field->getViewComponentForHelperText()" :caption="$field->getHelperText()"/>
