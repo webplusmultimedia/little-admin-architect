@@ -49,10 +49,8 @@ trait InteractsWithForms
     }
 
     /**
-     * @param string $method
-     * @param array $params
-     *
-     * @return void
+     * @param  string  $method
+     * @param  array  $params
      */
     public function __call($method, $params): void
     {

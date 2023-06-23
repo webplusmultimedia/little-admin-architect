@@ -33,7 +33,7 @@ class FileUpload extends Field
                     static function (string|array $file) use ($component): bool {
                         try {
                             if (is_array($file)) {
-                                return str($file[ key($file) ])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[ key($file) ])->exists();
+                                return str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists();
                             }
 
                             // dump($component->getDisk()->exists($component->getPathFile($file)),$component->getDisk()->directories());
@@ -63,7 +63,7 @@ class FileUpload extends Field
                         return true;
                     }
 
-                    return (bool) (is_array($file) and str($file[ key($file) ])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[ key($file) ])->exists());
+                    return (bool) (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists());
                 })->all();
                 //dump($files);
                 $component->state($files);
@@ -85,7 +85,7 @@ class FileUpload extends Field
                             return blank($file) || $component->getDisk()->exists($component->getPathFile($file));
                         }
 
-                        return (bool) (is_array($file) and str($file[ key($file) ])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[ key($file) ])->exists());
+                        return (bool) (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists());
                     } catch (UnableToCheckFileExistence $exception) {
                         return false;
                     }
@@ -98,7 +98,7 @@ class FileUpload extends Field
         });
         $this->setBeforeUpdatedValidateValueUsing(static function (FileUpload $component, $state): bool {
             if (blank($state)) {
-                $component->state(NULL);
+                $component->state(null);
 
                 return true;
             }
@@ -107,17 +107,17 @@ class FileUpload extends Field
                     if (is_string($file)) {
                         return $file;
                     }
-                    if (is_array($file) and str($file[ key($file) ])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[ key($file) ])->exists()) {
+                    if (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
                         return $component->saveAttachement($file);
                     }
 
-                    return NULL;
+                    return null;
                 })->all();
-               /* if (blank($state)) {
-                    $component->state(NULL);
+                /* if (blank($state)) {
+                     $component->state(NULL);
 
-                    return true;
-                }*/
+                     return true;
+                 }*/
                 $component->state($files);
             }
 
@@ -128,7 +128,7 @@ class FileUpload extends Field
 
     public function saveAttachement(array $filePath): ?string
     {
-        $file = TemporaryUploadedFile::unserializeFromLivewireRequest($filePath[ key($filePath) ]);
+        $file = TemporaryUploadedFile::unserializeFromLivewireRequest($filePath[key($filePath)]);
         $newName = $this->isPreserveFilenames() ? Str::slug($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension() : key($filePath) . '.' . $file->getClientOriginalExtension();
 
         $methodStore = 'public' === $this->evaluate($this->visibility) ? 'storePubliclyAs' : 'storeAs';
@@ -139,27 +139,27 @@ class FileUpload extends Field
             return $newName;
         }
 
-        return NULL;
+        return null;
 
     }
 
     public function dehydrateRules(array $rules): array
     {
-        $rules[ 'data.' . $this->name ] = $this->getDehydrateRules();
+        $rules['data.' . $this->name] = $this->getDehydrateRules();
 
         return $rules;
     }
 
     public function hydrateRules(array $rules): array
     {
-        $rules[ 'data.' . $this->name ] = $this->getHydrateRules();
+        $rules['data.' . $this->name] = $this->getHydrateRules();
 
         return $rules;
     }
 
     public function beforeSaveRulesUsing(array $rules): array
     {
-        $rules[ 'data.' . $this->getName() ] = $this->getBeforeSaveRules();
+        $rules['data.' . $this->getName()] = $this->getBeforeSaveRules();
 
         return $rules;
     }
