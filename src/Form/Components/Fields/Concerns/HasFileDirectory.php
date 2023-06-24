@@ -44,7 +44,7 @@ trait HasFileDirectory
         return $this;
     }
 
-    public function preserveFilenames(bool $preserveFilenames): static
+    public function preserveFilenames(bool $preserveFilenames = true): static
     {
         $this->preserveFilenames = $preserveFilenames;
 

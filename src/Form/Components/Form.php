@@ -124,9 +124,10 @@ final class Form implements Htmlable
             $this->model = $record;
             $this->initMode();
             $this->initDatasFormOnMount($this->model);
-            $this->removeHiddenFieldsOnForm();
-            $this->initSelectUsing();
         }
+        $this->removeHiddenFieldsOnForm();
+        $this->initSelectUsing();
+
     }
 
     public function modelArray(array $record): void

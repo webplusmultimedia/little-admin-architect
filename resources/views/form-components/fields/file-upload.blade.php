@@ -56,7 +56,7 @@
                      x-bind="dropZone"
                      x-ref="dropzone"
                 >
-                    <span class="inline-flex gap-3">
+                    <span class="inline-flex gap-3" >
                        <x-heroicon-o-arrow-down-tray class="w-5 h-auto"/> <span>Drag & Drop ou cliquer ICI</span>
                     </span>
 

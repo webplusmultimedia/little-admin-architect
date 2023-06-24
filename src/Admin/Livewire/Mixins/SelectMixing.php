@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Mixins;
 
 use Closure;
+use Illuminate\Support\Collection;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
@@ -26,7 +27,7 @@ class SelectMixing
 
     public function getSearchResultsUsing(): Closure
     {
-        return function (string $name, string $search) {
+        return function (string $name, string $search): array|Collection {
             /** @var Form $form * */
             $form = $this->form;
             if ($form->hasSearchResultsUsing() and isset($form->getSearchResultsUsing()[$name])) {

@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
     @livewireStyles
 
-    @stack('scripts')
+
     <!-- Scripts -->
     <link rel="stylesheet" href="{{ route('little-admin.page.assets','app.css') }}">
 </head>
@@ -138,6 +138,7 @@
 @livewire('little-admin-architect.modal')
 @livewire('little-admin-notification')
 @livewireScripts
+@stack('scripts')
 <script defer src="{{ route('little-admin.page.assets','app.js') }}"></script>
 </body>
 </html>

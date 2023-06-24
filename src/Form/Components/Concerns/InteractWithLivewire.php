@@ -26,6 +26,7 @@ trait InteractWithLivewire
                     $this->livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
                 } else {
                     $datas = $this->pageForResource::getMutateFormDataBeforeSave($this->values($datas));
+                    //dd($datas);
                     $this->livewire->data->update($datas);
                     if ($this->hasModal()) {
                         $this->livewire->dispatchBrowserEvent($this->eventForCloseModal);

@@ -12,4 +12,11 @@ trait InteractsWithUploadFiles
 
         return $this->form->getUploadFileUrlsUsing($path);
     }
+
+    public function deleteUploadFile(string $path, int $key): bool
+    {
+        $this->skipRender();
+
+        return $this->form->deleteUploadFileUsing($path, $key);
+    }
 }

@@ -1,5 +1,5 @@
 import {uuid} from "./support/file";
-import {Success, Warning} from "../notification/Notification";
+import {Danger, Info, Success, Warning} from "../notification/Notification";
 import {gallery} from "./support/gallery";
 
 /**
@@ -21,15 +21,17 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         startUpload: false,
         photos: [],
         async uploadUsing(fileKey, file) {
+            let newFile = this.getNewFile(file)
+
+            this.addPhotosToView(newFile)
             await this.$wire.upload(`${path}`, file, (uploadedFilename) => {
                     Success('file ok : ' + uploadedFilename)
-                    this.photos.push({
-                        'url': URL.createObjectURL(file),
-                        'size' : parseFloat(file.size/1000) +'Kb',
-                        'name' : file.name,
-                        'new' : true
-                    })
+                    this.finishUploadUsing(newFile)
+
+                    console.log('end start' + new Date().toString())
+
                     this.startUpload = false
+                    this.reloadOnSave = true
                 }
                 ,
                 () => {
@@ -68,19 +70,20 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             },
 
         },
+        reloadOnSave: false,
         /** @param {File[]} files */
         async saveFileUsing(files) {
-            Array.from(files).forEach(async (file) => {
+            for (const file of Array.from(files)) {
 
                 if (!this.isFileSize(file) && !this.isProvidedMimeType(file)) {
                     setTimeout(() => {
                         Warning(`Le fichier ${file.name} ne peut être téléversé`)
                     }, 2)
-                    return;
+                    continue;
                 }
 
                 await this.uploadUsing(uuid(), file);
-            })
+            }
         },
         /**
          * @param {File} file
@@ -96,15 +99,57 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         isProvidedMimeType(file) {
             return acceptedFileTypes.find(type => type === file.type);
         },
+        async deleteUploadFileUsing(key) {
+            let isDelete = await this.$wire.deleteUploadFile(path, key)
+            if (isDelete) {
+                this.photos = this.photos.filter((val,index)=>index!==key)
+            }
+        },
+        addPhotosToView(newFile) {
+
+            let endPhotos = Array.from(this.photos)
+            endPhotos = endPhotos.pop()??false
+
+            if (endPhotos && endPhotos.isInit){
+                endPhotos.isInit = true
+                this.photos = this.photos.map((photo)=> photo.url === endPhotos.url?endPhotos:photo)
+            }
+            this.photos.push(newFile)
+        },
         async init() {
             this.$watch('state', async value => {
 
             });
             this.$watch('photos', value => {
-                this.$refs.galleryImages.innerHTML = gallery(value).getGallery()
+                this.$refs.galleryImages.innerHTML = gallery(value, path).getGallery()
             });
+            setTimeout(async () => {
+                this.photos = await this.$wire.getUploadFileUrls(path) ?? []
+            }, 50)
 
-            this.photos = await this.$wire.getUploadFileUrls(path) ?? []
+            window.addEventListener('little-admin-send-notification', async (ev) => {
+                if (this.reloadOnSave){
+                    this.photos = await this.$wire.getUploadFileUrls(path) ?? []
+                }
+
+                console.log('pass')
+            })
+
+        },
+        finishUploadUsing(newFile) {
+            newFile.start = false
+            this.photos[this.photos.length-1] = newFile
+            this.$refs.galleryImages.innerHTML = gallery(this.photos, path).getGallery()
+        },
+        getNewFile(file) {
+            return {
+                'url': URL.createObjectURL(file),
+                'size': parseFloat(file.size / 1000) + 'Kb',
+                'name': file.name,
+                'new': true,
+                'start': true,
+                'isInit': false
+            }
         }
     }
 }

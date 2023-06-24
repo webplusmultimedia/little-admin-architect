@@ -52,18 +52,23 @@ trait InteractsWithForms
      * @param  string  $method
      * @param  array  $params
      */
-    public function __call($method, $params): void
+    public function __call($method, $params): mixed
     {
 
         try {
-            parent::__call($method, $params);
+            if (static::hasMacro($method)) {
+                return static::macroCall($method, $params);
+            }
 
             if ('hydrate' === $method /*|| str($method)->startsWith('hydrate')*/) {
                 $this->form->hydrateState();
 
+                return null;
             }
             if ('dehydrate' === $method /*|| str($method)->startsWith('dehydrate')*/) {
                 $this->form->dehydrateState();
+
+                return null;
             }
             /*if ('updating' === $method) {
                 //dump('updating');
@@ -72,7 +77,12 @@ trait InteractsWithForms
             if ('updated' === $method) {
                 //dump('updated');
                 $this->form->updated(...$params);
+
+                return null;
             }
+            parent::__call($method, $params);
+
+            return null;
         } catch (BadMethodCallException $exception) {
             throw new BadMethodCallException(sprintf(
                 'Method %s::%s does not exist.', static::class, $method
@@ -96,10 +106,12 @@ trait InteractsWithForms
     public function getSearchResultUsing(string $name, string $term): array
     {
         $this->skipRender();
-        $results = $this->getSearchResultsUsing($name, $term);
         $options = [];
+        $results = $this->getSearchResultsUsing($name, $term);
         if ($results instanceof Collection) {
-            return $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
+            $res = $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
+
+            return $res;
         }
 
         return $options;

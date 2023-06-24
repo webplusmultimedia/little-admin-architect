@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
+use Exception;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Str;
 use League\Flysystem\UnableToCheckFileExistence;
@@ -44,7 +45,7 @@ class FileUpload extends Field
                         }
                     }
                 )
-                    ->all();
+                    ->values()->all();
                 // dump($files);
                 $component->state($files);
             }
@@ -65,7 +66,7 @@ class FileUpload extends Field
                     }
 
                     return (bool) (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists());
-                })->all();
+                })->values()->all();
                 //dump($files);
                 $component->state($files);
             }
@@ -91,7 +92,7 @@ class FileUpload extends Field
                         return false;
                     }
                 })
-                    ->all();
+                    ->values()->all();
                 //dump($files);
                 $component->state($files);
             }
@@ -104,21 +105,20 @@ class FileUpload extends Field
                 return true;
             }
             if (is_array($state)) {
-                $files = collect($state)->map(function (string|array $file) use ($component) {
-                    if (is_string($file)) {
-                        return $file;
-                    }
-                    if (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
-                        return $component->saveAttachement($file);
-                    }
+                $files = collect($state)
+                    ->map(function (string|array $file) use ($component): ?string {
+                        if (is_string($file)) {
+                            return $file;
+                        }
+                        if (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
+                            return $component->saveAttachement($file);
+                        }
 
-                    return null;
-                })->all();
-                /* if (blank($state)) {
-                     $component->state(NULL);
+                        return null;
+                    })
+                    ->filter(fn (?string $name) => ! blank($name))
+                    ->values()->all();
 
-                     return true;
-                 }*/
                 $component->state($files);
             }
 
@@ -130,10 +130,28 @@ class FileUpload extends Field
     public function saveAttachement(array $filePath): ?string
     {
         $file = TemporaryUploadedFile::unserializeFromLivewireRequest($filePath[key($filePath)]);
-        $newName = $this->isPreserveFilenames() ? Str::slug($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension() : key($filePath) . '.' . $file->getClientOriginalExtension();
+        $newName = $this->isPreserveFilenames() ?
+            Str::slug(str($file->getClientOriginalName())->beforeLast('.')) . '.' . $file->getClientOriginalExtension() :
+            key($filePath) . '.' . $file->getClientOriginalExtension();
 
         $methodStore = 'public' === $this->evaluate($this->visibility) ? 'storePubliclyAs' : 'storeAs';
-        $path = $file->storePubliclyAs($this->getBaseDirectory(), $newName, $this->getDiskName()); //$this->getDisk()->move($file->path(),$this->getPathFile($newName));
+        try {
+            $countTmp = 1;
+
+            $tmpName = str($newName)->beforeLast('.') . "-{$countTmp}." . str($newName)->afterLast('.');
+            if ($this->getDisk()->exists($this->getPathFile($newName)) and $this->isPreserveFilenames()) {
+                while ($this->getDisk()->exists($this->getPathFile($tmpName))) {
+                    $tmpName = str($newName)->beforeLast('.') . "-{$countTmp}." . str($newName)->afterLast('.');
+                    $countTmp++;
+                }
+                $newName = $tmpName;
+
+            }
+        } catch (UnableToCheckFileExistence $exception) {
+            return null;
+        }
+
+        $path = $file->storePubliclyAs($this->getBaseDirectory(), $newName, $this->getDiskName());
         if ($path) {
             $file->delete();
 
@@ -167,13 +185,7 @@ class FileUpload extends Field
 
     public function setState(mixed $value): void
     {
-
-        if ($value instanceof TemporaryUploadedFile and $value->exists()) {
-            dump('temp');
-
-        }
         if (is_array($value)) {
-
             $files = collect($value)->filter(function (string|TemporaryUploadedFile|array $file) {
                 if ($file instanceof TemporaryUploadedFile) {
                     return $file->exists();
@@ -188,8 +200,6 @@ class FileUpload extends Field
                 return $file;
             })->all();
             $this->state($files);
-
-            //dump($files,$this->getState());
 
             return;
         }
@@ -215,6 +225,57 @@ class FileUpload extends Field
     {
         $file = $this->getPathFile($_file);
 
+        if ($storage = $this->getStorageForFile($file)) {
+            return [
+                'url' => $storage->url($file),
+                'size' => round($storage->size($file) / 1000, 2) . 'Kb',
+                'name' => basename($storage->path($file)),
+            ];
+        }
+
+        return null;
+    }
+
+    public function deleteUploadFileUsing(int $key): bool
+    {
+        /** @var array $files */
+        $files = $this->getState();
+        $newFiles = collect($files)->filter(fn (string|array $file, int $index) => $index !== $key)->values()->all();
+        if (is_array($files) and count($files)) {
+            if ($file = collect($files)->filter(fn (string|array $file, int $index) => $index === $key)->first()) {
+                if (is_string($file)) {
+                    $_file = $this->getPathFile($file);
+                    try {
+                        $is_delete = $this->getDisk()->delete($_file);
+                        if ($is_delete) {
+                            $this->state($newFiles);
+                        }
+
+                        return $is_delete;
+                    } catch (UnableToCheckFileExistence $exception) {
+                        return false;
+                    }
+                }
+
+                try {
+                    $_tmpFile = TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)]);
+                    $is_delete = $_tmpFile->delete();
+                    if ($is_delete) {
+                        $this->state($newFiles);
+                    }
+
+                    return $is_delete;
+                } catch (Exception $exception) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private function getStorageForFile(string $file): ?FilesystemAdapter
+    {
         /** @var FilesystemAdapter $storage */
         $storage = $this->getDisk();
         try {
@@ -225,10 +286,6 @@ class FileUpload extends Field
             return null;
         }
 
-        return [
-            'url' => $storage->url($file),
-            'size' => round($storage->size($file) / 1000, 2) . 'kb',
-            'name' => basename($storage->path($file)),
-        ];
+        return $storage;
     }
 }
