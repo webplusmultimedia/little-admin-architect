@@ -56,11 +56,15 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                     this.startUpload = true
                     await this.saveFileUsing(this.$event.dataTransfer.files)
                     this.$refs.dropzone.classList.remove('border-primary-500', 'text-primary-500')
+                    this.$refs.ladroptitle.classList.remove('pointer-events-none')
+                    this.$refs.ladroptitle.classList.add( 'pointer-events-auto')
                     this.startUpload = false
                 }
             },
             ['@dragenter.prevent.stop']() {
                 this.$refs.dropzone.classList.add('border-primary-500', 'text-primary-500')
+                this.$refs.ladroptitle.classList.remove( 'pointer-events-auto')
+                this.$refs.ladroptitle.classList.add('pointer-events-none')
             },
             ['@dragleave.prevent.stop']() {
                 if (this.$event.target === this.$refs.dropzone) {
