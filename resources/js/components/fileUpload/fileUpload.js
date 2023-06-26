@@ -41,7 +41,19 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                 })
 
         },
+        addPhotosToView(newFile) {
 
+            /*let endPhotos = Array.from(this.photos)
+            endPhotos = endPhotos.pop() ?? false
+
+            if (endPhotos && endPhotos.isInit) {
+                endPhotos.isInit = true
+                this.photos = [this.photos.map((photo) => photo.url === endPhotos.url ? endPhotos : photo), newFile]
+                return
+            }*/
+
+            this.photos.push(newFile)
+        },
         'dropZone': {
             ['@dragover.prevent.stop']() {
 
@@ -121,19 +133,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                 this.photos = this.photos.filter((val, index) => index !== key)
             }
         },
-        addPhotosToView(newFile) {
 
-            /*let endPhotos = Array.from(this.photos)
-            endPhotos = endPhotos.pop() ?? false
-
-            if (endPhotos && endPhotos.isInit) {
-                endPhotos.isInit = true
-                this.photos = [this.photos.map((photo) => photo.url === endPhotos.url ? endPhotos : photo), newFile]
-                return
-            }*/
-
-            this.photos.push(newFile)
-        },
         async init() {
             this.$watch('state', async value => {
 
@@ -156,8 +156,9 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
 
         },
         finishUploadUsing(newFile) {
+            let index = Array.from(this.photos).findIndex((file=> file === newFile))
             newFile.start = false
-            this.photos[this.photos.length - 1] = newFile
+            this.photos[index] = newFile
             this.$refs.galleryImages.innerHTML = gallery(this.photos, path).getGallery()
         },
         getNewFile(file) {

@@ -78,20 +78,6 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         $this->setUp();
     }
 
-    public function getWireName(): string
-    {
-        return $this->getPrefix() . $this->name;
-    }
-
-    protected function getPrefix(): string
-    {
-        if ($this->record instanceof Model) {
-            return $this->prefixName . '.';
-        }
-
-        return '';
-    }
-
     public function livewire(BaseForm|Component $livewire): void
     {
         $this->livewire = $livewire;

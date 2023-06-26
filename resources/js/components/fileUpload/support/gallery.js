@@ -24,7 +24,7 @@ export function gallery(files) {
                             'la-file-upload-image-infos-gradient' : ${(!file['new'])},
                         }"
                         >
-                            <div class="max-w-[80%]">
+                            <div class="max-w-[80%] select-none">
                                 <div class="text-[0.795rem] text-white truncate">${file['name']}</div>
                                 <div class="text-[0.795rem] text-white">${file['size']}</div>
                             </div>
@@ -64,13 +64,15 @@ export function laImageGalleryComponent({startUpload,newImg,  isInit}) {
         startUpload,
         isInit,
         init() {
-           /* if (!this.isInit && this.startUpload) {
-                this.$refs.la_file_upload_image_wrapper.style.opacity = 0;
-                setInterval(() => {
-                    this.$refs.la_file_upload_image_wrapper.style.opacity = 1
-                }, 10);
-                this.isInit = true
-            }*/
+            if (!this.isInit && this.startUpload) {
+                this.$refs.la_file_upload_image_wrapper.classList.add('animate-pulse');
+                 //console.log(this.$refs.la_file_upload_image_wrapper)
+                /*setInterval(() => {
+
+                    //$this.$refs.la_file_upload_image_wrapper.style.opacity = 1
+                }, 10);*/
+                //this.isInit = true
+            }
         }
     }
 }

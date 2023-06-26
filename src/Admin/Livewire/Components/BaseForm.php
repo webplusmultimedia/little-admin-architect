@@ -40,7 +40,7 @@ class BaseForm extends Component implements HasForm
         $this->pageRoute = $pageRoute;
         $this->key = $key;
 
-        $this->getForm()->hydrateState();
+        $this->form->hydrateState();
 
         $this->initialized = true;
         $this->initBoot = false;

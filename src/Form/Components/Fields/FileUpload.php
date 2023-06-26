@@ -22,7 +22,6 @@ class FileUpload extends Field
     protected function setUp(): void
     {
         $this->afterStateHydrated(static function (string|array|null $state, FileUpload $component): void {
-
             if (blank($state)) {
                 $component->state([]);
 
@@ -34,6 +33,9 @@ class FileUpload extends Field
                 $files = $files->filter(
                     static function (string|array $file) use ($component): bool {
                         try {
+                            if (is_array($file) and isset($file['file']) and isset($file['delete'])) {
+                                return true;
+                            }
                             if (is_array($file)) {
                                 return str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists();
                             }
@@ -64,6 +66,9 @@ class FileUpload extends Field
                     if (is_string($file)) {
                         return true;
                     }
+                    if (is_array($file) and isset($file['file']) and isset($file['delete'])) {
+                        return true;
+                    }
 
                     return (bool) (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists());
                 })->values()->all();
@@ -85,6 +90,9 @@ class FileUpload extends Field
                     try {
                         if (is_string($file)) {
                             return blank($file) || $component->getDisk()->exists($component->getPathFile($file));
+                        }
+                        if (is_array($file) and isset($file['file'])) {
+                            return true;
                         }
 
                         return (bool) (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists());
@@ -109,6 +117,12 @@ class FileUpload extends Field
                     ->map(function (string|array $file) use ($component): ?string {
                         if (is_string($file)) {
                             return $file;
+                        }
+                        if (is_array($file) and isset($file['file']) and isset($file['delete'])) {
+                            $_file = $component->getPathFile($file['file']);
+                            $component->getDisk()->delete($_file);
+
+                            return null;
                         }
                         if (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
                             return $component->saveAttachement($file);
@@ -164,14 +178,14 @@ class FileUpload extends Field
 
     public function dehydrateRules(array $rules): array
     {
-        $rules['data.' . $this->name] = $this->getDehydrateRules();
+        $rules['data.' . $this->getName()] = $this->getDehydrateRules();
 
         return $rules;
     }
 
     public function hydrateRules(array $rules): array
     {
-        $rules['data.' . $this->name] = $this->getHydrateRules();
+        $rules['data.' . $this->getName()] = $this->getHydrateRules();
 
         return $rules;
     }
@@ -186,7 +200,7 @@ class FileUpload extends Field
     public function setState(mixed $value): void
     {
         if (is_array($value)) {
-            $files = collect($value)->filter(function (string|TemporaryUploadedFile|array $file) {
+            $newFiles = collect($value)->filter(function (string|TemporaryUploadedFile|array $file) {
                 if ($file instanceof TemporaryUploadedFile) {
                     return $file->exists();
                 }
@@ -199,7 +213,7 @@ class FileUpload extends Field
 
                 return $file;
             })->all();
-            $this->state($files);
+            $this->state($newFiles);
 
             return;
         }
@@ -209,11 +223,21 @@ class FileUpload extends Field
     public function getUploadFileUrlsUsing(): array
     {
         $files = [];
+        /** @var string[]|string $file */
         foreach ($this->getState() as $file) {
-            if (is_array($file)) {
+            if (is_array($file) and ! isset($file['file']) and ! isset($file['delete'])) {
                 continue;
             }
-            if ($details = $this->getUrlForLa($file)) {
+
+            if (is_array($file) and isset($file['file']) and isset($file['delete'])) {
+                if ($details = $this->getUrlForLa($file['file'])) {
+                    $files[] = $details;
+                }
+
+                continue;
+            }
+
+            if (is_string($file) and $details = $this->getUrlForLa($file)) {
                 $files[] = $details;
             }
         }
@@ -236,6 +260,21 @@ class FileUpload extends Field
         return null;
     }
 
+    private function getStorageForFile(string $file): ?FilesystemAdapter
+    {
+        /** @var FilesystemAdapter $storage */
+        $storage = $this->getDisk();
+        try {
+            if ( ! $storage->exists($file)) {
+                return null;
+            }
+        } catch (UnableToCheckFileExistence $exception) {
+            return null;
+        }
+
+        return $storage;
+    }
+
     public function deleteUploadFileUsing(int $key): bool
     {
         /** @var array $files */
@@ -244,17 +283,23 @@ class FileUpload extends Field
         if (is_array($files) and count($files)) {
             if ($file = collect($files)->filter(fn (string|array $file, int $index) => $index === $key)->first()) {
                 if (is_string($file)) {
-                    $_file = $this->getPathFile($file);
-                    try {
-                        $is_delete = $this->getDisk()->delete($_file);
-                        if ($is_delete) {
-                            $this->state($newFiles);
-                        }
+                    if ($state = $this->getState() and isset($state[$key])) {
+                        $state[$key] = ['file' => $file, 'delete' => true];
+                        $this->state($state);
 
-                        return $is_delete;
-                    } catch (UnableToCheckFileExistence $exception) {
-                        return false;
+                        return true;
                     }
+                    /* $_file = $this->getPathFile($file);
+                     try {
+                         $is_delete = $this->getDisk()->delete($_file);
+                         if ($is_delete) {
+                             $this->state($newFiles);
+                         }
+
+                         return $is_delete;
+                     } catch (UnableToCheckFileExistence $exception) {
+                         return false;
+                     }*/
                 }
 
                 try {
@@ -272,20 +317,5 @@ class FileUpload extends Field
         }
 
         return true;
-    }
-
-    private function getStorageForFile(string $file): ?FilesystemAdapter
-    {
-        /** @var FilesystemAdapter $storage */
-        $storage = $this->getDisk();
-        try {
-            if ( ! $storage->exists($file)) {
-                return null;
-            }
-        } catch (UnableToCheckFileExistence $exception) {
-            return null;
-        }
-
-        return $storage;
     }
 }
