@@ -2,6 +2,11 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## refactoring livewire Pages - 2023-06-26
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.1.01-alpha...v0.1.02-alpha
+** Refactoring livewire for pages : calling updated,updating, hydrated, dehydrated Hooks for all components
+
 ## add some methods to resource - 2023-06-18
 
 **Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.1.0-alpha...v0.1.01-alpha
