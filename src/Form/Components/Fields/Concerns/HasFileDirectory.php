@@ -24,9 +24,9 @@ trait HasFileDirectory
 
     protected ?int $maxSize = null;
 
-    protected ?int $maxFiles = null;
+    protected int $maxFiles = 1;
 
-    protected array $acceptedFileTypes = ['image/jpg', 'image/png'];
+    protected array $acceptedFileTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
 
     protected bool $isMultiple = false;
 
@@ -103,7 +103,7 @@ trait HasFileDirectory
         return $this->maxSize;
     }
 
-    public function getMaxFiles(): ?int
+    public function getMaxFiles(): int
     {
         return $this->maxFiles;
     }

@@ -28,6 +28,10 @@ Alpine.data('timePicker', timePicker)
 Alpine.data('fileUpload',fileUpload)
 Alpine.data('laImageGalleryComponent',laImageGalleryComponent)
 
+Alpine.store('laDatas',{
+    isTinyEditorShow : false,
+})
+
 window.Alpine = Alpine;
 
 

@@ -1,0 +1,8 @@
+@layer components {
+    .la-tiny-mce-html-text{
+        @apply w-full rounded-lg border border-gray-300 bg-white p-4 text-sm opacity-70 shadow-sm transition duration-75 overflow-x-hidden overflow-y-auto text-gray-600
+    }
+    .la-tiny-mce-html-text p{
+        @apply text-[0.975rem]
+    }
+}

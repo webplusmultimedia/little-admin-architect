@@ -3,7 +3,7 @@
         @apply grid-cols-1 grid  md:grid-cols-3 gap-2  py-2 md:flex-wrap
     }
     .la-file-upload-image-wrapper{
-        @apply relative flex md:col-span-1 border border-gray-100 rounded-lg h-48 overflow-hidden transition
+        @apply relative flex md:col-span-1 border border-gray-100 rounded-lg h-48 overflow-hidden duration-300
     }
     .la-file-upload-image-infos{
         @apply absolute top-0 left-0 right-0 pt-2 pb-4 px-3 flex items-start justify-between gap-1.5

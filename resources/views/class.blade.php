@@ -60,3 +60,4 @@ modal__large
 "
 
 ></div>
+<span class="la-tiny-mce-html-text"></span>

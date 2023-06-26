@@ -12,8 +12,8 @@ export function gallery(files) {
 
             }
             return `<div class="la-file-upload-image-wrapper"
-                        x-data="laImageGalleryComponent({ startUpload : ${!!file['start']}, newImg : ${!!file['new']}, isInit : ${!!file['isInit']}, })"
-
+                        x-data="laImageGalleryComponent({ startUpload : ${!!file['start']}, newImg : ${!!file['new']}, isInit : ${!!file['isInit']} })"
+                        x-ref="la_file_upload_image_wrapper"
                     >
                         <img src="${url}" alt="image" class="object-cover w-full">
 
@@ -58,19 +58,19 @@ export function gallery(files) {
     }
 }
 
-export function laImageGalleryComponent({newImg, startUpload,isInit}) {
+export function laImageGalleryComponent({startUpload,newImg,  isInit}) {
     return {
         newImg,
         startUpload,
         isInit,
         init() {
-            if (this.isInit && this.startUpload) {
-                this.$el.style.opacity = 0;
+           /* if (!this.isInit && this.startUpload) {
+                this.$refs.la_file_upload_image_wrapper.style.opacity = 0;
                 setInterval(() => {
-                    this.$el.style.opacity = 1
-                }, 300);
+                    this.$refs.la_file_upload_image_wrapper.style.opacity = 1
+                }, 10);
                 this.isInit = true
-            }
+            }*/
         }
     }
 }

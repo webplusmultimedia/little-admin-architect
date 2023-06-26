@@ -25,7 +25,7 @@
             :label="$field->getLabel()"
             :showRequired="$field->isRequired()"
         />
-        <div class="">
+        <div class="la-file-upload">
             <div class=""
                 x-data="fileUpload({
                     fieldName : @js($field->getWireName()),
@@ -46,7 +46,8 @@
                  wire:ignore
             >
                 <input type="file"  :id="$id('file-input')"
-                       x-ref="file_input"
+                       x-bind="laFileInput"
+                       x-ref="laFileInput"
                        class="hidden"
                     {{ $field->isMultiple()?'multiple':'' }}
                     {{ $field->isDisabled()?'disabled':'' }}

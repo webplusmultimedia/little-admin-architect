@@ -28,8 +28,6 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                     Success('file ok : ' + uploadedFilename)
                     this.finishUploadUsing(newFile)
 
-                    console.log('end start' + new Date().toString())
-
                     this.startUpload = false
                     this.reloadOnSave = true
                 }
@@ -57,13 +55,13 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                     await this.saveFileUsing(this.$event.dataTransfer.files)
                     this.$refs.dropzone.classList.remove('border-primary-500', 'text-primary-500')
                     this.$refs.ladroptitle.classList.remove('pointer-events-none')
-                    this.$refs.ladroptitle.classList.add( 'pointer-events-auto')
+                    this.$refs.ladroptitle.classList.add('pointer-events-auto')
                     this.startUpload = false
                 }
             },
             ['@dragenter.prevent.stop']() {
                 this.$refs.dropzone.classList.add('border-primary-500', 'text-primary-500')
-                this.$refs.ladroptitle.classList.remove( 'pointer-events-auto')
+                this.$refs.ladroptitle.classList.remove('pointer-events-auto')
                 this.$refs.ladroptitle.classList.add('pointer-events-none')
             },
             ['@dragleave.prevent.stop']() {
@@ -72,7 +70,21 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                 }
                 return false
             },
+            ['@click.prevent.stop']() {
+                this.$refs.laFileInput.click()
+            }
 
+        },
+        'laFileInput': {
+            async ['@change']() {
+                const fileList = this.$event.target.files
+
+                if (fileList.length) {
+                    this.startUpload = true
+                    await this.saveFileUsing(fileList)
+                    this.startUpload = false
+                }
+            }
         },
         reloadOnSave: false,
         /** @param {File[]} files */
@@ -106,18 +118,20 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         async deleteUploadFileUsing(key) {
             let isDelete = await this.$wire.deleteUploadFile(path, key)
             if (isDelete) {
-                this.photos = this.photos.filter((val,index)=>index!==key)
+                this.photos = this.photos.filter((val, index) => index !== key)
             }
         },
         addPhotosToView(newFile) {
 
-            let endPhotos = Array.from(this.photos)
-            endPhotos = endPhotos.pop()??false
+            /*let endPhotos = Array.from(this.photos)
+            endPhotos = endPhotos.pop() ?? false
 
-            if (endPhotos && endPhotos.isInit){
+            if (endPhotos && endPhotos.isInit) {
                 endPhotos.isInit = true
-                this.photos = this.photos.map((photo)=> photo.url === endPhotos.url?endPhotos:photo)
-            }
+                this.photos = [this.photos.map((photo) => photo.url === endPhotos.url ? endPhotos : photo), newFile]
+                return
+            }*/
+
             this.photos.push(newFile)
         },
         async init() {
@@ -132,9 +146,10 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             }, 50)
 
             window.addEventListener('little-admin-send-notification', async (ev) => {
-                if (this.reloadOnSave){
+                if (this.reloadOnSave) {
                     this.photos = await this.$wire.getUploadFileUrls(path) ?? []
                 }
+                this.reloadOnSave = false
 
                 console.log('pass')
             })
@@ -142,7 +157,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         },
         finishUploadUsing(newFile) {
             newFile.start = false
-            this.photos[this.photos.length-1] = newFile
+            this.photos[this.photos.length - 1] = newFile
             this.$refs.galleryImages.innerHTML = gallery(this.photos, path).getGallery()
         },
         getNewFile(file) {
