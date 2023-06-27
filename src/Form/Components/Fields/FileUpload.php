@@ -27,71 +27,74 @@ class FileUpload extends Field
 
                 return;
             }
-            //dump('afterHydrate');
+
             if (is_array($state)) {
                 $files = collect($state);
-                $files = $files->filter(
-                    static function (string|array $file) use ($component): bool {
-                        try {
-                            if (is_array($file) and isset($file['file']) and isset($file['delete'])) {
-                                return true;
-                            }
-                            if (is_array($file)) {
-                                return str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists();
-                            }
+                $files = $files
+                    ->filter(
+                        static function (string|array $file) use ($component): bool {
+                            try {
+                                if (is_array($file) and isset($file['file']) and isset($file['delete']) and isset($file['id'])) {
+                                    return true;
+                                }
 
-                            // dump($component->getDisk()->exists($component->getPathFile($file)),$component->getDisk()->directories());
-                            return blank($file) || $component->getDisk()->exists($component->getPathFile($file));
-                        } catch (UnableToCheckFileExistence $exception) {
-                            return false;
+                                if (is_array($file)) {
+                                    return str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists();
+                                }
+
+                                return blank($file) || $component->getDisk()->exists($component->getPathFile($file));
+                            } catch (UnableToCheckFileExistence $exception) {
+                                return false;
+                            }
                         }
-                    }
-                )
-                    ->values()->all();
-                // dump($files);
+                    )
+                    ->map(static function (string|array $file) {
+                        if (is_string($file)) {
+                            return ['file' => $file, 'delete' => false, 'id' => Str::uuid()->toString()];
+                        }
+
+                        return $file;
+                    })
+                    ->values()
+                    ->all();
+
                 $component->state($files);
             }
 
         });
 
-        $this->afterStateUpdated(static function (string|array|null $state, FileUpload $component): void {
+        $this->afterStateUpdated(static function (array|null $state, FileUpload $component): void {
             if (blank($state)) {
                 $component->state([]);
             }
 
-            // dump('updated', $state);
-            if (is_array($state)) {
-                $files = collect($state);
-                $files = $files->filter(function (string|array $file, $key): bool {
-                    if (is_string($file)) {
-                        return true;
-                    }
-                    if (is_array($file) and isset($file['file']) and isset($file['delete'])) {
-                        return true;
-                    }
+            $files = collect($state);
+            $files = $files->filter(function (array $file, $key): bool {
+                if (is_array($file) and isset($file['file']) and isset($file['delete']) and isset($file['id'])) {
+                    return true;
+                }
 
-                    return (bool) (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists());
-                })->values()->all();
-                //dump($files);
-                $component->state($files);
-            }
+                return (bool) (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists());
+            })->values()->all();
+
+            $component->state($files);
         });
-        $this->afterStateDehydratedUsing(static function (string|array|null $state, FileUpload $component): void {
+
+        $this->afterStateDehydratedUsing(static function (array|null $state, FileUpload $component): void {
             if (blank($state)) {
                 $component->state([]);
 
                 return;
             }
-
-            if (is_array($state)) {
-                $files = collect($state);
-                // dump('dehydrated', $state);
-                $files = $files->filter(static function (string|array $file) use ($component): bool {
+            $files = collect($state);
+            $files = $files
+                ->filter(static function (string|array $file): bool {
                     try {
-                        if (is_string($file)) {
-                            return blank($file) || $component->getDisk()->exists($component->getPathFile($file));
+                        if (is_array($file) and isset($file['file']) and isset($file['delete']) and isset($file['id'])) {
+                            return true;
                         }
-                        if (is_array($file) and isset($file['file'])) {
+
+                        if (is_string($file)) {
                             return true;
                         }
 
@@ -100,41 +103,52 @@ class FileUpload extends Field
                         return false;
                     }
                 })
-                    ->values()->all();
-                //dump($files);
-                $component->state($files);
-            }
+                ->map(function (string|array $file) {
+                    if (is_string($file)) {
+                        return ['file' => $file, 'delete' => false, 'id' => Str::uuid()->toString()];
+                    }
 
+                    return $file;
+                })
+                ->values()->all();
+
+            $component->state($files);
         });
-        $this->setBeforeUpdatedValidateValueUsing(static function (FileUpload $component, $state): bool {
+
+        $this->setBeforeUpdatedValidateValueUsing(static function (FileUpload $component,null|array $state): bool {
             if (blank($state)) {
                 $component->state(null);
 
                 return true;
             }
-            if (is_array($state)) {
-                $files = collect($state)
-                    ->map(function (string|array $file) use ($component): ?string {
-                        if (is_string($file)) {
-                            return $file;
-                        }
-                        if (is_array($file) and isset($file['file']) and isset($file['delete'])) {
-                            $_file = $component->getPathFile($file['file']);
-                            $component->getDisk()->delete($_file);
 
-                            return null;
-                        }
-                        if (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
-                            return $component->saveAttachement($file);
-                        }
+            $files = collect($state)
+                ->map(function (array $file) use ($component): ?string {
+                    if (is_array($file) and isset($file['file']) and isset($file['delete']) and ! $file['delete']) {
+                        return $file['file'];
+                    }
+
+                    if (is_array($file) and isset($file['file']) and isset($file['delete']) and $file['delete']) {
+                        $_file = $component->getPathFile($file['file']);
+                        $component->getDisk()->delete($_file);
 
                         return null;
-                    })
-                    ->filter(fn (?string $name) => ! blank($name))
-                    ->values()->all();
+                    }
 
-                $component->state($files);
+                    if (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
+                        return $component->saveAttachement($file);
+                    }
+
+                    return null;
+                })
+                ->filter(fn (?string $name) => ! blank($name))
+                ->values()->all();
+            if (blank($files)) {
+                $component->state(null);
+
+                return true;
             }
+            $component->state($files);
 
             return true;
         });
@@ -173,7 +187,6 @@ class FileUpload extends Field
         }
 
         return null;
-
     }
 
     public function dehydrateRules(array $rules): array
@@ -214,10 +227,7 @@ class FileUpload extends Field
                 return $file;
             })->all();
             $this->state($newFiles);
-
-            return;
         }
-
     }
 
     public function getUploadFileUrlsUsing(): array
@@ -225,21 +235,18 @@ class FileUpload extends Field
         $files = [];
         /** @var string[]|string $file */
         foreach ($this->getState() as $file) {
+            //is temp File
             if (is_array($file) and ! isset($file['file']) and ! isset($file['delete'])) {
                 continue;
             }
-
-            if (is_array($file) and isset($file['file']) and isset($file['delete'])) {
+            // a file without delete
+            if (is_array($file) and isset($file['file']) and isset($file['delete']) and ! $file['delete']) {
                 if ($details = $this->getUrlForLa($file['file'])) {
+                    $details['id'] = $file['id'];
                     $files[] = $details;
                 }
-
-                continue;
             }
 
-            if (is_string($file) and $details = $this->getUrlForLa($file)) {
-                $files[] = $details;
-            }
         }
 
         return $files;
@@ -275,44 +282,64 @@ class FileUpload extends Field
         return $storage;
     }
 
-    public function deleteUploadFileUsing(int $key): bool
+    public function deleteUploadFileUsing(string $key): bool
     {
         /** @var array $files */
         $files = $this->getState();
-        $newFiles = collect($files)->filter(fn (string|array $file, int $index) => $index !== $key)->values()->all();
-        if (is_array($files) and count($files)) {
-            if ($file = collect($files)->filter(fn (string|array $file, int $index) => $index === $key)->first()) {
-                if (is_string($file)) {
-                    if ($state = $this->getState() and isset($state[$key])) {
-                        $state[$key] = ['file' => $file, 'delete' => true];
-                        $this->state($state);
-
-                        return true;
-                    }
-                    /* $_file = $this->getPathFile($file);
-                     try {
-                         $is_delete = $this->getDisk()->delete($_file);
-                         if ($is_delete) {
-                             $this->state($newFiles);
-                         }
-
-                         return $is_delete;
-                     } catch (UnableToCheckFileExistence $exception) {
-                         return false;
-                     }*/
+        $filesWithoutTmpFileToDelete = collect($files)
+            ->filter(function (array $file, int $index) use ($key) {
+                if (isset($file['file']) and isset($file['delete'])) {
+                    return true;
+                }
+                if (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
+                    return key($file) !== $key;
                 }
 
-                try {
-                    $_tmpFile = TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)]);
-                    $is_delete = $_tmpFile->delete();
-                    if ($is_delete) {
-                        $this->state($newFiles);
-                    }
+                return false;
+            })
+            ->values()
+            ->all();
 
-                    return $is_delete;
-                } catch (Exception $exception) {
-                    return false;
+        $fileToDelete = collect($files)
+            ->filter(function (array $file, int $index) use ($key) {
+                if (isset($file['file']) and isset($file['delete']) and ! $file['delete']) {
+                    return $file['id'] === $key;
                 }
+                if ( ! isset($file['file']) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
+                    return key($file) !== $key;
+                }
+
+                return false;
+            })
+            ->first();
+
+        if ($fileToDelete) {
+            if (isset($fileToDelete['file']) and
+                isset($fileToDelete['delete']) and ! $fileToDelete['delete']
+            ) {
+                $state = collect($files)
+                    ->map(function (array $file) use ($key) {
+                        if (isset($file['file']) and isset($file['delete']) and ! $file['delete'] and $file['id'] === $key) {
+                            $file['delete'] = true;
+                        }
+
+                        return $file;
+                    })->all();
+                $this->state($state);
+
+                return true;
+            }
+
+            try {
+                $_tmpFile = TemporaryUploadedFile::unserializeFromLivewireRequest($fileToDelete[key($fileToDelete)]);
+                $is_delete = $_tmpFile->delete();
+                if ($is_delete) {
+                    $this->state($filesWithoutTmpFileToDelete);
+                }
+
+                return $is_delete;
+            } catch (Exception $exception) {
+                return false;
             }
         }
 

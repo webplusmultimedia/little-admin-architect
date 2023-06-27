@@ -8,6 +8,7 @@ export function gallery(files) {
         template(file, key) {
             let extension = file['name'].split('.').pop(),
                 url = file['url']
+
             if (!this.extensions.find(ext => ext === extension)) {
 
             }
@@ -39,7 +40,7 @@ export function gallery(files) {
                            <svg xmlns="http://www.w3.org/2000/svg"
                                class="w-6 h-6 text-white hover:text-error-500 transition cursor-pointer"
                                x-show="!startUpload"
-                                x-on:click.prevent.stop="deleteUploadFileUsing(${key})"
+                                x-on:click.prevent.stop="deleteUploadFileUsing('${file['id']}')"
                                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                            >
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -50,6 +51,7 @@ export function gallery(files) {
                     </div>`
         },
         getGallery() {
+            //console.log(files)
             let res = '';
             files.forEach((file, key) => res += this.template(file, key))
 

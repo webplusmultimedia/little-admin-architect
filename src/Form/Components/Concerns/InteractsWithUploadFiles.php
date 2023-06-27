@@ -16,7 +16,7 @@ trait InteractsWithUploadFiles
         return $field->getUploadFileUrlsUsing();
     }
 
-    public function deleteUploadFileUsing(string $path, int $key): bool
+    public function deleteUploadFileUsing(string $path, string $key): bool
     {
         $field = $this->getFormFieldByPath($path);
         if ( ! $field or ! method_exists($field, 'deleteUploadFileUsing')) {

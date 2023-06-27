@@ -61,6 +61,7 @@ trait InteractsWithForms
             }
 
             if ('hydrate' === $method /*|| str($method)->startsWith('hydrate')*/) {
+
                 $this->form->hydrateState();
 
                 return null;
@@ -74,8 +75,9 @@ trait InteractsWithForms
                 //dump('updating');
                 $this->form->updating(...$params);
             }*/
+
             if ('updated' === $method) {
-                //dump('updated');
+                //dd('updated');
                 $this->form->updated(...$params);
 
                 return null;

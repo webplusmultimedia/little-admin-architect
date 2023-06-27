@@ -22,11 +22,11 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         photos: [],
         async uploadUsing(fileKey, file) {
             let newFile = this.getNewFile(file)
-
+            newFile['id'] = fileKey
             this.addPhotosToView(newFile)
             await this.$wire.upload(`${path}`, file, (uploadedFilename) => {
                     Success('file ok : ' + uploadedFilename)
-                    this.finishUploadUsing(newFile)
+                    this.finishUploadUsing(newFile,uploadedFilename)
 
                     this.startUpload = false
                     this.reloadOnSave = true
@@ -130,14 +130,11 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         async deleteUploadFileUsing(key) {
             let isDelete = await this.$wire.deleteUploadFile(path, key)
             if (isDelete) {
-                this.photos = this.photos.filter((val, index) => index !== key)
+                this.photos = this.photos.filter((val) => val['id'] !== key)
             }
         },
 
         async init() {
-            this.$watch('state', async value => {
-
-            });
             this.$watch('photos', value => {
                 this.$refs.galleryImages.innerHTML = gallery(value, path).getGallery()
             });
@@ -155,11 +152,26 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             })
 
         },
-        finishUploadUsing(newFile) {
-            let index = Array.from(this.photos).findIndex((file=> file === newFile))
-            newFile.start = false
-            this.photos[index] = newFile
-            this.$refs.galleryImages.innerHTML = gallery(this.photos, path).getGallery()
+        finishUploadUsing(newFile,newName) {
+            try {
+                /**
+                 *
+                 * @type {Object}
+                 */
+                const endState = Array.from(this.state).pop(),
+                    key =  Object.keys(endState)[0],
+                    name =    endState[key].split('livewire-file:').pop()
+                if(name === newName){
+                    newFile['id'] = key
+                }
+
+                let index = Array.from(this.photos).findIndex((file=> file === newFile))
+                newFile.start = false
+                this.photos[index] = newFile
+                this.$refs.galleryImages.innerHTML = gallery(this.photos, path).getGallery()
+            } catch (e) {
+                console.log(e)
+            }
         },
         getNewFile(file) {
             return {
