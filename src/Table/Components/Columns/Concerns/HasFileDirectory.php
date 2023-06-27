@@ -51,6 +51,6 @@ trait HasFileDirectory
 
     public function getPathFile(string $file): string
     {
-        return trim($this->getBaseDirectory() . $file, '/');
+        return trim($this->getBaseDirectory(), '/') . '/' . $file;
     }
 }
