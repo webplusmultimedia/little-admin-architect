@@ -350,4 +350,21 @@ class FileUpload extends Field
 
         return true;
     }
+
+    public function reorder(array $newOrder): array
+    {
+        $values = [];
+        $state = $this->getState();
+        foreach ($newOrder as $order) {
+            if (isset($state[(int) $order])) {
+                $values[] = $state[(int) $order];
+            }
+        }
+        if (blank($values)) {
+            return [];
+        }
+        $this->state($values);
+
+        return $this->getUploadFileUrlsUsing();
+    }
 }

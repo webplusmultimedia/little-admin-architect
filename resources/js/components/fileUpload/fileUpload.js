@@ -18,15 +18,18 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
     return {
         progress: 0,
         state,
+        path,
         startUpload: false,
+        stopDragging : false,
         photos: [],
         async uploadUsing(fileKey, file) {
             let newFile = this.getNewFile(file)
             newFile['id'] = fileKey
             this.addPhotosToView(newFile)
             this.$store.laDatas.startUploadFile = true
+            this.stopDragging = true
 
-            await this.$wire.upload(`${path}`, file, (uploadedFilename) => {
+            await this.$wire.upload(`${this.path}`, file, (uploadedFilename) => {
                     Success('file ok : ' + uploadedFilename)
                     this.finishUploadUsing(newFile,uploadedFilename)
 
@@ -133,7 +136,8 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             return acceptedFileTypes.find(type => type === file.type);
         },
         async deleteUploadFileUsing(key) {
-            let isDelete = await this.$wire.deleteUploadFile(path, key)
+            let isDelete = await this.$wire.deleteUploadFile(this.path, key)
+
             if (isDelete) {
                 this.photos = this.photos.filter((val) => val['id'] !== key)
             }
@@ -141,21 +145,35 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
 
         async init() {
             this.$watch('photos', value => {
-                this.$refs.galleryImages.innerHTML = gallery(value, path).getGallery()
+                this.$refs.galleryImages.innerHTML = gallery(value, this.path).getGallery()
             });
             setTimeout(async () => {
-                this.photos = await this.$wire.getUploadFileUrls(path) ?? []
+                this.photos = await this.$wire.getUploadFileUrls(this.path) ?? []
             }, 50)
 
             window.addEventListener('little-admin-send-notification', async (ev) => {
                 if (this.reloadOnSave) {
-                    this.photos = await this.$wire.getUploadFileUrls(path) ?? []
+                    this.stopDragging = false
+                    this.photos = await this.$wire.getUploadFileUrls(this.path) ?? []
                 }
                 this.reloadOnSave = false
-
-                console.log('pass')
+            })
+            let sort = Sortable.create(this.$refs.galleryImages, {
+                handle: '.la-icon-grip',
+                ghostClass: 'opacity-50',
+                animation: 180,
+                onEnd: async (evt) => {
+                    this.reorderFiles(sort.toArray())
+                }
             })
 
+        },
+        async reorderFiles(newOrder){
+            if (!this.stopDragging) {
+                this.photos = await this.$wire.reorderUploadFiles(this.path, newOrder)
+                return
+            }
+            this.$refs.galleryImages.innerHTML = gallery(this.photos, this.path).getGallery()
         },
         finishUploadUsing(newFile,newName) {
             try {
@@ -173,7 +191,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                 let index = Array.from(this.photos).findIndex((file=> file === newFile))
                 newFile.start = false
                 this.photos[index] = newFile
-                this.$refs.galleryImages.innerHTML = gallery(this.photos, path).getGallery()
+                this.$refs.galleryImages.innerHTML = gallery(this.photos, this.path).getGallery()
             } catch (e) {
                 console.log(e)
             }

@@ -58,6 +58,13 @@ class BaseForm extends Component implements HasForm
         $this->initialized = true;
     }
 
+    public function reorderUploadFiles(string $path, array $newOrder): array
+    {
+        $this->skipRender();
+
+        return $this->form->reorderUploadFiles($path, $newOrder);
+    }
+
     public function save(): void
     {
         $this->form->saveDatasForm();

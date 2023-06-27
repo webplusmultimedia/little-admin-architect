@@ -25,6 +25,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWit
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasSchema;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\FileUpload;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Select;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithRecord;
@@ -220,6 +221,17 @@ final class Form implements Htmlable
         $this->livewire = $livewire;
 
         return $this;
+    }
+
+    public function reorderUploadFiles(string $path, array $newOrder): array
+    {
+        /** @var ?FileUpload $field */
+        $field = $this->getFormFieldByPath($path);
+        if ($field) {
+            return $field->reorder($newOrder);
+        }
+
+        return [];
     }
 
     protected function getLivewireComponent(): Component
