@@ -1,7 +1,7 @@
 @php
     use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
     /** @var Table $table */
-	$table = $getTable();
+	//$table = $getTable();
     $sortDirection = $table->getSortDirection();
     $sortColumn = $table->getSortColumn();
 @endphp

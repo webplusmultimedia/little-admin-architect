@@ -38,9 +38,9 @@
                     state : $wire.entangle(@js($field->getWireName())){{ $field->getWireModifier() }},
 
                 })"
-                 x-on:livewire-upload-start="isUploadingFile = true"
-                 x-on:livewire-upload-finish="isUploadingFile = false"
-                 x-on:livewire-upload-error="isUploadingFile = false"
+                 {{--x-on:livewire-upload-start="Alpine.store('laDatas').startUploadFile = true"
+                 x-on:livewire-upload-finish="$store.laDatas.startUploadFile = false"
+                 x-on:livewire-upload-error="$store.laDatas.startUploadFile = false"--}}
                  x-on:livewire-upload-progress="progress = $event.detail.progress"
                  x-id="['file-input']"
                  wire:ignore

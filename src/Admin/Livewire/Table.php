@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseTable;
 
+
 class Table extends BaseTable implements Htmlable
 {
     public function render(): View

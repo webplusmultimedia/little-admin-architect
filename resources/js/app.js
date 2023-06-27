@@ -13,6 +13,7 @@ import {btnUpDownDate} from "./components/DateTime/btnUpDownDate";
 import timePicker from "./components/DateTime/timePicker";
 import {fileUpload} from "./components/fileUpload/fileUpload";
 import {laImageGalleryComponent} from "./components/fileUpload/support/gallery";
+import {buttonActionComponent} from "./components/buttons/action";
 
 Alpine.data('SelectFormComponent',SelectFormComponent)
 Alpine.data('DropdownMenu',DropdownMenu)
@@ -27,9 +28,11 @@ Alpine.data('btnUpDownDate', btnUpDownDate)
 Alpine.data('timePicker', timePicker)
 Alpine.data('fileUpload',fileUpload)
 Alpine.data('laImageGalleryComponent',laImageGalleryComponent)
+Alpine.data('buttonActionComponent',buttonActionComponent)
 
 Alpine.store('laDatas',{
     isTinyEditorShow : false,
+    startUploadFile : false,
 })
 
 window.Alpine = Alpine;

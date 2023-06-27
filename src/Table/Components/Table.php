@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components;
 
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\View\View;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\Modal;
@@ -20,7 +22,7 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasSearchab
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasSortableColum;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Header;
 
-final class Table
+final class Table implements Htmlable
 {
     use HasActionModal;
     use HasColumns;
@@ -89,7 +91,7 @@ final class Table
 
     public function getView(): string
     {
-        return config('little-admin-architect.blade-table-prefix') . '::' . $this->view;
+        return 'little-views::table-components.' . $this->view;
     }
 
     protected function tableTitle(string $TableTitle): void
@@ -100,5 +102,15 @@ final class Table
     public function getTableTitle(): string
     {
         return $this->TableTitle;
+    }
+
+    protected function render(): View
+    {
+        return view($this->getView(), ['table' => $this]);
+    }
+
+    public function toHtml(): string
+    {
+        return $this->render()->render();
     }
 }

@@ -24,16 +24,21 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             let newFile = this.getNewFile(file)
             newFile['id'] = fileKey
             this.addPhotosToView(newFile)
+            this.$store.laDatas.startUploadFile = true
+
             await this.$wire.upload(`${path}`, file, (uploadedFilename) => {
                     Success('file ok : ' + uploadedFilename)
                     this.finishUploadUsing(newFile,uploadedFilename)
 
                     this.startUpload = false
                     this.reloadOnSave = true
+                    this.$store.laDatas.startUploadFile = false
                 }
                 ,
                 () => {
                     this.startUpload = false
+                    this.$store.laDatas.startUploadFile = false
+                    this.reloadOnSave = true
                     console.log('erreur de chargement')
                 },
                 (ev) => {

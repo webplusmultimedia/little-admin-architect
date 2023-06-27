@@ -12,9 +12,9 @@
     </div>
 
     <div class="" x-data="{}">
-        <form wire:submit.prevent="save" x-data="{ livewireId : $wire.__instance.id ,isUploadingFile : false}" novalidate>
+        <form wire:submit.prevent="save" x-data="{ livewireId : $wire.__instance.id }" validate>
             {{ $slot ?? NULL }}
-            <div  @class(["grid gap-5", $form->getColumns()]) >
+            <div @class(["grid gap-5", $form->getColumns()]) >
                 @foreach($form->getFields() as $field)
                     <x-dynamic-component :component="$field->getFieldView()" :field="$field"/>
                 @endforeach
@@ -22,18 +22,28 @@
             <div class="flex justify-end group-btn px-3 py-5 bg-white mt-5 rounded-md border border-gray-200" aria-autocomplete="none">
                 <div class="inline-flex items-center space-x-3">
                     <x-little-form::button.submit class="btn-primary" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}"
-                                                  wire:loading.class.delay="opacity-70 cursor-wait">
+                                                  wire:loading.class.delay="opacity-70 cursor-wait"
+                                                  x-data="buttonActionComponent"
+                                                  {{--x-bind="triggerFileUpload"--}}
+                                                  x-bind:disabled="$store.laDatas.startUploadFile"
+                                                  x-bind:class="{ 'animate-pulse cursor-wait': $store.laDatas.startUploadFile }"
+
+                    >
                         @if($button->hasIcon())
                             <x-little-anonyme::form-components.fields.icons.hero-icon :name="$button->getViewIcon()"/>
                         @endif
-                        <span>{{ $button->getCaption() }}</span>
-                        <x-little-form::icon name="loader" wire:loading.delay="wire:loading.delay" wire:target="{{ $button->getAction() }}"
-                                             class="!opacity-100"/>
+                        <span x-show="!$store.laDatas.startUploadFile">{{ $button->getCaption() }}</span>
+                            <span x-show="$store.laDatas.startUploadFile">Uploading files ...</span>
+                        <x-little-form::icon name="loader" wire:loading.delay="wire:loading.delay"
+                                             wire:target="{{ $button->getAction() }}"  class="!opacity-100"
+                        />
                     </x-little-form::button.submit>
 
-                    <x-little-form::button.link class="" wire:loading.attr="disabled" wire:target="{{ $buttonCancel->getAction() }}"
-                                                x-bind:disable="isUploadingFile"
-                                                wire:loading.class.delay="opacity-70 cursor-wait" :url="$buttonCancel->getAction()">
+                    <x-little-form::button.link class="" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}"
+                                                x-bind:disabled="$store.laDatas.startUploadFile"
+                                                wire:loading.class.delay="opacity-70 cursor-wait" :url="$buttonCancel->getAction()"
+                                                x-bind:class="{ 'opacity-70 cursor-wait': $store.laDatas.startUploadFile }"
+                    >
                         @if($buttonCancel->hasIcon())
                             <x-little-anonyme::form-components.fields.icons.hero-icon :name="$buttonCancel->getViewIcon()"/>
                         @endif

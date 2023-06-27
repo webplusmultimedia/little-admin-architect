@@ -2701,6 +2701,12 @@ label {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
+.enabled\:cursor-wait:enabled {
+  cursor: wait;
+}
+.enabled\:opacity-70:enabled {
+  opacity: 0.7;
+}
 .disabled\:text-gray-300:disabled {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
