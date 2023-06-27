@@ -24,7 +24,6 @@
                     <x-little-form::button.submit class="btn-primary" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}"
                                                   wire:loading.class.delay="opacity-70 cursor-wait"
                                                   x-data="buttonActionComponent"
-                                                  {{--x-bind="triggerFileUpload"--}}
                                                   x-bind:disabled="$store.laDatas.startUploadFile"
                                                   x-bind:class="{ 'animate-pulse cursor-wait': $store.laDatas.startUploadFile }"
 
