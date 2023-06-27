@@ -115,7 +115,7 @@ class FileUpload extends Field
             $component->state($files);
         });
 
-        $this->setBeforeUpdatedValidateValueUsing(static function (FileUpload $component,null|array $state): bool {
+        $this->setBeforeUpdatedValidateValueUsing(static function (FileUpload $component, null|array $state): bool {
             if (blank($state)) {
                 $component->state(null);
 
