@@ -154,9 +154,11 @@ class FileUpload extends Field
         });
 
     }
-     protected function beforeValidateValueUsing(): bool {
-            return $this->evaluate($this->beforeUpdatedValidateValueUsing);
-     }
+
+    protected function beforeValidateValueUsing(): bool
+    {
+        return $this->evaluate($this->beforeUpdatedValidateValueUsing);
+    }
 
     public function saveAttachement(array $filePath): ?string
     {
