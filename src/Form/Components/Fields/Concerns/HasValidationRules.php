@@ -14,6 +14,8 @@ trait HasValidationRules
      */
     protected array $rules = [];
 
+    protected bool $nullable = false;
+
     protected function addRules(string|Rule|Closure $rules): void
     {
         $this->rules[] = $rules;
@@ -40,6 +42,7 @@ trait HasValidationRules
     public function nullable(): static
     {
         $this->addRules('nullable');
+        $this->nullable = true;
 
         return $this;
     }
@@ -47,5 +50,10 @@ trait HasValidationRules
     public function getViewComponentForErrorMessage(): string
     {
         return $this->getViewComponent('partials.error-message');
+    }
+
+    protected function isNullable(): bool
+    {
+        return $this->nullable;
     }
 }

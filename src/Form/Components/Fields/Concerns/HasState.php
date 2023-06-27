@@ -16,7 +16,7 @@ trait HasState
     public function getState(): mixed
     {
         if ($this->record instanceof Model) {
-            return $this->getValue();
+            return $this->record->{$this->getName()};
         }
         if (is_array($this->record)) {
             if (isset($this->record[$this->getName()])) {

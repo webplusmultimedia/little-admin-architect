@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
 
+use Closure;
 use Illuminate\Support\Collection;
 
 trait HasOptions
 {
-    protected array $options = [];
+    protected Closure|array $options = [];
 
     public function options(array|Collection $options): static
     {
@@ -24,6 +25,6 @@ trait HasOptions
 
     public function getOptions(): array
     {
-        return $this->options;
+        return $this->evaluate($this->options);
     }
 }

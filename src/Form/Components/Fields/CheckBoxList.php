@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
-use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasOptions;
 
@@ -15,15 +14,6 @@ class CheckBoxList extends Field
 
     protected string $view = 'check-box-list';
 
-    public function initDatasFormOnMount(?Model $model): void
-    {
-        if ($model) {
-            if (null === $model->{$this->name}) {
-                $model->{$this->name} = [];
-            }
-        }
-    }
-
     public function getValue(): mixed
     {
         if ($this->getRecord()->{$this->getName()}) {
@@ -31,5 +21,33 @@ class CheckBoxList extends Field
         }
 
         return [];
+    }
+
+    protected function beforeValidateValueUsing(): bool
+    {
+        return $this->evaluate($this->beforeUpdatedValidateValueUsing);
+    }
+
+    protected function setUp(): void
+    {
+        $this->afterStateHydrated(static function (null|array $state, CheckBoxList $component): void {
+            if (blank($state)) {
+                $component->state([]);
+            }
+        });
+
+        $this->setBeforeUpdatedValidateValueUsing(static function (null|array $state, CheckBoxList $component): bool {
+            if (blank($state)) {
+                if ($component->isNullable()) {
+                    $component->state(null);
+
+                    return true;
+                }
+
+                $component->state([]);
+            }
+
+            return true;
+        });
     }
 }

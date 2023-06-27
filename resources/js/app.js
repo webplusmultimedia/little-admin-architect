@@ -14,6 +14,8 @@ import timePicker from "./components/DateTime/timePicker";
 import {fileUpload} from "./components/fileUpload/fileUpload";
 import {laImageGalleryComponent} from "./components/fileUpload/support/gallery";
 import {buttonActionComponent} from "./components/buttons/action";
+import Sortable from 'sortablejs';
+window.Sortable = Sortable
 
 Alpine.data('SelectFormComponent',SelectFormComponent)
 Alpine.data('DropdownMenu',DropdownMenu)

@@ -24,6 +24,7 @@ trait ValidateValuesForRules
         if ( ! $this->beforeValidateValueUsing()) {
             return $values;
         }
+
         /* Restore datas if field is disable before saving datas */
         if ($this->isDisabled()) {
             if ($model) {

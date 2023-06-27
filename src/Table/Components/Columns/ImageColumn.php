@@ -17,7 +17,8 @@ class ImageColumn extends contracts\AbstractColumn
     {
         /** @var null|array $state */
         $state = $this->getState();
-        if (blank($state)) {
+
+        if ( ! blank($state)) {
             $_file = $state[0];
             if (Storage::disk($this->getDiskName())->exists($this->getPathFile($_file))) {
                 return Storage::disk($this->getDiskName())->url($this->getPathFile($_file));
