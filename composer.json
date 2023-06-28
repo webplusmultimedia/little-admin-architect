@@ -39,8 +39,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Webplusmultimedia\\LittleAdminArchitect\\": "src/",
-            "Webplusmultimedia\\LittleAdminArchitect\\Database\\Factories\\": "database/factories/"
+            "Webplusmultimedia\\LittleAdminArchitect\\": "src/"
         }
     },
     "autoload-dev": {

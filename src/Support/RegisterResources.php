@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Support;
 use Illuminate\Filesystem\Filesystem;
 use SplFileInfo;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Resources;
 
 class RegisterResources
 {
@@ -38,7 +39,7 @@ class RegisterResources
                         ->finish('/')
                         ->append('Pages');
                     $resourceClassBasePath = (string) str($resourceFile->getRealPath())->between('app/', '.php')->prepend('App/');
-                    /** @var resource $resourceClassBaseName */
+                    /** @var Resources\Resource $resourceClassBaseName */
                     $resourceClassBaseName = (string) str($resourceClassBasePath)->replace('/', '\\');
                     $pages = $this->filesystem->files($pagesDirectory);
                     $groupName = (string) str(string: $resourceGroupe)->afterLast('/');

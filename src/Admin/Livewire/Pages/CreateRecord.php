@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages;
 
 use Illuminate\Support\Str;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Resources;
 
 class CreateRecord extends Page
 {
@@ -16,7 +17,7 @@ class CreateRecord extends Page
     public function mount(): void
     {
 
-        /** @var resource $resource */
+        /** @var Resources\Resource $resource */
         $resource = static::getResource();
         /*static::$form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
 
