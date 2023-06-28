@@ -28,6 +28,21 @@ class ImageColumn extends contracts\AbstractColumn
         return null;
     }
 
+    public function getUrlForCroppa(): ?string
+    {
+        /** @var null|array $state */
+        $state = $this->getState();
+
+        if ( ! blank($state)) {
+            $_file = $state[0];
+            if (Storage::disk($this->getDiskName())->exists($this->getPathFile($_file))) {
+                return str($this->getPathFile($_file))->prepend('storage/')->toString();
+            }
+        }
+
+        return null;
+    }
+
     protected function setUp(): void
     {
         parent::setUp();

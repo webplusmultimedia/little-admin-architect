@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
+use Bkwld\Croppa\Facades\Croppa;
 use Exception;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Str;
@@ -130,7 +131,10 @@ class FileUpload extends Field
 
                     if (is_array($file) and isset($file['file']) and isset($file['delete']) and $file['delete']) {
                         $_file = $component->getPathFile($file['file']);
-                        $component->getDisk()->delete($_file);
+                        if ($component->getDisk()->exists($_file)) {
+                            Croppa::reset(str($_file)->prepend('storage/')->toString());
+                            $component->getDisk()->delete($_file);
+                        }
 
                         return null;
                     }
@@ -164,7 +168,7 @@ class FileUpload extends Field
     {
         $file = TemporaryUploadedFile::unserializeFromLivewireRequest($filePath[key($filePath)]);
         $newName = $this->isPreserveFilenames() ?
-            Str::slug(str($file->getClientOriginalName())->beforeLast('.')) . '.' . $file->getClientOriginalExtension() :
+            Str::slug(str($file->getClientOriginalName())->beforeLast('.'), '_') . '.' . $file->getClientOriginalExtension() :
             key($filePath) . '.' . $file->getClientOriginalExtension();
 
         $methodStore = 'public' === $this->evaluate($this->visibility) ? 'storePubliclyAs' : 'storeAs';
@@ -174,7 +178,7 @@ class FileUpload extends Field
             $tmpName = str($newName)->beforeLast('.') . "-{$countTmp}." . str($newName)->afterLast('.');
             if ($this->getDisk()->exists($this->getPathFile($newName)) and $this->isPreserveFilenames()) {
                 while ($this->getDisk()->exists($this->getPathFile($tmpName))) {
-                    $tmpName = str($newName)->beforeLast('.') . "-{$countTmp}." . str($newName)->afterLast('.');
+                    $tmpName = str($newName)->beforeLast('.') . "_{$countTmp}." . str($newName)->afterLast('.');
                     $countTmp++;
                 }
                 $newName = $tmpName;
@@ -263,7 +267,7 @@ class FileUpload extends Field
 
         if ($storage = $this->getStorageForFile($file)) {
             return [
-                'url' => $storage->url($file),
+                'url' => Croppa::url(str($file)->prepend('storage/')->toString(), 320, 200),
                 'size' => round($storage->size($file) / 1000, 2) . 'Kb',
                 'name' => basename($storage->path($file)),
             ];

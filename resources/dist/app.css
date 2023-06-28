@@ -1718,6 +1718,9 @@ label {
 .h-auto {
   height: auto;
 }
+.h-12 {
+  height: 3rem;
+}
 .max-h-\[calc\(100vh_-_20em\)\] {
   max-height: calc(100vh - 20em);
 }
@@ -1762,6 +1765,9 @@ label {
 }
 .w-screen {
   width: 100vw;
+}
+.w-12 {
+  width: 3rem;
 }
 .min-w-\[12rem\] {
   min-width: 12rem;
