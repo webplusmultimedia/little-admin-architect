@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Resources;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 class ListRecord extends Page
@@ -25,7 +26,7 @@ class ListRecord extends Page
 
     public static function getForm(): Form
     {
-        /** @var resource $resource */
+        /** @var Resources\Resource $resource */
         $resource = static::getResource();
         static::$form = $resource::getFormSchema(Form::make());
 
