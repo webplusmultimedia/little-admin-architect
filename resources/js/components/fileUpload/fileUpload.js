@@ -25,7 +25,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         async uploadUsing(fileKey, file) {
             let newFile = this.getNewFile(file)
             newFile['id'] = fileKey
-            this.addPhotosToView(newFile)
+            this.photos.push(newFile)
             this.$store.laDatas.startUploadFile = true
             this.stopDragging = true
 
@@ -48,19 +48,6 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                     this.progress = ev.detail.progress
                 })
 
-        },
-        addPhotosToView(newFile) {
-
-            /*let endPhotos = Array.from(this.photos)
-            endPhotos = endPhotos.pop() ?? false
-
-            if (endPhotos && endPhotos.isInit) {
-                endPhotos.isInit = true
-                this.photos = [this.photos.map((photo) => photo.url === endPhotos.url ? endPhotos : photo), newFile]
-                return
-            }*/
-
-            this.photos.push(newFile)
         },
         'dropZone': {
             ['@dragover.prevent.stop']() {

@@ -40,6 +40,7 @@
                 <div class="relative"  >
                     <div class="relative">
                         <input type="text" x-model="value" :id="$id('text-input')" x-on:click="toggle" class="cursor-pointer py-2 px-2"
+                               {{ $field->isRequired()?'required':'' }}
                                readonly
                         >
                         <button x-on:click.prevent="clearDate" x-show="selectedDay" class="absolute right-3 bottom-0 top-0">

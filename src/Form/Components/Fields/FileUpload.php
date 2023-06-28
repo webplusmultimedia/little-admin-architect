@@ -311,7 +311,7 @@ class FileUpload extends Field
                     return $file['id'] === $key;
                 }
                 if ( ! isset($file['file']) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
-                    return key($file) !== $key;
+                    return key($file) === $key;
                 }
 
                 return false;
@@ -348,7 +348,7 @@ class FileUpload extends Field
             }
         }
 
-        return true;
+        return false;
     }
 
     public function reorder(array $newOrder): array
