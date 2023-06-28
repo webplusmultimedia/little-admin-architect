@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Conce
 
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages\CreateRecord;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages\EditRecord;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 trait CanInitForm
@@ -15,7 +15,7 @@ trait CanInitForm
     {
         $page = $this->getResourcePage();
 
-        /** @var Resources $resource */
+        /** @var resource $resource */
         $resource = $page::getResource();
         $this->_form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
         $this->_form->setPagesForResource($page);

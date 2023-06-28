@@ -101,7 +101,7 @@
                                     'text-slate-500 bg-slate-50' => !request()->routeIs($navigation['route_prefix']),
                                  ])
                             >
-                                {{ $group }}
+                                {{ str($group)->snake()->replace('_',' ')->title() }}
                             </div>
                         @endif
                         <div class="flex">

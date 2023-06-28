@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
 
 trait CanInitTable
@@ -21,7 +21,7 @@ trait CanInitTable
         /** @var Page $page */
         $page = app($pageClass);
 
-        /** @var Resources $resource */
+        /** @var resource $resource */
         $resource = $page::getResource();
 
         $this->_table = $resource::getTableColumns(\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table::make($resource::getPluralModelLabel()));

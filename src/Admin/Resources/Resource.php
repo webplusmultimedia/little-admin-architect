@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
 
-class Resources
+class Resource
 {
     protected static ?string $breadcrumb = null;
 
@@ -130,6 +130,14 @@ class Resources
     {
         if (filled(static::$slug)) {
             return (string) static::$slug;
+        }
+        $groupName = str(static::class)->after(config('little-admin-architect.resources.namespace'))
+            ->replace('\\', '/')
+            ->after('/')
+            ->before('/')->kebab()->slug();
+
+        if ( ! blank($groupName)) {
+            return (string) str($groupName)->lower() . '/' . static::getResourceName();
         }
 
         return str(static::getResourceName())->append('/') . Str::of(static::getModel())

@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages;
 
 use Illuminate\Support\Str;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 class EditRecord extends Page
@@ -17,7 +17,7 @@ class EditRecord extends Page
 
     public function mount(mixed $record): void
     {
-        /** @var Resources $resource */
+        /** @var resource $resource */
         $resource = static::getResource();
         static::$form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
         static::$key = $record;

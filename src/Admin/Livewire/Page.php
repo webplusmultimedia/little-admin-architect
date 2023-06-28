@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
 use Livewire\Component;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
 
 class Page extends Component
 {
@@ -24,7 +24,7 @@ class Page extends Component
 
     protected static ?string $routeName = null;
 
-    public static function getResource(): null|string|Resources
+    public static function getResource(): null|string|Resource
     {
         return static::$resource;
     }

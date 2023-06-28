@@ -7,7 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Support\Concerns;
 use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resources;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 trait InteractWithPage
@@ -27,7 +27,7 @@ trait InteractWithPage
         $this->livewireId($livewire->id);
     }
 
-    public function getResourcePage(): Resources|string|null
+    public function getResourcePage(): Resource|string|null
     {
         return $this->pageForResource::getResource();
     }
