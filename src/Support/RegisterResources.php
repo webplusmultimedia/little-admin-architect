@@ -7,7 +7,6 @@ namespace Webplusmultimedia\LittleAdminArchitect\Support;
 use Illuminate\Filesystem\Filesystem;
 use SplFileInfo;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
 
 class RegisterResources
 {
