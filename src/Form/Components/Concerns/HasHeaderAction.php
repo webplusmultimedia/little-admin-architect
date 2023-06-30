@@ -1,22 +1,16 @@
 <?php
 
-declare(strict_types=1);
+namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns;
 
-namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
-
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\TableAction;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\TableAction\CreateAction;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Contrats\FormAction;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\CreateAction;
 
 trait HasHeaderAction
 {
-    /**
-     * @var TableAction[]
-     */
+    /** @var FormAction[] $headerActions */
     protected array $headerActions = [];
 
-    /**
-     * @param  TableAction[]  $headerActions
-     */
+    /** @param FormAction[] $headerActions */
     public function headerActions(array $headerActions): static
     {
         foreach ($headerActions as $headerAction) {
@@ -25,11 +19,7 @@ trait HasHeaderAction
                     str(__('little-admin-architect::table.button.create', ['label' => 'un ']))->append($this->title)->singular()->value()
                 );
                 $headerAction->success();
-                if ($this->hasModalForm()) {
-                    $headerAction->wireClick('showModalForm()');
-                } else {
-                    $headerAction->url($this->linkCreate());
-                }
+                $headerAction->url($this->linkCreate());
             }
         }
         $this->headerActions = $headerActions;
@@ -37,9 +27,7 @@ trait HasHeaderAction
         return $this;
     }
 
-    /**
-     * @return TableAction[]
-     */
+    /** @return  FormAction[] */
     public function getHeaderActions(): array
     {
         return $this->headerActions;

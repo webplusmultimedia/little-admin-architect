@@ -1,7 +1,7 @@
-<div class="">
+<div class="w-full md:w-fit">
     @if($action->getType() === 'link')
         <a href="{{ url($action->getUrl()) }}"
-            @class([ $action->getClass(),'btn inline-flex items-center justify-center space-x-1' ])
+            @class([ $action->getClass(),'w-full md:w-fit btn inline-flex items-center justify-center space-x-1' ])
         >
             @if($action->getIconPosition()==='before' and $action->getIcon())
                 <x-dynamic-component :component="$action->getIcon()" class="w-4 h-4"  aria-hidden="true"/>
@@ -25,7 +25,5 @@
                 <x-dynamic-component :component="$action->getIcon()" class="w-4 h-4"  aria-hidden="true"/>
             @endif
         </button>
-
-
     @endif
 </div>

@@ -7,8 +7,17 @@
     $buttonCancel = $form->getCancelButton();
 @endphp
 <div class="py-5 px-2">
-    <div class="flex flex-col bg-white px-5 py-2 mb-8 text-lg font-bold rounded-md shadow-sm">
-        <h2 class="text-2xl !m-0">{{ $this->getTitleForm() }}</h2>
+    <div class="flex flex-col md:flex-row justify-between bg-white px-5 py-2 mb-8 text-lg font-bold rounded-md shadow-sm">
+        <div class="">
+            <h2 class="text-2xl !m-0">{{ $this->getTitleForm() }}</h2>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-center gap-2">
+            @foreach($form->getHeaderActions() as $headerAction)
+                {{ $headerAction }}
+            @endforeach
+        </div>
+
     </div>
 
     <div class="" x-data="{}">

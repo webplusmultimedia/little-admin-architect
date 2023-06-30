@@ -49,6 +49,10 @@ trait HasRowActions
         return $this->rowActions;
     }
 
+    public function hasRowsAction(): int
+    {
+        return count($this->rowActions);
+    }
     protected function applyRecordToEditAction(EditAction $rowAction): void
     {
         if ( ! $this->hasModalForm()) {

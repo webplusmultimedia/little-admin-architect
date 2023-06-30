@@ -9,7 +9,14 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\EditAction;
 class {{ ressourceClass }} extends Resource
 {
     protected static ?string $model = {{ modelClass }};
-    protected static ?string $navigationLabel = {{ navigationLabel }};
+
+    protected static ?string $navigationLabel = null;
+
+    protected static ?int $navigationSort = null;
+
+    protected static ?string $navigationIcon = null;
+
+    protected static ?string $recordTitleAttribute = null;
 
      public static function getFormSchema(Form $form): Form
      {
@@ -28,8 +35,6 @@ class {{ ressourceClass }} extends Resource
      }
      public static function getPages(): array
          {
-             return [
-                 {{ pages }}
-             ];
+             return {{ pages }};
          }
 }

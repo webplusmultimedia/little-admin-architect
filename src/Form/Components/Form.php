@@ -19,6 +19,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanUpdatedDa
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanValidatedValues;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasFields;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasHeaderAction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasSelectOptionLabelUsing;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasState;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithUploadFiles;
@@ -50,6 +51,7 @@ final class Form implements Htmlable
     use InteractWithLivewire;
     use InteractWithPage;
     use InteractWithRecord;
+    use HasHeaderAction;
 
     protected string $view = 'form';
 
@@ -89,6 +91,8 @@ final class Form implements Htmlable
     {
         $this->model($model);
         $this->setPagesForResource($resource);
+        //dd($this->pageForResource::getActions());
+        $this->headerActions($this->pageForResource::getActions());
     }
 
     public function livewireId(string $id): void

@@ -14,12 +14,12 @@ module.exports = {
         },
         colors: {
             'primary-datepicker' : colors.yellow,
-            primary : colors.yellow,
+            primary : colors.violet,
             secondary : colors.lime,
             info : {...colors.cyan,...{DEFAULT : "#009399"}} ,
             error : {...colors.rose,...{DEFAULT : "#d7035f"}},
             warning : colors.yellow,
-            success : colors.emerald,
+            success : {...colors.emerald,...{DEFAULT : "#028248"}},
             primaire : '#f46316',
             danger : '#d7035f'
         },

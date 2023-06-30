@@ -47,6 +47,12 @@ text-tag-warning
 text-tag-danger
 text-tag-primary
 text-tag
+btn-success
+btn-error
+btn-secondary
+btn-info
+btn-danger
+btn-warning
 btn-outline
 btn-outline-primary
 btn-outline-warning

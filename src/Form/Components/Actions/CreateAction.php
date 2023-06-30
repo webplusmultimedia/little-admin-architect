@@ -1,19 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\TableAction;
+namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\TableAction;
 
-class CreateAction extends TableAction implements Htmlable
+class CreateAction extends Contrats\FormAction implements Htmlable
 {
-    public function __construct()
-    {
-
-    }
 
     public static function make(): CreateAction
     {
@@ -25,6 +18,6 @@ class CreateAction extends TableAction implements Htmlable
     }
     public function toHtml(): string
     {
-        return $this->render()->render();
+       return $this->render()->render();
     }
 }

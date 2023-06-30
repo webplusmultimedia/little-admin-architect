@@ -15,7 +15,7 @@
         </div>
         <div class="flex items-center">
             @foreach($table->getHeaderActions() as $headerAction)
-                <x-little-action::table-action :action="$headerAction"/>
+                {{ $headerAction }}
             @endforeach
         </div>
     </div>
@@ -36,9 +36,12 @@
                                                  :sort-column="$sortColumn"
                             />
                         @endforeach
-                        <th class="w-5">
-                            &nbsp;
-                        </th>
+                        @if($table->hasRowsAction())
+                            <th class="w-5">
+                                &nbsp;
+                            </th>
+                        @endif
+
                     </tr>
                     </thead>
                     <tbody class="divide-y">
@@ -48,13 +51,15 @@
                                 @php($column->setRecord($record)->livewireId($table->getLivewireId()))
                                 <x-dynamic-component :component="$column->getView()" :column="$column" :livewireId="$table->getLivewireId()"/>
                             @endforeach
-                            <td class="max-w-max whitespace-nowrap">
-                                <div class="px-3 w-full inline-flex gap-2 items-center justify-end">
-                                    @foreach($table->getRowActions($record) as $action)
-                                        <x-little-action::table-row-action :action="$action"/>
-                                    @endforeach
-                                </div>
-                            </td>
+                            @if($table->hasRowsAction())
+                                <td class="max-w-max whitespace-nowrap">
+                                    <div class="px-3 w-full inline-flex gap-2 items-center justify-end">
+                                        @foreach($table->getRowActions($record) as $action)
+                                            {{ $action }}
+                                        @endforeach
+                                    </div>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>

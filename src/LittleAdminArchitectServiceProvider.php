@@ -15,6 +15,7 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Mixins\SelectMixing;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Modal\LittleAdminModal;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Table;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
+use Webplusmultimedia\LittleAdminArchitect\Commands\MakeResourceCommand;
 use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 use Webplusmultimedia\LittleAdminArchitect\Support\Components\Livewire\Notification;
 
@@ -28,7 +29,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
             ->hasViews('little-views')
             ->hasRoute('admin')
             ->hasTranslations()
-
+            ->hasCommand(MakeResourceCommand::class)
             //->hasMigration('create_little-admin-architect_table')
             ->hasCommand(LittleAdminArchitectCommand::class);
     }
