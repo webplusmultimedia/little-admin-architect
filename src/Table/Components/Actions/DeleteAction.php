@@ -30,8 +30,9 @@ class DeleteAction extends Action implements Htmlable
 
     public function render(): View
     {
-        return view('little-views::action.table-row-action',['action'=>$this]);
+        return view('little-views::action.table-row-action', ['action' => $this]);
     }
+
     public function toHtml(): string
     {
         return $this->render()->render();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Contrats\FormAction;
@@ -7,10 +9,10 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\CreateAction;
 
 trait HasHeaderAction
 {
-    /** @var FormAction[] $headerActions */
+    /** @var FormAction[] */
     protected array $headerActions = [];
 
-    /** @param FormAction[] $headerActions */
+    /** @param  FormAction[]  $headerActions */
     public function headerActions(array $headerActions): static
     {
         foreach ($headerActions as $headerAction) {

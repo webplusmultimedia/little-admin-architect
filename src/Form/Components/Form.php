@@ -43,6 +43,7 @@ final class Form implements Htmlable
     use HasDefaultValue;
     use HasFields;
     use HasGridColumns;
+    use HasHeaderAction;
     use HasModal;
     use HasSchema;
     use HasSelectOptionLabelUsing;
@@ -51,7 +52,6 @@ final class Form implements Htmlable
     use InteractWithLivewire;
     use InteractWithPage;
     use InteractWithRecord;
-    use HasHeaderAction;
 
     protected string $view = 'form';
 

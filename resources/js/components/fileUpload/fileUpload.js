@@ -150,7 +150,9 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                 ghostClass: 'opacity-50',
                 animation: 180,
                 onEnd: async (evt) => {
-                    this.reorderFiles(sort.toArray())
+                    if(evt.oldIndex !== evt.newIndex) {
+                        this.reorderFiles(sort.toArray())
+                    }
                 }
             })
 

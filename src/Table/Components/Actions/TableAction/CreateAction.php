@@ -19,10 +19,12 @@ class CreateAction extends TableAction implements Htmlable
     {
         return new self();
     }
+
     public function render(): View
     {
-        return view('little-views::action.table-action',['action'=>$this]);
+        return view('little-views::action.table-action', ['action' => $this]);
     }
+
     public function toHtml(): string
     {
         return $this->render()->render();

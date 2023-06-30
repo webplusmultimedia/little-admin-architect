@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Contrats;
 
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\BaseAction;

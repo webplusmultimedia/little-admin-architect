@@ -2,15 +2,9 @@
 namespace {{ namespace }};
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
 use {{ extendPageNamespace }};
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\TableAction\CreateAction;
 
 class {{ pageClass }} extends {{ extendPageName }}
 {
     protected static ?string $resource = {{ PageResourceClass }};
-    public static function getActions(): array
-    {
-        return [
-            CreateAction::make()
-        ];
-    }
+
 }
