@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Command\concerns;
 
-use Illuminate\Support\Str;
-
 trait CanCreateResourcePage
 {
     private function createResourceAndPages(array $resourceParams, array $pageParams): bool
@@ -16,8 +14,10 @@ trait CanCreateResourcePage
             return false;
         }
 
-        return $this->createResource($resourceParams);
-        //$this->createPages($pageParams);
+        $this->createResource($resourceParams);
+        $this->createPages($pageParams);
+
+        return true;
     }
 
     public function pageExist(array $pageParams): bool
@@ -39,13 +39,29 @@ trait CanCreateResourcePage
             'modelClass' => $resourceParams['modelClass'],
             'namespace' => $resourceParams['nameSpace'],
             'pages' => $resourceParams['pages'],
+            'pageNamespace' => str($resourceParams['nameSpace'])
+                ->append('\\', $resourceParams['name'], '\\Pages'),
         ];
-        /*$path = (string) Str::of($resourceParams['file'])
-            ->replace('\\', '/')
-            ->replace('//', '/');*/
-        $this->info($resourceParams['file'] . '   --    ' . $resourceParams['stub']);
+
         $this->copyStubToPath($resourceParams['stub'], $resourceParams['file'], $replacements);
 
         return true;
+    }
+
+    protected function createPages(array $paramsPages): void
+    {
+        foreach ($paramsPages as $page) {
+            $replacements = [
+                'extendPageNamespace' => $page['extendPageNamespace'],
+                'extendPageName' => $page['extendPageName'],
+                'PageResourceClass' => $page['PageResourceClass'],
+                'PageResourceNamespace' => $page['PageResourceNamespace'],
+                'pageClass' => $page['pageClass'],
+                'nameSpace' => $page['nameSpace'],
+            ];
+
+            $this->copyStubToPath($page['stub'], $page['file'], $replacements);
+
+        }
     }
 }

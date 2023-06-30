@@ -1,5 +1,7 @@
 <?php
 namespace {{ namespace }};
+
+use {{ pageNamespace }};
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
@@ -20,7 +22,9 @@ class {{ ressourceClass }} extends Resource
 
      public static function getFormSchema(Form $form): Form
      {
-        return $form->schema([]);
+        return $form->schema([
+
+        ]);
      }
 
       public static function getTableColumns(Table $table): Table
@@ -30,7 +34,7 @@ class {{ ressourceClass }} extends Resource
                 [
                         EditAction::make(),
                         DeleteAction::make(),
-                    ]
+                ]
             );
      }
      public static function getPages(): array

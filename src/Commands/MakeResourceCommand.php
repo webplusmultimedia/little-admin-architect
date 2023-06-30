@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Commands;
 
+use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Webplusmultimedia\LittleAdminArchitect\Support\Command\concerns\CanCreateResourcePage;
 use Webplusmultimedia\LittleAdminArchitect\Support\Command\concerns\CanManipulateFiles;
 
-class MakeResourceCommand extends \Illuminate\Console\Command
+class MakeResourceCommand extends Command
 {
     use CanCreateResourcePage;
     use CanManipulateFiles;
@@ -64,9 +65,6 @@ class MakeResourceCommand extends \Illuminate\Console\Command
 
         $paramsPages = $this->getParamsPages(['Edit', 'Create', 'List'], $page, $resourcePath, $resourceNameSpace, $resource);
 
-        /* $this->info(collect($pageRessource)->toJson());
-         $this->info(collect($paramsPages)->toJson());*/
-
         if ( ! $this->confirm('Are you sure you want to do this ?', false)) {
             $this->error('No regret');
 
@@ -85,22 +83,24 @@ class MakeResourceCommand extends \Illuminate\Console\Command
 
     private function getParamsPages(array $pages, string $resourceName, string $resourcePath, string $resourceNameSpace, string $resource): array
     {
-
         $listPages = [];
         foreach ($pages as $page) {
             $pageNamespace = str('Webplusmultimedia\\LittleAdminArchitect\\Admin\\Livewire\\Pages\\')->append($page, 'Record');
             $resourcePage = str($page)->ucfirst()->append('Page')->value();
-            $nameSpace = str($resourceNameSpace)->append('\\Pages')->value();
-            $directory = str($resourcePath)->append('/Pages')->value();
+            $extendPageName = str($page)->ucfirst()->append('Record')->value();
+            $nameSpace = str($resourceNameSpace)->append('\\', $resource, '\\Pages')->value();
+            $directory = str($resourcePath)->append('/', $resource, '/Pages')->value();
             $listPages[$page] = [
                 'name' => $resourcePage,
                 'nameSpace' => $nameSpace,
-                'extendPageNameSpace' => $pageNamespace,
-                'stub' => str($this->stub)->append('/', $page, 'Page.stub'),
+                'extendPageNamespace' => $pageNamespace,
+                'extendPageName' => $extendPageName,
+                'PageResourceClass' => str($resource)->append('::class'),
+                'PageResourceNamespace' => Str::of($resourceNameSpace)->append('\\', $resource)->value(),
+                'pageClass' => $resourcePage,
+                'stub' => str($this->stub)->append('/', 'ResourcePage.stub')->value(),
                 'class' => str($nameSpace)->append('\\', $resourcePage)->value(),
                 'file' => str($directory)->append('/', $resourcePage . '.php')->value(),
-                'PageResourceClass' => str($resource)->append('::class'),
-                'nameSpaceResource' => Str::of($resourceNameSpace)->append('\\', $resource)->value(),
             ];
         }
 
@@ -110,9 +110,9 @@ class MakeResourceCommand extends \Illuminate\Console\Command
     private function getPages(): string
     {
         return '[' .
-            PHP_EOL . "    'index'  => Pages\ListPage::route('/')," .
-            PHP_EOL . "    'create' => Pages\CreatePage::route('/create')," .
-            PHP_EOL . "    'edit'   => Pages\EditPage::route('/{record}/edit')," .
-            PHP_EOL . '];';
+            PHP_EOL . "                'index'  => Pages\ListPage::route('/')," .
+            PHP_EOL . "                'create' => Pages\CreatePage::route('/create')," .
+            PHP_EOL . "                'edit'   => Pages\EditPage::route('/{record}/edit')," .
+            PHP_EOL . '            ]';
     }
 }
