@@ -45,8 +45,8 @@
                     >
                 </x-dynamic-component>
             @endforeach
-            <x-dynamic-component :component="$field->getViewComponentForHelperText()" :caption="$field->getHelperText()"/>
-            <x-dynamic-component :component="$field->getViewComponentForErrorMessage()" :message="$field->getErrorMessage($errors)"/>
+            <x-little-anonyme::form-components.fields.partials.helper-text :text="$field->getHelperText()"/>
+            <x-little-anonyme::form-components.fields.partials.error-message :message="$field->getErrorMessage($errors)"/>
         </div>
     </x-dynamic-component>
 @endif

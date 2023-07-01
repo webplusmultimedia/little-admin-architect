@@ -38,8 +38,8 @@
                 @endforeach
             </select>
         @endif
-        <x-dynamic-component :component="$field->getViewComponentForHelperText()" :caption="$field->getHelperText()" class="mb-1"/>
-        <x-dynamic-component :component="$field->getViewComponentForErrorMessage()" :message="$field->getErrorMessage($errors)" class="mb-1"/>
+        <x-little-anonyme::form-components.fields.partials.helper-text :text="$field->getHelperText()" class="mb-1"/>
+        <x-little-anonyme::form-components.fields.partials.error-message :message="$field->getErrorMessage($errors)" class="mb-1"/>
     </x-dynamic-component>
 @endif
 

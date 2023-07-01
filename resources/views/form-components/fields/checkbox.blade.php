@@ -41,11 +41,10 @@
                     >
                 @endif
             </x-dynamic-component>
-            @if($errorMessage)
-                <div class="wf-full">
-                    <x-dynamic-component :component="$field->getViewComponentForErrorMessage()" :message="$errorMessage"/>
-                </div>
-            @endif
+
+                    <x-little-anonyme::form-components.fields.partials.helper-text :text="$field->getHelperText()"/>
+                    <x-little-anonyme::form-components.fields.partials.error-message :message="$field->getErrorMessage($errors)"/>
+
         </div>
     </x-dynamic-component>
 @endif
