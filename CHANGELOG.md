@@ -2,6 +2,13 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## Change view components renderer - 2023-07-01
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.1.02-alpha...v0.1.10-alpha
+
+- Remove all views componets
+- All components now rendered by their own
+
 ## refactoring livewire Pages - 2023-06-26
 
 **Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.1.01-alpha...v0.1.02-alpha
