@@ -12,5 +12,5 @@ class DateTimePicker extends Field
     use HasConfigDateTime;
     use HasRangeDate;
 
-    protected string $view = 'date-time-picker-field';
+    protected string $view = 'date-time-range-picker';
 }

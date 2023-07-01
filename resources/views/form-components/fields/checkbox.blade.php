@@ -1,8 +1,6 @@
 @php use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\CheckBox;
     /** @var CheckBox $field */
-    $field = $getConfig();
     $id = $field->getId();
-    $errorMessage = $field->getErrorMessage($errors);
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
@@ -27,7 +25,7 @@
             >
                 @if($field->getType() === 'switch')
                     <x-little-anonyme::form-components.fields.partials.toggle-switch
-                            {{ $attributes->merge(['wire:model' . $field->getWireModifier() => ($field->getStatePath())]) }}
+                            {{ $attributes->merge(['wire:model' . $field->getWireModifier() => $field->getStatePath()]) }}
                             :id="$id"
 
                     />
@@ -41,7 +39,6 @@
                     >
                 @endif
             </x-dynamic-component>
-
                     <x-little-anonyme::form-components.fields.partials.helper-text :text="$field->getHelperText()"/>
                     <x-little-anonyme::form-components.fields.partials.error-message :message="$field->getErrorMessage($errors)"/>
 

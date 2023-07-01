@@ -22,7 +22,6 @@
     )"
      wire:ignore
         {{ $attributes }}
-
 >
     <div class=""
          role="combobox" aria-autocomplete="list"

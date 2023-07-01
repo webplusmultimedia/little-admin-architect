@@ -1,7 +1,6 @@
 @php use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Textarea; @endphp
 @php
     /** @var Textarea $field */
-    $field = $getConfig();
     $id = $field->getId();
 
 @endphp
@@ -26,9 +25,6 @@
             :showRequired="$field->isRequired()"
         />
         <div class="">
-            {{-- @if($prepend)
-                 <x:form::partials.addon :addon="$prepend"/>
-             @endif--}}
             <textarea {{ $attributes->merge([
                 'wire:model' . $field->getWireModifier() =>  $field->getStatePath(),
                 'id' => $id,
@@ -36,10 +32,6 @@
                 'placeholder' => $field->getPlaceHolder(),
                 'aria-describedby' => $id
             ])}}></textarea>
-            {{--
-              @if($append)
-                  <x:form::partials.addon :addon="$append"/>
-              @endif--}}
             <x-little-anonyme::form-components.fields.partials.helper-text :text="$field->getHelperText()"/>
             <x-little-anonyme::form-components.fields.partials.error-message :message="$field->getErrorMessage($errors)"/>
         </div>

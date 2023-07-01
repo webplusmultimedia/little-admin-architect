@@ -14,7 +14,7 @@ class Input extends AbstractComponent
 {
     use HasAddon;
     use HasName;
-   // use HasValidation;
+    // use HasValidation;
 
     public ?string $type = 'text';
 

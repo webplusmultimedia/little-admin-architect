@@ -25,7 +25,7 @@
             {{ $slot ?? NULL }}
             <div @class(["grid gap-5", $form->getColumns()]) >
                 @foreach($form->getFields() as $field)
-                    <x-dynamic-component :component="$field->getFieldView()" :field="$field"/>
+                    {{ $field }}
                 @endforeach
             </div>
             <div class="flex justify-end group-btn px-3 py-5 bg-white mt-5 rounded-md border border-gray-200" aria-autocomplete="none">

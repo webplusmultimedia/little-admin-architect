@@ -30,7 +30,7 @@
                 'class' => 'py-2 px-2',
                 'type' => $field->getType(),
                 'placeholder' => $field->getPlaceHolder(),
-               // 'aria-describedby' =>  $id . '-caption',
+                'aria-describedby' =>  $id,
                 'minlength' => $field->getMinLength() ,
                 'maxlength' => $field->getMaxLength() ,
                 'step' => $field->getStep() ,

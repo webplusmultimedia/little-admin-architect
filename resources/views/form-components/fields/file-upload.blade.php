@@ -1,7 +1,6 @@
 @php
     use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\FileUpload;
     /** @var FileUpload $field */
-	$field = $getConfig();
 	$id = $field->getId();
 @endphp
 @if($field->isHidden())

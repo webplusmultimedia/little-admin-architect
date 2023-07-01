@@ -26,6 +26,7 @@ trait HasName
     {
         return $this->getPrefix() . $this->name;
     }
+
     public function getStatePath(): string
     {
         return $this->getPrefix() . $this->name;

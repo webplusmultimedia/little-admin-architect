@@ -2,8 +2,6 @@
 
     use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Radio;
     /** @var Radio $field */
-    $field = $getConfig();
-
     $id = $field->getId();
 
 @endphp

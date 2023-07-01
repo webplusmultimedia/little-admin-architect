@@ -34,7 +34,7 @@ abstract class AbstractField implements Htmlable
 
     public function getView(): string
     {
-        if (! isset($this->view)) {
+        if ( ! isset($this->view)) {
             throw new Exception('Class [' . static::class . '] extends [' . static::class . '] but does not have a [$view] property defined.');
         }
 

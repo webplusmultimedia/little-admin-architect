@@ -1,7 +1,7 @@
 @php
     use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\DateTimePicker;
     /** @var DateTimePicker $field */
-    $field = $getConfig();
+
     $id = $field->getId();
 @endphp
 @if($field->isHidden())

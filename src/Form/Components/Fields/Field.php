@@ -51,6 +51,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use HasHelperText;
     use HasId;
     use HasLabel;
+    use HasMessageBag;
     use HasName;
     use HasPlaceholder;
     use HasState;
@@ -60,7 +61,6 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use InteractWithRules;
     use InteractWithWrapper;
     use ValidateValuesForRules;
-    use HasMessageBag;
 
     /**
      * @var array<string,string>|Model|null
@@ -78,7 +78,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         $this->label = $label;
         $this->name = $name;
         $this->setUp();
-        $this->setViewDatas('field',$this);
+        $this->setViewDatas('field', $this);
     }
 
     public function livewire(BaseForm|Component $livewire): void

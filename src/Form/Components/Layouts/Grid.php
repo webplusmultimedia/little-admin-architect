@@ -12,7 +12,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Layouts\Grid\GridColu
 
 final class Grid extends AbstractLayout
 {
-    protected string $view = 'layouts.grid';
+    protected string $view = 'grid';
 
     protected string $name = '...';
 

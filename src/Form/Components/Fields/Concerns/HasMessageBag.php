@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
 
 use Illuminate\Contracts\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 trait HasMessageBag
 {
     protected string|null $errorBag = null;
+
     public function getErrorMessage(ViewErrorBag $errors, string|null $locale = null): string|null
     {
         /*if (! $this->shouldDisplayValidationFailure()) {

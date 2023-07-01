@@ -1,10 +1,7 @@
 @php
     use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\CheckBoxList;
 /** @var CheckBoxList $field */
-    $field = $getConfig();
     $id = $field->getId();
-
-
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field

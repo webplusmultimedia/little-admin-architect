@@ -11,6 +11,8 @@ final class Container extends AbstractLayout
 {
     use HasLabel;
 
+    protected string $view = 'container';
+
     protected string $name = '...';
 
     protected string $colSpan = 'lg:col-span-full';

@@ -16,13 +16,13 @@ class FileUpload extends Field
 {
     use HasFileDirectory;
 
-    protected string $view = 'file-upload-field';
+    protected string $view = 'file-upload';
 
     protected string $prefixName = 'data';
 
     protected function setUp(): void
     {
-        $this->setViewDatas('field',$this);
+        $this->setViewDatas('field', $this);
         $this->afterStateHydrated(static function (string|array|null $state, FileUpload $component): void {
             if (blank($state)) {
                 $component->state([]);
