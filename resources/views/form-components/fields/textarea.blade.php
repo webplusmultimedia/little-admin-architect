@@ -3,15 +3,13 @@
     /** @var Textarea $field */
     $field = $getConfig();
     $id = $field->getId();
-    $errorMessage = $getErrorMessage($errors);
-    $isWired = $componentIsWired();
 
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
         {{ $attributes->except(['field'])
             ->merge([
-                   'wire:model' . $field->getWireModifier() => $field->getWireName(),
+                   'wire:model' . $field->getWireModifier() => $field->getStatePath(),
                    'id' => $id,
                    'type' => 'hidden',
             ])
@@ -32,7 +30,7 @@
                  <x:form::partials.addon :addon="$prepend"/>
              @endif--}}
             <textarea {{ $attributes->merge([
-                'wire:model' . $getComponentLivewireModifier() =>  $field->getWireName(),
+                'wire:model' . $field->getWireModifier() =>  $field->getStatePath(),
                 'id' => $id,
 				'rows' => $field->getRows(),
                 'placeholder' => $field->getPlaceHolder(),
@@ -43,7 +41,7 @@
                   <x:form::partials.addon :addon="$append"/>
               @endif--}}
             <x-dynamic-component :component="$field->getViewComponentForHelperText()" :caption="$field->getHelperText()"/>
-            <x-dynamic-component :component="$field->getViewComponentForErrorMessage()" :message="$errorMessage"/>
+            <x-dynamic-component :component="$field->getViewComponentForErrorMessage()" :message="$field->getErrorMessage($errors)"/>
         </div>
     </x-dynamic-component>
 @endif

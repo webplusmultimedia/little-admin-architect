@@ -2,13 +2,12 @@
     /** @var CheckBox $field */
     $field = $getConfig();
     $id = $field->getId();
-    $errorMessage = $getErrorMessage($errors);
-    $validationClass = $getValidationClass($errors);
+    $errorMessage = $field->getErrorMessage($errors);
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
             {{ $attributes->except(['field'])->merge([
-                       'wire:model' . $field->getWireModifier() => $field->getWireName(),
+                       'wire:model' . $field->getWireModifier() => $field->getStatePath(),
                        'id' => $id,
                        'type' => 'hidden',
                        ])
@@ -28,13 +27,13 @@
             >
                 @if($field->getType() === 'switch')
                     <x-little-anonyme::form-components.fields.partials.toggle-switch
-                            {{ $attributes->merge(['wire:model' . $field->getWireModifier() => ($field->getWireName())]) }}
+                            {{ $attributes->merge(['wire:model' . $field->getWireModifier() => ($field->getStatePath())]) }}
                             :id="$id"
 
                     />
                 @else
                     <input {{ $attributes->merge([
-                            'wire:model' . $field->getWireModifier() => ($field->getWireName()),
+                            'wire:model' . $field->getWireModifier() => ($field->getStatePath()),
                             'id' => $id,
                             'aria-describedby' => $id
                         ]) }}

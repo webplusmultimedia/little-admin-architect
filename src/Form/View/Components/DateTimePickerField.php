@@ -11,7 +11,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns\HasVali
 
 class DateTimePickerField extends AbstractComponent
 {
-    use HasValidation;
+    //use HasValidation;
 
     public function __construct(
         DateTimePicker $field,

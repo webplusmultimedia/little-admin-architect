@@ -6,13 +6,11 @@
 
     $id = $field->getId();
 
-    $errorMessage =  $getErrorMessage($errors);
-
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
             {{ $attributes->except(['field'])->merge([
-                       'wire:model' . $field->getWireModifier() => $field->getWireName(),
+                       'wire:model' . $field->getWireModifier() => $field->getStatePath(),
                        'id' => $id,
                        'type' => 'hidden',
                        ])
@@ -45,12 +43,12 @@
                            value="{{$key}}"
                            type="radio"
                            name="{{ $id }}"
-                           wire:model{{ $field->getWireModifier() }}="{{ $field->getWireName() }}"
+                           wire:model{{ $field->getWireModifier() }}="{{ $field->getStatePath() }}"
                     >
                 </x-dynamic-component>
             @endforeach
             <x-dynamic-component :component="$field->getViewComponentForHelperText()" :caption="$field->getHelperText()" class="mb-1"/>
-            <x-dynamic-component :component="$field->getViewComponentForErrorMessage()" :message="$errorMessage" class="mb-1"/>
+            <x-dynamic-component :component="$field->getViewComponentForErrorMessage()" :message="$field->getErrorMessage($errors)" class="mb-1"/>
         </div>
     </x-dynamic-component>
 @endif

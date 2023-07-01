@@ -3,13 +3,12 @@
     /** @var DateTimePicker $field */
     $field = $getConfig();
     $id = $field->getId();
-    $errorMessage =  $getErrorMessage($errors);
 @endphp
 @if($field->isHidden())
     @if($field->getConfig()->type!=='range')
         <x-little-anonyme::form-components.fields.partials.hidden-field
             {{ $attributes->except(['field'])->merge([
-                       'wire:model' . $field->getWireModifier() => $field->getWireName(),
+                       'wire:model' . $field->getWireModifier() => $field->getStatePath(),
                        'id' => $id,
                        'type' => 'hidden',
                        ])
@@ -29,7 +28,7 @@
                 x-data="webplusDateTime({
                    dayDate : @js($field->getComponentValue()) ,
                    config :  @js($field->getConfig()),
-                   dateTo : $wire.entangle(@js($field->getWireName())){{ $field->getWireModifier() }},
+                   dateTo : $wire.entangle(@js($field->getStatePath())){{ $field->getWireModifier() }},
                    dateFrom : @if($field->getDateFromWireName()) $wire.entangle(@js($field->getDateFromWireName())).defer @else @js(null) @endif
                     })"
                 x-id="['text-input']"
@@ -169,8 +168,8 @@
                 </div>
             </div>
 
-            <x-dynamic-component :component="$field->getViewComponentForHelperText()" :caption="$field->getHelperText()"/>
-            <x-dynamic-component :component="$field->getViewComponentForErrorMessage()" :message="$errorMessage"/>
+            <x-little-anonyme::form-components.fields.partials.helper-text :text="$field->getHelperText()"/>
+            <x-little-anonyme::form-components.fields.partials.error-message :message="$field->getErrorMessage($errors)"/>
         </div>
     </x-dynamic-component>
 @endif

@@ -24,6 +24,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasDe
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasHelperText;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasId;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasLabel;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasMessageBag;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasName;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasPlaceHolder;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasState;
@@ -59,6 +60,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use InteractWithRules;
     use InteractWithWrapper;
     use ValidateValuesForRules;
+    use HasMessageBag;
 
     /**
      * @var array<string,string>|Model|null
@@ -76,6 +78,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         $this->label = $label;
         $this->name = $name;
         $this->setUp();
+        $this->setViewDatas('field',$this);
     }
 
     public function livewire(BaseForm|Component $livewire): void

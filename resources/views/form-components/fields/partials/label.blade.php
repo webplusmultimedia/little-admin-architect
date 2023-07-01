@@ -1,5 +1,4 @@
-@if($label)
-    <div @class(["mb-1" => $wrappedWithMargin])>
+ <div @class(["mb-1" => $wrappedWithMargin])>
         <label {{ $attributes->merge(['for' => $id,'class' => '']) }}>
             {{ $slot }}
             {{ $label }}
@@ -9,5 +8,4 @@
                  </span>
             @endif
         </label>
-    </div>
-@endif
+ </div>

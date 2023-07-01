@@ -22,6 +22,7 @@ class FileUpload extends Field
 
     protected function setUp(): void
     {
+        $this->setViewDatas('field',$this);
         $this->afterStateHydrated(static function (string|array|null $state, FileUpload $component): void {
             if (blank($state)) {
                 $component->state([]);
