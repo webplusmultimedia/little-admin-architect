@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect;
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Livewire\Livewire;
@@ -16,7 +15,6 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Modal\LittleAdminModal
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Table;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
 use Webplusmultimedia\LittleAdminArchitect\Commands\MakeResourceCommand;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 use Webplusmultimedia\LittleAdminArchitect\Support\Components\Livewire\Notification;
 
 class LittleAdminArchitectServiceProvider extends PackageServiceProvider
@@ -46,7 +44,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
 
     public function registeringPackage(): void
     {
-        $this->app->singleton(FormBinder::class, fn (Application $app) => new FormBinder());
+
         $this->app->bind('little-admin-architect', fn (): LittleAdminArchitect => new LittleAdminArchitect());
         $this->app->scoped('little-admin-manager', function (): LittleAdminManager {
             return new LittleAdminManager();

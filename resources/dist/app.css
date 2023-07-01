@@ -1260,6 +1260,22 @@ label {
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
 }
+.modal__body {
+  width: 100%;
+  overflow-y: auto;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+@media (min-width: 768px) {
+  .modal__body {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+}
 .modal__head {
   display: flex;
   width: 100%;
@@ -1713,6 +1729,12 @@ label {
 .mt-5 {
   margin-top: 1.25rem;
 }
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
 .block {
   display: block;
 }
@@ -1760,6 +1782,15 @@ label {
 }
 .max-h-\[calc\(100vh_-_20em\)\] {
   max-height: calc(100vh - 20em);
+}
+.max-h-\[calc\(100vh_-_40em\)\] {
+  max-height: calc(100vh - 40em);
+}
+.max-h-\[calc\(100vh_-_5em\)\] {
+  max-height: calc(100vh - 5em);
+}
+.max-h-\[calc\(100vh_-_15em\)\] {
+  max-height: calc(100vh - 15em);
 }
 .min-h-screen {
   min-height: 100vh;
@@ -2128,6 +2159,10 @@ label {
   --tw-border-opacity: 1;
   border-color: rgb(203 213 225 / var(--tw-border-opacity));
 }
+.border-gray-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity));
+}
 .\!bg-primary-datepicker-200 {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(254 240 138 / var(--tw-bg-opacity)) !important;
@@ -2195,6 +2230,10 @@ label {
 }
 .bg-black\/20 {
   background-color: rgb(0 0 0 / 0.2);
+}
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 .bg-opacity-60 {
   --tw-bg-opacity: 0.6;
@@ -2296,6 +2335,18 @@ label {
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
+}
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.py-7 {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
 }
 .pb-4 {
   padding-bottom: 1rem;
@@ -2881,6 +2932,9 @@ label {
   }
   .md\:hidden {
     display: none;
+  }
+  .md\:max-h-\[calc\(100vh_-_20em\)\] {
+    max-height: calc(100vh - 20em);
   }
   .md\:w-auto {
     width: auto;

@@ -22,6 +22,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasFields;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasHeaderAction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasSelectOptionLabelUsing;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasState;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasTitle;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithUploadFiles;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasGridColumns;
@@ -48,6 +49,7 @@ final class Form implements Htmlable
     use HasSchema;
     use HasSelectOptionLabelUsing;
     use HasState;
+    use HasTitle;
     use InteractsWithUploadFiles;
     use InteractWithLivewire;
     use InteractWithPage;
@@ -84,6 +86,7 @@ final class Form implements Htmlable
 
     public function getLivewireId(): ?string
     {
+
         return $this->livewireId;
     }
 
@@ -161,18 +164,6 @@ final class Form implements Htmlable
                 }
             }
         }
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function title(string $title): Form
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     public function initMode(): void
