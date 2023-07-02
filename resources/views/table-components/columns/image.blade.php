@@ -1,6 +1,5 @@
 @php use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\ImageColumn; @endphp
 @php /**@var ImageColumn $column */
-    $column = $getColumn()
 @endphp
 <td wire:key="{{$column->getWireId()}}">
     <div class="flex  items-center justify-center w-12 h-12  min-w-max text-gray-800">

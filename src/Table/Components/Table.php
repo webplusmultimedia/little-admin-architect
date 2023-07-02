@@ -78,7 +78,6 @@ final class Table implements Htmlable
 
     protected function applyHeaders(): void
     {
-
         foreach ($this->columns as $column) {
             $this->headers(Header::make($column));
         }

@@ -18,6 +18,11 @@ trait HasHeader
      */
     public function getHeaders(): array
     {
+        foreach ($this->headers as $header) {
+            $header->sortColumn(sortColumn: $this->getSortColumn())
+                ->sortDirection(sortDirection: $this->getSortDirection());
+        }
+
         return $this->headers;
     }
 

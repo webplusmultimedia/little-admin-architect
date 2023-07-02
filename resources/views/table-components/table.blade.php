@@ -1,14 +1,17 @@
 @php
     use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
     /** @var Table $table */
-	//$table = $getTable();
     $sortDirection = $table->getSortDirection();
     $sortColumn = $table->getSortColumn();
 @endphp
 <div class="py-5 px-2">
-    <div class="flex justify-between bg-white px-5 py-2 mb-8">
-        <div class="">
-            <h1 class="text-2xl mb-0">{{ $table->title }}</h1>
+    <div class="flex justify-between bg-white px-5 py-3 mb-8">
+        <div class="flex flex-col">
+            <div class="inline-flex items-center gap-2">
+                <h1 class="text-2xl m-0">{{ $table->title }}</h1>
+                <span class="text-sm text-primary">{{ $table->getRecords()->total() }}</span>
+            </div>
+
             <p class="inline-flex items-center space-x-2 text-sm">
                 <span>{{ $table->title }}</span> <span>/</span> <span class="text-gray-400">Liste</span>
             </p>
@@ -30,11 +33,7 @@
                     <thead class="bg-gray-100 border-t text-start">
                     <tr>
                         @foreach($table->getHeaders() as $header)
-                            <x-dynamic-component :component="$header->getComponentView()"
-                                                 :header="$header"
-                                                 :sort-direction="$sortDirection"
-                                                 :sort-column="$sortColumn"
-                            />
+                            {{ $header }}
                         @endforeach
                         @if($table->hasRowsAction())
                             <th class="w-5">
@@ -49,7 +48,7 @@
                         <tr wire:key="{{ $table->getLivewireId() . '.tr.'. $record->getKey()  }}" class="hover:bg-primary-50/50 cursor-pointer">
                             @foreach($table->getColumns() as $column)
                                 @php($column->setRecord($record)->livewireId($table->getLivewireId()))
-                                <x-dynamic-component :component="$column->getView()" :column="$column" :livewireId="$table->getLivewireId()"/>
+                                {{ $column }}
                             @endforeach
                             @if($table->hasRowsAction())
                                 <td class="max-w-max whitespace-nowrap">
