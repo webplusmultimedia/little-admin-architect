@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts;
 
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contracts\AbstractColumn;
 
@@ -45,11 +44,6 @@ final class Header implements Htmlable
     {
         return $this->column->getLabel();
     }
-
-    /*  public function getRecord(): Model
-      {
-          return $this->record;
-      }*/
 
     public function render(): View
     {

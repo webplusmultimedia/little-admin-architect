@@ -42,7 +42,7 @@
                 )
             >
                 <div class="inline-flex items-center space-x-3">
-                    <x-little-form::button.submit class="btn-primary" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}"
+                    <x-little-anonyme::form-components.fields.button.submit class="btn-primary" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}"
                                                   wire:loading.class.delay="opacity-70 cursor-wait"
                                                   x-data="buttonActionComponent"
                                                   x-bind:disabled="$store.laDatas.startUploadFile"
@@ -54,12 +54,12 @@
                         @endif
                         <span x-show="!$store.laDatas.startUploadFile">{{ $button->getCaption() }}</span>
                         <span x-show="$store.laDatas.startUploadFile">Uploading files ...</span>
-                        <x-little-form::icon name="loader" wire:loading.delay="wire:loading.delay"
+                        <x-little-anonyme::form-components.fields.icons.loader  wire:loading.delay="wire:loading.delay"
                                              wire:target="{{ $button->getAction() }}" class="!opacity-100"
                         />
-                    </x-little-form::button.submit>
+                    </x-little-anonyme::form-components.fields.button.submit>
 
-                    <x-little-form::button.link class="" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}"
+                    <x-little-anonyme::form-components.fields.button.link class="" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}"
                                                 x-bind:disabled="$store.laDatas.startUploadFile"
                                                 wire:loading.class.delay="opacity-70 cursor-wait" :url="$buttonCancel->getAction()"
                                                 x-bind:class="{ 'opacity-70 cursor-wait': $store.laDatas.startUploadFile }"
@@ -68,7 +68,7 @@
                             <x-little-anonyme::form-components.fields.icons.hero-icon :name="$buttonCancel->getViewIcon()"/>
                         @endif
                         <span>{{ $buttonCancel->getCaption() }}</span>
-                    </x-little-form::button.link>
+                    </x-little-anonyme::form-components.fields.button.link>
                     @if (session()->has('message'))
                         <div class="alert alert-success">
                             {{ session('message') }}

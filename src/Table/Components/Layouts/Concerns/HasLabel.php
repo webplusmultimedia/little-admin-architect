@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-//declare(strict_types=1);
-
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Concerns;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Partials\Label;

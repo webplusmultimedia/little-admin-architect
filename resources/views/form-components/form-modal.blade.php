@@ -24,6 +24,7 @@
             <div class="inline-flex items-center space-x-3">
                 <x-little-form::button.submit class="btn-primary" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}"
                                               wire:loading.class.delay="opacity-70 cursor-wait">
+
                     @if($button->hasIcon())
                         <x-little-anonyme::form-components.fields.icons.hero-icon :name="$button->getViewIcon()"/>
                     @endif
