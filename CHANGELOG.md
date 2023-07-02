@@ -2,6 +2,12 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## wip - 2023-07-02
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.1.10-alpha...v0.1.11
+
+- remove some duplicate view on table, form, action
+
 ## Change view components renderer - 2023-07-01
 
 **Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.1.02-alpha...v0.1.10-alpha
