@@ -17,12 +17,12 @@
     <x-dynamic-component :component="$field->getWrapperView()" :id="$field->getWrapperId()"
         {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
     >
-        <x-dynamic-component
-            :component="$field->getViewComponentForLabel()"
-            :id="$id" class="form-label"
-            :label="$field->getLabel()"
-            :showRequired="$field->isRequired()"
-        />
+        <x-little-anonyme::form-components.fields.partials.label class="form-label"
+                                                                 :id="$id"
+                                                                 :is-required="$field->isRequired()"
+        >
+            {{ $field->getLabel() }}
+        </x-little-anonyme::form-components.fields.partials.label>
         <div class="la-file-upload">
             <div class=""
                 x-data="fileUpload({
@@ -32,7 +32,6 @@
                     maxFiles : @js($field->getMaxFiles()),
                     acceptedFileTypes : @js($field->getAcceptedFileTypes()),
                     multiple : {{  $field->isMultiple()?'true':'false' }},
-
                     state : $wire.entangle(@js($field->getStatePath())){{ $field->getWireModifier() }},
 
                 })"

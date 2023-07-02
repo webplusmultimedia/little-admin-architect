@@ -18,11 +18,12 @@
                          @class([  'hidden' => $field->getType() === 'hidden'])
                          x-data="{ errors : $wire.__instance.errors}"
     >
-        <x-dynamic-component :component="$field->getViewComponentForLabel()" :id="$id" class="form-label" label=""
-                             :showRequired="$field->isRequired()">
+        <x-little-anonyme::form-components.fields.partials.label class="form-label"
+                                                                 :id="$id"
+                                                                 :is-required="$field->isRequired()"
+        >
             {{ $field->getLabel() }}
-        </x-dynamic-component>
-
+        </x-little-anonyme::form-components.fields.partials.label>
 
         <input {{ $attributes->except(['field'])->merge([
                 'wire:model' . $field->getWireModifier() => $field->getStatePath(),

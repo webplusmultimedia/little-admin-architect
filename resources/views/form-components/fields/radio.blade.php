@@ -31,10 +31,9 @@
             </div>
             @foreach($field->getOptions() as $key => $option)
                 @php($idGroup = str($key)->slug()->append($id))
-                <x-dynamic-component :component="$field->getViewComponentForLabel()"
-                                     :id="$idGroup"
-                                     class=" items-center gap-2" :label="$option"
-                                     :showRequired="false"
+                <x-little-anonyme::form-components.fields.partials.label class="inline-flex items-center gap-2" :label="$option"
+                                                                         :id="$idGroup"
+                                                                         :is-required="false"
                 >
                     <input id="{{$idGroup}}"
                            aria-describedby="{{$idGroup}}"
@@ -43,7 +42,7 @@
                            name="{{ $id }}"
                            wire:model{{ $field->getWireModifier() }}="{{ $field->getStatePath() }}"
                     >
-                </x-dynamic-component>
+                </x-little-anonyme::form-components.fields.partials.label>
             @endforeach
             <x-little-anonyme::form-components.fields.partials.helper-text :text="$field->getHelperText()" class="mb-1"/>
             <x-little-anonyme::form-components.fields.partials.error-message :message="$field->getErrorMessage($errors)" class="mb-1"/>

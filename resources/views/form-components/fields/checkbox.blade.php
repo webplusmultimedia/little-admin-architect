@@ -17,17 +17,16 @@
                          :id="$field->getWrapperId()"
     >
         <div>
-            <x-dynamic-component :component="$field->getViewComponentForLabel()"
-                                 :id="$id"
-                                 @class(['disabled__field' => $field->isDisabled(),"inline-flex items-center gap-2"])
-                                 :label="$field->getLabel()"
-                                 :showRequired="$field->isRequired()"
+            <x-little-anonyme::form-components.fields.partials.label   @class(['disabled__field' => $field->isDisabled(),"inline-flex items-center gap-2"])
+                                                                     :id="$id"
+                                                                     :label="$field->getLabel()"
+
+                                                                     :is-required="$field->isRequired()"
             >
                 @if($field->getType() === 'switch')
                     <x-little-anonyme::form-components.fields.partials.toggle-switch
                             {{ $attributes->merge(['wire:model' . $field->getWireModifier() => $field->getStatePath()]) }}
                             :id="$id"
-
                     />
                 @else
                     <input {{ $attributes->merge([
@@ -38,7 +37,7 @@
                            type="checkbox"
                     >
                 @endif
-            </x-dynamic-component>
+            </x-little-anonyme::form-components.fields.partials.label>
                     <x-little-anonyme::form-components.fields.partials.helper-text :text="$field->getHelperText()"/>
                     <x-little-anonyme::form-components.fields.partials.error-message :message="$field->getErrorMessage($errors)"/>
 

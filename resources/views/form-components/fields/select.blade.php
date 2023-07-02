@@ -18,13 +18,16 @@
                          :id="$field->getWrapperId()"
             {{ $attributes->class($field->getColSpan()) }}
     >
-        <x-dynamic-component :component="$field->getViewComponentForLabel()" :id="$id" class="form-label" :label="$field->getLabel()"
-                             :showRequired="$field->isRequired()"/>
 
         @if($field->isSearchable())
             <x-little-anonyme::form-components.fields.partials.select.searchSelect :field="$field"/>
-
         @else
+            <x-little-anonyme::form-components.fields.partials.label class="form-label"
+                                                                     :id="$id"
+                                                                     :is-required="$field->isRequired()"
+            >
+                {{ $field->getLabel() }}
+            </x-little-anonyme::form-components.fields.partials.label>
             <select {{ $attributes->merge([
                 'wire:model' . $field->getWireModifier() => $field->getStatePath(),
                 'id' => $id,

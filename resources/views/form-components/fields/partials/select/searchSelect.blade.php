@@ -28,6 +28,13 @@
          aria-haspopup="true"
          x-bind:aria-expanded="show"
     >
+        <x-little-anonyme::form-components.fields.partials.label class="form-label"
+                                                                 :id="$field->getId()"
+                                                                 :is-required="$field->isRequired()"
+                                                                 x-on:click="show = true"
+        >
+            {{ $field->getLabel() }}
+        </x-little-anonyme::form-components.fields.partials.label>
         <div class="choice__wrapper_selected" x-on:click="show = true"
              :class="{'ring-2 ring-primary-500': show}"
              x-on:keyup.esc="show = false"

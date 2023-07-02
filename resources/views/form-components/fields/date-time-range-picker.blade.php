@@ -21,8 +21,7 @@
                          {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
                          x-data="{ errors : $wire.__instance.errors}"
     >
-        <x-dynamic-component :component="$field->getViewComponentForLabel()" :id="$id" class="form-label" :label="$field->getLabel()"
-                             :showRequired="$field->isRequired()"/>
+
         <div x-data="{}">
             <div
                 x-data="webplusDateTime({
@@ -36,9 +35,17 @@
                 x-cloak
                 wire:ignore
             >
+                <x-little-anonyme::form-components.fields.partials.label class="form-label"
+                                                                         :id="$id"
+                                                                         :is-required="$field->isRequired()"
+                >
+                    {{ $field->getLabel() }}
+                </x-little-anonyme::form-components.fields.partials.label>
                 <div class="relative"  >
                     <div class="relative">
-                        <input type="text" x-model="value" :id="$id('text-input')" x-on:click="toggle" class="cursor-pointer py-2 px-2"
+                        <input type="text" x-model="value" id="{{$id}}"
+                               x-on:click="toggle" class="cursor-pointer py-2 px-2"
+                               x-on:keyup.esc="toggle"
                                {{ $field->isRequired()?'required':'' }}
                                readonly
                         >

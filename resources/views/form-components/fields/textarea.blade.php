@@ -18,11 +18,10 @@
     <x-dynamic-component :component="$field->getWrapperView()" :id="$field->getWrapperId()"
         {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
     >
-        <x-dynamic-component
-            :component="$field->getViewComponentForLabel()"
-            :id="$id" class="form-label"
-            :label="$field->getLabel()"
-            :showRequired="$field->isRequired()"
+        <x-little-anonyme::form-components.fields.partials.label class="form-label"
+                                                                 :id="$id"
+                                                                 :is-required="$field->isRequired()"
+                                                                 :label="$field->getLabel()"
         />
         <div class="">
             <textarea {{ $attributes->merge([
