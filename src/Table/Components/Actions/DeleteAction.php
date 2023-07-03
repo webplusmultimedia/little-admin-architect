@@ -9,12 +9,15 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\Action;
 
-class DeleteAction extends Action implements Htmlable
+class DeleteAction extends Action
 {
+    protected ?string $view = 'little-views::action.table-row-action';
     public function __construct()
     {
-        $this->label(trans('little-admin-architect::table.button.delete'))
-            ->name(trans('little-admin-architect::table.button.delete'))
+        if (!$this->hasLabel()) {
+            $this->label(trans('little-admin-architect::table.button.delete'));
+        }
+        $this->name(trans('little-admin-architect::table.button.delete'))
             ->notificationText(trans('little-admin-architect::table.notification.delete'))
             ->action(fn (Model $record) => $record->delete())
             ->danger()
@@ -28,13 +31,5 @@ class DeleteAction extends Action implements Htmlable
         return new self();
     }
 
-    public function render(): View
-    {
-        return view('little-views::action.table-row-action', ['action' => $this]);
-    }
 
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
 }

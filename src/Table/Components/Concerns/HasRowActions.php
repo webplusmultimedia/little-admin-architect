@@ -73,7 +73,7 @@ trait HasRowActions
         foreach ($this->rowActions as $rowAction) {
             $rowAction->roundedFull()
                 ->small()
-                ->outline();
+                ->bgTransparent();
         }
     }
 

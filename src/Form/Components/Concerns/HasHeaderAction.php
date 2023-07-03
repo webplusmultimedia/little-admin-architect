@@ -17,11 +17,13 @@ trait HasHeaderAction
     {
         foreach ($headerActions as $headerAction) {
             if ($headerAction instanceof CreateAction) {
-                $headerAction->label(
-                    str(__('little-admin-architect::table.button.create', ['label' => 'un ']))->append($this->title)->singular()->value()
-                );
-                $headerAction->success();
-                $headerAction->url($this->linkCreate());
+                if (!$headerAction->hasLabel()) {
+                    $headerAction->label(
+                        str(__('little-admin-architect::table.button.create', ['label' => 'un ']))->append($this->title)->singular()->value()
+                    );
+                }
+                $headerAction->success()
+                    ->url($this->linkCreate());
             }
         }
         $this->headerActions = $headerActions;

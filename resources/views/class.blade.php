@@ -53,6 +53,11 @@ btn-secondary
 btn-info
 btn-danger
 btn-warning
+btn-transparent
+btn-text-primary
+btn-text-success
+btn-text-danger
+btn-text-warning
 btn-outline
 btn-outline-primary
 btn-outline-warning

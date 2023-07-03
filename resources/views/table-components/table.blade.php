@@ -52,7 +52,7 @@
                             @endforeach
                             @if($table->hasRowsAction())
                                 <td class="max-w-max whitespace-nowrap">
-                                    <div class="px-3 w-full inline-flex gap-2 items-center justify-end">
+                                    <div class="w-full inline-flex gap-2 items-center justify-end">
                                         @foreach($table->getRowActions($record) as $action)
                                             {{ $action }}
                                         @endforeach

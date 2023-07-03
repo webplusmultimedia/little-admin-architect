@@ -8,9 +8,9 @@ use Closure;
 
 trait HasColor
 {
-    protected string|Closure $color = 'primary';
+    protected string|Closure $color = 'primary ';
 
-    protected string $btnStyle = 'btn-';
+    protected string $btnStyle = '';
 
     protected bool $outline = false;
 
@@ -18,10 +18,12 @@ trait HasColor
 
     protected bool $roundedFull = false;
 
+    protected bool $isBgTransparent = false;
+
     public function small(): static
     {
         $this->isSmall = true;
-        //$this->btnStyle = str($this->btnStyle)->prepend('btn-small ')->value();
+
         return $this;
     }
 
@@ -41,14 +43,14 @@ trait HasColor
 
     public function danger(): static
     {
-        $this->color = 'danger';
+        $this->color = 'danger ';
 
         return $this;
     }
 
     public function success(): static
     {
-        $this->color = 'success';
+        $this->color = 'success ';
 
         return $this;
     }
@@ -70,19 +72,32 @@ trait HasColor
         if ($this->outline) {
             $this->btnStyle = 'btn-outline btn-outline-' . $color;
         } else {
-            $this->btnStyle .= $color;
+            $this->btnStyle = 'btn-' . $color . ' text-white ';
         }
+        if ($this->isBgTransparent) {
+            $this->btnStyle = 'btn-transparent btn-text-' . $color;
+        }
+
+        $btnStyle = str($this->btnStyle);
+
 
         if ($this->roundedFull) {
-            $this->btnStyle = str($this->btnStyle)->prepend('btn-rounded ')->value();
+            $btnStyle = $btnStyle->prepend('btn-rounded ');
         }
         if ($this->isSmall) {
-            $this->btnStyle = str($this->btnStyle)->prepend('btn-small ')->value();
+            $btnStyle = $btnStyle->prepend('btn-small ');
         } else {
-            $this->btnStyle = str($this->btnStyle)->prepend('btn-medium ')->value();
+            $btnStyle = $btnStyle->prepend('btn-medium ');
         }
 
-        return $this->btnStyle;
+        return $btnStyle->value();
+    }
+
+    public function bgTransparent(): static
+    {
+        $this->isBgTransparent = true;
+
+        return $this;
     }
 
     public function roundedFull(bool $roundedFull = true): static

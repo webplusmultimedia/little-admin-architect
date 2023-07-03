@@ -7,20 +7,12 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 
-class CreateAction extends Contrats\FormAction implements Htmlable
+class CreateAction extends Contrats\FormAction
 {
+    protected ?string $view = 'little-views::action.table-action';
     public static function make(): CreateAction
     {
-        return new self();
+        return (new self())->icon('heroicon-o-plus');
     }
 
-    public function render(): View
-    {
-        return view('little-views::action.table-action', ['action' => $this]);
-    }
-
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
 }

@@ -8,11 +8,12 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\TableAction;
 
-class CreateAction extends TableAction implements Htmlable
+class CreateAction extends TableAction
 {
+    protected ?string $view = 'little-views::action.table-action';
     public function __construct()
     {
-
+        $this->icon('heroicon-o-plus');
     }
 
     public static function make(): CreateAction
@@ -20,13 +21,4 @@ class CreateAction extends TableAction implements Htmlable
         return new self();
     }
 
-    public function render(): View
-    {
-        return view('little-views::action.table-action', ['action' => $this]);
-    }
-
-    public function toHtml(): string
-    {
-        return $this->render()->render();
-    }
 }

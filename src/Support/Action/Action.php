@@ -9,7 +9,6 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\CanHaveUrl;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\CanNotify;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\CanRequireConfirmation;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasButton;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasModal;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\InteractWithLivewire;
 
 abstract class Action extends BaseAction

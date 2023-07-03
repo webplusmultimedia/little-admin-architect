@@ -25,4 +25,9 @@ trait HasLabel
 
         return $this->label;
     }
+
+    public function hasLabel(): bool
+    {
+        return $this->label !== null;
+    }
 }
