@@ -4,26 +4,25 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions;
 
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Contracts\View\View;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\Action;
 
-class EditAction extends Action
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\BaseRowAction;
+
+class EditAction extends BaseRowAction
 {
     protected ?string $view = 'little-views::action.table-row-action';
+
     public function __construct()
     {
-        if (!$this->hasLabel()) {
+        if (! $this->hasLabel()) {
             $this->label(trans('little-admin-architect::table.button.edit'));
         }
         $this->name('edit')
-            ->icon('heroicon-s-pencil');
+            ->icon('heroicon-s-pencil')
+            ->requireConfirmation(false);
     }
 
     public static function make(): EditAction
     {
         return new self();
     }
-
-
 }

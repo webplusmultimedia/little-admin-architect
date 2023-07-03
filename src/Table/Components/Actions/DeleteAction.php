@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions;
 
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\Action;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\BaseRowAction;
 
-class DeleteAction extends Action
+class DeleteAction extends BaseRowAction
 {
     protected ?string $view = 'little-views::action.table-row-action';
+
     public function __construct()
     {
-        if (!$this->hasLabel()) {
+        if ( ! $this->hasLabel()) {
             $this->label(trans('little-admin-architect::table.button.delete'));
         }
         $this->name(trans('little-admin-architect::table.button.delete'))
@@ -30,6 +29,4 @@ class DeleteAction extends Action
     {
         return new self();
     }
-
-
 }

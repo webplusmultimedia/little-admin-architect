@@ -8,27 +8,27 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\ConfirmationDialog;
 
-trait HasMountTableAction
+trait HasMountFormAction
 {
-    public ?string $mountTableAction = null;
+    public ?string $mountFormAction = null;
 
-    public array $mountTableActionData = [];
+    public array $mountFormActionData = [];
 
-    public mixed $mountTableActionRecord = null;
+    public mixed $mountFormActionRecord = null;
 
-    public function mountTableAction(string $method, mixed $key): void
+    public function mountFormAction(string $method, mixed $key): void
     {
-        $id = $this->id . '-action-table';
-        $action = $this->table->getActionByName($method);
+        $id = $this->id . '-action-form';
+        $action = $this->form->getActionByName($method);
         if ( ! $action) {
             throw new Exception('Aucune action trouvée');
         }
         $record = $this->getRecordForMount($key);
         if ($action->isRequireConfirmation()) {
-            $this->mountTableAction = $method;
-            $this->mountTableActionRecord = $key;
+            $this->mountFormAction = $method;
+            $this->mountFormActionRecord = $key;
             $action->record($record);
-            $this->table->getActionModal()->content(
+            $this->form->getActionModal()->content(
                 ConfirmationDialog::make(title: $this->getTitleForModal($key),
                     subtitle: $action->getConfirmQuestion(),
                     actionLabel: $action->getLabel() ?? $action->getName()
@@ -36,6 +36,7 @@ trait HasMountTableAction
             )->maxWidthSmall();
             $this->dispatchBrowserEvent('show-modal', ['id' => $id]);
         } else {
+
             if ($action->getAction()) {
                 app()->call($action->getAction(), ['record' => $record, 'livewire' => $this]);
             }
@@ -43,18 +44,18 @@ trait HasMountTableAction
         }
     }
 
-    public function CallMountTableAction(): void
+    public function CallMountFormAction(): void
     {
-        $action = $this->table->getActionByName($this->mountTableAction);
+        $action = $this->form->getActionByName($this->mountFormAction);
         if ( ! $action) {
             throw new Exception('Aucune action trouvée');
         }
         if ($action->isRequireConfirmation()) {
-            $record = $this->getRecordForMount($this->mountTableActionRecord);
+            $record = $this->getRecordForMount($this->mountFormActionRecord);
             if ($action->getAction()) {
                 app()->call($action->getAction(), ['record' => $record, 'livewire' => $this]);
             }
-            $id = $this->id . '-action-table';
+            $id = $this->id . '-action-form';
             $this->notification()->success($action->getNotificationText())->send();
             $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
         }
@@ -64,7 +65,7 @@ trait HasMountTableAction
     private function getRecordForMount(mixed $key): Model
     {
 
-        $model = $this->table->getResourcePage()::getEloquentQuery()->getModel();
+        $model = $this->form->getResourcePage()::getEloquentQuery()->getModel();
 
         if ( ! $record = $model->where($model->getKeyName(), $key)->first()) {
             throw new Exception('Aucune donnée disponible');
@@ -76,7 +77,7 @@ trait HasMountTableAction
     private function getTitleForModal(mixed $key): mixed
     {
         $record = $this->getRecordForMount($key);
-        $field = $this->table->getResourcePage()::getRecordTitleAttribute();
+        $field = $this->form->getResourcePage()::getRecordTitleAttribute();
 
         return $record->{$field};
     }

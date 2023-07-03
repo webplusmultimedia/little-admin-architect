@@ -35,15 +35,7 @@ class BaseTable extends Component implements HasTable
 
     public string $search = '';
 
-    public ?string $mountTableAction = null;
-
-    public array $mountTableActionData = [];
-
-    public mixed $mountTableActionRecord = null;
-
-    /**
-     * @var array[]
-     */
+    /** @phpstan-ignore-next-line */
     protected $queryString = [
         'search' => ['except' => '', 'as' => 'q'],
         'tableSortColumn' => ['except' => null],

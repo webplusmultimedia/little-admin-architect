@@ -17,7 +17,7 @@ trait HasHeaderAction
     {
         foreach ($headerActions as $headerAction) {
             if ($headerAction instanceof CreateAction) {
-                if (!$headerAction->hasLabel()) {
+                if ( ! $headerAction->hasLabel()) {
                     $headerAction->label(
                         str(__('little-admin-architect::table.button.create', ['label' => 'un ']))->append($this->title)->singular()->value()
                     );

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\Action;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\BaseRowAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\DeleteAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\EditAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\RowAction;
@@ -13,12 +13,12 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\RowAction;
 trait HasRowActions
 {
     /**
-     * @var Action[]
+     * @var BaseRowAction[]
      */
     protected array $rowActions = [];
 
     /**
-     * @param  Action[]  $actions
+     * @param  BaseRowAction[]  $actions
      */
     public function actions(array $actions = []): static
     {
@@ -28,7 +28,7 @@ trait HasRowActions
     }
 
     /**
-     * @return Action[]
+     * @return BaseRowAction[]
      */
     public function getRowActions(Model $record): array
     {
@@ -77,15 +77,15 @@ trait HasRowActions
         }
     }
 
-    public function applyWireClickToRowAction(RowAction $rowAction): void
+    public function applyWireClickToRowAction(BaseRowAction $rowAction): void
     {
         $rowAction->wireClick("mountTableAction('{$rowAction->getName()}',{$rowAction->getRecord()->getKey()})");
     }
 
-    public function getActionByName(string $name): ?Action
+    public function getActionByName(string $name): ?BaseRowAction
     {
         return collect($this->rowActions)->filter(/**
-         * @param  Action  $ra
+         * @param  BaseRowAction  $ra
          */ fn ($ra) => $ra->getName() === $name)->first();
     }
 }

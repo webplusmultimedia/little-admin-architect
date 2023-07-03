@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Action;
 
-
 use Exception;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
@@ -31,8 +30,10 @@ abstract class BaseAction implements Htmlable
         if ( ! isset($this->view)) {
             throw new Exception('Class [' . static::class . '] extends [' . static::class . '] but does not have a [$view] property defined.');
         }
+
         return $this->view;
     }
+
     public function render(): View
     {
         return view($this->getView(), ['action' => $this]);

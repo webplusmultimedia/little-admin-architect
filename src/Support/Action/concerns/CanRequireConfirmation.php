@@ -14,9 +14,9 @@ trait CanRequireConfirmation
 
     protected ConfirmationDialog $confirmationDialog;
 
-    public function requireConfirmation(): static
+    public function requireConfirmation(bool $confirm = true): static
     {
-        $this->shouldRequireConfirmation = true;
+        $this->shouldRequireConfirmation = $confirm;
 
         return $this;
     }

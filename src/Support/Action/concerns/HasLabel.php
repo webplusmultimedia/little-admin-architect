@@ -28,6 +28,6 @@ trait HasLabel
 
     public function hasLabel(): bool
     {
-        return $this->label !== null;
+        return null !== $this->label;
     }
 }

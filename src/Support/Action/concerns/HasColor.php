@@ -80,7 +80,6 @@ trait HasColor
 
         $btnStyle = str($this->btnStyle);
 
-
         if ($this->roundedFull) {
             $btnStyle = $btnStyle->prepend('btn-rounded ');
         }
