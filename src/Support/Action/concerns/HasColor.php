@@ -36,7 +36,7 @@ trait HasColor
 
     public function warning(): static
     {
-        $this->color = 'warning';
+        $this->color = 'warning ';
 
         return $this;
     }
@@ -55,8 +55,15 @@ trait HasColor
         return $this;
     }
 
-    public function color(Closure $color): static
+    public function color(string|Closure $color): static
     {
+        if (is_string($color)){
+            $color = str($color)
+                ->trim()
+                ->lower()
+                ->append(' ')
+                ->value();
+        }
         $this->color = $color;
 
         return $this;
@@ -92,6 +99,13 @@ trait HasColor
         return $btnStyle->value();
     }
 
+    public function getColor(): string
+    {
+        if (is_callable($this->color)) {
+            return call_user_func($this->color, $this->getRecord());
+        }
+        return $this->color;
+    }
     public function bgTransparent(): static
     {
         $this->isBgTransparent = true;

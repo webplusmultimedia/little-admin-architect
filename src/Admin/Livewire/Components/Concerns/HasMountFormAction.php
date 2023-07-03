@@ -31,7 +31,8 @@ trait HasMountFormAction
             $this->form->getActionModal()->content(
                 ConfirmationDialog::make(title: $this->getTitleForModal($key),
                     subtitle: $action->getConfirmQuestion(),
-                    actionLabel: $action->getLabel() ?? $action->getName()
+                    actionLabel: $action->getLabel() ?? $action->getName(),
+                    btnClass: $action->getClass(),record: $record
                 )
             )->maxWidthSmall();
             $this->dispatchBrowserEvent('show-modal', ['id' => $id]);

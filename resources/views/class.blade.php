@@ -58,6 +58,7 @@ btn-text-primary
 btn-text-success
 btn-text-danger
 btn-text-warning
+btn-text-info
 btn-outline
 btn-outline-primary
 btn-outline-warning

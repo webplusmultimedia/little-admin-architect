@@ -19,4 +19,11 @@ trait InteractsWithUploadFiles
 
         return $this->form->deleteUploadFileUsing($path, $key);
     }
+
+    public function reorderUploadFiles(string $path, array $newOrder): array
+    {
+        $this->skipRender();
+
+        return $this->form->reorderUploadFiles($path, $newOrder);
+    }
 }

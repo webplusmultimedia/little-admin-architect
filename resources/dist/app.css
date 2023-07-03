@@ -1110,7 +1110,7 @@ select {
 }
 .btn-warning {
   --tw-bg-opacity: 1;
-  background-color: rgb(253 224 71 / var(--tw-bg-opacity));
+  background-color: rgb(202 138 4 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(161 98 7 / var(--tw-text-opacity));
 }
@@ -1176,7 +1176,7 @@ select {
 }
 .btn-text-primary {
   --tw-text-opacity: 1;
-  color: rgb(109 40 217 / var(--tw-text-opacity));
+  color: rgb(124 58 237 / var(--tw-text-opacity));
   text-underline-offset: 4px;
 }
 .btn-text-primary:hover {
@@ -1186,7 +1186,7 @@ select {
 }
 .btn-text-success {
   --tw-text-opacity: 1;
-  color: rgb(4 120 87 / var(--tw-text-opacity));
+  color: rgb(5 150 105 / var(--tw-text-opacity));
   text-underline-offset: 4px;
 }
 .btn-text-success:hover {
@@ -1196,7 +1196,7 @@ select {
 }
 .btn-text-danger {
   --tw-text-opacity: 1;
-  color: rgb(190 18 60 / var(--tw-text-opacity));
+  color: rgb(225 29 72 / var(--tw-text-opacity));
   text-underline-offset: 4px;
 }
 .btn-text-danger:hover {
@@ -1212,6 +1212,16 @@ select {
 .btn-text-warning:hover {
   --tw-text-opacity: 1;
   color: rgb(161 98 7 / var(--tw-text-opacity));
+  text-decoration-line: underline;
+}
+.btn-text-info {
+  --tw-text-opacity: 1;
+  color: rgb(8 145 178 / var(--tw-text-opacity));
+  text-underline-offset: 4px;
+}
+.btn-text-info:hover {
+  --tw-text-opacity: 1;
+  color: rgb(6 182 212 / var(--tw-text-opacity));
   text-decoration-line: underline;
 }
 .choice__list__option {

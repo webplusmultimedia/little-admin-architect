@@ -7,7 +7,7 @@
         <x-little-anonyme::form-components.fields.button.button class="" x-on:click="close">
             {{ trans('little-admin-architect::form.button.cancel') }}
         </x-little-anonyme::form-components.fields.button.button>
-        <x-little-anonyme::form-components.fields.button.submit class="btn-danger">
+        <x-little-anonyme::form-components.fields.button.submit class="{{ $btnClass }}">
             {{ $actionLabel }}
         </x-little-anonyme::form-components.fields.button.submit>
     </div>

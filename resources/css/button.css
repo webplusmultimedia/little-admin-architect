@@ -44,7 +44,7 @@
     }
 
     .btn-warning {
-        @apply bg-warning-300 hover:bg-warning-500 text-warning-700
+        @apply bg-warning-600 hover:bg-warning-500 text-warning-700
     }
 
     .btn-outline-primary {
@@ -72,15 +72,18 @@
     }
 
     .btn-text-primary {
-        @apply text-primary-700 hover:text-primary-500 hover:underline underline-offset-4
+        @apply text-primary-600 hover:text-primary-500 hover:underline underline-offset-4
     }
     .btn-text-success {
-        @apply text-success-700 hover:text-success-500 hover:underline underline-offset-4
+        @apply text-success-600 hover:text-success-500 hover:underline underline-offset-4
     }
     .btn-text-danger {
-        @apply text-error-700 hover:text-error-500 hover:underline underline-offset-4
+        @apply text-error-600 hover:text-error-500 hover:underline underline-offset-4
     }
     .btn-text-warning {
         @apply hover:text-warning-700 text-warning-500 hover:underline underline-offset-4
+    }
+    .btn-text-info {
+        @apply hover:text-info-500 text-info-600 hover:underline underline-offset-4
     }
 }
