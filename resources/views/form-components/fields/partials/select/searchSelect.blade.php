@@ -8,9 +8,9 @@
      x-cloak
      x-data="SelectFormComponent(
      {
-        componentId: @js($field->getWireName()),
+        componentId: @js($field->getStatePath()),
         defaultLabel: @js($field->getLabelDefault()),
-        state : $wire.entangle(@js($field->getWireName())).defer,
+        state : $wire.entangle(@js($field->getStatePath())).defer,
         defaultValue : @js($field->getState()),
         isMultiple : @js($field->isMultiple()),
         isSearchable : @js($field->isSearchable()),

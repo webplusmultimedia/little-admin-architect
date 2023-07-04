@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
-use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\Modal;
+use Webplusmultimedia\LittleAdminArchitect\Support\Components\BaseModal;
 
 trait HasActionModal
 {
-    protected Modal $actionModal;
+    protected BaseModal $actionModal;
 
-    public function actionModal(Modal $modal): static
+    protected function actionModal(BaseModal $modal): static
     {
         $this->actionModal = $modal;
 
         return $this;
     }
 
-    public function getActionModal(): Modal
+    public function getActionModal(): BaseModal
     {
         return $this->actionModal;
     }

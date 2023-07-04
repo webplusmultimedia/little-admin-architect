@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns;
 
 use Illuminate\Contracts\Support\Htmlable;
-use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\Modal;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\TableModal;
 
 trait HasModal
 {
@@ -13,16 +13,16 @@ trait HasModal
 
     protected ?string $modalTitle = null;
 
-    protected ?Modal $modal = null;
+    protected ?TableModal $modal = null;
 
     protected string|Htmlable|null $content = null;
 
-    public function getModal(): ?Modal
+    public function getModal(): ?TableModal
     {
         return $this->modal;
     }
 
-    public function modal(Modal $modal): static
+    public function modal(TableModal $modal): static
     {
         $this->modal = $modal;
 

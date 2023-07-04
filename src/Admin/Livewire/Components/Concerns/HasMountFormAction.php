@@ -32,7 +32,7 @@ trait HasMountFormAction
                 ConfirmationDialog::make(title: $this->getTitleForModal($key),
                     subtitle: $action->getConfirmQuestion(),
                     actionLabel: $action->getLabel() ?? $action->getName(),
-                    btnClass: $action->getClass(),record: $record
+                    btnClass: $action->getClass(), record: $record
                 )
             )->maxWidthSmall();
             $this->dispatchBrowserEvent('show-modal', ['id' => $id]);

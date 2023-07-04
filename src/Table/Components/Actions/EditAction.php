@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions;
 
-
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\BaseRowAction;
 
 class EditAction extends BaseRowAction
@@ -13,7 +12,7 @@ class EditAction extends BaseRowAction
 
     public function __construct()
     {
-        if (! $this->hasLabel()) {
+        if ( ! $this->hasLabel()) {
             $this->label(trans('little-admin-architect::table.button.edit'));
         }
         $this->name('edit')

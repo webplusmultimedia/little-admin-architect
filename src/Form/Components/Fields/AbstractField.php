@@ -11,8 +11,6 @@ use Illuminate\View\View;
 
 abstract class AbstractField implements Htmlable
 {
-    protected string $prefixName = 'data';
-
     protected string $view = 'input';
 
     protected array $viewDatas = [];

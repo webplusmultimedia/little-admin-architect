@@ -77,7 +77,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     ) {
         $this->label = $label;
         $this->name = $name;
-        $this->setUp();
+        // $this->setUp();
         $this->setViewDatas('field', $this);
     }
 
@@ -107,7 +107,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         return ['set' => $this->set(), 'get' => $this->get(), 'state' => $this->getState(), 'status' => $this->getStatusForm(), 'component' => $this];
     }
 
-    protected function setUp(): void
+    public function setUp(): void
     {
     }
 

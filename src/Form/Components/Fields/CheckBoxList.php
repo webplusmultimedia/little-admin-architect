@@ -28,7 +28,7 @@ class CheckBoxList extends Field
         return $this->evaluate($this->beforeUpdatedValidateValueUsing);
     }
 
-    protected function setUp(): void
+    public function setUp(): void
     {
         $this->afterStateHydrated(static function (null|array $state, CheckBoxList $component): void {
             if (blank($state)) {

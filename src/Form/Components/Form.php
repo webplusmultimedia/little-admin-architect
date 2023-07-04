@@ -149,15 +149,19 @@ final class Form implements Htmlable
     protected function initSelectUsing(): void
     {
         foreach ($this->getFormFields() as $field) {
+            $field->setUp();
             if ($field instanceof Select) {
+
+                //if($field->getName() === 'categorie_id') dd($field->hasRelationship());
+
                 if ($field->optionsUsing()) {
-                    $this->addToListOptionsUsing($field->getWireName(), $field->optionsUsing());
+                    $this->addToListOptionsUsing($field->getStatePath(), $field->optionsUsing());
                 }
                 if ($field->searchResultsUsing()) {
-                    $this->addToSearchResultsUsing($field->getWireName(), $field->searchResultsUsing());
+                    $this->addToSearchResultsUsing($field->getStatePath(), $field->searchResultsUsing());
                 }
                 if ($field->selectOptionLabelUsing()) {
-                    $this->addSelectOptionLabelsUsing($field->getWireName(), $field->selectOptionLabelUsing());
+                    $this->addSelectOptionLabelsUsing($field->getStatePath(), $field->selectOptionLabelUsing());
                     if ( ! $field->isMultiple()) {
                         $field->setDefaultLabelForSelect($this);
                     }

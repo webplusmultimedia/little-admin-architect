@@ -30,7 +30,7 @@ trait HasRangeDate
             return null;
         }
 
-        return $this->getPrefix() . $this->dateFrom;
+        return $this->getPrefixPath() . $this->dateFrom;
     }
 
     public function getDateFromName(): ?string

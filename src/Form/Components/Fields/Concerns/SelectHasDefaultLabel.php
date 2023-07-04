@@ -17,8 +17,12 @@ trait SelectHasDefaultLabel
 
     public function setDefaultLabelForSelect(Form $form): void
     {
-        if ($form->hasSelectOptionLabelsUsing() and isset($form->getSelectOptionLabelsUsing()[$this->getWireName()])) {
-            $this->defaultLabelForSelect = call_user_func($form->getSelectOptionLabelsUsing()[$this->getWireName()], $this->getState());
+        if ($form->hasSelectOptionLabelsUsing() and isset($form->getSelectOptionLabelsUsing()[$this->getStatePath()])) {
+            if ($this->hasRelationship()) {
+                $this->defaultLabelForSelect = app()->call($form->getSelectOptionLabelsUsing()[$this->getStatePath()], ['component' => $this, 'state' => $this->getState()]);
+            } else {
+                $this->defaultLabelForSelect = call_user_func($form->getSelectOptionLabelsUsing()[$this->getStatePath()], $this->getState());
+            }
         }
     }
 }

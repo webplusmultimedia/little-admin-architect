@@ -60,15 +60,15 @@ trait HasConfigDateTime
     public function getComponentValue(): array|Carbon|string|null
     {
         $this->addRules('date');
-        $value = $this->getValue();
+        $value = $this->getState();
         if ('range' !== $this->getConfig()->type) {
             return $value;
         }
         if ( ! $this->dateFrom) {
             throw new FieldException('Need dateFrom for range values (dateFrom("fieldName") method)');
         }
-        $this->addRules('before:' . $this->getPrefix() . $this->dateFrom);
-        if ( ! $this->getValue() or ! $this->getRecord()->{$this->dateFrom}) {
+        $this->addRules('before:' . $this->getPrefixPath() . $this->dateFrom);
+        if ( ! $this->getState() or ! $this->getRecord()->{$this->dateFrom}) {
             return null;
         }
 

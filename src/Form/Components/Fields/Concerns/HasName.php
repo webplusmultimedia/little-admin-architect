@@ -10,6 +10,8 @@ trait HasName
 {
     protected string $name;
 
+    protected string $prefixPath = 'data';
+
     public function name(string $name): static
     {
         $this->name = $name;
@@ -24,20 +26,25 @@ trait HasName
 
     public function getWireName(): string
     {
-        return $this->getPrefix() . $this->name;
+        return $this->getPrefixPath() . $this->name;
     }
 
     public function getStatePath(): string
     {
-        return $this->getPrefix() . $this->name;
+        return $this->getPrefixPath() . $this->name;
     }
 
-    protected function getPrefix(): string
+    protected function getPrefixPath(): string
     {
         if ($this->record instanceof Model) {
-            return $this->prefixName . '.';
+            return $this->prefixPath . '.';
         }
 
         return '';
+    }
+
+    public function setPrefixPath(string $prefixPath): void
+    {
+        $this->prefixPath = $prefixPath;
     }
 }

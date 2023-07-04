@@ -18,9 +18,7 @@ class FileUpload extends Field
 
     protected string $view = 'file-upload';
 
-    protected string $prefixName = 'data';
-
-    protected function setUp(): void
+    public function setUp(): void
     {
         $this->setViewDatas('field', $this);
         $this->afterStateHydrated(static function (string|array|null $state, FileUpload $component): void {

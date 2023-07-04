@@ -8,7 +8,6 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
-use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\Modal;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasActionModal;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasColumns;
@@ -70,7 +69,7 @@ final class Table implements Htmlable
         $this->builder($page::getResource()::getEloquentQuery());
         if (count($this->rowActions)) {
             $this->applyDefaultForRowActions();
-            $this->actionModal(Modal::make($this->livewireId . '-action-table'));
+            $this->actionModal(TableModal::make($this->livewireId . '-action-table'));
         }
         $this->headerActions($this->pageForResource::getActions());
 

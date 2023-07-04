@@ -15,6 +15,8 @@ trait CanSearchWithLivewire
 
     protected bool $isMultiple = false;
 
+    protected int $loadLimit = 25;
+
     protected ?Closure $selectOptionLabelUsing = null;
 
     protected ?Closure $optionsUsing = null;
@@ -22,6 +24,8 @@ trait CanSearchWithLivewire
     protected null|Collection $optionsUsingResults = null;
 
     protected ?Closure $searchResultsUsing = null;
+
+    protected bool $preload = false;
 
     public function getSelectOptionLabelUsing(Closure $optionLabel): static
     {
@@ -38,8 +42,13 @@ trait CanSearchWithLivewire
     protected function getOptionsLabelUsingAll(): array
     {
         if ($this->selectOptionLabelUsing and $this->getState()) {
-            /** @var Collection $results */
-            $results = call_user_func($this->selectOptionLabelUsing(), $this->getState());
+            if ($this->hasRelationship()) {
+                /** @var Collection $results */
+                $results = app()->call($this->selectOptionLabelUsing(), ['component' => $this, 'state' => $this->getState()]);
+            } else {
+                /** @var Collection $results */
+                $results = call_user_func($this->selectOptionLabelUsing(), $this->getState());
+            }
 
             return $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
         }
@@ -60,7 +69,11 @@ trait CanSearchWithLivewire
     {
         $this->optionsUsing = $optionsUsing;
         if ( ! $this->optionsUsingResults) {
-            $this->optionsUsingResults = call_user_func($this->optionsUsing);
+            if ($this->hasRelationship()) {
+                $this->optionsUsingResults = app()->call($this->optionsUsing, ['component' => $this]);
+            } else {
+                $this->optionsUsingResults = call_user_func($this->optionsUsing);
+            }
         }
 
         $this->addRules('in:' . implode(',', $this->optionsUsingResults->keys()->toArray()));
@@ -77,7 +90,11 @@ trait CanSearchWithLivewire
     {
         if ($this->optionsUsing) {
             if ( ! $this->optionsUsingResults) {
-                $this->optionsUsingResults = call_user_func($this->optionsUsing);
+                if ($this->hasRelationship()) {
+                    $this->optionsUsingResults = app()->call($this->optionsUsing, ['component' => $this]);
+                } else {
+                    $this->optionsUsingResults = call_user_func($this->optionsUsing);
+                }
             }
             $results = $this->optionsUsingResults;
 
@@ -130,6 +147,13 @@ trait CanSearchWithLivewire
     {
         $this->isMultiple = $isMultiple;
         $this->addRules('array');
+
+        return $this;
+    }
+
+    public function preload(bool $preload = true): static
+    {
+        $this->preload = $preload;
 
         return $this;
     }

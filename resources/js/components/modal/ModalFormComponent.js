@@ -1,5 +1,5 @@
 
-export function ModalTableComponent(id = null) {
+export function ModalFormComponent(id = null) {
     return {
         id : null,
         isOpen : false,
@@ -11,11 +11,9 @@ export function ModalTableComponent(id = null) {
         close(){
             if (this.id === id) {
                 this.isOpen = false
-                setTimeout(()=>{
-                    this.$wire.mountTableAction = null
-                    this.$wire.mountTableActionRecord = null
-                },300)
-
+                this.$wire.mountFormAction = null
+                this.$wire.mountFormActionRecord = null
+                this.$wire.mountFormActionData = null
             }
         },
         init(){

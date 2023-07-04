@@ -31,7 +31,7 @@ trait HasFields
 
     public function getFormFieldByPath(string $path): ?Field
     {
-        return collect(self::$formFields)->filter(fn (Field $field) => $field->getWireName() === $path)->first();
+        return collect(self::$formFields)->filter(fn (Field $field) => $field->getStatePath() === $path)->first();
     }
 
     public function removeHiddenFieldsOnForm(): void

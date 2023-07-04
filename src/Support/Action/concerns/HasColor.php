@@ -57,7 +57,7 @@ trait HasColor
 
     public function color(string|Closure $color): static
     {
-        if (is_string($color)){
+        if (is_string($color)) {
             $color = str($color)
                 ->trim()
                 ->lower()
@@ -104,8 +104,10 @@ trait HasColor
         if (is_callable($this->color)) {
             return call_user_func($this->color, $this->getRecord());
         }
+
         return $this->color;
     }
+
     public function bgTransparent(): static
     {
         $this->isBgTransparent = true;

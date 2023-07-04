@@ -15,12 +15,14 @@ import {fileUpload} from "./components/fileUpload/fileUpload";
 import {laImageGalleryComponent} from "./components/fileUpload/support/gallery";
 import {buttonActionComponent} from "./components/buttons/action";
 import Sortable from 'sortablejs';
+import {ModalFormComponent} from "./components/modal/ModalFormComponent";
 window.Sortable = Sortable
 
 Alpine.data('SelectFormComponent',SelectFormComponent)
 Alpine.data('DropdownMenu',DropdownMenu)
 Alpine.data('ModalComponent',ModalComponent)
 Alpine.data('ModalTableComponent',ModalTableComponent)
+Alpine.data('ModalFormComponent',ModalFormComponent)
 Alpine.data('TableComponent',TableComponent)
 Alpine.data('LittleAdminNotification',LittleAdminNotification)
 Alpine.data('webplusDateTime', webplusDateTime)
