@@ -1,6 +1,6 @@
 @layer components {
     .choice__list__option{
-        @apply max-h-40 overflow-y-auto overflow-x-hidden;
+        @apply max-h-64 overflow-y-auto overflow-x-hidden;
         scrollbar-width: thin;
     }
     .choice__option{
