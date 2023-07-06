@@ -21,9 +21,11 @@ trait HasHeaderAction
     {
         foreach ($headerActions as $headerAction) {
             if ($headerAction instanceof CreateAction) {
-                $headerAction->label(
-                    str(__('little-admin-architect::table.button.create', ['label' => 'un ']))->append($this->title)->singular()->value()
-                );
+                if ( ! $headerAction->hasLabel()) {
+                    $headerAction->label(
+                        str(__('little-admin-architect::table.button.create', ['label' => 'un ']))->append($this->title)->singular()->value()
+                    );
+                }
                 $headerAction->success();
                 if ($this->hasModalForm()) {
                     $headerAction->wireClick('showModalForm()');

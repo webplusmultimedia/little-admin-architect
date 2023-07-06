@@ -36,11 +36,12 @@ abstract class AbstractColumn implements Htmlable
 
     protected function setUp(): void
     {
-        $this->value = fn (AbstractColumn $column) => $column->record->{$column->getName()};
+        $this->value = fn (AbstractColumn $column) => data_get($column->record, $column->getName());
     }
 
     public function getName(): string
     {
+
         return $this->name;
     }
 

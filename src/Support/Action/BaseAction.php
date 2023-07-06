@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\CanBeDisabled;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasColor;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasCssClass;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasIcon;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasName;
@@ -17,7 +17,7 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasRecord;
 abstract class BaseAction implements Htmlable
 {
     use CanBeDisabled;
-    use HasColor;
+    use HasCssClass;
     use HasIcon;
     use HasLabel;
     use HasName;

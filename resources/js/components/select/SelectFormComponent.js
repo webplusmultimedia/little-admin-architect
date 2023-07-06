@@ -10,7 +10,8 @@ export function SelectFormComponent({
                                         optionsUsing,
                                         hasOptionUsing,
                                         msgContent,
-                                        searchDebounce
+                                        searchDebounce,
+                                        isDynamicOptions
                                     }) {
 
     return {
@@ -29,6 +30,8 @@ export function SelectFormComponent({
         isSearchable,
         hasOptionUsing,
         msgContent,
+        isDynamicOptions,
+        dynamicOptions : [],
         searchDebounce,
         canShowNoResult : false,
         async getOptionUsing() {
@@ -40,6 +43,10 @@ export function SelectFormComponent({
             if (!this.hasOptionUsing) {
                 this.options = await this.$wire.getSearchResultUsing(componentId, term)
                 this.addSelectedOptionToNewList()
+                if (this.isDynamicOptions){  //For belongToMany
+                    this.state = [...this.dynamicOptions]
+                    console.log(this.dynamicOptions)
+                }
             }
             if (this.hasOptionUsing){
                 this.options = this.searchInOptions(term)
@@ -58,7 +65,14 @@ export function SelectFormComponent({
                 if(!isDuplicateTag) {
                     this.defaultMultipleLabel.push(item)
                     this.defaultLabel = TagsBuilder(this.defaultMultipleLabel)
-                    this.state.push(this.$el.dataset.value)
+
+                    if (this.isDynamicOptions){  //For belongToMany
+                        this.dynamicOptions.push(this.$el.dataset.value)
+                        this.state = [...this.dynamicOptions]
+                    }
+                    else {
+                        this.state.push(this.$el.dataset.value)
+                    }
                 }
             }
 
@@ -88,6 +102,7 @@ export function SelectFormComponent({
                     await this.getResultsOnSearchTerm(term)
                     this.canShowNoResult = true;
                     this.isSearching = false
+
                 }
                 else if (this.hasOptionUsing && this.optionsBackup){
                     this.options = this.optionsBackup
@@ -103,7 +118,6 @@ export function SelectFormComponent({
         },
         selectItem :{
             ['x-on:click.stop'](){
-                console.log('select',this.$el.dataset)
                 if(!this.isMultiple){
                     this.selectOptionFrom({label: this.$el.dataset.label, value: this.$el.dataset.value})
                     this.defaultLabel = this.$el.dataset.label
@@ -126,7 +140,13 @@ export function SelectFormComponent({
             }
             else {
                 this.defaultMultipleLabel = []
-                this.state = []
+                if (this.isDynamicOptions){  //For belongToMany
+                    this.dynamicOptions = []
+                    this.state = []
+                }
+                else {
+                    this.state = []
+                }
             }
             this.defaultLabel = null
 
@@ -137,6 +157,9 @@ export function SelectFormComponent({
                 this.defaultLabel = TagsBuilder(this.defaultMultipleLabel)
                 if (!this.state){
                     this.state = []
+                }
+                if (this.isDynamicOptions){
+                    this.dynamicOptions = [...this.defaultValue]
                 }
             }
             else {
@@ -163,7 +186,15 @@ export function SelectFormComponent({
         deleteTag : {
             ['x-on:click.stop'](){
               let id = this.$refs.tagElement.dataset.value
-                this.state = Array.from(this.state).filter(idState=> idState !== id)
+                if (this.isDynamicOptions){  //For belongToMany
+                    this.dynamicOptions = Array.from(this.dynamicOptions).filter(idState=> {
+                       return  String(idState) !== String(id)
+                    })
+                    this.state = [...this.dynamicOptions]
+                }
+                else {
+                    this.state = Array.from(this.state).filter(idState=> idState !== id)
+                }
                 this.defaultMultipleLabel = Array.from(this.defaultMultipleLabel).filter(label=> String(label.value ) !== id)
                 this.defaultLabel = TagsBuilder(this.defaultMultipleLabel)
                 /** @Todo add the remove tag to list options */

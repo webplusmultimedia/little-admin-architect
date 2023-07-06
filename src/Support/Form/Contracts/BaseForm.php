@@ -20,17 +20,17 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithRecord;
 
 abstract class BaseForm
 {
-  /*  use CanGetRules;
-    use CanInitDatasForm;
-    use CanSearchResultsUsingForSelect;
-    use CanUpdatedDatas;
-    use CanValidatedValues;
-    use HasDefaultValue;
-    use HasFields;
-    use HasGridColumns;
-    use HasSchema;
-    use HasState;
-    use HasTitle;
-    use InteractWithPage;
-    use InteractWithRecord;*/
+    /*  use CanGetRules;
+      use CanInitDatasForm;
+      use CanSearchResultsUsingForSelect;
+      use CanUpdatedDatas;
+      use CanValidatedValues;
+      use HasDefaultValue;
+      use HasFields;
+      use HasGridColumns;
+      use HasSchema;
+      use HasState;
+      use HasTitle;
+      use InteractWithPage;
+      use InteractWithRecord;*/
 }

@@ -8,11 +8,11 @@ use Exception;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\Component;
 use Illuminate\View\View;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasColor;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasCssClass;
 
 class ConfirmationDialog extends Component implements Htmlable
 {
-    use HasColor;
+    use HasCssClass;
 
     public function __construct(
         public string $title,

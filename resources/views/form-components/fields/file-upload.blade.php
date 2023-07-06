@@ -23,6 +23,7 @@
         >
             {{ $field->getLabel() }}
         </x-little-anonyme::form-components.fields.partials.label>
+
         <div class="la-file-upload">
             <div class=""
                 x-data="fileUpload({

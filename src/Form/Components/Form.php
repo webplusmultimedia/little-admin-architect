@@ -94,7 +94,6 @@ final class Form implements Htmlable
     {
         $this->model($model);
         $this->setPagesForResource($resource);
-        //dd($this->pageForResource::getActions());
         $this->headerActions($this->pageForResource::getActions());
     }
 
@@ -149,11 +148,9 @@ final class Form implements Htmlable
     protected function initSelectUsing(): void
     {
         foreach ($this->getFormFields() as $field) {
-            $field->setUp();
+
             if ($field instanceof Select) {
-
-                //if($field->getName() === 'categorie_id') dd($field->hasRelationship());
-
+                $field->setUp();
                 if ($field->optionsUsing()) {
                     $this->addToListOptionsUsing($field->getStatePath(), $field->optionsUsing());
                 }
@@ -233,10 +230,10 @@ final class Form implements Htmlable
         return [];
     }
 
-    protected function getLivewireComponent(): Component
+    /*protected function getLivewireComponent(): Component
     {
         return $this->livewire;
-    }
+    }*/
 
     protected function render(): View
     {

@@ -18,6 +18,7 @@
         hasOptionUsing : @js($field->hasOptionUsing()),
         msgContent : @js($field->getMessagesContent()),
         searchDebounce : @js($field->getSearchDebounce()),
+        isDynamicOptions : @js($field->getDynamicOption()),
      }
     )"
      wire:ignore

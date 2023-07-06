@@ -21,6 +21,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAli
 class BaseForm extends Component implements HasForm
 {
     use CanInitForm;
+
     //use HasMountFormAction;
     use HasNotification;
     use InteractsWithForms;

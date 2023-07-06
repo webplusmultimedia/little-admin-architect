@@ -157,4 +157,11 @@ trait CanSearchWithLivewire
 
         return $this;
     }
+
+    public function loadingLimit(int $loadLimit): static
+    {
+        $this->loadLimit = $loadLimit;
+
+        return $this;
+    }
 }

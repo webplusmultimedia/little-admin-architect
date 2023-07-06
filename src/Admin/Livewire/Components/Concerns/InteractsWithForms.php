@@ -40,10 +40,6 @@ trait InteractsWithForms
                 return $form;
             }
 
-            /*if ($property === 'modal') {
-                return $this->getModalViewOnce();
-            }*/
-
             throw $exception;
         }
     }
@@ -54,7 +50,6 @@ trait InteractsWithForms
      */
     public function __call($method, $params): mixed
     {
-
         try {
             if (static::hasMacro($method)) {
                 return static::macroCall($method, $params);

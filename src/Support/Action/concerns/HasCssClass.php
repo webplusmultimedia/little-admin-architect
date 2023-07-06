@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns;
 
 use Closure;
 
-trait HasColor
+trait HasCssClass
 {
     protected string|Closure $color = 'primary ';
 
@@ -71,10 +71,7 @@ trait HasColor
 
     public function getClass(): string
     {
-        $color = $this->color;
-        if (is_callable($this->color)) {
-            $color = call_user_func($this->color, $this->getRecord());
-        }
+        $color = $this->getColor();
 
         if ($this->outline) {
             $this->btnStyle = 'btn-outline btn-outline-' . $color;
@@ -102,7 +99,7 @@ trait HasColor
     public function getColor(): string
     {
         if (is_callable($this->color)) {
-            return call_user_func($this->color, $this->getRecord());
+            return app()->call($this->color, ['record' => $this->getRecord()]);
         }
 
         return $this->color;

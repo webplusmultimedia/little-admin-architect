@@ -60,7 +60,6 @@ class FileUpload extends Field
 
                 $component->state($files);
             }
-
         });
 
         $this->afterStateUpdated(static function (array|null $state, FileUpload $component): void {
@@ -234,6 +233,7 @@ class FileUpload extends Field
 
                 return $file;
             })->all();
+
             $this->state($newFiles);
         }
     }

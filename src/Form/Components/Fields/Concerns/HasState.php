@@ -27,7 +27,7 @@ trait HasState
         return null;
     }
 
-    protected function state(mixed $state): void
+    public function state(mixed $state): void
     {
         if ($this->record instanceof Model) {
             $this->record->{$this->getName()} = $state;

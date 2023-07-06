@@ -28,7 +28,7 @@ trait InteractWithRecord
         return $model;
     }
 
-    protected function getDataRecordByName(string $name): mixed
+    /*protected function getDataRecordByName(string $name): mixed
     {
         return $this->record->{$name};
     }
@@ -36,5 +36,5 @@ trait InteractWithRecord
     protected function setDataToRecordByName(string $name, mixed $value): void
     {
         $this->record->{$name} = $value;
-    }
+    }*/
 }

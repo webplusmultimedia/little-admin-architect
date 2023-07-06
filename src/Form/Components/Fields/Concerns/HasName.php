@@ -31,6 +31,7 @@ trait HasName
 
     public function getStatePath(): string
     {
+
         return $this->getPrefixPath() . $this->name;
     }
 

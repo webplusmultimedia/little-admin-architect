@@ -29,7 +29,8 @@ trait HasMountTableAction
             $this->mountTableActionRecord = $key;
             $action->record($record);
             $this->table->getActionModal()->content(
-                ConfirmationDialog::make(title: $this->getTitleForModal($key),
+                ConfirmationDialog::make(
+                    title: $this->getTitleForModal($record),
                     subtitle: $action->getConfirmQuestion(),
                     actionLabel: $action->getLabel() ?? $action->getName(),
                     btnClass: $action->getColor(),
@@ -64,9 +65,7 @@ trait HasMountTableAction
 
     private function getRecordForMount(mixed $key): Model
     {
-
         $model = $this->table->getResourcePage()::getEloquentQuery()->getModel();
-
         if ( ! $record = $model->where($model->getKeyName(), $key)->first()) {
             throw new Exception('Aucune donnée disponible');
         }
@@ -74,11 +73,10 @@ trait HasMountTableAction
         return $record;
     }
 
-    private function getTitleForModal(mixed $key): mixed
+    private function getTitleForModal(Model $record): mixed
     {
-        $record = $this->getRecordForMount($key);
-        $field = $this->table->getResourcePage()::getRecordTitleAttribute();
+        $fieldName = $this->table->getResourcePage()::getRecordTitleAttribute();
 
-        return $record->{$field};
+        return $record->{$fieldName};
     }
 }
