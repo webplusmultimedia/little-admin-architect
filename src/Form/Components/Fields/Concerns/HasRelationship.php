@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns
 
 use Closure;
 use Exception;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -37,16 +38,16 @@ trait HasRelationship
         return (bool) $this->relationship;
     }
 
-    public function getRelationType(): ?string
+    public function getRelationType(): string|false
     {
         try {
             return get_class($this->record->{$this->relationship}());
         } catch (Exception) {
-            return null;
+            return false;
         }
     }
 
-    protected function getInstanceRelationship(): ?Relation
+    protected function getInstanceRelationship(): BelongsTo|BelongsToMany|null
     {
         try {
             if ( ! $this->instanceRelationCache) {

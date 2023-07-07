@@ -16,7 +16,7 @@ trait HasTitle
     public function getTitleForm(): string
     {
         $statusTitle = str('Nouveau ')->append('(', $this->getTitle(), ') : ');
-        if (self::UPDATED === $this->statusForm) {
+        if (Form::UPDATED === $this->statusForm) {
             $statusTitle = str('Edition ')->append('(', $this->getTitle(), ') : ');
             if ($updateTitle = $this->pageForResource::getResource()::getRecordTitleAttribute()) {
                 return $statusTitle->append($this->getFormFieldByName($updateTitle)?->getState())->value();
@@ -26,7 +26,7 @@ trait HasTitle
         return $statusTitle->value();
     }
 
-    public function title(string $title): Form
+    public function title(string $title): static
     {
         $this->title = $title;
 

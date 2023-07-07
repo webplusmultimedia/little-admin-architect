@@ -7,25 +7,31 @@ namespace Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal;
 use Exception;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasCssClass;
 
-class ConfirmationDialog implements Htmlable
+class FormDialog implements Htmlable
 {
     use HasCssClass;
 
+    /**
+     * @param  Field[]  $fields
+     */
     public function __construct(
         public string $title,
         public string $subtitle,
         public string $actionLabel,
-        string $btnClass,
+        public array $fields = [],
     ) {
-        //dd($btnClass);
-        $this->color($btnClass);
+        $this->color('primary');
     }
 
-    public static function make(string $title, string $subtitle, string $actionLabel, string $btnClass): ConfirmationDialog
+    /**
+     * @param  Field[]  $fields
+     */
+    public static function make(string $title, string $subtitle, string $actionLabel, array $fields): FormDialog
     {
-        return new self(title: $title, subtitle: $subtitle, actionLabel: $actionLabel, btnClass: $btnClass);
+        return new self(title: $title, subtitle: $subtitle, actionLabel: $actionLabel, fields: $fields);
     }
 
     public function getClass(): string
@@ -66,8 +72,14 @@ class ConfirmationDialog implements Htmlable
     public function render(): View
     {
         return view(
-            'little-views::modal.confirmation-dialog',
-            ['title' => $this->title, 'subtitle' => $this->subtitle, 'actionLabel' => $this->actionLabel, 'btnClass' => $this->getClass()]
+            'little-views::modal.form-dialog',
+            [
+                'title' => $this->title,
+                'subtitle' => $this->subtitle,
+                'actionLabel' => $this->actionLabel,
+                'btnClass' => $this->getClass(),
+                'fields' => $this->fields,
+            ]
         );
     }
 

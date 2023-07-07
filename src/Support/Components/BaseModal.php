@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Components;
 
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\View\Component;
 use Webplusmultimedia\LittleAdminArchitect\Support\Components\Concerns\HasContent;
 use Webplusmultimedia\LittleAdminArchitect\Support\Components\Concerns\HasTitle;
 
-abstract class BaseModal extends Component implements Htmlable
+abstract class BaseModal implements Htmlable
 {
     use HasContent;
     use HasTitle;

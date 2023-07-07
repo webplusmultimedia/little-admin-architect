@@ -33,7 +33,6 @@ class Select extends Field
             $this->options([]);
             if (BelongsTo::class === $this->getRelationType()) {
                 $this->isMultiple = false;
-
             }
             if (BelongsToMany::class === $this->getRelationType()) {
                 $this->isMultiple = true;
@@ -93,7 +92,6 @@ class Select extends Field
 
                 $this->afterStateUpdated(static function (Collection|array $state, Select $component): void {
                     $model = $component->getBuilderRelationship()->getModel();
-
                     if ($state instanceof Collection) {
                         $state = $state->map(function ($value) use ($model) {
                             if ($value instanceof Model) {
@@ -123,12 +121,10 @@ class Select extends Field
 
                         })->all();
 
-                        //$state = $model->whereIn($model->getKeyName(),$state)->get();
-
                         $component->state($state);
                     }
-
                 });
+
                 $this->setBeforeUpdatedValidateValueUsing(static function (array $state, Select $component): bool {
                     return false;
                 });

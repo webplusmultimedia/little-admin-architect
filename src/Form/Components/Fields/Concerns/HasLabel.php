@@ -10,7 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Partials\Label;
 
 trait HasLabel
 {
-    protected ?Label $fieldLabel = null;
+    //protected ?Label $fieldLabel = null;
 
     protected ?string $label = null;
 
@@ -23,7 +23,11 @@ trait HasLabel
 
     public function getLabel(): null|string
     {
-        return $this->label ?? str($this->name)->headline()->lower()->ucfirst()->value();
+        if ($this->label) {
+            return str($this->label)->headline()->lower()->ucfirst()->value();
+        }
+
+        return str($this->name)->headline()->lower()->ucfirst()->value();
     }
 
     public function getViewComponentForLabel(): string

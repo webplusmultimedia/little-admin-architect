@@ -20,7 +20,7 @@ trait CanDehydrate
     public function dehydrateState(): void
     {
         if ($this->dehydrate) {
-            $this->setState($this->evaluate(closure: $this->dehydrate, excludes: ['set', 'get']));
+            $this->setState($this->evaluate(closure: $this->dehydrate));
         }
     }
 }

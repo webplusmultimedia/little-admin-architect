@@ -7,82 +7,35 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\View;
-use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Button;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanGetRules;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanInitDatasForm;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanListOptionsForSelect;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanSearchResultsUsingForSelect;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanUpdatedDatas;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanValidatedValues;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasDefaultValue;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasFields;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasActionFormModal;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasHeaderAction;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasSelectOptionLabelUsing;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasState;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasTitle;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithUploadFiles;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractWithLivewire;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasGridColumns;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasSchema;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\FileUpload;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Select;
-use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithRecord;
+use Webplusmultimedia\LittleAdminArchitect\Support\Form\Contracts\BaseForm as BaseFormAlias;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasModal;
 
-final class Form implements Htmlable
+final class Form extends BaseFormAlias implements Htmlable
 {
-    use CanGetRules;
-    use CanInitDatasForm;
-    use CanListOptionsForSelect;
-    use CanSearchResultsUsingForSelect;
-    use CanUpdatedDatas;
-    use CanValidatedValues;
-    use HasDefaultValue;
-    use HasFields;
-    use HasGridColumns;
+    use HasActionFormModal;
     use HasHeaderAction;
     use HasModal;
-    use HasSchema;
-    use HasSelectOptionLabelUsing;
-    use HasState;
-    use HasTitle;
-    use InteractsWithUploadFiles;
     use InteractWithLivewire;
-    use InteractWithPage;
     use InteractWithRecord;
 
     protected string $view = 'form';
 
-    protected BaseForm|Component $livewire;
+    protected BaseForm $livewire;
 
     protected string $eventForCloseModal = 'close.modal';
-
-    /**
-     * @var Model|array<string,string>|null
-     */
-    protected null|Model|array $model = null;
 
     public const CREATED = 'CREATED';
 
     public const UPDATED = 'UPDATED';
-
-    protected ?string $statusForm = null;
-
-    protected string $action = 'save';
-
-    protected string $type = 'submit';
-
-    protected string $caption = 'Enregistrer';
-
-    protected Button $buttonSave;
-
-    protected Button $buttonCancel;
-
-    protected ?string $livewireId = null;
 
     public function getLivewireId(): ?string
     {
@@ -90,23 +43,35 @@ final class Form implements Htmlable
         return $this->livewireId;
     }
 
+    public function setLivewireComponent(BaseForm $livewire): void
+    {
+        $this->livewire = $livewire;
+        $this->livewireId($livewire->id);
+    }
+
     public function configureForm(Page $resource, Model $model): void
     {
         $this->model($model);
         $this->setPagesForResource($resource);
         $this->headerActions($this->pageForResource::getActions());
+        $this->actionModal(FormModal::make($this->livewireId . '-action-form'));
+    }
+
+    public function model(Model $record): void
+    {
+        if ( ! $this->model) {
+            $this->model = $record;
+            $this->initMode();
+            $this->initDatasFormOnMount($this->model);
+        }
+        $this->removeHiddenFieldsOnForm();
+        $this->initSelectUsing();
+
     }
 
     public function livewireId(string $id): void
     {
         $this->livewireId = $id;
-    }
-
-    public function __construct(
-        public string $title = ''
-    ) {
-        $this->buttonSave = Button::make(trans('little-admin-architect::form.button.save'), $this->type, $this->action)->icon('heroicon-s-check');
-
     }
 
     public static function make(string $title = ''): Form
@@ -122,19 +87,6 @@ final class Form implements Htmlable
     public function getAction(): ?string
     {
         return $this->action;
-    }
-
-    public function model(Model $record): void
-    {
-
-        if ( ! $this->model) {
-            $this->model = $record;
-            $this->initMode();
-            $this->initDatasFormOnMount($this->model);
-        }
-        $this->removeHiddenFieldsOnForm();
-        $this->initSelectUsing();
-
     }
 
     public function modelArray(array $record): void
@@ -176,11 +128,6 @@ final class Form implements Htmlable
         }
     }
 
-    public function getStatusForm(): ?string
-    {
-        return $this->statusForm;
-    }
-
     public function getSaveButton(): Button
     {
         return $this->buttonSave;
@@ -212,12 +159,12 @@ final class Form implements Htmlable
         return $this->model;
     }
 
-    public function livewireComponent(Component $livewire): Form
+   /* public function livewireComponent(Component $livewire): Form
     {
         $this->livewire = $livewire;
 
         return $this;
-    }
+    }*/
 
     public function reorderUploadFiles(string $path, array $newOrder): array
     {

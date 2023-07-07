@@ -23,8 +23,8 @@
         <div class="flex justify-end group-btn px-3 py-5 bg-white border border-gray-200" aria-autocomplete="none">
             <div class="inline-flex items-center space-x-3">
                 <x-little-form::button.submit class="btn-primary" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}"
-                                              wire:loading.class.delay="opacity-70 cursor-wait">
-
+                                              wire:loading.class.delay="opacity-70 cursor-wait"
+                >
                     @if($button->hasIcon())
                         <x-little-anonyme::form-components.fields.icons.hero-icon :name="$button->getViewIcon()"/>
                     @endif
@@ -34,7 +34,8 @@
                 </x-little-form::button.submit>
 
                 <x-little-anonyme::form-components.fields.button.text wire:loading.attr="disabled" wire:target="{{ $buttonCancel->getAction() }}"
-                                                                      wire:loading.class.delay="opacity-70 cursor-wait">
+                                                                      wire:loading.class.delay="opacity-70 cursor-wait"
+                >
                     @if($buttonCancel->hasIcon())
                         <x-little-anonyme::form-components.fields.icons.hero-icon :name="$buttonCancel->getViewIcon()"/>
                     @endif

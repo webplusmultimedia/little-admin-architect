@@ -78,4 +78,8 @@
             </div>
         </form>
     </div>
+    <div>
+        {{ $form->getActionModal() }}
+    </div>
+
 </div>

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
@@ -19,12 +18,6 @@ trait InteractWithPage
     public function setPagesForResource(Page $page): void
     {
         $this->pageForResource = $page;
-    }
-
-    public function setLivewireComponent(BaseForm $livewire): void
-    {
-        $this->livewire = $livewire;
-        $this->livewireId($livewire->id);
     }
 
     public function getResourcePage(): Resource|string|null

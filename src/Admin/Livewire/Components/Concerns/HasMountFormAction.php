@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Conce
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\ConfirmationDialog;
+use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\FormDialog;
 
 trait HasMountFormAction
 {
@@ -29,10 +29,11 @@ trait HasMountFormAction
             $this->mountFormActionRecord = $key;
             $action->record($record);
             $this->form->getActionModal()->content(
-                ConfirmationDialog::make(title: $this->getTitleForModal($key),
+                FormDialog::make(
+                    title: $this->getTitleForModal($key),
                     subtitle: $action->getConfirmQuestion(),
                     actionLabel: $action->getLabel() ?? $action->getName(),
-                    btnClass: $action->getClass(), record: $record
+                    record: $record
                 )
             )->maxWidthSmall();
             $this->dispatchBrowserEvent('show-modal', ['id' => $id]);
