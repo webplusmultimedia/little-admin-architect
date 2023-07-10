@@ -138,12 +138,12 @@ final class Form extends BaseFormAlias implements Htmlable
         return $this->model;
     }
 
-   /* public function livewireComponent(Component $livewire): Form
-    {
-        $this->livewire = $livewire;
+    /* public function livewireComponent(Component $livewire): Form
+     {
+         $this->livewire = $livewire;
 
-        return $this;
-    }*/
+         return $this;
+     }*/
 
     public function reorderUploadFiles(string $path, array $newOrder): array
     {
