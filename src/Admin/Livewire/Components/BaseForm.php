@@ -45,11 +45,11 @@ class BaseForm extends Component implements HasForm
         $this->pageRoute = $pageRoute;
         $this->key = $key;
 
-        $this->form->hydrateState();
+        //$this->form->hydrateState();
+        $this->record = [];
 
         $this->initialized = true;
         $this->initBoot = false;
-        // dump($this->getOptionsUsing('data.categorie_id'),$this->getSearchResultsUsing('data.categorie_id','2'));
 
     }
 
@@ -68,10 +68,10 @@ class BaseForm extends Component implements HasForm
         $this->form->saveDatasForm();
     }
 
-    public function dehydrate(): void
+    /*public function dehydrate(): void
     {
         $this->form->dehydrateState();
-    }
+    }*/
 
     public function updated(string $name, mixed $value): void
     {

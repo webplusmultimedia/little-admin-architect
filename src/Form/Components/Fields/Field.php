@@ -72,7 +72,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
      */
     protected array|null|Model $record = null;
 
-    protected BaseForm|Component $livewire;
+    public BaseForm|Component $livewire;
 
     protected mixed $oldValue = null;
 
@@ -103,7 +103,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     public function record(array|null|Model $record): void
     {
         $this->record = $record;
-        $this->setOldValue($this->getState());
+        //$this->setOldValue($this->getState());
     }
 
     public function getRecord(): array|null|Model

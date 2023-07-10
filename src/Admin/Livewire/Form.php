@@ -12,11 +12,14 @@ class Form extends BaseForm implements Htmlable
 {
     public function render(): View
     {
+        $this->form->dehydrateState();
+
         return view('little-views::livewire.form', $this->formDatas);
     }
 
     public function toHtml(): string
     {
+
         return $this->render()->render();
     }
 }

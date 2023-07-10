@@ -11,7 +11,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Input;
 trait HasFields
 {
     /** @var Field[] */
-    protected static array $formFields = [];
+    public static array $formFields = [];
 
     public static function addFormField(Field $field): void
     {
@@ -26,28 +26,28 @@ trait HasFields
 
     public function getFormFieldByName(string $name): ?Field
     {
-        return collect(self::$formFields)->filter(fn (Field $field) => $field->getName() === $name)->first();
+        return collect(static::$formFields)->filter(fn (Field $field) => $field->getName() === $name)->first();
     }
 
     public function getFormFieldByPath(string $path): ?Field
     {
-        return collect(self::$formFields)->filter(fn (Field $field) => $field->getStatePath() === $path)->first();
+        return collect(static::$formFields)->filter(fn (Field $field) => $field->getStatePath() === $path)->first();
     }
 
     public function setUpFieldsOnForm(): void
     {
-        foreach (self::$formFields as $key => $field) {
+        foreach (static::$formFields as $key => $field) {
             $field->livewire($this->livewire);
             $field->setForm($this);  //  @phpstan-ignore-line
             if ($field->isHiddenOnForm()) {
-                unset(self::$formFields[$key]);
+                unset(static::$formFields[$key]);
             }
             //Add date from when Need, because can't livewire it data when range
             if ($field instanceof DateTimePicker and $field->getDateFromWireName()) {
                 $from = Input::make($field->getDateFromName())->hidden();
                 $from->record($this->model);
                 $from->statusForm($this->statusForm);
-                self::$formFields[] = $from;
+                static::$formFields[] = $from;
             }
         }
     }

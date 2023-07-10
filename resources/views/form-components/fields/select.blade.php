@@ -6,17 +6,18 @@
 @endphp
 @if($field->isHidden())
     <x-little-anonyme::form-components.fields.partials.hidden-field
-            {{ $attributes->except(['field'])
-                ->merge([
-                    'wire:model' . $field->getWireModifier() => $field->getStatePath(),
-                    'id' => $id, 'type' => 'hidden',
-                ])
-            }}
+        {{ $attributes->except(['field'])
+            ->merge([
+                'wire:model' . $field->getWireModifier() => $field->getStatePath(),
+                'id' => $id, 'type' => 'hidden',
+            ])
+        }}
     />
 @else
     <x-dynamic-component :component="$field->getWrapperView()"
                          :id="$field->getWrapperId()"
-            {{ $attributes->class($field->getColSpan()) }}
+                         x-data="{}"
+        {{ $attributes->class($field->getColSpan()) }}
     >
 
         @if($field->isSearchable())
@@ -49,4 +50,3 @@
         <x-little-anonyme::form-components.fields.partials.error-message :message="$field->getErrorMessage($errors)" class="mb-1"/>
     </x-dynamic-component>
 @endif
-

@@ -81,10 +81,8 @@ class Select extends Field
                     $component->state($state);
                 });
 
-                $this->afterStateDehydratedUsing(static function (array $state, Select $component): void {
-                    //$component->livewire->record[$component->getName()] = $state;
-
-                    $component->state($state);
+                $this->afterStateDehydratedUsing(static function (array $state): array {
+                    return $state;
                 });
 
                 $this->setBeforeUpdatedValidateValueUsing(static function (Collection|array $state, Select $component): bool {

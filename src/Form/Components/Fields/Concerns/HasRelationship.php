@@ -56,7 +56,7 @@ trait HasRelationship
         return $this->hasRelationship() and in_array(HasBelongToRelation::class, class_uses_recursive($this)) and BelongsToMany::class === $this->getRelationType();
     }
 
-    protected function getInstanceRelationship(): BelongsTo|BelongsToMany|null
+    protected function getInstanceRelationship(): BelongsTo|BelongsToMany
     {
         try {
             if ( ! $this->instanceRelationCache) {
@@ -65,7 +65,7 @@ trait HasRelationship
 
             return $this->instanceRelationCache;
         } catch (Exception) {
-            return null;
+            throw new Exception('Call to a non existing relationship [' . $this->relationship . '] on Select field [' . $this->name . ']');
         }
     }
 

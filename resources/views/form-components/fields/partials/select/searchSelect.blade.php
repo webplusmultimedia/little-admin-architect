@@ -10,7 +10,7 @@
      {
         componentId: @js($field->getStatePath()),
         defaultLabel: @js($field->getLabelDefault()),
-        state : $wire.entangle(@js($field->getStatePath())).defer,
+        state : @entangle($field->getStatePath()).defer,
         defaultValue : @js($field->getState()),
         isMultiple : @js($field->isMultiple()),
         isSearchable : @js($field->isSearchable()),
@@ -22,6 +22,7 @@
      }
     )"
      wire:ignore
+     wire:key="{{$field->getStatePath() . '-'.md5('hhh')}}"
         {{ $attributes }}
 >
     <div class=""

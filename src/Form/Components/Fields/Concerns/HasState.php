@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
 
 use Closure;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 trait HasState
@@ -36,7 +37,7 @@ trait HasState
     {
         $this->state = $state;
         if ($this->checkRelation()) {
-            $this->livewire->record[$this->getName()] = $state; //  @phpstan-ignore-line
+            $this->livewire->record[$this->name] = $state; //@phpstan-ignore-line
 
             return;
         }
@@ -72,10 +73,12 @@ trait HasState
     protected function getRelationState(): mixed
     {
         if ( ! isset($this->livewire->record[$this->getName()])) {
-            return $this->record->{$this->getName()}->modelKeys();
+            if ($this->record->{$this->name}) {
+                return $this->record->{$this->name}->modelKeys();
+            }
+            throw new Exception('Call to a non existing relationship [' . $this->relationship . '] on Select field [' . $this->name . ']');
         }
 
-        return $this->livewire->record[$this->getName()];
-
+        return $this->livewire->record[$this->name];
     }
 }

@@ -79,11 +79,11 @@ class FileUpload extends Field
             $component->state($files);
         });
 
-        $this->afterStateDehydratedUsing(static function (array|null $state, FileUpload $component): void {
+        $this->afterStateDehydratedUsing(static function (array|null $state, FileUpload $component): array {
             if (blank($state)) {
-                $component->state([]);
+                //$component->state([]);
 
-                return;
+                return [];
             }
             $files = collect($state);
             $files = $files
@@ -111,7 +111,8 @@ class FileUpload extends Field
                 })
                 ->values()->all();
 
-            $component->state($files);
+            //$component->state($files);
+            return $files;
         });
 
         $this->setBeforeUpdatedValidateValueUsing(static function (FileUpload $component, null|array $state): bool {

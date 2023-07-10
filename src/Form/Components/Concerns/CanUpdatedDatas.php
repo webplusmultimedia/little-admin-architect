@@ -19,7 +19,9 @@ trait CanUpdatedDatas
     {
         foreach ($this->getFormFields() as $field) {
             if ($field->getStatePath() === $name) {
+
                 $field->setState($value); // do not remove or change
+
                 $field->afterStateUpdatedUsing();
             }
         }

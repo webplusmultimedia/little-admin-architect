@@ -20,11 +20,11 @@ trait HasBelongToRelation
 
                 if (BelongsTo::class === $this->getRelationType() or BelongsToMany::class === $this->getRelationType()) {
                     if (BelongsTo::class === $this->getRelationType()) {
-                        $this->relationshipBuilder = $this->getInstanceRelationship()?->getModel()->query();
+                        $this->relationshipBuilder = $this->getInstanceRelationship()->getModel()->query();
                     }
                     if (BelongsToMany::class === $this->getRelationType()) {
 
-                        $this->relationshipBuilder = $this->getInstanceRelationship()?->getModel()->query();
+                        $this->relationshipBuilder = $this->getInstanceRelationship()->getModel()->query();
                     }
                 } else {
                     throw new Exception('Need only BelongsTo/BelongsToMany relationship on Select field [' . $this->name . ']');

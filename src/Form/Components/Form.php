@@ -40,7 +40,6 @@ final class Form extends BaseFormAlias implements Htmlable
 
     public function getLivewireId(): ?string
     {
-
         return $this->livewireId;
     }
 
@@ -138,13 +137,6 @@ final class Form extends BaseFormAlias implements Htmlable
         return $this->model;
     }
 
-    /* public function livewireComponent(Component $livewire): Form
-     {
-         $this->livewire = $livewire;
-
-         return $this;
-     }*/
-
     public function reorderUploadFiles(string $path, array $newOrder): array
     {
         /** @var ?FileUpload $field */
@@ -155,11 +147,6 @@ final class Form extends BaseFormAlias implements Htmlable
 
         return [];
     }
-
-    /*protected function getLivewireComponent(): Component
-    {
-        return $this->livewire;
-    }*/
 
     protected function render(): View
     {
