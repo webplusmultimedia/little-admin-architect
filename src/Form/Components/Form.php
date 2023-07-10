@@ -11,10 +11,11 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasActionFormModal;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasFormFieldsAction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasHeaderAction;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasSelectOptionLabelUsing;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\FileUpload;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Select;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithRecord;
 use Webplusmultimedia\LittleAdminArchitect\Support\Form\Contracts\BaseForm as BaseFormAlias;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasModal;
@@ -22,14 +23,14 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasModal;
 final class Form extends BaseFormAlias implements Htmlable
 {
     use HasActionFormModal;
+    use HasFormFieldsAction;
     use HasHeaderAction;
     use HasModal;
+    use HasSelectOptionLabelUsing;
     use InteractWithLivewire;
     use InteractWithRecord;
 
     protected string $view = 'form';
-
-    protected BaseForm $livewire;
 
     protected string $eventForCloseModal = 'close.modal';
 
@@ -51,21 +52,21 @@ final class Form extends BaseFormAlias implements Htmlable
 
     public function configureForm(Page $resource, Model $model): void
     {
-        $this->model($model);
+
+        $this->model = $model;
+        $this->initMode();
+        $this->initDatasFormOnMount($this->model);
+        $this->setUpFieldsOnForm();
+        $this->initSelectUsing();
+        if (self::CREATED === $this->statusForm) {
+            $this->applyDefaultValue();
+        }
+        //$this->model($model);
+        $this->hydrateState();
+
         $this->setPagesForResource($resource);
         $this->headerActions($this->pageForResource::getActions());
         $this->actionModal(FormModal::make($this->livewireId . '-action-form'));
-    }
-
-    public function model(Model $record): void
-    {
-        if ( ! $this->model) {
-            $this->model = $record;
-            $this->initMode();
-            $this->initDatasFormOnMount($this->model);
-        }
-        $this->removeHiddenFieldsOnForm();
-        $this->initSelectUsing();
 
     }
 
@@ -95,28 +96,6 @@ final class Form extends BaseFormAlias implements Htmlable
         $this->statusForm = 'CREATED';
         $this->initDatasFormOnMount($record);
         $this->initSelectUsing();
-    }
-
-    protected function initSelectUsing(): void
-    {
-        foreach ($this->getFormFields() as $field) {
-
-            if ($field instanceof Select) {
-                $field->setUp();
-                if ($field->optionsUsing()) {
-                    $this->addToListOptionsUsing($field->getStatePath(), $field->optionsUsing());
-                }
-                if ($field->searchResultsUsing()) {
-                    $this->addToSearchResultsUsing($field->getStatePath(), $field->searchResultsUsing());
-                }
-                if ($field->selectOptionLabelUsing()) {
-                    $this->addSelectOptionLabelsUsing($field->getStatePath(), $field->selectOptionLabelUsing());
-                    if ( ! $field->isMultiple()) {
-                        $field->setDefaultLabelForSelect($this);
-                    }
-                }
-            }
-        }
     }
 
     public function initMode(): void

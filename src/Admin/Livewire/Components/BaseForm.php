@@ -30,6 +30,8 @@ class BaseForm extends Component implements HasForm
 
     public ?Model $data = null;
 
+    public array $record = [];
+
     public bool $initialized = false;
 
     public ?string $previousPage = null;
@@ -64,5 +66,15 @@ class BaseForm extends Component implements HasForm
     public function save(): void
     {
         $this->form->saveDatasForm();
+    }
+
+    public function dehydrate(): void
+    {
+        $this->form->dehydrateState();
+    }
+
+    public function updated(string $name, mixed $value): void
+    {
+        $this->form->updated(name: $name, value: $value);
     }
 }

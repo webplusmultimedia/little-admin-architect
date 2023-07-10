@@ -45,7 +45,6 @@ export function SelectFormComponent({
                 this.addSelectedOptionToNewList()
                 if (this.isDynamicOptions){  //For belongToMany
                     this.state = [...this.dynamicOptions]
-                    console.log(this.dynamicOptions)
                 }
             }
             if (this.hasOptionUsing){
@@ -160,13 +159,13 @@ export function SelectFormComponent({
                 }
                 if (this.isDynamicOptions){
                     this.dynamicOptions = [...this.defaultValue]
+                    this.state = this.dynamicOptions
                 }
             }
             else {
                 this.selectOptionFrom({label: defaultLabel, value: defaultValue})
             }
             this.$nextTick(()=>this.addSelectedOptionToNewList())
-
             this.$watch('show',(value)=>{
                 if(value) {
                     setTimeout(()=>{

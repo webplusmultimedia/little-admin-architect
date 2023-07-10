@@ -21,8 +21,7 @@ trait CanValidatedValues
                 $values = $field->getValidatedValues(values: $values, datas: $datas, model: $this->model);
                 //Save datas for relationship for save after saving livewire data
                 if ($field->hasRelationship() and BelongsToMany::class === $field->getRelationType()) {
-                    $this->datasRelation[$field->getName()] = $field->getRecord()->{$field->getName()};
-                    unset($field->getRecord()->{$field->getName()}); // Unset it because u can't save that
+                    $this->datasRelation[$field->getName()] = $field->getState();
                     $this->hasDatasRelationshipForSave = true;
                 }
             }

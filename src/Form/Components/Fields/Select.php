@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
@@ -63,72 +62,35 @@ class Select extends Field
 
             } else {
                 $this->dynamicOptions = true;
-                $this->getSelectOptionLabelUsing(static function (Select $component, Collection|array $state): Collection {
+                $this->getSelectOptionLabelUsing(static function (Select $component, array $state): Collection {
                     $model = $component->getBuilderRelationship()->getModel();
-                    if ($state instanceof Collection) {
-                        return $state->pluck(value: $component->getLabelField(), key: 'id');
-                    }
 
                     return $model->whereIn($model->getKeyName(), $state)->get()->pluck(value: $component->getLabelField(), key: 'id');
                 });
 
-                $this->afterStateHydrated(static function (Collection|array|null $state, Select $component): void {
-                    $model = $component->getBuilderRelationship()->getModel();
+                $this->afterStateHydrated(static function (array $state, Select $component): void {
+                    // $component->livewire->record[$component->getName()] = $state;
+                    $component->state($state);
+                });
+
+                $this->afterStateUpdated(static function (array|null $state, Select $component): void {
                     if (blank($state)) {
                         $state = [];
                     }
-                    if ($state instanceof Collection) {
-                        $state = $state->map(function ($value) use ($model) {
-                            if ($value instanceof Model) {
-                                return $value->{$model->getKeyName()};
-                            }
-
-                            return $value;
-
-                        })->all();
-                        $component->state($state);
-                    }
+                    //$component->livewire->record[$component->getName()] = $state;
+                    $component->state($state);
                 });
 
-                $this->afterStateUpdated(static function (Collection|array $state, Select $component): void {
-                    $model = $component->getBuilderRelationship()->getModel();
-                    if ($state instanceof Collection) {
-                        $state = $state->map(function ($value) use ($model) {
-                            if ($value instanceof Model) {
-                                return $value->{$model->getKeyName()};
-                            }
+                $this->afterStateDehydratedUsing(static function (array $state, Select $component): void {
+                    //$component->livewire->record[$component->getName()] = $state;
 
-                            return $value;
-
-                        })->all();
-
-                        $component->state($state);
-                    }
+                    $component->state($state);
                 });
 
-                $this->afterStateDehydratedUsing(static function (Collection|array|null $state, Select $component): void {
-                    $model = $component->getBuilderRelationship()->getModel();
-                    if (blank($state)) {
-                        $state = [];
-                    }
-                    if (is_array($state)) {
-                        $state = collect($state)->map(function ($value) use ($model) {
-                            if (is_array($value)) {
-                                return $value[$model->getKeyName()];
-                            }
-
-                            return $value;
-
-                        })->all();
-
-                        $component->state($state);
-                    }
-                });
-
-                $this->setBeforeUpdatedValidateValueUsing(static function (array $state, Select $component): bool {
+                $this->setBeforeUpdatedValidateValueUsing(static function (Collection|array $state, Select $component): bool {
                     return false;
                 });
-                $this->setBeforeCreatedValidateValueUsing(static function (array $state, Select $component): bool {
+                $this->setBeforeCreatedValidateValueUsing(static function (Collection|array $state, Select $component): bool {
                     return false;
                 });
 

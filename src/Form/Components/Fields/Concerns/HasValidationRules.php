@@ -6,22 +6,24 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns
 
 use Closure;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Exists;
+use Illuminate\Validation\Rules\Unique;
 
 trait HasValidationRules
 {
     /**
-     * @var array<int,string|Rule|Closure>
+     * @var array<int,string|Rule|Unique|Exists|Closure>
      */
     protected array $rules = [];
 
     protected bool $nullable = false;
 
-    protected function addRules(string|Rule|Closure $rules): void
+    protected function addRules(string|Rule|Unique|Exists|Closure $rules): void
     {
         $this->rules[] = $rules;
     }
 
-    public function rules(string|Rule|Closure $rules): static
+    public function rules(string|Rule|Unique|Exists|Closure $rules): static
     {
         $this->rules[] = $rules;
 

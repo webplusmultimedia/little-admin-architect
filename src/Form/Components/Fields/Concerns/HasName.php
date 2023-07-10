@@ -12,6 +12,8 @@ trait HasName
 
     protected string $prefixPath = 'data';
 
+    protected string $prefixRelationPath = 'record';
+
     public function name(string $name): static
     {
         $this->name = $name;
@@ -31,6 +33,9 @@ trait HasName
 
     public function getStatePath(): string
     {
+        if ($this->checkRelation()) {
+            return $this->getPrefixRelationPath() . $this->name;
+        }
 
         return $this->getPrefixPath() . $this->name;
     }
@@ -47,5 +52,15 @@ trait HasName
     public function setPrefixPath(string $prefixPath): void
     {
         $this->prefixPath = $prefixPath;
+    }
+
+    public function getPrefixRelationPath(): string
+    {
+        return $this->prefixRelationPath . '.';
+    }
+
+    public function setPrefixRelationPath(string $prefixRelationPath): void
+    {
+        $this->prefixRelationPath = $prefixRelationPath;
     }
 }

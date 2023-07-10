@@ -8,8 +8,13 @@ trait InteractWithAttributeRules
 {
     public function applyAttributesRules(array $rules): array
     {
-        $rules['data.' . $this->name] = str($this->getLabel())->lower();
+        $rules['data.' . $this->name] = $this->getAttributes();
 
         return $rules;
+    }
+
+    protected function getAttributes(): string
+    {
+        return str($this->getLabel())->lower()->value();
     }
 }

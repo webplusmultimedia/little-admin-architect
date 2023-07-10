@@ -14,7 +14,6 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanUpdatedDa
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanValidatedValues;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasFields;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasSelectOptionLabelUsing;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasState;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasTitle;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWithUploadFiles;
@@ -34,11 +33,12 @@ abstract class BaseForm
     use HasFields;
     use HasGridColumns;
     use HasSchema;
-    use HasSelectOptionLabelUsing;
     use HasState;
     use HasTitle;
     use InteractsWithUploadFiles;
     use InteractWithPage;
+
+    protected string $view = '';
 
     protected ?string $statusForm = null;
 
@@ -51,6 +51,8 @@ abstract class BaseForm
     protected Button $buttonSave;
 
     protected Button $buttonCancel;
+
+    protected \Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm $livewire;
 
     protected ?string $livewireId = null;
 

@@ -16,7 +16,7 @@ trait HasRelationship
 
     protected mixed $valueForRelation = null;
 
-    protected mixed $statePathForRelation = null;
+    protected mixed $relationClass = null;
 
     protected ?string $labelField = null;
 
@@ -41,10 +41,19 @@ trait HasRelationship
     public function getRelationType(): string|false
     {
         try {
-            return get_class($this->record->{$this->relationship}());
+            if ( ! $this->relationClass) {
+                $this->relationClass = get_class($this->record->{$this->relationship}());
+            }
+
+            return $this->relationClass;
         } catch (Exception) {
             return false;
         }
+    }
+
+    protected function checkRelation(): bool // check if relation in livewire record
+    {
+        return $this->hasRelationship() and in_array(HasBelongToRelation::class, class_uses_recursive($this)) and BelongsToMany::class === $this->getRelationType();
     }
 
     protected function getInstanceRelationship(): BelongsTo|BelongsToMany|null

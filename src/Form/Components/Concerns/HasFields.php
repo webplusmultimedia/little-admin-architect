@@ -34,9 +34,11 @@ trait HasFields
         return collect(self::$formFields)->filter(fn (Field $field) => $field->getStatePath() === $path)->first();
     }
 
-    public function removeHiddenFieldsOnForm(): void
+    public function setUpFieldsOnForm(): void
     {
         foreach (self::$formFields as $key => $field) {
+            $field->livewire($this->livewire);
+            $field->setForm($this);  //  @phpstan-ignore-line
             if ($field->isHiddenOnForm()) {
                 unset(self::$formFields[$key]);
             }

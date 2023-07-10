@@ -55,6 +55,7 @@ final class Grid extends AbstractLayout
                 if ($field instanceof Field) {
                     $field->record($model);
                     $field->statusForm($this->getStatusForm());
+
                     Form::addFormField($field);
 
                     continue;

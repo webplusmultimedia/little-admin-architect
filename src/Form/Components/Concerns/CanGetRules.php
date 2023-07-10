@@ -46,9 +46,6 @@ trait CanGetRules
 
     public function getHydrateFormRules(): array
     {
-        /*if (count($this->formRules) > 0) {
-            return $this->formRules;
-        }*/
         $rules = [];
         /** @var Field $field */
         foreach (static::$formFields as $field) {

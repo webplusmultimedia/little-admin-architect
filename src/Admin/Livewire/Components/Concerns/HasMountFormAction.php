@@ -19,7 +19,7 @@ trait HasMountFormAction
     public function mountFormAction(string $method, mixed $key): void
     {
         $id = $this->id . '-action-form';
-        $action = $this->form->getActionByName($method);
+        $action = $this->form->getActionFormByName($method);
         if ( ! $action) {
             throw new Exception('Aucune action trouvée');
         }

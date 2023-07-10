@@ -16,7 +16,5 @@ abstract class Action extends BaseAction
     use CanNotify;
     use HasAction;
     use HasButton;
-
-    //use HasModal;
     use InteractWithLivewire;
 }

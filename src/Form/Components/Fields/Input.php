@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasMinMaxLength;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasMinMaxValues;
 
 final class Input extends Field
 {
     use HasMinMaxLength;
-    use HasMinMaxValues;
 
     protected ?string $type = 'text';
 

@@ -13,8 +13,8 @@ trait CanInitValue
 
     }
 
-    public function getValue(): mixed
+   /* public function getValue(): mixed
     {
         return $this->getRecord()->{$this->getName()};
-    }
+    }*/
 }

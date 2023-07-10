@@ -25,6 +25,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasHe
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasId;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasMessageBag;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasMinMaxValues;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasName;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasPlaceHolder;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasRelationship;
@@ -33,6 +34,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasVa
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithAttributeRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithWrapper;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateFunction;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractsWithEvaluateFunction;
 
@@ -53,6 +55,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use HasId;
     use HasLabel;
     use HasMessageBag;
+    use HasMinMaxValues;
     use HasName;
     use HasPlaceholder;
     use HasRelationship;
@@ -72,6 +75,10 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     protected BaseForm|Component $livewire;
 
     protected mixed $oldValue = null;
+
+    public bool $hasFormAction = false;
+
+    protected ?Form $form = null;
 
     final public function __construct(
         string $name,
@@ -121,5 +128,10 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     public function setOldValue(mixed $value): void
     {
         $this->oldValue = $value;
+    }
+
+    public function setForm(Form $form): void
+    {
+        $this->form = $form;
     }
 }

@@ -13,6 +13,7 @@ trait InteractWithLivewire
     public function saveDatasForm(): void
     {
         if ($this->hasRules()) {
+            //dump($this->livewire->data);
             if ($this->livewire instanceof BaseForm) {
                 /** @TODO : Validate with laravel Validation */
                 $datas = $this->livewire->validate(rules: $this->getRulesBeforeValidate(), attributes: $this->getAttributesRules());
@@ -42,10 +43,10 @@ trait InteractWithLivewire
     protected function saveRelations(): void
     {
         if ($this->hasDatasRelationshipForSave) {
-            foreach ($this->datasRelation as $field => $value) {
-                //@Todo : get the field and check if having fields to save in the relationship for fieldSet component (morphMany, hasMany ...)
-                if ($this->livewire->data->{$field}() instanceof BelongsToMany) {
-                    $this->livewire->data->{$field}()->sync($value);
+            foreach ($this->datasRelation as $name => $value) {
+                //@Todo : get the name and check if having fields to save in the relationship for fieldSet component (morphMany, hasMany ...)
+                if ($this->livewire->data->{$name}() instanceof BelongsToMany) {
+                    $this->livewire->data->{$name}()->sync($value);
                 }
             }
         }
