@@ -44,9 +44,9 @@ class BaseTable extends Component implements HasTable
 
     protected bool $initBoot = true;
 
-    protected null|string $pageRoute = null;
+    protected ?string $pageRoute = null;
 
-    protected null|\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = null;
+    protected ?\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = null;
 
     protected array $formDatas;
 
@@ -55,7 +55,7 @@ class BaseTable extends Component implements HasTable
         $this->resetPage();
     }
 
-    public function mount(string $pageRoute, ?array $mounts = null): void
+    public function mount(string $pageRoute, array $mounts = null): void
     {
         $this->pageRoute = $pageRoute;
         $this->initBoot = false;

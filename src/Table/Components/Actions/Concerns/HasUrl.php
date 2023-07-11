@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Concer
 
 trait HasUrl
 {
-    protected null|string $url = null;
+    protected ?string $url = null;
 
     protected string $type = 'button';
 

@@ -10,11 +10,11 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAli
 
 trait InteractsWithForms
 {
-    protected LittleFormAlias|null $_form = null;
+    protected ?LittleFormAlias $_form = null;
 
     protected array $formDatas = [];
 
-    protected null|string $pageRoute = null;
+    protected ?string $pageRoute = null;
 
     protected bool $initBoot = true;
 

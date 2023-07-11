@@ -10,7 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\Abstra
 
 class ErrorMessage extends AbstractComponent
 {
-    public function __construct(public string|null $message)
+    public function __construct(public ?string $message)
     {
         parent::__construct();
     }

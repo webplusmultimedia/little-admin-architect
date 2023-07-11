@@ -26,7 +26,7 @@ trait HasConfigDateTime
         return $this;
     }
 
-    public function minMaxDate(?Carbon $min = null, ?Carbon $max = null): static
+    public function minMaxDate(Carbon $min = null, Carbon $max = null): static
     {
         $this->getConfig()->minDate = $min;
         $this->getConfig()->maxDate = $max;

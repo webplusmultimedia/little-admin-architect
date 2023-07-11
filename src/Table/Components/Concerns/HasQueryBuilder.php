@@ -15,7 +15,7 @@ trait HasQueryBuilder
         $this->builder = $builder;
     }
 
-    public function applyQueryToRecords(null|string $search = null): void
+    public function applyQueryToRecords(string $search = null): void
     {
         $this->records = $this->builder
             ->when($search, fn (Builder $builder) => $this->searchQuery($builder, $search))

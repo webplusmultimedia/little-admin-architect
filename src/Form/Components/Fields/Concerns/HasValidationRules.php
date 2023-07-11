@@ -30,7 +30,7 @@ trait HasValidationRules
         return $this;
     }
 
-    public function exists(string $table, string|null $column = null): static
+    public function exists(string $table, string $column = null): static
     {
         $rules = "exists:{$table}";
         if ($column) {

@@ -10,7 +10,7 @@ trait HasIcon
 {
     protected string|Closure|null $icon = null;
 
-    protected string  $iconPosition = 'before';
+    protected string $iconPosition = 'before';
 
     public function icon(string|Closure $icon): static
     {
@@ -19,7 +19,7 @@ trait HasIcon
         return $this;
     }
 
-    public function getIcon(): null|string
+    public function getIcon(): ?string
     {
         if (is_callable($this->icon)) {
             return call_user_func($this->icon, $this->record);

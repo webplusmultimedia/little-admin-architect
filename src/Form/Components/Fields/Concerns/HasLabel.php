@@ -14,14 +14,14 @@ trait HasLabel
 
     protected ?string $label = null;
 
-    public function label(null|string $label): static
+    public function label(?string $label): static
     {
         $this->label = $label;
 
         return $this;
     }
 
-    public function getLabel(): null|string
+    public function getLabel(): ?string
     {
         if ($this->label) {
             return str($this->label)->headline()->lower()->ucfirst()->value();

@@ -9,7 +9,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 trait HasSetUpForm
 {
-    public function setUp(null|Model $model): Form
+    public function setUp(?Model $model): Form
     {
         $form = $this->form($model);
         $form->schema($this->schema());

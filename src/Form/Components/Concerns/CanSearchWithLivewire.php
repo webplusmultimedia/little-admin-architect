@@ -21,7 +21,7 @@ trait CanSearchWithLivewire
 
     protected ?Closure $optionsUsing = null;
 
-    protected null|Collection $optionsUsingResults = null;
+    protected ?Collection $optionsUsingResults = null;
 
     protected ?Closure $searchResultsUsing = null;
 

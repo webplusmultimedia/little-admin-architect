@@ -30,13 +30,13 @@ class CheckBoxList extends Field
 
     public function setUp(): void
     {
-        $this->afterStateHydrated(static function (null|array $state, CheckBoxList $component): void {
+        $this->afterStateHydrated(static function (?array $state, CheckBoxList $component): void {
             if (blank($state)) {
                 $component->state([]);
             }
         });
 
-        $this->setBeforeUpdatedValidateValueUsing(static function (null|array $state, CheckBoxList $component): bool {
+        $this->setBeforeUpdatedValidateValueUsing(static function (?array $state, CheckBoxList $component): bool {
             if (blank($state)) {
                 if ($component->isNullable()) {
                     $component->state(null);

@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns;
 
 trait CanHaveUrl
 {
-    public null|string $url = null;
+    public ?string $url = null;
 
     public function url(string $url): static
     {

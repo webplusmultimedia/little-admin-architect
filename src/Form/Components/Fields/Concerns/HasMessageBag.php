@@ -9,9 +9,9 @@ use Illuminate\Support\ViewErrorBag;
 
 trait HasMessageBag
 {
-    protected string|null $errorBag = null;
+    protected ?string $errorBag = null;
 
-    public function getErrorMessage(ViewErrorBag $errors, string|null $locale = null): string|null
+    public function getErrorMessage(ViewErrorBag $errors, string $locale = null): ?string
     {
         /*if (! $this->shouldDisplayValidationFailure()) {
             return null;

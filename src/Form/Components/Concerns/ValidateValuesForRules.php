@@ -18,7 +18,7 @@ trait ValidateValuesForRules
 
     protected ?Closure $beforeCreatedValidateValueUsing = null;
 
-    public function getValidatedValues(array $values, null|array $datas = null, Model $model = null): array
+    public function getValidatedValues(array $values, array $datas = null, Model $model = null): array
     {
         /* Can do some stuff before datas is saving | return false to deny value from saving */
         if ( ! $this->beforeValidateValueUsing()) {

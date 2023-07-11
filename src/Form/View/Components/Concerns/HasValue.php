@@ -14,7 +14,7 @@ trait HasValue
 
     protected array|object|null $bind = null;
 
-    public function getValue(string|null $locale = null): mixed
+    public function getValue(string $locale = null): mixed
     {
         $oldValue = $this->getOldValue($locale);
         if (isset($oldValue)) {
@@ -38,7 +38,7 @@ trait HasValue
         return $this->value ?? data_get($dataBatch, $this->name);
     }
 
-    protected function getOldValue(string|null $locale): mixed
+    protected function getOldValue(?string $locale): mixed
     {
         $oldValue = data_get(old(), $this->name . ($locale ? '.' . $locale : ''));
         if ($oldValue) {

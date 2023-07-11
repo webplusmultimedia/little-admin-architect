@@ -62,7 +62,7 @@ class FileUpload extends Field
             }
         });
 
-        $this->afterStateUpdated(static function (array|null $state, FileUpload $component): void {
+        $this->afterStateUpdated(static function (?array $state, FileUpload $component): void {
             if (blank($state)) {
                 $component->state([]);
             }
@@ -79,7 +79,7 @@ class FileUpload extends Field
             $component->state($files);
         });
 
-        $this->afterStateDehydratedUsing(static function (array|null $state, FileUpload $component): array {
+        $this->afterStateDehydratedUsing(static function (?array $state, FileUpload $component): array {
             if (blank($state)) {
                 //$component->state([]);
 
@@ -115,7 +115,7 @@ class FileUpload extends Field
             return $files;
         });
 
-        $this->setBeforeUpdatedValidateValueUsing(static function (FileUpload $component, null|array $state): bool {
+        $this->setBeforeUpdatedValidateValueUsing(static function (FileUpload $component, ?array $state): bool {
             if (blank($state)) {
                 $component->state(null);
 

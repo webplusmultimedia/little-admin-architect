@@ -73,7 +73,7 @@ class Select extends Field
                     $component->state($state);
                 });
 
-                $this->afterStateUpdated(static function (array|null $state, Select $component): void {
+                $this->afterStateUpdated(static function (?array $state, Select $component): void {
                     if (blank($state)) {
                         $state = [];
                     }

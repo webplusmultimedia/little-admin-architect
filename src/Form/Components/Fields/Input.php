@@ -14,7 +14,7 @@ final class Input extends Field
 
     private null|int|float|string $step = null;
 
-    private null|string $inputMode = null;
+    private ?string $inputMode = null;
 
     public function type(string $type): static
     {
@@ -102,7 +102,7 @@ final class Input extends Field
         return $this;
     }
 
-    public function getInputMode(): null|string
+    public function getInputMode(): ?string
     {
         return $this->inputMode;
     }

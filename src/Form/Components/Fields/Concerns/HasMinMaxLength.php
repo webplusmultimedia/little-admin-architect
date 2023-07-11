@@ -6,9 +6,9 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns
 
 trait HasMinMaxLength
 {
-    protected null|int $minLength = null;
+    protected ?int $minLength = null;
 
-    protected null|int $maxLength = null;
+    protected ?int $maxLength = null;
 
     public function minLength(int $length): static
     {

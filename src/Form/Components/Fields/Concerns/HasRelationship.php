@@ -22,9 +22,9 @@ trait HasRelationship
 
     protected ?Closure $queryBuilderRelation = null;
 
-    protected Relation|null $instanceRelationCache = null;
+    protected ?Relation $instanceRelationCache = null;
 
-    public function relationship(string $relationship, string $labelField, null|Closure $query = null): static
+    public function relationship(string $relationship, string $labelField, Closure $query = null): static
     {
         $this->relationship = $relationship;
         $this->labelField = $labelField;

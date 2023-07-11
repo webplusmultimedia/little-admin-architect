@@ -12,7 +12,7 @@ trait HasLabel
 
     protected bool $isRequiredField = false;
 
-    public function getLabel(string|false|null $locale = null): string|null
+    public function getLabel(string|false $locale = null): ?string
     {
         $label = $this->getConfig()?->getLabel();
         if (false === $label) {

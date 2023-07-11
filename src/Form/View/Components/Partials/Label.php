@@ -10,7 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\Abstra
 
 class Label extends AbstractComponent
 {
-    public function __construct(public string|null $label, public string|null $id = null, public bool $showRequired = false, public bool $wrappedWithMargin = true)
+    public function __construct(public ?string $label, public ?string $id = null, public bool $showRequired = false, public bool $wrappedWithMargin = true)
     {
         parent::__construct();
     }

@@ -35,7 +35,7 @@ trait HasSortableColum
         return $this;
     }
 
-    public function applyParamsForSortingColumn(?string $column, ?string $direction = null): void
+    public function applyParamsForSortingColumn(?string $column, string $direction = null): void
     {
         $this->sortableColumn = $this->hasColumn($column);
         $this->sortDirection = $this->hasDirection($direction);

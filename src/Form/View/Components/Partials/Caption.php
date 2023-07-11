@@ -10,7 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\Abstra
 
 class Caption extends AbstractComponent
 {
-    public function __construct(public string|null $caption)
+    public function __construct(public ?string $caption)
     {
         parent::__construct();
     }

@@ -6,9 +6,9 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns
 
 trait HasMinMaxValues
 {
-    private null|int $minValue = null;
+    private ?int $minValue = null;
 
-    private null|int $maxValue = null;
+    private ?int $maxValue = null;
 
     public function minValue(int $min): static
     {

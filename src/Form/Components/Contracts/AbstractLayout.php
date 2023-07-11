@@ -25,7 +25,7 @@ abstract class AbstractLayout implements Htmlable /*CanValidateValuesForRules, C
 
     protected string $view;
 
-    protected Model|null $bind = null;
+    protected ?Model $bind = null;
 
     public function __construct(
         public ?string $title = null,

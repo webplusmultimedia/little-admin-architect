@@ -18,17 +18,17 @@ class Button extends AbstractField
     final public function __construct(
         protected string $caption,
         protected string $type = 'link',
-        protected null|string $action = null,
+        protected ?string $action = null,
     ) {
         $this->view .= $this->type;
     }
 
-    public static function make(string $caption, string $type = 'link', null|string $action = null): Button
+    public static function make(string $caption, string $type = 'link', string $action = null): Button
     {
         return new self(caption: $caption, type: $type, action: $action);
     }
 
-    public function getAction(): null|string
+    public function getAction(): ?string
     {
         return $this->action;
     }

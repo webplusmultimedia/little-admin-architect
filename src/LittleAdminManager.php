@@ -96,7 +96,7 @@ final class LittleAdminManager
         $this->applyResources();
     }
 
-    public function resolveResourceBy(null|string $name = null, null|string $route = null): void
+    public function resolveResourceBy(string $name = null, string $route = null): void
     {
     }
 

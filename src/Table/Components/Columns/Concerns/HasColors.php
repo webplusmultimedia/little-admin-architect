@@ -37,7 +37,7 @@ trait HasColors
         return is_array($this->valuesForBgColor);
     }
 
-    public function getColor(?string $value): string|null
+    public function getColor(?string $value): ?string
     {
         if ($value) {
             if ($this->hasTextColor() and isset($this->valuesForTextColor[$value])) {

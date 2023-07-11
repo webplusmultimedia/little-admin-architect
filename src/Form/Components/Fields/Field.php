@@ -82,7 +82,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
 
     final public function __construct(
         string $name,
-        ?string $label = null,
+        string $label = null,
     ) {
         $this->label = $label;
         $this->name = $name;
@@ -95,7 +95,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         $this->livewire = $livewire;
     }
 
-    public static function make(string $name, null|string $label = null): static
+    public static function make(string $name, string $label = null): static
     {
         return new static(name: $name, label: $label);
     }

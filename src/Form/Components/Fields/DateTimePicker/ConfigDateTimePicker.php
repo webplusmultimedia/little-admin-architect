@@ -11,8 +11,8 @@ class ConfigDateTimePicker
     public function __construct(
         public string $lang = 'fr',
         public string $type = 'date',
-        public null|Carbon $minDate = null,
-        public null|Carbon $maxDate = null,
+        public ?Carbon $minDate = null,
+        public ?Carbon $maxDate = null,
         public int $minTime = 7,
         public int $maxTime = 17,
         public int $intervalMinute = 5,

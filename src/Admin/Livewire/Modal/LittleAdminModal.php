@@ -15,9 +15,9 @@ class LittleAdminModal extends Component
 
     public bool $isOpen = false;
 
-    public null|string $activeComponent = null;
+    public ?string $activeComponent = null;
 
-    public null|string $livewireTableId = null;
+    public ?string $livewireTableId = null;
 
     public string $maxWidth = 'modal__large';
 
@@ -26,7 +26,7 @@ class LittleAdminModal extends Component
      */
     protected $listeners = ['open-modal-architect' => 'openModal'];
 
-    public function openModal(string $component, array $attributes = [], null|string $livewireId = null): void
+    public function openModal(string $component, array $attributes = [], string $livewireId = null): void
     {
         $id = md5($component . serialize($attributes));
         $this->components[$id] = [

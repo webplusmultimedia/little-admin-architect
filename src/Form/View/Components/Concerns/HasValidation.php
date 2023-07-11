@@ -10,13 +10,13 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 trait HasValidation
 {
-    protected bool|null $displayValidationSuccess = true;
+    protected ?bool $displayValidationSuccess = true;
 
-    protected bool|null $displayValidationFailure = true;
+    protected ?bool $displayValidationFailure = true;
 
-    protected string|null $errorBag = null;
+    protected ?string $errorBag = null;
 
-    public function getValidationClass(ViewErrorBag $errors, string|null $locale = null): string|null
+    public function getValidationClass(ViewErrorBag $errors, string $locale = null): ?string
     {
         $errorBag = $this->getErrorBag($errors);
         if ($errorBag->isEmpty()) {
@@ -55,7 +55,7 @@ trait HasValidation
         return config('little-admin-architect.display_validation_success', true);
     }
 
-    public function getErrorMessage(ViewErrorBag $errors, string|null $locale = null): string|null
+    public function getErrorMessage(ViewErrorBag $errors, string $locale = null): ?string
     {
         /*if (! $this->shouldDisplayValidationFailure()) {
             return null;

@@ -17,7 +17,7 @@ final class Container extends AbstractLayout
 
     protected string $colSpan = 'lg:col-span-full';
 
-    public static function make(?string $title = null, int $columns = 2): Container
+    public static function make(string $title = null, int $columns = 2): Container
     {
         return new self(title: $title, columns: $columns);
     }
