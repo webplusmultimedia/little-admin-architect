@@ -1,7 +1,7 @@
 @php use Webplusmultimedia\LittleAdminArchitect\LittleAdminArchitect; @endphp
-    @props([
-        'title' => NULL
-    ])
+@props([
+    'title' => NULL
+])
     <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -19,8 +19,23 @@
     <link rel="stylesheet" href="{{ route('little-admin.page.assets','app.css') }}">
 </head>
 <body class="bg-gray-100">
-<header class="bg-white sticky top-0 z-10 lg:ml-[20rem] border-b ">
-    <nav class="bg-white border-gray-200 dark:bg-gray-900 ml-0">
+<header x-data="{}"
+    class="bg-white sticky top-0 z-10  border-b duration-150"
+        :class="{
+        'md:ml-[20rem]' : $store.laDatas.menuOpen,
+        'md:ml-[6rem]' : !$store.laDatas.menuOpen
+        }"
+>
+    <nav class="bg-white border-gray-200 dark:bg-gray-900 ml-0 relative">
+        <span class=" hidden absolute left-1.5 top-0 bottom-0 md:flex items-center pr-2"
+              x-on:click="$store.laDatas.toggleMenu()"
+              :class="{ 'md:hidden' : !$store.laDatas.menuOpen}"
+              x-transition:enter-start.opacity.0
+              x-transition:enter.duration.500ms
+              x-transition:enter-end.opacity.1
+        >
+            <x-little-anonyme::form-components.fields.icons.menu-left class="text-primary-500 w-8 cursor-pointer"/>
+        </span>
         <div class="container flex flex-wrap items-center justify-between mx-auto py-4">
             <div class="flex items-center">
                 {{--<x-little-anonyme::form-components.fields.icons.logo class="h-8"/>--}}
@@ -82,44 +97,70 @@
         </div>
     </nav>
 </header>
-<aside class="w-[20rem]  border-r border-gray-100 bg-white fixed top-0 -left-[20rem] bottom-0 lg:left-0 shadow-lg overflow-x-hidden overflow-y-auto pb-5  z-10">
-    <a href="#" class="flex items-center bg-white py-5  border-b sticky top-0">
-        <x-little-anonyme::form-components.fields.icons.logo class="text-primary-500 h-8"/>
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Little Admin</span>
-    </a>
+<aside
+    class="hidden md:flex md:flex-col border-r border-gray-100 bg-white fixed top-0  bottom-0 lg:left-0 shadow-lg overflow-x-hidden overflow-y-auto pb-5  z-10 transition-all duration-150"
+    :class="{ 'md:w-[20rem]' : $store.laDatas.menuOpen ,'md:w-[6rem]' : !$store.laDatas.menuOpen }"
+    x-cloak
+    x-data="{ }"
+>
+    <div class="flex  items-center justify-between bg-white py-5 gap-2  border-b sticky top-0">
+        <a href="#" class="flex items-center gap-2">
+            <x-little-anonyme::form-components.fields.icons.logo class="text-primary-500 h-8"/>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+                  {{--:class="{ 'md:hidden' : !$store.laDatas.menuOpen}"--}}
+                  x-show="!window.matchMedia('(min-width : 1024px)').matches?true:$store.laDatas.menuOpen"
+                  x-transition:enter-start="opacity-0"
+                  x-transition:enter="delay-100 duration-200"
+
+                  x-transition:enter-end="opacity-100"
+
+            >
+                Little Admin
+            </span>
+        </a>
+        <span class="flex items-center pr-2"
+              x-on:click="$store.laDatas.toggleMenu()"
+              :class="{ 'md:hidden' : $store.laDatas.menuOpen}"
+        >
+            <x-little-anonyme::form-components.fields.icons.menu-left class="text-primary-500 w-8 cursor-pointer"/>
+        </span>
+    </div>
     <div class="flex flex-col">
         <div class="flex flex-col">
             @foreach(LittleAdminArchitect::getNavigationPages() as $group => $navigations)
                 <div class="flex flex-col gap-1 mb-5">
+                    <div
+                       {{-- :class="{
+                                    'text-primary-600 font-bold bg-transparent border-b border-primary-100' : {{ request()->routeIs($navigation['route_prefix'])?'true':'false' }},
+                                    'text-slate-700 border-b border-primary-100' : {{ !request()->routeIs($navigation['route_prefix'])?'true':'false' }},
 
+                                }"--}}
+                        class="px-3 py-2 text-lg font-medium border-b border-primary-100"
+                    >
+                                <span :class="{ 'md:hidden' : !$store.laDatas.menuOpen }">
+                                    {{ str($group)->snake()->replace('_',' ')->title() }}
+                                </span>
+
+                    </div>
                     @foreach($navigations as $navigation)
-                        @if($loop->first)
-                            <div
-                                @class([
-                                    'bg-gray-50 px-3 py-2 text-lg font-medium',
-                                    'text-primary-600 font-bold bg-primary-50' => request()->routeIs($navigation['route_prefix']),
-                                    'text-slate-500 bg-slate-50' => !request()->routeIs($navigation['route_prefix']),
-                                 ])
-                            >
-                                {{ str($group)->snake()->replace('_',' ')->title() }}
-                            </div>
-                        @endif
+
                         <div class="flex">
 
                             <a href="{{ route($navigation['route_name']) }}"
-                                @class([
-                                    'inline-flex items-center space-x-2 pl-10 hover:bg-gray-50 py-1 rounded-md grow duration-200',
-                                    'text-primary-600 font-bold' => request()->routeIs($navigation['route_resource']),
-                                    'text-slate-500' => !request()->routeIs($navigation['route_resource']),
-                                 ])
-
+                               :class="{
+                                    'border-primary-600 bg-primary-50 text-primary-600 font-bold pl-4 ' : {{  request()->routeIs($navigation['route_resource'])?'true':'false' }} && $store.laDatas.menuOpen,
+                                    'bg-primary-50 text-primary-600 font-bold' : {{  request()->routeIs($navigation['route_resource'])?'true':'false' }} && !$store.laDatas.menuOpen,
+                                    'flex justify-center pl-0' : !$store.laDatas.menuOpen,
+                                    'text-slate-500 border-transparent pl-4' : {{ !request()->routeIs($navigation['route_resource'])?'true':'false' }}
+                               }"
+                               class="inline-flex items-center space-x-2 pl-10 hover:bg-gray-50 py-1 grow border-l-4 duration-200"
                             >
                                 @if($navigation['icon'])
-                                    <x-dynamic-component :component="$navigation['icon']" class="w-5"/>
+                                    <x-dynamic-component :component="$navigation['icon']" class="w-6"/>
                                 @else
-                                    <x-heroicon-o-chevron-double-right class="w-5 h-5"/>
+                                    <x-heroicon-o-chevron-double-right class="w-7"/>
                                 @endif
-                                <span>{{ $navigation['title'] }}</span>
+                                <span :class="{'md:hidden' : !$store.laDatas.menuOpen}">{{ $navigation['title'] }}</span>
                             </a>
                         </div>
                     @endforeach
@@ -129,7 +170,13 @@
         </div>
     </div>
 </aside>
-<div class="ml-0 lg:ml-[20rem] ">
+<div class="ml-0 duration-150"
+     :class="{
+        'md:ml-[20rem]' : $store.laDatas.menuOpen,
+        'md:ml-[6rem]' : !$store.laDatas.menuOpen
+        }"
+     x-data="{}"
+>
     <div class="container mx-auto ">
         {{ $slot }}
     </div>

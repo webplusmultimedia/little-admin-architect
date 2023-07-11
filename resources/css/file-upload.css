@@ -1,6 +1,6 @@
 @layer components {
     .la-file-upload-gallery-wrapper{
-        @apply grid-cols-1 grid  md:grid-cols-3 gap-2  py-2 md:flex-wrap
+        @apply grid-cols-1 grid  md:grid-cols-3 2xl:grid-cols-4  gap-2  py-2 md:flex-wrap
     }
     .la-file-upload-image-wrapper{
         @apply relative flex md:col-span-1 border border-gray-100 rounded-lg h-48 overflow-hidden duration-300

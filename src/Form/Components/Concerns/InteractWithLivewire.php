@@ -13,7 +13,6 @@ trait InteractWithLivewire
     public function saveDatasForm(): void
     {
         if ($this->hasRules()) {
-            //dump($this->livewire->data);
             if ($this->livewire instanceof BaseForm) {
                 /** @TODO : Validate with laravel Validation */
                 $datas = $this->livewire->validate(rules: $this->getRulesBeforeValidate(), attributes: $this->getAttributesRules());

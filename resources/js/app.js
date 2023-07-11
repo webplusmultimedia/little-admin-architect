@@ -16,6 +16,7 @@ import {laImageGalleryComponent} from "./components/fileUpload/support/gallery";
 import {buttonActionComponent} from "./components/buttons/action";
 import Sortable from 'sortablejs';
 import {ModalFormComponent} from "./components/modal/ModalFormComponent";
+
 window.Sortable = Sortable
 
 Alpine.data('SelectFormComponent',SelectFormComponent)
@@ -33,10 +34,16 @@ Alpine.data('timePicker', timePicker)
 Alpine.data('fileUpload',fileUpload)
 Alpine.data('laImageGalleryComponent',laImageGalleryComponent)
 Alpine.data('buttonActionComponent',buttonActionComponent)
-
-Alpine.store('laDatas',{
-    isTinyEditorShow : false,
-    startUploadFile : false,
+document.addEventListener('alpine:init', () => {
+    Alpine.store('laDatas', {
+        isTinyEditorShow: false,
+        startUploadFile: false,
+        menuOpen: localStorage.getItem('isMenuOpen')===null ? false: localStorage.getItem('isMenuOpen').toLocaleLowerCase() === 'true',
+        toggleMenu() {
+            this.menuOpen = !this.menuOpen
+            localStorage.setItem('isMenuOpen', this.menuOpen)
+        },
+    })
 })
 
 window.Alpine = Alpine;

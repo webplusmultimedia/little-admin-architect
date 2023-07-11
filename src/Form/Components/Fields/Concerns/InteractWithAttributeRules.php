@@ -8,7 +8,7 @@ trait InteractWithAttributeRules
 {
     public function applyAttributesRules(array $rules): array
     {
-        $rules['data.' . $this->name] = $this->getAttributes();
+        $rules[$this->getStatePath()] = $this->getAttributes();
 
         return $rules;
     }

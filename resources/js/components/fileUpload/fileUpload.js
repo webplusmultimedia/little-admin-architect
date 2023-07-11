@@ -182,7 +182,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                 this.photos[index] = newFile
                 this.$refs.galleryImages.innerHTML = gallery(this.photos, this.path).getGallery()
             } catch (e) {
-                console.log(e)
+                //console.log(e)
             }
         },
         getNewFile(file) {
