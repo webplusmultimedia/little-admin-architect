@@ -11,6 +11,7 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasActionModal;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasColumns;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasFilters;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeader;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasHeaderAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasQueryBuilder;
@@ -25,6 +26,7 @@ final class Table implements Htmlable
 {
     use HasActionModal;
     use HasColumns;
+    use HasFilters;
     use HasHeader;
     use HasHeaderAction;
     use HasQueryBuilder;

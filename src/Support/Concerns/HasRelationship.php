@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
+namespace Webplusmultimedia\LittleAdminArchitect\Support\Concerns;
 
 use Closure;
 use Exception;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasBelongToRelation;
 
 trait HasRelationship
 {
@@ -53,7 +54,7 @@ trait HasRelationship
 
     protected function checkRelation(): bool // check if relation in livewire record
     {
-        return $this->hasRelationship() and in_array(HasBelongToRelation::class, class_uses_recursive($this)) and BelongsToMany::class === $this->getRelationType();
+        return $this->hasRelationship() and in_array(HasBelongToRelation::class, class_uses_recursive($this), true) and BelongsToMany::class === $this->getRelationType();
     }
 
     protected function getInstanceRelationship(): BelongsTo|BelongsToMany

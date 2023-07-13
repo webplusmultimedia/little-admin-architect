@@ -6,7 +6,6 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns
 
 use Closure;
 use Exception;
-use Illuminate\Database\Eloquent\Model;
 
 trait HasState
 {
@@ -20,14 +19,11 @@ trait HasState
             if ($this->checkRelation()) {
                 return $this->getRelationState();
             }
-            if ($this->record instanceof Model) {
-                return $this->record->{$this->getName()};
-            }
             if (is_array($this->record)) {
-                if (isset($this->record[$this->getName()])) {
-                    return $this->record[$this->getName()];
-                }
+                return data_get($this->livewire, $this->getName(), null);
             }
+
+            return data_get($this->livewire, $this->getStatePath());
         }
 
         return $this->state;
@@ -36,18 +32,10 @@ trait HasState
     public function state(mixed $state): void
     {
         $this->state = $state;
-        if ($this->checkRelation()) {
-            $this->livewire->record[$this->name] = $state; //@phpstan-ignore-line
-
-            return;
-        }
-        if ($this->record instanceof Model) {
-            $this->record->{$this->getName()} = $state;
-        }
         if (is_array($this->record)) {
-            $this->record[$this->getName()] = $state;
+            data_set($this->livewire, $this->getName(), $state);
         }
-
+        data_set($this->livewire, $this->getStatePath(), $state);
     }
 
     public function setState(mixed $value): void
@@ -79,6 +67,7 @@ trait HasState
             throw new Exception('Call to a non existing relationship [' . $this->relationship . '] on Select field [' . $this->name . ']');
         }
 
-        return $this->livewire->record[$this->name];
+        return data_get($this->livewire, $this->getStatePath());
+        // return $this->livewire->record[$this->name];
     }
 }

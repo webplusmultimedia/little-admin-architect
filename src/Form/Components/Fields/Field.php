@@ -28,15 +28,15 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasMe
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasMinMaxValues;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasName;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasPlaceHolder;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasRelationship;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasState;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasValidationRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithAttributeRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithWrapper;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
-use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateFunction;
-use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractsWithEvaluateFunction;
+use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateParameters;
+use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\HasRelationship;
+use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractsWithEvaluateParameters;
 
 abstract class Field extends AbstractField implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
 {
@@ -45,7 +45,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use CanBeRequired;
     use CanBeWireModifier;
     use CanDehydrate;
-    use CanEvaluateFunction;
+    use CanEvaluateParameters;
     use CanHideOnForm;
     use CanHydrate;
     use CanInitValue;
@@ -61,7 +61,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use HasRelationship;
     use HasState;
     use HasValidationRules;
-    use InteractsWithEvaluateFunction;
+    use InteractsWithEvaluateParameters;
     use InteractWithAttributeRules;
     use InteractWithRules;
     use InteractWithWrapper;

@@ -7,7 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Support\Concerns;
 use Closure;
 use Exception;
 
-trait InteractsWithEvaluateFunction
+trait InteractsWithEvaluateParameters
 {
     protected function set(): Closure
     {
@@ -16,7 +16,6 @@ trait InteractsWithEvaluateFunction
             if ($field) {
                 $field->state($value);
             }
-
         };
     }
 

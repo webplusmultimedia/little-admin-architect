@@ -38,11 +38,16 @@ document.addEventListener('alpine:init', () => {
     Alpine.store('laDatas', {
         isTinyEditorShow: false,
         startUploadFile: false,
+        isMobileMenuShow : false,
         menuOpen: localStorage.getItem('isMenuOpen')===null ? false: localStorage.getItem('isMenuOpen').toLocaleLowerCase() === 'true',
         toggleMenu() {
             this.menuOpen = !this.menuOpen
             localStorage.setItem('isMenuOpen', this.menuOpen)
         },
+        toggleMobileMenu(){
+            this.isMobileMenuShow = ! this.isMobileMenuShow
+            console.log(this.isMobileMenuShow)
+        }
     })
 })
 

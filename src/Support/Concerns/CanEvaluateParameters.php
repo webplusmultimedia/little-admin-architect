@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Concerns;
 
-trait CanEvaluateFunction
+trait CanEvaluateParameters
 {
     protected array $defaultParameters = [];
 

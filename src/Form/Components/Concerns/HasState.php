@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns;
 
 trait HasState
 {
-    public function getState(): array
+    public function getStates(): array
     {
         $datas = [];
         foreach ($this->getFormFields() as $field) {

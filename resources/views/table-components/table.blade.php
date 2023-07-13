@@ -72,5 +72,7 @@
             {{ $table->getRecords()->links() }}
         </div>
     </div>
-    {{  $table->getActionModal() }}
+    @if($table->hasRowsAction())
+        {{  $table->getActionModal() }}
+    @endif
 </div>

@@ -21,6 +21,7 @@
 <body class="bg-gray-100">
 <header x-data="{}"
     class="bg-white sticky top-0 z-10  border-b duration-150"
+        x-cloak
         :class="{
         'md:ml-[20rem]' : $store.laDatas.menuOpen,
         'md:ml-[6rem]' : !$store.laDatas.menuOpen
@@ -42,8 +43,11 @@
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white uppercase">{{ $title }}</span>
             </div>
             <button data-collapse-toggle="navbar-default" type="button"
+                    x-data=""
+                    x-on:click.stop="$store.laDatas.toggleMobileMenu()"
                     class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                    aria-controls="navbar-default" aria-expanded="false">
+                    aria-controls="navbar-default" aria-expanded="false"
+            >
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -97,9 +101,16 @@
         </div>
     </nav>
 </header>
+
 <aside
-    class="hidden md:flex md:flex-col border-r border-gray-100 bg-white fixed top-0  bottom-0 lg:left-0 shadow-lg overflow-x-hidden overflow-y-auto pb-5  z-10 transition-all duration-150"
-    :class="{ 'md:w-[20rem]' : $store.laDatas.menuOpen ,'md:w-[6rem]' : !$store.laDatas.menuOpen }"
+    class="flex flex-col w-[20rem] border-r border-gray-100 bg-white fixed top-0  bottom-0 lg:left-0 shadow-lg overflow-x-hidden overflow-y-auto pb-5  z-10 transition-all duration-150"
+    :class="{
+        //'w-[20rem]' : !window.matchMedia('(max-width : 1024px)').matches?$store.laDatas.menuOpen:true ,
+        'w-[6rem]' : !window.matchMedia('(max-width : 1024px)').matches?!$store.laDatas.menuOpen:false,
+        //'flex flex-col' : window.matchMedia('(min-width : 1024px)').matches?!$store.laDatas.isMobileMenuShow:false,
+        //'hidden' : !window.matchMedia('(min-width : 1024px)').matches?!$store.laDatas.isMobileMenuShow:false
+    }"
+    x-show="!window.matchMedia('(max-width : 1024px)').matches || $store.laDatas.isMobileMenuShow "
     x-cloak
     x-data="{ }"
 >
@@ -110,15 +121,14 @@
                   {{--:class="{ 'md:hidden' : !$store.laDatas.menuOpen}"--}}
                   x-show="!window.matchMedia('(min-width : 1024px)').matches?true:$store.laDatas.menuOpen"
                   x-transition:enter-start="opacity-0"
-                  x-transition:enter="delay-100 duration-200"
-
+                  x-transition:enter="delay-100 duration-300"
                   x-transition:enter-end="opacity-100"
 
             >
                 Little Admin
             </span>
         </a>
-        <span class="flex items-center pr-2"
+        <span class="flex items-center pr-2" x-data="{}"
               x-on:click="$store.laDatas.toggleMenu()"
               :class="{ 'md:hidden' : $store.laDatas.menuOpen}"
         >
@@ -137,7 +147,12 @@
                                 }"--}}
                         class="px-3 py-2 text-lg font-medium border-b border-primary-100"
                     >
-                                <span :class="{ 'md:hidden' : !$store.laDatas.menuOpen }">
+                                <span
+                                      x-show="!window.matchMedia('(min-width : 1024px)').matches?true:$store.laDatas.menuOpen"
+                                      x-transition:enter-start="opacity-0"
+                                      x-transition:enter="delay-100 duration-300"
+                                      x-transition:enter-end="opacity-100"
+                                >
                                     {{ str($group)->snake()->replace('_',' ')->title() }}
                                 </span>
 
@@ -171,6 +186,7 @@
     </div>
 </aside>
 <div class="ml-0 duration-150"
+     x-cloak
      :class="{
         'md:ml-[20rem]' : $store.laDatas.menuOpen,
         'md:ml-[6rem]' : !$store.laDatas.menuOpen

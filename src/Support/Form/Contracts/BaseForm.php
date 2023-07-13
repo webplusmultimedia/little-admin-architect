@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Form\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
+use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanGetRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanInitDatasForm;
@@ -52,7 +53,7 @@ abstract class BaseForm
 
     protected Button $buttonCancel;
 
-    protected \Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm $livewire;
+    protected \Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm|Component $livewire;
 
     protected ?string $livewireId = null;
 

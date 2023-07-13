@@ -24,10 +24,6 @@ trait InteractsWithTable
                 return $this->getTable();
             }
 
-            /*if ($property === 'modal') {
-                return $this->getModalViewOnce();
-            }*/
-
             throw $exception;
         }
     }

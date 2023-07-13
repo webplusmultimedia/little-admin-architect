@@ -39,7 +39,7 @@ class Login extends Component implements HasForm
             redirect()->intended(LittleAdminManager::getUrl());
         }
 
-        $this->form->modelArray(['email' => $this->email, 'password' => $this->password, 'remember' => $this->remember]);
+        $this->form->modelArray(['email' => $this->email, 'password' => $this->password, 'remember' => $this->remember], $this);
 
     }
 
@@ -73,8 +73,8 @@ class Login extends Component implements HasForm
                 ]),
             ]);
         }
-        $this->form->modelArray(['email' => $this->email, 'password' => $this->password, 'remember' => $this->remember]);
-        $data = $this->form->getState();
+        $this->form->modelArray(['email' => $this->email, 'password' => $this->password, 'remember' => $this->remember], $this);
+        $data = $this->form->getStates();
 
         if ( ! LittleAdminManager::auth()->attempt([
             'email' => $data['email'],

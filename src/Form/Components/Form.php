@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\View;
+use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Button;
@@ -89,11 +90,13 @@ final class Form extends BaseFormAlias implements Htmlable
         return $this->action;
     }
 
-    public function modelArray(array $record): void
+    public function modelArray(array $record, Component $livewire): void
     {
         $this->model = $record;
         $this->statusForm = 'CREATED';
+        $this->livewire = $livewire; //@phpstan-ignore-line
         $this->initDatasFormOnMount($record);
+        $this->setUpFieldsOnForm();
         $this->initSelectUsing();
     }
 

@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\ComponentAttributeBag;
 use Illuminate\View\View;
-use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateFunction;
+use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateParameters;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\CanBeSearchable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\CanBeSortable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasLabel;
@@ -19,7 +19,7 @@ abstract class AbstractColumn implements Htmlable
 {
     use CanBeSearchable;
     use CanBeSortable;
-    use CanEvaluateFunction;
+    use CanEvaluateParameters;
     use HasLabel;
     use HasLivewireId;
     use HasRecord;

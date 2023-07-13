@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanFilterColumn;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanInitTable;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanSortColumn;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\HasMountTableAction;
@@ -19,6 +20,7 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Concerns\InteractsWithModalForm
  */
 class BaseTable extends Component implements HasTable
 {
+    use CanFilterColumn;
     use CanInitTable;
     use CanSortColumn;
     use HasMountTableAction;
@@ -35,11 +37,14 @@ class BaseTable extends Component implements HasTable
 
     public string $search = '';
 
+    public array $tableFilters = [];
+
     /** @phpstan-ignore-next-line */
     protected $queryString = [
         'search' => ['except' => '', 'as' => 'q'],
         'tableSortColumn' => ['except' => null],
         'tableDirection' => ['except' => null],
+        'tableFilters' => ['except' => null],
     ];
 
     protected bool $initBoot = true;
