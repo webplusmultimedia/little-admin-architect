@@ -2,6 +2,14 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## wip - table filters - 2023-07-13
+
+### What's Changed
+
+- Bump dependabot/fetch-metadata from 1.5.1 to 1.6.0 by @dependabot in https://github.com/webplusmultimedia/little-admin-architect/pull/3
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.1.11...v0.2.0
+
 ## wip - 2023-07-02
 
 **Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.1.10-alpha...v0.1.11
