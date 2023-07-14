@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters\Concer
 
 trait HasLabel
 {
-    protected string|null $label = null;
+    protected ?string $label = null;
 
     public function label(string $label): static
     {

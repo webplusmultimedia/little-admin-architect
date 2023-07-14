@@ -31,7 +31,7 @@ class TableFilter implements Htmlable
 
     public function render(): View
     {
-        return view('little-views::table-components.table-filters',['filters'=>$this->tableFilters]);
+        return view('little-views::table-components.table-filters', ['filters' => $this->tableFilters]);
     }
 
     public function toHtml(): string
