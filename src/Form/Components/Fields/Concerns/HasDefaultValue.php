@@ -10,8 +10,8 @@ trait HasDefaultValue
 
     public function applyDefaultValue(): void
     {
-        if ($this->defaultValue and $this->record) {
-            $this->record->{$this->name} = $this->defaultValue;
+        if ($this->defaultValue) {
+            data_set($this->livewire, $this->getStatePath(), $this->defaultValue);
         }
     }
 

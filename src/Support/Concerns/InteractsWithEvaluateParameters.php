@@ -6,15 +6,18 @@ namespace Webplusmultimedia\LittleAdminArchitect\Support\Concerns;
 
 use Closure;
 use Exception;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 
 trait InteractsWithEvaluateParameters
 {
     protected function set(): Closure
     {
         return function (string $name, mixed $value): void {
-            $field = $this->form->getFormFieldByName($name);
-            if ($field) {
-                $field->state($value);
+            if ($this->livewire instanceof BaseForm) {
+                $field = $this->livewire->form->getFormFieldByName($name);
+                if ($field) {
+                    $field->state($value);
+                }
             }
         };
     }
@@ -22,9 +25,11 @@ trait InteractsWithEvaluateParameters
     protected function get(): Closure
     {
         return function (string $name) {
-            $field = $this->form->getFormFieldByName($name);
-            if ($field) {
-                return $field->getState();
+            if ($this->livewire instanceof BaseForm) {
+                $field = $this->livewire->form->getFormFieldByName($name);
+                if ($field) {
+                    return $field->getState();
+                }
             }
             throw new Exception('Field [' . $name . '] not exist.');
         };

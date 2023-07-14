@@ -17,6 +17,9 @@ trait HasQueryBuilder
 
     public function applyQueryToRecords(string $search = null): void
     {
+        if ($this->hasFilters()) {
+            $this->builder = $this->handleQuery($this->builder);
+        }
         $this->records = $this->builder
             ->when($search, fn (Builder $builder) => $this->searchQuery($builder, $search))
             ->when($this->sortableColumn, fn (Builder $builder) => $builder->orderBy($this->sortableColumn, $this->sortDirection))

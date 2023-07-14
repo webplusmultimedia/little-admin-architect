@@ -74,6 +74,7 @@ final class Table implements Htmlable
             $this->actionModal(TableModal::make($this->livewireId . '-action-table'));
         }
         $this->headerActions($this->pageForResource::getActions());
+        $this->setLivewireToFilters();
 
     }
 

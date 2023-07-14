@@ -4,23 +4,22 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters\Concerns;
 
+use Illuminate\Support\Str;
+
 trait HasStatePath
 {
     protected string $prefixPath = 'tableFilters';
 
-    protected ?string $path = null;
+    protected ?string $filterPath = null;
 
-    protected function path(string $path): static
+    protected function getFilterPath(): string
     {
-        $this->path = $path;
+        $path = str($this->name);
+        if ( ! blank($this->getLabel())) {
 
-        return $this;
-    }
+            $path = $path->append('.' . Str::slug($this->getLabel(), '_'));
+        }
 
-    protected function setPrefixPath(): static
-    {
-        $this->field->setPrefixPath($this->prefixPath);
-
-        return $this;
+        return $path->value();
     }
 }

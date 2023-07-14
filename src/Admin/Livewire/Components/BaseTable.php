@@ -60,6 +60,16 @@ class BaseTable extends Component implements HasTable
         $this->resetPage();
     }
 
+    public function updatingTableFilters(): void
+    {
+        $this->resetPage();
+    }
+
+    public function removeFilters(): void
+    {
+        $this->table->removeFilters();
+    }
+
     public function mount(string $pageRoute, array $mounts = null): void
     {
         $this->pageRoute = $pageRoute;

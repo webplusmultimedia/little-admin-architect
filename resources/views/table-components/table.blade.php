@@ -25,12 +25,12 @@
     <div class="flex flex-col bg-white py-10 px-5 rounded-lg overflow-x-auto" x-data="{}">
         <x-little-anonyme::table-components.partials.search-bar :table="$table"/>
         @if($table->hasRecords())
-            <div class=" border-collapse border border-gray-200 rounded-lg overflow-hidden overflow-x-auto">
+            <div class=" border-collapse border border-gray-200  overflow-hidden overflow-x-auto">
                 <table class="table-auto w-full text-start divide-y shadow-sm"
                        wire:loading.class.delay="opacity-50"
                        x-data="TableComponent({ livewireId : $wire.__instance.id })"
                 >
-                    <thead class="bg-gray-100 border-t text-start">
+                    <thead class="bg-slate-100 border-t text-start">
                     <tr>
                         @foreach($table->getHeaders() as $header)
                             {{ $header }}

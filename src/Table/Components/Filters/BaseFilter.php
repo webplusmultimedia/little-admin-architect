@@ -6,19 +6,20 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters;
 
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateParameters;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\HasRelationship;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters\Concerns\HasField;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters\Concerns\HasFormField;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters\Concerns\HasLabel;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters\Concerns\HasName;
+use Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters\Concerns\HasQuery;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters\Concerns\HasStatePath;
 
 class BaseFilter
 {
     //use CanBeHidden;
     use CanEvaluateParameters;
-    use HasField;
+    use HasFormField;
     use HasLabel;
     use HasName;
-    //use HasPath;
+    use HasQuery;
 
     //use HasRelationship;
     use HasStatePath;

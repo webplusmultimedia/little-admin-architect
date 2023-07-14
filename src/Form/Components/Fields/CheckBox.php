@@ -29,8 +29,8 @@ class CheckBox extends Field
 
     public function applyDefaultValue(): void
     {
-        if ( ! $this->record->{$this->name}) {
-            $this->record->{$this->name} = false;
+        if ( ! data_get($this->livewire, $this->getStatePath())) {
+            data_set($this->livewire, $this->getStatePath(), false);
         }
         parent::applyDefaultValue();
     }

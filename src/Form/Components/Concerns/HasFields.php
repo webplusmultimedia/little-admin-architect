@@ -43,12 +43,13 @@ trait HasFields
                 unset(static::$formFields[$key]);
             }
             //Add date from when Need, because can't livewire it data when range
-            if ($field instanceof DateTimePicker and $field->getDateFromWireName()) {
+            /*if ($field instanceof DateTimePicker and $field->getDateFromWireName()) {
                 $from = Input::make($field->getDateFromName())->hidden();
                 $from->record($this->model);
+                $field->livewire($this->livewire);
                 $from->statusForm($this->statusForm);
                 static::$formFields[] = $from;
-            }
+            }*/
         }
     }
 

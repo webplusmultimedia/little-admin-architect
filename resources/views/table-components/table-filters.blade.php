@@ -1,0 +1,4 @@
+<div  {{ $attributes }}
+>
+   {{ $slot }}
+</div>

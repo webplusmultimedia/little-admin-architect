@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseTable;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\ValidateValuesForRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanGetAttributesRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanInteractWithRules;
@@ -72,7 +73,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
      */
     protected array|null|Model $record = null;
 
-    public BaseForm|Component $livewire;
+    public BaseForm|BaseTable|Component $livewire;
 
     protected mixed $oldValue = null;
 

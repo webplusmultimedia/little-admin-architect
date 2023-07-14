@@ -10,7 +10,7 @@ trait HasName
 {
     protected string $name;
 
-    protected string $prefixPath = 'data';
+    protected ?string $prefixPath = 'data';
 
     protected string $prefixRelationPath = 'record';
 
@@ -42,11 +42,11 @@ trait HasName
 
     protected function getPrefixPath(): string
     {
-        if ($this->record instanceof Model) {
-            return $this->prefixPath . '.';
-        }
+        /* if ($this->record instanceof Model) {*/
+        return $this->prefixPath . '.';
+        // }
 
-        return '';
+        // return '';
     }
 
     public function setPrefixPath(string $prefixPath): void
