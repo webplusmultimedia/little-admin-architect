@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\DateTimePicker;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters\BaseFilter;
 
@@ -25,7 +26,37 @@ trait HasFilters
         foreach ($this->filters as $filter) {
             /** @var Field $field */
             foreach ($filter->getFormFields() as $field) {
+                if ( ! data_get($this->livewire, $field->getStatePath())) {
+                    data_set($this->livewire, $field->getStatePath(), null);
+                }
                 $field->livewire($this->livewire);
+            }
+        }
+    }
+
+    public function getCountActifFilters(): int
+    {
+        $count = 0;
+        if ( ! $this->hasFilters()) {
+            return 0;
+        }
+        foreach ($this->filters as $filter) {
+            foreach ($filter->getFormFields() as $field) {
+                if ( ! blank($field->getState()) and false !== $field->getState()) {
+                    $count++;
+                }
+            }
+        }
+
+        return $count;
+    }
+
+    public function setDefaultToFilters(): void
+    {
+        foreach ($this->filters as $filter) {
+            /** @var Field $field */
+            foreach ($filter->getFormFields() as $field) {
+                $field->applyDefaultValue();
             }
         }
     }
@@ -36,6 +67,9 @@ trait HasFilters
             /** @var Field $field */
             foreach ($filter->getFormFields() as $field) {
                 $field->setState(null);
+                if ($field instanceof DateTimePicker) {
+                    $this->livewire->emit($field->getClearDateEventName(), ['date_to' => $field->getState()]);
+                }
             }
         }
     }

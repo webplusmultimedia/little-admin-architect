@@ -38,7 +38,7 @@ trait HasFields
     {
         foreach (static::$formFields as $key => $field) {
             $field->livewire($this->livewire);
-            $field->setForm($this);  //  @phpstan-ignore-line
+            // $field->setForm($this);    @phpstan-ignore-line
             if ($field->isHiddenOnForm()) {
                 unset(static::$formFields[$key]);
             }

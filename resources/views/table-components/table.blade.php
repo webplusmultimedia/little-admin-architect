@@ -22,7 +22,7 @@
             @endforeach
         </div>
     </div>
-    <div class="flex flex-col bg-white py-10 px-5 rounded-lg overflow-x-auto" x-data="{}">
+    <div class="flex flex-col bg-white py-10 px-5 rounded-lg" x-data="{}">
         <x-little-anonyme::table-components.partials.search-bar :table="$table"/>
         @if($table->hasRecords())
             <div class=" border-collapse border border-gray-200  overflow-hidden overflow-x-auto">

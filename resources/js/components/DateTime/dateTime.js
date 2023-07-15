@@ -253,11 +253,11 @@ export function webplusDateTime({dayDate, config, dateFrom, dateTo}) {
         },
         setEntangleDate(){
             if(this.configTypeMatch('range')){
-                dateFrom = this.dayDate[0]
-                dateTo = this.dayDate[1]
+                this.dateFrom = this.dayDate[0]
+                this.dateTo = this.dayDate[1]
             }
             else {
-                dateFrom = this.dayDate
+                this.dateFrom = this.dayDate
             }
         },
 
@@ -269,6 +269,7 @@ export function webplusDateTime({dayDate, config, dateFrom, dateTo}) {
             return new Date(date.setDate(date.getDate() - date.getDay() + 1))
         },
         init() {
+
             checkConfig(this)
             this.$watch('dayDate',value=>{
                 if(this.configTypeMatch('range')){
@@ -278,6 +279,12 @@ export function webplusDateTime({dayDate, config, dateFrom, dateTo}) {
                 }
                 this.dateTo = value
             })
+
+            Livewire.on(`${config.clear_date_event}`,value=> {
+                this.clearDate()
+            })
+
+
         }
 
     }

@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns
 
 trait CanBeWireModifier
 {
-    protected string $wireModifier = '.defer';
+    protected ?string $wireModifier = '.defer';
 
     /**
      * @return bool
@@ -33,7 +33,7 @@ trait CanBeWireModifier
         return $this->isWireLazy;
     }
 
-    public function getWireModifier(): string
+    public function getWireModifier(): ?string
     {
         return $this->wireModifier;
     }

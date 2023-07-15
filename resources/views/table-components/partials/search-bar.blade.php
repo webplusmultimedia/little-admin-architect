@@ -19,22 +19,26 @@
         <div class="justify-end flex items-center relative"
              x-data="{filterOpen : false }"
         >
-            <button class="rounded-full p-3"
+            <button class="rounded-full p-3 relative"
                     :class="{'bg-primary-100' : filterOpen }"
                     x-on:click="filterOpen = !filterOpen"
                     x-on:keydown.esc="filterOpen=false"
                     aria-haspopup="menu" aria-controls="table-filters" :aria-expanded="filterOpen"
-
             >
                 <x-little-anonyme::form-components.fields.icons.filter
                     id="table-filters"
                     class="text-primary-500 w-5 stroke-3"
                 />
+                @if($table->getCountActifFilters())
+                    <span class="absolute -top-1 -right-2 rounded-full w-5 h-5 text-sm font-semibold text-primary-600 bg-primary-300/50">
+                        {{ $table->getCountActifFilters() }}
+                    </span>
+                @endif
             </button>
 
             <x-little-anonyme::table-components.table-filters
                 class="absolute right-0 top-[calc(100%_+_1rem)] rounded-md bg-white z-20 shadow-md border border-primary-200 flex flex-col
-                                   min-w-[12rem] whitespace-nowrap  divide-y text-sm overflow-hidden p-3"
+                                   min-w-[20rem] whitespace-nowrap  divide-y text-sm  p-3"
                 x-transition:enter-start="opacity-0"
                 x-transition:enter-end="opacity-100"
                 x-transition:enter="duration-300"
@@ -47,13 +51,18 @@
                 <ul role="menu">
                     @php /** @var BaseFilter $filter */ @endphp
                     @foreach($table->getFilters() as $filter)
-                        <li role="menuitem">
+
                             @foreach($filter->getFormFields() as $field)
+                            <li role="menuitem"
+                                class="pb-3"
+                            >
                                 {{ $field}}
+                            </li>
                             @endforeach
-                        </li>
+
                     @endforeach
                     <li role="menuitem"
+
                         wire:click.stop="removeFilters()"
                     >
                         <span class="text-sm text-danger font-semibold text-right underline" role="button" aria-description="remove filters">{{ __('Remove filters') }}</span>

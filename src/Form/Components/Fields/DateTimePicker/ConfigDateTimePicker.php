@@ -16,6 +16,7 @@ class ConfigDateTimePicker
         public int $minTime = 7,
         public int $maxTime = 17,
         public int $intervalMinute = 5,
+        public ?string $clear_date_event = null
     ) {
     }
 }

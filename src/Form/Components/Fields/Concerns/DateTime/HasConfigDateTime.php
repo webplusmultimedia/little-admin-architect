@@ -79,8 +79,14 @@ trait HasConfigDateTime
     {
         if ( ! $this->config) {
             $this->config = new ConfigDateTimePicker();
+            $this->config->clear_date_event = 'date_picker_' . $this->getStatePath();
         }
 
         return $this->config;
+    }
+
+    public function getClearDateEventName(): string
+    {
+        return $this->getConfig()->clear_date_event;
     }
 }

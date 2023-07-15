@@ -87,7 +87,7 @@
                                     @csrf
                                     <button type="submit"
                                             class="inline-flex items-center space-x-2 px-4 py-2 hover:text-primary-600 hover:bg-primary-50/40 w-full text-left">
-                                        <x-heroicon-o-magnifying-glass class="w-5"/>
+                                        <x-heroicon-o-power class="w-5 text-error"/>
                                         <span>Log Out</span>
                                     </button>
                                 </form>
