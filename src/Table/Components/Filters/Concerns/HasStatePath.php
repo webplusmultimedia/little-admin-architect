@@ -11,7 +11,7 @@ trait HasStatePath
 {
     protected string $prefixPath = 'tableFilters';
 
-    protected function getFilterPath(?Field $field = null): string
+    protected function getFilterPath(Field $field = null): string
     {
         if ( ! $field) {
             $path = str($this->name);
