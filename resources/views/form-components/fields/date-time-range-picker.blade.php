@@ -41,23 +41,27 @@
                 >
                     {{ $field->getLabel() }}
                 </x-little-anonyme::form-components.fields.partials.label>
-                <div class="relative"  >
+                <div class="relative">
                     <div class="relative">
                         <input type="text" x-model="value" id="{{$id}}"
-                               x-on:click="toggle" class="cursor-pointer py-2 px-2"
+                                class="cursor-pointer py-2 px-2"
+                               x-on:click="toggle"
                                x-on:keyup.esc="toggle"
                                {{ $field->isRequired()?'required':'' }}
                                readonly
                         >
-                        <button x-on:click.prevent="clearDate" x-show="selectedDay" class="absolute right-3 bottom-0 top-0">
-                            <x-heroicon-o-x-mark class="w-5 h-auto text-gray-400 hover:text-red-700"/>
-                        </button>
+                        <div class="inline-flex gap-2 items-center absolute right-2 bottom-0 top-0 pointer-events-none">
+                            <button x-on:click.prevent.stop="clearDate" x-show="selectedDay" class="pointer-events-auto">
+                                <x-heroicon-o-x-mark class="w-5 h-auto text-gray-400 hover:text-red-700 transition"/>
+                            </button>
+                            <x-heroicon-o-calendar-days class="w-5 h-auto text-gray-400"/>
+                        </div>
                     </div>
                     <div class="fixed top-0 bottom-0 right-0 left-0 bg-gray-600 bg-opacity-60 bg-blend-darken backdrop-blur-sm z-20 sm:hidden"
                          x-show="show"></div>
-                    <div class="flex flex-col bg-white border border-gray-100 px-3 py-2 shadow-sm
-        w-full fixed left-0 right-0 bottom-0 bg-blend-darken rounded-0
-        sm:absolute z-30 sm:bottom-unset sm:w-[330px] sm:left-0  sm:rounded-lg sm:z-20"
+                    <div class="flex flex-col bg-white border border-gray-200 px-3 py-2 shadow-lg
+        w-full fixed left-0 right-0 bottom-0 md:bottom-unset md:top-[calc(100%_+_4px)] bg-blend-darken rounded-0
+        sm:absolute z-30   sm:w-[330px] sm:left-0  sm:rounded-lg sm:z-20"
                          x-show="show"
                          x-on:click.outside="show=false"
                          x-transition

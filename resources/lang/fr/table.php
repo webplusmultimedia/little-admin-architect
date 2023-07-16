@@ -21,4 +21,7 @@ return [
     'search-bar' => [
         'placeholder' => 'Rechercher par :fieldsText ...',
     ],
+    'filter' => [
+        'remove-filter' => 'Supprimer les filtres',
+    ],
 ];

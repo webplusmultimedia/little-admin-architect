@@ -44,7 +44,7 @@
             </div>
             <button data-collapse-toggle="navbar-default" type="button"
                     x-data=""
-                    x-on:click.stop="$store.laDatas.toggleMobileMenu()"
+                    x-on:click.stop="!window.matchMedia('(min-width : 1024px)').matches && $store.laDatas.toggleMenu()"
                     class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                     aria-controls="navbar-default" aria-expanded="false"
             >
@@ -103,14 +103,16 @@
 </header>
 
 <aside
-    class="flex flex-col w-[20rem] border-r border-gray-100 bg-white fixed top-0  bottom-0 lg:left-0 shadow-lg overflow-x-hidden overflow-y-auto pb-5  z-10 transition-all duration-150"
+    class="flex flex-col border-r border-gray-100 bg-white fixed top-0  h-screen lg:left-0 shadow-lg overflow-x-hidden overflow-y-auto pb-5  z-10 transition-all duration-150"
     :class="{
+        '-x-translate-full w-[20rem]' : window.matchMedia('(min-width : 1024px)').matches && $store.laDatas.menuOpen,
+
         //'w-[20rem]' : !window.matchMedia('(max-width : 1024px)').matches?$store.laDatas.menuOpen:true ,
-        'w-[6rem]' : !window.matchMedia('(max-width : 1024px)').matches?!$store.laDatas.menuOpen:false,
+        'w-[6rem] x-translate-0' : !window.matchMedia('(min-width : 1024px)').matches && !$store.laDatas.menuOpen,
         //'flex flex-col' : window.matchMedia('(min-width : 1024px)').matches?!$store.laDatas.isMobileMenuShow:false,
         //'hidden' : !window.matchMedia('(min-width : 1024px)').matches?!$store.laDatas.isMobileMenuShow:false
     }"
-    x-show="!window.matchMedia('(max-width : 1024px)').matches || $store.laDatas.isMobileMenuShow "
+    {{--x-show="window.matchMedia('(max-width : 1024px)').matches && $store.laDatas.isMobileMenuShow || $store.laDatas.menuOpen "--}}
     x-cloak
     x-data="{ }"
 >
@@ -119,7 +121,7 @@
             <x-little-anonyme::form-components.fields.icons.logo class="text-primary-500 h-8"/>
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
                   {{--:class="{ 'md:hidden' : !$store.laDatas.menuOpen}"--}}
-                  x-show="!window.matchMedia('(min-width : 1024px)').matches?true:$store.laDatas.menuOpen"
+                  x-show="window.matchMedia('(min-width : 1024px)').matches && $store.laDatas.menuOpen"
                   x-transition:enter-start="opacity-0"
                   x-transition:enter="delay-100 duration-300"
                   x-transition:enter-end="opacity-100"
@@ -129,7 +131,7 @@
             </span>
         </a>
         <span class="flex items-center pr-2" x-data="{}"
-              x-on:click="$store.laDatas.toggleMenu()"
+              x-on:click="window.matchMedia('(min-width : 1024px)').matches && $store.laDatas.toggleMenu()"
               :class="{ 'md:hidden' : $store.laDatas.menuOpen}"
         >
             <x-little-anonyme::form-components.fields.icons.menu-left class="text-primary-500 w-8 cursor-pointer"/>
@@ -148,7 +150,7 @@
                         class="px-3 py-2 text-lg font-medium border-b border-primary-100"
                     >
                                 <span
-                                      x-show="!window.matchMedia('(min-width : 1024px)').matches?true:$store.laDatas.menuOpen"
+                                      x-show="window.matchMedia('(min-width : 1024px)').matches && $store.laDatas.menuOpen"
                                       x-transition:enter-start="opacity-0"
                                       x-transition:enter="delay-100 duration-300"
                                       x-transition:enter-end="opacity-100"
@@ -165,10 +167,10 @@
                                :class="{
                                     'border-primary-600 bg-primary-50 text-primary-600 font-bold pl-4 ' : {{  request()->routeIs($navigation['route_resource'])?'true':'false' }} && $store.laDatas.menuOpen,
                                     'bg-primary-50 text-primary-600 font-bold' : {{  request()->routeIs($navigation['route_resource'])?'true':'false' }} && !$store.laDatas.menuOpen,
-                                    'flex justify-center pl-0' : !$store.laDatas.menuOpen,
-                                    'text-slate-500 border-transparent pl-4' : {{ !request()->routeIs($navigation['route_resource'])?'true':'false' }}
+                                    'flex justify-center pl-0 border-none' : !$store.laDatas.menuOpen,
+                                    'text-slate-500 border-transparent pl-4' : {{ !request()->routeIs($navigation['route_resource'])?'true':'false' }} && $store.laDatas.menuOpen
                                }"
-                               class="inline-flex items-center space-x-2 pl-10 hover:bg-gray-50 py-1 grow border-l-4 duration-200"
+                               class="inline-flex items-center space-x-2 hover:bg-gray-50 py-1 grow border-l-4 duration-200"
                             >
                                 @if($navigation['icon'])
                                     <x-dynamic-component :component="$navigation['icon']" class="w-6"/>

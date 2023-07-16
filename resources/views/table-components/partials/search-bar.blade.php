@@ -20,7 +20,7 @@
              x-data="{filterOpen : false }"
         >
             <button class="rounded-full p-3 relative"
-                    :class="{'bg-primary-100' : filterOpen }"
+                    :class="{'bg-primary-500/10' : filterOpen }"
                     x-on:click="filterOpen = !filterOpen"
                     x-on:keydown.esc="filterOpen=false"
                     aria-haspopup="menu" aria-controls="table-filters" :aria-expanded="filterOpen"
@@ -30,7 +30,7 @@
                     class="text-primary-500 w-5 stroke-3"
                 />
                 @if($table->getCountActifFilters())
-                    <span class="absolute -top-1 -right-2 rounded-full w-5 h-5 text-sm font-semibold text-primary-600 bg-primary-300/50">
+                    <span class="absolute -top-0.5 -right-1 rounded-full w-5 h-5 text-xs  text-primary-600 bg-primary-500/10">
                         {{ $table->getCountActifFilters() }}
                     </span>
                 @endif
@@ -41,7 +41,8 @@
                                    min-w-[20rem] whitespace-nowrap  divide-y text-sm  p-3"
                 x-transition:enter-start="opacity-0"
                 x-transition:enter-end="opacity-100"
-                x-transition:enter="duration-300"
+                x-transition:enter="duration-200"
+                x-transition:leave="duration-200"
                 x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0"
                 x-show="filterOpen"
@@ -65,7 +66,7 @@
 
                         wire:click.stop="removeFilters()"
                     >
-                        <span class="text-sm text-danger font-semibold text-right underline" role="button" aria-description="remove filters">{{ __('Remove filters') }}</span>
+                        <span class="text-sm text-danger font-semibold text-right underline" role="button" aria-description="remove filters">{{ trans('little-admin-architect::table.filter.remove-filter') }}</span>
                     </li>
                 </ul>
 

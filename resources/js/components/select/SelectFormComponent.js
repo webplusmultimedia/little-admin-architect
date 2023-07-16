@@ -70,6 +70,10 @@ export function SelectFormComponent({
                         this.state = [...this.dynamicOptions]
                     }
                     else {
+                        console.log(this.state)
+                        if (!this.state){
+                            this.state = []
+                        }
                         this.state.push(this.$el.dataset.value)
                     }
                 }

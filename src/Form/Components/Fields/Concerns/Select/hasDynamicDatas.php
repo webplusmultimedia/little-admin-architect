@@ -12,4 +12,9 @@ trait hasDynamicDatas
     {
         return $this->dynamicOptions;
     }
+
+    public function setDynamicOption(bool $dynamiqueOption = true): void
+    {
+        $this->dynamicOptions = $dynamiqueOption;
+    }
 }

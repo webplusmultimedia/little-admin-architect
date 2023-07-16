@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
-use Livewire\Component;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseTable;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasActionModal;
@@ -41,7 +41,7 @@ final class Table implements Htmlable
 
     protected string $TableTitle = '';
 
-    protected Component $livewire;
+    protected BaseTable $livewire;
 
     private ?string $livewireId = null;
 
@@ -60,7 +60,7 @@ final class Table implements Htmlable
     ) {
     }
 
-    public function configureColumns(Component $livewire, Page $page, string $title = ''): void
+    public function configureColumns(BaseTable $livewire, Page $page, string $title = ''): void
     {
         $this->livewire = $livewire;
         $this->livewireId($livewire->id);

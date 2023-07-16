@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 use Illuminate\Database\Eloquent\Builder;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\DateTimePicker;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Select;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters\BaseFilter;
 
 trait HasFilters
@@ -24,6 +25,7 @@ trait HasFilters
     protected function setLivewireToFilters(): void
     {
         foreach ($this->filters as $filter) {
+            $filter->componentLivewire($this->livewire);
             /** @var Field $field */
             foreach ($filter->getFormFields() as $field) {
                 if ( ! data_get($this->livewire, $field->getStatePath())) {
@@ -54,9 +56,14 @@ trait HasFilters
     public function setDefaultToFilters(): void
     {
         foreach ($this->filters as $filter) {
+            $filter->componentLivewire($this->livewire);
             /** @var Field $field */
             foreach ($filter->getFormFields() as $field) {
                 $field->applyDefaultValue();
+                /*if ($field instanceof Select) {
+                    $field->setDynamicOption();
+                    $field->setState([]);
+                }*/
             }
         }
     }
@@ -72,6 +79,20 @@ trait HasFilters
                 }
             }
         }
+    }
+
+    public function getFilterFieldByName(string $name): ?Field
+    {
+        foreach ($this->filters as $filter) {
+            /** @var Field $field */
+            foreach ($filter->getFormFields() as $field) {
+                if ($name === $field->getStatePath()) {
+                    return $field;
+                }
+            }
+        }
+
+        return null;
     }
 
     public function handleQuery(Builder $builder): Builder

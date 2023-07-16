@@ -10,7 +10,7 @@
      {
         componentId: @js($field->getStatePath()),
         defaultLabel: @js($field->getLabelDefault()),
-        state : @entangle($field->getStatePath()).defer,
+        state : @entangle($field->getStatePath()){{ $field->getWireModifier() }},
         defaultValue : @js($field->getState()),
         isMultiple : @js($field->isMultiple()),
         isSearchable : @js($field->isSearchable()),
