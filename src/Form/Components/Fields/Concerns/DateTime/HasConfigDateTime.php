@@ -85,7 +85,7 @@ trait HasConfigDateTime
         return $this->config;
     }
 
-    public function getClearDateEventName(): string
+    public function getClearEventName(): string
     {
         return $this->getConfig()->clear_date_event;
     }

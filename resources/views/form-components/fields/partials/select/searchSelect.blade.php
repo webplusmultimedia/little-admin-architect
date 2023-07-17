@@ -4,9 +4,9 @@
 	'field'
 ])
 <div
-     @class(['disabled__field' => $field->isDisabled(),"relative"])
-     x-cloak
-     x-data="SelectFormComponent(
+    @class(['disabled__field' => $field->isDisabled(),"relative"])
+    x-cloak
+    x-data="SelectFormComponent(
      {
         componentId: @js($field->getStatePath()),
         defaultLabel: @js($field->getLabelDefault()),
@@ -21,19 +21,20 @@
         isDynamicOptions : @js($field->getDynamicOption()),
      }
     )"
-     wire:ignore
-     wire:key="{{$field->getStatePath() . '-'.md5('hhh')}}"
-        {{ $attributes }}
+    wire:ignore
+    wire:key="{{$field->getStatePath() . '-'.md5('hhh')}}"
+    {{ $attributes }}
 >
     <div class=""
          role="combobox" aria-autocomplete="list"
          aria-haspopup="true"
          x-bind:aria-expanded="show"
     >
-        <x-little-anonyme::form-components.fields.partials.label class="form-label"
-                                                                 :id="$field->getId()"
-                                                                 :is-required="$field->isRequired()"
-                                                                 x-on:click="show = true"
+        <x-little-anonyme::form-components.fields.partials.label
+            class="form-label"
+            :id="$field->getId()"
+            :is-required="$field->isRequired()"
+            x-on:click="show = true"
         >
             {{ $field->getLabel() }}
         </x-little-anonyme::form-components.fields.partials.label>

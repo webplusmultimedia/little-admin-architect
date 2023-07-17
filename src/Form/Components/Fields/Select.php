@@ -103,4 +103,9 @@ class Select extends Field
         }
 
     }
+
+    public function getClearEventName(): ?string
+    {
+        return $this->getStatePath() . '.' . $this->clearEventName;
+    }
 }

@@ -70,7 +70,6 @@ export function SelectFormComponent({
                         this.state = [...this.dynamicOptions]
                     }
                     else {
-                        console.log(this.state)
                         if (!this.state){
                             this.state = []
                         }
@@ -176,6 +175,10 @@ export function SelectFormComponent({
                         this.$refs.search.focus()
                     },5)
                 }
+            })
+
+            Livewire.on(`${componentId}.clear_event`,value=> {
+                this.resetOptions()
             })
         },
         showChoiceSelected(){

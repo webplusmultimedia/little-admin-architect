@@ -29,6 +29,10 @@ trait HasFormField
                     $field->name($this->getFilterPath($field))
                         ->reactive(false)
                         ->setPrefixPath($this->prefixPath);
+                    if ( ! data_get($this->livewire, $field->getStatePath())) {
+                        data_set($this->livewire, $field->getStatePath(), null);
+                        $field->applyDefaultValue();
+                    }
                 }
                 $this->fields = $fields;
             }

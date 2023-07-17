@@ -76,7 +76,7 @@ class BaseTable extends Component implements HasTable
     {
         $this->pageRoute = $pageRoute;
         $this->initBoot = false;
-        $this->table->setDefaultToFilters();
+        //$this->table->setDefaultToFilters();
     }
 
     public function paginationView(): string

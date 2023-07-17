@@ -20,8 +20,6 @@ class BaseFilter
     use HasLabel;
     use HasName;
     use HasQuery;
-
-    //use HasRelationship;
     use HasStatePath;
 
     protected BaseTable $livewire;
