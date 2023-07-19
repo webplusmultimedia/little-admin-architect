@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts;
 
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\InteractWithLivewire;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\Contracts\BaseAction;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Concerns\HasUrl;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Contracts\Action;
 
-abstract class TableAction extends BaseAction
+abstract class TableAction extends Action
 {
-    use HasUrl;
-    use InteractWithLivewire;
 }

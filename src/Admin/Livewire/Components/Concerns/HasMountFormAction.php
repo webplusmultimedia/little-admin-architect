@@ -37,7 +37,7 @@ trait HasMountFormAction
                 actionLabel: $action->getTitleForModal(),
                 fields: $action->getFields()
             )
-        )->maxWidthMedium();
+        )->setMaxWidth($action->getMaxWidth());
         $this->dispatchBrowserEvent('show-modal', ['id' => $id]);
 
     }
@@ -51,17 +51,9 @@ trait HasMountFormAction
         $id = $this->id . $this->suffixEventForm;
         $action->livewire($this);
         $action->authorizeAccess();
-        // $this->notification()->success($action->getNotificationText())->send();
+        $action->handleAction();
+        $this->notification()->success($action->getNotificationText())->send();
         $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
-        /* if ($action->isRequireConfirmation()) {
-             $record = $this->getRecordForMount($this->mountFormAction);
-             if ($action->getAction()) {
-                 app()->call($action->getAction(), ['record' => $record, 'livewire' => $this]);
-             }
-             $id = $this->id . '-action-form';
-             $this->notification()->success($action->getNotificationText())->send();
-             $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
-         }*/
 
     }
 

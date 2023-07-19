@@ -109,6 +109,8 @@ class Select extends Field
                     ->get()
                     ->pluck(value: $component->getLabelField(), key: 'id');
             });
+        } else {
+            $this->formAction = null;
         }
 
     }
@@ -116,5 +118,10 @@ class Select extends Field
     public function getClearEventName(): ?string
     {
         return $this->getStatePath() . '.' . $this->clearEventName;
+    }
+
+    public function eventToGetLabel(): string
+    {
+        return $this->getStatePath() . '.getLabel_event';
     }
 }

@@ -66,13 +66,13 @@ trait CanGetRules
         if (count($this->attributesRules) > 0) {
             return $this->attributesRules;
         }
-        $rules = [];
+        $attributesRules = [];
         /** @var Field $field */
         foreach (static::$formFields as $field) {
-            $rules = $field->applyAttributesRules($rules);
+            $attributesRules = $field->applyAttributesRules($attributesRules);
         }
-        $this->attributesRules = $rules;
+        $this->attributesRules = $attributesRules;
 
-        return $rules;
+        return $attributesRules;
     }
 }

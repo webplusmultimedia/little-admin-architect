@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Contrats;
 
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\InteractWithLivewire;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\Contracts\BaseAction;
-use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Concerns\HasUrl;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Contracts\Action;
 
-abstract class FormAction extends BaseAction
+abstract class FormAction extends Action
 {
-    use HasUrl;
-    use InteractWithLivewire;
+    protected string $livewireData = 'mountFormActionData';
+
+    protected function getLivewireData(string $name): mixed
+    {
+        $path = $this->livewireData . '.' . $name;
+
+        return data_get($this->livewire, $path, null);
+    }
 }

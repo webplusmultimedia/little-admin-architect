@@ -67,7 +67,6 @@ final class Form extends BaseFormAlias implements Htmlable
         $this->setPagesForResource($resource);
         $this->headerActions($this->pageForResource::getActions());
         $this->actionModal(FormModal::make($this->livewireId . '-action-form'));
-        $this->setFormActions();
 
     }
 

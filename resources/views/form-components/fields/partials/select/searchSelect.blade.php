@@ -38,22 +38,28 @@
         >
             {{ $field->getLabel() }}
         </x-little-anonyme::form-components.fields.partials.label>
-        <div class="choice__wrapper_selected" x-on:click="show = true"
-             :class="{'ring-2 ring-primary-500': show}"
-             x-on:keyup.esc="show = false"
-        >
-            <div class="choice__selected" x-html="defaultLabel" x-show="showChoiceSelected">
+        <div class="inline-flex gap-2 items-center w-full" >
+            <div class="choice__wrapper_selected" x-on:click="show = true"
+                                                                 :class="{'ring-2 ring-primary-500': show}"
+                                                                 x-on:keyup.esc="show = false"
+            >
+                <div class="choice__selected" x-html="defaultLabel" x-show="showChoiceSelected">
 
+                </div>
+                <div class="choice__selected text-gray-500" x-text="msgContent.placeholder" x-show="!showChoiceSelected()"></div>
+                <div class="flex items-center space-x-2 z-[2]">
+                    <x-heroicon-o-x-mark class="w-5 hover:text-error-400 transition"
+                                         x-show="showChoiceSelected"
+                                         x-on:click.stop="resetOptions"
+                    />
+                    <x-heroicon-o-chevron-down class="w-5"/>
+                </div>
             </div>
-            <div class="choice__selected text-gray-500" x-text="msgContent.placeholder" x-show="!showChoiceSelected()"></div>
-            <div class="flex items-center space-x-2 z-[2]">
-                <x-heroicon-o-x-mark class="w-5 hover:text-error-400 transition"
-                                     x-show="showChoiceSelected"
-                                     x-on:click.stop="resetOptions"
-                />
-                <x-heroicon-o-chevron-down class="w-5"/>
-            </div>
+            @if($field->hasFormAction() && $field->getFormAction()->authorize())
+                {{ $field->getFormAction() }}
+            @endif
         </div>
+
 
     </div>
 

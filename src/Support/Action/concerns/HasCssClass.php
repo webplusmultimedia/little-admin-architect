@@ -12,6 +12,8 @@ trait HasCssClass
 
     protected string $btnStyle = '';
 
+    protected ?string $classesStyle = null;
+
     protected bool $outline = false;
 
     protected bool $isSmall = false;
@@ -100,6 +102,10 @@ trait HasCssClass
             $btnStyle = $btnStyle->prepend('btn-medium ');
         }
 
+        if ($this->classesStyle) {
+            $btnStyle = $btnStyle->prepend($this->classesStyle);
+        }
+
         return $btnStyle->value();
     }
 
@@ -122,6 +128,13 @@ trait HasCssClass
     public function roundedFull(bool $roundedFull = true): static
     {
         $this->roundedFull = $roundedFull;
+
+        return $this;
+    }
+
+    public function classesStyle(string $classesStyle): static
+    {
+        $this->classesStyle = $classesStyle . ' ';
 
         return $this;
     }

@@ -21,13 +21,7 @@
     >
 
         @if($field->isSearchable())
-            <div class="inline-flex gap-2 items-center w-full" >
                 <x-little-anonyme::form-components.fields.partials.select.searchSelect :field="$field"/>
-                @if($field->hasFormAction)
-                    {{ $field->getFormAction() }}
-                @endif
-            </div>
-
         @else
             <x-little-anonyme::form-components.fields.partials.label class="form-label"
                                                                      :id="$id"

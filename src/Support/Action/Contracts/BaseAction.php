@@ -34,6 +34,11 @@ abstract class BaseAction implements Htmlable
 
     protected BaseTable|BaseForm|Page|null $livewire = null;
 
+    public function getDefaultParameters(): array
+    {
+        return ['record' => $this->getRecord(), 'livewire' => $this->livewire];
+    }
+
     public function livewire(BaseTable|BaseForm|Page $livewire): void
     {
         $this->livewire = $livewire;

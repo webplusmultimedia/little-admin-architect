@@ -21,4 +21,9 @@ trait HasAction
     {
         return $this->action;
     }
+
+    public function handleAction(): void
+    {
+        $this->evaluate(closure: $this->action);
+    }
 }

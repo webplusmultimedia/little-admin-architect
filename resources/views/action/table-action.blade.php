@@ -1,7 +1,8 @@
 <div class="w-full md:w-fit">
     @if($action->getType() === 'link')
         <a href="{{ url($action->getUrl()) }}"
-            @class([ $action->getClass(),'w-full md:w-fit btn inline-flex items-center justify-center space-x-2' ])
+            @class([ 'w-full md:w-fit btn inline-flex items-center justify-center space-x-2',$action->getClass() ])
+            target="{{$action->getTargetLink()}}"
         >
             @if($action->getIconPosition()==='before' and $action->getIcon())
                 <x-icon :name="$action->getIcon()" :class="$action->getIconSize()" aria-hidden="true"/>

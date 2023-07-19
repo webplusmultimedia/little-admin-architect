@@ -31,6 +31,13 @@ trait HasContent
         return $this->maxWidth;
     }
 
+    public function setMaxWidth(string $maxWidth): static
+    {
+        $this->maxWidth = $maxWidth;
+
+        return $this;
+    }
+
     public function content(null|string|Htmlable $content): static
     {
         $this->content = $content;

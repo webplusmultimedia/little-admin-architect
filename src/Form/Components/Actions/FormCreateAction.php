@@ -14,12 +14,9 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Input;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Radio;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Select;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
-use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\FormDialog;
 
 class FormCreateAction extends FormAction
 {
-    protected ?FormDialog $formDialog = null;
-
     protected ?string $view = 'little-views::action.form-action';
 
     /** @var Field[] */
@@ -36,12 +33,39 @@ class FormCreateAction extends FormAction
     {
         $this->roundedFull()
             ->bgTransparent()
-            ->icon('heroicon-o-plus');
+            ->icon('heroicon-o-plus')
+            ->classesStyle('bg-primary-100 hover:bg-primary-200')
+            ->action(function (?Model $record, BaseForm $livewire, array $rules, array $attributes, string $status): void {
+
+                /** @var array $values */
+                $values = $livewire->validate(rules: $rules, attributes: $attributes);
+                $values = collect($values)->values()->collapse()->all();
+                if ($record) {
+                    $record->fill($values)->save();
+
+                    $field = $livewire->form->getFormFieldByPath($livewire->mountFormActionComponent);
+                    if ($field && $field instanceof Select) {
+                        if (is_array($field->getState())) {
+                            $field->setState([...$field->getState(), $record->getKey()]);
+                        } else {
+                            $field->setState($record->getKey());
+                        }
+                        $livewire->dispatchBrowserEvent($field->eventToGetLabel(), $field->getAllLabelsForValues());
+                    }
+
+                }
+
+            })->maxWidthMedium();
     }
 
     public static function make(string $name): FormCreateAction
     {
         return new self($name);
+    }
+
+    public function handleAction(): void
+    {
+        $this->evaluate(closure: $this->action, include: ['rules' => $this->getRulesFields(), 'attributes' => $this->attributesFields(), 'status' => $this->statusForm]);
     }
 
     public function record(Model $record): static
@@ -72,12 +96,18 @@ class FormCreateAction extends FormAction
     {
         foreach ($this->fields as $field) {
             if (in_array(get_class($field), [Input::class, DateTimePicker::class, CheckBox::class, Radio::class, Select::class]) /*and ! $field->isHiddenOnForm()*/) {
+
+                $model->{$field->getName()} = $this->getLivewireData($field->getName());
+
                 $field->record($model);
-                $field->setPrefixPath('mountFormActionData');
+
+                $field->setPrefixPath($this->livewireData);
                 $field->statusForm($this->statusForm);
+
                 $field->hydrateState();
             }
         }
+        //dd($this->record);
     }
 
     /**
@@ -104,6 +134,25 @@ class FormCreateAction extends FormAction
         }
 
         return null;
+    }
 
+    private function getRulesFields(): array
+    {
+        $rules = [];
+        foreach ($this->fields as $field) {
+            $rules = $field->beforeSaveRulesUsing(rules: $rules);
+        }
+
+        return $rules;
+    }
+
+    private function attributesFields(): array
+    {
+        $attributesRules = [];
+        foreach ($this->fields as $field) {
+            $attributesRules = $field->applyAttributesRules($attributesRules);
+        }
+
+        return $attributesRules;
     }
 }

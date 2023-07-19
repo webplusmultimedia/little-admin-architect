@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Concerns;
 
+//@todo : A supprimer
 trait HasUrl
 {
     protected ?string $url = null;

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns;
 
+use Closure;
+
 trait CanHaveUrl
 {
-    protected ?string $url = null;
+    protected null|Closure|string $url = null;
 
     protected string $targetLink = '_self';
 
-    public function url(string $url): static
+    public function url(Closure|string $url): static
     {
         $this->url = $url;
         $this->type = 'link';
@@ -20,7 +22,7 @@ trait CanHaveUrl
 
     public function getUrl(): ?string
     {
-        return $this->url;
+        return $this->evaluate($this->url);
     }
 
     public function targetLink(string $targetLink): static
