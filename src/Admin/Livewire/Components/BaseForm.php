@@ -21,8 +21,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAli
 class BaseForm extends Component implements HasForm
 {
     use CanInitForm;
-
-    //use HasMountFormAction;
+    use HasMountFormAction;
     use HasNotification;
     use InteractsWithForms;
     use InteractsWithUploadFiles;
@@ -40,11 +39,12 @@ class BaseForm extends Component implements HasForm
 
     public function mount(mixed $key, ?string $pageRoute): void
     {
+
         //@Todo : Can update or edit
         $this->previousPage = url()->previous();
         $this->pageRoute = $pageRoute;
         $this->key = $key;
-
+        $this->form->authorizeAccess();
         //$this->form->hydrateState();
         $this->record = [];
 

@@ -33,6 +33,7 @@ trait HasRowActions
     public function getRowActions(Model $record): array
     {
         foreach ($this->rowActions as $rowAction) {
+            $rowAction->livewire($this->livewire);
             $rowAction->record($record);
             if ($rowAction instanceof EditAction) {
                 $this->applyRecordToEditAction($rowAction);

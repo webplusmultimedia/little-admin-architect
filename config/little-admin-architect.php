@@ -3,6 +3,15 @@
 declare(strict_types=1);
 
 // config for Webplusmultimedia/LittleAdminArchitect
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Webplusmultimedia\LittleAdminArchitect\Http\Middleware\Authenticate;
+
 return [
 
     'prefix' => 'admin',
@@ -57,5 +66,19 @@ return [
         'col3' => 'lg:grid-cols-3',
         'col4' => 'lg:grid-cols-4',
         'col5' => 'lg:grid-cols-5',
+    ],
+    'middleware' => [
+        'auth' => [
+            Authenticate::class,
+        ],
+        'base' => [
+            EncryptCookies::class,
+            AddQueuedCookiesToResponse::class,
+            StartSession::class,
+            AuthenticateSession::class,
+            ShareErrorsFromSession::class,
+            VerifyCsrfToken::class,
+            SubstituteBindings::class,
+        ],
     ],
 ];

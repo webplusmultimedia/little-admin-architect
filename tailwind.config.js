@@ -5,6 +5,7 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   content: [
       './resources/views/**/*.blade.php',
+      './src/**/*.php',
       './resources/js/**/*.js',
   ],
   theme: {

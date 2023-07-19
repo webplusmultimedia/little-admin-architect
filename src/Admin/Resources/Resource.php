@@ -6,8 +6,11 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Resources;
 
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
 
@@ -193,5 +196,105 @@ class Resource
         }
 
         return null;
+    }
+
+    public static function shouldAuthorizeWithGate(): bool
+    {
+        return static::$shouldAuthorizeWithGate;
+    }
+
+    public static function can(string $action, ?Model $record = null): bool
+    {
+        $user = LittleAdminManager::auth()->user();
+        $model = static::getModel();
+
+        if (static::shouldAuthorizeWithGate()) {
+            return Gate::forUser($user)->check($action, $record ?? $model);
+        }
+
+        if (static::shouldIgnorePolicies()) {
+            return true;
+        }
+
+        $policy = Gate::getPolicyFor($model);
+        if (null === $policy) {
+            return true;
+        }
+
+        if ( ! method_exists($policy, $action)) {
+            return true;
+        }
+
+        return Gate::forUser($user)->check($action, $record ?? $model);
+    }
+
+    public static function shouldIgnorePolicies(): bool
+    {
+        return static::$shouldIgnorePolicies;
+    }
+
+    public static function canViewAny(): bool
+    {
+        return static::can('viewAny');
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::can('create');
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return static::can('update', $record);
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return static::can('delete', $record);
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return static::can('deleteAny');
+    }
+
+    public static function canForceDelete(Model $record): bool
+    {
+        return static::can('forceDelete', $record);
+    }
+
+    public static function canForceDeleteAny(): bool
+    {
+        return static::can('forceDeleteAny');
+    }
+
+    public static function canReorder(): bool
+    {
+        return static::can('reorder');
+    }
+
+    public static function canReplicate(Model $record): bool
+    {
+        return static::can('replicate', $record);
+    }
+
+    public static function canRestore(Model $record): bool
+    {
+        return static::can('restore', $record);
+    }
+
+    public static function canRestoreAny(): bool
+    {
+        return static::can('restoreAny');
+    }
+
+   /* public static function canGloballySearch(): bool
+    {
+        return static::$isGloballySearchable && count(static::getGloballySearchableAttributes()) && static::canViewAny();
+    }*/
+
+    public static function canView(Model $record): bool
+    {
+        return static::can('view', $record);
     }
 }

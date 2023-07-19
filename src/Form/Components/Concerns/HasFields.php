@@ -34,10 +34,13 @@ trait HasFields
         return collect(static::$formFields)->filter(fn (Field $field) => $field->getStatePath() === $path)->first();
     }
 
-    public function setUpFieldsOnForm(): void
+    public function setUpFieldsOnForm(bool $shouldUsePath = true): void
     {
         foreach (static::$formFields as $key => $field) {
             $field->livewire($this->livewire);
+            if ( ! $shouldUsePath) {
+                $field->setPrefixPath(null);
+            }
             // $field->setForm($this);    @phpstan-ignore-line
             if ($field->isHiddenOnForm()) {
                 unset(static::$formFields[$key]);

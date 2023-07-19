@@ -11,12 +11,12 @@ trait HasFormAction
 {
     protected ?FormCreateAction $formAction = null;
 
-    public function getFormAction(FormCreateAction $formAction): FormCreateAction
+    public function getFormAction(): ?FormCreateAction
     {
-        return $this->formAction = $formAction;
+        return $this->formAction;
     }
 
-    protected function hasFormAction(): bool
+    public function hasFormAction(): bool
     {
         return null !== $this->formAction;
     }
@@ -26,8 +26,9 @@ trait HasFormAction
      */
     public function createOptionForm(array $schemas): static
     {
-        $this->formAction = FormCreateAction::make()
+        $this->formAction = FormCreateAction::make('create-option')
             ->schemas(fields: $schemas);
+        $this->hasFormAction = true;
 
         return $this;
     }

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
 
-use Illuminate\Database\Eloquent\Model;
-
 trait HasName
 {
     protected string $name;
@@ -40,16 +38,16 @@ trait HasName
         return $this->getPrefixPath() . $this->name;
     }
 
-    protected function getPrefixPath(): string
+    protected function getPrefixPath(): ?string
     {
-        /* if ($this->record instanceof Model) {*/
-        return $this->prefixPath . '.';
-        // }
+        if ( ! $this->prefixPath) {
+            return null;
+        }
 
-        // return '';
+        return $this->prefixPath . '.';
     }
 
-    public function setPrefixPath(string $prefixPath): void
+    public function setPrefixPath(?string $prefixPath): void
     {
         $this->prefixPath = $prefixPath;
     }

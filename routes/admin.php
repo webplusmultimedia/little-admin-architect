@@ -6,11 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager;
 use Webplusmultimedia\LittleAdminArchitect\Http\Controllers\AssetsController;
-use Webplusmultimedia\LittleAdminArchitect\Http\Middleware\Authenticate;
 use Webplusmultimedia\LittleAdminArchitect\Http\Responses\Auth\LogoutResponse;
 
 Route::prefix(config('little-admin-architect.prefix'))
-    ->middleware(['web'])
+    ->middleware(config('little-admin-architect.middleware.base'))
     ->name(config('little-admin-architect.route.prefix') . '.')
     ->group(function (): void {
         Route::prefix('assets')
@@ -28,7 +27,7 @@ Route::prefix(config('little-admin-architect.prefix'))
         })->name('auth.logout');
         foreach (LittleAdminManager::getPages() as $resource => $pages) {
             foreach ($pages as $page) {
-                Route::get($page['slug'], $page['classBaseName'])->name($page['routeName'])->middleware(Authenticate::class);
+                Route::get($page['slug'], $page['classBaseName'])->name($page['routeName'])->middleware(config('little-admin-architect.middleware.auth'));
             }
         }
     });

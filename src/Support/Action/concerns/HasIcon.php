@@ -12,6 +12,8 @@ trait HasIcon
 
     protected string $iconPosition = 'before';
 
+    protected string $iconSize = 'w-4 h-4';
+
     public function icon(string|Closure $icon): static
     {
         $this->icon = $icon;
@@ -38,5 +40,31 @@ trait HasIcon
     public function getIconPosition(): string
     {
         return $this->iconPosition;
+    }
+
+    public function setIconSize(string $iconSize): static
+    {
+        $this->iconSize = $iconSize;
+
+        return $this;
+    }
+
+    public function mediumIconSize(): static
+    {
+        $this->iconSize = 'w-6 h-6';
+
+        return $this;
+    }
+
+    public function bigIconSize(): static
+    {
+        $this->iconSize = 'w-8 h-8';
+
+        return $this;
+    }
+
+    public function getIconSize(): string
+    {
+        return $this->iconSize;
     }
 }

@@ -67,6 +67,7 @@ final class Form extends BaseFormAlias implements Htmlable
         $this->setPagesForResource($resource);
         $this->headerActions($this->pageForResource::getActions());
         $this->actionModal(FormModal::make($this->livewireId . '-action-form'));
+        $this->setFormActions();
 
     }
 
@@ -96,7 +97,7 @@ final class Form extends BaseFormAlias implements Htmlable
         $this->statusForm = 'CREATED';
         $this->livewire = $livewire; //@phpstan-ignore-line
         $this->initDatasFormOnMount($record);
-        $this->setUpFieldsOnForm();
+        $this->setUpFieldsOnForm(false);
         $this->initSelectUsing();
     }
 

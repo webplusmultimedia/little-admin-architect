@@ -4,7 +4,7 @@
 	'field'
 ])
 <div
-    @class(['disabled__field' => $field->isDisabled(),"relative"])
+    @class(['disabled__field' => $field->isDisabled(),"relative flex-1"])
     x-cloak
     x-data="SelectFormComponent(
      {

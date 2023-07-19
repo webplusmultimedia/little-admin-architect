@@ -19,6 +19,13 @@ trait HasContent
         return $this;
     }
 
+    public function maxWidthMedium(): static
+    {
+        $this->maxWidth = 'modal__medium';
+
+        return $this;
+    }
+
     public function getMaxWidth(): string
     {
         return $this->maxWidth;

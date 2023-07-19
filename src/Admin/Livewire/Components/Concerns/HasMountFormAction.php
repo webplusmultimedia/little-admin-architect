@@ -10,57 +10,58 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\FormDialog;
 
 trait HasMountFormAction
 {
-    public ?string $mountFormAction = null;
+    public ?string $mountFormActionComponent = null;
 
     public array $mountFormActionData = [];
 
-    public mixed $mountFormActionRecord = null;
+    public mixed $mountFormAction = null;
 
-    public function mountFormAction(string $method, mixed $key): void
+    protected string $suffixEventForm = '-action-form';
+
+    public function mountFormAction(string $component, string $actionName): void
     {
-        $id = $this->id . '-action-form';
-        $action = $this->form->getActionFormByName($method);
+        $id = $this->id . $this->suffixEventForm;
+        $action = $this->form->getActionFormByName($component);
         if ( ! $action) {
             throw new Exception('Aucune action trouvée');
         }
-        $record = $this->getRecordForMount($key);
-        if ($action->isRequireConfirmation()) {
-            $this->mountFormAction = $method;
-            $this->mountFormActionRecord = $key;
-            $action->record($record);
-            $this->form->getActionModal()->content(
-                FormDialog::make(
-                    title: $this->getTitleForModal($key),
-                    subtitle: $action->getConfirmQuestion(),
-                    actionLabel: $action->getLabel() ?? $action->getName(),
-                    record: $record
-                )
-            )->maxWidthSmall();
-            $this->dispatchBrowserEvent('show-modal', ['id' => $id]);
-        } else {
+        $action->livewire($this);
+        $action->authorizeAccess();
 
-            if ($action->getAction()) {
-                app()->call($action->getAction(), ['record' => $record, 'livewire' => $this]);
-            }
-            $this->notification()->success($action->getNotificationText())->send();
-        }
+        $this->mountFormActionComponent = $component;
+        $this->mountFormAction = $actionName;
+        $this->form->getActionModal()->content(
+            FormDialog::make(
+                title: $action->getTitleForModal(),
+                subtitle: 'fff',
+                actionLabel: $action->getTitleForModal(),
+                fields: $action->getFields()
+            )
+        )->maxWidthMedium();
+        $this->dispatchBrowserEvent('show-modal', ['id' => $id]);
+
     }
 
     public function CallMountFormAction(): void
     {
-        $action = $this->form->getActionByName($this->mountFormAction);
+        $action = $this->form->getActionFormByName($this->mountFormActionComponent);
         if ( ! $action) {
             throw new Exception('Aucune action trouvée');
         }
-        if ($action->isRequireConfirmation()) {
-            $record = $this->getRecordForMount($this->mountFormActionRecord);
-            if ($action->getAction()) {
-                app()->call($action->getAction(), ['record' => $record, 'livewire' => $this]);
-            }
-            $id = $this->id . '-action-form';
-            $this->notification()->success($action->getNotificationText())->send();
-            $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
-        }
+        $id = $this->id . $this->suffixEventForm;
+        $action->livewire($this);
+        $action->authorizeAccess();
+        // $this->notification()->success($action->getNotificationText())->send();
+        $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
+        /* if ($action->isRequireConfirmation()) {
+             $record = $this->getRecordForMount($this->mountFormAction);
+             if ($action->getAction()) {
+                 app()->call($action->getAction(), ['record' => $record, 'livewire' => $this]);
+             }
+             $id = $this->id . '-action-form';
+             $this->notification()->success($action->getNotificationText())->send();
+             $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
+         }*/
 
     }
 
@@ -74,13 +75,5 @@ trait HasMountFormAction
         }
 
         return $record;
-    }
-
-    private function getTitleForModal(mixed $key): mixed
-    {
-        $record = $this->getRecordForMount($key);
-        $field = $this->form->getResourcePage()::getRecordTitleAttribute();
-
-        return $record->{$field};
     }
 }

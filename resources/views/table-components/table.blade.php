@@ -16,9 +16,11 @@
                 <span>{{ $table->title }}</span> <span>/</span> <span class="text-gray-400">Liste</span>
             </p>
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center gap-2">
             @foreach($table->getHeaderActions() as $headerAction)
-                {{ $headerAction }}
+                @if($headerAction->authorize())
+                    {{ $headerAction }}
+                @endif
             @endforeach
         </div>
     </div>
@@ -54,7 +56,9 @@
                                 <td class="max-w-max whitespace-nowrap">
                                     <div class="w-full inline-flex gap-2 items-center justify-end">
                                         @foreach($table->getRowActions($record) as $action)
-                                            {{ $action }}
+                                            @if($action->authorize())
+                                                {{ $action }}
+                                            @endif
                                         @endforeach
                                     </div>
                                 </td>

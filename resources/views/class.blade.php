@@ -69,6 +69,7 @@ btn-rounded
 btn-small
 modal__small
 modal__large
+modal__medium
 "
 
 ></div>

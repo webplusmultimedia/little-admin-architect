@@ -21,9 +21,11 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractsWit
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasGridColumns;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasSchema;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
+use Webplusmultimedia\LittleAdminArchitect\Support\Form\Concerns\CanAuthorizeAccess;
 
 abstract class BaseForm
 {
+    use CanAuthorizeAccess;
     use CanGetRules;
     use CanInitDatasForm;
     use CanListOptionsForSelect;

@@ -41,6 +41,13 @@ trait HasCssClass
         return $this;
     }
 
+    public function info(): static
+    {
+        $this->color = 'info ';
+
+        return $this;
+    }
+
     public function danger(): static
     {
         $this->color = 'danger ';

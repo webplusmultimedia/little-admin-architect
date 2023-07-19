@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages;
 
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources;
@@ -14,9 +13,11 @@ class ListRecord extends Page
 {
     protected static ?string $routeName = 'list';
 
+    protected static string $pageId;
+
     public function mount(): void
     {
-
+        static::$pageId = $this->id;
         /*$this->authorizeAccess();
 
         $this->fillForm();
@@ -38,7 +39,7 @@ class ListRecord extends Page
         return [
             'component' => static::getComponent(),
             'pageRoute' => static::getComponent(),
-            'id' => Str::random(10),
+            'id' => static::$pageId,
         ];
     }
 

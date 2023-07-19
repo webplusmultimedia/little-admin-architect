@@ -1,30 +1,31 @@
 
 export function ModalFormComponent(id = null) {
     return {
-        id : null,
+        id ,
+        eventId : null,
         isOpen : false,
         open(){
-            if (this.id === id) {
+            if (this.eventId === this.id) {
                 this.isOpen = true
             }
         },
         close(){
-            if (this.id === id) {
+            if (this.eventId === this.id) {
                 this.isOpen = false
                 this.$wire.mountFormAction = null
-                this.$wire.mountFormActionRecord = null
-                this.$wire.mountFormActionData = null
+                this.$wire.mountFormActionComponent = null
+                this.$wire.mountFormActionData = []
             }
         },
         init(){
             window.addEventListener('show-modal',(ev)=>{
-                this.id = ev.detail.id
+                this.eventId = ev.detail.id
                 this.open()
 
             })
 
             window.addEventListener('close-modal',(ev)=>{
-                this.id = ev.detail.id
+                this.eventId = ev.detail.id
                 this.close()
                 console.log(ev.detail)
             })

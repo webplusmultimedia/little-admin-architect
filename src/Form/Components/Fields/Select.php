@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanSearchWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasBelongToRelation;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasFormAction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasOptions;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\Select\ContainMessageForComponent;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\Select\hasDynamicDatas;
@@ -20,6 +21,7 @@ class Select extends Field
     use ContainMessageForComponent;
     use HasBelongToRelation;
     use hasDynamicDatas;
+    use HasFormAction;
     use HasOptions;
     use SelectHasDefaultLabel;
 
@@ -36,6 +38,13 @@ class Select extends Field
             if (BelongsToMany::class === $this->getRelationType()) {
                 $this->isMultiple = true;
                 $this->searchable = true;
+            }
+
+            if ($this->hasFormAction()) {
+                $model = new ($this->getInstanceRelationship()->getModel())();
+                $this->formAction
+                    ->record($model)
+                    ->setUp($this->getStatePath());
             }
 
             if ( ! $this->isMultiple()) {

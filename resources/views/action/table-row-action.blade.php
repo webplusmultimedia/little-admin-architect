@@ -26,7 +26,5 @@
                 <x-dynamic-component :component="$action->getIcon()" class="w-4 h-4"  aria-hidden="true"/>
             @endif
         </button>
-
-
     @endif
 </div>

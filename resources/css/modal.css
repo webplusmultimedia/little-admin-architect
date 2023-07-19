@@ -1,22 +1,29 @@
-@layer components{
-    .modal__overlay{
+@layer components {
+    .modal__overlay {
         @apply fixed inset-0 bg-slate-900/50 backdrop-blur-sm h-full md:h-screen w-full  pt-10 md:pt-0 z-10
     }
 
-    .modal{
+    .modal {
         @apply mx-auto bg-white md:rounded-lg md:shadow-lg max-h-fit overflow-hidden
     }
 
-    .modal__body{
+    .modal__body {
         @apply px-3 py-2 md:px-5 md:py-5 overflow-y-auto  w-full
     }
-    .modal__head{
+
+    .modal__head {
         @apply bg-gray-50 flex justify-between items-center border-b border-gray-200 self-start w-full py-4 px-6;
     }
-    .modal__large{
-        @apply   mx-2 md:mx-0 container p-0
+
+    .modal__large {
+        @apply mx-2 md:mx-0 container p-0
     }
-    .modal__small{
+
+    .modal__small {
         @apply w-full mx-2 md:mx-0 md:max-w-md lg:max-w-lg
+    }
+
+    .modal__medium {
+        @apply w-full mx-2 md:mx-0 md:max-w-md lg:max-w-2xl
     }
 }

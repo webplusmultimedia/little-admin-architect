@@ -64,6 +64,7 @@ class BaseTable extends Component implements HasTable
 
     public function updatingTableFilters(): void
     {
+        //dd('reset');
         $this->resetPage();
     }
 
@@ -75,8 +76,8 @@ class BaseTable extends Component implements HasTable
     public function mount(string $pageRoute, array $mounts = null): void
     {
         $this->pageRoute = $pageRoute;
+        $this->table->authorizeAccess();
         $this->initBoot = false;
-        //$this->table->setDefaultToFilters();
     }
 
     public function paginationView(): string

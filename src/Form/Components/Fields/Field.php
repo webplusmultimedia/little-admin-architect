@@ -79,9 +79,9 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
 
     protected mixed $oldValue = null;
 
-    public bool $hasFormAction = false;
-
     protected ?Form $form = null;
+
+    public bool $hasFormAction = false;
 
     final public function __construct(
         string $name,

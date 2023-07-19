@@ -23,11 +23,14 @@ trait HasMountTableAction
         if ( ! $action) {
             throw new Exception('Aucune action trouvée');
         }
+        $action->livewire($this);
         $record = $this->getRecordForMount($key);
+
         if ($action->isRequireConfirmation()) {
             $this->mountTableAction = $method;
             $this->mountTableActionRecord = $key;
             $action->record($record);
+            $action->authorizeAccess();
             $this->table->getActionModal()->content(
                 ConfirmationDialog::make(
                     title: $this->getTitleForModal($record),

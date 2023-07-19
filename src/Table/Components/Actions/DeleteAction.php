@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions;
 
 use Illuminate\Database\Eloquent\Model;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseTable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\BaseRowAction;
 
 class DeleteAction extends BaseRowAction
@@ -23,6 +24,15 @@ class DeleteAction extends BaseRowAction
             ->requireConfirmation()
             ->confirmQuestion(trans('little-admin-architect::form.confirm_dialog.question'))
             ->icon('heroicon-s-x-mark');
+    }
+
+    public function authorize(): bool
+    {
+        if ($this->livewire && $this->livewire instanceof BaseTable) {
+            return $this->livewire->table->getResourcePage()::canDelete($this->record);
+        }
+
+        return true;
     }
 
     public static function make(): DeleteAction

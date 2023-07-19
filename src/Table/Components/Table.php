@@ -9,6 +9,7 @@ use Illuminate\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseTable;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithPage;
+use Webplusmultimedia\LittleAdminArchitect\Support\Form\Concerns\CanAuthorizeAccess;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasActionModal;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasColumns;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasFilters;
@@ -24,6 +25,7 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Header;
 
 final class Table implements Htmlable
 {
+    use CanAuthorizeAccess;
     use HasActionModal;
     use HasColumns;
     use HasFilters;
@@ -103,6 +105,12 @@ final class Table implements Htmlable
     public function getTableTitle(): string
     {
         return $this->TableTitle;
+    }
+
+    public function authorizeAccess(): void
+    {
+        abort_unless($this->getResourcePage()::canViewAny(), 403);
+
     }
 
     protected function render(): View

@@ -6,7 +6,6 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Select;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Filters\BaseFilter;
 
 trait HasFilters
@@ -59,10 +58,6 @@ trait HasFilters
             /** @var Field $field */
             foreach ($filter->getFormFields() as $field) {
                 $field->applyDefaultValue();
-                /*if ($field instanceof Select) {
-                    $field->setDynamicOption();
-                    $field->setState([]);
-                }*/
             }
         }
     }

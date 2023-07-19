@@ -1398,6 +1398,23 @@ label {
     max-width: 32rem;
   }
 }
+.modal__medium {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .modal__medium {
+    margin-left: 0px;
+    margin-right: 0px;
+    max-width: 28rem;
+  }
+}
+@media (min-width: 1024px) {
+  .modal__medium {
+    max-width: 42rem;
+  }
+}
 .wrapper-web-notification {
   position: fixed;
   top: 1.5rem;
@@ -1615,6 +1632,9 @@ label {
 .pointer-events-auto {
   pointer-events: auto;
 }
+.collapse {
+  visibility: collapse;
+}
 .static {
   position: static;
 }
@@ -1690,6 +1710,9 @@ label {
 .z-\[2\] {
   z-index: 2;
 }
+.col-span-full {
+  grid-column: 1 / -1;
+}
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
@@ -1725,9 +1748,6 @@ label {
 }
 .col-span-9 {
   grid-column: span 9 / span 9;
-}
-.col-span-full {
-  grid-column: 1 / -1;
 }
 .\!m-0 {
   margin: 0px !important;
@@ -1806,6 +1826,9 @@ label {
 }
 .grid {
   display: grid;
+}
+.contents {
+  display: contents;
 }
 .hidden {
   display: none;
@@ -2182,6 +2205,14 @@ label {
 .border-none {
   border-style: none;
 }
+.\!border-error-400 {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(251 113 133 / var(--tw-border-opacity)) !important;
+}
+.\!border-success-400 {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(52 211 153 / var(--tw-border-opacity)) !important;
+}
 .border-error-200 {
   --tw-border-opacity: 1;
   border-color: rgb(254 205 211 / var(--tw-border-opacity));
@@ -2530,10 +2561,6 @@ label {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
-.text-info {
-  --tw-text-opacity: 1;
-  color: rgb(0 147 153 / var(--tw-text-opacity));
-}
 .text-primary-400 {
   --tw-text-opacity: 1;
   color: rgb(167 139 250 / var(--tw-text-opacity));
@@ -2570,10 +2597,6 @@ label {
   --tw-text-opacity: 1;
   color: rgb(51 65 85 / var(--tw-text-opacity));
 }
-.text-success {
-  --tw-text-opacity: 1;
-  color: rgb(2 130 72 / var(--tw-text-opacity));
-}
 .text-warning-400 {
   --tw-text-opacity: 1;
   color: rgb(250 204 21 / var(--tw-text-opacity));
@@ -2581,6 +2604,14 @@ label {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.text-info {
+  --tw-text-opacity: 1;
+  color: rgb(0 147 153 / var(--tw-text-opacity));
+}
+.text-success {
+  --tw-text-opacity: 1;
+  color: rgb(2 130 72 / var(--tw-text-opacity));
 }
 .underline {
   text-decoration-line: underline;
@@ -2621,10 +2652,17 @@ label {
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.outline {
+  outline-style: solid;
+}
 .ring-2 {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.ring-error-400 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(251 113 133 / var(--tw-ring-opacity));
 }
 .ring-primary-300 {
   --tw-ring-opacity: 1;
@@ -2641,6 +2679,10 @@ label {
 .ring-primary-datepicker-400 {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(250 204 21 / var(--tw-ring-opacity));
+}
+.ring-success-400 {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(52 211 153 / var(--tw-ring-opacity));
 }
 .ring-offset-2 {
   --tw-ring-offset-width: 2px;
@@ -3081,6 +3123,12 @@ label {
   .lg\:col-span-1 {
     grid-column: span 1 / span 1;
   }
+  .lg\:col-span-6 {
+    grid-column: span 6 / span 6;
+  }
+  .lg\:col-span-full {
+    grid-column: 1 / -1;
+  }
   .lg\:col-span-10 {
     grid-column: span 10 / span 10;
   }
@@ -3102,9 +3150,6 @@ label {
   .lg\:col-span-5 {
     grid-column: span 5 / span 5;
   }
-  .lg\:col-span-6 {
-    grid-column: span 6 / span 6;
-  }
   .lg\:col-span-7 {
     grid-column: span 7 / span 7;
   }
@@ -3113,9 +3158,6 @@ label {
   }
   .lg\:col-span-9 {
     grid-column: span 9 / span 9;
-  }
-  .lg\:col-span-full {
-    grid-column: 1 / -1;
   }
   .lg\:grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));

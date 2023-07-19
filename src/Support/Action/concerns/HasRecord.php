@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 trait HasRecord
 {
-    protected Model $record;
+    protected ?Model $record = null;
 
     public function record(Model $record): static
     {
@@ -17,7 +17,7 @@ trait HasRecord
         return $this;
     }
 
-    public function getRecord(): Model
+    public function getRecord(): ?Model
     {
         return $this->record;
     }

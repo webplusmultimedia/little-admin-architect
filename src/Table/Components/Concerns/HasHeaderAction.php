@@ -20,6 +20,7 @@ trait HasHeaderAction
     public function headerActions(array $headerActions): static
     {
         foreach ($headerActions as $headerAction) {
+            $headerAction->livewire($this->livewire);
             if ($headerAction instanceof CreateAction) {
                 if ( ! $headerAction->hasLabel()) {
                     $headerAction->label(

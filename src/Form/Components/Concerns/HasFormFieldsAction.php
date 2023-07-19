@@ -9,15 +9,26 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Select;
 
 trait HasFormFieldsAction
 {
-    /** @var array<string,FormCreateAction> */
+    /** @var FormCreateAction[] */
     protected array $formActions = [];
 
-    protected function getFormsAction(): void
+    protected function setFormActions(): void
     {
         foreach ($this->getFormFields() as $field) {
-            if ($field instanceof Select and $field->hasFormAction) {
-
+            if ($field instanceof Select and $field->hasFormAction()) {
+                $this->formActions[$field->getStatePath()] = $field->getFormAction();
             }
         }
+    }
+
+    public function getActionFormByName(string $fieldPath): ?FormCreateAction
+    {
+        foreach ($this->formActions as $name => $action) {
+            if ($name === $fieldPath) {
+                return $action;
+            }
+        }
+
+        return null;
     }
 }
