@@ -203,7 +203,7 @@ class Resource
         return static::$shouldAuthorizeWithGate;
     }
 
-    public static function can(string $action, ?Model $record = null): bool
+    public static function can(string $action, Model $record = null): bool
     {
         $user = LittleAdminManager::auth()->user();
         $model = static::getModel();
@@ -288,10 +288,10 @@ class Resource
         return static::can('restoreAny');
     }
 
-   /* public static function canGloballySearch(): bool
-    {
-        return static::$isGloballySearchable && count(static::getGloballySearchableAttributes()) && static::canViewAny();
-    }*/
+    /* public static function canGloballySearch(): bool
+     {
+         return static::$isGloballySearchable && count(static::getGloballySearchableAttributes()) && static::canViewAny();
+     }*/
 
     public static function canView(Model $record): bool
     {
