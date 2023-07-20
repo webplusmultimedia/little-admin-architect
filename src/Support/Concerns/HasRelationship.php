@@ -70,7 +70,7 @@ trait HasRelationship
         }
     }
 
-    protected function getLabelField(): string
+    public function getLabelField(): string
     {
         return $this->labelField;
     }

@@ -47,10 +47,11 @@ class FormCreateAction extends FormAction
                     if ($field && $field instanceof Select) {
                         if (is_array($field->getState())) {
                             $field->setState([...$field->getState(), $record->getKey()]);
+                            $livewire->dispatchBrowserEvent($field->eventToGetLabel(), $field->getAllLabelsForValues());
                         } else {
                             $field->setState($record->getKey());
+                            $livewire->dispatchBrowserEvent($field->eventToGetLabel(), $record->{$field->getLabelField()});
                         }
-                        $livewire->dispatchBrowserEvent($field->eventToGetLabel(), $field->getAllLabelsForValues());
                     }
 
                 }

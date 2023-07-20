@@ -42,6 +42,7 @@ class Select extends Field
 
             if ($this->hasFormAction()) {
                 $model = new ($this->getInstanceRelationship()->getModel())();
+
                 $this->formAction
                     ->record($model)
                     ->setUp($this->getStatePath());

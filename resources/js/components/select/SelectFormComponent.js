@@ -178,14 +178,16 @@ export function SelectFormComponent({
                 if (this.isMultiple) {
                     this.defaultMultipleLabel = ev.detail
                     this.defaultLabel = TagsBuilder(this.defaultMultipleLabel)
-
                     if (this.isDynamicOptions) {
                         this.dynamicOptions = this.state
                     }
                 } else {
                     this.defaultValue = this.state
                     this.defaultLabel = ev.detail
-                    this.selectOptionFrom({label: this.defaultLabel, value: this.defaultValue})
+                    let item = {label: this.defaultLabel, value: this.defaultValue}
+                    this.selectOptionFrom(item)
+                    this.options.push(item)
+                    this.$refs.list_options.innerHTML = OptionsBuilder(this.options)
                 }
             })
 
