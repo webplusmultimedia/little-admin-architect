@@ -15,6 +15,7 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Modal\LittleAdminModal
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Table;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
 use Webplusmultimedia\LittleAdminArchitect\Commands\MakeResourceCommand;
+use Webplusmultimedia\LittleAdminArchitect\Http\Middleware\Authenticate;
 use Webplusmultimedia\LittleAdminArchitect\Support\Components\Livewire\Notification;
 
 class LittleAdminArchitectServiceProvider extends PackageServiceProvider
@@ -56,6 +57,9 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     {
         $this->registerLivewireComponents();
         Form::mixin(new SelectMixing());
+        Livewire::addPersistentMiddleware([
+            Authenticate::class,
+        ]);
     }
 
     private function registerLivewireComponents(): void

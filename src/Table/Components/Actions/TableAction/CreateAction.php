@@ -22,7 +22,7 @@ class CreateAction extends TableAction
 
     public function __construct()
     {
-        $this->icon('heroicon-o-plus');
+        $this->icon('heroicon-o-plus')->mediumIconSize();
     }
 
     public static function make(): CreateAction

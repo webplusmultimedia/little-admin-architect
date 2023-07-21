@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns;
 
 use Exception;
-use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal\FormDialog;
 
 trait HasMountFormAction
@@ -49,23 +48,11 @@ trait HasMountFormAction
             throw new Exception('Aucune action trouvée');
         }
         $id = $this->id . $this->suffixEventForm;
-        $action->livewire($this);
+        //$action->livewire($this);
         $action->authorizeAccess();
         $action->handleAction();
         $this->notification()->success($action->getNotificationText())->send();
         $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
 
-    }
-
-    private function getRecordForMount(mixed $key): Model
-    {
-
-        $model = $this->form->getResourcePage()::getEloquentQuery()->getModel();
-
-        if ( ! $record = $model->where($model->getKeyName(), $key)->first()) {
-            throw new Exception('Aucune donnée disponible');
-        }
-
-        return $record;
     }
 }

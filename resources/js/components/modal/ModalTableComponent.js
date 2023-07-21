@@ -11,11 +11,6 @@ export function ModalTableComponent(id = null) {
         close(){
             if (this.id === id) {
                 this.isOpen = false
-                setTimeout(()=>{
-                    this.$wire.mountTableAction = null
-                    this.$wire.mountTableActionRecord = null
-                },300)
-
             }
         },
         init(){
@@ -28,7 +23,6 @@ export function ModalTableComponent(id = null) {
             window.addEventListener('close-modal',(ev)=>{
                 this.id = ev.detail.id
                 this.close()
-                console.log(ev.detail)
             })
         }
     }

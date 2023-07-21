@@ -25,12 +25,12 @@ trait HasMountTableAction
         }
         $action->livewire($this);
         $record = $this->getRecordForMount($key);
-
+        $action->record($record);
+        $action->authorizeAccess();
         if ($action->isRequireConfirmation()) {
             $this->mountTableAction = $method;
             $this->mountTableActionRecord = $key;
-            $action->record($record);
-            $action->authorizeAccess();
+
             $this->table->getActionModal()->content(
                 ConfirmationDialog::make(
                     title: $this->getTitleForModal($record),
@@ -41,9 +41,7 @@ trait HasMountTableAction
             )->maxWidthSmall();
             $this->dispatchBrowserEvent('show-modal', ['id' => $id]);
         } else {
-            if ($action->getAction()) {
-                app()->call($action->getAction(), ['record' => $record, 'livewire' => $this]);
-            }
+            $action->handleAction();
             $this->notification()->success($action->getNotificationText())->send();
         }
     }
@@ -51,18 +49,23 @@ trait HasMountTableAction
     public function CallMountTableAction(): void
     {
         $action = $this->table->getActionByName($this->mountTableAction);
+        $id = $this->id . '-action-table';
         if ( ! $action) {
             throw new Exception('Aucune action trouvée');
         }
+
         if ($action->isRequireConfirmation()) {
             $record = $this->getRecordForMount($this->mountTableActionRecord);
-            if ($action->getAction()) {
-                app()->call($action->getAction(), ['record' => $record, 'livewire' => $this]);
-            }
-            $id = $this->id . '-action-table';
+            $action->record($record);
+            $action->livewire($this);
+            $action->authorizeAccess();
+            $action->handleAction();
             $this->notification()->success($action->getNotificationText())->send();
             $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
         }
+        $this->mountTableActionRecord = null;
+        $this->mountTableAction = null;
+        $this->mountTableActionData = [];
 
     }
 

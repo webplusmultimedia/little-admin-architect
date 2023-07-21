@@ -19,11 +19,11 @@ trait CanAuthorizeAccess
 
     public function authorizeAccess(): void
     {
-        abort_unless($this->evaluate($this->authorize, include : ['record' => $this->record]), 403);
+        abort_unless($this->authorize(), 403);
     }
 
     public function authorize(): bool
     {
-        return $this->evaluate($this->authorize, include : ['record' => $this->record]);
+        return $this->evaluate($this->authorize);
     }
 }

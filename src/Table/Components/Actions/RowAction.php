@@ -18,7 +18,7 @@ class RowAction extends BaseRowAction
 
     public function authorize(): bool
     {
-        return $this->evaluate($this->authorize, include : ['record' => $this->record]);
+        return $this->evaluate($this->authorize);
     }
 
     public static function make(string $name): RowAction

@@ -26,7 +26,7 @@ function ModalComponent({name}) {
                     setTimeout(() => {
                         this.activeComponent = id;
                         this.showActiveComponent = true;
-                    }, 300);
+                    }, 100);
                 }
             }
         },

@@ -16,6 +16,7 @@ trait InteractWithLivewire
             if ($this->livewire instanceof BaseForm) {
                 /** @TODO : Validate with laravel Validation */
                 $datas = $this->livewire->validate(rules: $this->getRulesBeforeValidate(), attributes: $this->getAttributesRules());
+                $this->form->authorizeAccess();
                 if ( ! $this->livewire->data?->exists) {
                     $datas = $this->pageForResource::getMutateFormDataBeforeCreate($this->values($datas));
                     $this->livewire->data?->fill($datas)->save();

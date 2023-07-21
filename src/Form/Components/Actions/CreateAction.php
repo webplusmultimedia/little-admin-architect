@@ -10,6 +10,8 @@ class CreateAction extends Contrats\FormAction
 
     public static function make(): CreateAction
     {
-        return (new self())->icon('heroicon-o-plus');
+        return (new self())
+            ->mediumIconSize()
+            ->icon('heroicon-o-plus');
     }
 }

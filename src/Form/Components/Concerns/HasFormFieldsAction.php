@@ -15,8 +15,9 @@ trait HasFormFieldsAction
     protected function setFormActions(): void
     {
         foreach ($this->getFormFields() as $field) {
-            if ($field instanceof Select and $field->hasFormAction()) {
-                $this->formActions[$field->getStatePath()] = $field->getFormAction();
+            if ($field instanceof Select and $field->hasFormAction() and $action = $field->getFormAction()) {
+                $action->livewire(livewire: $this->livewire);
+                $this->formActions[$field->getStatePath()] = $action;
             }
         }
     }

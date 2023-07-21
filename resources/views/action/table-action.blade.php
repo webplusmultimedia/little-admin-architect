@@ -5,13 +5,13 @@
             target="{{$action->getTargetLink()}}"
         >
             @if($action->getIconPosition()==='before' and $action->getIcon())
-                <x-icon :name="$action->getIcon()" :class="$action->getIconSize()" aria-hidden="true"/>
+                <x-dynamic-component :component="$action->getIcon()" :class="$action->getIconSize()" aria-hidden="true"/>
             @endif
             @if($action->getLabel())
                 <span>{{ $action->getLabel() }}</span>
             @endif
             @if($action->getIconPosition()==='after' and $action->getIcon())
-                <x-icon :name="$action->getIcon()" :class="$action->getIconSize()" aria-hidden="true"/>
+                    <x-dynamic-component :component="$action->getIcon()" :class="$action->getIconSize()" aria-hidden="true"/>
             @endif
         </a>
 
@@ -23,13 +23,13 @@
             wire:loading.attr="disabled" wire:target="{{  $action->getWireClickAction() }}"
         >
             @if($action->getIconPosition()==='before' and $action->getIcon())
-                <x-icon :name="$action->getIcon()" :class="$action->getIconSize()" aria-hidden="true"/>
+                <x-dynamic-component :component="$action->getIcon()" :class="$action->getIconSize()" aria-hidden="true"/>
             @endif
             @if($action->getLabel())
                 <span>{{ $action->getLabel() }}</span>
             @endif
             @if($action->getIconPosition()==='after' and $action->getIcon())
-                <x-icon :name="$action->getIcon()" :class="$action->getIconSize()" aria-hidden="true"/>
+                    <x-dynamic-component :component="$action->getIcon()" :class="$action->getIconSize()" aria-hidden="true"/>
             @endif
         </button>
     @endif

@@ -34,6 +34,7 @@ class FormCreateAction extends FormAction
         $this->roundedFull()
             ->bgTransparent()
             ->icon('heroicon-o-plus')
+            ->mediumIconSize()
             ->classesStyle('bg-primary-100 hover:bg-primary-200')
             ->action(function (?Model $record, BaseForm $livewire, array $rules, array $attributes, string $status): void {
 

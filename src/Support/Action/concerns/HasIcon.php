@@ -51,7 +51,7 @@ trait HasIcon
 
     public function mediumIconSize(): static
     {
-        $this->iconSize = 'w-6 h-6';
+        $this->iconSize = 'w-7 h-7';
 
         return $this;
     }
