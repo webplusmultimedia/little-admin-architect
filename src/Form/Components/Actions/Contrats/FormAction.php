@@ -63,7 +63,7 @@ abstract class FormAction extends Action
             return $this->getLabel();
         }
 
-        if ($this->record) {
+        if ($this->record and $this->record instanceof Model) {
             $name = str(get_class($this->record))
                 ->afterLast('\\')
                 ->singular()
@@ -75,10 +75,12 @@ abstract class FormAction extends Action
         return null;
     }
 
-    public function record(Model $record): static
+    public function record(array|Model $record): static
     {
         $this->record = $record;
-        $this->fill($this->record);
+        if ($this->record instanceof Model) {
+            $this->fill($this->record);
+        }
 
         return $this;
     }

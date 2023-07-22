@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 
 trait HasRecord
 {
-    protected ?Model $record = null;
+    protected array|Model|null $record = null;
 
-    public function record(Model $record): static
+    public function record(array|Model $record): static
     {
         $this->record = $record;
 
         return $this;
     }
 
-    public function getRecord(): ?Model
+    public function getRecord(): array|Model|null
     {
         return $this->record;
     }

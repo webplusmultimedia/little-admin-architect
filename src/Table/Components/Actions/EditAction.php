@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions;
 
+use Illuminate\Database\Eloquent\Model;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseTable;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\BaseRowAction;
 
@@ -23,7 +24,7 @@ class EditAction extends BaseRowAction
 
     public function authorize(): bool
     {
-        if ($this->livewire && $this->livewire instanceof BaseTable) {
+        if ($this->livewire && $this->livewire instanceof BaseTable and $this->record instanceof Model) {
             return $this->livewire->table->getResourcePage()::canEdit($this->record);
         }
 

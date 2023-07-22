@@ -28,7 +28,7 @@ class DeleteAction extends BaseRowAction
 
     public function authorize(): bool
     {
-        if ($this->livewire && $this->livewire instanceof BaseTable) {
+        if ($this->livewire && $this->livewire instanceof BaseTable and $this->record instanceof Model) {
             return $this->livewire->table->getResourcePage()::canDelete($this->record);
         }
 
