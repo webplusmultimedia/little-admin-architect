@@ -10,6 +10,8 @@ trait HasLabel
 {
     protected string|Closure|null $label = null;
 
+    protected bool $showLabel = true;
+
     public function label(string|Closure $label): static
     {
         $this->label = $label;
@@ -19,15 +21,23 @@ trait HasLabel
 
     public function getLabel(): ?string
     {
-        if (is_callable($this->label)) {
-            return call_user_func($this->label, $this->record);
-        }
-
-        return $this->label;
+        return $this->evaluate($this->label);
     }
 
     public function hasLabel(): bool
     {
         return null !== $this->label;
+    }
+
+    public function showLabel(): bool
+    {
+        return $this->hasLabel() and $this->showLabel;
+    }
+
+    public function withoutLabel(): static
+    {
+        $this->showLabel = false;
+
+        return $this;
     }
 }

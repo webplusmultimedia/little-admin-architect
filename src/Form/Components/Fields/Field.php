@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseTable;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Contrats\FormAction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\ValidateValuesForRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanGetAttributesRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\CanInteractWithRules;
@@ -83,6 +84,8 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
 
     public bool $hasFormAction = false;
 
+    protected ?FormAction $formAction = null;
+
     final public function __construct(
         string $name,
         string $label = null,
@@ -123,14 +126,14 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     {
     }
 
-    public function getOldValue(): mixed
+    public function getFormAction(): ?FormAction
     {
-        return $this->oldValue;
+        return $this->formAction;
     }
 
-    public function setOldValue(mixed $value): void
+    public function hasFormAction(): bool
     {
-        $this->oldValue = $value;
+        return null !== $this->formAction;
     }
 
     public function setForm(Form $form): void

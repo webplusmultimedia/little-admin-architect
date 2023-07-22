@@ -61,7 +61,6 @@ final class Form extends BaseFormAlias implements Htmlable
         if (self::CREATED === $this->statusForm) {
             $this->applyDefaultValue();
         }
-        //$this->model($model);
         $this->hydrateState();
 
         $this->setPagesForResource($resource);

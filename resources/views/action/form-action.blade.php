@@ -8,7 +8,7 @@
             @if($action->getIconPosition()==='before' and $action->getIcon())
                 <x-dynamic-component :component="$action->getIcon()" :class="$action->getIconSize()" aria-hidden="true"/>
             @endif
-            @if($action->getLabel())
+            @if($action->showLabel())
                 <span>{{ $action->getLabel() }}</span>
             @endif
             @if($action->getIconPosition()==='after' and $action->getIcon())
@@ -25,7 +25,7 @@
             @if($action->getIconPosition()==='before' and $action->getIcon())
                 <x-dynamic-component :component="$action->getIcon()" :class="$action->getIconSize()" aria-hidden="true"/>
             @endif
-            @if($action->getLabel())
+            @if($action->showLabel())
                 <span>{{ $action->getLabel() }}</span>
             @endif
             @if($action->getIconPosition()==='after' and $action->getIcon())

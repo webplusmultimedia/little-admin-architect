@@ -17,7 +17,7 @@ trait HasMountFormAction
 
     protected string $suffixEventForm = '-action-form';
 
-    public function mountFormAction(string $component, string $actionName): void
+    public function mountFormAction(string $component, mixed $actionName): void
     {
         $id = $this->id . $this->suffixEventForm;
         $action = $this->form->getActionFormByName($component);
