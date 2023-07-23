@@ -13,6 +13,8 @@ abstract class FormAction extends Action
 {
     protected string $livewireData = 'mountFormActionData';
 
+    protected string $livewireFormKey = 'mountFormAction';
+
     /** @var Field[] */
     protected array $fields;
 
@@ -21,6 +23,11 @@ abstract class FormAction extends Action
     public function setUp(string $fieldPath): void
     {
         $this->wireClick("mountFormAction('{$fieldPath}','CreateOption')");
+    }
+
+    public function beforeFill(): void
+    {
+
     }
 
     protected function getLivewireData(string $name): mixed
@@ -41,14 +48,18 @@ abstract class FormAction extends Action
         return $this;
     }
 
-    public function fill(Model $model): void
+    public function fill(array|Model $model): void
     {
-        foreach ($this->fields as $field) {
-            $model->{$field->getName()} = $this->getLivewireData($field->getName());
-            $field->record($model);
-            $field->setPrefixPath($this->livewireData);
-            $field->statusForm($this->statusForm);
-            $field->hydrateState();
+        if ($model instanceof Model) {
+            foreach ($this->fields as $field) {
+                $model->{$field->getName()} = $this->getLivewireData($field->getName());
+                $field->record($model);
+                $field->setPrefixPath($this->livewireData);
+                $field->statusForm($this->statusForm);
+                $field->hydrateState();
+            }
+
+            return;
         }
     }
 
@@ -90,7 +101,7 @@ abstract class FormAction extends Action
         $this->evaluate(closure: $this->action, include: ['rules' => $this->getRulesFields(), 'attributes' => $this->attributesFields(), 'status' => $this->statusForm]);
     }
 
-    private function getRulesFields(): array
+    protected function getRulesFields(): array
     {
         $rules = [];
         foreach ($this->fields as $field) {
@@ -100,7 +111,7 @@ abstract class FormAction extends Action
         return $rules;
     }
 
-    private function attributesFields(): array
+    protected function attributesFields(): array
     {
         $attributesRules = [];
         foreach ($this->fields as $field) {

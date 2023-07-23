@@ -11,16 +11,26 @@ import {gallery} from "./support/gallery";
  * @param {null|int} maxFiles
  * @param {Array} acceptedFileTypes
  * @param {boolean} multiple
+ * @param {boolean} enableCustomProperties
  * @returns {{dropZone: {"@drop.prevent.stop"(): void, "@dragleave.prevent.stop"(): boolean, "@dragenter.prevent.stop"(): void}, init(): void, saveFileUsing(File[]), progress: number, state, overZone: {"@dragover.prevent.stop"(): void, "@dragleave.prevent.stop"(): boolean, "@dragenter.prevent.stop"(): void}, isProvidedMimeType(File): boolean, uploadUsing(*, *, *, *): void}|*|boolean}
  */
-export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, acceptedFileTypes, multiple}) {
+export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, acceptedFileTypes, multiple,enableCustomProperties}) {
 
     return {
         progress: 0,
         state,
         path,
+        maxFiles,
+        isMultiple: multiple,
         startUpload: false,
-        stopDragging : false,
+        stopDragging: false,
+        enableCustomProperties,
+        mountFormAction(id){
+          this.$wire.call('mountFormAction',`${this.path}`,id)
+        },
+        isEnableCustomProperties(){
+            return this.enableCustomProperties
+        },
         photos: [],
         async uploadUsing(fileKey, file) {
             let newFile = this.getNewFile(file)
@@ -31,7 +41,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
 
             await this.$wire.upload(`${this.path}`, file, (uploadedFilename) => {
                     Success('file ok : ' + uploadedFilename)
-                    this.finishUploadUsing(newFile,uploadedFilename)
+                    this.finishUploadUsing(newFile, uploadedFilename)
 
                     this.startUpload = false
                     this.reloadOnSave = true
@@ -96,9 +106,12 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         reloadOnSave: false,
         /** @param {File[]} files */
         async saveFileUsing(files) {
+            if (!this.canUploadAll(files.length)) {
+                Warning(`Le nombre limite de fichier (${this.maxFiles}) a été atteint.<br>Il ne vous reste que ${(this.maxFiles - this.photos.length)} fichier(s) à télécharger.`)
+                return
+            }
             for (const file of Array.from(files)) {
-
-                if (!this.isFileSize(file) && !this.isProvidedMimeType(file)) {
+                if (!this.isFileSize(file) || !this.isProvidedMimeType(file) || !this.canUpload()) {
                     setTimeout(() => {
                         Warning(`Le fichier ${file.name} ne peut être téléversé`)
                     }, 2)
@@ -108,12 +121,18 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                 await this.uploadUsing(uuid(), file);
             }
         },
+        canUploadAll(fileCount) {
+            if (this.isMultiple && this.maxFiles) {
+                return (this.photos.length + fileCount) <= this.maxFiles
+            }
+            return true
+        },
         /**
          * @param {File} file
          * @returns {boolean}
          */
         isFileSize(file) {
-            return file.size < maxSize
+            return Math.round(file.size / 1000) < maxSize
         },
         /**
          * @param {File} file
@@ -121,6 +140,18 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
          */
         isProvidedMimeType(file) {
             return acceptedFileTypes.find(type => type === file.type);
+        },
+        canUpload() {
+
+            if (!this.isMultiple) {
+                return this.photos.length < 1
+            }
+
+            if (this.maxFiles) {
+                return this.photos.length < this.maxFiles
+            }
+
+            return true
         },
         async deleteUploadFileUsing(key) {
             let isDelete = await this.$wire.deleteUploadFile(this.path, key)
@@ -150,34 +181,34 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
                 ghostClass: 'opacity-50',
                 animation: 180,
                 onEnd: async (evt) => {
-                    if(evt.oldIndex !== evt.newIndex) {
+                    if (evt.oldIndex !== evt.newIndex) {
                         this.reorderFiles(sort.toArray())
                     }
                 }
             })
 
         },
-        async reorderFiles(newOrder){
+        async reorderFiles(newOrder) {
             if (!this.stopDragging) {
                 this.photos = await this.$wire.reorderUploadFiles(this.path, newOrder)
                 return
             }
             this.$refs.galleryImages.innerHTML = gallery(this.photos, this.path).getGallery()
         },
-        finishUploadUsing(newFile,newName) {
+        finishUploadUsing(newFile, newName) {
             try {
                 /**
                  *
                  * @type {Object}
                  */
                 const endState = Array.from(this.state).pop(),
-                    key =  Object.keys(endState)[0],
-                    name =    endState[key].split('livewire-file:').pop()
-                if(name === newName){
+                    key = Object.keys(endState)[0],
+                    name = endState[key].split('livewire-file:').pop()
+                if (name === newName) {
                     newFile['id'] = key
                 }
 
-                let index = Array.from(this.photos).findIndex((file=> file === newFile))
+                let index = Array.from(this.photos).findIndex((file => file === newFile))
                 newFile.start = false
                 this.photos[index] = newFile
                 this.$refs.galleryImages.innerHTML = gallery(this.photos, this.path).getGallery()

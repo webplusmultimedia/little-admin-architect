@@ -26,15 +26,15 @@
 
         <div class="la-file-upload">
             <div class=""
-                x-data="fileUpload({
+                 x-data="fileUpload({
                     fieldName : @js($field->getStatePath()),
                     minSize : @js($field->getMinSize()),
                     maxSize : @js($field->getMaxSize()),
-                    maxFiles : @js($field->getMaxFiles()),
+                    maxFiles : @js($field->getMaxFile()),
                     acceptedFileTypes : @js($field->getAcceptedFileTypes()),
                     multiple : {{  $field->isMultiple()?'true':'false' }},
+                    enableCustomProperties : {{  $field->hasFormAction()?'true':'false' }},
                     state : $wire.entangle(@js($field->getStatePath())){{ $field->getWireModifier() }},
-
                 })"
                  {{--x-on:livewire-upload-start="Alpine.store('laDatas').startUploadFile = true"
                  x-on:livewire-upload-finish="$store.laDatas.startUploadFile = false"
@@ -43,17 +43,19 @@
                  x-id="['file-input']"
                  wire:ignore
             >
-                <input type="file"  :id="$id('file-input')"
+                <input type="file" :id="$id('file-input')"
                        x-bind="laFileInput"
                        x-ref="laFileInput"
                        class="hidden"
-                    {{ $field->isMultiple()?'multiple':'' }}
-                    {{ $field->isDisabled()?'disabled':'' }}
-                    accept="{{  $field->getAcceptFileTypes() }}"
+                       {{ $field->isMultiple()?'multiple':'' }}
+                       {{ $field->isDisabled()?'disabled':'' }}
+                       accept="{{  $field->getAcceptFileTypes() }}"
                 >
                 <div class="la-dropzone" role="button"
                      x-bind="dropZone"
                      x-ref="dropzone"
+                     x-cloak
+                     x-show="canUpload"
                 >
                     <span class="inline-flex gap-3" x-ref="ladroptitle">
                        <x-heroicon-o-arrow-down-tray class="w-5 h-auto"/> <span>Drag & Drop ou cliquer ICI</span>

@@ -25,6 +25,8 @@ trait HasFormFieldsAction
     {
         foreach ($this->formActions as $name => $action) {
             if ($name === $fieldPath) {
+                $action->beforeFill();
+
                 return $action;
             }
         }

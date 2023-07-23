@@ -10,10 +10,12 @@ use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Str;
 use League\Flysystem\UnableToCheckFileExistence;
 use Livewire\TemporaryUploadedFile;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasCustomProperties;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasFileDirectory;
 
 class FileUpload extends Field
 {
+    use HasCustomProperties;
     use HasFileDirectory;
 
     protected string $view = 'file-upload';
@@ -21,6 +23,7 @@ class FileUpload extends Field
     public function setUp(): void
     {
         $this->setViewDatas('field', $this);
+
         $this->afterStateHydrated(static function (string|array|null $state, FileUpload $component): void {
             if (blank($state)) {
                 $component->state([]);
@@ -48,9 +51,9 @@ class FileUpload extends Field
                             }
                         }
                     )
-                    ->map(static function (string|array $file) {
+                    ->map(static function (string|array $file) use ($component) {
                         if (is_string($file)) {
-                            return ['file' => $file, 'delete' => false, 'id' => Str::uuid()->toString()];
+                            return ['file' => $file, 'delete' => false, 'id' => Str::uuid()->toString(), 'customProperties' => $component->getBlankCustomProperties($file)];
                         }
 
                         return $file;
@@ -59,6 +62,9 @@ class FileUpload extends Field
                     ->all();
 
                 $component->state($files);
+            }
+            if ($component->hasFormAction()) {
+                $component->formAction->record($component->getState());
             }
         });
 
@@ -229,7 +235,12 @@ class FileUpload extends Field
                 return true;
             })->map(function (string|array|TemporaryUploadedFile $file) {
                 if ($file instanceof TemporaryUploadedFile) {
-                    return [(string) Str::uuid() => $file->serializeForLivewireResponse()];
+                    $tmpFile = [(string) Str::uuid() => $file->serializeForLivewireResponse()];
+                    if ($this->hasFormAction()) {
+                        $tmpFile = array_merge($tmpFile, ['customProperties' => $this->getBlankCustomProperties($file)]);
+                    }
+
+                    return $tmpFile;
                 }
 
                 return $file;

@@ -22,9 +22,9 @@ trait HasFileDirectory
 
     protected ?int $minSize = 2048;
 
-    protected ?int $maxSize = null;
+    protected ?int $maxSize = 3052;
 
-    protected int $maxFiles = 1;
+    protected ?int $maxFile = 1;
 
     protected array $acceptedFileTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
 
@@ -103,9 +103,9 @@ trait HasFileDirectory
         return $this->maxSize;
     }
 
-    public function getMaxFiles(): int
+    public function getMaxFile(): ?int
     {
-        return $this->maxFiles;
+        return $this->maxFile;
     }
 
     public function getMinSize(): ?int
@@ -113,30 +113,32 @@ trait HasFileDirectory
         return $this->minSize;
     }
 
-    public function setMinSize(int $minSize): static
+    public function minSize(int $minSize): static
     {
         $this->minSize = $minSize;
 
         return $this;
     }
 
-    public function setMaxSize(int $maxSize): static
+    public function maxSize(int $maxSize): static
     {
         $this->maxSize = $maxSize;
 
         return $this;
     }
 
-    public function setMaxFiles(int $maxFiles): static
+    public function maxFile(int $maxFiles): static
     {
-        $this->maxFiles = $maxFiles;
+        $this->maxFile = $maxFiles;
+        $this->isMultiple = true;
 
         return $this;
     }
 
-    public function setIsMultiple(bool $isMultiple): static
+    public function multiple(bool $isMultiple = true): static
     {
         $this->isMultiple = $isMultiple;
+        $this->maxFile = null;
 
         return $this;
     }
@@ -163,8 +165,8 @@ trait HasFileDirectory
         $this->rules = [];
         $this->addRules('nullable');
         $this->addRules('array');
-        if ($this->isMultiple and $this->maxFiles) {
-            $this->addRules('max:' . $this->maxFiles);
+        if ($this->isMultiple and $this->maxFile) {
+            $this->addRules('max:' . $this->maxFile);
         }
 
         return $this->rules;

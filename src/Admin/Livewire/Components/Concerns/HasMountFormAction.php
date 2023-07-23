@@ -20,6 +20,8 @@ trait HasMountFormAction
     public function mountFormAction(string $component, mixed $actionName): void
     {
         $id = $this->id . $this->suffixEventForm;
+        $this->mountFormActionComponent = $component;
+        $this->mountFormAction = $actionName;
         $action = $this->form->getActionFormByName($component);
         if ( ! $action) {
             throw new Exception('Aucune action trouvée');
@@ -27,8 +29,6 @@ trait HasMountFormAction
         $action->livewire($this);
         $action->authorizeAccess();
 
-        $this->mountFormActionComponent = $component;
-        $this->mountFormAction = $actionName;
         $this->form->getActionModal()->content(
             FormDialog::make(
                 title: $action->getTitleForModal(),
@@ -53,6 +53,7 @@ trait HasMountFormAction
         $action->handleAction();
         $this->notification()->success($action->getNotificationText())->send();
         $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
+        $this->reset(['mountFormActionComponent', 'mountFormAction', 'mountFormActionData']);
 
     }
 }
