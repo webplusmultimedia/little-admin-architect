@@ -2,6 +2,10 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## add custom properties to file upload - 2023-07-23
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.2.0...v0.2.1
+
 ## wip - table filters - 2023-07-13
 
 ### What's Changed
