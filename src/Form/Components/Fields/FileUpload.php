@@ -23,6 +23,9 @@ class FileUpload extends Field
     public function setUp(): void
     {
         $this->setViewDatas('field', $this);
+        if ( ! $this->canEditCustomProperties) {
+            $this->defaultCustomProperties();
+        }
 
         $this->afterStateHydrated(static function (string|array|null $state, FileUpload $component): void {
             if (blank($state)) {
@@ -37,7 +40,7 @@ class FileUpload extends Field
                     ->filter(
                         static function (string|array $file) use ($component): bool {
                             try {
-                                if (is_array($file) and isset($file['file']) and isset($file['delete']) and isset($file['id'])) {
+                                if (is_array($file) and isset($file['file'])) {
                                     return true;
                                 }
 
@@ -52,6 +55,9 @@ class FileUpload extends Field
                         }
                     )
                     ->map(static function (string|array $file) use ($component) {
+                        if (is_array($file) and ! isset($file['delete']) and ! isset($file['id']) and ! isset($file['new'])) {
+                            return array_merge($file, ['file' => $file['file'], 'delete' => false, 'id' => Str::uuid()->toString()]);
+                        }
                         if (is_string($file)) {
                             return ['file' => $file, 'delete' => false, 'id' => Str::uuid()->toString(), 'customProperties' => $component->getBlankCustomProperties($file)];
                         }
@@ -60,7 +66,6 @@ class FileUpload extends Field
                     })
                     ->values()
                     ->all();
-
                 $component->state($files);
             }
             if ($component->hasFormAction()) {
@@ -91,11 +96,12 @@ class FileUpload extends Field
 
                 return [];
             }
+
             $files = collect($state);
             $files = $files
                 ->filter(static function (string|array $file): bool {
                     try {
-                        if (is_array($file) and isset($file['file']) and isset($file['delete']) and isset($file['id'])) {
+                        if (is_array($file) and isset($file['file'])) {
                             return true;
                         }
 
@@ -108,20 +114,24 @@ class FileUpload extends Field
                         return false;
                     }
                 })
-                ->map(function (string|array $file) {
+                ->map(function (string|array $file) use ($component) {
+
+                    if (is_array($file) and ! isset($file['delete']) and ! isset($file['id']) and ! isset($file['new'])) {
+                        return array_merge($file, ['delete' => false, 'id' => Str::uuid()->toString()]);
+                    }
                     if (is_string($file)) {
-                        return ['file' => $file, 'delete' => false, 'id' => Str::uuid()->toString()];
+                        return ['file' => $file, 'delete' => false, 'id' => Str::uuid()->toString(), 'customProperties' => $component->getBlankCustomProperties($file)];
                     }
 
                     return $file;
                 })
                 ->values()->all();
 
-            //$component->state($files);
             return $files;
         });
 
         $this->setBeforeUpdatedValidateValueUsing(static function (FileUpload $component, ?array $state): bool {
+            $component->livewire->dispatchBrowserEvent($component->eventForSave());
             if (blank($state)) {
                 $component->state(null);
 
@@ -129,9 +139,9 @@ class FileUpload extends Field
             }
 
             $files = collect($state)
-                ->map(function (array $file) use ($component): ?string {
+                ->map(function (array $file) use ($component): null|array {
                     if (is_array($file) and isset($file['file']) and isset($file['delete']) and ! $file['delete']) {
-                        return $file['file'];
+                        return ['file' => $file['file'], 'customProperties' => $file['customProperties']];
                     }
 
                     if (is_array($file) and isset($file['file']) and isset($file['delete']) and $file['delete']) {
@@ -145,13 +155,15 @@ class FileUpload extends Field
                     }
 
                     if (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
-                        return $component->saveAttachement($file);
+
+                        return ['file' => $component->saveAttachement($file), 'customProperties' => $file['customProperties']];
                     }
 
                     return null;
                 })
-                ->filter(fn (?string $name) => ! blank($name))
+                ->filter(fn (null|string|array $file) => ! blank($file))
                 ->values()->all();
+            //dd($files);
             if (blank($files)) {
                 $component->state(null);
 
@@ -162,6 +174,11 @@ class FileUpload extends Field
             return true;
         });
 
+    }
+
+    public function eventForSave(): string
+    {
+        return $this->getStatePath() . '.save_event';
     }
 
     protected function beforeValidateValueUsing(): bool
@@ -235,7 +252,7 @@ class FileUpload extends Field
                 return true;
             })->map(function (string|array|TemporaryUploadedFile $file) {
                 if ($file instanceof TemporaryUploadedFile) {
-                    $tmpFile = [(string) Str::uuid() => $file->serializeForLivewireResponse()];
+                    $tmpFile = [(string) Str::uuid() => $file->serializeForLivewireResponse(), 'new' => true, 'delete' => false];
                     if ($this->hasFormAction()) {
                         $tmpFile = array_merge($tmpFile, ['customProperties' => $this->getBlankCustomProperties($file)]);
                     }

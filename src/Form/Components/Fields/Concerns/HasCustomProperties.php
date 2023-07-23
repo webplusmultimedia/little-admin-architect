@@ -16,12 +16,9 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Textarea;
 
 trait HasCustomProperties
 {
-    protected array $blankCustomProperties = [];
+    protected bool $canEditCustomProperties = false;
 
-    /**
-     * @param  Field[]  $schemas
-     */
-    public function withCustomProperties(array $schemas = []): static
+    protected function defaultCustomProperties(): void
     {
         $fields = [
             Input::make('alt')
@@ -33,6 +30,30 @@ trait HasCustomProperties
             Textarea::make('texte')
                 ->nullable(),
         ];
+        $this->formAction = CustomPropertiesCreateAction::make('edit-custom-properties')
+            ->schemas(fields: $fields)
+            ->withoutLabel();
+        $this->formAction->label('Custom properties');
+        $this->hasFormAction = true;
+    }
+
+    /**
+     * @param  Field[]  $schemas
+     */
+    public function withCustomProperties(array $schemas = []): static
+    {
+        $this->canEditCustomProperties = true;
+        $fields = [
+            Input::make('alt')
+                ->maxLength(255)
+                ->required(),
+            Input::make('title')
+                ->nullable()
+                ->maxLength(255),
+            Textarea::make('texte')
+                ->nullable(),
+        ];
+
         foreach ($schemas as $schema) {
             if (in_array(get_class($schema), [Input::class, DateTimePicker::class, CheckBox::class, Radio::class, Select::class, Textarea::class]) /*and ! $field->isHiddenOnForm()*/) {
                 $fields[] = $schema;
@@ -41,7 +62,6 @@ trait HasCustomProperties
         $this->formAction = CustomPropertiesCreateAction::make('edit-custom-properties')
             ->schemas(fields: $fields)
             ->withoutLabel();
-
         $this->formAction->label('Custom properties');
         $this->hasFormAction = true;
 
@@ -93,5 +113,14 @@ trait HasCustomProperties
             ->lower()
             ->ucfirst()
             ->value();
+    }
+
+    public function canEditCustomProperties(): bool
+    {
+        if ($this->canEditCustomProperties) {
+            return $this->formAction->authorize();
+        }
+
+        return $this->canEditCustomProperties;
     }
 }

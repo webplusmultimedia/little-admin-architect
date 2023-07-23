@@ -52,7 +52,6 @@ class CustomPropertiesCreateAction extends FormAction
     public function beforeFill(): void
     {
         $record = data_get($this->livewire, $this->livewireData);
-
         //store record custom properties
         if (blank($record) and isset($this->record[data_get($this->livewire, $this->livewireFormKey)])) {
             $datas = $this->record[data_get($this->livewire, $this->livewireFormKey)]; // one file-upload (might be {file,delete,id} with/without customProperties

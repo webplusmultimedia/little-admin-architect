@@ -33,7 +33,7 @@
                     maxFiles : @js($field->getMaxFile()),
                     acceptedFileTypes : @js($field->getAcceptedFileTypes()),
                     multiple : {{  $field->isMultiple()?'true':'false' }},
-                    enableCustomProperties : {{  $field->hasFormAction()?'true':'false' }},
+                    enableCustomProperties : {{  $field->canEditCustomProperties()?'true':'false' }},
                     state : $wire.entangle(@js($field->getStatePath())){{ $field->getWireModifier() }},
                 })"
                  {{--x-on:livewire-upload-start="Alpine.store('laDatas').startUploadFile = true"

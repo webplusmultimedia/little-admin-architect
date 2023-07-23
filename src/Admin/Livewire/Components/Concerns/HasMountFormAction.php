@@ -51,7 +51,7 @@ trait HasMountFormAction
         //$action->livewire($this);
         $action->authorizeAccess();
         $action->handleAction();
-        $this->notification()->success($action->getNotificationText())->send();
+        //$this->notification()->success($action->getNotificationText())->send();
         $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
         $this->reset(['mountFormActionComponent', 'mountFormAction', 'mountFormActionData']);
 

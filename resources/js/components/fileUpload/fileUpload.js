@@ -14,7 +14,7 @@ import {gallery} from "./support/gallery";
  * @param {boolean} enableCustomProperties
  * @returns {{dropZone: {"@drop.prevent.stop"(): void, "@dragleave.prevent.stop"(): boolean, "@dragenter.prevent.stop"(): void}, init(): void, saveFileUsing(File[]), progress: number, state, overZone: {"@dragover.prevent.stop"(): void, "@dragleave.prevent.stop"(): boolean, "@dragenter.prevent.stop"(): void}, isProvidedMimeType(File): boolean, uploadUsing(*, *, *, *): void}|*|boolean}
  */
-export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, acceptedFileTypes, multiple,enableCustomProperties}) {
+export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, acceptedFileTypes, multiple, enableCustomProperties}) {
 
     return {
         progress: 0,
@@ -25,10 +25,10 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         startUpload: false,
         stopDragging: false,
         enableCustomProperties,
-        mountFormAction(id){
-          this.$wire.call('mountFormAction',`${this.path}`,id)
+        mountFormAction(id) {
+            this.$wire.call('mountFormAction', `${this.path}`, id)
         },
-        isEnableCustomProperties(){
+        isEnableCustomProperties() {
             return this.enableCustomProperties
         },
         photos: [],
@@ -162,14 +162,14 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         },
 
         async init() {
-            this.$watch('photos', value => {
-                this.$refs.galleryImages.innerHTML = gallery(value, this.path).getGallery()
+            this.$watch('photos', photos => {
+                this.$refs.galleryImages.innerHTML = gallery(photos, this.path).getGallery()
             });
             setTimeout(async () => {
-                this.photos = await this.$wire.getUploadFileUrls(this.path) ?? []
+                await this.refreshPhotos()
             }, 50)
 
-            window.addEventListener('little-admin-send-notification', async (ev) => {
+            window.addEventListener(`${this.path}.save_event`, async (ev) => {
                 if (this.reloadOnSave) {
                     this.stopDragging = false
                     this.photos = await this.$wire.getUploadFileUrls(this.path) ?? []
@@ -188,9 +188,20 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             })
 
         },
+        async refreshPhotos(reorder = false, newOrder=null) {
+            let photos;
+            if (reorder) {
+                photos = await this.$wire.reorderUploadFiles(this.path, newOrder)
+            } else {
+                 photos = await this.$wire.getUploadFileUrls(this.path) ?? []
+            }
+            let tmpFiles = Array.from(this.photos).filter(photo => photo['new'])
+            this.photos = photos.concat(tmpFiles)
+            console.log(this.photos)
+        },
         async reorderFiles(newOrder) {
             if (!this.stopDragging) {
-                this.photos = await this.$wire.reorderUploadFiles(this.path, newOrder)
+                await this.refreshPhotos(true, newOrder)
                 return
             }
             this.$refs.galleryImages.innerHTML = gallery(this.photos, this.path).getGallery()
