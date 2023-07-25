@@ -55,7 +55,7 @@ trait HasCustomProperties
         ];
 
         foreach ($schemas as $schema) {
-            if (in_array(get_class($schema), [Input::class, DateTimePicker::class, CheckBox::class, Radio::class, Select::class, Textarea::class]) /*and ! $field->isHiddenOnForm()*/) {
+            if (in_array(get_class($schema), [Input::class, /*DateTimePicker::class,*/ CheckBox::class, Radio::class, Select::class, Textarea::class]) /*and ! $field->isHiddenOnForm()*/) {
                 $fields[] = $schema;
             }
         }

@@ -48,12 +48,16 @@ trait HasMountFormAction
             throw new Exception('Aucune action trouvée');
         }
         $id = $this->id . $this->suffixEventForm;
-        //$action->livewire($this);
         $action->authorizeAccess();
         $action->handleAction();
         //$this->notification()->success($action->getNotificationText())->send();
         $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
         $this->reset(['mountFormActionComponent', 'mountFormAction', 'mountFormActionData']);
 
+    }
+
+    public function closeMountAction(): void
+    {
+        $this->reset(['mountFormActionComponent', 'mountFormAction', 'mountFormActionData']);
     }
 }

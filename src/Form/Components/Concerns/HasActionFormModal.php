@@ -19,7 +19,6 @@ trait HasActionFormModal
     {
         $this->setFormActions();
         $this->actionForm = $actionModal;
-
         if ($this->livewire->{$this->montFormActionComponent}) {
             $action = $this->getActionFormByName($this->livewire->{$this->montFormActionComponent});
 

@@ -10,9 +10,6 @@ export function ModalFormComponent(id = null) {
         },
         close(){
                 this.isOpen = false
-                this.$wire.mountFormAction = null
-                this.$wire.mountFormActionComponent = null
-                this.$wire.mountFormActionData = []
         },
         init(){
             window.addEventListener('show-modal',(ev)=>{

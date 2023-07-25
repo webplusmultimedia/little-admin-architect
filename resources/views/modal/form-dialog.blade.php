@@ -8,7 +8,7 @@
         @endforeach
     </div>
     <div class="inline-flex justify-center items-center space-x-5 py-4 border-t border-gray-200">
-        <x-little-anonyme::form-components.fields.button.button class="" x-on:click="close">
+        <x-little-anonyme::form-components.fields.button.button class="" x-on:click="isOpen = false;$wire.closeMountAction()">
             {{ trans('little-admin-architect::form.button.cancel') }}
         </x-little-anonyme::form-components.fields.button.button>
         <x-little-anonyme::form-components.fields.button.submit class="{{ $btnClass }}">

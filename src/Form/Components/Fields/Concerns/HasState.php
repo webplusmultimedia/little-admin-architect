@@ -19,10 +19,9 @@ trait HasState
             if ($this->checkRelation()) {
                 return $this->getRelationState();
             }
-            if (is_array($this->record)) {
+            /*if (is_array($this->record)) {
                 return data_get($this->livewire, $this->getName(), null);
-            }
-
+            }*/
             return data_get($this->livewire, $this->getStatePath());
         }
 
@@ -32,9 +31,9 @@ trait HasState
     public function state(mixed $state): void
     {
         $this->state = $state;
-        if (is_array($this->record)) {
+        /*if (is_array($this->record)) {
             data_set($this->livewire, $this->getName(), $state);
-        }
+        }*/
         data_set($this->livewire, $this->getStatePath(), $state);
     }
 
