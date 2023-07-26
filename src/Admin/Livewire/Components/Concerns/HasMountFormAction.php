@@ -52,7 +52,7 @@ trait HasMountFormAction
         $action->handleAction();
         //$this->notification()->success($action->getNotificationText())->send();
         $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
-        $this->reset(['mountFormActionComponent', 'mountFormAction', 'mountFormActionData']);
+        $this->reset([/*'mountFormActionComponent',*/ 'mountFormAction', 'mountFormActionData']);
 
     }
 

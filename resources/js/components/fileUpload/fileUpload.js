@@ -197,7 +197,6 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             }
             let tmpFiles = Array.from(this.photos).filter(photo => photo['new'])
             this.photos = photos.concat(tmpFiles)
-            console.log(this.photos)
         },
         async reorderFiles(newOrder) {
             if (!this.stopDragging) {

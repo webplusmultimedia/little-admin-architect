@@ -56,7 +56,7 @@ class FileUpload extends Field
                     )
                     ->map(static function (string|array $file) use ($component) {
                         if (is_array($file) and ! isset($file['delete']) and ! isset($file['id']) and ! isset($file['new'])) {
-                            return array_merge($file, ['file' => $file['file'], 'delete' => false, 'id' => Str::uuid()->toString()]);
+                            return array_merge($file, ['file' => $file['file'], 'delete' => false, 'id' => Str::uuid()->toString(), 'customProperties' => $component->getMissingCustomProperties($file)]);
                         }
                         if (is_string($file)) {
                             return ['file' => $file, 'delete' => false, 'id' => Str::uuid()->toString(), 'customProperties' => $component->getBlankCustomProperties($file)];

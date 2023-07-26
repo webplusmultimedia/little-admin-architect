@@ -38,7 +38,7 @@ trait HasCustomProperties
     }
 
     /**
-     * @param  Field[]  $schemas
+     * @param Field[] $schemas
      */
     public function withCustomProperties(array $schemas = []): static
     {
@@ -50,14 +50,14 @@ trait HasCustomProperties
             Input::make('title')
                 ->nullable()
                 ->maxLength(255),
-            Textarea::make('texte')
-                ->nullable(),
+           /* Textarea::make('texte')
+                ->nullable(),*/
         ];
 
         foreach ($schemas as $schema) {
-            if (in_array(get_class($schema), [Input::class, /*DateTimePicker::class,*/ CheckBox::class, Radio::class, Select::class, Textarea::class]) /*and ! $field->isHiddenOnForm()*/) {
+            //if (in_array(get_class($schema), [Input::class, DateTimePicker::class, CheckBox::class, Radio::class, Select::class, Textarea::class]) /*and ! $field->isHiddenOnForm()*/) {
                 $fields[] = $schema;
-            }
+            //}
         }
         $this->formAction = CustomPropertiesCreateAction::make('edit-custom-properties')
             ->schemas(fields: $fields)
@@ -77,17 +77,29 @@ trait HasCustomProperties
         return false;
     }
 
-    public function getBlankCustomProperties(TemporaryUploadedFile|array|string $file): array
+    protected function getMissingCustomProperties(array $file): array
+    {
+        /** @var array $customProperties */
+        $customProperties = $file['customProperties'];
+        foreach ($this->formAction->getFields() as $field) {
+            if (! isset($customProperties[$field->getName()])) {
+                $customProperties[$field->getName()] = NULL;
+            }
+        }
+        return $customProperties;
+    }
+
+    protected function getBlankCustomProperties(TemporaryUploadedFile|array|string $file): array
     {
         // @todo : add parameter : file (tmp or file) to retrieve alt on new file
         $customProperties = [];
         if ($this->formAction) {
             foreach ($this->formAction->getFields() as $field) {
-                $name = null;
+                $value = NULL;
                 if ('alt' === $field->getName()) {
-                    $name = $this->getCustomAltProperty($file);
+                    $value = $this->getCustomAltProperty($file);
                 }
-                $customProperties[$field->getName()] = $name;
+                $customProperties[$field->getName()] = $value;
             }
         }
 
@@ -96,7 +108,7 @@ trait HasCustomProperties
 
     protected function getCustomAltProperty(TemporaryUploadedFile|array|string $file): string
     {
-        $altProperty = null;
+        $altProperty = NULL;
         if ($file instanceof TemporaryUploadedFile) {
             $altProperty = $file->getClientOriginalName();
         }

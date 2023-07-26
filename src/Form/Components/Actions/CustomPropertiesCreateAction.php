@@ -79,7 +79,7 @@ class CustomPropertiesCreateAction extends FormAction
     public function fill(Model|array $model): void
     {
         foreach ($this->fields as $field) {
-            $field->record($this->record);
+            $field->record($model);
             $field->livewire($this->livewire);
             $field->setPrefixPath($this->livewireData);
             $field->statusForm($this->statusForm);

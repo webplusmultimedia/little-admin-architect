@@ -21,6 +21,9 @@ export function ModalFormComponent(id = null) {
             window.addEventListener('close-modal',(ev)=>{
                 this.eventId = ev.detail.id
                 this.close()
+                this.$wire.mountFormActionData = []
+                this.$wire.mountFormActionComponent = null
+                this.$wire.mountFormAction = null
             })
         }
     }
