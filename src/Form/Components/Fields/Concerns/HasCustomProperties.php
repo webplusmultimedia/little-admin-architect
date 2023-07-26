@@ -38,7 +38,7 @@ trait HasCustomProperties
     }
 
     /**
-     * @param Field[] $schemas
+     * @param  Field[]  $schemas
      */
     public function withCustomProperties(array $schemas = []): static
     {
@@ -50,13 +50,13 @@ trait HasCustomProperties
             Input::make('title')
                 ->nullable()
                 ->maxLength(255),
-           /* Textarea::make('texte')
+            /* Textarea::make('texte')
                 ->nullable(),*/
         ];
 
         foreach ($schemas as $schema) {
             //if (in_array(get_class($schema), [Input::class, DateTimePicker::class, CheckBox::class, Radio::class, Select::class, Textarea::class]) /*and ! $field->isHiddenOnForm()*/) {
-                $fields[] = $schema;
+            $fields[] = $schema;
             //}
         }
         $this->formAction = CustomPropertiesCreateAction::make('edit-custom-properties')
@@ -82,10 +82,11 @@ trait HasCustomProperties
         /** @var array $customProperties */
         $customProperties = $file['customProperties'];
         foreach ($this->formAction->getFields() as $field) {
-            if (! isset($customProperties[$field->getName()])) {
-                $customProperties[$field->getName()] = NULL;
+            if ( ! isset($customProperties[$field->getName()])) {
+                $customProperties[$field->getName()] = null;
             }
         }
+
         return $customProperties;
     }
 
@@ -95,7 +96,7 @@ trait HasCustomProperties
         $customProperties = [];
         if ($this->formAction) {
             foreach ($this->formAction->getFields() as $field) {
-                $value = NULL;
+                $value = null;
                 if ('alt' === $field->getName()) {
                     $value = $this->getCustomAltProperty($file);
                 }
@@ -108,7 +109,7 @@ trait HasCustomProperties
 
     protected function getCustomAltProperty(TemporaryUploadedFile|array|string $file): string
     {
-        $altProperty = NULL;
+        $altProperty = null;
         if ($file instanceof TemporaryUploadedFile) {
             $altProperty = $file->getClientOriginalName();
         }
