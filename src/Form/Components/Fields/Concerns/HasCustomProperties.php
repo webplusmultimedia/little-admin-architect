@@ -6,12 +6,8 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns
 
 use Livewire\TemporaryUploadedFile;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\CustomPropertiesCreateAction;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\CheckBox;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\DateTimePicker;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Input;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Radio;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Select;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Textarea;
 
 trait HasCustomProperties
@@ -50,8 +46,6 @@ trait HasCustomProperties
             Input::make('title')
                 ->nullable()
                 ->maxLength(255),
-            /* Textarea::make('texte')
-                ->nullable(),*/
         ];
 
         foreach ($schemas as $schema) {

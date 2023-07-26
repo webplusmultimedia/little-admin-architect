@@ -38,6 +38,7 @@ trait HasFields
     {
         foreach (static::$formFields as $key => $field) {
             $field->livewire($this->livewire);
+            $field->setUp();
             if ( ! $shouldUsePath) {
                 $field->setPrefixPath(null);
             }

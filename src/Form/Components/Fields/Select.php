@@ -29,7 +29,7 @@ class Select extends Field
 
     public function setUp(): void
     {
-        $this->setViewDatas('field', $this);
+        // $this->setViewDatas('field', $this);
         if ($this->hasRelationship()) {
             $this->options([]);
             if (BelongsTo::class === $this->getRelationType()) {

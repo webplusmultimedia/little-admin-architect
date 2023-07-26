@@ -36,7 +36,7 @@ trait HasRelationship
 
     public function hasRelationship(): bool
     {
-        return (bool) $this->relationship;
+        return null !== $this->relationship;
     }
 
     public function getRelationType(): string|false

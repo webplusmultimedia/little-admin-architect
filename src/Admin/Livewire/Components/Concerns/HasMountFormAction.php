@@ -33,7 +33,7 @@ trait HasMountFormAction
             FormDialog::make(
                 title: $action->getTitleForModal(),
                 subtitle: 'fff',
-                actionLabel: $action->getTitleForModal(),
+                actionLabel: $action->getButtonTitle(),
                 fields: $action->getFields()
             )
         )->setMaxWidth($action->getMaxWidth());

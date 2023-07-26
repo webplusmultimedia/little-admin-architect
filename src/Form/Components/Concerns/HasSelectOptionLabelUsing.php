@@ -34,7 +34,7 @@ trait HasSelectOptionLabelUsing
     {
         foreach ($this->getFormFields() as $field) {
             if ($field instanceof Select) {
-                $field->setUp();
+                //$field->setUp();
                 if ($field->optionsUsing()) {
                     $this->addToListOptionsUsing($field->getStatePath(), $field->optionsUsing());
                 }

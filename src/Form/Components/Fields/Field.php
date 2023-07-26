@@ -93,7 +93,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
         $this->label = $label;
         $this->name = $name;
         $this->setViewDatas('field', $this);
-        $this->setUp();
+
     }
 
     public function livewire(BaseForm|BaseTable|Component $livewire): void

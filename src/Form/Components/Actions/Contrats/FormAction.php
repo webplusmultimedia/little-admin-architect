@@ -27,7 +27,6 @@ abstract class FormAction extends Action
 
     public function beforeFill(): void
     {
-
     }
 
     protected function getLivewireData(string $name): mixed
@@ -70,6 +69,11 @@ abstract class FormAction extends Action
 
     public function getTitleForModal(): ?string
     {
+        return 'Create ' . $this->getTitle();
+    }
+
+    protected function getTitle(): ?string
+    {
         if ($this->hasLabel()) {
             return $this->getLabel();
         }
@@ -80,10 +84,15 @@ abstract class FormAction extends Action
                 ->singular()
                 ->value();
 
-            return "Create {$name}";
+            return $name;
         }
 
         return null;
+    }
+
+    public function getButtonTitle(): string
+    {
+        return str('Save ')->append($this->getTitle())->value();
     }
 
     public function record(array|Model $record): static
