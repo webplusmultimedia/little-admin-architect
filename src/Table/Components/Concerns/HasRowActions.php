@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\GroupAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\Contracts\BaseRowAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\DeleteAction;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\EditAction;
@@ -13,12 +14,12 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Actions\RowAction;
 trait HasRowActions
 {
     /**
-     * @var BaseRowAction[]
+     * @var array<int,BaseRowAction>|array<int,GroupAction>
      */
     protected array $rowActions = [];
 
     /**
-     * @param  BaseRowAction[]  $actions
+     * @param  array<int,BaseRowAction>|array<int,GroupAction>  $actions
      */
     public function actions(array $actions = []): static
     {
@@ -28,26 +29,36 @@ trait HasRowActions
     }
 
     /**
-     * @return BaseRowAction[]
+     * @return array<int,BaseRowAction>|array<int,GroupAction>
      */
     public function getRowActions(Model $record): array
     {
         foreach ($this->rowActions as $rowAction) {
-            $rowAction->livewire($this->livewire);
-            $rowAction->record($record);
-            if ($rowAction instanceof EditAction) {
-                $this->applyRecordToEditAction($rowAction);
+            if ($rowAction instanceof GroupAction) {
+                foreach ($rowAction->getActions() as $action) {
+                    $this->applySetUp($action, $record);
+                }
+            } else {
+                $this->applySetUp($rowAction, $record);
             }
-            if ($rowAction instanceof DeleteAction) {
-                $this->applyRecordToDeleteAction($rowAction);
-            }
-            if ($rowAction instanceof RowAction) {
-                $this->applyWireClickToRowAction($rowAction);
-            }
-
         }
 
         return $this->rowActions;
+    }
+
+    protected function applySetUp(BaseRowAction $rowAction, Model $model): void
+    {
+        $rowAction->livewire($this->livewire);
+        $rowAction->record($model);
+        if ($rowAction instanceof EditAction) {
+            $this->applyRecordToEditAction($rowAction);
+        }
+        if ($rowAction instanceof DeleteAction) {
+            $this->applyRecordToDeleteAction($rowAction);
+        }
+        if ($rowAction instanceof RowAction) {
+            $this->applyWireClickToRowAction($rowAction);
+        }
     }
 
     public function hasRowsAction(): int
@@ -78,9 +89,18 @@ trait HasRowActions
     protected function applyDefaultForRowActions(): void
     {
         foreach ($this->rowActions as $rowAction) {
-            $rowAction->roundedFull()
-                ->small()
-                ->bgTransparent();
+            if ($rowAction instanceof GroupAction) {
+                foreach ($rowAction->getActions() as $action) {
+                    $action->roundedFull()
+                        ->small()
+                        ->bgTransparent();
+                }
+            } else {
+                $rowAction->roundedFull()
+                    ->small()
+                    ->bgTransparent();
+            }
+
         }
     }
 
@@ -94,8 +114,16 @@ trait HasRowActions
 
     public function getActionByName(string $name): ?BaseRowAction
     {
-        return collect($this->rowActions)->filter(/**
-         * @param  BaseRowAction  $ra
-         */ fn ($ra) => $ra->getName() === $name)->first();
+        foreach ($this->rowActions as $rowAction) {
+            if ($rowAction instanceof GroupAction) {
+                if ($row = $rowAction->getActionByName($name)) {
+                    return $row;
+                }
+            } elseif ($rowAction->getName() === $name) {
+                return $rowAction;
+            }
+        }
+
+        return null;
     }
 }

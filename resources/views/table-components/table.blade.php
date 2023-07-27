@@ -1,5 +1,5 @@
 @php
-    use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
+    use Webplusmultimedia\LittleAdminArchitect\Support\Action\GroupAction;use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
     /** @var Table $table */
     $sortDirection = $table->getSortDirection();
     $sortColumn = $table->getSortColumn();
@@ -56,7 +56,9 @@
                                 <td class="max-w-max whitespace-nowrap">
                                     <div class="w-full inline-flex gap-2 items-center justify-end">
                                         @foreach($table->getRowActions($record) as $action)
-                                            @if($action->authorize())
+                                            @if($action instanceof GroupAction)
+                                                {{ $action }}
+                                            @elseif($action->authorize())
                                                 {{ $action }}
                                             @endif
                                         @endforeach

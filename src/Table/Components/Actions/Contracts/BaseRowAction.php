@@ -10,4 +10,16 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Action\Contracts\Action;
 abstract class BaseRowAction extends Action
 {
     use CanRequireConfirmation;
+
+    protected bool $inGroupAction = false;
+
+    public function inGroupAction(): void
+    {
+        $this->inGroupAction = true;
+    }
+
+    public function isInGroupAction(): bool
+    {
+        return $this->inGroupAction;
+    }
 }

@@ -14,6 +14,8 @@ class TableModal extends BaseModal
     ) {
         $this->alpineData = "ModalTableComponent('{$id}')";
         $this->formAction = 'CallMountTableAction';
+        $this->actionData = 'mountTableActionRecord';
+        $this->alpineCloseModal = 'isOpen = false;$wire.closeMountTableAction()';
     }
 
     public static function make(string $id): TableModal
@@ -25,7 +27,15 @@ class TableModal extends BaseModal
     {
         return view(
             'little-views::modal.modal',
-            ['id' => $this->id, 'maxWidth' => $this->getMaxWidth(), 'content' => $this->content, 'formAction' => $this->formAction, 'alpineData' => $this->alpineData]);
+            [
+                'id' => $this->id,
+                'maxWidth' => $this->getMaxWidth(),
+                'content' => $this->content,
+                'formAction' => $this->formAction,
+                'alpineData' => $this->alpineData,
+                'alpineCloseModal' => $this->alpineCloseModal,
+            ]
+        );
     }
 
     public function toHtml(): string

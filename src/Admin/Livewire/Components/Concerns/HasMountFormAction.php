@@ -56,7 +56,7 @@ trait HasMountFormAction
 
     }
 
-    public function closeMountAction(): void
+    public function closeMountFormAction(): void
     {
         $this->reset(['mountFormActionComponent', 'mountFormAction', 'mountFormActionData']);
     }

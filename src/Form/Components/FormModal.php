@@ -15,6 +15,7 @@ class FormModal extends BaseModal
         $this->alpineData = "ModalFormComponent('{$id}')";
         $this->formAction = 'CallMountFormAction';
         $this->actionData = 'mountFormActionData';
+        $this->alpineCloseModal = 'isOpen = false;$wire.closeMountFormAction()';
     }
 
     public static function make(string $id): FormModal
@@ -33,6 +34,7 @@ class FormModal extends BaseModal
                 'formAction' => $this->formAction,
                 'alpineData' => $this->alpineData,
                 'actionData' => $this->actionData,
+                'alpineCloseModal' => $this->alpineCloseModal,
             ]
         );
     }

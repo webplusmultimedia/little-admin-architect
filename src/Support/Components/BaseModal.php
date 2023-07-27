@@ -18,4 +18,6 @@ abstract class BaseModal implements Htmlable
     public ?string $alpineData = null;
 
     public ?string $actionData = null;
+
+    public ?string $alpineCloseModal = null;
 }

@@ -85,4 +85,11 @@ trait HasMountTableAction
 
         return $record->{$fieldName};
     }
+
+    public function closeMountTableAction(): void
+    {
+        $this->reset(['mountTableAction',
+            'mountTableActionData',
+            'mountTableActionRecord']);
+    }
 }

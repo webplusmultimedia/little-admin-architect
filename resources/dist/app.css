@@ -1914,6 +1914,9 @@ label {
 .w-screen {
   width: 100vw;
 }
+.min-w-\[10rem\] {
+  min-width: 10rem;
+}
 .min-w-\[12rem\] {
   min-width: 12rem;
 }

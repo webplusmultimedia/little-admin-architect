@@ -1,4 +1,5 @@
 import Alpine from 'alpinejs';
+import AlpineFloatingUI from "@awcodes/alpine-floating-ui";
 import {SelectFormComponent} from "./components/select/SelectFormComponent";
 import {DropdownMenu} from "./components/menus/Dropdown/Dropdown";
 import ModalComponent from "./components/modal/ModalComponent";
@@ -50,6 +51,9 @@ document.addEventListener('alpine:init', () => {
         }
     })
 })
+
+//Alpine.plugin(focus)
+Alpine.plugin(AlpineFloatingUI);
 
 window.Alpine = Alpine;
 

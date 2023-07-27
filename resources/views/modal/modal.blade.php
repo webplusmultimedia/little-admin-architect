@@ -4,7 +4,7 @@
         x-cloak
         x-data="{{ $alpineData  }}"
         x-show="isOpen"
-        @click.self="isOpen = false;$wire.closeMountAction()"
+        @click.self="{{ $alpineCloseModal }}"
 
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"

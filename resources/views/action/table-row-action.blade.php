@@ -1,7 +1,7 @@
-<div class="">
+<div class="flex items-center">
     @if($action->getType() === 'link')
         <a href="{{ url($action->getUrl()) }}"
-            @class([ $action->getClass(),'inline-flex items-center justify-center gap-1' ])
+            @class([ $action->getClass(),'inline-flex items-center justify-left gap-1 w-full' ])
             {{ $action->getAlpineDispatch() }}
         >
             @if($action->getIconPosition()==='before' and $action->getIcon())
@@ -13,8 +13,8 @@
             @endif
         </a>
     @else
-        <button
-            @class([ $action->getClass(),'inline-flex items-center justify-center gap-1' ])
+        <button type="button"
+            @class([ $action->getClass(),'inline-flex items-center justify-left gap-1 w-full' ])
             wire:click="{{ $action->getWireClickAction() }}"
             wire:loading.attr="disabled" wire:target="mountTableAction"
         >
