@@ -8,7 +8,7 @@ If you knew laravel nova or filament, it's work the same way.
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/webplusmultimedia/little-admin-architect/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/webplusmultimedia/little-admin-architect/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/webplusmultimedia/little-admin-architect.svg?style=flat-square)](https://packagist.org/packages/webplusmultimedia/little-admin-architect)
 
-[![S-lection-023.png](https://i.postimg.cc/jjS5wJMk/S-lection-023.png)](https://webplusm.net)
+[![S-lection-023.png](https://i.postimg.cc/jjS5wJMk/S-lection-023.png)](https://postimg.cc/qNW0WgV8)
 ### This package is under development. do not use it in production for now.
 
 ## Support us
