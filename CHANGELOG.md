@@ -2,6 +2,13 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## Add group actions - 2023-07-27
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.2.1...v0.2.2
+
+- Add group action in rows table
+- Add all fields in modal form
+
 ## add custom properties to file upload - 2023-07-23
 
 **Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.2.0...v0.2.1
