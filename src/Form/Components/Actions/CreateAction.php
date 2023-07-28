@@ -11,7 +11,7 @@ class CreateAction extends Contrats\FormAction
     public static function make(): CreateAction
     {
         return (new self())
-            ->mediumIconSize()
+            ->setIconSize('w-5 h-5')
             ->icon('heroicon-o-plus');
     }
 }

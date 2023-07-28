@@ -16,7 +16,7 @@
     <div x-float.placement.bottom-end.flip.teleport.offset="{ offset : -5 }"
          x-ref="panel"
         class="absolute  rounded-md bg-white z-10 shadow-md border border-primary-200 flex flex-col
-                                   min-w-[10rem] whitespace-nowrap  divide-y text-sm  "
+                                   min-w-[10rem] whitespace-nowrap  divide-y text-sm"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
         x-transition:enter="duration-200"
