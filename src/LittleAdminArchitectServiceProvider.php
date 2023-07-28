@@ -56,6 +56,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         $this->registerLivewireComponents();
+        $this->registerGuard();
         Form::mixin(new SelectMixing());
         Livewire::addPersistentMiddleware([
             Authenticate::class,
@@ -78,5 +79,16 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
         Livewire::component('little-admin.pages.auth.login', config('little-admin-architect.auth.pages.login'));
         Livewire::component('little-admin-architect.modal', LittleAdminModal::class);
         Livewire::component('little-admin-notification', Notification::class);
+    }
+
+    private function registerGuard(): void
+    {
+        $offsetGuard = 'auth.guards.' . config('little-admin-architect.auth.guard');
+        if (!config()->offsetExists($offsetGuard)) {
+            config()->set($offsetGuard, [
+                'driver'   => 'session',
+                'provider' => 'users',
+            ]);
+        }
     }
 }
