@@ -36,8 +36,8 @@
             <div aria-autocomplete="none"
                 @class(
                     [
-                        "flex justify-end group-btn px-3 py-5","rounded-md border mt-5 bg-white border-gray-200 " => !$form->hasModal(),
-                        "rounded-0 border border-t border-gray-200 bg-gray-50  shadow-lg mt-2" => $form->hasModal()
+                        "flex justify-end group-btn px-3 py-5","rounded-md border mt-5 bg-white border-gray-200 mt-2" => !$form->hasModal(),
+                        "rounded-0 border border-t border-gray-200 bg-gray-50  shadow-lg mt-8" => $form->hasModal()
                     ]
                 )
             >
