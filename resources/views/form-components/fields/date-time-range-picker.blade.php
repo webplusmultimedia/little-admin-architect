@@ -52,7 +52,7 @@
                                 class="w-full flex relative"
                         >
                             <input type="text" x-model="value" id="{{$id}}"
-                                   class="cursor-pointer py-2 px-2"
+                                   class="cursor-pointer"
 
                                    {{ $field->isRequired()?'required':'' }}
 

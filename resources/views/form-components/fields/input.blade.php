@@ -28,7 +28,7 @@
         <input {{ $attributes->except(['field'])->merge([
                 'wire:model' . $field->getWireModifier() => $field->getStatePath(),
                 'id' => $id,
-                'class' => 'py-2 px-2',
+
                 'type' => $field->getType(),
                 'placeholder' => $field->getPlaceHolder(),
                 'aria-describedby' =>  $id,

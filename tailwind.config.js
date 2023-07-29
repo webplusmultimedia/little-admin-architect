@@ -8,6 +8,7 @@ module.exports = {
       './src/**/*.php',
       './resources/js/**/*.js',
   ],
+    darkMode : 'class',
   theme: {
     extend: {
         fontFamily: {
@@ -15,7 +16,7 @@ module.exports = {
         },
         colors: {
             'primary-datepicker' : colors.yellow,
-            primary : colors.violet,
+            primary : colors.emerald,
             secondary : colors.lime,
             info : {...colors.cyan,...{DEFAULT : "#009399"}} ,
             error : {...colors.rose,...{DEFAULT : "#d7035f"}},

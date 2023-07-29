@@ -5,9 +5,9 @@
 ])
 <div class="flex justify-end  items-center space-x-3 mb-5">
     @if($table->showSearchBar())
-        <div class="flex  w-full bg-gray-100 py-2 px-2 rounded-lg">
-            <div class="flex items-center py-1 px-3 border border-slate-300 rounded-l-lg bg-slate-100">
-                <x-heroicon-s-magnifying-glass class="text-slate-600 w-5"/>
+        <div class="flex  w-full bg-gray-100 py-2 px-2 rounded-lg dark:bg-gray-800">
+            <div class="flex items-center py-1 px-3 border-t border-l border-b   border-slate-300 rounded-l-lg bg-slate-100 dark:bg-gray-600 dark:border-gray-400/40">
+                <x-heroicon-s-magnifying-glass class="text-slate-600 w-5 dark:text-gray-200"/>
             </div>
             <input type="search" wire:model.debounce.500ms="search"
                    placeholder="{{ __('little-admin-architect::table.search-bar.placeholder',['fieldsText'=>$table->getFieldSearchText()]) }}"
@@ -38,7 +38,7 @@
 
             <x-little-anonyme::table-components.table-filters
                 class="absolute right-0 top-[calc(100%_+_1rem)] rounded-md bg-white z-20 shadow-md border border-primary-200 flex flex-col
-                                   min-w-[20rem] whitespace-nowrap  divide-y text-sm  p-3"
+                                   min-w-[20rem] whitespace-nowrap  divide-y text-sm  p-3 dark:bg-gray-900/95 dark:border-gray-400/40"
                 x-transition:enter-start="opacity-0"
                 x-transition:enter-end="opacity-100"
                 x-transition:enter="duration-200"

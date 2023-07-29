@@ -1,5 +1,0 @@
-@layer components {
-    .la-dropzone{
-        @apply flex items-center justify-center w-full py-3 border rounded-lg border-gray-300  text-gray-400 transition
-    }
-}

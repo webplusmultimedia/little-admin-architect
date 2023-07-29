@@ -84,9 +84,9 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     private function registerGuard(): void
     {
         $offsetGuard = 'auth.guards.' . config('little-admin-architect.auth.guard');
-        if (!config()->offsetExists($offsetGuard)) {
+        if ( ! config()->offsetExists($offsetGuard)) {
             config()->set($offsetGuard, [
-                'driver'   => 'session',
+                'driver' => 'session',
                 'provider' => 'users',
             ]);
         }

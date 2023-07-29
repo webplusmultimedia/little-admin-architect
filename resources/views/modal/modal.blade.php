@@ -15,7 +15,7 @@
         wire:ignore.self
     >
         {{-- Modal --}}
-        <div class="modal {{ $maxWidth }}" :id="id" tabindex="-1" :ariaLabelledby="id +'-Label'" aria-hidden="true"
+        <div class="modal {{ $maxWidth }} dark:bg-gray-800 dark:border dark:border-gray-400/20" :id="id" tabindex="-1" :ariaLabelledby="id +'-Label'" aria-hidden="true"
 
 
         >

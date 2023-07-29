@@ -4,8 +4,8 @@
     $sortDirection = $table->getSortDirection();
     $sortColumn = $table->getSortColumn();
 @endphp
-<div class="py-5 px-2">
-    <div class="flex justify-between bg-white px-5 py-3 mb-8">
+<div class="my-10">
+    <div class="flex justify-between bg-white px-5 py-3 mb-8 dark:bg-gray-800">
         <div class="flex flex-col">
             <div class="inline-flex items-center gap-2">
                 <h1 class="text-2xl m-0">{{ $table->title }}</h1>
@@ -24,30 +24,31 @@
             @endforeach
         </div>
     </div>
-    <div class="flex flex-col bg-white py-10 px-5 rounded-lg" x-data="{}">
+    <div class="flex flex-col bg-white  rounded-lg border dark:bg-gray-800 dark:border-gray-400/40 dark:text-white" x-data="{}">
         <x-little-anonyme::table-components.partials.search-bar :table="$table"/>
         @if($table->hasRecords())
-            <div class=" border-collapse border border-gray-200  overflow-hidden overflow-x-auto">
-                <table class="table-auto w-full text-start divide-y shadow-sm"
+            <div class="  overflow-hidden overflow-x-auto  ">
+                <table class="border-collapse table-auto   w-full rounded-lg text-start divide-y shadow-sm dark:text-white dark:border-gray-600"
                        wire:loading.class.delay="opacity-50"
                        x-data="TableComponent({ livewireId : $wire.__instance.id })"
                 >
-                    <thead class="bg-slate-100 border-t text-start">
-                    <tr>
-                        @foreach($table->getHeaders() as $header)
-                            {{ $header }}
-                        @endforeach
-                        @if($table->hasRowsAction())
-                            <th class="w-5">
-                                &nbsp;
-                            </th>
-                        @endif
+                    <thead class="bg-slate-100  text-start  dark:bg-gray-700">
+                        <tr class=" dark:border-gray-600">
+                            @foreach($table->getHeaders() as $header)
+                                {{ $header }}
+                            @endforeach
+                            @if($table->hasRowsAction())
+                                <th class="w-5">
+                                    &nbsp;
+                                </th>
+                            @endif
 
-                    </tr>
+                        </tr>
                     </thead>
                     <tbody class="divide-y">
                     @foreach($table->getRecords() as $record)
-                        <tr wire:key="{{ $table->getLivewireId() . '.tr.'. $record->getKey()  }}" class="hover:bg-primary-50/50 cursor-pointer">
+                        <tr wire:key="{{ $table->getLivewireId() . '.tr.'. $record->getKey()  }}"
+                            class="hover:bg-primary-50/50 cursor-pointer dark:border-gray-600 dark:hover:bg-gray-700/50">
                             @foreach($table->getColumns() as $column)
                                 @php($column->setRecord($record)->livewireId($table->getLivewireId()))
                                 {{ $column }}
@@ -74,8 +75,12 @@
             <x-little-anonyme::table-components.partials.no-records/>
         @endif
 
-        <div class=" py-5 px-5    text-primary-400">
-            {{ $table->getRecords()->links() }}
+        <div class=" py-5  px-3 border-t  dark:border-gray-400/40">
+            @if(!$table->getRecords()->hasMorePages())
+                <div class="">Nombre d'éléments : {{ $table->getRecords()->count() }}</div>
+            @else
+                {{ $table->getRecords()->links() }}
+            @endif
         </div>
     </div>
     @if($table->hasRowsAction())

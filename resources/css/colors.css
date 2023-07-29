@@ -1,30 +1,30 @@
 @layer base {
     .text-success{
-        @apply text-success-500
+        @apply text-success-500 dark:text-success-400
     }
     .text-primary{
-        @apply text-primary-500
+        @apply text-primary-500 dark:text-primary-400
     }
 
     .text-error{
-        @apply text-danger
+        @apply text-danger dark:text-error-400
     }
     .text-warning{
-        @apply text-warning-500
+        @apply text-warning-500 dark:text-warning-400
     }
 
     .text-tag-success{
-        @apply bg-success-100 text-success-600
+        @apply bg-success-100 text-success-600 dark:bg-success-400/10 dark:text-success-400
     }
     .text-tag-primary{
-        @apply bg-primary-100  text-primary-600
+        @apply bg-primary-100  text-primary-600 dark:bg-primary-400/10 dark:text-primary-400
     }
     .text-tag-danger{
-        @apply bg-danger text-error-600
+        @apply bg-danger text-error-600  dark:bg-error-400/10 dark:text-error-400
     }
 
     .text-tag-warning{
-        @apply bg-warning-100 text-warning-600
+        @apply bg-warning-100 text-warning-600 dark:bg-warning-400/10 dark:text-warning-400
     }
     .text-tag-info{
         @apply bg-info

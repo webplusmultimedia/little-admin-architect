@@ -5,7 +5,6 @@
 @import "modal.css";
 @import "colors.css";
 @import "notification.css";
-@import "la-file-upload.css";
 @import "file-upload.css";
 @import "tiny-mce.css";
 
@@ -19,7 +18,7 @@
 }
 @layer base {
     body {
-        @apply text-gray-600
+        @apply text-gray-600 dark:text-white dark:bg-gray-900
     }
 
     h1 {
@@ -46,6 +45,10 @@
         @apply list-disc ml-10 mb-4
     }
 
+    .la-dark-nav{
+        @apply dark:bg-gray-800 dark:text-white dark:border-gray-400/30
+    }
+
     [x-cloak] {
         @apply !hidden
     }
@@ -65,11 +68,15 @@
     [multiple],
     textarea,
     select {
-        @apply text-black text-[1rem] border  py-3 px-2 w-full border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500   dark:border-blue-300 shadow-sm disabled:opacity-50 duration-100 rounded;
+        @apply text-black text-[1rem] border-none ring-1  py-2 px-4 w-full ring-gray-300  focus:ring-primary-500 focus:ring-2  placeholder:text-slate-400
+        shadow-sm disabled:opacity-50 duration-100 rounded
+        dark:bg-gray-700 dark:text-white/90  dark:placeholder:text-gray-300/80 dark:ring-gray-300/40 dark:focus:ring-primary-500;
     }
 
     [type="checkbox"] {
-        @apply text-primary-500 py-2 px-2 border-gray-300  focus:ring-primary-500 focus:ring-1 focus:border-primary-500 shadow-sm disabled:opacity-50 duration-75 indeterminate:bg-gray-300 rounded ;
+        @apply text-primary-500 py-2 px-2 border-none ring-gray-400/80 ring-inset  ring-1 focus:ring-primary-500  shadow-sm disabled:opacity-50 duration-75
+        checked:bg-primary-500 indeterminate:bg-gray-300 rounded
+        dark:bg-gray-400 dark:checked:bg-primary-500;
     }
 
     [type="radio"] {
@@ -81,7 +88,7 @@
     }
 
     label {
-        @apply text-[1rem]
+        @apply text-[1rem] dark:text-white/90
     }
     .disabled__field{
         @apply pointer-events-none opacity-70

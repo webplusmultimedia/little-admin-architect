@@ -13,15 +13,15 @@
         @if($header->isSortable())
             @if($sortColumn === $header->getName() && $sortDirection==='asc')
                 <span>
-                    <x-heroicon-m-arrow-down class="text-primary-600 h-4"/>
+                    <x-heroicon-m-arrow-down class="text-primary-600 h-4  dark:text-primary-400"/>
                 </span>
             @elseif($sortColumn === $header->getName() && $sortDirection==='desc')
                 <span>
-                    <x-heroicon-m-arrow-up class="text-primary-600 w-4"/>
+                    <x-heroicon-m-arrow-up class="text-primary-600 w-4 dark:text-primary-400"/>
                 </span>
             @else
                 <span>
-                <x-heroicon-m-arrow-down class="text-gray-400 w-3"/>
+                <x-heroicon-m-arrow-down class="text-gray-400 w-3 dark:text-gray-300"/>
             </span>
             @endif
         @endif

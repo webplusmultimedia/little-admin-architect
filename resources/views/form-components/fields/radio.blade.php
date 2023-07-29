@@ -22,10 +22,10 @@
     >
         <div {{ $attributes->class('grid px-4')->merge(['class'=> $field->getColumns()]) }} >
             <div class="col-span-full inline-flex item-center  py-3 text-sm font-bold uppercase text-slate-600">
-                <span class="bg-white z-[1] px-2">{{ $field->getLabel() }}</span>
+                <span class="bg-white dark:bg-gray-700 z-[1] dark:text-white/90 px-2">{{ $field->getLabel() }}</span>
                 @if($field->isRequired())
-                    <span class="whitespace-nowrap bg-white z-[1] pr-2">
-                <sup class="font-medium text-error-700 dark:text-error-400">*</sup>
+                    <span class="whitespace-nowrap bg-white z-[1] pr-2 dark:bg-gray-700 dark:text-white/90">
+                <sup class="font-medium text-error-700 dark:text-error-500">*</sup>
             </span>
                 @endif
             </div>

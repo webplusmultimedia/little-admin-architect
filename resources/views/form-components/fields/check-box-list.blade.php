@@ -19,7 +19,7 @@
             {{ $attributes->merge(['class'=> $field->getColSpan()]) }}
     >
         <div {{ $attributes->class('grid auto-rows-min')->merge(['class'=> $field->getColumns()]) }}>
-            <div class="col-span-full  py-3 text-sm font-bold uppercase text-slate-600">
+            <div class="col-span-full  py-3 text-sm font-bold uppercase text-slate-600  dark:text-white/90 ">
                 {{ $field->getLabel() }}
                 @if($field->isRequired())
                     <span class="whitespace-nowrap">
