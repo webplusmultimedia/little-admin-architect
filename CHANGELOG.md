@@ -2,6 +2,10 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## dark mode - 2023-07-30
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.2.2...v0.2.3
+
 ## Add group actions - 2023-07-27
 
 **Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.2.1...v0.2.2
