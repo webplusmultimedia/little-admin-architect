@@ -12,9 +12,7 @@
                 <span class="text-sm text-primary">{{ $table->getRecords()->total() }}</span>
             </div>
 
-            <p class="inline-flex items-center space-x-2 text-sm">
-                <span>{{ $table->title }}</span> <span>/</span> <span class="text-gray-400">Liste</span>
-            </p>
+
         </div>
         <div class="flex items-center gap-2">
             @foreach($table->getHeaderActions() as $headerAction)
@@ -32,7 +30,7 @@
                        wire:loading.class.delay="opacity-50"
                        x-data="TableComponent({ livewireId : $wire.__instance.id })"
                 >
-                    <thead class="bg-slate-100  text-start  dark:bg-gray-700">
+                    <thead class="bg-slate-200/70  text-start  dark:bg-gray-700">
                         <tr class=" dark:border-gray-600">
                             @foreach($table->getHeaders() as $header)
                                 {{ $header }}
@@ -76,7 +74,7 @@
         @endif
 
         <div class=" py-5  px-3 border-t  dark:border-gray-400/40">
-            @if(!$table->getRecords()->hasMorePages())
+            @if(!$table->getRecords()->hasPages())
                 <div class="">Nombre d'éléments : {{ $table->getRecords()->count() }}</div>
             @else
                 {{ $table->getRecords()->links() }}
