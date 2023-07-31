@@ -202,7 +202,6 @@
                   x-transition:enter-start="opacity-0"
                   x-transition:enter="delay-100 duration-300"
                   x-transition:enter-end="opacity-100"
-
             >
                 Little Admin
             </span>
@@ -274,6 +273,9 @@
 >
     <div class="container mx-auto ">
         {{ $slot }}
+    </div>
+    <div class="flex items-center justify-center my-5">
+        Création L.A. - Little Admin : Webplus Multimédia
     </div>
 </div>
 
