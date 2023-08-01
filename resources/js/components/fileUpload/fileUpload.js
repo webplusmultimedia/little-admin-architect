@@ -201,6 +201,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         async reorderFiles(newOrder) {
             if (!this.stopDragging) {
                 await this.refreshPhotos(true, newOrder)
+                this.photos = await this.$wire.getUploadFileUrls(this.path) ?? []
                 return
             }
             this.$refs.galleryImages.innerHTML = gallery(this.photos, this.path).getGallery()

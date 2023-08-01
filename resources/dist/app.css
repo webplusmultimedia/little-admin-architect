@@ -2034,9 +2034,6 @@ label {
 .mt-8 {
   margin-top: 2rem;
 }
-.mb-11 {
-  margin-bottom: 2.75rem;
-}
 .block {
   display: block;
 }
@@ -2084,12 +2081,6 @@ label {
 }
 .h-screen {
   height: 100vh;
-}
-.h-10 {
-  height: 2.5rem;
-}
-.h-11 {
-  height: 2.75rem;
 }
 .max-h-\[calc\(100vh_-_15em\)\] {
   max-height: calc(100vh - 15em);
