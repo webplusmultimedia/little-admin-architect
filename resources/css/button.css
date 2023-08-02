@@ -80,6 +80,9 @@
     .btn-text-danger {
         @apply text-error-600 hover:text-error-500 hover:underline underline-offset-4 dark:text-error-600
     }
+    .btn-text-error {
+        @apply text-error-600 hover:text-error-500 hover:underline underline-offset-4 dark:text-error-600
+    }
     .btn-text-warning {
         @apply hover:text-warning-700 text-warning-500 hover:underline underline-offset-4 dark:text-warning-400
     }

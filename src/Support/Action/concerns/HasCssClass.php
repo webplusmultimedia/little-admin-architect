@@ -52,7 +52,7 @@ trait HasCssClass
 
     public function danger(): static
     {
-        $this->color = 'danger ';
+        $this->color = 'error ';
 
         return $this;
     }

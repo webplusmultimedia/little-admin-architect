@@ -16,7 +16,7 @@
     <div x-float.placement.bottom-end.flip.teleport.offset="{ offset : -5 }"
          x-ref="panel"
         class="absolute  rounded-md bg-white z-10 shadow-md border border-primary-200 flex flex-col
-                                   min-w-[10rem] whitespace-nowrap  divide-y text-sm"
+                                   min-w-[10rem] whitespace-nowrap  divide-y text-sm dark:bg-gray-800 dark:text-white dark:border-gray-400/40"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
         x-transition:enter="duration-200"
@@ -31,7 +31,7 @@
             @foreach($actions as $action)
                 @if($action->authorize())
                     <li role="menuitem"
-                        class="p-1 hover:!text-slate-300 hover:bg-gray-100"
+                        class="p-1 hover:text-slate-300 hover:bg-gray-100 dark:hover:bg-transparent dark:hover:text-transparent"
                     >
                         {{ $action }}
                     </li>
@@ -39,5 +39,4 @@
             @endforeach
         </ul>
     </div>
-
 </div>

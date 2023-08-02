@@ -170,10 +170,8 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             }, 50)
 
             window.addEventListener(`${this.path}.save_event`, async (ev) => {
-                if (this.reloadOnSave) {
                     this.stopDragging = false
                     this.photos = await this.$wire.getUploadFileUrls(this.path) ?? []
-                }
                 this.reloadOnSave = false
             })
             let sort = Sortable.create(this.$refs.galleryImages, {
@@ -201,7 +199,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         async reorderFiles(newOrder) {
             if (!this.stopDragging) {
                 await this.refreshPhotos(true, newOrder)
-                this.photos = await this.$wire.getUploadFileUrls(this.path) ?? []
+                //this.photos = await this.$wire.getUploadFileUrls(this.path) ?? []
                 return
             }
             this.$refs.galleryImages.innerHTML = gallery(this.photos, this.path).getGallery()

@@ -57,6 +57,7 @@ btn-transparent
 btn-text-primary
 btn-text-success
 btn-text-danger
+btn-text-error
 btn-text-warning
 btn-text-info
 btn-outline
@@ -70,6 +71,18 @@ btn-small
 modal__small
 modal__large
 modal__medium
+
+bg-primary-500
+bg-warning-500
+!bg-error-500
+bg-info-500
+bg-success-500
+dark:hover:bg-primary-500
+dark:hover:bg-warning-500
+dark:hover:bg-error-500
+dark:hover:bg-info-500
+dark:hover:bg-success-500
+dark:hover:bg-none dark:hover:text-transparent
 "
 
 ></div>
