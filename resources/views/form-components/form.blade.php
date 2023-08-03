@@ -5,7 +5,7 @@
     $button = $form->getSaveButton();
     $buttonCancel = $form->getCancelButton();
 @endphp
-<div x-data="{}" @class(["py-5 px-2 dark:bg-gray-80" => !$form->hasModal(),"py-0 px-0 dark:bg-gray-800" => $form->hasModal()])>
+<div x-data="{}" @class(["py-5 px-2 dark:bg-gray-80" => !$form->hasModal(),"py-0 px-0 dark:bg-gray-800 rounded-lg  dark:border dark:border-gray-400/40" => $form->hasModal()])>
     <div
         @class([
             "flex flex-col md:flex-row justify-between items-center bg-white text-lg font-bold  shadow-sm",

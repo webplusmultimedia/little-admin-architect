@@ -4,7 +4,7 @@
     }
 
     .modal {
-        @apply mx-auto bg-white md:rounded-lg md:shadow-lg max-h-fit overflow-hidden
+        @apply mx-auto bg-white md:rounded-lg md:shadow-lg max-h-fit
     }
 
     .modal__body {

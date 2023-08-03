@@ -3,7 +3,7 @@
 	/** @var Table $table */
 	'table'
 ])
-<div class="flex justify-end  items-center space-x-3">
+<div class="flex justify-end  items-center space-x-3 rounded-lg">
     <div class="flex  w-full bg-gray-50 py-2 px-2  dark:bg-gray-800">
         @if($table->showSearchBar())
 

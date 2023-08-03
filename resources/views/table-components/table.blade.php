@@ -4,17 +4,15 @@
     $sortDirection = $table->getSortDirection();
     $sortColumn = $table->getSortColumn();
 @endphp
-<div class="my-10">
-    <div class="flex justify-between bg-white px-5 py-3 mb-8 dark:bg-gray-800">
+<div class="my-10 rounded-lg">
+    <div class="flex justify-between bg-white px-5 py-3 mb-8 dark:bg-gray-800 rounded-lg">
         <div class="flex flex-col">
             <div class="inline-flex items-center gap-2">
                 <h1 class="text-2xl m-0">{{ $table->title }}</h1>
                 <span class="text-sm text-primary">{{ $table->getRecords()->total() }}</span>
             </div>
-
-
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 rounded-lg">
             @foreach($table->getHeaderActions() as $headerAction)
                 @if($headerAction->authorize())
                     {{ $headerAction }}
@@ -23,7 +21,10 @@
         </div>
     </div>
     <div class="flex flex-col bg-white  rounded-lg border dark:bg-gray-800 dark:border-gray-400/40 dark:text-white" x-data="{}">
-        <x-little-anonyme::table-components.partials.search-bar :table="$table"/>
+        @if($table->showSearchBar() AND $table->hasFilters())
+            <x-little-anonyme::table-components.partials.search-bar :table="$table"/>
+        @endif
+
         @if($table->hasRecords())
             <div class="  overflow-hidden overflow-x-auto  ">
                 <table class="border-collapse table-auto   w-full rounded-lg text-start divide-y shadow-sm dark:text-white dark:border-gray-600"
