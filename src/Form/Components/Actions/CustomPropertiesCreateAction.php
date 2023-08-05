@@ -20,7 +20,7 @@ class CustomPropertiesCreateAction extends FormAction
             ->icon('heroicon-o-plus')
             ->mediumIconSize()
             ->classesStyle('bg-primary-100 hover:bg-primary-200')
-            ->action(function (?array $record, BaseForm $livewire, array $rules, array $attributes, int $key): void {
+            ->action(function (?array $record, BaseForm $livewire, array $rules, array $attributes, array $key): void {
 
                 /** @var array $values */
                 $values = $livewire->validate(rules: $rules, attributes: $attributes);
@@ -28,8 +28,9 @@ class CustomPropertiesCreateAction extends FormAction
                 $field = $livewire->form->getFormFieldByPath($livewire->mountFormActionComponent);
                 if ($field instanceof FileUpload) {
                     $state = $field->getState();
-                    if (isset($state[$key])) {
-                        $state[$key]['customProperties'] = $values;
+
+                    if (isset($state[$key[0]])) {
+                        $state[$key[0]]['customProperties'] = $values;
                         $field->setState($state);
                     }
                 }
@@ -52,26 +53,27 @@ class CustomPropertiesCreateAction extends FormAction
     public function beforeFill(): void
     {
         $record = data_get($this->livewire, $this->livewireData);
-        //store record custom properties
-        if (blank($record) and isset($this->record[data_get($this->livewire, $this->livewireFormKey)])) {
-            $datas = $this->record[data_get($this->livewire, $this->livewireFormKey)]; // one file-upload (might be {file,delete,id} with/without customProperties
-            if (isset($datas['customProperties'])) {
-                $record = $datas['customProperties'];
-            } else {
-                foreach ($this->fields as $field) {
-                    if ('alt' === $field->getName()) {
-                        $record[$field->getName()] = str($datas['file'])
-                            ->beforeLast('.')
-                            ->headline()->value();
 
-                        continue;
-                    }
-                    $record[$field->getName()] = null;
-                }
-            }
-        }
-        data_set($this->livewire, $this->livewireData, $record);
-        $this->record = $record;
+        //store record custom properties
+        /*  if (blank($record) and isset($this->record[data_get($this->livewire, $this->livewireFormKey)])) {
+              $datas = $this->record[data_get($this->livewire, $this->livewireFormKey)]; // one file-upload (might be {file,delete,id} with/without customProperties
+              if (isset($datas['customProperties'])) {
+                  $record = $datas['customProperties'];
+              } else {
+                  foreach ($this->fields as $field) {
+                      if ('alt' === $field->getName()) {
+                          $record[$field->getName()] = str($datas['file'])
+                              ->beforeLast('.')
+                              ->headline()->value();
+
+                          continue;
+                      }
+                      $record[$field->getName()] = null;
+                  }
+              }
+          }
+          data_set($this->livewire, $this->livewireData, $record);
+          $this->record = $record;*/
 
         $this->fill($record);
     }

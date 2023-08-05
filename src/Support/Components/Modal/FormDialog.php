@@ -19,7 +19,6 @@ class FormDialog implements Htmlable
      */
     public function __construct(
         public string $title,
-        public string $subtitle,
         public string $actionLabel,
         public array $fields = [],
     ) {
@@ -29,9 +28,9 @@ class FormDialog implements Htmlable
     /**
      * @param  Field[]  $fields
      */
-    public static function make(string $title, string $subtitle, string $actionLabel, array $fields): FormDialog
+    public static function make(string $title, string $actionLabel, array $fields): FormDialog
     {
-        return new self(title: $title, subtitle: $subtitle, actionLabel: $actionLabel, fields: $fields);
+        return new self(title: $title, actionLabel: $actionLabel, fields: $fields);
     }
 
     public function getClass(): string
@@ -75,7 +74,6 @@ class FormDialog implements Htmlable
             'little-views::modal.form-dialog',
             [
                 'title' => $this->title,
-                'subtitle' => $this->subtitle,
                 'actionLabel' => $this->actionLabel,
                 'btnClass' => $this->getClass(),
                 'fields' => $this->fields,

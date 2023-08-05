@@ -13,7 +13,7 @@ abstract class FormAction extends Action
 {
     protected string $livewireData = 'mountFormActionData';
 
-    protected string $livewireFormKey = 'mountFormAction';
+    protected string $livewireFormKey = 'mountFormActionComponentArguments';
 
     /** @var Field[] */
     protected array $fields;

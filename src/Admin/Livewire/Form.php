@@ -19,7 +19,6 @@ class Form extends BaseForm implements Htmlable
 
     public function toHtml(): string
     {
-
         return $this->render()->render();
     }
 }

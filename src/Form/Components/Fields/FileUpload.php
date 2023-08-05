@@ -10,6 +10,7 @@ use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Str;
 use League\Flysystem\UnableToCheckFileExistence;
 use Livewire\TemporaryUploadedFile;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasCustomProperties;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasFileDirectory;
 
@@ -398,5 +399,19 @@ class FileUpload extends Field
         $this->state($values);
 
         return $this->getUploadFileUrlsUsing();
+    }
+
+    public function editCustomProperties(int $fileId): void
+    {
+        if (isset($this->getState()[$fileId]) and $customProperties = $this->getState()[$fileId]['customProperties'] and $this->livewire instanceof BaseForm) {
+            $this->livewire->mountFormAction = 'editCustomProperties';
+            $this->livewire->mountFormActionComponentArguments = [$fileId];
+            $this->livewire->mountFormActionData = $customProperties;
+
+            //$this->formAction->fill($customProperties);
+            $this->showFormActionComponent();
+        } else {
+            throw new Exception('Can\'t find this file ');
+        }
     }
 }

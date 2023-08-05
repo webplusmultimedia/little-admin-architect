@@ -23,6 +23,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanHi
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanHydrate;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanInitValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasColSpan;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasComponentActions;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasDefaultValue;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasHelperText;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasId;
@@ -36,7 +37,6 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasVa
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithAttributeRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithRules;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\InteractWithWrapper;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateParameters;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\HasRelationship;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractsWithEvaluateParameters;
@@ -54,6 +54,7 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     use CanHydrate;
     use CanInitValue;
     use HasColSpan;
+    use HasComponentActions;
     use HasDefaultValue;
     use HasHelperText;
     use HasId;
@@ -79,8 +80,6 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     public BaseForm|BaseTable|Component $livewire;
 
     protected mixed $oldValue = null;
-
-    protected ?Form $form = null;
 
     public bool $hasFormAction = false;
 
@@ -109,7 +108,6 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     public function record(array|null|Model $record): void
     {
         $this->record = $record;
-        //$this->setOldValue($this->getState());
     }
 
     public function getRecord(): array|null|Model
@@ -134,10 +132,5 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     public function hasFormAction(): bool
     {
         return null !== $this->formAction;
-    }
-
-    public function setForm(Form $form): void
-    {
-        $this->form = $form;
     }
 }

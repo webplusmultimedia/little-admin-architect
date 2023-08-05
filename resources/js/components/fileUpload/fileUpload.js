@@ -26,7 +26,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         stopDragging: false,
         enableCustomProperties,
         mountFormAction(id) {
-            this.$wire.call('mountFormAction', `${this.path}`, id)
+            this.$wire.call('mountFormAction', `${this.path}`, 'editCustomProperties',[id])
         },
         isEnableCustomProperties() {
             return this.enableCustomProperties

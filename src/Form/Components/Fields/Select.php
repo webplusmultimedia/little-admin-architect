@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\CanSearchWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasBelongToRelation;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasFormAction;
@@ -124,5 +125,13 @@ class Select extends Field
     public function eventToGetLabel(): string
     {
         return $this->getStatePath() . '.getLabel_event';
+    }
+
+    public function createOption(): void
+    {
+        if ($this->livewire instanceof BaseForm) {
+            $this->livewire->mountFormAction = 'createOption';
+            $this->showFormActionComponent();
+        }
     }
 }

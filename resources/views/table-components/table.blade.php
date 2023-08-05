@@ -47,7 +47,7 @@
                     <tbody class="divide-y">
                     @foreach($table->getRecords() as $record)
                         <tr wire:key="{{ $table->getLivewireId() . '.tr.'. $record->getKey()  }}"
-                            class="hover:bg-primary-50/50 cursor-pointer dark:border-gray-600 dark:hover:bg-gray-700/50">
+                            class="hover:bg-primary-50/50 cursor-pointer dark:border-gray-600 dark:hover:bg-primary-900/20">
                             @foreach($table->getColumns() as $column)
                                 @php($column->setRecord($record)->livewireId($table->getLivewireId()))
                                 {{ $column }}
