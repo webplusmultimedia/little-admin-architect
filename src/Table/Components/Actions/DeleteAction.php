@@ -23,7 +23,7 @@ class DeleteAction extends BaseRowAction
             ->danger()
             ->requireConfirmation()
             ->confirmQuestion(trans('little-admin-architect::form.confirm_dialog.question'))
-            ->icon('heroicon-s-x-mark');
+            ->icon('heroicon-s-trash');
     }
 
     public function authorize(): bool

@@ -18,7 +18,7 @@ class EditAction extends BaseRowAction
             $this->label(trans('little-admin-architect::table.button.edit'));
         }
         $this->name('edit')
-            ->icon('heroicon-s-pencil')
+            ->icon('heroicon-s-pencil-square')
             ->requireConfirmation(false);
     }
 

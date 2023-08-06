@@ -12,7 +12,7 @@ trait HasIcon
 
     protected string $iconPosition = 'before';
 
-    protected string $iconSize = 'w-4 h-4';
+    protected string $iconSize = 'w-5';
 
     public function icon(string|Closure $icon): static
     {
