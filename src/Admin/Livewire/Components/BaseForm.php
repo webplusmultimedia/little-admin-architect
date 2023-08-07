@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use mysql_xdevapi\Exception;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanInitForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\HasMountFormAction;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\HasNotification;
@@ -68,10 +69,17 @@ class BaseForm extends Component implements HasForm
         $this->form->saveDatasForm();
     }
 
-    /*public function dehydrate(): void
+    public function callAction(string $component, string $actionName, array $arguments = [], bool $skipRender = false): mixed
     {
-        $this->form->dehydrateState();
-    }*/
+        if ($skipRender) {
+            $this->skipRender();
+        }
+        $componentField = $this->form->getFormFieldByPath($component);
+        if ($componentField) {
+            return $componentField->callActionResult(action: $actionName, arguments: $arguments);
+        }
+        throw new Exception("This Component [{$component}] doesn't exist");
+    }
 
     public function updated(string $name, mixed $value): void
     {

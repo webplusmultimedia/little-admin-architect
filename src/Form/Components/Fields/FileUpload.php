@@ -401,6 +401,9 @@ class FileUpload extends Field
         return $this->getUploadFileUrlsUsing();
     }
 
+    /**
+     * @throws Exception
+     */
     public function editCustomProperties(int $fileId): void
     {
         if (isset($this->getState()[$fileId]) and $customProperties = $this->getState()[$fileId]['customProperties'] and $this->livewire instanceof BaseForm) {

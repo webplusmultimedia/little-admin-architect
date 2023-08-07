@@ -20,7 +20,7 @@ trait HasActionFormModal
         $this->setFormActions();
         $this->actionForm = $actionModal;
 
-        if ($this->livewire->{$this->mountFormActionComponent}) {
+        /*if ($this->livewire->{$this->mountFormActionComponent}) {
             $action = $this->getActionFormByName($this->livewire->{$this->mountFormActionComponent});
 
             if ($action) {
@@ -31,7 +31,7 @@ trait HasActionFormModal
                     fields: $action->getFields()
                 ))->setMaxWidth($action->getMaxWidth());
             }
-        }
+        }*/
 
         return $this;
     }

@@ -18,27 +18,36 @@ trait HasMountFormAction
 
     protected string $suffixEventForm = '-action-form';
 
-    public function mountFormAction(string $component, string $actionName, mixed $arguments = []): void
+    public function mountFormAction(string $component, string $actionName, array $arguments = []): void
     {
         $componentField = $this->form->getFormFieldByPath($component);
         if ($componentField) {
-            $componentField->mountActionComponent($actionName, $arguments);
+            $componentField->mountActionComponent(action: $actionName, arguments: $arguments);
+        } else {
+            throw new Exception("This Component [{$component}] doesn't exist");
         }
 
     }
 
     public function CallMountFormAction(): void
     {
-        $action = $this->form->getActionFormByName($this->mountFormActionComponent);
-        if ( ! $action) {
-            throw new Exception('Aucune action trouvée');
+        $componentField = $this->form->getFormFieldByPath($this->mountFormActionComponent);
+        if ($componentField) {
+            $componentField->mountActionComponent(action: 'saveActionModal');
+        } else {
+            throw new Exception("This Component [{$this->mountFormActionComponent}] doesn't exist");
         }
-        $id = $this->id . $this->suffixEventForm;
-        $action->authorizeAccess();
-        $action->handleAction();
-        //$this->notification()->success($action->getNotificationText())->send();
-        $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
-        $this->reset([/*'mountFormActionComponent',*/ 'mountFormAction', 'mountFormActionComponentArguments', 'mountFormActionData']);
+
+        // $action = $this->form->getActionFormByName($this->mountFormActionComponent);
+        //        if (! $action) {
+        //            throw new Exception('Aucune action trouvée');
+        //        }
+        //        $id = $this->id . $this->suffixEventForm;
+        //        $action->authorizeAccess();
+        //        $action->handleAction();
+        //        //$this->notification()->success($action->getNotificationText())->send();
+        //        $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
+        //        $this->reset([/*'mountFormActionComponent',*/ 'mountFormAction', 'mountFormActionComponentArguments', 'mountFormActionData']);
 
     }
 

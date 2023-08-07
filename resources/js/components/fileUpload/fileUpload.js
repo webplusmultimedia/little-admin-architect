@@ -154,7 +154,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             return true
         },
         async deleteUploadFileUsing(key) {
-            let isDelete = await this.$wire.deleteUploadFile(this.path, key)
+            let isDelete = await this.$wire.call('callAction',this.path,'deleteUploadFileUsing', [key],true)
 
             if (isDelete) {
                 this.photos = this.photos.filter((val) => val['id'] !== key)
@@ -171,7 +171,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
 
             window.addEventListener(`${this.path}.save_event`, async (ev) => {
                     this.stopDragging = false
-                    this.photos = await this.$wire.getUploadFileUrls(this.path) ?? []
+                    this.photos = await this.$wire.call('callAction',this.path,'getUploadFileUrlsUsing',[],true) ?? []
                 this.reloadOnSave = false
             })
             let sort = Sortable.create(this.$refs.galleryImages, {
@@ -189,9 +189,9 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         async refreshPhotos(reorder = false, newOrder=null) {
             let photos;
             if (reorder) {
-                photos = await this.$wire.reorderUploadFiles(this.path, newOrder)
+                photos = await this.$wire.call('callAction',this.path,'reorder', [newOrder])
             } else {
-                 photos = await this.$wire.getUploadFileUrls(this.path) ?? []
+                 photos = await this.$wire.call('callAction',this.path,'getUploadFileUrlsUsing',[],true) ?? []
             }
             let tmpFiles = Array.from(this.photos).filter(photo => photo['new'])
             this.photos = photos.concat(tmpFiles)
