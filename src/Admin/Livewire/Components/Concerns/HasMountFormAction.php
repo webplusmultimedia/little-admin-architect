@@ -14,7 +14,7 @@ trait HasMountFormAction
 
     public array $mountFormActionData = [];
 
-    public string|null $mountFormAction = null;
+    public ?string $mountFormAction = null;
 
     protected string $suffixEventForm = '-action-form';
 

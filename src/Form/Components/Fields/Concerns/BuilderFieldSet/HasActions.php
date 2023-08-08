@@ -38,7 +38,7 @@ trait HasActions
         ];
     }
 
-    public function getActionByName(string $name): null|Action
+    public function getActionByName(string $name): ?Action
     {
         if (isset($this->actions[$name])) {
             return $this->actions[$name];

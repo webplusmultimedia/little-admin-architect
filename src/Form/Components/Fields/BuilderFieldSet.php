@@ -32,7 +32,7 @@ class BuilderFieldSet extends Field
 
         $this->actions = $this->getActions();
 
-        $this->afterStateHydrated(static function (array|null $state, BuilderFieldSet $component): void {
+        $this->afterStateHydrated(static function (?array $state, BuilderFieldSet $component): void {
 
             if (blank($state)) {
                 $component->state([
@@ -65,7 +65,7 @@ class BuilderFieldSet extends Field
 
         });
 
-        $this->setBeforeUpdatedValidateValueUsing(static function (array|null $state, BuilderFieldSet $component): bool {
+        $this->setBeforeUpdatedValidateValueUsing(static function (?array $state, BuilderFieldSet $component): bool {
             if (blank($state)) {
                 $component->state([]);
 
