@@ -16,7 +16,7 @@ module.exports = {
         },
         colors: {
             'primary-datepicker' : colors.cyan,
-            primary : colors.fuchsia,
+            primary : colors.yellow,
             secondary : colors.lime,
             info : {...colors.cyan,...{DEFAULT : "#009399"}} ,
             error : {...colors.rose,...{DEFAULT : "#d7035f"}},

@@ -16,6 +16,7 @@ final class Textarea extends Field
     {
         $this->setViewDatas('field', $this);
     }
+
     public function rows(int $rows): Textarea
     {
         $this->rows = $rows;

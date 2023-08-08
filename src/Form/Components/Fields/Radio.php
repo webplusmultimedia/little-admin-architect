@@ -18,6 +18,7 @@ class Radio extends Field
     {
         $this->setViewDatas('field', $this);
     }
+
     public function options(array $options): static
     {
         $this->options = $options;

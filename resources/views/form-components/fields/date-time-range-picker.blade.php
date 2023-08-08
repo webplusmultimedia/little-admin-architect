@@ -47,7 +47,7 @@
                     <div class="relative">
                         <button type="button"
                                 x-on:click.stop="$refs.panel.toggle"
-                                x-on:keyup.esc="$refs.panel.toggle"
+                                x-on:key.esc="$refs.panel.toggle"
                                 x-bind:aria-expanded="show"
                                 class="w-full flex relative"
                         >
@@ -59,9 +59,9 @@
                                    readonly
                             >
                         </button>
-                        <div class="inline-flex gap-2 items-center absolute right-2 bottom-0 top-0 cursor-pointer">
+                        <div class="inline-flex gap-2 items-center absolute right-2 bottom-0 top-0 cursor-pointer pointer-events-none">
                             <x-heroicon-o-x-mark x-on:click.prevent.stop="clearDate" x-show="selectedDay"
-                                                 class="pointer-events-auto" class="w-5 h-auto text-gray-400 hover:text-red-700 transition"
+                                                   class="w-5 h-auto text-gray-400 hover:text-red-700 transition pointer-events-auto"
                             />
                             <x-heroicon-o-calendar-days class="w-5 h-auto text-gray-400 pointer-events-none"/>
                         </div>

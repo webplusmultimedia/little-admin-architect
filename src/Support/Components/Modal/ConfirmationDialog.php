@@ -7,7 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Support\Components\Modal;
 use Exception;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasCssClass;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\HasCssClass;
 
 class ConfirmationDialog implements Htmlable
 {

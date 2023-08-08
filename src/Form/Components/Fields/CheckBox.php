@@ -43,6 +43,7 @@ class CheckBox extends Field
             }
         }
     }
+
     public function setUp(): void
     {
         $this->setViewDatas('field', $this);

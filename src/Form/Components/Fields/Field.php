@@ -133,6 +133,4 @@ abstract class Field extends AbstractField implements CanValidateValuesForRules,
     {
         return null !== $this->formAction;
     }
-
-
 }

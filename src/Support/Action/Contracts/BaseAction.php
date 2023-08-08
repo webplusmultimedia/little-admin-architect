@@ -10,13 +10,13 @@ use Illuminate\Contracts\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseTable;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\CanAuthorizeAccess;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\CanBeDisabled;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasCssClass;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasIcon;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasLabel;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasName;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasRecord;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\CanAuthorizeAccess;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\CanBeDisabled;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\HasCssClass;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\HasIcon;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\HasLabel;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\HasName;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\HasRecord;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateParameters;
 
 abstract class BaseAction implements Htmlable

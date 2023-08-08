@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Action\Contracts;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasAction;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\CanHaveUrl;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\CanNotify;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\CanSizeModal;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasButton;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\InteractWithLivewire;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\CanHaveUrl;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\CanNotify;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\CanSizeModal;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\HasButton;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\InteractWithAlpineData;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\InteractWithLivewire;
 
 abstract class Action extends BaseAction
 {
@@ -18,5 +19,6 @@ abstract class Action extends BaseAction
     use CanSizeModal;
     use HasAction;
     use HasButton;
+    use InteractWithAlpineData;
     use InteractWithLivewire;
 }

@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
-use Webplusmultimedia\LittleAdminArchitect\Support\Action\concerns\HasCssClass;
+use Webplusmultimedia\LittleAdminArchitect\Support\Action\Concerns\HasCssClass;
 
 class FormDialog implements Htmlable
 {

@@ -76,6 +76,7 @@ export function listeDate(date) {
                 return this.date.getDate()
             },
             ['x-on:click.prevent.stop']() {
+                this.$refs.panel.toggle()
                 return this.select(this.date)
             },
 

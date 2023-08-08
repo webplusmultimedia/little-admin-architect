@@ -44,9 +44,32 @@ trait HasBuilderFields
         $this->fields[$key] = $field;
     }
 
-    public function getFormFields()
+    public function addFormFields(): void
     {
         $formFields = [];
 
+    }
+
+    protected function addFormFieldsByName(string $keyField): array
+    {
+        $fields = [];
+        //$record = 0;
+
+        foreach ($this->formSchemas as $formField) {
+            // $keyField = str($this->keyField)->append($record)->value();
+            $pathField = str($this->getStatePath())->append('.', $keyField)->value();
+
+            $field = clone $formField;
+            $field->setPrefixPath($pathField);
+            $field->record($this->getState());
+            $field->statusForm($this->statusForm);
+            $field->livewire($this->livewire);
+
+            $field->setUp();
+            $fields[] = $field;
+            //$record ++;
+        }
+
+        return $fields;
     }
 }

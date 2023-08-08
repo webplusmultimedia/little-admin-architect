@@ -17,6 +17,7 @@ import {laImageGalleryComponent} from "./components/fileUpload/support/gallery";
 import {buttonActionComponent} from "./components/buttons/action";
 import Sortable from 'sortablejs';
 import {ModalFormComponent} from "./components/modal/ModalFormComponent";
+import {BuilderFieldsSetComponent} from "./components/BuilderFieldsSet/BuilderFieldsSetComponent";
 
 window.Sortable = Sortable
 
@@ -35,6 +36,7 @@ Alpine.data('timePicker', timePicker)
 Alpine.data('fileUpload',fileUpload)
 Alpine.data('laImageGalleryComponent',laImageGalleryComponent)
 Alpine.data('buttonActionComponent',buttonActionComponent)
+Alpine.data('BuilderFieldsSetComponent',BuilderFieldsSetComponent)
 document.addEventListener('alpine:init', () => {
     Alpine.store('laDatas', {
         isTinyEditorShow: false,

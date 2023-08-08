@@ -9,18 +9,18 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\Build
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasBelongToManyRelation;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasBuilderFields;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasGridColumns;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 class BuilderFieldSet extends Field
 {
+    use HasActions;
     use HasBelongToManyRelation;
     use HasBuilderFields;
     use HasGridColumns;
-    use HasActions;
 
     protected string $view = 'builder-field-set';
 
     protected string $keyField = 'record-';
+
     protected string $colSpan = 'lg:col-span-full';
 
     //protected ?string $prefixPath = 'record';
@@ -34,36 +34,27 @@ class BuilderFieldSet extends Field
 
         $this->afterStateHydrated(static function (array|null $state, BuilderFieldSet $component): void {
 
-
             if (blank($state)) {
                 $component->state([
-                    'record-1' => ['marge' => 'test', 'at' => NULL],
-                    'record-2' => ['marge' => 'test2', 'at' => NULL],
+                    /* 'record-1' => ['marge' => 'test', 'at' => NULL],
+                     'record-2' => ['marge' => 'test2', 'at' => NULL],*/
                 ]);
+
+                return;
             }
 
+            if (is_array($state) and ! str((string) key($state))->startsWith($component->keyField)) {
+
+                $values = collect($state)
+                    ->map(fn (array $value, int $key) => [str($component->keyField)->append($key)->value() => $value])
+                    ->collapse()
+                    ->toArray();
+                $component->state($values);
+            }
 
             /** @var array $values */
             foreach ($component->getState() as $keyField => $values) {
-                $fields = [];
-                //$record = 0;
-
-                foreach ($component->formSchemas as $formField) {
-                    // $keyField = str($this->keyField)->append($record)->value();
-                    $pathField = str($component->getStatePath())->append('.', $keyField)->value();
-
-                    $field = clone $formField;
-                    $field->setPrefixPath($pathField);
-                    $field->record($component->getState());
-                    $field->statusForm($component->statusForm);
-                    $field->livewire($component->livewire);
-
-                    $field->setUp();
-                    $fields[] = $field;
-                    //$record ++;
-                }
-                $component->addFields($fields, $keyField);
-
+                $component->addFields($component->addFormFieldsByName($keyField), $keyField);
             }
 
             foreach ($component->fields as $items) {
@@ -89,7 +80,7 @@ class BuilderFieldSet extends Field
 
     public function getWireKey(): string
     {
-        $title =  Str::random(5);
+        $title = Str::random(5);
 
         return (string) str($this->getStatePath())->append('-', str($title)->kebab());
     }
@@ -140,5 +131,32 @@ class BuilderFieldSet extends Field
         }
 
         return $rules;
+    }
+
+    public function addFieldsToFieldSet(): void
+    {
+        /** @var array $state */
+        $state = $this->getState();
+        $count = count($state);
+        $keyField = str($this->keyField)->append($count)->value();
+        $value = [];
+        foreach ($this->formSchemas as $formSchema) {
+            $value[$formSchema->getName()] = $formSchema->defaultValue;
+        }
+        $state = array_merge($state, [$keyField => $value]);
+        $this->state($state);
+
+        $this->addFields($this->addFormFieldsByName($keyField), $keyField);
+
+    }
+
+    protected function deleteFieldToFieldSet(string $key): void
+    {
+        //dump($key);
+    }
+
+    protected function reorderFieldToFieldSet(array $keys): void
+    {
+        //dump($keys);
     }
 }
