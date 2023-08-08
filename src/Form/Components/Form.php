@@ -58,14 +58,15 @@ final class Form extends BaseFormAlias implements Htmlable
         $this->initDatasFormOnMount($this->model);
         $this->setUpFieldsOnForm();
         $this->initSelectUsing();
+        $this->hydrateState();
         if (self::CREATED === $this->statusForm) {
             $this->applyDefaultValue();
         }
-        $this->hydrateState();
 
         $this->setPagesForResource($resource);
         $this->headerActions($this->pageForResource::getActions());
         $this->actionModal(FormModal::make($this->livewireId . '-action-form'));
+
 
     }
 

@@ -14,6 +14,10 @@ class Radio extends Field
 
     protected array $options = [];
 
+    public function setUp(): void
+    {
+        $this->setViewDatas('field', $this);
+    }
     public function options(array $options): static
     {
         $this->options = $options;

@@ -43,4 +43,10 @@ trait HasBuilderFields
     {
         $this->fields[$key] = $field;
     }
+
+    public function getFormFields()
+    {
+        $formFields = [];
+
+    }
 }

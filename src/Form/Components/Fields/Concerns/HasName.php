@@ -8,7 +8,7 @@ trait HasName
 {
     protected string $name;
 
-    protected ?string $prefixPath = 'data';
+    public ?string $prefixPath = 'data';
 
     protected string $prefixRelationPath = 'record';
 

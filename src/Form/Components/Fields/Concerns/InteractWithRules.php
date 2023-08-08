@@ -22,7 +22,8 @@ trait InteractWithRules
         if ($this->checkRelation()) {
             $rules[$this->getStatePath()] = $this->rules;
         } else {
-            $rules['data.' . $this->getName()] = $this->rules;
+           // $rules['data.' . $this->getName()] = $this->rules;
+            $rules[$this->getStatePath()] = $this->rules;
         }
 
         return $rules;
@@ -30,11 +31,7 @@ trait InteractWithRules
 
     public function beforeSaveRulesUsing(array $rules): array
     {
-        /* if ($this->checkRelation()) {*/
         $rules[$this->getStatePath()] = $this->rules;
-        /* } else {
-             $rules['data.' . $this->getName()] = $this->rules;
-         }*/
 
         return $rules;
     }

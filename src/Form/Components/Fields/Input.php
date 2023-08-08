@@ -106,4 +106,9 @@ final class Input extends Field
     {
         return $this->inputMode;
     }
+
+   public function setUp(): void
+   {
+       $this->setViewDatas('field', $this);
+   }
 }

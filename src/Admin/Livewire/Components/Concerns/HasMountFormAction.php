@@ -26,9 +26,11 @@ trait HasMountFormAction
         } else {
             throw new Exception("This Component [{$component}] doesn't exist");
         }
-
     }
 
+    /**
+     * @throws Exception
+     */
     public function CallMountFormAction(): void
     {
         $componentField = $this->form->getFormFieldByPath($this->mountFormActionComponent);
@@ -37,18 +39,6 @@ trait HasMountFormAction
         } else {
             throw new Exception("This Component [{$this->mountFormActionComponent}] doesn't exist");
         }
-
-        // $action = $this->form->getActionFormByName($this->mountFormActionComponent);
-        //        if (! $action) {
-        //            throw new Exception('Aucune action trouvée');
-        //        }
-        //        $id = $this->id . $this->suffixEventForm;
-        //        $action->authorizeAccess();
-        //        $action->handleAction();
-        //        //$this->notification()->success($action->getNotificationText())->send();
-        //        $this->dispatchBrowserEvent('close-modal', ['id' => $id]);
-        //        $this->reset([/*'mountFormActionComponent',*/ 'mountFormAction', 'mountFormActionComponentArguments', 'mountFormActionData']);
-
     }
 
     public function closeMountFormAction(): void

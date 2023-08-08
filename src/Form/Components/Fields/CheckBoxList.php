@@ -34,7 +34,7 @@ class CheckBoxList extends Field
 
     public function setUp(): void
     {
-
+        $this->setViewDatas('field', $this);
         if ($this->hasRelationship() and BelongsToMany::class === $this->getRelationType()) {
             $this->options(static function (CheckBoxList $component): array {
                 $model = $component->getBuilderRelationship()->getModel();

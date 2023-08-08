@@ -14,16 +14,20 @@ export function ModalFormComponent(id = null) {
         init(){
             window.addEventListener('show-modal',(ev)=>{
                 this.eventId = ev.detail.id
-                this.open()
+                if (ev.detail.id === this.id) {
+                    this.open()
+                }
 
             })
 
             window.addEventListener('close-modal',(ev)=>{
-                this.eventId = ev.detail.id
-                this.close()
-                this.$wire.mountFormActionData = []
-                this.$wire.mountFormActionComponent = null
-                this.$wire.mountFormAction = null
+                if (ev.detail.id === this.id) {
+                    this.close()
+                    this.$wire.mountFormActionData = []
+                    this.$wire.mountFormActionComponent = null
+                    this.$wire.mountFormAction = null
+                    this.$wire.mountFormActionComponentArguments = []
+                }
             })
         }
     }

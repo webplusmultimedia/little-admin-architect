@@ -17,6 +17,10 @@ class DateTimePicker extends Field
 
     protected string $view = 'date-time-range-picker';
 
+    public function setUp(): void
+    {
+        $this->setViewDatas('field', $this);
+    }
     public function livewire(Component|BaseForm $livewire): void
     {
         parent::livewire($livewire);

@@ -12,6 +12,10 @@ final class Textarea extends Field
 
     protected int $rows = 6;
 
+    public function setUp(): void
+    {
+        $this->setViewDatas('field', $this);
+    }
     public function rows(int $rows): Textarea
     {
         $this->rows = $rows;
