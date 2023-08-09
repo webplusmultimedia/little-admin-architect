@@ -15,7 +15,7 @@ export function gallery(files) {
             return `<div class="la-file-upload-image-wrapper"
                         x-data="laImageGalleryComponent({ startUpload : ${!!file['start']}, newImg : ${!!file['new']}, isInit : ${!!file['isInit']} })"
                         x-ref="la_file_upload_image_wrapper"
-                        data-id="${key}"
+                        data-id="${file['id']}"
                     >
                         <img src="${url}" alt="image" class="object-cover w-full">
 
