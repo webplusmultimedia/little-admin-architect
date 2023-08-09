@@ -43,6 +43,7 @@ trait HasMountFormAction
 
     public function closeMountFormAction(): void
     {
+        $this->resetValidation('mountFormActionData.*');
         $this->reset(['mountFormActionComponent', 'mountFormAction', 'mountFormActionComponentArguments', 'mountFormActionData']);
     }
 }
