@@ -72,4 +72,19 @@ trait HasBuilderFields
 
         return $fields;
     }
+
+    protected function fill(): void
+    {
+        $this->fields = [];
+        /** @var array $values */
+        foreach ($this->getState() as $keyField => $values) {
+            $this->addFields($this->addFormFieldsByName($keyField), $keyField);
+        }
+
+        foreach ($this->fields as $items) {
+            foreach ($items as $item) {
+                $item->hydrateState();
+            }
+        }
+    }
 }

@@ -36,15 +36,12 @@ class BuilderFieldSet extends Field
 
             if (blank($state)) {
                 $component->state([
-                    /* 'record-1' => ['marge' => 'test', 'at' => NULL],
-                     'record-2' => ['marge' => 'test2', 'at' => NULL],*/
                 ]);
 
                 return;
             }
 
             if (is_array($state) and ! str((string) key($state))->startsWith($component->keyField)) {
-
                 $values = collect($state)
                     ->map(fn (array $value, int $key) => [str($component->keyField)->append($key)->value() => $value])
                     ->collapse()
@@ -52,17 +49,7 @@ class BuilderFieldSet extends Field
                 $component->state($values);
             }
 
-            /** @var array $values */
-            foreach ($component->getState() as $keyField => $values) {
-                $component->addFields($component->addFormFieldsByName($keyField), $keyField);
-            }
-
-            foreach ($component->fields as $items) {
-                foreach ($items as $item) {
-                    $item->hydrateState();
-                }
-            }
-
+            $component->fill();
         });
 
         $this->setBeforeUpdatedValidateValueUsing(static function (?array $state, BuilderFieldSet $component): bool {
@@ -147,16 +134,47 @@ class BuilderFieldSet extends Field
         $this->state($state);
 
         $this->addFields($this->addFormFieldsByName($keyField), $keyField);
+        foreach ($this->fields as $items) {
+            foreach ($items as $item) {
+                $item->hydrateState();
+            }
+        }
 
     }
 
     protected function deleteFieldToFieldSet(string $key): void
     {
-        //dump($key);
+        $state = $this->getState();
+        if (isset($state[$key])) {
+            unset($state[$key]);
+            $i = 0;
+            $newState = [];
+            foreach ($state as $value) {
+                $key = str($this->keyField)->append($i)->value();
+                $newState[$key] = $value;
+                $i++;
+            }
+            $this->state($newState);
+            $this->fill();
+
+            return;
+        }
+
+        throw new FieldException("Can't find {$key}");
     }
 
     protected function reorderFieldToFieldSet(array $keys): void
     {
-        //dump($keys);
+        $state = $this->getState();
+        $newState = [];
+        foreach ($keys as $key) {
+            if (isset($state[$key])) {
+                $newState[$key] = $state[$key];
+            } else {
+                throw new FieldException("Can't find {$key}");
+            }
+        }
+        $this->state($newState);
+        $this->fill();
     }
 }
