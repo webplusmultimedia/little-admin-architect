@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns;
 
-use Illuminate\Support\Collection;
 use Livewire\Exceptions\PropertyNotFoundException;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAlias;
 
@@ -42,5 +41,4 @@ trait InteractsWithForms
             throw $exception;
         }
     }
-
 }
