@@ -56,17 +56,17 @@ trait InteractsWithForms
         return $options;
     }
 
-   /* public function getSearchResultUsing(string $name, string $term): array
-    {
-        $this->skipRender();
-        $options = [];
-        $results = $this->getSearchResultsUsing($name, $term);
-        if ($results instanceof Collection) {
-            $res = $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
+    /* public function getSearchResultUsing(string $name, string $term): array
+     {
+         $this->skipRender();
+         $options = [];
+         $results = $this->getSearchResultsUsing($name, $term);
+         if ($results instanceof Collection) {
+             $res = $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
 
-            return $res;
-        }
+             return $res;
+         }
 
-        return $options;
-    }*/
+         return $options;
+     }*/
 }
