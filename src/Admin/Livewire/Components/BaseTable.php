@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components;
 
-use Illuminate\Support\Collection;
+use Exception;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanFilterColumn;
@@ -85,17 +85,14 @@ class BaseTable extends Component implements HasTable
         return 'little-views::table-components.pagination.pagination';
     }
 
-    public function getSearchResultUsing(string $name, mixed $search): array
+    public function callAction(string $component, string $actionName, array $arguments = [], bool $skipRender = false): mixed
     {
-        $options = [];
-
-        if ($field = $this->table->getFilterFieldByName($name) and $field instanceof Select) {
-            $results = call_user_func($field->searchResultsUsing(), $search);
-            if ($results instanceof Collection) {
-                $options = $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
-            }
+        if ($skipRender) {
+            $this->skipRender();
         }
-
-        return $options;
+        if ($componentField = $this->table->getFilterFieldByName($component) and $componentField instanceof Select) {
+            return $componentField->callActionResult(action: $actionName, arguments: $arguments);
+        }
+        throw new Exception("This Component [{$component}] doesn't exist");
     }
 }

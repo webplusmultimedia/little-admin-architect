@@ -13,7 +13,7 @@ trait CanHideOnForm
 
     protected bool|Closure $hideOnUpdated = false;
 
-    protected string $statusForm;
+    protected string $statusForm = Form::CREATED;
 
     public function hideOnCreate(bool|Closure $hide = true): static
     {
