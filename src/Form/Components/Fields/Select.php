@@ -52,17 +52,18 @@ class Select extends Field
             if ( ! $this->isMultiple()) {
                 $this->getOptionsUsing(static function (Select $component): Collection {
                     $query = $component->getBuilderRelationship();
+                    $model = $query->getModel();
 
                     if ($component->searchable) {
                         return $query
                             ->limit($component->loadLimit)
                             ->get()
-                            ->pluck(value: $component->getLabelField(), key: 'id');
+                            ->pluck(value: $component->getLabelField(), key: $model->getKeyName());
                     }
 
                     return $component->getBuilderRelationship()
                         ->get()
-                        ->pluck(value: $component->getLabelField(), key: 'id');
+                        ->pluck(value: $component->getLabelField(), key: $model->getKeyName());
                 });
 
                 $this->getSelectOptionLabelUsing(static function (Select $component, mixed $state): ?string {
@@ -76,7 +77,7 @@ class Select extends Field
                 $this->getSelectOptionLabelUsing(static function (Select $component, array $state): Collection {
                     $model = $component->getBuilderRelationship()->getModel();
 
-                    return $model->whereIn($model->getKeyName(), $state)->get()->pluck(value: $component->getLabelField(), key: 'id');
+                    return $model->whereIn($model->getKeyName(), $state)->get()->pluck(value: $component->getLabelField(), key: $model->getKeyName());
                 });
 
                 $this->afterStateHydrated(static function (array $state, Select $component): void {
@@ -105,14 +106,20 @@ class Select extends Field
 
             }
             $this->getSearchResultsUsing(static function (Select $component, string $search): Collection {
+                $model = $component->getBuilderRelationship()->getModel();
+
                 return $component->getBuilderRelationship()
                     ->where($component->getLabelField(), 'like', '%' . $search . '%')
                     ->limit($component->loadLimit)
                     ->get()
-                    ->pluck(value: $component->getLabelField(), key: 'id');
+                    ->pluck(value: $component->getLabelField(), key: $model->getKeyName());
             });
         } else {
             $this->formAction = null;
+        }
+
+        if ($this->selectOptionLabelUsing() and ! $this->isMultiple()) {
+            $this->setDefaultLabelForSelect();
         }
 
     }
@@ -133,5 +140,31 @@ class Select extends Field
             $this->livewire->mountFormAction = 'createOption';
             $this->showFormActionComponent();
         }
+    }
+
+    public function getSearchResultUsing(string $term): array
+    {
+        $options = [];
+        $results = $this->evaluate(closure: $this->searchResultsUsing, include: ['search' => $term]);
+        if ($results instanceof Collection) {
+            $res = $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
+
+            return $res;
+        }
+
+        return $options;
+    }
+
+    public function getOptionUsing(string $name): array
+    {
+
+        /** @var Collection|array<null> $results */
+        $results = $this->evaluate($this->optionsUsing);
+        $options = [];
+        if ($results instanceof Collection) {
+            return $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
+        }
+
+        return $options;
     }
 }

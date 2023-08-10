@@ -39,15 +39,20 @@ trait CanSearchWithLivewire
         return $this->selectOptionLabelUsing;
     }
 
+    protected function hasSelectOptionLabelUsing(): bool
+    {
+        return null !== $this->selectOptionLabelUsing;
+    }
+
     protected function getOptionsLabelUsingAll(): array
     {
         if ($this->selectOptionLabelUsing and $this->getState()) {
             if ($this->hasRelationship()) {
                 /** @var Collection $results */
-                $results = app()->call($this->selectOptionLabelUsing(), ['component' => $this, 'state' => $this->getState()]);
+                $results = $this->evaluate(closure: $this->selectOptionLabelUsing());
             } else {
                 /** @var Collection $results */
-                $results = call_user_func($this->selectOptionLabelUsing(), $this->getState());
+                $results = $this->evaluate(closure: $this->selectOptionLabelUsing(), include: ['ids' => $this->getState()]);
             }
 
             return $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();

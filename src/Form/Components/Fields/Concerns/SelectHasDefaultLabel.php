@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
-
 trait SelectHasDefaultLabel
 {
     protected ?string $defaultLabelForSelect = null;
@@ -15,13 +13,13 @@ trait SelectHasDefaultLabel
         return $this->defaultLabelForSelect;
     }
 
-    public function setDefaultLabelForSelect(Form $form): void
+    public function setDefaultLabelForSelect(): void
     {
-        if ($form->hasSelectOptionLabelsUsing() and isset($form->getSelectOptionLabelsUsing()[$this->getStatePath()])) {
+        if ($this->hasSelectOptionLabelUsing()) {
             if ($this->hasRelationship()) {
-                $this->defaultLabelForSelect = app()->call($form->getSelectOptionLabelsUsing()[$this->getStatePath()], ['component' => $this, 'state' => $this->getState()]);
+                $this->defaultLabelForSelect = $this->evaluate(closure: $this->selectOptionLabelUsing);
             } else {
-                $this->defaultLabelForSelect = call_user_func($form->getSelectOptionLabelsUsing()[$this->getStatePath()], $this->getState());
+                $this->defaultLabelForSelect = $this->evaluate(closure: $this->selectOptionLabelUsing, include: ['id' => $this->getState()]);
             }
         }
     }

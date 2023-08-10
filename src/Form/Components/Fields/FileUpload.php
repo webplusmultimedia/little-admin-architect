@@ -24,7 +24,7 @@ class FileUpload extends Field
     public function setUp(): void
     {
         $this->setViewDatas('field', $this);
-        if (! $this->canEditCustomProperties) {
+        if ( ! $this->canEditCustomProperties) {
             $this->defaultCustomProperties();
         }
 
@@ -134,7 +134,7 @@ class FileUpload extends Field
         $this->setBeforeUpdatedValidateValueUsing(static function (FileUpload $component, ?array $state): bool {
             $component->livewire->dispatchBrowserEvent($component->eventForSave());
             if (blank($state)) {
-                $component->state(NULL);
+                $component->state(null);
 
                 return true;
             }
@@ -152,7 +152,7 @@ class FileUpload extends Field
                             $component->getDisk()->delete($_file);
                         }
 
-                        return NULL;
+                        return null;
                     }
 
                     if (is_array($file) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
@@ -160,13 +160,13 @@ class FileUpload extends Field
                         return ['file' => $component->saveAttachement($file), 'customProperties' => $file['customProperties']];
                     }
 
-                    return NULL;
+                    return null;
                 })
-                ->filter(fn(null|string|array $file) => ! blank($file))
+                ->filter(fn (null|string|array $file) => ! blank($file))
                 ->values()->all();
             //dd($files);
             if (blank($files)) {
-                $component->state(NULL);
+                $component->state(null);
 
                 return true;
             }
@@ -208,7 +208,7 @@ class FileUpload extends Field
 
             }
         } catch (UnableToCheckFileExistence $exception) {
-            return NULL;
+            return null;
         }
 
         $path = $file->storePubliclyAs($this->getBaseDirectory(), $newName, $this->getDiskName());
@@ -218,7 +218,7 @@ class FileUpload extends Field
             return $newName;
         }
 
-        return NULL;
+        return null;
     }
 
     public function dehydrateRules(array $rules): array
@@ -296,13 +296,13 @@ class FileUpload extends Field
 
         if ($storage = $this->getStorageForFile($file)) {
             return [
-                'url'  => Croppa::url(str($file)->prepend('storage/')->toString(), 320, 200),
+                'url' => Croppa::url(str($file)->prepend('storage/')->toString(), 320, 200),
                 'size' => round($storage->size($file) / 1000, 2) . 'Kb',
                 'name' => basename($storage->path($file)),
             ];
         }
 
-        return NULL;
+        return null;
     }
 
     private function getStorageForFile(string $file): ?FilesystemAdapter
@@ -310,11 +310,11 @@ class FileUpload extends Field
         /** @var FilesystemAdapter $storage */
         $storage = $this->getDisk();
         try {
-            if (! $storage->exists($file)) {
-                return NULL;
+            if ( ! $storage->exists($file)) {
+                return null;
             }
         } catch (UnableToCheckFileExistence $exception) {
-            return NULL;
+            return null;
         }
 
         return $storage;
@@ -343,7 +343,7 @@ class FileUpload extends Field
                 if (isset($file['file']) and isset($file['delete']) and ! $file['delete']) {
                     return $file['id'] === $key;
                 }
-                if (! isset($file['file']) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
+                if ( ! isset($file['file']) and str($file[key($file)])->startsWith('livewire-file:') and TemporaryUploadedFile::unserializeFromLivewireRequest($file[key($file)])->exists()) {
                     return key($file) === $key;
                 }
 
@@ -387,18 +387,21 @@ class FileUpload extends Field
     public function reorder(array $newOrder): array
     {
         $values = [];
+        /** @var array<string,array> $state */
         $state = $this->getState();
         //remove delete images first
-        $deleteState = collect($state)->filter(fn($value) => ! in_array($value['id'], $newOrder))->values()->all();
-        $newOrderState = collect($state)->filter(fn($value) => in_array($value['id'], $newOrder))->values()->all();
+        /** @var array<string,array> $deleteState */
+        $deleteState = collect($state)->filter(fn ($value) => ! in_array($value['id'], $newOrder))->values()->all();
+        /** @var array<string,array> $newOrderState */
+        $newOrderState = collect($state)->filter(fn ($value) => in_array($value['id'], $newOrder))->values()->all();
 
         foreach ($newOrder as $order) {
-            if (!blank($orderState = collect($newOrderState)->filter(fn($value) => $value['id'] === $order)->values()->all())) {
-                $mergeTmp   = array_merge($values,$orderState);
+            if ( ! blank($orderState = collect($newOrderState)->filter(fn ($value) => $value['id'] === $order)->values()->all())) {
+                $mergeTmp = array_merge($values, $orderState);
                 $values = $mergeTmp;
             }
         }
-        $values = array_merge($values,$deleteState);
+        $values = array_merge($values, $deleteState);
         if (blank($values)) {
             return [];
         }

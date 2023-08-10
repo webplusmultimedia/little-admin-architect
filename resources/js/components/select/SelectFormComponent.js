@@ -41,7 +41,7 @@ export function SelectFormComponent({
         },
         async getResultsOnSearchTerm(term) {
             if (!this.hasOptionUsing) {
-                this.options = await this.$wire.getSearchResultUsing(componentId, term)
+                this.options = await this.$wire.call('callAction',componentId,'getSearchResultUsing', [term],true)
                 this.addSelectedOptionToNewList()
                 if (this.isDynamicOptions) {  //For belongToMany
                     this.state = [...this.dynamicOptions]

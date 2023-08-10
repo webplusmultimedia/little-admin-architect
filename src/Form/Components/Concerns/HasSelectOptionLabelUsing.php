@@ -35,18 +35,18 @@ trait HasSelectOptionLabelUsing
         foreach ($this->getFormFields() as $field) {
             if ($field instanceof Select) {
                 //$field->setUp();
-                if ($field->optionsUsing()) {
-                    $this->addToListOptionsUsing($field->getStatePath(), $field->optionsUsing());
-                }
-                if ($field->searchResultsUsing()) {
-                    $this->addToSearchResultsUsing($field->getStatePath(), $field->searchResultsUsing());
-                }
-                if ($field->selectOptionLabelUsing()) {
+                /* if ($field->optionsUsing()) {
+                     $this->addToListOptionsUsing($field->getStatePath(), $field->optionsUsing());
+                 }
+                 if ($field->searchResultsUsing()) {
+                     $this->addToSearchResultsUsing($field->getStatePath(), $field->searchResultsUsing());
+                 }*/
+                /*if ($field->selectOptionLabelUsing()) {
                     $this->addSelectOptionLabelsUsing($field->getStatePath(), $field->selectOptionLabelUsing());
                     if ( ! $field->isMultiple()) {
                         $field->setDefaultLabelForSelect($this);
                     }
-                }
+                }*/
             }
         }
     }

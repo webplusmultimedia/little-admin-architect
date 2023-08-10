@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns;
+namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\BuilderFieldSet;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
 
@@ -104,5 +104,27 @@ trait HasBuilderFields
         }
 
         return $newState;
+    }
+
+    public function getFormFieldByPath(string $path): ?Field
+    {
+        foreach ($this->fields as $fields) {
+            if ($field = collect($fields)->filter(fn (Field $field) => $field->getStatePath() === $path)->first()) {
+                return $field;
+            }
+        }
+
+        return null;
+    }
+
+    public function getFormFieldByName(string $name): ?Field
+    {
+        foreach ($this->fields as $fields) {
+            if ($field = collect($fields)->filter(fn (Field $field) => $field->getName() === $name)->first()) {
+                return $field;
+            }
+        }
+
+        return null;
     }
 }

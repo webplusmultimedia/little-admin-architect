@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns;
 
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\DateTimePicker;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Input;
 
 trait HasFields
 {
@@ -26,12 +24,35 @@ trait HasFields
 
     public function getFormFieldByName(string $name): ?Field
     {
-        return collect(static::$formFields)->filter(fn (Field $field) => $field->getName() === $name)->first();
+        foreach (static::$formFields as $field) {
+            if ($field->getName() === $name) {
+                return $field;
+            }
+            if (method_exists($field, 'getFormFieldByName')) {
+                if ($childField = $field->getFormFieldByName($name)) {
+                    return $childField;
+                }
+            }
+        }
+
+        return null;
+        // return collect(static::$formFields)->filter(fn (Field $field) => $field->getName() === $name)->first();
     }
 
     public function getFormFieldByPath(string $path): ?Field
     {
-        return collect(static::$formFields)->filter(fn (Field $field) => $field->getStatePath() === $path)->first();
+        foreach (static::$formFields as $field) {
+            if ($field->getStatePath() === $path) {
+                return $field;
+            }
+            if (method_exists($field, 'getFormFieldByPath')) {
+                if ($childField = $field->getFormFieldByPath($path)) {
+                    return $childField;
+                }
+            }
+        }
+
+        return null;
     }
 
     public function setUpFieldsOnForm(bool $shouldUsePath = true): void
@@ -46,14 +67,6 @@ trait HasFields
             if ($field->isHiddenOnForm()) {
                 unset(static::$formFields[$key]);
             }
-            //Add date from when Need, because can't livewire it data when range
-            /*if ($field instanceof DateTimePicker and $field->getDateFromWireName()) {
-                $from = Input::make($field->getDateFromName())->hidden();
-                $from->record($this->model);
-                $field->livewire($this->livewire);
-                $from->statusForm($this->statusForm);
-                static::$formFields[] = $from;
-            }*/
         }
     }
 

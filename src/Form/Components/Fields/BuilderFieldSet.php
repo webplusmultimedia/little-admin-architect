@@ -6,8 +6,8 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
 use Illuminate\Support\Str;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\BuilderFieldSet\HasActions;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\BuilderFieldSet\HasBuilderFields;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasBelongToManyRelation;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasBuilderFields;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasGridColumns;
 
 class BuilderFieldSet extends Field
@@ -22,6 +22,8 @@ class BuilderFieldSet extends Field
     protected string $keyField = 'record-';
 
     protected string $colSpan = 'lg:col-span-full';
+
+    protected array $stateTemp = [];
 
     //protected ?string $prefixPath = 'record';
 
@@ -48,7 +50,7 @@ class BuilderFieldSet extends Field
                     ->toArray();
                 //if for advertance you add another field when this fiel is filled, you need to add a default value on missing one
                 if (count($component->formSchemas) > count(collect($newState)->first())) {
-                   $newState = $component->fillMissingValues($newState);
+                    $newState = $component->fillMissingValues($newState);
                 }
                 $component->state($newState);
             }
@@ -62,10 +64,27 @@ class BuilderFieldSet extends Field
 
                 return true;
             }
+            $component->stateTemp = $state;
             $records = collect($state)->values()->toArray();
+
             $component->state($records);
 
             return true;
+        });
+
+        $this->afterStateDehydratedUsing(static function (?array $state, BuilderFieldSet $component): array {
+
+            if (blank($state)) {
+
+                return [];
+            }
+
+            if (is_array($state) and ! str((string) key($state))->startsWith($component->keyField)) {
+                return $component->stateTemp;
+            }
+
+            return $state;
+
         });
     }
 
@@ -126,17 +145,22 @@ class BuilderFieldSet extends Field
 
     public function addFieldsToFieldSet(): void
     {
+
         /** @var array $state */
         $state = $this->getState();
         $count = count($state);
-        $keyField = str($this->keyField)->append($count)->value();
+        $keyField = str($this->keyField)->append($count)->value(); // @todo : test key when add
+        while (array_key_exists($keyField, $state)) {
+            $count++;
+            $keyField = str($this->keyField)->append($count)->value();
+        }
         $value = [];
         foreach ($this->formSchemas as $formSchema) {
             $value[$formSchema->getName()] = $formSchema->getDefaultValue();
         }
         $state = array_merge($state, [$keyField => $value]);
         $this->state($state);
-        //dd($this->getState());
+
         $this->addFields($this->addFormFieldsByName($keyField), $keyField);
         foreach ($this->fields as $items) {
             foreach ($items as $item) {
@@ -151,12 +175,10 @@ class BuilderFieldSet extends Field
         $state = $this->getState();
         if (isset($state[$key])) {
             unset($state[$key]);
-            $i = 0;
+
             $newState = [];
-            foreach ($state as $value) {
-                $key = str($this->keyField)->append($i)->value();
-                $newState[$key] = $value;
-                $i++;
+            foreach ($state as $k => $value) {
+                $newState[$k] = $value;
             }
             $this->state($newState);
             $this->fill();
@@ -171,12 +193,9 @@ class BuilderFieldSet extends Field
     {
         $state = $this->getState();
         $newState = [];
-        $i=0;
         foreach ($keys as $key) {
             if (isset($state[$key])) {
-                $keyField = str($this->keyField)->append($i)->value();
-                $newState[$keyField] = $state[$key];
-                $i++;
+                $newState[$key] = $state[$key];
             } else {
                 throw new FieldException("Can't find {$key}");
             }

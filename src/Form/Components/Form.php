@@ -14,7 +14,6 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasActionFormModal;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasFormFieldsAction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasHeaderAction;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasSelectOptionLabelUsing;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\FileUpload;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithRecord;
@@ -27,7 +26,6 @@ final class Form extends BaseFormAlias implements Htmlable
     use HasFormFieldsAction;
     use HasHeaderAction;
     use HasModal;
-    use HasSelectOptionLabelUsing;
     use InteractWithLivewire;
     use InteractWithRecord;
 
@@ -57,7 +55,6 @@ final class Form extends BaseFormAlias implements Htmlable
         $this->initMode();
         $this->initDatasFormOnMount($this->model);
         $this->setUpFieldsOnForm();
-        $this->initSelectUsing();
         $this->hydrateState();
         if (self::CREATED === $this->statusForm) {
             $this->applyDefaultValue();
@@ -96,7 +93,6 @@ final class Form extends BaseFormAlias implements Htmlable
         $this->livewire = $livewire; //@phpstan-ignore-line
         $this->initDatasFormOnMount($record);
         $this->setUpFieldsOnForm(false);
-        $this->initSelectUsing();
     }
 
     public function initMode(): void

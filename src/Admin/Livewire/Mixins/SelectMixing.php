@@ -26,23 +26,24 @@ class SelectMixing
         };
     }
 
-    public function getSearchResultsUsing(): Closure
-    {
-        return function (string $name, string $search): array|Collection {
-            /** @var Form $form * */
-            $form = $this->form;
-            /** @var Select $field */
-            $field = $form->getFormFieldByPath($name);
-            if ($form->hasSearchResultsUsing() and isset($form->getSearchResultsUsing()[$name])) {
-                if ($field->hasRelationship()) {
-                    return app()->call($form->getSearchResultsUsing()[$name], ['component' => $field, 'search' => $search]);
-                }
-
-                return call_user_func($form->getSearchResultsUsing()[$name], $search);
-            }
-
-            return [];
-        };
-
-    }
+//    public function getSearchResultsUsing(): Closure
+//    {
+//        return function (string $name, string $search): array|Collection {
+//            /** @var Form $form * */
+//            $form = $this->form;
+//            /** @var Select $field */
+//            $field = $form->getFormFieldByPath($name);
+//
+//            if ($form->hasSearchResultsUsing() and isset($form->getSearchResultsUsing()[$name])) {
+//                if ($field->hasRelationship()) {
+//                    return app()->call($form->getSearchResultsUsing()[$name], ['component' => $field, 'search' => $search]);
+//                }
+//
+//                return call_user_func($form->getSearchResultsUsing()[$name], $search);
+//            }
+//
+//            return [];
+//        };
+//
+//    }
 }

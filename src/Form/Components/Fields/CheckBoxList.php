@@ -58,7 +58,7 @@ class CheckBoxList extends Field
             });
 
             $this->afterStateHydrated(static function (?array $state, CheckBoxList $component): void {
-                if (is_null($state)) {
+                if (null === $state) {
                     $component->state([]);
                 }
                 $component->state($state);
@@ -89,7 +89,7 @@ class CheckBoxList extends Field
             $this->addRules('in:' . implode(',', array_keys($this->evaluate($this->options))));
 
             $this->afterStateHydrated(static function (?array $state, CheckBoxList $component): void {
-                if (is_null($state)) {
+                if (null === $state) {
                     $component->state([]);
                 }
 

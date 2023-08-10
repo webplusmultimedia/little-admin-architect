@@ -56,7 +56,7 @@ trait InteractsWithForms
         return $options;
     }
 
-    public function getSearchResultUsing(string $name, string $term): array
+   /* public function getSearchResultUsing(string $name, string $term): array
     {
         $this->skipRender();
         $options = [];
@@ -68,5 +68,5 @@ trait InteractsWithForms
         }
 
         return $options;
-    }
+    }*/
 }
