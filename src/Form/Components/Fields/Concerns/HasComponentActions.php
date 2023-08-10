@@ -78,7 +78,7 @@ trait HasComponentActions
             $action->handleAction();
             $this->livewire->form->getActionModal()->content(null);
             $this->livewire->dispatchBrowserEvent('close-modal', ['id' => $this->getFormActionId()]);
-            $this->livewire->reset([/*'mountFormActionComponent',*/ 'mountFormAction', 'mountFormActionComponentArguments', 'mountFormActionData']);
+            $this->livewire->reset(['mountFormActionComponent', 'mountFormAction', 'mountFormActionComponentArguments', 'mountFormActionData']);
         }
     }
 

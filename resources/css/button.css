@@ -2,9 +2,7 @@
     .group-btn {
         @apply flex gap-2
     }
-    .btn-transparent {
-        @apply !bg-transparent hover:!bg-transparent
-    }
+
     .btn {
         @apply bg-gray-300 hover:bg-gray-500 hover:text-white text-gray-700 duration-300 font-medium
     }
@@ -40,6 +38,9 @@
     }
 
     .btn-danger {
+        @apply bg-error-600 hover:bg-error-700 text-white
+    }
+    .btn-error {
         @apply bg-error-600 hover:bg-error-700 text-white
     }
 
@@ -88,5 +89,8 @@
     }
     .btn-text-info {
         @apply hover:text-info-500 text-info-600 hover:underline underline-offset-4 dark:text-info-400
+    }
+    .btn-transparent {
+        @apply bg-transparent hover:bg-transparent
     }
 }

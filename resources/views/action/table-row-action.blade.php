@@ -2,7 +2,7 @@
     @if($action->getType() === 'link')
         <a href="{{ url($action->getUrl()) }}"
            @class([ $action->getClass(),'inline-flex items-center justify-left w-full gap-1 transition',
-           "dark:hover:text-white dark:hover:bg-".str($action->getColor())->trim()."-500  rounded-md p-2 hover:no-underline" => $action->isInGroupAction() ])
+           "hover:text-white hover:bg-".str($action->getColor())->trim()."-500  rounded-md p-2 hover:no-underline" => $action->isInGroupAction() ])
            {{ $action->getAlpineDispatch() }}
            target="{{$action->getTargetLink()}}"
         >
@@ -19,7 +19,7 @@
     @else
         <button type="button"
                 @class([ $action->getClass(),'inline-flex items-center justify-left gap-1 w-full',
-           "dark:hover:text-white dark:hover:bg-".str($action->getColor())->trim()."-500 rounded-md p-2 hover:no-underline" => $action->isInGroupAction() ])
+           "hover:text-white hover:bg-".str($action->getColor())->trim()."-500 rounded-md p-2 hover:no-underline" => $action->isInGroupAction() ])
                 wire:click="{{ $action->getWireClickAction() }}"
                 wire:loading.attr="disabled" wire:target="{{  $action->getWireClickAction() }}"
         >

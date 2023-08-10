@@ -43,30 +43,4 @@ trait InteractsWithForms
         }
     }
 
-    public function getOptionUsing(string $name): array
-    {
-        $this->skipRender();
-        /** @var Collection|array<null> $results */
-        $results = $this->getOptionsUsing($name);
-        $options = [];
-        if ($results instanceof Collection) {
-            return $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
-        }
-
-        return $options;
-    }
-
-    /* public function getSearchResultUsing(string $name, string $term): array
-     {
-         $this->skipRender();
-         $options = [];
-         $results = $this->getSearchResultsUsing($name, $term);
-         if ($results instanceof Collection) {
-             $res = $results->map(fn ($value, $key) => ['value' => $key, 'label' => $value])->values()->toArray();
-
-             return $res;
-         }
-
-         return $options;
-     }*/
 }

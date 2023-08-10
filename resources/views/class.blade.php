@@ -47,13 +47,14 @@ text-tag-warning
 text-tag-danger
 text-tag-primary
 text-tag
+btn-transparent
 btn-success
 btn-error
 btn-secondary
 btn-info
 btn-danger
 btn-warning
-btn-transparent
+
 btn-text-primary
 btn-text-success
 btn-text-danger
@@ -74,7 +75,8 @@ modal__medium
 
 bg-primary-500
 bg-warning-500
-!bg-error-500
+bg-error-500
+hover:bg-error-500
 bg-info-500
 bg-success-500
 dark:hover:bg-primary-500

@@ -12,6 +12,10 @@ trait HasMountTableAction
 {
     public ?string $mountTableAction = null;
 
+    public ?string $mountTableActionComponent = null;
+
+    public array $mountTableActionComponentArguments = [];
+
     public array $mountTableActionData = [];
 
     public mixed $mountTableActionRecord = null;
