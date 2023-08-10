@@ -21,4 +21,9 @@ trait HasDefaultValue
 
         return $this;
     }
+
+    public function getDefaultValue(): mixed
+    {
+        return $this->defaultValue;
+    }
 }

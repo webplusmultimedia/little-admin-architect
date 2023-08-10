@@ -42,11 +42,15 @@ class BuilderFieldSet extends Field
             }
 
             if (is_array($state) and ! str((string) key($state))->startsWith($component->keyField)) {
-                $values = collect($state)
+                $newState = collect($state)
                     ->map(fn (array $value, int $key) => [str($component->keyField)->append($key)->value() => $value])
                     ->collapse()
                     ->toArray();
-                $component->state($values);
+                //if for advertance you add another field when this fiel is filled, you need to add a default value on missing one
+                if (count($component->formSchemas) > count(collect($newState)->first())) {
+                   $newState = $component->fillMissingValues($newState);
+                }
+                $component->state($newState);
             }
 
             $component->fill();
@@ -101,7 +105,7 @@ class BuilderFieldSet extends Field
             $valuesFields = [];
             /** @var Field $field */
             foreach ($fields as $field) {
-                $valuesFields[$field->getName()] = $field->defaultValue ?? $field->getState();
+                $valuesFields[$field->getName()] = $field->getDefaultValue() ?? $field->getState();
             }
             $values[$key] = $valuesFields;
         }
@@ -128,11 +132,11 @@ class BuilderFieldSet extends Field
         $keyField = str($this->keyField)->append($count)->value();
         $value = [];
         foreach ($this->formSchemas as $formSchema) {
-            $value[$formSchema->getName()] = $formSchema->defaultValue;
+            $value[$formSchema->getName()] = $formSchema->getDefaultValue();
         }
         $state = array_merge($state, [$keyField => $value]);
         $this->state($state);
-
+        //dd($this->getState());
         $this->addFields($this->addFormFieldsByName($keyField), $keyField);
         foreach ($this->fields as $items) {
             foreach ($items as $item) {
@@ -167,9 +171,12 @@ class BuilderFieldSet extends Field
     {
         $state = $this->getState();
         $newState = [];
+        $i=0;
         foreach ($keys as $key) {
             if (isset($state[$key])) {
-                $newState[$key] = $state[$key];
+                $keyField = str($this->keyField)->append($i)->value();
+                $newState[$keyField] = $state[$key];
+                $i++;
             } else {
                 throw new FieldException("Can't find {$key}");
             }

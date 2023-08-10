@@ -87,4 +87,22 @@ trait HasBuilderFields
             }
         }
     }
+
+    private function fillMissingValues(array $newState): array
+    {
+        $valueSchema = [];
+        foreach ($this->formSchemas as $formSchema) {
+            $valueSchema[$formSchema->getName()] = $formSchema->getDefaultValue();
+        }
+
+        foreach ($newState as $key => $items) {
+            $itemKeys = collect($valueSchema)->diffKeys($items);
+            foreach ($itemKeys as $keyItem => $itemKey) {
+                $items[$keyItem] = $itemKey;
+            }
+            $newState[$key] = $items;
+        }
+
+        return $newState;
+    }
 }
