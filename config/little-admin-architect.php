@@ -59,6 +59,9 @@ return [
     'table' => [
         'rowsPerPage' => 20,
     ],
+    'attachments' =>[
+      'root-path' => 'attachments'
+    ],
 
     'grid' => [
         'col1' => 'lg:grid-cols-1',

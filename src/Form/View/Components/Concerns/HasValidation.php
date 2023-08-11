@@ -6,7 +6,6 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns;
 
 use Illuminate\Contracts\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
-use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 trait HasValidation
 {

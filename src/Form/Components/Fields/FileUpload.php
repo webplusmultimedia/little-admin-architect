@@ -23,6 +23,7 @@ class FileUpload extends Field
 
     public function setUp(): void
     {
+        $this->baseDirectory = config('little-admin-architect.attachments.root-path');
         $this->setViewDatas('field', $this);
         if ( ! $this->canEditCustomProperties) {
             $this->defaultCustomProperties();

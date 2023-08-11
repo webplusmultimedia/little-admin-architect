@@ -50,5 +50,6 @@ class ImageColumn extends contracts\AbstractColumn
 
         $this->sortable(false);
         $this->setSearch(null);
+        $this->baseDirectory = config('little-admin-architect.attachments.root-path');
     }
 }

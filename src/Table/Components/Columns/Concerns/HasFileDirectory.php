@@ -11,7 +11,7 @@ trait HasFileDirectory
 {
     protected ?string $disk = null;
 
-    protected string $baseDirectory = 'attachements';
+    protected string $baseDirectory = 'attachments';
 
     protected ?string $directory = null;
 
