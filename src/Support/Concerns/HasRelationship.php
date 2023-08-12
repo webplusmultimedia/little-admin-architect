@@ -15,6 +15,8 @@ trait HasRelationship
 {
     protected ?string $relationship = null;
 
+    protected bool $hasRelationship = false;
+
     protected mixed $valueForRelation = null;
 
     protected mixed $relationClass = null;
@@ -36,7 +38,7 @@ trait HasRelationship
 
     public function hasRelationship(): bool
     {
-        return null !== $this->relationship;
+        return null !== $this->relationship or $this->hasRelationship;
     }
 
     public function getRelationType(): string|false

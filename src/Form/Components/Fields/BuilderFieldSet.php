@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
+use Closure;
 use Illuminate\Support\Str;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\BuilderFieldSet\HasActions;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\BuilderFieldSet\HasBuilderFields;
-use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasBelongToManyRelation;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasGridColumns;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasManyRelation;
 
 class BuilderFieldSet extends Field
 {
     use HasActions;
-    use HasBelongToManyRelation;
     use HasBuilderFields;
     use HasGridColumns;
+    use HasManyRelation;
 
     protected string $view = 'builder-field-set';
 
@@ -34,58 +35,70 @@ class BuilderFieldSet extends Field
 
         $this->actions = $this->getActions();
 
-        $this->afterStateHydrated(static function (?array $state, BuilderFieldSet $component): void {
+        if ( ! $this->hasRelationship()) {
+            $this->afterStateHydrated(static function (?array $state, BuilderFieldSet $component): void {
 
-            if (blank($state)) {
-                $component->state([
-                ]);
+                if (blank($state)) {
+                    $component->state([
+                    ]);
 
-                return;
-            }
-
-            if (is_array($state) and ! str((string) key($state))->startsWith($component->keyField)) {
-                $newState = collect($state)
-                    ->map(fn (array $value, int $key) => [str($component->keyField)->append($key)->value() => $value])
-                    ->collapse()
-                    ->toArray();
-                //if for advertance you add another field when this fiel is filled, you need to add a default value on missing one
-                if (count($component->formSchemas) > count(collect($newState)->first())) {
-                    $newState = $component->fillMissingValues($newState);
+                    return;
                 }
-                $component->state($newState);
-            }
 
-            $component->fill();
-        });
+                if (is_array($state) and ! str((string) key($state))->startsWith($component->keyField)) {
+                    $newState = collect($state)
+                        ->map(fn (array $value, int $key) => [str($component->keyField)->append($key)->value() => $value])
+                        ->collapse()
+                        ->toArray();
+                    //if for advertance you add another field when this fiel is filled, you need to add a default value on missing one
+                    if (count($component->formSchemas) > count(collect($newState)->first())) {
+                        $newState = $component->fillMissingValues($newState);
+                    }
+                    $component->state($newState);
+                }
 
-        $this->setBeforeUpdatedValidateValueUsing(static function (?array $state, BuilderFieldSet $component): bool {
-            if (blank($state)) {
-                $component->state([]);
+                $component->fill();
+            });
+
+            $this->setBeforeUpdatedValidateValueUsing(static function (?array $state, BuilderFieldSet $component): bool {
+                if (blank($state)) {
+                    $component->state([]);
+
+                    return true;
+                }
+                $component->stateTemp = $state;
+                $records = collect($state)->values()->toArray();
+
+                $component->state($records);
 
                 return true;
-            }
-            $component->stateTemp = $state;
-            $records = collect($state)->values()->toArray();
+            });
 
-            $component->state($records);
+            $this->afterStateDehydratedUsing(static function (?array $state, BuilderFieldSet $component): array {
 
-            return true;
-        });
+                if (blank($state)) {
 
-        $this->afterStateDehydratedUsing(static function (?array $state, BuilderFieldSet $component): array {
+                    return [];
+                }
 
-            if (blank($state)) {
+                if (is_array($state) and ! str((string) key($state))->startsWith($component->keyField)) {
+                    return $component->stateTemp;
+                }
 
-                return [];
-            }
+                return $state;
 
-            if (is_array($state) and ! str((string) key($state))->startsWith($component->keyField)) {
-                return $component->stateTemp;
-            }
+            });
+        } else {
+            $this->relationship = $this->getName();
+            $queryRelationship = $this->getBuilderRelationship();
+        }
+    }
 
-            return $state;
+    public function relationship(?string $relationship = null, string $labelField = null, Closure $query = null): static
+    {
+        $this->hasRelationship = true;
 
-        });
+        return $this;
     }
 
     public function getWireKey(): string
