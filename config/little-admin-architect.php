@@ -59,8 +59,8 @@ return [
     'table' => [
         'rowsPerPage' => 20,
     ],
-    'attachments' =>[
-      'root-path' => 'attachments'
+    'attachments' => [
+        'root-path' => 'attachments',
     ],
 
     'grid' => [

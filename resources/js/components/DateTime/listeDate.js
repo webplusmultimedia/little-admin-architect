@@ -44,16 +44,22 @@ export function listeDate(date) {
                     this.range_start_at = this.date
                     this._periodRange = Period.createFromDate(this._rangeSelected.start_at, this.date)
                     this.periodRange = null
+
                 } else {
+
                     this.rangeSelected = this.selectedDay = this._rangeSelected
                     this._rangeSelected = this.resetRange()
                     this.set_selectedDay(this.rangeSelected)
                     this.periodRange = Period.createFromRange(this.rangeSelected)
-                    this.show = !this.show
+                    //this.show = !this.show
+                    this.$refs.panel.toggle()
+
                 }
                 return;
             }
             setSelectedDate(this)
+
+            this.$refs.panel.toggle()
             this.showDateTime()
         },
         /* Events binding for date btn */
@@ -76,7 +82,7 @@ export function listeDate(date) {
                 return this.date.getDate()
             },
             ['x-on:click.prevent.stop']() {
-                this.$refs.panel.toggle()
+
                 return this.select(this.date)
             },
 
