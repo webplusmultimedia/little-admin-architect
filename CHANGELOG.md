@@ -2,6 +2,10 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## add : hasMany relationship to BuilderFieldSet - 2023-08-15
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.2.4...v0.2.5
+
 ## add BuilderFieldSet a repeater component - 2023-08-09
 
 **Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.2.3...v0.2.4
