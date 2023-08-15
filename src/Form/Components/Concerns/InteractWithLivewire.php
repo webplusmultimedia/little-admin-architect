@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\FieldException;
 
 /** @property BaseForm $livewire */
 trait InteractWithLivewire
@@ -66,7 +67,7 @@ trait InteractWithLivewire
                 }
             } catch (Exception $e) {
                 DB::rollBack();
-                dd($e->getMessage());
+                throw new FieldException('A problem causing by saving relationship');
             }
         }
 

@@ -24,8 +24,6 @@ class BaseForm extends Component implements HasForm
     use HasMountFormAction;
     use HasNotification;
     use InteractsWithForms;
-
-    //use InteractsWithUploadFiles;
     use WithFileUploads;
 
     public ?Model $data = null;
