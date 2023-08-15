@@ -19,12 +19,15 @@
                  wire:key="{{ $field->getWireKey()  }}"
                  data-id="{{ $keys }}"
             >
-                @if($keys )
+                @if($keys)
                     <div class="bg-gray-50 rounded-t-md py-1 dark:bg-gray-900 flex items-center justify-between">
                         <div class="inline-flex items-center">
-                            <span class="la-icon-grip">{{ $field->getActionByName('reorder') }}</span>
+                            @if(!$field->hasRelationship())
+                                <span class="la-icon-grip">{{ $field->getActionByName('reorder') }}</span>
+                            @endif
                             <span class="text-sm   uppercase pl-2">{{ $keys }}</span>
                         </div>
+
                         {{ $field->getActionByName('delete')->wireClick("callAction('{$field->getStatePath()}','deleteFieldToFieldSet',['{$keys}'])") }}
                     </div>
                 @endif

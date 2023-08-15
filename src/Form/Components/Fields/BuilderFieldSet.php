@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
 use Closure;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\BuilderFieldSet\HasActions;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\BuilderFieldSet\HasBuilderFields;
@@ -33,9 +36,8 @@ class BuilderFieldSet extends Field
         //$this->setPrefixPath(str($this->prefixPath)->append('.',$this->getName()));
         $this->setViewDatas('field', $this);
 
-        $this->actions = $this->getActions();
-
         if ( ! $this->hasRelationship()) {
+            $this->actions = $this->getActions();
             $this->afterStateHydrated(static function (?array $state, BuilderFieldSet $component): void {
 
                 if (blank($state)) {
@@ -86,19 +88,68 @@ class BuilderFieldSet extends Field
                 }
 
                 return $state;
-
             });
         } else {
             $this->relationship = $this->getName();
-            $queryRelationship = $this->getBuilderRelationship();
+            $this->actions = $this->getActions();
+            $this->afterStateHydrated(static function (null|array|Collection $state, BuilderFieldSet $component): void {
+                if (blank($state)) {
+                    $component->state([]);
+
+                    return;
+                }
+
+                if ($state instanceof Collection) {
+                    $newState = $state
+                        ->map(fn (Model $value, int $key) => [str($component->keyField)->append($key)->value() => $value])
+                        ->collapse()
+                        ->toArray();
+                    //if for advertance you add another field when this fiel is filled, you need to add a default value on missing one
+                    if (count($component->formSchemas) > count(collect($newState)->first())) {
+                        $newState = $component->fillMissingValues($newState);
+                    }
+                    $component->state($newState);
+                }
+
+                $component->fill();
+            });
+
+            $this->setBeforeUpdatedValidateValueUsing(static function (Collection|array $state, BuilderFieldSet $component): bool {
+                return false;
+            });
+
+            $this->setBeforeCreatedValidateValueUsing(static function (Collection|array $state, BuilderFieldSet $component): bool {
+                return false;
+            });
+
+            $this->afterStateDehydratedUsing(static function (Collection|array $state, BuilderFieldSet $component): array {
+                if (blank($state)) {
+                    return [];
+                }
+                if ($state instanceof Collection) {
+                    $newState = $state
+                        ->map(fn (Model $value, int $key) => [str($component->keyField)->append($key)->value() => $value])
+                        ->collapse()
+                        ->toArray();
+
+                    return $newState;
+                }
+
+                return $state;
+            });
         }
     }
 
-    public function relationship(?string $relationship = null, string $labelField = null, Closure $query = null): static
+    public function relationship(string $relationship = null, string $labelField = null, Closure $query = null): static
     {
         $this->hasRelationship = true;
 
         return $this;
+    }
+
+    protected function checkRelation(): bool // check if relation in livewire record
+    {
+        return $this->hasRelationship() and HasMany::class === $this->getRelationType();
     }
 
     public function getWireKey(): string
@@ -152,6 +203,8 @@ class BuilderFieldSet extends Field
                 $rules = $item->beforeSaveRulesUsing($rules);
             }
         }
+
+        $rules[$this->getStatePath() . '.*'] = ['array'];
 
         return $rules;
     }

@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use mysql_xdevapi\Exception;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\CanInitForm;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\HasMountFormAction;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\HasNotification;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\InteractsWithForms;
-use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\InteractsWithUploadFiles;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\HasForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAlias;
 
@@ -84,6 +83,10 @@ class BaseForm extends Component implements HasForm
 
     public function updated(string $name, mixed $value): void
     {
-        $this->form->updated(name: $name, value: $value);
+        $field = $this->form->getFormFieldByPath($name);
+        if ($field) {
+            $field->setState($value); // do not remove or change
+            $field->afterStateUpdatedUsing();
+        }
     }
 }

@@ -6,22 +6,24 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns
 
 use Closure;
 use Exception;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
 
 trait HasState
 {
     protected mixed $state = null;
 
+    protected ?Field $parentField = null;
+
     protected ?Closure $afterStateUpdated = null;
 
     public function getState(): mixed
     {
-        if ( ! $this->state) {
+        if (null === $this->state) {
             if ($this->checkRelation()) {
                 return $this->getRelationState();
             }
-            /*if (is_array($this->record)) {
-                return data_get($this->livewire, $this->getName(), null);
-            }*/
+
             return data_get($this->livewire, $this->getStatePath());
         }
 
@@ -31,16 +33,15 @@ trait HasState
     public function state(mixed $state): void
     {
         $this->state = $state;
-        /*if (is_array($this->record)) {
-            data_set($this->livewire, $this->getName(), $state);
-        }*/
         data_set($this->livewire, $this->getStatePath(), $state);
     }
 
     public function setState(mixed $value): void
     {
         $this->state = $value;
-        $this->state($value);
+        if (null === $this->parentField) {
+            $this->state($value);
+        }
     }
 
     public function afterStateUpdated(Closure $afterStateUpdated): static
@@ -59,14 +60,22 @@ trait HasState
 
     protected function getRelationState(): mixed
     {
-        if ( ! isset($this->livewire->record[$this->getName()])) {
+        if (null === data_get($this->livewire, $this->getStatePath(), null)) {
             if ($this->record->{$this->name}) {
-                return $this->record->{$this->name}->modelKeys();
+                if (HasMany::class !== $this->getRelationType()) {
+                    return $this->record->{$this->name}->modelKeys();
+                }
+
+                return $this->record->{$this->name};
             }
             throw new Exception('Call to a non existing relationship [' . $this->relationship . '] on Select field [' . $this->name . ']');
         }
 
         return data_get($this->livewire, $this->getStatePath());
-        // return $this->livewire->record[$this->name];
+    }
+
+    public function setParentField(?Field $parentField): void
+    {
+        $this->parentField = $parentField;
     }
 }

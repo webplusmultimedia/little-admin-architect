@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns;
 
+use Exception;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 
 /** @property BaseForm $livewire */
@@ -14,6 +17,7 @@ trait InteractWithLivewire
     {
         if ($this->hasRules()) {
             if ($this->livewire instanceof BaseForm) {
+                //dd($this->getRulesBeforeValidate(),$this->livewire->data);
                 $datas = $this->livewire->validate(rules: $this->getRulesBeforeValidate(), attributes: $this->getAttributesRules());
                 $this->livewire->form->authorizeAccess();
                 if ( ! $this->livewire->data?->exists) {
@@ -42,11 +46,27 @@ trait InteractWithLivewire
     protected function saveRelations(): void
     {
         if ($this->hasDatasRelationshipForSave) {
-            foreach ($this->datasRelation as $name => $value) {
-                //@Todo : get the name and check if having fields to save in the relationship for fieldSet component (morphMany, hasMany ...)
-                if ($this->livewire->data->{$name}() instanceof BelongsToMany) {
-                    $this->livewire->data->{$name}()->sync($value);
+            try {
+
+                DB::beginTransaction();
+                foreach ($this->datasRelation as $name => $value) {
+                    //@Todo : get the name and check if having fields to save in the relationship for fieldSet component (morphMany, hasMany ...)
+                    $relationship = $this->livewire->data->{$name}();
+                    if ($relationship instanceof BelongsToMany) {
+                        $relationship->sync($value);
+                    }
+                    if ($relationship instanceof HasMany) {
+                        /** @var array<string,array> $value */
+                        $datas = collect($value)->values()->all();
+                        $relationship->delete();
+                        $relationship->createMany($datas);
+                        $this->livewire->data->refresh();
+                    }
+                    DB::commit();
                 }
+            } catch (Exception $e) {
+                DB::rollBack();
+                dd($e->getMessage());
             }
         }
 

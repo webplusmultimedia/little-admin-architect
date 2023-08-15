@@ -64,6 +64,7 @@ trait HasBuilderFields
             $field->record($this->getState());
             $field->statusForm($this->statusForm);
             $field->livewire($this->livewire);
+            $field->setParentField($this);
 
             $field->setUp();
             $fields[] = $field;
@@ -76,9 +77,12 @@ trait HasBuilderFields
     protected function fill(): void
     {
         $this->fields = [];
-        /** @var array $values */
-        foreach ($this->getState() as $keyField => $values) {
-            $this->addFields($this->addFormFieldsByName($keyField), $keyField);
+        $state = $this->getState();
+        if (is_array($state)) {
+            /** @var array $values */
+            foreach ($state as $keyField => $values) {
+                $this->addFields($this->addFormFieldsByName($keyField), $keyField);
+            }
         }
 
         foreach ($this->fields as $items) {

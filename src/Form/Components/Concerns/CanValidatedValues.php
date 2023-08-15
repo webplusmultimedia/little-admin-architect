@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait CanValidatedValues
 {
@@ -20,9 +21,10 @@ trait CanValidatedValues
             foreach ($this->getFormFields() as $field) {
                 $values = $field->getValidatedValues(values: $values, datas: $datas, model: $this->model);
                 //Save datas for relationship for save after saving livewire data
-                if ($field->hasRelationship() and BelongsToMany::class === $field->getRelationType()) {
+                if ($field->hasRelationship() and in_array($field->getRelationType(), [BelongsToMany::class, HasMany::class])) {
                     $this->datasRelation[$field->getName()] = $field->getState();
                     $this->hasDatasRelationshipForSave = true;
+                    data_forget($this->livewire, $field->getStatePath());
                 }
             }
         }

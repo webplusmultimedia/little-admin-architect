@@ -8,6 +8,7 @@ use Closure;
 use Exception;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasBelongToRelation;
 
@@ -59,7 +60,7 @@ trait HasRelationship
         return $this->hasRelationship() and in_array(HasBelongToRelation::class, class_uses_recursive($this), true) and BelongsToMany::class === $this->getRelationType();
     }
 
-    protected function getInstanceRelationship(): BelongsTo|BelongsToMany
+    protected function getInstanceRelationship(): BelongsTo|BelongsToMany|HasMany
     {
         try {
             if ( ! $this->instanceRelationCache) {

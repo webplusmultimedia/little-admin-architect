@@ -10,7 +10,7 @@ trait HasName
 
     public ?string $prefixPath = 'data';
 
-    protected string $prefixRelationPath = 'record';
+    protected string $prefixRelationPath = 'data';
 
     public function name(string $name): static
     {
@@ -32,7 +32,7 @@ trait HasName
     public function getStatePath(): string
     {
         if ($this->checkRelation()) {
-            return $this->getPrefixRelationPath() . $this->name;
+            return $this->getPrefixPath() . $this->name . '-r';
         }
 
         return $this->getPrefixPath() . $this->name;
