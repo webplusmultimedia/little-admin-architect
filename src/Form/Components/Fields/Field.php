@@ -41,7 +41,7 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateParameter
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\HasRelationship;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractsWithEvaluateParameters;
 
-abstract class Field extends AbstractField implements CanValidateValuesForRules, CanGetAttributesRules, CanInteractWithRules
+abstract class Field extends AbstractField implements CanGetAttributesRules, CanInteractWithRules, CanValidateValuesForRules
 {
     use CanBeDisabled;
     use CanBeHidden;
