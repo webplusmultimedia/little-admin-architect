@@ -84,4 +84,9 @@ return [
             SubstituteBindings::class,
         ],
     ],
+    'translate' =>[
+        'active' => false,
+        'lang' => ['fr','en','it'],
+        'default' => 'fr',
+    ]
 ];

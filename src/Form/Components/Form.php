@@ -14,6 +14,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Actions\Button;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasActionFormModal;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasFormFieldsAction;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasHeaderAction;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\HasTranslatedField;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns\InteractWithLivewire;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\FileUpload;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\InteractWithRecord;
@@ -28,6 +29,7 @@ final class Form extends BaseFormAlias implements Htmlable
     use HasModal;
     use InteractWithLivewire;
     use InteractWithRecord;
+    use HasTranslatedField;
 
     protected string $view = 'form';
 

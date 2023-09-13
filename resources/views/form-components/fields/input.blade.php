@@ -15,7 +15,7 @@
     <x-dynamic-component :component="$field->getWrapperView()"
                          :id="$field->getWrapperId()"
                          {{ $attributes->class('')->merge(['class'=> $field->getColSpan()]) }}
-                         @class([  'hidden' => $field->getType() === 'hidden'])
+                         @class([  'hidden' => $field->getType()->value === 'hidden'])
                          x-data="{ errors : $wire.__instance.errors}"
     >
         <x-little-anonyme::form-components.fields.partials.label class="form-label"
@@ -29,7 +29,7 @@
                 'wire:model' . $field->getWireModifier() => $field->getStatePath(),
                 'id' => $id,
 
-                'type' => $field->getType(),
+                'type' => $field->getType()->value,
                 'placeholder' => $field->getPlaceHolder(),
                 'aria-describedby' =>  $id,
                 'minlength' => $field->getMinLength() ,

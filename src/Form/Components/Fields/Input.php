@@ -5,37 +5,40 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasMinMaxLength;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasTranslation;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Enums\InputType;
 
 final class Input extends Field
 {
     use HasMinMaxLength;
+    use HasTranslation;
 
-    protected ?string $type = 'text';
+    protected InputType $type = InputType::Text;
 
     private null|int|float|string $step = null;
 
     private ?string $inputMode = null;
 
-    public function type(string $type): static
+    public function type(InputType $type): static
     {
-        if ('slug' === $type) {
+        if (InputType::Slug === $type) {
             $this->disabled();
             $this->helperText('Merci de ne pas remplir');
-            $type = 'text';
+            $type = InputType::Text;
         }
         $this->type = $type;
 
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): InputType
     {
         return $this->type;
     }
 
     public function email(): Input
     {
-        $this->type = 'email';
+        $this->type = InputType::Email;
         $this->addRules('email');
 
         return $this;
@@ -43,7 +46,7 @@ final class Input extends Field
 
     public function numeric(): Input
     {
-        $this->type = 'number';
+        $this->type = InputType::Number;
         $this->step(1);
         $this->inputMode = 'numeric';
         $this->addRules('numeric');
@@ -53,7 +56,7 @@ final class Input extends Field
 
     public function decimal(): Input
     {
-        $this->type = 'number';
+        $this->type = InputType::Number;
         $this->step = 'any';
         $this->inputMode = 'decimal';
         $this->addRules('numeric');
@@ -63,7 +66,7 @@ final class Input extends Field
 
     public function url(): Input
     {
-        $this->type = 'url';
+        $this->type = InputType::Url;
         $this->addRules('url');
 
         return $this;
@@ -78,7 +81,7 @@ final class Input extends Field
 
     public function password(): Input
     {
-        $this->type = 'password';
+        $this->type = InputType::Password;
 
         return $this;
     }
@@ -109,6 +112,9 @@ final class Input extends Field
 
     public function setUp(): void
     {
+        if ($this->getType()===InputType::Text and $this->HasTranslated()){
+
+        }
         $this->setViewDatas('field', $this);
     }
 }
