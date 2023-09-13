@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Concerns;
 
 trait HasTranslatedField
 {
     protected bool $isTranslate = false;
-    protected ?string $lang = NULL;
+
+    protected ?string $lang = null;
 
     public function translate(): static
     {
@@ -19,7 +22,7 @@ trait HasTranslatedField
         return $this->isTranslate;
     }
 
-    protected function tranlatedLang(string $lang)
+    protected function tranlatedLang(string $lang): void
     {
         $this->lang = $lang;
     }

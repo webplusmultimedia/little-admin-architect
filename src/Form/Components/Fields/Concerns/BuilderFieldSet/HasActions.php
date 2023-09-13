@@ -10,6 +10,8 @@ trait HasActions
 {
     protected array $actions = [];
 
+    protected ?string $labelForAddAction = null;
+
     /**
      * @return array{add: Action}
      */
@@ -19,7 +21,7 @@ trait HasActions
             'add' => Action::make()
                 ->icon('heroicon-o-plus-circle')
                 ->small()
-                ->label('add ' . $this->getLabel())
+                ->label($this->getLabelForAddAction())
                 ->wireClick("callAction('{$this->getStatePath()}','addFieldsToFieldSet')")
                 ->roundedFull(),
 
@@ -45,5 +47,17 @@ trait HasActions
         }
 
         return null;
+    }
+
+    public function addActionLabel(string $label): static
+    {
+        $this->labelForAddAction = $label;
+
+        return $this;
+    }
+
+    public function getLabelForAddAction(): string
+    {
+        return $this->labelForAddAction ?? 'add ' . $this->getLabel();
     }
 }

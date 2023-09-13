@@ -22,7 +22,7 @@ final class Input extends Field
     public function type(InputType $type): static
     {
         if (InputType::Slug === $type) {
-            $this->disabled();
+            //$this->disabled();
             $this->helperText('Merci de ne pas remplir');
             $type = InputType::Text;
         }
@@ -112,7 +112,7 @@ final class Input extends Field
 
     public function setUp(): void
     {
-        if ($this->getType()===InputType::Text and $this->HasTranslated()){
+        if (InputType::Text === $this->getType() and $this->HasTranslated()) {
 
         }
         $this->setViewDatas('field', $this);

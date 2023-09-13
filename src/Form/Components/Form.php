@@ -27,9 +27,9 @@ final class Form extends BaseFormAlias implements Htmlable
     use HasFormFieldsAction;
     use HasHeaderAction;
     use HasModal;
+    use HasTranslatedField;
     use InteractWithLivewire;
     use InteractWithRecord;
-    use HasTranslatedField;
 
     protected string $view = 'form';
 

@@ -84,9 +84,9 @@ return [
             SubstituteBindings::class,
         ],
     ],
-    'translate' =>[
+    'translate' => [
         'active' => false,
-        'lang' => ['fr','en','it'],
-        'default' => 'fr',
-    ]
+        'lang' => [config('app.locale')],
+        'default' => config('app.locale'),
+    ],
 ];
