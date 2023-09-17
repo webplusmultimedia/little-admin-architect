@@ -153,5 +153,4 @@ final class Input extends Field
 
         $this->setViewDatas('field', $this);
     }
-
 }

@@ -100,7 +100,7 @@ class BaseForm extends Component implements HasForm
         if (Form::hasLanguage($lang)) {
             $this->selectedLangue = $lang;
             $this->form->translatedLang($this->selectedLangue);
-            $this->emit('change-language',$this->selectedLangue);
+            $this->emit('change-language', $this->selectedLangue);
         }
     }
 }
