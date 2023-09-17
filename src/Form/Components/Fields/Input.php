@@ -116,7 +116,7 @@ final class Input extends Field
         if (InputType::Text !== $this->getType() and $this->HasTranslated()) {
             $this->isTranslate = false;
         }
-        if (InputType::Text === $this->getType() and $this->HasTranslated()) {
+        if ($this->HasTranslated()) {
             $this->name = $this->name . '-translations';
             $this->setTranslateName($this->getStatePath());
             $this->addRules('array');
@@ -153,4 +153,5 @@ final class Input extends Field
 
         $this->setViewDatas('field', $this);
     }
+
 }
