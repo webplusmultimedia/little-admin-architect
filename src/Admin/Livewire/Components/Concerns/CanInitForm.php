@@ -18,6 +18,7 @@ trait CanInitForm
         /** @var Resources\Resource $resource */
         $resource = $page::getResource();
         $this->_form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
+        $this->_form->translatedLang($this->selectedLangue);
         $this->_form->setPagesForResource($page);
         $this->_form->setLivewireComponent($this);
         if ( ! $this->data) {

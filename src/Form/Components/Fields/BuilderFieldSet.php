@@ -104,7 +104,7 @@ class BuilderFieldSet extends Field
                         ->map(fn (Model $value, int $key) => [str($component->keyField)->append($key)->value() => $value])
                         ->collapse()
                         ->toArray();
-                    //if for advertance you add another field when this fiel is filled, you need to add a default value on missing one
+                    //if for advertance you add another field when this field is filled, you need to add a default value on missing one
                     if (count($component->formSchemas) > count(collect($newState)->first())) {
                         $newState = $component->fillMissingValues($newState);
                     }

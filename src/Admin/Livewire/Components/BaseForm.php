@@ -13,6 +13,7 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\Ha
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\HasNotification;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\Concerns\InteractsWithForms;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Contracts\HasForm;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form as LittleFormAlias;
 
 /**
@@ -36,6 +37,13 @@ class BaseForm extends Component implements HasForm
 
     protected mixed $key = null;
 
+    public ?string $selectedLangue = null;
+
+    // @phpstan-ignore-next-line
+    protected $queryString = [
+        'selectedLangue' => ['except' => ''],
+    ];
+
     public function mount(mixed $key, ?string $pageRoute): void
     {
 
@@ -44,7 +52,6 @@ class BaseForm extends Component implements HasForm
         $this->pageRoute = $pageRoute;
         $this->key = $key;
         $this->form->authorizeAccess();
-        //$this->form->hydrateState();
         $this->record = [];
 
         $this->initialized = true;
@@ -85,6 +92,14 @@ class BaseForm extends Component implements HasForm
         if ($field) {
             $field->setState($value); // do not remove or change
             $field->afterStateUpdatedUsing();
+        }
+    }
+
+    public function changeLanguage(string $lang): void
+    {
+        if (Form::hasLanguage($lang)) {
+            $this->selectedLangue = $lang;
+            $this->form->translatedLang($this->selectedLangue);
         }
     }
 }

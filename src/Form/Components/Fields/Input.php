@@ -7,6 +7,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasMinMaxLength;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasTranslation;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Enums\InputType;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 final class Input extends Field
 {
@@ -112,9 +113,44 @@ final class Input extends Field
 
     public function setUp(): void
     {
-        if (InputType::Text === $this->getType() and $this->HasTranslated()) {
-
+        if (InputType::Text !== $this->getType() and $this->HasTranslated()) {
+            $this->isTranslate = false;
         }
+        if (InputType::Text === $this->getType() and $this->HasTranslated()) {
+            $this->name = $this->name . '-translations';
+            $this->setTranslateName($this->getStatePath());
+            $this->addRules('array');
+
+            $this->afterStateHydrated(static function (string|null|array $state, Input $component): void {
+                if (blank($state)) {
+                    //Initialize $state for spatie/laravel-translatable
+                    $state = data_get($component->livewire, 'data.translations.' . str($component->name)->beforeLast('-translations')->toString());
+                    if ( ! $state) {
+                        $state = [];
+                        foreach (Form::getTranslatedLangues() as $langue) {
+                            $state[$langue] = '';
+                        }
+                    } else {
+                        foreach (Form::getTranslatedLangues() as $langue) {
+                            if ( ! isset($state[$langue])) {
+                                $state[$langue] = ''; // Define missing translation
+                            }
+                        }
+                    }
+                    $component->state($state);
+
+                }
+            });
+
+            $this->afterStateDehydratedUsing(static function (?array $state, Input $component): array {
+                if (null === $state) {
+                    $state = data_get($component->livewire, 'data.translations.' . str($component->name)->beforeLast('-translations')->toString());
+                }
+
+                return $state;
+            });
+        }
+
         $this->setViewDatas('field', $this);
     }
 }

@@ -33,6 +33,7 @@ trait InteractWithLivewire
                     $this->livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
                 } else {
                     $datas = $this->pageForResource::getMutateFormDataBeforeSave($this->values($datas));
+                    //dd($this->values($datas));
                     $this->livewire->data->update($datas);
                     $this->saveRelations();
                     if ($this->hasModal()) {
