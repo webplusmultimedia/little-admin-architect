@@ -2,6 +2,14 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## add translation for text input - 2023-09-17
+
+### What's Changed
+
+- Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/webplusmultimedia/little-admin-architect/pull/4
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.2.5...v0.3.0
+
 ## add : hasMany relationship to BuilderFieldSet - 2023-08-15
 
 **Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.2.4...v0.2.5
