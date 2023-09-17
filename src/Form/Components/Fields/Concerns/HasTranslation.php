@@ -62,33 +62,37 @@ trait HasTranslation
 
     public function beforeSaveRulesUsing(array $rules): array
     {
+        if ( ! $this->hasTranslated()) {
+            return parent::beforeSaveRulesUsing($rules);
+        }
+
         return $this->hydrateRules($rules);
     }
 
     public function applyAttributesRules(array $rules): array
     {
-        if ($this->hasTranslated()) {
-            foreach (Form::getTranslatedLangues() as $langue) {
-                $rules[$this->getStatePath() . ".{$langue}"] = $this->getAttributes() . "({$langue})";
-            }
-
-            return $rules;
+        if ( ! $this->hasTranslated()) {
+            return parent::applyAttributesRules(rules: $rules);
+        }
+        foreach (Form::getTranslatedLangues() as $langue) {
+            $rules[$this->getStatePath() . ".{$langue}"] = $this->getAttributes() . "({$langue})";
         }
 
-        return parent::applyAttributesRules(rules: $rules);
+        return $rules;
+
     }
 
     public function getErrorMessage(ViewErrorBag $errors, string $locale = null): ?string
     {
+        if ( ! $this->hasTranslated()) {
+            return parent::getErrorMessage(errors: $errors, locale: $locale);
+        }
+
         $errorBag = $this->getErrorBag($errors);
-
-        if ($this->hasTranslated()) {
-            $errorKey = $this->getStatePath();
-
-            foreach (Form::getTranslatedLangues() as $langue) {
-                if ($rawMessage = $errorBag->first($errorKey . ".{$langue}")) {
-                    return $rawMessage;
-                }
+        $errorKey = $this->getStatePath();
+        foreach (Form::getTranslatedLangues() as $langue) {
+            if ($rawMessage = $errorBag->first($errorKey . ".{$langue}")) {
+                return $rawMessage;
             }
         }
 
