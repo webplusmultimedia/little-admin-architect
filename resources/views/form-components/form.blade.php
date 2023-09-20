@@ -69,17 +69,28 @@
                                                                                wire:target="{{ $button->getAction() }}" class="!opacity-100"
                         />
                     </x-little-anonyme::form-components.fields.button.submit>
+                    @if(!$form->hasModal())
+                        <x-little-anonyme::form-components.fields.button.link class="" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}"
+                                                                              x-bind:disabled="$store.laDatas.startUploadFile"
+                                                                              wire:loading.class.delay="opacity-70 cursor-wait" :url="$buttonCancel->getAction()"
+                                                                              x-bind:class="{ 'opacity-70 cursor-wait': $store.laDatas.startUploadFile }"
+                        >
+                            @if($buttonCancel->hasIcon())
+                                <x-little-anonyme::form-components.fields.icons.hero-icon :name="$buttonCancel->getViewIcon()"/>
+                            @endif
+                            <span>{{ $buttonCancel->getCaption() }}</span>
+                        </x-little-anonyme::form-components.fields.button.link>
+                    @else
+                        <x-little-anonyme::form-components.fields.button.text wire:loading.attr="disabled" wire:target="{{ $buttonCancel->getAction() }}"
+                                                                              wire:loading.class.delay="opacity-70 cursor-wait"
+                        >
+                            @if($buttonCancel->hasIcon())
+                                <x-little-anonyme::form-components.fields.icons.hero-icon :name="$buttonCancel->getViewIcon()"/>
+                            @endif
+                            <span>{{ $buttonCancel->getCaption() }}</span>
+                        </x-little-anonyme::form-components.fields.button.text>
+                    @endif
 
-                    <x-little-anonyme::form-components.fields.button.link class="" wire:loading.attr="disabled" wire:target="{{ $button->getAction() }}"
-                                                                          x-bind:disabled="$store.laDatas.startUploadFile"
-                                                                          wire:loading.class.delay="opacity-70 cursor-wait" :url="$buttonCancel->getAction()"
-                                                                          x-bind:class="{ 'opacity-70 cursor-wait': $store.laDatas.startUploadFile }"
-                    >
-                        @if($buttonCancel->hasIcon())
-                            <x-little-anonyme::form-components.fields.icons.hero-icon :name="$buttonCancel->getViewIcon()"/>
-                        @endif
-                        <span>{{ $buttonCancel->getCaption() }}</span>
-                    </x-little-anonyme::form-components.fields.button.link>
                     @if (session()->has('message'))
                         <div class="alert alert-success">
                             {{ session('message') }}

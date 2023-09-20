@@ -23,14 +23,12 @@
                                                                      :id="$id"
                                                                      :is-required="$field->isRequired()"
             >
-                {{ $field->getLabel() }} @if($field->hasTranslated()) ({{ Form::getSelectedTranslateLangue() }}) @endif
+                {{ $field->getLabel() }} @if($field->hasTranslated())
+                    ({{ Form::getSelectedTranslateLangue() }})
+                @endif
             </x-little-anonyme::form-components.fields.partials.label>
             @if($field->hasTranslated())
-                <div class="inline-flex space-x-1">
-                @foreach(Form::getNotSelectedLanguages() as $langage)
-                    <span wire:click="changeLanguage(@js($langage))" role="button" class="text-primary-600/90 bg-primary-100/30 px-2 rounded-md">{{ $langage }}</span>
-                @endforeach
-                </div>
+                <x-little-anonyme::form-components.fields.partials.translation-langues/>
             @endif
         </div>
         @if($field->hasTranslated())
