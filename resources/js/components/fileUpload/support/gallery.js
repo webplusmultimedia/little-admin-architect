@@ -17,7 +17,7 @@ export function gallery(files) {
                         x-ref="la_file_upload_image_wrapper"
                         data-id="${file['id']}"
                     >
-                        <img src="${url}" alt="image" class="object-cover w-full">
+                        <img src="${url}" alt="image" class="object-cover w-full" loading="lazy">
 
                         <div
                             x-bind:class="{

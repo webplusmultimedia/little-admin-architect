@@ -6,9 +6,11 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concer
 
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
+use Webplusmultimedia\LittleAdminArchitect\Support\Components\Concerns\HasExtensionFile;
 
 trait HasFileDirectory
 {
+    use HasExtensionFile;
     protected ?string $disk = null;
 
     protected string $baseDirectory = 'attachments';
@@ -53,4 +55,5 @@ trait HasFileDirectory
     {
         return trim($this->getBaseDirectory(), '/') . '/' . $file;
     }
+
 }
