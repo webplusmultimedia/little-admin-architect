@@ -26,7 +26,11 @@ trait HasFileDirectory
 
     protected ?int $maxFile = 1;
 
-    protected array $acceptedFileTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
+    protected array $acceptedFileTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp','application/pdf'];
+    protected array $documentsAcceptedFileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/pdf'];
+
+    protected array $documentsExtension =['doc','docx','pdf','xls','xlsx'];
+    protected array $imagesExtension =['jpg','jpge','png','svg','webp'];
 
     protected bool $isMultiple = false;
 
@@ -64,6 +68,30 @@ trait HasFileDirectory
     protected function getBaseDirectory(): string
     {
         return implode('/', [$this->baseDirectory, $this->directory]);
+    }
+
+    public function setDocumentsExtension(array $documentsExtension): HasFileDirectory
+    {
+        $this->documentsExtension = $documentsExtension;
+
+        return $this;
+    }
+
+    public function setImagesExtension(array $imagesExtension): HasFileDirectory
+    {
+        $this->imagesExtension = $imagesExtension;
+
+        return $this;
+    }
+
+    public function getDocumentsExtension(): array
+    {
+        return $this->documentsExtension;
+    }
+
+    public function getImagesExtension(): array
+    {
+        return $this->imagesExtension;
     }
 
     protected function getDirectory(): ?string

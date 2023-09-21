@@ -296,14 +296,38 @@ class FileUpload extends Field
         $file = $this->getPathFile($_file);
 
         if ($storage = $this->getStorageForFile($file)) {
+            if($isDocument = $this->isDocumentFile($file) or $this->isSvgFile($file)){
+                $url = url(str($file)->prepend('storage/')->toString()); // svg
+                if($isDocument){
+                    $url = route(str(config('little-admin-architect.route.prefix'))->append('.documents.file')->toString(),['document'=>$this->getExtension($file)]);
+                }
+            }
+            else{
+                $url = Croppa::url(str($file)->prepend('storage/')->toString(), 320, 200);
+            }
             return [
-                'url' => Croppa::url(str($file)->prepend('storage/')->toString(), 320, 200),
+                'url' => $url,
                 'size' => round($storage->size($file) / 1000, 2) . 'Kb',
                 'name' => basename($storage->path($file)),
             ];
         }
 
         return null;
+    }
+
+    protected function isDocumentFile($file): bool
+    {
+        return in_array($this->getExtension($file),$this->documentsExtension);
+    }
+
+    protected function isSvgFile(string $file): bool
+    {
+        return 'svg' === $this->getExtension($file);
+    }
+
+    protected function getExtension(string $file): string
+    {
+        return str($file)->afterLast('.')->toString();
     }
 
     private function getStorageForFile(string $file): ?FilesystemAdapter
