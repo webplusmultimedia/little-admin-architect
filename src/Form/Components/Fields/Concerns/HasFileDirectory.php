@@ -200,4 +200,11 @@ trait HasFileDirectory
 
         return $this->rules;
     }
+
+    public function documents(): static
+    {
+        $this->acceptedFileTypes = $this->documentsAcceptedFileTypes;
+
+        return $this;
+    }
 }
