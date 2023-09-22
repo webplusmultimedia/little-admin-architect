@@ -29,7 +29,7 @@ trait HasFileDirectory
 
     protected ?int $maxFile = 1;
 
-    protected array $acceptedFileTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp', 'application/pdf'];
+    protected array $acceptedFileTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
 
     protected array $documentsAcceptedFileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
 
