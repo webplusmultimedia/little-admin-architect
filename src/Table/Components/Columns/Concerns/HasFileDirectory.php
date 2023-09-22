@@ -11,6 +11,7 @@ use Webplusmultimedia\LittleAdminArchitect\Support\Components\Concerns\HasExtens
 trait HasFileDirectory
 {
     use HasExtensionFile;
+
     protected ?string $disk = null;
 
     protected string $baseDirectory = 'attachments';
@@ -55,5 +56,4 @@ trait HasFileDirectory
     {
         return trim($this->getBaseDirectory(), '/') . '/' . $file;
     }
-
 }

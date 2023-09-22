@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Http\Controllers;
 
 use Illuminate\Http\Response;
@@ -12,7 +14,6 @@ class DocumentsAssetController
      */
     public function __invoke(string $document)
     {
-
 
         switch ($document) {
             case 'xls':
@@ -33,7 +34,7 @@ class DocumentsAssetController
         return sprintf('%s GMT', gmdate('D, d M Y H:i:s', $timestamp));
     }
 
-    protected function pretendResponseIsFile(string $path, string $contentType)
+    protected function pretendResponseIsFile(string $path, string $contentType): Response|BinaryFileResponse
     {
         abort_unless(
             file_exists($path) || file_exists($path = base_path($path)),
@@ -47,14 +48,14 @@ class DocumentsAssetController
 
         if (@strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'] ?? '') === $lastModified) {
             return response()->noContent(304, [
-                'Expires'       => $this->getHttpDate($expires),
+                'Expires' => $this->getHttpDate($expires),
                 'Cache-Control' => $cacheControl,
             ]);
         }
 
         return response()->file($path, [
-            'Content-Type'  => $contentType,
-            'Expires'       => $this->getHttpDate($expires),
+            'Content-Type' => $contentType,
+            'Expires' => $this->getHttpDate($expires),
             'Cache-Control' => $cacheControl,
             'Last-Modified' => $this->getHttpDate($lastModified),
         ]);

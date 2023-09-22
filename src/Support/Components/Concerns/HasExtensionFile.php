@@ -1,35 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Webplusmultimedia\LittleAdminArchitect\Support\Components\Concerns;
 
-
-
-
 use Bkwld\Croppa\Facades\Croppa;
+use Illuminate\Contracts\Routing\UrlGenerator;
 
 trait HasExtensionFile
 {
-    protected array $documentsExtension = ['doc', 'docx', 'pdf', 'xls', 'xlsx'];
+    protected static array $documentsExtension = ['doc', 'docx', 'pdf', 'xls', 'xlsx'];
+
     protected array $imagesExtension = ['jpg', 'jpge', 'png', 'svg', 'webp'];
 
-    protected function isDocumentFile($file): bool
+    public static function isDocumentFile(string $file): bool
     {
-        return in_array($this->getExtension($file), $this->documentsExtension);
+        return in_array(static::getExtension($file), static::$documentsExtension);
     }
 
-    protected function isSvgFile(string $file): bool
+    public static function isSvgFile(string $file): bool
     {
-        return 'svg' === $this->getExtension($file);
+        return 'svg' === static::getExtension($file);
     }
 
-    protected function getExtension(string $file): string
+    protected static function getExtension(string $file): string
     {
         return str($file)->afterLast('.')->toString();
     }
 
     public function setDocumentsExtension(array $documentsExtension): static
     {
-        $this->documentsExtension = $documentsExtension;
+        static::$documentsExtension = $documentsExtension;
 
         return $this;
     }
@@ -43,7 +44,7 @@ trait HasExtensionFile
 
     public function getDocumentsExtension(): array
     {
-        return $this->documentsExtension;
+        return static::$documentsExtension;
     }
 
     public function getImagesExtension(): array
@@ -51,18 +52,18 @@ trait HasExtensionFile
         return $this->imagesExtension;
     }
 
-    protected function getUrl(string $file,int $width=320,int $height = 200): string
+    protected function getUrl(string $file, int $width = 320, int $height = 200): string|UrlGenerator
     {
-        if ($isDocument = $this->isDocumentFile($file) or $this->isSvgFile($file)) {
+        if ($isDocument = static::isDocumentFile($file) or static::isSvgFile($file)) {
             $url = url(str($file)->prepend('storage/')->toString()); // svg
             if ($isDocument) {
-                $url = route(str(config('little-admin-architect.route.prefix'))->append('.documents.file')->toString(), ['document' => $this->getExtension($file)]);
+                $url = route(str(config('little-admin-architect.route.prefix'))->append('.documents.file')->toString(), ['document' => static::getExtension($file)]);
             }
 
             return $url;
         }
 
-        return Croppa::url(str($file)->prepend('storage/')->toString(), $width, $height);
+        return url(Croppa::url(str($file)->prepend('storage/')->toString(), $width, $height));
 
     }
 }

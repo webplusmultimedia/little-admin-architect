@@ -117,9 +117,10 @@ trait HasTranslation
 
     public function isRequired(): bool
     {
-        if($this->hasTranslated() and  Form::getDefaultTranslatedLang()!==Form::getSelectedTranslateLangue()){
+        if ($this->hasTranslated() and Form::getDefaultTranslatedLang() !== Form::getSelectedTranslateLangue()) {
             return false;
         }
+
         return $this->evaluate($this->required);
     }
 }

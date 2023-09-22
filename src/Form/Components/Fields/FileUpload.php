@@ -307,21 +307,6 @@ class FileUpload extends Field
         return null;
     }
 
-    protected function isDocumentFile($file): bool
-    {
-        return in_array($this->getExtension($file),$this->documentsExtension);
-    }
-
-    protected function isSvgFile(string $file): bool
-    {
-        return 'svg' === $this->getExtension($file);
-    }
-
-    protected function getExtension(string $file): string
-    {
-        return str($file)->afterLast('.')->toString();
-    }
-
     private function getStorageForFile(string $file): ?FilesystemAdapter
     {
         /** @var FilesystemAdapter $storage */
