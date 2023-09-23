@@ -12,7 +12,7 @@ trait CanInitTable
 {
     protected function setUp(): Table
     {
-        $this->pageRoute = $this->pageRoute ?? request()->collect('fingerprint')->get('name');
+        //$this->pageRoute = $this->pageRoute ?? request()->collect('fingerprint')->get('name');
 
         $pageClass = str($this->pageRoute)
             ->explode('.')

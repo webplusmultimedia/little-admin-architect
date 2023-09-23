@@ -51,7 +51,7 @@ class BaseTable extends Component implements HasTable
 
     protected bool $initBoot = true;
 
-    protected ?string $pageRoute = null;
+    public string $pageRoute;
 
     protected ?\Webplusmultimedia\LittleAdminArchitect\Table\Components\Table $_table = null;
 
