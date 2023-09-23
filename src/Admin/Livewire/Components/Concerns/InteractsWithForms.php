@@ -13,8 +13,6 @@ trait InteractsWithForms
 
     protected array $formDatas = [];
 
-    protected ?string $pageRoute = null;
-
     protected bool $initBoot = true;
 
     protected array $datasRules;

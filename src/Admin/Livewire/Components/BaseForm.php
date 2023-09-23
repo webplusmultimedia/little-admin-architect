@@ -35,6 +35,8 @@ class BaseForm extends Component implements HasForm
 
     public ?string $previousPage = null;
 
+    public string $pageRoute;
+
     protected mixed $key = null;
 
     public ?string $selectedLangue = null;

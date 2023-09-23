@@ -1,4 +1,4 @@
-import {uuid} from "./support/file";
+import {uuid} from "./support/helpers";
 import {Danger, Info, Success, Warning} from "../notification/Notification";
 import {gallery} from "./support/gallery";
 

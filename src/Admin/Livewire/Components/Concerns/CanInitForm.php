@@ -36,7 +36,7 @@ trait CanInitForm
 
     protected function getResourcePage(): EditRecord|CreateRecord
     {
-        $this->pageRoute = $this->pageRoute ?? request()->collect('fingerprint')->get('name');
+        //$this->pageRoute = $this->pageRoute ?? request()->collect('fingerprint')->get('name');
 
         $pageClass = str($this->pageRoute)
             ->explode('.')
