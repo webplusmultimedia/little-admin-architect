@@ -2,7 +2,7 @@
     /** @var Header $header */
         use Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Header;
 @endphp
-<th class="text-start ">
+<th class="text-start first:pl-3">
     <button type="button" class="inline-flex space-x-2 items-center py-2 px-2 min-w-max text-sm  uppercase"
             :class="{'cursor-default' : {{ $header->isSortable()?0:1 }} }"
             @if($header->isSortable())  wire:click="sortable('{{$header->getName()}}')" @endif

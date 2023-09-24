@@ -15,7 +15,7 @@
         @apply bg-gradient-to-b from-success-600/70 from-55% via-success-600/70 via-60% to-transparent rounded-t-lg
     }
     .la-dropzone{
-        @apply flex items-center justify-center w-full py-3 border rounded-lg border-gray-300  text-gray-400 transition hover:bg-gray-100
-        dark:border-gray-400/50 dark:bg-gray-800
+        @apply flex items-center justify-center w-full py-3 border border-dashed rounded-lg border-gray-300  text-gray-600 transition hover:border-primary-600
+        dark:border-gray-400/50 dark:bg-gray-800 dark:hover:border-primary-600 dark:text-white/80
     }
 }

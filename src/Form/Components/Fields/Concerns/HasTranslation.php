@@ -43,7 +43,7 @@ trait HasTranslation
         }
 
         foreach (Form::getTranslatedLangues() as $langue) {
-            $translatedRules = ['nullable'];
+            $translatedRules = [];
             foreach ($this->rules as $rule) {
                 if ( ! in_array($rule, ['array', 'required'])) {
                     $translatedRules[] = $rule;

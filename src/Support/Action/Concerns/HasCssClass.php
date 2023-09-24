@@ -16,9 +16,9 @@ trait HasCssClass
 
     protected bool $outline = false;
 
-    protected bool $isSmall = false;
+    protected bool $isSmall = true;
 
-    protected bool $roundedFull = false;
+    protected bool $roundedFull = true;
 
     protected bool $isBgTransparent = false;
 

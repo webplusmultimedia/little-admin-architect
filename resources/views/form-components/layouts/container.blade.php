@@ -9,7 +9,7 @@
 >
     @if($container->title )
         <div class="bg-gray-50 rounded-t-md py-3 dark:bg-gray-900">
-            <h2 class="text-lg m-0 uppercase pl-5">{{ $container->title }}</h2>
+            <h2 class="text-lg m-0  pl-5">{{ $container->title }}</h2>
         </div>
     @endif
         <div {{ $attributes->class(" py-3 grid grid-cols-1 gap-5 px-5")->merge(['class'=>$container->getColumns()]) }}>

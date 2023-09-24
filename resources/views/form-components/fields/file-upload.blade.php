@@ -57,9 +57,14 @@
                      x-cloak
                      x-show="canUpload"
                 >
-                    <span class="inline-flex gap-3" x-ref="ladroptitle">
-                       <x-heroicon-o-arrow-down-tray class="w-5 h-auto"/> <span>Drag & Drop ou cliquer ICI</span>
-                    </span>
+                    <div class="flex gap-3" x-ref="ladroptitle">
+                        @svg(name: 'heroicon-o-document-arrow-up',class:"w-10 h-auto text-slate-500" )
+                        <div class="flex flex-col x-space-y-2">
+                            <span>Drag & Drop ou cliquer ICI</span>
+                            <span class="text-slate-400" x-text="@js($field->getAcceptFileText())"></span>
+                        </div>
+
+                    </div>
 
                 </div>
                 <div class="flex px-3" x-show="startUpload">

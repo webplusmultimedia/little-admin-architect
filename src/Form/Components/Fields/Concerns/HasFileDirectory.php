@@ -31,6 +31,8 @@ trait HasFileDirectory
 
     protected array $acceptedFileTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
 
+    protected string $acceptedFileText = '.jpg, .svg, .png, .webp';
+
     protected array $documentsAcceptedFileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
 
     protected bool $isMultiple = false;
@@ -101,6 +103,11 @@ trait HasFileDirectory
     public function getAcceptFileTypes(): string
     {
         return implode(',', $this->acceptedFileTypes);
+    }
+
+    public function getAcceptFileText(): string
+    {
+        return $this->acceptedFileText;
     }
 
     public function getMaxSize(): ?int
@@ -204,6 +211,7 @@ trait HasFileDirectory
     public function documents(): static
     {
         $this->acceptedFileTypes = $this->documentsAcceptedFileTypes;
+        $this->acceptedFileText = '.pdf, .doc(x), .xls(x)';
 
         return $this;
     }

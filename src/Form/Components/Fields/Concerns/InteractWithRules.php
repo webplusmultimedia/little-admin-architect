@@ -11,7 +11,7 @@ trait InteractWithRules
         if ($this->checkRelation()) {
             $rules[$this->getStatePath()] = $this->rules;
         } else {
-            $rules['data.' . $this->getName()] = $this->rules;
+            $rules[$this->getStatePath()] = $this->rules;
         }
 
         return $rules;

@@ -21,18 +21,16 @@
             <div class="justify-end flex items-center relative mx-2"
                  x-data="{filterOpen : false }"
             >
-                <button class="rounded-full p-3 relative"
-                        :class="{'bg-primary-500/10' : filterOpen }"
+                <button class="rounded-lg p-2 relative"
+                        :class="{'ring-1 ring-primary-600' : filterOpen }"
                         x-on:click="filterOpen = !filterOpen"
-                        x-on:keydown.esc="filterOpen=false"
+                        x-on:key.esc="filterOpen=false"
                         aria-haspopup="menu" aria-controls="table-filters" :aria-expanded="filterOpen"
                 >
-                    <x-little-anonyme::form-components.fields.icons.filter
-                        id="table-filters"
-                        class="text-primary-500 w-5 stroke-3"
-                    />
+                    @svg('heroicon-s-funnel','w-6 text-slate-400')
+
                     @if($table->getCountActifFilters())
-                        <span class="absolute -top-0.5 -right-1 rounded-full w-5 h-5 text-xs  text-primary-600 bg-primary-500/10">
+                        <span class="absolute -top-0.5 -right-1 rounded-full w-5 h-5 text-xs  text-primary-600 bg-white border border-primary-600/30">
                         {{ $table->getCountActifFilters() }}
                     </span>
                     @endif
@@ -49,9 +47,21 @@
                     x-transition:leave-end="opacity-0"
                     x-show="filterOpen"
                     x-on:click.outside="filterOpen=false"
+                    x-on:key.esc="filterOpen=false"
                     role="menu"
                 >
                     <ul role="menu">
+                        <li role="menuitem">
+                            <div class="flex justify-between my-2.5 border-b border-gray-200">
+                                <span class="font-bold text-xs md:text-lg md:normal-case  text-black">Filtres</span>
+                                @if($table->getCountActifFilters())
+                                    <button type="button" wire:click.stop="removeFilters()"
+                                            title="{{trans('little-admin-architect::table.filter.remove-filter')}}">
+                                        @svg('heroicon-o-trash','h-5 w-5 text-error-500')
+                                    </button>
+                                @endif
+                            </div>
+                        </li>
                         @php /** @var BaseFilter $filter */ @endphp
                         @foreach($table->getFilters() as $filter)
 
@@ -64,13 +74,7 @@
                             @endforeach
 
                         @endforeach
-                        <li role="menuitem"
 
-                            wire:click.stop="removeFilters()"
-                        >
-                            <span class="text-sm text-danger font-semibold text-right underline" role="button"
-                                  aria-description="remove filters">{{ trans('little-admin-architect::table.filter.remove-filter') }}</span>
-                        </li>
                     </ul>
 
                 </x-little-anonyme::table-components.table-filters>

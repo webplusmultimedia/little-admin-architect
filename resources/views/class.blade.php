@@ -79,6 +79,7 @@ bg-error-500
 hover:bg-error-500
 bg-info-500
 bg-success-500
+hover:bg-success-500
 dark:hover:bg-primary-500
 dark:hover:bg-warning-500
 dark:hover:bg-error-500

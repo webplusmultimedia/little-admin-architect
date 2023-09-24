@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="flex flex-col bg-white  rounded-lg border dark:bg-gray-800 dark:border-gray-400/40 dark:text-white" x-data="{}">
-        @if($table->showSearchBar() AND $table->hasFilters())
+        @if($table->showSearchBar() OR $table->hasFilters())
             <x-little-anonyme::table-components.partials.search-bar :table="$table"/>
         @endif
 
@@ -32,17 +32,17 @@
                        x-data="TableComponent({ livewireId : $wire.__instance.id })"
                 >
                     <thead class="bg-slate-200/70  text-start  dark:bg-gray-700">
-                        <tr class=" dark:border-gray-600">
-                            @foreach($table->getHeaders() as $header)
-                                {{ $header }}
-                            @endforeach
-                            @if($table->hasRowsAction())
-                                <th class="w-5">
-                                    &nbsp;
-                                </th>
-                            @endif
+                    <tr class=" dark:border-gray-600">
+                        @foreach($table->getHeaders() as $header)
+                            {{ $header }}
+                        @endforeach
+                        @if($table->hasRowsAction())
+                            <th class="w-5">
+                                &nbsp;
+                            </th>
+                        @endif
 
-                        </tr>
+                    </tr>
                     </thead>
                     <tbody class="divide-y">
                     @foreach($table->getRecords() as $record)
@@ -50,7 +50,9 @@
                             class="hover:bg-primary-50/50 cursor-pointer dark:border-gray-600 dark:hover:bg-primary-900/20">
                             @foreach($table->getColumns() as $column)
                                 @php($column->setRecord($record)->livewireId($table->getLivewireId()))
-                                {{ $column }}
+                                <td wire:key="{{$column->getWireId()}}" class="first:pl-3">
+                                    {{ $column }}
+                                </td>
                             @endforeach
                             @if($table->hasRowsAction())
                                 <td class="max-w-max whitespace-nowrap">
