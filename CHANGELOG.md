@@ -2,6 +2,14 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## Add can delete & can sort on builder field set - 2023-10-15
+
+### What's Changed
+
+- Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/webplusmultimedia/little-admin-architect/pull/5
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.3.01...v0.3.02
+
 ## add translation for text input - 2023-09-17
 
 ### What's Changed
