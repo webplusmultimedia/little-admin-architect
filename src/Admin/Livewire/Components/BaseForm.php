@@ -48,7 +48,6 @@ class BaseForm extends Component implements HasForm
 
     public function mount(mixed $key, ?string $pageRoute): void
     {
-
         //@Todo : Can update or edit
         $this->previousPage = url()->previous();
         $this->pageRoute = $pageRoute;
@@ -58,7 +57,6 @@ class BaseForm extends Component implements HasForm
 
         $this->initialized = true;
         $this->initBoot = false;
-
     }
 
     protected function rules(): array

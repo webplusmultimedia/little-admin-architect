@@ -22,13 +22,14 @@
                 @if($keys)
                     <div class="bg-gray-50 rounded-t-md py-1 dark:bg-gray-900 flex items-center justify-between">
                         <div class="inline-flex items-center">
-                            @if(!$field->hasRelationship())
+                            @if($field->isCanSort())
                                 <span class="la-icon-grip">{{ $field->getActionByName('reorder') }}</span>
                             @endif
                             <span class="text-sm   uppercase pl-2">{{ $keys }}</span>
                         </div>
-
-                        {{ $field->getActionByName('delete')->wireClick("callAction('{$field->getStatePath()}','deleteFieldToFieldSet',['{$keys}'])") }}
+                        @if($field->isCanDeleted())
+                            {{ $field->getActionByName('delete')->wireClick("callAction('{$field->getStatePath()}','deleteFieldToFieldSet',['{$keys}'])") }}
+                        @endif
                     </div>
                 @endif
                 <div {{ $attributes->class(" py-3 grid grid-cols-1 gap-5 px-5")->merge(['class'=>$field->getColumns()]) }}>

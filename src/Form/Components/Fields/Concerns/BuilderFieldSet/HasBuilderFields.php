@@ -13,6 +13,10 @@ trait HasBuilderFields
      */
     protected array $fields = [];
 
+    protected bool $can_deleted = false;
+
+    protected bool $can_sort = false;
+
     /**
      * @var Field[]
      */
@@ -34,6 +38,30 @@ trait HasBuilderFields
     public function getFields(): array
     {
         return $this->fields;
+    }
+
+    public function canDeleted(bool $can_deleted = true): static
+    {
+        $this->can_deleted = $can_deleted;
+
+        return $this;
+    }
+
+    public function canSort(bool $can_sort = true): static
+    {
+        $this->can_sort = $can_sort;
+
+        return $this;
+    }
+
+    public function isCanDeleted(): bool
+    {
+        return $this->can_deleted;
+    }
+
+    public function isCanSort(): bool
+    {
+        return $this->can_sort;
     }
 
     /**

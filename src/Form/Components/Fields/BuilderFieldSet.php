@@ -33,7 +33,6 @@ class BuilderFieldSet extends Field
 
     public function setUp(): void
     {
-        //$this->setPrefixPath(str($this->prefixPath)->append('.',$this->getName()));
         $this->setViewDatas('field', $this);
 
         if ( ! $this->hasRelationship()) {
@@ -104,7 +103,7 @@ class BuilderFieldSet extends Field
                         ->map(fn (Model $value, int $key) => [str($component->keyField)->append($key)->value() => $value])
                         ->collapse()
                         ->toArray();
-                    //if for advertance you add another field when this field is filled, you need to add a default value on missing one
+                    //if for inadvertance you add another field when this field is filled, you need to add a default value on missing one
                     if (count($component->formSchemas) > count(collect($newState)->first())) {
                         $newState = $component->fillMissingValues($newState);
                     }
