@@ -12,9 +12,10 @@ import {gallery} from "./support/gallery";
  * @param {Array} acceptedFileTypes
  * @param {boolean} multiple
  * @param {boolean} enableCustomProperties
+ * @param {boolean} isReordable
  * @returns {{dropZone: {"@drop.prevent.stop"(): void, "@dragleave.prevent.stop"(): boolean, "@dragenter.prevent.stop"(): void}, init(): void, saveFileUsing(File[]), progress: number, state, overZone: {"@dragover.prevent.stop"(): void, "@dragleave.prevent.stop"(): boolean, "@dragenter.prevent.stop"(): void}, isProvidedMimeType(File): boolean, uploadUsing(*, *, *, *): void}|*|boolean}
  */
-export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, acceptedFileTypes, multiple, enableCustomProperties}) {
+export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, acceptedFileTypes, multiple, enableCustomProperties,isReordable}) {
 
     return {
         progress: 0,
@@ -23,8 +24,9 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
         maxFiles,
         isMultiple: multiple,
         startUpload: false,
-        stopDragging: false,
+        stopDragging: !isReordable,
         enableCustomProperties,
+        isReordable,
         mountFormAction(id) {
             this.$wire.call('mountFormAction', `${this.path}`, 'editCustomProperties',[id])
         },
@@ -37,7 +39,9 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             newFile['id'] = fileKey
             this.photos.push(newFile)
             this.$store.laDatas.startUploadFile = true
-            this.stopDragging = true
+            if (this.isReordable) {
+                this.stopDragging = true
+            }
 
             await this.$wire.upload(`${this.path}`, file, (uploadedFilename) => {
                     Success('file ok : ' + uploadedFilename)
@@ -139,6 +143,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
          * @returns {boolean}
          */
         isProvidedMimeType(file) {
+            console.log(file.type)
             return acceptedFileTypes.find(type => type === file.type);
         },
         canUpload() {
@@ -170,7 +175,7 @@ export function fileUpload({state, fieldName: path, minSize, maxSize, maxFiles, 
             }, 50)
 
             window.addEventListener(`${this.path}.save_event`, async (ev) => {
-                    this.stopDragging = false
+                    this.stopDragging = !this.isReordable
                     this.photos = await this.$wire.call('callAction',this.path,'getUploadFileUrlsUsing',[],true) ?? []
                 this.reloadOnSave = false
             })

@@ -33,7 +33,7 @@ trait HasFileDirectory
 
     protected string $acceptedFileText = '.jpg, .svg, .png, .webp';
 
-    protected array $documentsAcceptedFileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'];
+    protected array $documentsAcceptedFileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/wps-office.xlsx', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/wps-office.docx', 'application/pdf'];
 
     protected bool $isMultiple = false;
 

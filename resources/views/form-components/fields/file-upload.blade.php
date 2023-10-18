@@ -35,6 +35,7 @@
                     multiple : {{  $field->isMultiple()?'true':'false' }},
                     enableCustomProperties : {{  $field->canEditCustomProperties()?'true':'false' }},
                     state : $wire.entangle(@js($field->getStatePath())){{ $field->getWireModifier() }},
+                    isReordable : @js($field->isReordable())
                 })"
                  {{--x-on:livewire-upload-start="Alpine.store('laDatas').startUploadFile = true"
                  x-on:livewire-upload-finish="$store.laDatas.startUploadFile = false"

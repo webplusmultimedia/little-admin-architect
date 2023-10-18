@@ -11,11 +11,13 @@ use Illuminate\Support\Str;
 use League\Flysystem\UnableToCheckFileExistence;
 use Livewire\TemporaryUploadedFile;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
+use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\CanReorder;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasCustomProperties;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\HasFileDirectory;
 
 class FileUpload extends Field
 {
+    use CanReorder;
     use HasCustomProperties;
     use HasFileDirectory;
 
@@ -384,32 +386,6 @@ class FileUpload extends Field
         }
 
         return false;
-    }
-
-    public function reorder(array $newOrder): array
-    {
-        $values = [];
-        /** @var array<string,array> $state */
-        $state = $this->getState();
-        //remove delete images first
-        /** @var array<string,array> $deleteState */
-        $deleteState = collect($state)->filter(fn ($value) => ! in_array($value['id'], $newOrder))->values()->all();
-        /** @var array<string,array> $newOrderState */
-        $newOrderState = collect($state)->filter(fn ($value) => in_array($value['id'], $newOrder))->values()->all();
-
-        foreach ($newOrder as $order) {
-            if ( ! blank($orderState = collect($newOrderState)->filter(fn ($value) => $value['id'] === $order)->values()->all())) {
-                $mergeTmp = array_merge($values, $orderState);
-                $values = $mergeTmp;
-            }
-        }
-        $values = array_merge($values, $deleteState);
-        if (blank($values)) {
-            return [];
-        }
-        $this->state($values);
-
-        return $this->getUploadFileUrlsUsing();
     }
 
     /**
