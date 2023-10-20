@@ -2,6 +2,10 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## Can reorder attachments files - form FileUpload - 2023-10-20
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.3.02...v0.3.04
+
 ## Add can delete & can sort on builder field set - 2023-10-15
 
 ### What's Changed
