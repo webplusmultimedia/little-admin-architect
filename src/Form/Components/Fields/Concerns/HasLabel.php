@@ -23,11 +23,7 @@ trait HasLabel
 
     public function getLabel(): ?string
     {
-        if ($this->label) {
-            return str($this->label)->headline()->lower()->ucfirst()->value();
-        }
-
-        return str($this->name)->headline()->lower()->ucfirst()->value();
+        return $this->label ?? str($this->name)->headline()->lower()->ucfirst()->value();
     }
 
     public function getRawLabel(): ?string
