@@ -11,7 +11,7 @@ class CheckBox extends Field
 {
     use CanBeBoolean;
 
-    protected string $view = 'checkbox';
+    protected string $view = 'little-views::form-components.fields.checkbox';
 
     protected string $type = 'checkbox';
 

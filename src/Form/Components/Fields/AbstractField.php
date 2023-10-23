@@ -11,7 +11,7 @@ use Illuminate\View\View;
 
 abstract class AbstractField implements Htmlable
 {
-    protected string $view = 'input';
+    protected string $view;
 
     protected array $viewDatas = [];
 
@@ -36,7 +36,7 @@ abstract class AbstractField implements Htmlable
             throw new Exception('Class [' . static::class . '] extends [' . static::class . '] but does not have a [$view] property defined.');
         }
 
-        return 'little-views::form-components.fields.' . $this->view;
+        return $this->view;
     }
 
     public function render(): View

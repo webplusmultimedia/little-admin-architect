@@ -10,7 +10,7 @@ class Radio extends Field
 {
     use HasGridColumns;
 
-    protected string $view = 'radio';
+    protected string $view = 'little-views::form-components.fields.radio';
 
     protected array $options = [];
 

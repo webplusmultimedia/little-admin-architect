@@ -14,6 +14,8 @@ final class Input extends Field
     use HasMinMaxLength;
     use HasTranslation;
 
+    protected string $view = 'little-views::form-components.fields.input';
+
     protected InputType $type = InputType::Text;
 
     private null|int|float|string $step = null;

@@ -21,7 +21,7 @@ class BuilderFieldSet extends Field
     use HasGridColumns;
     use HasManyRelation;
 
-    protected string $view = 'builder-field-set';
+    protected string $view = 'little-views::form-components.fields.builder-field-set';
 
     protected string $keyField = 'record-';
 

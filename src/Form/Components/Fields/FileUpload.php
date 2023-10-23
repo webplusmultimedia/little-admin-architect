@@ -21,7 +21,7 @@ class FileUpload extends Field
     use HasCustomProperties;
     use HasFileDirectory;
 
-    protected string $view = 'file-upload';
+    protected string $view = 'little-views::form-components.fields.file-upload';
 
     public function setUp(): void
     {

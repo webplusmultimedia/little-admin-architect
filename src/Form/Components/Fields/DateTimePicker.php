@@ -15,7 +15,7 @@ class DateTimePicker extends Field
     use HasConfigDateTime;
     use HasRangeDate;
 
-    protected string $view = 'date-time-range-picker';
+    protected string $view = 'little-views::form-components.fields.date-time-range-picker';
 
     public function setUp(): void
     {

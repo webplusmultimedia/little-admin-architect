@@ -16,7 +16,7 @@ class CheckBoxList extends Field
     use HasGridColumns;
     use HasOptions;
 
-    protected string $view = 'check-box-list';
+    protected string $view = 'little-views::form-components.fields.check-box-list';
 
     protected mixed $defaultValue = [];
 

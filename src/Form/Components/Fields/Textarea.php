@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields;
 
 final class Textarea extends Field
 {
-    protected string $view = 'textarea';
+    protected string $view = 'little-views::form-components.fields.textarea';
 
     protected string $colSpan = 'lg:col-span-full';
 

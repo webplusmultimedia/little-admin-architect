@@ -26,7 +26,7 @@ class Select extends Field
     use HasOptions;
     use SelectHasDefaultLabel;
 
-    protected string $view = 'select';
+    protected string $view = 'little-views::form-components.fields.select';
 
     public function setUp(): void
     {
