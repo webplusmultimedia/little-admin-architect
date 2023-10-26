@@ -21,7 +21,7 @@ trait HasLabel
         return $this;
     }
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return $this->label ?? str($this->name)->headline()->lower()->ucfirst()->value();
     }

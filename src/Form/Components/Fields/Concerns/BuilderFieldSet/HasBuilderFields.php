@@ -23,7 +23,7 @@ trait HasBuilderFields
      */
     protected array $formSchemas = [];
 
-    protected ?string $nameForTitle =  NULL;
+    protected ?string $nameForTitle = null;
 
     public function groupName(string $name): static
     {
@@ -31,8 +31,9 @@ trait HasBuilderFields
 
         return $this;
     }
+
     /**
-     * @param Field[] $schemas
+     * @param  Field[]  $schemas
      */
     public function schema(array $schemas): static
     {
@@ -74,7 +75,7 @@ trait HasBuilderFields
     }
 
     /**
-     * @param Field[] $field
+     * @param  Field[]  $field
      */
     protected function addFields(array $field, string $key): void
     {
@@ -150,44 +151,43 @@ trait HasBuilderFields
     public function getFormFieldByPath(string $path): ?Field
     {
         foreach ($this->fields as $fields) {
-            if ($field = collect($fields)->filter(fn(Field $field) => $field->getStatePath() === $path)->first()) {
+            if ($field = collect($fields)->filter(fn (Field $field) => $field->getStatePath() === $path)->first()) {
                 return $field;
             }
         }
 
-        return NULL;
+        return null;
     }
 
     public function getFormFieldByName(string $name): ?Field
     {
         foreach ($this->fields as $fields) {
-            if ($field = collect($fields)->filter(fn(Field $field) => $field->getName() === $name)->first()) {
+            if ($field = collect($fields)->filter(fn (Field $field) => $field->getName() === $name)->first()) {
                 return $field;
             }
         }
 
-        return NULL;
+        return null;
     }
 
     /**
-     * @param string $title
-     * @param Field[] $fields
-     *
-     * @return string
+     * @param  Field[]  $fields
      */
     public function getTitleForBuilder(string $title, array $fields): string
     {
-        if (!$this->nameForTitle){
+        $index = str($title)->after('-')->toString();
+        $title = $this->getLabel() . '-' . $index;
+        if ( ! $this->nameForTitle) {
             return $title;
         }
-        if (!$this->hasRelationship()){
+        if ( ! $this->hasRelationship()) {
             return $title;
         }
-        if ($this->hasRelationship()){
-            if($field = collect($fields)->filter(fn(Field $f)=>$f->getName()===$this->nameForTitle)->first()){
-                return (string) $field->getState();
-            }
+
+        if ($field = collect($fields)->filter(fn (Field $f) => $f->getName() === $this->nameForTitle)->first()) {
+            return (string) $field->getState();
         }
+
         return $title;
     }
 }
