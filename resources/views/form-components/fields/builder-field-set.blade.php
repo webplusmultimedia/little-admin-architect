@@ -1,4 +1,4 @@
-@php use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\BuilderFieldSet; @endphp
+@php use Illuminate\Support\Str;use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\BuilderFieldSet; @endphp
 @php
     /** @var BuilderFieldSet $field */
 @endphp
@@ -17,15 +17,15 @@
             <div {{ $attributes->class("la__form__container__wrapper")->merge(['class'=>$field->getColSpan()]) }}
                  x-data="{}"
                  wire:key="{{ $field->getWireKey()  }}"
-                 data-id="{{ $keys }}"
+                 data-id="{{ Str::slug($field->getLabel()) }}-{{ $keys }}"
             >
                 @if($keys)
                     <div class="bg-gray-50 rounded-t-md py-1 dark:bg-gray-900 flex items-center justify-between">
                         <div class="inline-flex items-center">
-                            @if($field->isCanSort())
+                            @if($field->isCanReorder())
                                 <span class="la-icon-grip">{{ $field->getActionByName('reorder') }}</span>
                             @endif
-                            <span class="text-sm   uppercase pl-2">{{ $keys }}</span>
+                            <span class="text-sm uppercase pl-2">{{ $keys }}</span>
                         </div>
                         @if($field->isCanDeleted())
                             {{ $field->getActionByName('delete')->wireClick("callAction('{$field->getStatePath()}','deleteFieldToFieldSet',['{$keys}'])") }}

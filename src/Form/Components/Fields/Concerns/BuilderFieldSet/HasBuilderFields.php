@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Concerns\BuilderFieldSet;
 
+use Closure;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\Field;
 
 trait HasBuilderFields
@@ -13,9 +14,9 @@ trait HasBuilderFields
      */
     protected array $fields = [];
 
-    protected bool $can_deleted = false;
+    protected bool|Closure $can_deleted = false;
 
-    protected bool $can_sort = false;
+    protected bool|Closure $can_reorder = false;
 
     /**
      * @var Field[]
@@ -23,7 +24,7 @@ trait HasBuilderFields
     protected array $formSchemas = [];
 
     /**
-     * @param  Field[]  $schemas
+     * @param Field[] $schemas
      */
     public function schema(array $schemas): static
     {
@@ -40,32 +41,32 @@ trait HasBuilderFields
         return $this->fields;
     }
 
-    public function canDeleted(bool $can_deleted = true): static
+    public function canDeleted(bool|Closure $can_deleted = true): static
     {
         $this->can_deleted = $can_deleted;
 
         return $this;
     }
 
-    public function canSort(bool $can_sort = true): static
+    public function canReorder(bool|Closure $can_sort = true): static
     {
-        $this->can_sort = $can_sort;
+        $this->can_reorder = $can_sort;
 
         return $this;
     }
 
     public function isCanDeleted(): bool
     {
-        return $this->can_deleted;
+        return $this->evaluate($this->can_deleted);
     }
 
-    public function isCanSort(): bool
+    public function isCanReorder(): bool
     {
-        return $this->can_sort;
+        return $this->evaluate($this->can_reorder);
     }
 
     /**
-     * @param  Field[]  $field
+     * @param Field[] $field
      */
     protected function addFields(array $field, string $key): void
     {
@@ -141,22 +142,22 @@ trait HasBuilderFields
     public function getFormFieldByPath(string $path): ?Field
     {
         foreach ($this->fields as $fields) {
-            if ($field = collect($fields)->filter(fn (Field $field) => $field->getStatePath() === $path)->first()) {
+            if ($field = collect($fields)->filter(fn(Field $field) => $field->getStatePath() === $path)->first()) {
                 return $field;
             }
         }
 
-        return null;
+        return NULL;
     }
 
     public function getFormFieldByName(string $name): ?Field
     {
         foreach ($this->fields as $fields) {
-            if ($field = collect($fields)->filter(fn (Field $field) => $field->getName() === $name)->first()) {
+            if ($field = collect($fields)->filter(fn(Field $field) => $field->getName() === $name)->first()) {
                 return $field;
             }
         }
 
-        return null;
+        return NULL;
     }
 }
