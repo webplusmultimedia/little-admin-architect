@@ -55,12 +55,12 @@ trait HasBuilderFields
         return $this;
     }
 
-    public function isCanDeleted(): bool
+    public function isDeleted(): bool
     {
         return $this->evaluate($this->can_deleted);
     }
 
-    public function isCanReorder(): bool
+    public function isReordered(): bool
     {
         return $this->evaluate($this->can_reorder);
     }

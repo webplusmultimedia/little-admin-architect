@@ -22,12 +22,12 @@
                 @if($keys)
                     <div class="bg-gray-50 rounded-t-md py-1 dark:bg-gray-900 flex items-center justify-between">
                         <div class="inline-flex items-center">
-                            @if($field->isCanReorder())
+                            @if($field->isReordered())
                                 <span class="la-icon-grip">{{ $field->getActionByName('reorder') }}</span>
                             @endif
                             <span class="text-sm uppercase pl-2">{{ $keys }}</span>
                         </div>
-                        @if($field->isCanDeleted())
+                        @if($field->isDeleted())
                             {{ $field->getActionByName('delete')->wireClick("callAction('{$field->getStatePath()}','deleteFieldToFieldSet',['{$keys}'])") }}
                         @endif
                     </div>
