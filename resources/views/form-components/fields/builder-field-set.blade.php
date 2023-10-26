@@ -17,7 +17,7 @@
             <div {{ $attributes->class("la__form__container__wrapper")->merge(['class'=>$field->getColSpan()]) }}
                  x-data="{}"
                  wire:key="{{ $field->getWireKey()  }}"
-                 data-id="{{ Str::slug($field->getLabel()) }}-{{ $keys }}"
+                 data-id="{{ $keys }}"
             >
                 @if($keys)
                     <div class="bg-gray-50 rounded-t-md py-1 dark:bg-gray-900 flex items-center justify-between">
