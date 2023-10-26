@@ -25,7 +25,7 @@
                             @if($field->isReordered())
                                 <span class="la-icon-grip">{{ $field->getActionByName('reorder') }}</span>
                             @endif
-                            <span class="text-sm uppercase pl-2">{{ $keys }}</span>
+                            <span class="text-sm uppercase pl-2">{{ $field->getTitleForBuilder($keys,$items) }}</span>
                         </div>
                         @if($field->isDeleted())
                             {{ $field->getActionByName('delete')->wireClick("callAction('{$field->getStatePath()}','deleteFieldToFieldSet',['{$keys}'])") }}

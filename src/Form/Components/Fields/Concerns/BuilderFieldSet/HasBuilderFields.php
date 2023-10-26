@@ -23,6 +23,14 @@ trait HasBuilderFields
      */
     protected array $formSchemas = [];
 
+    protected ?string $nameForTitle =  NULL;
+
+    public function groupName(string $name): static
+    {
+        $this->nameForTitle = $name;
+
+        return $this;
+    }
     /**
      * @param Field[] $schemas
      */
@@ -159,5 +167,27 @@ trait HasBuilderFields
         }
 
         return NULL;
+    }
+
+    /**
+     * @param string $title
+     * @param Field[] $fields
+     *
+     * @return string
+     */
+    public function getTitleForBuilder(string $title, array $fields): string
+    {
+        if (!$this->nameForTitle){
+            return $title;
+        }
+        if (!$this->hasRelationship()){
+            return $title;
+        }
+        if ($this->hasRelationship()){
+            if($field = collect($fields)->filter(fn(Field $f)=>$f->getName()===$this->nameForTitle)->first()){
+                return (string) $field->getState();
+            }
+        }
+        return $title;
     }
 }
