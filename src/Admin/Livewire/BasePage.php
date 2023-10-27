@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 /**
  * Created by PhpStorm.
  *
@@ -22,13 +22,21 @@ abstract class BasePage extends Component
 {
     protected static string $layout = 'little-views::livewire.page';
 
-    protected static ?string $title = null;
+    protected static ?string $title = NULL;
 
-    protected string | Htmlable | null $heading = null;
+    protected string | Htmlable | null $heading = NULL;
 
-    protected string | Htmlable | null $subheading = null;
+    protected string | Htmlable | null $subheading = NULL;
 
     protected static string $view;
+
+    public function render(): View
+    {
+        return view(static::$layout, $this->getDataView())
+            ->layout('little-views::admin-components.Layouts.index', [
+                'livewire' => $this,
+                ...$this->getDatasLayout()]);
+    }
 
     public function getHeading(): string | Htmlable
     {
@@ -60,9 +68,5 @@ abstract class BasePage extends Component
         ];
     }
 
-    public function render(): View
-    {
-        return view(static::$layout, $this->getDataView())
-            ->layout('little-views::admin-components.Layouts.index', $this->getDatasLayout());
-    }
+
 }

@@ -10,6 +10,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Dashboard;
 use Webplusmultimedia\LittleAdminArchitect\Http\Middleware\Authenticate;
 
 return [
@@ -61,6 +62,12 @@ return [
     ],
     'attachments' => [
         'root-path' => 'attachments',
+    ],
+    'dashboard' =>[
+        'title' => 'Dashboard',
+        'class' => Dashboard::class,
+        'route' => '/',
+        'route_name' => 'admin-dashboard',
     ],
 
     'grid' => [

@@ -40,7 +40,7 @@
         <div class="container flex flex-wrap items-center justify-between mx-auto py-4">
             <div class="flex items-center">
                 {{--<x-little-anonyme::form-components.fields.icons.logo class="h-8"/>--}}
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white uppercase">{{ $title }}</span>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white uppercase">{{ $livewire->getTitle() }}</span>
             </div>
             <button data-collapse-toggle="navbar-default" type="button"
                     x-data=""
@@ -83,7 +83,8 @@
                                    min-w-[12rem] whitespace-nowrap   text-sm overflow-hidden
                                    dark:bg-gray-900 dark:text-white dark:border-gray-400/40"
                             >
-                                <div class="px-4 py-2 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-500 dark:hover:text-white "> {{ auth()->user()->name }}</div>
+                                <div
+                                    class="px-4 py-2 hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-500 dark:hover:text-white "> {{ auth()->user()->name }}</div>
 
                                 <div class="p-1" dark-mode="dark-mode" x-data="{
             mode: null,
@@ -215,6 +216,26 @@
     </div>
     <div class="flex flex-col">
         <div class="flex flex-col">
+            <div class="flex flex-col gap-1 mb-5">
+
+                    <div class="flex">
+                        @php($dashboardRouteName = config('little-admin-architect.route.prefix') . '.' . config('little-admin-architect.dashboard.route_name'))
+
+                        <a href="{{ route($dashboardRouteName) }}"
+                           :class="{
+                                    'border-primary-600 bg-primary-50/80 text-primary-600 font-bold pl-4  dark:bg-primary-400/10 dark:text-primary-400' : {{  request()->routeIs(config('little-admin-architect.dashboard.route_name'))?'true':'false' }} && $store.laDatas.menuOpen,
+                                    'bg-primary-50/80 text-primary-600 font-bold' : {{  request()->routeIs($dashboardRouteName)?'true':'false' }} && !$store.laDatas.menuOpen,
+                                    'flex justify-center pl-0 border-none  dark:hover:text-white/90 dark:hover:bg-primary-400/10' : !$store.laDatas.menuOpen,
+                                    'text-slate-500 border-transparent pl-4  dark:text-white/70 dark:hover:text-white/90 dark:hover:bg-primary-400/10' : {{ !request()->routeIs($dashboardRouteName)?'true':'false' }} && $store.laDatas.menuOpen
+                               }"
+                           class="inline-flex items-center space-x-4 hover:bg-gray-50 py-2 grow border-l-4 duration-200"
+                        >
+                            @svg('heroicon-o-home','w-7')
+                            <span :class="{'md:hidden' : !$store.laDatas.menuOpen}">{{ config('little-admin-architect.dashboard.title') }}</span>
+                        </a>
+                    </div>
+
+            </div>
             @foreach(LittleAdminArchitect::getNavigationPages() as $group => $navigations)
                 <div class="flex flex-col gap-1 mb-5">
                     <div

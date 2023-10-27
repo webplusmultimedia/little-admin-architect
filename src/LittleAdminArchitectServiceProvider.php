@@ -73,7 +73,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
             if (str($component)->afterLast('.')->startsWith('list-')) {
                 $class = Table::class;
             }
-            Livewire::component($component, $class);
+            Livewire::component($component, $class); // Defined all component Page Name in Resource Page
         }
 
         Livewire::component('little-admin.pages.auth.login', config('little-admin-architect.auth.pages.login'));

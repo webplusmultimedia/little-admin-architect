@@ -19,7 +19,7 @@ class EditRecord extends Page
     {
         /** @var Resources\Resource $resource */
         $resource = static::getResource();
-        static::$form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
+        //static::$form = $resource::getFormSchema(Form::make($resource::getModelLabel()));
         static::$key = $record;
         /* $model = $resource::getEloquentQuery()->getModel();
          static::$record = $resource::getEloquentQuery()->where($model->getKeyName(), $record)->firstOrFail();*/

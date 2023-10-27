@@ -10,8 +10,6 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
 
 abstract class Page extends BasePage
 {
-    protected static string $layout = 'little-views::livewire.page';
-
     protected static ?string $resource = null;
 
     protected static ?Model $record = null;

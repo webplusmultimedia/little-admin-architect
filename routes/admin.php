@@ -18,6 +18,9 @@ Route::prefix(config('little-admin-architect.prefix'))
                 Route::get('{file}', AssetsController::class)->where('file', '.*')->name('assets');
 
             });
+        Route::get(config('little-admin-architect.dashboard.route'),config('little-admin-architect.dashboard.class'))
+            ->name(config('little-admin-architect.dashboard.route_name'))
+            ->middleware(config('little-admin-architect.middleware.auth'));
         Route::get('assets-documents/{document}', DocumentsAssetController::class)->name('documents.file');
         Route::get('/login', config('little-admin-architect.auth.pages.login'))->name('auth.login');
         Route::post('/logout', function (Request $request): LogoutResponse {

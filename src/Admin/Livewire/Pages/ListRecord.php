@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages;
 
-use Illuminate\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 class ListRecord extends Page
 {
+    protected static string $layout = 'little-views::livewire.list';
+
     protected static ?string $routeName = 'list';
 
     protected static string $pageId;
@@ -48,11 +49,5 @@ class ListRecord extends Page
         return [
             'title' => static::getResource()::getPluralModelLabel(),
         ];
-    }
-
-    public function render(): View
-    {
-        return view('little-views::livewire.list', $this->getDataView())
-            ->layout('little-views::admin-components.Layouts.index', $this->getDatasLayout());
     }
 }
