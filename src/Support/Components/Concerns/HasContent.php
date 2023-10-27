@@ -8,7 +8,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 trait HasContent
 {
-    protected null|string|Htmlable $content = null;
+    protected null | string | Htmlable $content = null;
 
     protected string $maxWidth = 'modal__large';
 
@@ -38,14 +38,14 @@ trait HasContent
         return $this;
     }
 
-    public function content(null|string|Htmlable $content): static
+    public function content(null | string | Htmlable $content): static
     {
         $this->content = $content;
 
         return $this;
     }
 
-    public function getContent(): null|string|Htmlable
+    public function getContent(): null | string | Htmlable
     {
         return $this->content;
     }

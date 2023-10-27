@@ -9,9 +9,9 @@ use Illuminate\Support\Collection;
 
 trait HasOptions
 {
-    protected Closure|array $options = [];
+    protected Closure | array $options = [];
 
-    public function options(array|Collection|Closure $options): static
+    public function options(array | Collection | Closure $options): static
     {
         if ($options  instanceof Collection) {
             $options = $options->toArray();

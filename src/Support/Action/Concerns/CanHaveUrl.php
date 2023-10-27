@@ -8,11 +8,11 @@ use Closure;
 
 trait CanHaveUrl
 {
-    protected null|Closure|string $url = null;
+    protected null | Closure | string $url = null;
 
     protected string $targetLink = '_self';
 
-    public function url(Closure|string $url): static
+    public function url(Closure | string $url): static
     {
         $this->url = $url;
         $this->type = 'link';

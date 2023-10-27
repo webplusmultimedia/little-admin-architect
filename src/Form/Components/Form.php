@@ -132,7 +132,7 @@ final class Form extends BaseFormAlias implements Htmlable
         return $this;
     }
 
-    public function getRecord(): Model|array|null
+    public function getRecord(): Model | array | null
     {
         return $this->model;
     }

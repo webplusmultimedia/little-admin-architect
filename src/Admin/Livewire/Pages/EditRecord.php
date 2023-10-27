@@ -30,7 +30,7 @@ class EditRecord extends Page
         $this->previousUrl = url()->previous();*/
     }
 
-    protected static function setUpPage(): array
+    public function getDataView(): array
     {
         return [
             'component' => static::getComponent(),

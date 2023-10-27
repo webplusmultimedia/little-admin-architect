@@ -52,7 +52,7 @@ trait HasExtensionFile
         return $this->imagesExtension;
     }
 
-    protected function getUrl(string $file, int $width = 320, int $height = 200): string|UrlGenerator
+    protected function getUrl(string $file, int $width = 320, int $height = 200): string | UrlGenerator
     {
         if ($isDocument = static::isDocumentFile($file) or static::isSvgFile($file)) {
             $url = url(str($file)->prepend('storage/')->toString()); // svg

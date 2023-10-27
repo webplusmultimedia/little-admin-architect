@@ -8,11 +8,11 @@ use Closure;
 
 trait HasLabel
 {
-    protected string|Closure|null $label = null;
+    protected string | Closure | null $label = null;
 
     protected bool $showLabel = true;
 
-    public function label(string|Closure $label): static
+    public function label(string | Closure $label): static
     {
         $this->label = $label;
 

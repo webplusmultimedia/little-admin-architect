@@ -55,14 +55,14 @@ abstract class BaseForm
 
     protected Button $buttonCancel;
 
-    protected \Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm|Component $livewire;
+    protected \Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm | Component $livewire;
 
     protected ?string $livewireId = null;
 
     /**
      * @var Model|array<string,string>|null
      */
-    protected null|Model|array $model = null;
+    protected null | Model | array $model = null;
 
     public function getStatusForm(): ?string
     {

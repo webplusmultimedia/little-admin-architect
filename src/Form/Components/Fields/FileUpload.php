@@ -31,7 +31,7 @@ class FileUpload extends Field
             $this->defaultCustomProperties();
         }
 
-        $this->afterStateHydrated(static function (string|array|null $state, FileUpload $component): void {
+        $this->afterStateHydrated(static function (string | array | null $state, FileUpload $component): void {
             if (blank($state)) {
                 $component->state([]);
 
@@ -42,7 +42,7 @@ class FileUpload extends Field
                 $files = collect($state);
                 $files = $files
                     ->filter(
-                        static function (string|array $file) use ($component): bool {
+                        static function (string | array $file) use ($component): bool {
                             try {
                                 if (is_array($file) and isset($file['file'])) {
                                     return true;
@@ -58,7 +58,7 @@ class FileUpload extends Field
                             }
                         }
                     )
-                    ->map(static function (string|array $file) use ($component) {
+                    ->map(static function (string | array $file) use ($component) {
                         if (is_array($file) and ! isset($file['delete']) and ! isset($file['id']) and ! isset($file['new'])) {
                             return array_merge($file, ['file' => $file['file'], 'delete' => false, 'id' => Str::uuid()->toString(), 'customProperties' => $component->getMissingCustomProperties($file)]);
                         }
@@ -103,7 +103,7 @@ class FileUpload extends Field
 
             $files = collect($state);
             $files = $files
-                ->filter(static function (string|array $file): bool {
+                ->filter(static function (string | array $file): bool {
                     try {
                         if (is_array($file) and isset($file['file'])) {
                             return true;
@@ -118,7 +118,7 @@ class FileUpload extends Field
                         return false;
                     }
                 })
-                ->map(function (string|array $file) use ($component) {
+                ->map(function (string | array $file) use ($component) {
 
                     if (is_array($file) and ! isset($file['delete']) and ! isset($file['id']) and ! isset($file['new'])) {
                         return array_merge($file, ['delete' => false, 'id' => Str::uuid()->toString()]);
@@ -143,7 +143,7 @@ class FileUpload extends Field
             }
 
             $files = collect($state)
-                ->map(function (array $file) use ($component): null|array {
+                ->map(function (array $file) use ($component): null | array {
                     if (is_array($file) and isset($file['file']) and isset($file['delete']) and ! $file['delete']) {
                         return ['file' => $file['file'], 'customProperties' => $file['customProperties']];
                     }
@@ -165,7 +165,7 @@ class FileUpload extends Field
 
                     return null;
                 })
-                ->filter(fn (null|string|array $file) => ! blank($file))
+                ->filter(fn (null | string | array $file) => ! blank($file))
                 ->values()->all();
             //dd($files);
             if (blank($files)) {
@@ -248,13 +248,13 @@ class FileUpload extends Field
     public function setState(mixed $value): void
     {
         if (is_array($value)) {
-            $newFiles = collect($value)->filter(function (string|TemporaryUploadedFile|array $file) {
+            $newFiles = collect($value)->filter(function (string | TemporaryUploadedFile | array $file) {
                 if ($file instanceof TemporaryUploadedFile) {
                     return $file->exists();
                 }
 
                 return true;
-            })->map(function (string|array|TemporaryUploadedFile $file) {
+            })->map(function (string | array | TemporaryUploadedFile $file) {
                 if ($file instanceof TemporaryUploadedFile) {
                     $tmpFile = [(string) Str::uuid() => $file->serializeForLivewireResponse(), 'new' => true, 'delete' => false];
                     if ($this->hasFormAction()) {

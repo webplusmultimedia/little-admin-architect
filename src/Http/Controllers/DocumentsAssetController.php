@@ -34,7 +34,7 @@ class DocumentsAssetController
         return sprintf('%s GMT', gmdate('D, d M Y H:i:s', $timestamp));
     }
 
-    protected function pretendResponseIsFile(string $path, string $contentType): Response|BinaryFileResponse
+    protected function pretendResponseIsFile(string $path, string $contentType): Response | BinaryFileResponse
     {
         abort_unless(
             file_exists($path) || file_exists($path = base_path($path)),

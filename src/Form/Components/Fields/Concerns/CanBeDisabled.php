@@ -8,9 +8,9 @@ use Closure;
 
 trait CanBeDisabled
 {
-    protected bool|Closure $disabled = false;
+    protected bool | Closure $disabled = false;
 
-    public function disabled(bool|Closure $canDisabled = true): static
+    public function disabled(bool | Closure $canDisabled = true): static
     {
         $this->disabled = $canDisabled;
 

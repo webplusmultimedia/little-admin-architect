@@ -47,7 +47,7 @@ final class Grid extends AbstractLayout
         return $this->gridColumns;
     }
 
-    public function initDatasFormOnMount(null|array|Model $model): void
+    public function initDatasFormOnMount(null | array | Model $model): void
     {
         /** @var GridColumn $column */
         foreach ($this->gridColumns as $column) {

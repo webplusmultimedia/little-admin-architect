@@ -84,7 +84,7 @@ trait HasCustomProperties
         return $customProperties;
     }
 
-    protected function getBlankCustomProperties(TemporaryUploadedFile|array|string $file): array
+    protected function getBlankCustomProperties(TemporaryUploadedFile | array | string $file): array
     {
         // @todo : add parameter : file (tmp or file) to retrieve alt on new file
         $customProperties = [];
@@ -101,7 +101,7 @@ trait HasCustomProperties
         return $customProperties;
     }
 
-    protected function getCustomAltProperty(TemporaryUploadedFile|array|string $file): string
+    protected function getCustomAltProperty(TemporaryUploadedFile | array | string $file): string
     {
         $altProperty = null;
         if ($file instanceof TemporaryUploadedFile) {

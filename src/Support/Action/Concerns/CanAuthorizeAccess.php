@@ -8,9 +8,9 @@ use Closure;
 
 trait CanAuthorizeAccess
 {
-    protected Closure|bool $authorize = true;
+    protected Closure | bool $authorize = true;
 
-    public function can(Closure|bool $authorize): static
+    public function can(Closure | bool $authorize): static
     {
         $this->authorize = $authorize;
 

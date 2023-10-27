@@ -20,7 +20,7 @@ class ErrorMessage extends AbstractComponent
         return 'fields.partials.error-message';
     }
 
-    protected function setUp(Field|AbstractLayout $field): void
+    protected function setUp(Field | AbstractLayout $field): void
     {
         // TODO: Implement setUp() method.
     }

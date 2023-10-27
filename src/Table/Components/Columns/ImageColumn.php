@@ -30,7 +30,7 @@ class ImageColumn extends contracts\AbstractColumn
         return null;
     }
 
-    public function getUrlForCroppa(): null|UrlGenerator|string
+    public function getUrlForCroppa(): null | UrlGenerator | string
     {
         /** @var null|array $state */
         $state = $this->getState();

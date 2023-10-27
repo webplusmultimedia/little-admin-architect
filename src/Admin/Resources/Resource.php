@@ -14,7 +14,7 @@ use Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
 
-class Resource
+abstract class Resource
 {
     protected static ?string $breadcrumb = null;
 
@@ -44,7 +44,7 @@ class Resource
 
     protected static ?string $slug = null;
 
-    protected static string|array $middlewares = [];
+    protected static string | array $middlewares = [];
 
     protected static int $globalSearchResultsLimit = 50;
 
@@ -184,7 +184,7 @@ class Resource
         };
     }
 
-    public static function getMiddlewares(): string|array
+    public static function getMiddlewares(): string | array
     {
         return static::$middlewares;
     }

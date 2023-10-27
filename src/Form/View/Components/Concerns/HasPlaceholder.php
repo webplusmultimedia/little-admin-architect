@@ -6,7 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns;
 
 trait HasPlaceholder
 {
-    protected string|false|null $placeholder = null;
+    protected string | false | null $placeholder = null;
 
     public function getPlaceholder(?string $label, string $locale = null): ?string
     {

@@ -9,20 +9,20 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 trait CanHideOnForm
 {
-    protected bool|Closure $hideOnCreated = false;
+    protected bool | Closure $hideOnCreated = false;
 
-    protected bool|Closure $hideOnUpdated = false;
+    protected bool | Closure $hideOnUpdated = false;
 
     protected string $statusForm = Form::CREATED;
 
-    public function hideOnCreate(bool|Closure $hide = true): static
+    public function hideOnCreate(bool | Closure $hide = true): static
     {
         $this->hideOnCreated = $hide;
 
         return $this;
     }
 
-    public function hideOnUpdate(bool|Closure $hide = true): static
+    public function hideOnUpdate(bool | Closure $hide = true): static
     {
         $this->hideOnUpdated = $hide;
 

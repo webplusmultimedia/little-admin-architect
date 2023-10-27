@@ -15,7 +15,7 @@ trait HasModal
 
     protected ?TableModal $modal = null;
 
-    protected string|Htmlable|null $content = null;
+    protected string | Htmlable | null $content = null;
 
     public function getModal(): ?TableModal
     {

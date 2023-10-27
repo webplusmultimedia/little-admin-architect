@@ -50,10 +50,10 @@ class CheckBoxList extends Field
                 return $state;
             });
 
-            $this->setBeforeUpdatedValidateValueUsing(static function (Collection|array $state, Select $component): bool {
+            $this->setBeforeUpdatedValidateValueUsing(static function (Collection | array $state, Select $component): bool {
                 return false;
             });
-            $this->setBeforeCreatedValidateValueUsing(static function (Collection|array $state, Select $component): bool {
+            $this->setBeforeCreatedValidateValueUsing(static function (Collection | array $state, Select $component): bool {
                 return false;
             });
 

@@ -18,7 +18,7 @@ final class Input extends Field
 
     protected InputType $type = InputType::Text;
 
-    private null|int|float|string $step = null;
+    private null | int | float | string $step = null;
 
     private ?string $inputMode = null;
 
@@ -89,14 +89,14 @@ final class Input extends Field
         return $this;
     }
 
-    public function step(int|float $step): Input
+    public function step(int | float $step): Input
     {
         $this->step = $step;
 
         return $this;
     }
 
-    public function getStep(): null|float|int|string
+    public function getStep(): null | float | int | string
     {
         return $this->step;
     }
@@ -123,7 +123,7 @@ final class Input extends Field
             $this->setTranslateName($this->getStatePath());
             $this->addRules('array');
 
-            $this->afterStateHydrated(static function (string|null|array $state, Input $component): void {
+            $this->afterStateHydrated(static function (string | null | array $state, Input $component): void {
                 if (blank($state)) {
                     //Initialize $state for spatie/laravel-translatable
                     $state = data_get($component->livewire, 'data.translations.' . str($component->name)->beforeLast('-translations')->toString());

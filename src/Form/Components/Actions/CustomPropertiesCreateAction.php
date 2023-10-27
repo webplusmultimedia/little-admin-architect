@@ -78,7 +78,7 @@ class CustomPropertiesCreateAction extends FormAction
         $this->fill($record);
     }
 
-    public function fill(Model|array $model): void
+    public function fill(Model | array $model): void
     {
         foreach ($this->fields as $field) {
             $field->record($model);

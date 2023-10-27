@@ -47,7 +47,7 @@ abstract class FormAction extends Action
         return $this;
     }
 
-    public function fill(array|Model $model): void
+    public function fill(array | Model $model): void
     {
         if ($model instanceof Model) {
             foreach ($this->fields as $field) {
@@ -95,7 +95,7 @@ abstract class FormAction extends Action
         return str('Save ')->append($this->getTitle())->value();
     }
 
-    public function record(array|Model $record): static
+    public function record(array | Model $record): static
     {
         $this->record = $record;
         if ($this->record instanceof Model) {

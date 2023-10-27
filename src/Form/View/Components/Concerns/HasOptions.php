@@ -8,7 +8,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\FormBinder;
 
 trait HasOptions
 {
-    public function isSelected(string $name, string|int $value): bool
+    public function isSelected(string $name, string | int $value): bool
     {
         $oldValue = $this->getOldValue();
         if (isset($oldValue)) {

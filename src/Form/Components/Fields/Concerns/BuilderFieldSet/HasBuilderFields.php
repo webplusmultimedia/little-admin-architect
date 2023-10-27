@@ -14,9 +14,9 @@ trait HasBuilderFields
      */
     protected array $fields = [];
 
-    protected bool|Closure $can_deleted = false;
+    protected bool | Closure $can_deleted = false;
 
-    protected bool|Closure $can_reorder = false;
+    protected bool | Closure $can_reorder = false;
 
     /**
      * @var Field[]
@@ -50,14 +50,14 @@ trait HasBuilderFields
         return $this->fields;
     }
 
-    public function canDeleted(bool|Closure $can_deleted = true): static
+    public function canDeleted(bool | Closure $can_deleted = true): static
     {
         $this->can_deleted = $can_deleted;
 
         return $this;
     }
 
-    public function canReorder(bool|Closure $can_sort = true): static
+    public function canReorder(bool | Closure $can_sort = true): static
     {
         $this->can_reorder = $can_sort;
 

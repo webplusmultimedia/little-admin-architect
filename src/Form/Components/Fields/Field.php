@@ -75,9 +75,9 @@ abstract class Field extends AbstractField implements CanGetAttributesRules, Can
     /**
      * @var array<string,string>|Model|null
      */
-    protected array|null|Model $record = null;
+    protected array | null | Model $record = null;
 
-    public BaseForm|BaseTable|Component $livewire;
+    public BaseForm | BaseTable | Component $livewire;
 
     protected mixed $oldValue = null;
 
@@ -95,7 +95,7 @@ abstract class Field extends AbstractField implements CanGetAttributesRules, Can
 
     }
 
-    public function livewire(BaseForm|BaseTable|Component $livewire): void
+    public function livewire(BaseForm | BaseTable | Component $livewire): void
     {
         $this->livewire = $livewire;
     }
@@ -105,12 +105,12 @@ abstract class Field extends AbstractField implements CanGetAttributesRules, Can
         return new static(name: $name, label: $label);
     }
 
-    public function record(array|null|Model $record): void
+    public function record(array | null | Model $record): void
     {
         $this->record = $record;
     }
 
-    public function getRecord(): array|null|Model
+    public function getRecord(): array | null | Model
     {
         return $this->record;
     }

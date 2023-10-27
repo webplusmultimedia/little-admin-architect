@@ -11,7 +11,7 @@ use Webplusmultimedia\LittleAdminArchitect\LittleAdminManager;
 
 class LoginResponse implements Responsable
 {
-    public function toResponse($request): RedirectResponse|Redirector
+    public function toResponse($request): RedirectResponse | Redirector
     {
         return redirect()->intended((new LittleAdminManager())->getUrl());
     }

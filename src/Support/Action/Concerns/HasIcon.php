@@ -8,13 +8,13 @@ use Closure;
 
 trait HasIcon
 {
-    protected string|Closure|null $icon = null;
+    protected string | Closure | null $icon = null;
 
     protected string $iconPosition = 'before';
 
     protected string $iconSize = 'w-5';
 
-    public function icon(string|Closure $icon): static
+    public function icon(string | Closure $icon): static
     {
         $this->icon = $icon;
 

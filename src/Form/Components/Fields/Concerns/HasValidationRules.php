@@ -18,12 +18,12 @@ trait HasValidationRules
 
     protected bool $nullable = false;
 
-    protected function addRules(string|Rule|Unique|Exists|Closure $rules): void
+    protected function addRules(string | Rule | Unique | Exists | Closure $rules): void
     {
         $this->rules[] = $rules;
     }
 
-    public function rules(string|Rule|Unique|Exists|Closure $rules): static
+    public function rules(string | Rule | Unique | Exists | Closure $rules): static
     {
         $this->rules[] = $rules;
 

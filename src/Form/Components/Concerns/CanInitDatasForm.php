@@ -10,7 +10,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 trait CanInitDatasForm
 {
-    public function initDatasFormOnMount(null|array|Model $model): void
+    public function initDatasFormOnMount(null | array | Model $model): void
     {
         foreach ($this->fields as $field) {
             if ($field instanceof Field) {

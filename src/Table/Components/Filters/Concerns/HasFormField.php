@@ -13,9 +13,9 @@ trait HasFormField
     /**
      * @var Field[]|string|Closure
      */
-    protected array|Closure|string $formFields = CheckBox::class;
+    protected array | Closure | string $formFields = CheckBox::class;
 
-    protected Field|array|null $fields = null;
+    protected Field | array | null $fields = null;
 
     public function getFormFields(): array
     {
@@ -45,7 +45,7 @@ trait HasFormField
     /**
      * @param  Field[]|Closure  $formField
      */
-    public function form(array|Closure $formField): static
+    public function form(array | Closure $formField): static
     {
         $this->formFields = $formField;
 

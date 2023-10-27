@@ -8,7 +8,7 @@ use Closure;
 
 trait HasCssClass
 {
-    protected string|Closure $color = 'primary ';
+    protected string | Closure $color = 'primary ';
 
     protected string $btnStyle = '';
 
@@ -64,7 +64,7 @@ trait HasCssClass
         return $this;
     }
 
-    public function color(string|Closure $color): static
+    public function color(string | Closure $color): static
     {
         if (is_string($color)) {
             $color = str($color)

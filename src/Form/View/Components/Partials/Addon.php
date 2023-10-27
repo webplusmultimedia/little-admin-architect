@@ -11,7 +11,7 @@ use Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Abstracts\Abstra
 
 class Addon extends AbstractComponent
 {
-    public function __construct(public string|Closure $addon)
+    public function __construct(public string | Closure $addon)
     {
         parent::__construct();
     }
@@ -21,7 +21,7 @@ class Addon extends AbstractComponent
         return 'fields.partials.addon';
     }
 
-    protected function setUp(Field|AbstractLayout $field): void
+    protected function setUp(Field | AbstractLayout $field): void
     {
         // TODO: Implement setUp() method.
     }

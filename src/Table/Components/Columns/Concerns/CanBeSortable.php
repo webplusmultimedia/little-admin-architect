@@ -8,7 +8,7 @@ use Closure;
 
 trait CanBeSortable
 {
-    protected bool|Closure $sortable = false;
+    protected bool | Closure $sortable = false;
 
     protected string $direction = 'asc';
 
@@ -18,7 +18,7 @@ trait CanBeSortable
     }
 
     /** @todo : define sort on closure and array */
-    public function sortable(bool|Closure $sort = true): static
+    public function sortable(bool | Closure $sort = true): static
     {
         $this->sortable = $sort;
 

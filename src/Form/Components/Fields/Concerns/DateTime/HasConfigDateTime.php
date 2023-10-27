@@ -57,7 +57,7 @@ trait HasConfigDateTime
         return $this;
     }
 
-    public function getComponentValue(): array|Carbon|string|null
+    public function getComponentValue(): array | Carbon | string | null
     {
         $this->addRules('date');
         $value = $this->getState();

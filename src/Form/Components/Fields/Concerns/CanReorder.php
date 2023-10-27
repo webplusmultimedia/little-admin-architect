@@ -18,7 +18,7 @@ use Closure;
 
 trait CanReorder
 {
-    protected bool|Closure $isReordable = false;
+    protected bool | Closure $isReordable = false;
 
     public function reorder(array $newOrder): array
     {
@@ -46,7 +46,7 @@ trait CanReorder
         return $this->getUploadFileUrlsUsing();
     }
 
-    public function canReorder(bool|Closure $canReorder = true): static
+    public function canReorder(bool | Closure $canReorder = true): static
     {
         $this->isReordable = $canReorder;
 

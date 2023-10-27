@@ -42,7 +42,7 @@ trait HasRelationship
         return null !== $this->relationship or $this->hasRelationship;
     }
 
-    public function getRelationType(): string|false
+    public function getRelationType(): string | false
     {
         try {
             if ( ! $this->relationClass) {
@@ -60,7 +60,7 @@ trait HasRelationship
         return $this->hasRelationship() and in_array(HasBelongToRelation::class, class_uses_recursive($this), true) and BelongsToMany::class === $this->getRelationType();
     }
 
-    protected function getInstanceRelationship(): BelongsTo|BelongsToMany|HasMany
+    protected function getInstanceRelationship(): BelongsTo | BelongsToMany | HasMany
     {
         try {
             if ( ! $this->instanceRelationCache) {

@@ -6,12 +6,12 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\View\View;
-use Livewire\Component;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
 
-class Page extends Component
+abstract class Page extends BasePage
 {
+    protected static string $layout = 'little-views::livewire.page';
+
     protected static ?string $resource = null;
 
     protected static ?Model $record = null;
@@ -24,7 +24,7 @@ class Page extends Component
 
     protected static ?string $routeName = null;
 
-    public static function getResource(): null|string|Resource
+    public static function getResource(): null | string | Resource
     {
         return static::$resource;
     }
@@ -112,14 +112,14 @@ class Page extends Component
             ->implode('.');
     }
 
-    protected static function setUpLayout(): array
+    public function getDatasLayout(): array
     {
         return [
             'title' => static::title(),
         ];
     }
 
-    protected static function setUpPage(): array
+    public function getDataView(): array
     {
         return [
         ];
@@ -143,11 +143,5 @@ class Page extends Component
     protected static function mutateFormDataBeforeSave(array $data): array
     {
         return $data;
-    }
-
-    public function render(): View
-    {
-        return view('little-views::livewire.page', static::setUpPage())
-            ->layout('little-views::admin-components.Layouts.index', static::setUpLayout());
     }
 }

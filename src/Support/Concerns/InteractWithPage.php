@@ -20,7 +20,7 @@ trait InteractWithPage
         $this->pageForResource = $page;
     }
 
-    public function getResourcePage(): Resource|string|null
+    public function getResourcePage(): Resource | string | null
     {
         return $this->pageForResource::getResource();
     }

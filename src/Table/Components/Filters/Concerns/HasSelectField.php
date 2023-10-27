@@ -14,7 +14,7 @@ trait HasSelectField
 
     protected bool $isMultiple = false;
 
-    protected Collection|array $options = [];
+    protected Collection | array $options = [];
 
     protected ?Closure $selectOptionLabelUsing = null;
 
@@ -42,7 +42,7 @@ trait HasSelectField
         $this->setSearchResultsUsing($field);
     }
 
-    public function options(array|Collection $options): static
+    public function options(array | Collection $options): static
     {
         $this->options = $options;
 

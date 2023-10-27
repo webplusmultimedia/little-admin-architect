@@ -19,7 +19,7 @@ trait HasFileDirectory
 
     protected ?string $directory = null;
 
-    protected string|Closure $visibility = 'public';
+    protected string | Closure $visibility = 'public';
 
     protected bool $preserveFilenames = false;
 
@@ -160,14 +160,14 @@ trait HasFileDirectory
         return $this->isMultiple;
     }
 
-    public function visibility(string|Closure $visibility): static
+    public function visibility(string | Closure $visibility): static
     {
         $this->visibility = $visibility;
 
         return $this;
     }
 
-    protected function getVisibility(): string|Closure
+    protected function getVisibility(): string | Closure
     {
         return $this->visibility;
     }

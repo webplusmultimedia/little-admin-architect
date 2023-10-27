@@ -20,7 +20,7 @@ class Label extends AbstractComponent
         return 'fields.partials.label';
     }
 
-    protected function setUp(Field|AbstractLayout $field): void
+    protected function setUp(Field | AbstractLayout $field): void
     {
         // TODO: Implement setUp() method.
     }

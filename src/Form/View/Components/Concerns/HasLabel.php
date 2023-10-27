@@ -6,13 +6,13 @@ namespace Webplusmultimedia\LittleAdminArchitect\Form\View\Components\Concerns;
 
 trait HasLabel
 {
-    protected string|false|null $label = null;
+    protected string | false | null $label = null;
 
     protected bool $wrappedWithMargin = true;
 
     protected bool $isRequiredField = false;
 
-    public function getLabel(string|false $locale = null): ?string
+    public function getLabel(string | false $locale = null): ?string
     {
         $label = $this->getConfig()?->getLabel();
         if (false === $label) {

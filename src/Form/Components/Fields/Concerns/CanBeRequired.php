@@ -8,14 +8,14 @@ use Closure;
 
 trait CanBeRequired
 {
-    protected bool|Closure $required = false;
+    protected bool | Closure $required = false;
 
     public function isRequired(): bool
     {
         return $this->evaluate($this->required);
     }
 
-    public function required(bool|Closure $required = true): static
+    public function required(bool | Closure $required = true): static
     {
         $this->required = $required;
         $this->addRules('required');

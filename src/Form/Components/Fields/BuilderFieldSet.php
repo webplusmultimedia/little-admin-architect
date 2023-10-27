@@ -91,7 +91,7 @@ class BuilderFieldSet extends Field
         } else {
             $this->relationship = $this->getName();
             $this->actions = $this->getActions();
-            $this->afterStateHydrated(static function (null|array|Collection $state, BuilderFieldSet $component): void {
+            $this->afterStateHydrated(static function (null | array | Collection $state, BuilderFieldSet $component): void {
                 if (blank($state)) {
                     $component->state([]);
 
@@ -113,15 +113,15 @@ class BuilderFieldSet extends Field
                 $component->fill();
             });
 
-            $this->setBeforeUpdatedValidateValueUsing(static function (Collection|array $state, BuilderFieldSet $component): bool {
+            $this->setBeforeUpdatedValidateValueUsing(static function (Collection | array $state, BuilderFieldSet $component): bool {
                 return false;
             });
 
-            $this->setBeforeCreatedValidateValueUsing(static function (Collection|array $state, BuilderFieldSet $component): bool {
+            $this->setBeforeCreatedValidateValueUsing(static function (Collection | array $state, BuilderFieldSet $component): bool {
                 return false;
             });
 
-            $this->afterStateDehydratedUsing(static function (Collection|array $state, BuilderFieldSet $component): array {
+            $this->afterStateDehydratedUsing(static function (Collection | array $state, BuilderFieldSet $component): array {
                 if (blank($state)) {
                     return [];
                 }

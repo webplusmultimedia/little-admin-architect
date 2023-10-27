@@ -29,7 +29,7 @@ abstract class AbstractLayoutView extends Component
 
     abstract protected function setUp(AbstractLayout $field): void;
 
-    public function render(): View|Htmlable
+    public function render(): View | Htmlable
     {
         return view('little-views::form-components.' . $this->viewPath);
     }

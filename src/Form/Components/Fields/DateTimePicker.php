@@ -22,7 +22,7 @@ class DateTimePicker extends Field
         $this->setViewDatas('field', $this);
     }
 
-    public function livewire(Component|BaseForm $livewire): void
+    public function livewire(Component | BaseForm $livewire): void
     {
         parent::livewire($livewire);
         if ($this->getDateFromWireName()) {
