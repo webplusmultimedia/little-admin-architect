@@ -80,7 +80,9 @@ abstract class Page extends BasePage
 
     protected static function title(): string
     {
-        return (static::getResource())::getModelLabel();
+        static::$title = (static::getResource())::getModelLabel();
+
+        return static::$title;
     }
 
     public static function getForm(): \Webplusmultimedia\LittleAdminArchitect\Form\Components\Form
@@ -114,8 +116,10 @@ abstract class Page extends BasePage
 
     public function getDatasLayout(): array
     {
+        static::title();
+
         return [
-            'title' => static::title(),
+            'title' => $this->getTitle(),
         ];
     }
 
