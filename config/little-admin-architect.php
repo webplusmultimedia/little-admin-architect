@@ -63,7 +63,7 @@ return [
     'attachments' => [
         'root-path' => 'attachments',
     ],
-    'dashboard' =>[
+    'dashboard' => [
         'title' => 'Dashboard',
         'class' => Dashboard::class,
         'route' => '/',

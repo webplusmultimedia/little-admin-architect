@@ -20,7 +20,7 @@
             @endforeach
         </div>
     </div>
-    <div class="flex flex-col bg-white  rounded-lg border dark:bg-gray-800 dark:border-gray-400/40 dark:text-white" x-data="{}">
+    <div class="flex flex-col bg-white  rounded-lg border dark:bg-gray-800 dark:border-gray-400/40 dark:text-white overflow-hidden" x-data="{}">
         @if($table->showSearchBar() OR $table->hasFilters())
             <x-little-anonyme::table-components.partials.search-bar :table="$table"/>
         @endif

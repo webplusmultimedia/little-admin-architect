@@ -7,6 +7,8 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources\Resource;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Widgets\Widget;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Widgets\WidgetConfiguration;
 
 abstract class Page extends BasePage
 {
@@ -145,5 +147,21 @@ abstract class Page extends BasePage
     protected static function mutateFormDataBeforeSave(array $data): array
     {
         return $data;
+    }
+
+    /**
+     * @return array<class-string<Widget> | WidgetConfiguration>
+     */
+    protected static function getHeaderWidgets(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<class-string<Widget> | WidgetConfiguration>
+     */
+    protected static function getFooterWidgets(): array
+    {
+        return [];
     }
 }

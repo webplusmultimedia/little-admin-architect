@@ -1,13 +1,14 @@
 <div
-    class="modal__overlay flex items-center justify-center"
+    class="modal__overlay flex items-center justify-center cursor-pointer"
     x-cloak
     x-data="ModalComponent({name:$wire.name})"
     x-show="show"
+    x-on:click.self="closeModal"
 >
     {{-- Modal --}}
-    <div class="modal" id="{{ $name }}" tabindex="-1" aria-labelledby="{{ $name }}Label" aria-hidden="true"
-         :class="{ {{$maxWidth}} : true }"
-         @click.outside="closeModal"
+    <div id="{{ $name }}" tabindex="-1" aria-labelledby="{{ $name }}Label" aria-hidden="true"
+         @class(['modal cursor-default',$maxWidth])
+
          x-show="show && showActiveComponent"
          x-transition:enter="ease-out duration-300"
          x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"

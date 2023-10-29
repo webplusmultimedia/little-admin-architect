@@ -13,6 +13,7 @@ use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Form;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Mixins\SelectMixing;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Modal\LittleAdminModal;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Table;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Widgets\OverviewSimpleStatWidget;
 use Webplusmultimedia\LittleAdminArchitect\Commands\LittleAdminArchitectCommand;
 use Webplusmultimedia\LittleAdminArchitect\Commands\MakeResourceCommand;
 use Webplusmultimedia\LittleAdminArchitect\Http\Middleware\Authenticate;
@@ -79,6 +80,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
         Livewire::component('little-admin.pages.auth.login', config('little-admin-architect.auth.pages.login'));
         Livewire::component('little-admin-architect.modal', LittleAdminModal::class);
         Livewire::component('little-admin-notification', Notification::class);
+        Livewire::component(LittleAdminArchitect::resolveLivewireComponent(OverviewSimpleStatWidget::class), OverviewSimpleStatWidget::class);
     }
 
     private function registerGuard(): void

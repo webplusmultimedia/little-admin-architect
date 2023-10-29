@@ -9,7 +9,7 @@
 <div class=" flex flex-col items-start overflow-hidden">
     <div class="modal__head">
         {{--<h1 >{{ __($form->title) }}</h1>--}}
-        <h2 class="text-2xl !m-0">{{ $getTitleForm() }} </h2>
+        <h2 class="text-2xl !m-0">{{ $getTitleForm() }}</h2>
     </div>
     <form wire:submit.prevent="save" x-data="{ livewireId : $wire.__instance.id }" novalidate class="w-full flex flex-col gap-2">
         <div class="max-h-[calc(100vh_-_20em)] py-5 px-5 overflow-x-hidden overflow-y-auto" x-data="{}">

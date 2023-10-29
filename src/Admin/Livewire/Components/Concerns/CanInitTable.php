@@ -12,8 +12,6 @@ trait CanInitTable
 {
     protected function setUp(): Table
     {
-        //$this->pageRoute = $this->pageRoute ?? request()->collect('fingerprint')->get('name');
-
         $pageClass = str($this->pageRoute)
             ->explode('.')
             ->map(fn (string $segment) => str($segment)->studly())

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Widgets\Widget;
 use Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
@@ -288,6 +289,13 @@ abstract class Resource
         return static::can('restoreAny');
     }
 
+    /**
+     * @return array<class-string<Widget>>
+     */
+    public static function getWidgets(): array
+    {
+        return [];
+    }
     /* public static function canGloballySearch(): bool
      {
          return static::$isGloballySearchable && count(static::getGloballySearchableAttributes()) && static::canViewAny();

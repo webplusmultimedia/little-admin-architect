@@ -57,4 +57,9 @@ class LittleAdminArchitect
             return (bool) ($group['group'] === $groupRessource);
         });
     }
+
+    public static function resolveLivewireComponent(string $class): string
+    {
+        return str($class)->replace('\\', '.')->lower()->toString();
+    }
 }

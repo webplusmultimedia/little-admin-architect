@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 /**
  * Created by PhpStorm.
  *
@@ -22,11 +22,11 @@ abstract class BasePage extends Component
 {
     protected static string $layout = 'little-views::livewire.page';
 
-    protected static ?string $title = NULL;
+    protected static ?string $title = null;
 
-    protected string | Htmlable | null $heading = NULL;
+    protected string | Htmlable | null $heading = null;
 
-    protected string | Htmlable | null $subheading = NULL;
+    protected string | Htmlable | null $subheading = null;
 
     protected static string $view;
 
@@ -67,6 +67,4 @@ abstract class BasePage extends Component
         return [
         ];
     }
-
-
 }

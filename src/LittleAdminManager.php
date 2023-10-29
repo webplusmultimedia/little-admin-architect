@@ -42,7 +42,7 @@ final class LittleAdminManager
 
     //  private array $userMenuItems = [];
 
-    //  private array $widgets = [];
+    // private array $widgets = [];
 
     //  private ?Closure $navigationBuilder = null;
 
