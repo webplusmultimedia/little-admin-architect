@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseForm;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Fields\FieldException;
 
@@ -19,7 +20,13 @@ trait InteractWithLivewire
         if ($this->hasRules()) {
             if ($this->livewire instanceof BaseForm) {
                 //dd($this->getRulesBeforeValidate(),$this->livewire->data);
-                $datas = $this->livewire->validate(rules: $this->getRulesBeforeValidate(), attributes: $this->getAttributesRules());
+                try {
+                    $datas = $this->livewire->validate(rules: $this->getRulesBeforeValidate(), attributes: $this->getAttributesRules());
+                } catch (ValidationException $exception) {
+                    $this->livewire->notification()->error(__('little-admin-architect::form.message.error'))->send();
+                    throw $exception;
+                }
+
                 $this->livewire->form->authorizeAccess();
                 if ( ! $this->livewire->data?->exists) {
                     $datas = $this->pageForResource::getMutateFormDataBeforeCreate($this->values($datas));
@@ -30,7 +37,7 @@ trait InteractWithLivewire
                     } elseif ($edit_url = $this->linkEdit($this->livewire->data)) {
                         redirect(to: $edit_url);
                     }
-                    $this->livewire->notification()->success(trans('little-admin-architect::form.message.success'))->send();
+                    $this->livewire->notification()->success(__('little-admin-architect::form.message.success'))->send();
                 } else {
                     $datas = $this->pageForResource::getMutateFormDataBeforeSave($this->values($datas));
                     //dd($datas);

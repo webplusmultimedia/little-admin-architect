@@ -41,7 +41,8 @@ class ListRecord extends Page
             'component' => static::getComponent(),
             'pageRoute' => static::getComponent(),
             'id' => static::$pageId,
-            'widgets' => static::getHeaderWidgets(),
+            'headerWidgets' => static::getHeaderWidgets(),
+            'footerWidgets' => static::getFooterWidgets(),
         ];
     }
 

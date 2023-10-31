@@ -15,13 +15,11 @@
     @endphp
 
     @foreach($widgets as $key=>$widget)
-
         <div class="py-4">
             @livewire(
 	            $normalizeWidgetClass($widget),
                 [...($widget instanceof WidgetConfiguration ? [...$normalizeWidgetClass($widget)::getDefaultProperties(),...$widget->properties ]: $widget::getDefaultProperties())]
             )
-            {{--{{ LittleAdminArchitect::resolveLivewireComponent($widget) }}--}}
         </div>
     @endforeach
 </div>

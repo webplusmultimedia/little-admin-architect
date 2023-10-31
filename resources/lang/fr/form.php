@@ -16,6 +16,7 @@ return [
     ],
     'message' => [
         'success' => 'Enregistré',
+        'error' => 'Il y a des erreurs, merci de corriger',
     ],
     'select' => [
         'search-prompt' => 'Taper ici pour rechercher...',
