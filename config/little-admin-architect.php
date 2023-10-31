@@ -25,6 +25,10 @@ return [
         'path' => app_path('LittleAdmin/Resources'),
         'register' => [],
     ],
+    'widgets' => [
+        'namespace' => 'App\\LittleAdmin\\Widgets',
+        'path' => app_path('LittleAdmin/Widgets'),
+    ],
     'pages' => [
         'namespace' => 'App\\LittleAdmin\\Pages',
         'path' => app_path('LittleAdmin/Pages'),

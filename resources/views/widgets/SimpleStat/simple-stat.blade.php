@@ -4,4 +4,7 @@
         {{ $getValue() }}
     </div>
     @if($description = $getDescription()) <p class="text-xs text-gray-500">{{ $description }}</p> @endif
+    @if($button = $getButton)
+        {{ $button }}
+    @endif
 </div>

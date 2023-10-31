@@ -164,4 +164,9 @@ abstract class Page extends BasePage
     {
         return [];
     }
+
+    protected function getWidgetData(): array
+    {
+        return [];
+    }
 }

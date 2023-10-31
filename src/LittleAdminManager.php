@@ -91,6 +91,11 @@ final class LittleAdminManager
         return $this->resources;
     }
 
+    public function registerResourcesWidgets(): void
+    {
+        RegisterResources::resolveWidgetsComponents(config('little-admin-architect.widgets.path'));
+    }
+
     public function registerResources(): void
     {
         $this->applyResources();

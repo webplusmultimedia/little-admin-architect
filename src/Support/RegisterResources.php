@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Webplusmultimedia\LittleAdminArchitect\Support;
 
 use Illuminate\Filesystem\Filesystem;
+use Livewire\Livewire;
 use SplFileInfo;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources;
@@ -105,5 +106,27 @@ class RegisterResources
         }
 
         return [];
+    }
+
+    public static function resolveWidgetsComponents(string $path): void
+    {
+        $filesystem = new Filesystem();
+        if ($filesystem->exists($path)) {
+            $widgetsDirectories = $filesystem->directories($path);
+            foreach ($widgetsDirectories as $widgetsDirectory) {
+                $widgetsFiles = $filesystem->files($widgetsDirectory);
+                foreach ($widgetsFiles as $widgetsFile) {
+                    $prependClass = config('little-admin-architect.widgets.namespace');
+                    $prependDir = str(config('little-admin-architect.widgets.path'))->toString();
+                    $widgetClass = str($widgetsFile->getPath())
+                        ->after($prependDir)->replace('/', '\\')
+                        ->prepend($prependClass)
+                        ->append('\\', $widgetsFile->getFilename())
+                        ->before('.php')
+                        ->toString();
+                    Livewire::component(str($widgetClass)->explode('\\')->map(fn ($str) => str($str)->kebab())->implode('.'), $widgetClass);
+                }
+            }
+        }
     }
 }

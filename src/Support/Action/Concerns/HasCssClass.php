@@ -64,6 +64,11 @@ trait HasCssClass
         return $this;
     }
 
+    /**
+     * Available: primary|warning|error|success|info
+     *
+     * @return $this
+     */
     public function color(string | Closure $color): static
     {
         if (is_string($color)) {
