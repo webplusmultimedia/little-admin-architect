@@ -1,10 +1,11 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components;
 
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\View\Component;
 use Illuminate\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Components\BaseTable;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
@@ -23,7 +24,7 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasSearchab
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Concerns\HasSortableColum;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Layouts\Header;
 
-final class Table implements Htmlable
+final class Table extends Component implements Htmlable
 {
     use CanAuthorizeAccess;
     use HasActionModal;
@@ -45,7 +46,7 @@ final class Table implements Htmlable
 
     protected BaseTable $livewire;
 
-    private ?string $livewireId = null;
+    private ?string $livewireId = NULL;
 
     public function getLivewireId(): ?string
     {
@@ -59,8 +60,7 @@ final class Table implements Htmlable
 
     public function __construct(
         public string $title,
-    ) {
-    }
+    ) {}
 
     public function configureColumns(BaseTable $livewire, Page $page, string $title = ''): void
     {
@@ -113,9 +113,9 @@ final class Table implements Htmlable
 
     }
 
-    protected function render(): View
+    public function render(): View
     {
-        return view($this->getView(), ['table' => $this]);
+        return view($this->getView(), $this->data());
     }
 
     public function toHtml(): string
