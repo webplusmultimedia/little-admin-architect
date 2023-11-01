@@ -31,7 +31,7 @@ final class Form extends BaseFormAlias implements Htmlable
     use InteractWithLivewire;
     use InteractWithRecord;
 
-    protected string $view = 'form';
+    protected string $view = 'little-views::form-components.form';
 
     protected string $eventForCloseModal = 'close.modal';
 
@@ -80,7 +80,7 @@ final class Form extends BaseFormAlias implements Htmlable
 
     public function getView(): string
     {
-        return 'little-views::form-components.' . $this->view;
+        return $this->view;
     }
 
     public function getAction(): ?string
