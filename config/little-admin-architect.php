@@ -10,6 +10,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Dashboard\Widgets\LaInfosWidget;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Dashboard;
 use Webplusmultimedia\LittleAdminArchitect\Http\Middleware\Authenticate;
 
@@ -72,6 +73,9 @@ return [
         'class' => Dashboard::class,
         'route' => '/',
         'route_name' => 'admin-dashboard',
+        'widgets' => [
+            LaInfosWidget::class,
+        ],
     ],
 
     'grid' => [

@@ -294,6 +294,7 @@ abstract class Resource
      */
     public static function getWidgets(): array
     {
+
         return [];
     }
     /* public static function canGloballySearch(): bool

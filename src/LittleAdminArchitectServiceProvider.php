@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Blade;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Dashboard\Widgets\LaInfosWidget;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Form;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Mixins\SelectMixing;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Modal\LittleAdminModal;
@@ -80,6 +81,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
         Livewire::component('little-admin.pages.auth.login', config('little-admin-architect.auth.pages.login'));
         Livewire::component('little-admin-architect.modal', LittleAdminModal::class);
         Livewire::component('little-admin-notification', Notification::class);
+        Livewire::component(LittleAdminArchitect::resolveLivewireComponent(LaInfosWidget::class), LaInfosWidget::class);
 
     }
 

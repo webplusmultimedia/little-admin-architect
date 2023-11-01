@@ -4,19 +4,30 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
-class Dashboard extends BasePage
+class Dashboard extends Page
 {
-    protected static ?string $test = null;
+    protected static ?string $title = 'Tableau de board';
 
     protected static string $layout = 'little-views::dashboard.dashboard';
 
-    public function mount(): void
+    protected static function title(): string
     {
-        self::$test = 'mada';
+        return static::$title;
     }
 
-    public static function getTest(): ?string
+    protected static function getHeaderWidgets(): array
     {
-        return static::$test;
+        return [
+            ...config('little-admin-architect.dashboard.widgets'),
+        ];
+    }
+
+    public function getDataView(): array
+    {
+        return [
+            'id' => $this->id,
+            'headerWidgets' => static::getHeaderWidgets(),
+            'footerWidgets' => static::getFooterWidgets(),
+        ];
     }
 }

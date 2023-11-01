@@ -15,12 +15,12 @@ module.exports = {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'primary-datepicker': colors.cyan,
-                primary: colors.yellow,
+                primary: colors.emerald,
+                'primary-datepicker': this.primary,
                 secondary: colors.lime,
                 info: {...colors.cyan, ...{DEFAULT: "#009399"}},
                 error: {...colors.rose, ...{DEFAULT: "#d7035f"}},
-                warning: colors.yellow,
+                warning: colors.orange,
                 success: {...colors.emerald, ...{DEFAULT: "#028248"}},
                 primaire: '#f46316',
                 danger: '#d7035f'

@@ -24,12 +24,16 @@ class SimpleStat extends Component implements Htmlable
 {
     protected ?string $description = null;
 
+    protected ?string $icon = null;
+
     /** @var scalar | Htmlable | Closure */
     protected $value;
 
     protected string | Htmlable $label;
 
     protected ?Action $button = null;
+
+    protected string $iconColor = 'gray';
 
     /** @param  scalar | Htmlable | Closure  $value */
     public function __construct(string | Htmlable $label, $value)
@@ -111,5 +115,37 @@ class SimpleStat extends Component implements Htmlable
         }
 
         return $this->button;
+    }
+
+    public function icon(string $icon, string $iconColor = 'gray'): static
+    {
+        $this->icon = $icon;
+        $this->iconColor = $iconColor;
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function getIconColor(): string
+    {
+        return $this->iconColor;
+    }
+
+    public function getIconClass(): string
+    {
+        $color = match ($this->iconColor) {
+            'info' => 'text-info-500',
+            'success' => 'text-success-500',
+            'warning' => 'text-warning-500',
+            'error' => 'text-error-500',
+            'primary' => 'text-primary-500',
+            default => 'text-gray-400'
+        };
+
+        return $color . ' h-6 w-6';
     }
 }
