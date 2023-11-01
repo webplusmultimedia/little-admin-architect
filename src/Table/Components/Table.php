@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Table\Components;
 
@@ -46,7 +46,7 @@ final class Table extends Component implements Htmlable
 
     protected BaseTable $livewire;
 
-    private ?string $livewireId = NULL;
+    private ?string $livewireId = null;
 
     public function getLivewireId(): ?string
     {
@@ -60,7 +60,8 @@ final class Table extends Component implements Htmlable
 
     public function __construct(
         public string $title,
-    ) {}
+    ) {
+    }
 
     public function configureColumns(BaseTable $livewire, Page $page, string $title = ''): void
     {
