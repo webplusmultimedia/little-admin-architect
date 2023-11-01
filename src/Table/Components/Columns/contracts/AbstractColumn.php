@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\contra
 
 use Exception;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
 use Illuminate\View\View;
 use Webplusmultimedia\LittleAdminArchitect\Support\Concerns\CanEvaluateParameters;
@@ -15,7 +16,7 @@ use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\Has
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasLivewireId;
 use Webplusmultimedia\LittleAdminArchitect\Table\Components\Columns\Concerns\HasRecord;
 
-abstract class AbstractColumn implements Htmlable
+abstract class AbstractColumn extends Component implements Htmlable
 {
     use CanBeSearchable;
     use CanBeSortable;
@@ -54,10 +55,10 @@ abstract class AbstractColumn implements Htmlable
             throw new Exception('Class [' . static::class . '] extends [' . static::class . '] but does not have a [$view] property defined.');
         }
 
-        return 'little-views::table-components.columns.' . $this->view;
+        return $this->view;
     }
 
-    public function getDefaultParameters(): array
+    protected function getDefaultParameters(): array
     {
         return ['state' => $this->getState(), 'search' => $this->getSearch(), 'column' => $this, 'record' => $this->getRecord()];
     }
@@ -68,7 +69,7 @@ abstract class AbstractColumn implements Htmlable
             $this->getView(),
             array_merge(
                 ['attributes' => new ComponentAttributeBag()],
-                ['column' => $this],
+                [...$this->data()],
             )
         );
     }

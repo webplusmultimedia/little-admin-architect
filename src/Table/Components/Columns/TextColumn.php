@@ -17,5 +17,5 @@ class TextColumn extends AbstractColumn
     use HasDateTimeValue;
     use HasMoneyValue;
 
-    protected string $view = 'text';
+    protected string $view = 'little-views::table-components.columns.text';
 }

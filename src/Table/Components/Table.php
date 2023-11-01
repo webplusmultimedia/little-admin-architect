@@ -39,7 +39,7 @@ final class Table implements Htmlable
     use HasSortableColum;
     use InteractWithPage;
 
-    private string $view = 'table';
+    private string $view = 'little-views::table-components.table';
 
     protected string $TableTitle = '';
 
@@ -94,7 +94,7 @@ final class Table implements Htmlable
 
     public function getView(): string
     {
-        return 'little-views::table-components.' . $this->view;
+        return $this->view;
     }
 
     protected function tableTitle(string $TableTitle): void

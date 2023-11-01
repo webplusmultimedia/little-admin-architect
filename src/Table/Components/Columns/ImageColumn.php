@@ -12,7 +12,7 @@ class ImageColumn extends contracts\AbstractColumn
 {
     use HasFileDirectory;
 
-    protected string $view = 'image';
+    protected string $view = 'little-views::table-components.columns.image';
 
     public function getFileUrl(): ?string
     {

@@ -10,5 +10,5 @@ class BadgeColumn extends contracts\AbstractColumn
 {
     use HasColors;
 
-    protected string $view = 'badge';
+    protected string $view = 'little-views::table-components.columns.badge';
 }
