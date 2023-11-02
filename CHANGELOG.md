@@ -2,6 +2,10 @@
 
 All notable changes to `little-admin-architect` will be documented in this file.
 
+## Add dashboard and widgets - 2023-11-02
+
+**Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.3.04...v0.4.0
+
 ## Can reorder attachments files - form FileUpload - 2023-10-20
 
 **Full Changelog**: https://github.com/webplusmultimedia/little-admin-architect/compare/v0.3.02...v0.3.04
