@@ -298,7 +298,6 @@ class FileUpload extends Field
         $file = $this->getPathFile($_file);
 
         if ($storage = $this->getStorageForFile($file)) {
-
             return [
                 'url' => $this->getUrl($file),
                 'size' => round($storage->size($file) / 1000, 2) . 'Kb',
