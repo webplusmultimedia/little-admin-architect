@@ -58,9 +58,13 @@ class SimpleStat extends Component implements Htmlable
         return $this->render()->render();
     }
 
-    public function button(string $label, string $function, string $color = null): static
+    /**
+     * @param  'info'|'success'|'primary'|'error'|'warning'|null  $color
+     * @return $this
+     */
+    public function button(string $label, string $wireAction, string $color = null): static
     {
-        $this->button = Action::make()->label($label)->wireClick($function);
+        $this->button = Action::make()->label($label)->wireClick($wireAction);
         if ($color) {
             $this->button->color($color);
         }
@@ -88,10 +92,7 @@ class SimpleStat extends Component implements Htmlable
         return $this;
     }
 
-    /**
-     * @return scalar | Htmlable | Closure
-     */
-    public function getValue()
+    public function getValue(): mixed
     {
         return value($this->value);
     }

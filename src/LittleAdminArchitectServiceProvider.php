@@ -69,6 +69,7 @@ class LittleAdminArchitectServiceProvider extends PackageServiceProvider
     {
         $groups = \Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager::getPages();
         $componentNames = collect(Arr::pluck($groups, '*.component'))->flatten();
+        //dd($componentNames);
 
         foreach ($componentNames as $page => $component) {
             $class = Form::class;

@@ -85,6 +85,9 @@ class BaseTable extends Component implements HasTable
         return 'little-views::table-components.pagination.pagination';
     }
 
+    /**
+     * @throws Exception
+     */
     public function callAction(string $component, string $actionName, array $arguments = [], bool $skipRender = false): mixed
     {
         if ($skipRender) {

@@ -22,7 +22,4 @@
             {{ $button }}
         @endif
     </div>
-
-
-
 </x-little-anonyme::widgets.wrappers.wrapper>
