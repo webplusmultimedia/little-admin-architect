@@ -42,7 +42,7 @@ final class Table extends Component implements Htmlable
 
     private string $view = 'little-views::table-components.table';
 
-    protected string $TableTitle = '';
+    protected string $tableTitle = '';
 
     protected BaseTable $livewire;
 
@@ -98,14 +98,14 @@ final class Table extends Component implements Htmlable
         return $this->view;
     }
 
-    protected function tableTitle(string $TableTitle): void
+    protected function tableTitle(string $title): void
     {
-        $this->TableTitle = $TableTitle;
+        $this->tableTitle = $title;
     }
 
     public function getTableTitle(): string
     {
-        return $this->TableTitle;
+        return $this->tableTitle;
     }
 
     public function authorizeAccess(): void

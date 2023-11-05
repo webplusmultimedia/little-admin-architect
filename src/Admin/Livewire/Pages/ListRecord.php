@@ -19,11 +19,6 @@ class ListRecord extends Page
     public function mount(): void
     {
         static::$pageId = $this->id;
-        /*$this->authorizeAccess();
-
-        $this->fillForm();
-
-        $this->previousUrl = url()->previous();*/
     }
 
     public static function getForm(): Form

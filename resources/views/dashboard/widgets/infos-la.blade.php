@@ -18,7 +18,7 @@
         </svg>
         <div class="flex flex-col">
             <h2 class="text-sm lg:text-lg p-0 m-0 text-gray-500">{{ $label }}</h2>
-            <p class="text-xs text-gray-500">{{ $description }}</p>
+            <div class="text-xs text-gray-500">{{ $description }}</div>
         </div>
 
     </div>

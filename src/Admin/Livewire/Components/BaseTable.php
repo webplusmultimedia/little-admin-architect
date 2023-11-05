@@ -41,12 +41,15 @@ class BaseTable extends Component implements HasTable
 
     public array $tableFilters = [];
 
+    public ?string $tableGroupColumn = null;
+
     /** @phpstan-ignore-next-line */
     protected $queryString = [
         'search' => ['except' => '', 'as' => 'q'],
         'tableSortColumn' => ['except' => null],
         'tableDirection' => ['except' => null],
         'tableFilters' => ['except' => null],
+        'tableGroupColumn' => ['except' => null],
     ];
 
     protected bool $initBoot = true;

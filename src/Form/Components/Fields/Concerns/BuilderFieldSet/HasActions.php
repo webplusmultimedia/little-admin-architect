@@ -36,7 +36,7 @@ trait HasActions
                 ->small()
                 ->bgTransparent()
                 ->roundedFull()
-                ->alpineDataClick(':class="hover:pointer-drag"'),
+                ->alpineDataClick(':class="hover:cursor-drag"'),
         ];
     }
 

@@ -1,8 +1,9 @@
 @php
-    use Webplusmultimedia\LittleAdminArchitect\Support\Action\GroupAction;use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
+    use Webplusmultimedia\LittleAdminArchitect\Support\Action\GroupAction;
+    use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
     /** @var Table $table */
-    $sortDirection = $getSortDirection();
-    $sortColumn = $getSortColumn();
+    /*$sortDirection = $getSortDirection();
+    $sortColumn = $getSortColumn();*/
 @endphp
 <div class="my-10 rounded-lg">
     <div class="flex justify-between bg-white px-5 py-3 mb-8 dark:bg-gray-800 rounded-lg">
