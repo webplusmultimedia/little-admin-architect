@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire;
 
+use Webplusmultimedia\LittleAdminArchitect\Admin\Widgets\Widget;
+use Webplusmultimedia\LittleAdminArchitect\Admin\Widgets\WidgetConfiguration;
+
 class Dashboard extends Page
 {
     protected static ?string $title = 'Tableau de board';
@@ -15,6 +18,7 @@ class Dashboard extends Page
         return static::$title;
     }
 
+    /**  @return array<class-string<Widget|WidgetConfiguration>> */
     protected static function getHeaderWidgets(): array
     {
         return [

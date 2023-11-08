@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\LittleAdminArchitect;
 
-use Livewire\Livewire;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Widgets\WidgetConfiguration;
 
 class LittleAdminArchitect
@@ -66,13 +65,19 @@ class LittleAdminArchitect
      */
     public static function resolveLivewireComponent(string | WidgetConfiguration $class): string
     {
+        $class = self::resolveClassNameWidget($class);
+        $component = str($class)->explode('\\')->map(fn ($str) => str($str)->kebab())->implode('.');
+
+        return $component;
+    }
+
+    /** @param  class-string | WidgetConfiguration  $class */
+    public static function resolveClassNameWidget(string | WidgetConfiguration $class): string
+    {
         if ($class instanceof WidgetConfiguration) {
             $class = $class->widget;
         }
-        $component = str($class)->explode('\\')->map(fn ($str) => str($str)->kebab())->implode('.');
 
-        //Livewire::component($component, $class);
-
-        return $component;
+        return $class;
     }
 }

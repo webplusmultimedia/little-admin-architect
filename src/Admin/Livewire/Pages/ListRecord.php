@@ -6,6 +6,7 @@ namespace Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Pages;
 
 use Webplusmultimedia\LittleAdminArchitect\Admin\Livewire\Page;
 use Webplusmultimedia\LittleAdminArchitect\Admin\Resources;
+use Webplusmultimedia\LittleAdminArchitect\Facades\LittleAdminManager;
 use Webplusmultimedia\LittleAdminArchitect\Form\Components\Form;
 
 class ListRecord extends Page
@@ -19,6 +20,7 @@ class ListRecord extends Page
     public function mount(): void
     {
         static::$pageId = $this->id;
+        //LittleAdminManager::registerResourcesWidgets(static::getResource()::getWidgets());
     }
 
     public static function getForm(): Form
