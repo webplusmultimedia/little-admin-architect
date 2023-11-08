@@ -68,11 +68,11 @@ export function listeDate(date) {
                 return {
                     'text-slate-400': this.isNotCurrentMonth(),
                     'line-through cursor-not-allowed hover:bg-transparent': this.isDisabled(),
-                    'focus:ring-2 focus:ring-offset-2 focus:ring-primary-datepicker-400 hover:bg-primary-datepicker-200': !this.isDisabled() && !this.configTypeMatch('range'),
-                    'hover:bg-primary-datepicker-200': !this._periodRange && this.configTypeMatch('range'),
-                    'ring-2 ring-offset-2 ring-primary-datepicker-200': this.isCurrentDate() && ((this.configTypeMatch('range') && !this._periodRange && !this.isInRange()) ||
+                    'focus:ring-2 focus:ring-offset-2 focus:ring-primary-400 hover:bg-primary-200': !this.isDisabled() && !this.configTypeMatch('range'),
+                    'hover:bg-primary-200': !this._periodRange && this.configTypeMatch('range'),
+                    'ring-2 ring-offset-2 ring-primary-200': this.isCurrentDate() && ((this.configTypeMatch('range') && !this._periodRange && !this.isInRange()) ||
                         (this.configTypeMatch('date'))),
-                    'ring-2 ring-offset-2 ring-primary-datepicker-400  bg-primary-datepicker-300  text-slate-700 font-bold': this.isSelectDay() && this.configTypeMatch('date'),
+                    'ring-2 ring-offset-2 ring-primary-400  bg-primary-300  text-slate-700 font-bold': this.isSelectDay() && this.configTypeMatch('date'),
                 }
             },
             [':disabled']() {
@@ -102,9 +102,9 @@ export function listeDate(date) {
             },
             [':class']() {
                 return {
-                    'bg-primary-datepicker-100': (this.configTypeMatch('range') && this._periodRange && this.isInRange()) || (this.configTypeMatch('range') && this.periodRange && this.isInRange()),
-                    "rounded-l before:absolute before:top-0 before:bottom-0  before:left-0 before:w-2 before:border-t-2 before:border-b-2 before:rounded-l before:border-l-4 before:border-primary-datepicker-400": this.isRangeLeft(),
-                    "rounded-r after:absolute after:top-0 after:bottom-0 after:right-0 after:w-2 after:border-t-2 after:border-b-2 after:rounded-r after:border-r-4 after:border-primary-datepicker-400": this.isRangeRight(),
+                    'bg-primary-100': (this.configTypeMatch('range') && this._periodRange && this.isInRange()) || (this.configTypeMatch('range') && this.periodRange && this.isInRange()),
+                    "rounded-l before:absolute before:top-0 before:bottom-0  before:left-0 before:w-2 before:border-t-2 before:border-b-2 before:rounded-l before:border-l-4 before:border-primary-400": this.isRangeLeft(),
+                    "rounded-r after:absolute after:top-0 after:bottom-0 after:right-0 after:w-2 after:border-t-2 after:border-b-2 after:rounded-r after:border-r-4 after:border-primary-400": this.isRangeRight(),
                 }
             }
         },
