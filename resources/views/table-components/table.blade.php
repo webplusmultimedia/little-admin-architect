@@ -1,9 +1,5 @@
 @php
     use Webplusmultimedia\LittleAdminArchitect\Support\Action\GroupAction;
-    use Webplusmultimedia\LittleAdminArchitect\Table\Components\Table;
-    /** @var Table $table */
-    /*$sortDirection = $getSortDirection();
-    $sortColumn = $getSortColumn();*/
 @endphp
 <div class="my-10 rounded-lg">
     <div class="flex justify-between bg-white px-5 py-3 mb-8 dark:bg-gray-800 rounded-lg">
@@ -84,7 +80,7 @@
             <x-little-anonyme::table-components.partials.no-records/>
         @endif
 
-        <div class=" py-5  px-3 border-t  dark:border-gray-400/40">
+        <div class=" py-5  px-5 border-t  dark:border-gray-400/40">
             @if(!$getRecords()->hasPages())
                 <div class="">Nombre d'éléments : {{ $getRecords()->count() }}</div>
             @else
