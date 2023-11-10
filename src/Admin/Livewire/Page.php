@@ -152,7 +152,7 @@ abstract class Page extends BasePage
     /**
      * @return array<class-string<Widget> | WidgetConfiguration>
      */
-    protected static function getHeaderWidgets(): array
+    protected function getHeaderWidgets(): array
     {
         return [];
     }
@@ -160,9 +160,47 @@ abstract class Page extends BasePage
     /**
      * @return array<class-string<Widget> | WidgetConfiguration>
      */
-    protected static function getFooterWidgets(): array
+    public function getVisibleHeaderWidgets(): array
+    {
+        return $this->filterVisibleWidgets($this->getHeaderWidgets());
+    }
+
+    /**
+     * @return array<class-string<Widget> | WidgetConfiguration>
+     */
+    protected function getFooterWidgets(): array
     {
         return [];
+    }
+
+    /**
+     * @return array<class-string<Widget> | WidgetConfiguration>
+     */
+    public function getVisibleFooterWidgets(): array
+    {
+        return $this->filterVisibleWidgets($this->getFooterWidgets());
+    }
+
+    /**
+     * @param  array<class-string<Widget> | WidgetConfiguration>  $widgets
+     * @return array<class-string<Widget> | WidgetConfiguration>
+     */
+    protected function filterVisibleWidgets(array $widgets): array
+    {
+        return array_filter($widgets, fn (string | WidgetConfiguration $widget): bool => $this->normalizeWidgetClass($widget)::canView());
+    }
+
+    /**
+     * @param  class-string<Widget> | WidgetConfiguration  $widget
+     * @return class-string<Widget>
+     */
+    protected function normalizeWidgetClass(string | WidgetConfiguration $widget): string
+    {
+        if ($widget instanceof WidgetConfiguration) {
+            return $widget->widget;
+        }
+
+        return $widget;
     }
 
     protected function getWidgetData(): array

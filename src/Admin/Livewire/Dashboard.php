@@ -19,7 +19,7 @@ class Dashboard extends Page
     }
 
     /**  @return array<class-string<Widget|WidgetConfiguration>> */
-    protected static function getHeaderWidgets(): array
+    protected function getHeaderWidgets(): array
     {
         return [
             ...config('little-admin-architect.dashboard.widgets'),
@@ -30,8 +30,8 @@ class Dashboard extends Page
     {
         return [
             'id' => $this->id,
-            'headerWidgets' => static::getHeaderWidgets(),
-            'footerWidgets' => static::getFooterWidgets(),
+            'headerWidgets' => $this->getVisibleHeaderWidgets(),
+            'footerWidgets' => $this->getVisibleFooterWidgets(),
         ];
     }
 }
